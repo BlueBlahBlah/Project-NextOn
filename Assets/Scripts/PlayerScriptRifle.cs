@@ -11,6 +11,7 @@ public class PlayerScriptRifle : MonoBehaviour
     private Vector3 lastPosition;
     Animator Anim;
     public Button RollBtn;
+    public bool[] NowWeapon;
 
     void Start()
     {
@@ -59,8 +60,21 @@ public class PlayerScriptRifle : MonoBehaviour
     private void reloadDone()
     {
         Anim.SetBool("reload", false);
-        GameObject.Find("SM_Wep_Rifle_Assault_01").GetComponent<Rifle>().bulletCount += 30; //30발 추가
-        GameObject.Find("SM_Wep_Rifle_Assault_01").GetComponent<Rifle>().nowReloading = false; //이제 장전 끝
+        Rifle rifle = GameObject.FindObjectOfType<Rifle>();
+        Shotgun shotgun = GameObject.FindObjectOfType<Shotgun>();
+        if (rifle != null && rifle.gameObject.activeSelf)
+        {
+            Debug.Log("라이플 재장전");
+            rifle.bulletCount += 30; // 30발 추가
+            rifle.nowReloading = false; // 이제 장전 끝
+        }
+        if (shotgun != null && shotgun.gameObject.activeSelf)
+        {
+            Debug.Log("샷건 재장전");
+            shotgun.bulletCount += 30; // 30발 추가
+            shotgun.nowReloading = false; // 이제 장전 끝
+        }
+        
     }
     
     void OnRollButtonClick()

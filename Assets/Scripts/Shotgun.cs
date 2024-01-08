@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Shotgun : MonoBehaviour
+{
+    [Header("총 연사속도 조정")]
+    public float fireRate;
+    [Header("탄알 개수")]
+    public int bulletCount;
+    public int maxBulletCount;
+    [Header("탄알 프리팹")]
+    public GameObject bulletPrefab;
+    [Header("탄속")]
+    public float speed;
+
+    public Button fireBtn;
+    public bool nowReloading;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        // 버튼 클릭 이벤트 등록
+        fireBtn.onClick.AddListener(OnFireButtonClick);
+        nowReloading = false;
+    }
+    
+
+    void OnFireButtonClick()
+    {
+        if (bulletCount > 0)
+        {
+            // 버튼이 눌렸을 때 발사
+            Shoot();
+        }
+        else
+        {
+            if (nowReloading == false)
+            {
+                // 탄알이 없을 때의 처리 (e.g., 재장전 등)
+                Debug.Log("탄알이 없습니다!");
+                GameObject.Find("Character_GhillieSuit_01 RifleTest").GetComponent<PlayerScriptRifle>().reloaing = true;     //재장전중으로 수정
+                nowReloading = true;
+            }
+            //재장전 중인데 버튼 연타시 많이 재장전 됨을 방지
+            
+        }
+       
+    }
+
+    void Shoot()
+    {
+        // 총알 생성
+        for (int i = 0; i < 7; i++)
+        {
+            Debug.Log("muzzle " + (i+1));
+            GameObject.Find("muzzle " + (i+1)).GetComponent<ShotgunMuzzle>().shoot(bulletPrefab,speed);
+        }
+
+        // 탄알 개수 감소
+        bulletCount--;
+    }
+}
