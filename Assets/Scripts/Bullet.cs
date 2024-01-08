@@ -24,12 +24,5 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 26)
-        {
-            Debug.Log("탄피탄피");
-            Destroy(gameObject);
-        }
-    }
+    
 }
