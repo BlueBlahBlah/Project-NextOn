@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public bool walking;
-    public bool reloaing;
     private Vector3 lastPosition;
     Animator Anim;
+    public Button RollBtn;
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class PlayerScript : MonoBehaviour
         lastPosition = transform.position;
         walking = false;
         Anim = GetComponentInChildren<Animator>();
+        RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
     }
 
     void Update()
@@ -44,19 +46,15 @@ public class PlayerScript : MonoBehaviour
             walking = false;
         }
         Anim.SetBool("walk", walking);
-
-        if (reloaing == true)       //재장전중이라면
-        {
-            Anim.SetBool("reload", true);       //재장전 애니메이션
-            reloaing = false;
-            Invoke("reloadDone",4);      //4초후 재장전 끝
-        }
+        
+        
     }
-
-    private void reloadDone()
+    
+    void OnRollButtonClick()
     {
-        Anim.SetBool("reload", false);
-        GameObject.Find("SM_Wep_Rifle_Assault_01").GetComponent<Rifle>().bulletCount += 30; //30발 추가
-        GameObject.Find("SM_Wep_Rifle_Assault_01").GetComponent<Rifle>().nowReloading = false;  //이제 재장전 끝
+        Anim.SetTrigger("roll");        //애니메이션 트리거
+        
     }
+
+    
 }
