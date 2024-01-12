@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3755915063410668550}
   - component: {fileID: 8592778805411402911}
   - component: {fileID: 1008056018346353009}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlaneWarhead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,6 +115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket30_Red
       objectReference: {fileID: 0}
+    - target: {fileID: 1141234444027904, guid: 0bd1673f20c463c4f8e56b9e5a06202e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4708490201581024, guid: 0bd1673f20c463c4f8e56b9e5a06202e, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -194,13 +198,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4850562849229985409}
     m_Modifications:
+    - target: {fileID: 1010119977784964, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1056904543853562, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_Name
       value: FX_Explosion_Large_Dark_01
       objectReference: {fileID: 0}
     - target: {fileID: 1056904543853562, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056904543853562, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368536608535506, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989805736563948, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4020996693717984, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_LocalPosition.x
