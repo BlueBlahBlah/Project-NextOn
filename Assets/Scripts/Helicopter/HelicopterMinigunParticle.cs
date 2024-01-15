@@ -11,21 +11,39 @@ public class HelicopterMinigunParticle : MonoBehaviour
     public GameObject Particle;
     [SerializeField] private GameObject Helicopter;
     BoxCollider rangeCollider;
+    private Coroutine respawnCoroutine;  // 코루틴을 저장할 변수 추가
+
 
     private void Awake()
     {
         rangeCollider = rangeObject.GetComponent<BoxCollider>();
+        
     }
 
     private void Start()
     {
-        StartCoroutine(RandomRespawn_Coroutine());
+        //StartCoroutine(RandomRespawn_Coroutine());
+        
+    }
+
+    public void ParticleStop()
+    {
+        if (respawnCoroutine != null)
+        {
+            StopCoroutine(respawnCoroutine);
+            respawnCoroutine = null;  // 코루틴이 정지되면 변수를 null로 설정
+        }
+    }
+
+    public void ParticleStart()
+    {
+        respawnCoroutine = StartCoroutine(RandomRespawn_Coroutine());
     }
 
     private void Update()
     {
         //이펙트 장판의 위치
-        ///transform.position = Helicopter.transform.position - new Vector3(20f, 7f, 0f);
+        //transform.position = Helicopter.transform.position - new Vector3(20f, 7f, 0f);
     }
 
     IEnumerator RandomRespawn_Coroutine()
