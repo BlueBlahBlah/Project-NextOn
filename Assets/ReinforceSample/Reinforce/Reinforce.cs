@@ -5,28 +5,21 @@ using UnityEngine;
 public class Reinforce : MonoBehaviour
 {
     [SerializeField]
+    public GameObject UI;
+    [SerializeField]
     public GameObject player;
     public Stat stat;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public void IncreaseStat()
     {
-        stat = player.GetComponent<Stat>();
+        stat.health = stat.health + (stat.health * 0.05f);
+        UI.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DecreaseStat()
     {
-        
-    }
-
-    public void IncreaseStat(float increase)
-    {
-        
-    }
-
-    public void DecreaseStat(float decrease)
-    {
-
+        stat.health = stat.health - (stat.health * 0.05f);
+        UI.SetActive(false);
     }
 }

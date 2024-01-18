@@ -6,7 +6,7 @@ public class Stat : MonoBehaviour
 {
     [Header("Physical")]
     [SerializeField]
-    private float health;
+    public  float health;
     [SerializeField]
     private float healthRegen;
     [SerializeField]
