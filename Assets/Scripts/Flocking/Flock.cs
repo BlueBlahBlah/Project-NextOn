@@ -46,6 +46,7 @@ public class Flock : MonoBehaviour
         }
         
         this.transform.Translate(0, 0,speed * Time.deltaTime);
+        //this.transform.Translate(FlockManager.FM.transform.position.x, FlockManager.FM.transform.position.y,speed * Time.deltaTime);
     }
 
     void ApplyRules()
