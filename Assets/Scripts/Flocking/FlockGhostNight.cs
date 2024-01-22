@@ -6,7 +6,7 @@ public class FlockGhostNight : MonoBehaviour
     [SerializeField] private GameObject effectPrefab;
     public float minInterval = 10f;
     public float maxInterval = 20f;
-    public float attackRadius = 3f;
+    public float attackRadius = 5f;
     public int damageAmount = 10;
 
     // Start is called before the first frame update
@@ -46,6 +46,7 @@ public class FlockGhostNight : MonoBehaviour
             {
                 // Enemy 태그를 가진 적에게 데미지 주기
                 //collider.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
+                Debug.Log("백귀야행 공격");
             }
         }
     }

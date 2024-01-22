@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class FlockLightBomb : MonoBehaviour
 {
     public float moveDistance = 3.0f; // 움직일 거리
     public float moveDuration = 2.0f; // 움직이는 데 걸리는 시간
+    [SerializeField] private GameObject Effect;
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +99,17 @@ public class FlockLightBomb : MonoBehaviour
             transform.position += direction * moveSpeed * Time.deltaTime;
             elapsedTime += Time.deltaTime;
             yield return null;
+        }
+    }
+
+    public void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Enemy"))
+        {
+            Effect.GetComponent<ParticleSystem>().Play();
+            StopAllCoroutines();
+            //collider.damage--; //collider의 체력이 닳는 메커니즘
+            Destroy(gameObject, 0.5f);
         }
     }
 }
