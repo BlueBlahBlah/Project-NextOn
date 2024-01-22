@@ -63,6 +63,7 @@ public class PlayerScriptRifle : MonoBehaviour
         Rifle rifle = GameObject.FindObjectOfType<Rifle>();
         Shotgun shotgun = GameObject.FindObjectOfType<Shotgun>();
         Sniper sniper = GameObject.FindObjectOfType<Sniper>();
+        GrenadeLauncher grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
         if (rifle != null && rifle.gameObject.activeSelf)
         {
             Debug.Log("라이플 재장전");
@@ -80,6 +81,12 @@ public class PlayerScriptRifle : MonoBehaviour
             Debug.Log("저격총 재장전");
             sniper.bulletCount += 1; // 30발 추가
             sniper.nowReloading = false; // 이제 장전 끝
+        }
+        if (grenadeLauncher != null && grenadeLauncher.gameObject.activeSelf)
+        {
+            Debug.Log("라이플 재장전");
+            grenadeLauncher.bulletCount += 30; // 30발 추가
+            grenadeLauncher.nowReloading = false; // 이제 장전 끝
         }
         
     }
