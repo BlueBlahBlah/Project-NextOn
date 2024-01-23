@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Splines;
 using Random = UnityEngine.Random;
 
 public class HelicopterMinigunParticle : MonoBehaviour
@@ -12,12 +13,14 @@ public class HelicopterMinigunParticle : MonoBehaviour
     [SerializeField] private GameObject Helicopter;
     BoxCollider rangeCollider;
     private Coroutine respawnCoroutine;  // 코루틴을 저장할 변수 추가
+    
+    [SerializeField] private SplineAnimate splineAnimate;   //헬리콥터 이동 관리 컴포넌트
 
 
     private void Awake()
     {
         rangeCollider = rangeObject.GetComponent<BoxCollider>();
-        
+        splineAnimate = Helicopter.GetComponent<SplineAnimate>();
     }
 
     private void Start()
@@ -42,8 +45,18 @@ public class HelicopterMinigunParticle : MonoBehaviour
 
     private void Update()
     {
-        //이펙트 장판의 위치
-        //transform.position = Helicopter.transform.position - new Vector3(20f, 7f, 0f);
+       
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (splineAnimate.NormalizedTime > 0 && splineAnimate.NormalizedTime < 1)   //스킬 실행중일때
+        {
+            if (other.CompareTag("Enemy"))
+            {
+                //적을 공격
+            }
+        }
     }
 
     IEnumerator RandomRespawn_Coroutine()

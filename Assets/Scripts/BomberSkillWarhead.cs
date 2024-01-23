@@ -24,13 +24,30 @@ public class BomberSkillWarhead : MonoBehaviour
         warhead.SetActive(false);
         effect.SetActive(true);
 
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 
+        /*RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 
             15, Vector3.up, 0f, LayerMask.GetMask("Enemy"));
         foreach (RaycastHit hitObj in rayHits)
         {
             //hitObj.transform.GetComponent<>()
             //피격된 적의 체력 감소 및 이펙트
+        }*/
+
+        Collider[] colls;
+        colls = Physics.OverlapSphere(transform.position, 20f);
+        if (colls.Length == 0)
+        {
+            Destroy(gameObject,5);
         }
+
+        foreach (Collider collider in colls)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                //공격하는 메커니즘
+            }
+        }
+        
+        
         Destroy(gameObject,5);
     }
 }

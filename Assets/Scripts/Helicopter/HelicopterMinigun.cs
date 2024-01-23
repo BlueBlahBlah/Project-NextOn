@@ -9,7 +9,7 @@ public class HelicopterMinigun : MonoBehaviour
     [SerializeField] private SplineAnimate splineAnimate;   //헬리콥터 이동 관리 컴포넌트
 
     [SerializeField] private bool isTurned;                 //헬기 회전 조정 변수
-    [SerializeField] private bool isDoing;
+    
     public HelicopterMinigunParticle helicopterMinigunParticle;     //헬기 탄 이펙트 스크립트
     [SerializeField] private GameObject EffectPlane;        //헬기 이펙트 장판
     [SerializeField] private GameObject LeftMuzzle;         //헬기 좌측 총구
@@ -27,7 +27,6 @@ public class HelicopterMinigun : MonoBehaviour
         splineAnimate = GetComponent<SplineAnimate>();                     //컴포넌트 가져오기
         helicopterMinigunParticle = GameObject.Find("ParticleArea").GetComponent<HelicopterMinigunParticle>();      //ParticleArea 오브젝트
         isTurned = false;           //변수 초기화
-        isDoing = false;
         mainCamera = Camera.main;
         mainCameraScript = mainCamera.GetComponent<CameraAbove>();
         Player = GameObject.Find("Player");

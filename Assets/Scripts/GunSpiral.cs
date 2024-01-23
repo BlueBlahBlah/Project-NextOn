@@ -13,6 +13,19 @@ public class Gunspiral : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Collider[] colls;
+        colls = Physics.OverlapSphere(transform.position, 5f);
+        if (colls.Length == 0)
+        {
+            Destroy(gameObject,5);
+        }
+
+        foreach (Collider collider in colls)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                //공격하는 메커니즘
+            }
+        }
     }
 }

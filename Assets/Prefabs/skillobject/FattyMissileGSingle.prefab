@@ -174,7 +174,7 @@ MonoBehaviour:
   muzzleMain: {fileID: 8436693662775039607}
   muzzleSub: {fileID: 0}
   muzzleEff: {fileID: 1497772684437746, guid: bd75ef4ae186f454a90b2de71bed2854, type: 3}
-  bullet: {fileID: 1230967522142342, guid: eb167afc8ab53774898a71ad9c87e1e8, type: 3}
+  bullet: {fileID: 1230967522142342, guid: 02d30d05856a28d4baecf38be4810249, type: 3}
 --- !u!1 &2748734813811726505
 GameObject:
   m_ObjectHideFlags: 0
