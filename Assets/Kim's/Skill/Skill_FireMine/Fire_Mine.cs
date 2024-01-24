@@ -12,7 +12,7 @@ public class Fire_Mine : MonoBehaviour
     private void Destroy() 
     {
         an.StopPlayback();
-        Destroy(gameObject, 0.4f); 
+        Destroy(gameObject, 0.45f); 
     }
 
 

@@ -845,6 +845,7 @@ GameObject:
   - component: {fileID: 4134312666272264087}
   - component: {fileID: 4345820836225528514}
   - component: {fileID: 7575080154586196052}
+  - component: {fileID: 5794858097440675397}
   m_Layer: 0
   m_Name: pivot
   m_TagString: Untagged
@@ -884,7 +885,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -914,11 +915,23 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 94
   m_CollisionDetection: 0
+--- !u!114 &5794858097440675397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7309012088946623321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12db499fbfa60d44994cba59b96f78e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7606740146757297177
 GameObject:
   m_ObjectHideFlags: 0

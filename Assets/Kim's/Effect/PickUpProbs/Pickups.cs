@@ -9,7 +9,6 @@ public class Pickups : MonoBehaviour
     {
         if (other.gameObject.tag =="Player")
         {
-            Debug.Log("Destroy!!!!!!!!!!!!!!!!!!!!!!!");
             Destroy(gameObject);
         }
     }
