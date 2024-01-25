@@ -20,6 +20,7 @@ public class MachineGun : MonoBehaviour
     public bool nowReloading;
     public bool fireBtnDowing;      //격발 버튼이 눌리고 있는지
     private float timer;
+    public GameObject Effect;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,7 @@ public class MachineGun : MonoBehaviour
         //fireBtn.onClick.AddListener(OnFireButtonClick);
         nowReloading = false;
         timer = 0;
+        Effect.SetActive(false);
     }
 
     private void Update()
@@ -38,6 +40,10 @@ public class MachineGun : MonoBehaviour
             OnFireButtonClick();
             timer = 0;
         }
+        else if (fireBtnDowing == false)
+        {
+            Effect.SetActive(false);
+        }
             
     }
 
@@ -46,13 +52,16 @@ public class MachineGun : MonoBehaviour
     {
         if (bulletCount > 0)
         {
+            Effect.SetActive(true);
             // 버튼이 눌렸을 때 발사
             Shoot();
+            
         }
         else
         {
             if (nowReloading == false)
             {
+                Effect.SetActive(false);        //재장전일때도 탄피가 튀지않게
                 // 탄알이 없을 때의 처리 (e.g., 재장전 등)
                 Debug.Log("탄알이 없습니다!");
                 GameObject.Find("Character_GhillieSuit_01 RifleTest").GetComponent<PlayerScriptRifle>().reloaing = true;     //재장전중으로 수정
