@@ -536,6 +536,22 @@ PrefabInstance:
       propertyPath: m_Text
       value: Reduce Skill Cooldown X%
       objectReference: {fileID: 0}
+    - target: {fileID: 2897759581270746463, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897759581270746463, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897759581270746463, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897759581270746463, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -200
+      objectReference: {fileID: 0}
     - target: {fileID: 3881800396052358657, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -592,13 +608,29 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3955382644155696421, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955382644155696421, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955382644155696421, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955382644155696421, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3992521994410283503, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_Name
       value: Reinforce Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 3992521994410283503, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4132846433978821641, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_Name
