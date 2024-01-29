@@ -11,7 +11,7 @@ public class PlayerScriptOneHand : MonoBehaviour
     Animator Anim;
     
     public Button attackBtn;
-    public Button RollBtn;
+    //public Button RollBtn;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class PlayerScriptOneHand : MonoBehaviour
         walking = false;
         Anim = GetComponentInChildren<Animator>();
         attackBtn.onClick.AddListener(OnAttackButtonClick);
-        RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
+        //RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
     }
 
     void Update()
