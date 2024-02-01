@@ -62,6 +62,8 @@ MonoBehaviour:
   effectPrefab: {fileID: 8044853681042434482}
   minInterval: 4
   maxInterval: 10
+  attackRadius: 5
+  damageAmount: 10
 --- !u!1001 &2967054294217729332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -205,20 +207,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2803403803262308575, guid: 01304aede261f07428e4dea65be92e9d, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2803403803262308575, guid: 01304aede261f07428e4dea65be92e9d, type: 3}
       propertyPath: playOnAwake
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2803403803262308575, guid: 01304aede261f07428e4dea65be92e9d, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.85264623
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2803403803262308575, guid: 01304aede261f07428e4dea65be92e9d, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.9528302
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2803403803262308575, guid: 01304aede261f07428e4dea65be92e9d, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3284714285638526997, guid: 01304aede261f07428e4dea65be92e9d, type: 3}
       propertyPath: playOnAwake
