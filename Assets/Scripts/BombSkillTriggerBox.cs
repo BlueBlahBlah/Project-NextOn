@@ -19,9 +19,12 @@ public class BombSkillTriggerBox : MonoBehaviour
     
     public void OnTriggerEnter(Collider other)
     {
+        Debug.LogError("무언가 충돌");
         // 충돌한 물체가 Player 태그를 가진 경우
         if (other.CompareTag("Player"))
+        //if(other.gameObject.layer == 6)
         {
+            Debug.LogError("플레이어");
             // plane GameObject의 BomberSkill 스크립트 가져오기
             BomberSkill bomberSkill = plane.GetComponent<BomberSkill>();
 
