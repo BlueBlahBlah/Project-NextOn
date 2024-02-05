@@ -1,0 +1,765 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3950726322256359903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8562360320200938003}
+  - component: {fileID: 8268397107274095916}
+  m_Layer: 0
+  m_Name: SwordDemaciaSkillExpand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8562360320200938003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3950726322256359903}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2176338942878834700}
+  - {fileID: 8578578639803742666}
+  - {fileID: 3321264660830681878}
+  - {fileID: 6895601872423284239}
+  - {fileID: 4390475483004345012}
+  - {fileID: 1161668086926926374}
+  - {fileID: 5836038410113998934}
+  - {fileID: 8800238433175475150}
+  - {fileID: 8284542612201106433}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8268397107274095916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3950726322256359903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60d8bf51008cf0439058bedb78ad814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sword1: {fileID: 6928147097458793304}
+  Sword2:
+  - {fileID: 656235245913916062}
+  - {fileID: 5765119020878905410}
+  - {fileID: 2424142723797079387}
+  - {fileID: 4825690118025257440}
+  Sword3:
+  - {fileID: 7928942632030755186}
+  - {fileID: 3380962708331059970}
+  - {fileID: 303689038578133146}
+  - {fileID: 931904498142435157}
+--- !u!1001 &448613063737012362
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!4 &4390475483004345012 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 448613063737012362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4825690118025257440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 448613063737012362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1495284791710519592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!4 &3321264660830681878 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 1495284791710519592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5765119020878905410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 1495284791710519592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2658313143147137586
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!4 &2176338942878834700 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 2658313143147137586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6928147097458793304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 2658313143147137586}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3082929434752321560
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!4 &1161668086926926374 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 3082929434752321560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7928942632030755186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 3082929434752321560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4681328253620189680
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!1 &303689038578133146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 4681328253620189680}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8800238433175475150 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 4681328253620189680}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5201458111347983935
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!1 &931904498142435157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 5201458111347983935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8284542612201106433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 5201458111347983935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5610054493127087092
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!1 &656235245913916062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 5610054493127087092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8578578639803742666 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 5610054493127087092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7306466261773517873
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!1 &2424142723797079387 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 7306466261773517873}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6895601872423284239 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 7306466261773517873}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7649952238765116008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8562360320200938003}
+    m_Modifications:
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+      propertyPath: m_Name
+      value: SwordDemaciaSkill (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+--- !u!1 &3380962708331059970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954382541854789994, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 7649952238765116008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5836038410113998934 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4240087392627583550, guid: 631dfa3485f2c0d4081fdf0059499f3d, type: 3}
+  m_PrefabInstance: {fileID: 7649952238765116008}
+  m_PrefabAsset: {fileID: 0}

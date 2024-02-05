@@ -7,6 +7,8 @@ public class SwordDemaciaSkill : MonoBehaviour
     [SerializeField] private GameObject sword;
     [SerializeField] private GameObject effect;
     [SerializeField] private Rigidbody rigid;
+
+    [SerializeField] private int damage;
     // Start is called before the first frame update
     void Start()
     {
