@@ -9,7 +9,6 @@ public class ReinforceUI : MonoBehaviour
     public GameObject UI;
     [SerializeField]
     public GameObject player;
-    public Stat stat;
 
     [Header("Icon")]
     [SerializeField]
@@ -42,13 +41,13 @@ public class ReinforceUI : MonoBehaviour
     public void IncreaseStat(string _data)
     {
         Debug.Log($"{_data}");
-        stat.health = stat.health + (stat.health * 0.05f);
+        PlayerStatManager.instance.health = PlayerStatManager.instance.health + (PlayerStatManager.instance.health * 0.05f);
         UI.SetActive(false);
     }
 
     public void DecreaseStat()
     {
-        stat.health = stat.health - (stat.health * 0.05f);
+        PlayerStatManager.instance.health = PlayerStatManager.instance.health - (PlayerStatManager.instance.health * 0.05f);
         UI.SetActive(false);
     }
 }

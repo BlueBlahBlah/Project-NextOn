@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 388726256}
   - component: {fileID: 388726257}
   m_Layer: 0
-  m_Name: Player
+  m_Name: '@PlayerStat Manager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,6 +532,14 @@ PrefabInstance:
       propertyPath: m_Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 957783361600036012, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 957783361600036012, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 1512006968906083772, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_Text
       value: Reduce Skill Cooldown X%
@@ -549,8 +557,16 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2897759581270746463, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897759581270746463, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897759581270746463, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -200
+      value: -250
       objectReference: {fileID: 0}
     - target: {fileID: 3881800396052358657, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -621,8 +637,16 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3955382644155696421, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
-      propertyPath: m_AnchoredPosition.x
+      propertyPath: m_SizeDelta.x
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955382644155696421, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3955382644155696421, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 3992521994410283503, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_Name

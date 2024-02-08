@@ -2,8 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stat : MonoBehaviour
+public class PlayerStatManager : MonoBehaviour
 {
+    public static PlayerStatManager instance = null;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            if (instance != this)
+                Destroy(this.gameObject);
+        }
+    }
+
     [Header("Physical")]
     [SerializeField]
     public  float health;
