@@ -37,39 +37,85 @@ public class ReinforceUI : MonoBehaviour
         // 2. 이후 TargetStat 검사
         // 3. 마지막으로 Value를 얻고 증가 -> 미구현
 
-        switch (ReinforceGiver.targetStat[0])
+        if (ReinforceGiver.valueType[0] == "Fixed")
         {
-            case "health":
-                PlayerStatManager.instance.health = PlayerStatManager.instance.health + 2;
-                break;
-            case "healthRegen":
-                PlayerStatManager.instance.healthRegen = PlayerStatManager.instance.healthRegen + 2;
-                break;
-            case "depense":
-                PlayerStatManager.instance.depense = PlayerStatManager.instance.depense + 2;
-                break;
-            case "speed":
-                PlayerStatManager.instance.speed = PlayerStatManager.instance.speed + 2;
-                break;
-            case "damage":
-                PlayerStatManager.instance.damage = PlayerStatManager.instance.damage + 2;
-                break;
-            case "attackSpeed":
-                PlayerStatManager.instance.attackSpeed = PlayerStatManager.instance.attackSpeed + 2;
-                break;
-            case "skillCooldown":
-                PlayerStatManager.instance.skillCooldown = PlayerStatManager.instance.skillCooldown + 2;
-                break;
-            case "skillDamage":
-                PlayerStatManager.instance.skillDamage = PlayerStatManager.instance.skillDamage + 2;
-                break;
-            case "critProbability":
-                PlayerStatManager.instance.critProbability = PlayerStatManager.instance.critProbability + 2;
-                break;
-            case "critDamage":
-                PlayerStatManager.instance.critDamage = PlayerStatManager.instance.critDamage + 2;
-                break;
+            // 계산식 : 변경될 스탯 = 기존 스탯 + 변화량 
+            // 예시 : 기존 스탯 100, 변화량 50
+            // 결과 : 100 + 50 = 150
+            switch (ReinforceGiver.targetStat[0])
+            {
+                case "health":
+                    PlayerStatManager.instance.health = PlayerStatManager.instance.health + ReinforceGiver.delta[0];
+                    break;
+                case "healthRegen":
+                    PlayerStatManager.instance.healthRegen = PlayerStatManager.instance.healthRegen + ReinforceGiver.delta[0];
+                    break;
+                case "depense":
+                    PlayerStatManager.instance.depense = PlayerStatManager.instance.depense + ReinforceGiver.delta[0];
+                    break;
+                case "speed":
+                    PlayerStatManager.instance.speed = PlayerStatManager.instance.speed + ReinforceGiver.delta[0];
+                    break;
+                case "damage":
+                    PlayerStatManager.instance.damage = PlayerStatManager.instance.damage + ReinforceGiver.delta[0];
+                    break;
+                case "attackSpeed":
+                    PlayerStatManager.instance.attackSpeed = PlayerStatManager.instance.attackSpeed + ReinforceGiver.delta[0];
+                    break;
+                case "skillCooldown":
+                    PlayerStatManager.instance.skillCooldown = PlayerStatManager.instance.skillCooldown + ReinforceGiver.delta[0];
+                    break;
+                case "skillDamage":
+                    PlayerStatManager.instance.skillDamage = PlayerStatManager.instance.skillDamage + ReinforceGiver.delta[0];
+                    break;
+                case "critProbability":
+                    PlayerStatManager.instance.critProbability = PlayerStatManager.instance.critProbability + ReinforceGiver.delta[0];
+                    break;
+                case "critDamage":
+                    PlayerStatManager.instance.critDamage = PlayerStatManager.instance.critDamage + ReinforceGiver.delta[0];
+                    break;
+            }
         }
+        else if (ReinforceGiver.valueType[0] == "Percent")
+        {
+            // 계산식 => 변경될 스탯 = 기존 스탯 + 기존 스탯*0.01*변화량
+            // 예시 : 기존스탯 100, 변화량 5%
+            // 결과 : 100 + 100 * 0.01 * 5 = 100 + 5 = 105
+            switch (ReinforceGiver.targetStat[0])
+            {
+                case "health":
+                    PlayerStatManager.instance.health = PlayerStatManager.instance.health + PlayerStatManager.instance.health * 0.01f * ReinforceGiver.delta[0] ;
+                    break;
+                case "healthRegen":
+                    PlayerStatManager.instance.healthRegen = PlayerStatManager.instance.healthRegen + PlayerStatManager.instance.healthRegen * 0.01f * ReinforceGiver.delta[0];
+                    break;
+                case "depense":
+                    PlayerStatManager.instance.depense = PlayerStatManager.instance.depense + PlayerStatManager.instance.depense * 0.01f * ReinforceGiver.delta[0];
+                    break;
+                case "speed":
+                    PlayerStatManager.instance.speed = PlayerStatManager.instance.speed + PlayerStatManager.instance.speed * 0.01f * ReinforceGiver.delta[0];
+                    break;
+                case "damage":
+                    PlayerStatManager.instance.damage = PlayerStatManager.instance.damage + PlayerStatManager.instance.damage * 0.01f * ReinforceGiver.delta[0];
+                    break;
+                case "attackSpeed":
+                    PlayerStatManager.instance.attackSpeed = PlayerStatManager.instance.attackSpeed + PlayerStatManager.instance.attackSpeed * 0.01f * ReinforceGiver.delta[0];
+                    break;
+                case "skillCooldown":
+                    PlayerStatManager.instance.skillCooldown = PlayerStatManager.instance.skillCooldown + ReinforceGiver.delta[0];
+                    break;
+                case "skillDamage":
+                    PlayerStatManager.instance.skillDamage = PlayerStatManager.instance.skillDamage + ReinforceGiver.delta[0];
+                    break;
+                case "critProbability":
+                    PlayerStatManager.instance.critProbability = PlayerStatManager.instance.critProbability + ReinforceGiver.delta[0];
+                    break;
+                case "critDamage":
+                    PlayerStatManager.instance.critDamage = PlayerStatManager.instance.critDamage + ReinforceGiver.delta[0];
+                    break;
+            }
+        }
+        
         
         UI.SetActive(false);
     }

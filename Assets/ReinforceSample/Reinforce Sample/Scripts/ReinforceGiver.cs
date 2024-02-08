@@ -14,6 +14,7 @@ public class ReinforceGiver : MonoBehaviour
 
     public string[] targetStat = new string[3]; // 변화할 타겟 스탯
     public float[] delta = new float[3]; // 스탯의 변화량
+    public string[] valueType = new string[3]; // 스탯의 변화 타입
 
     private void Start()
     {
@@ -48,10 +49,20 @@ public class ReinforceGiver : MonoBehaviour
         reinforceUI.text_middle.text = data_dialog[numbers[1]]["Description"].ToString();
         reinforceUI.text_right.text = data_dialog[numbers[2]]["Description"].ToString();
 
-        // 증강 타겟 스탯 변경
+        // 증강 타겟 스탯 저장
         targetStat[0] = data_dialog[numbers[0]]["TargetStat"].ToString();
         targetStat[1] = data_dialog[numbers[1]]["TargetStat"].ToString();
         targetStat[2] = data_dialog[numbers[2]]["TargetStat"].ToString();
+
+        // 변화량(value) 저장
+        delta[0] = float.Parse(data_dialog[numbers[0]]["Value"].ToString());
+        delta[1] = float.Parse(data_dialog[numbers[1]]["Value"].ToString());
+        delta[2] = float.Parse(data_dialog[numbers[2]]["Value"].ToString());
+
+        // 변화 타입 저장 (Fixed / Percent)
+        valueType[0] = data_dialog[numbers[0]]["ValueType"].ToString();
+        valueType[1] = data_dialog[numbers[1]]["ValueType"].ToString();
+        valueType[2] = data_dialog[numbers[2]]["ValueType"].ToString();
 
         Debug.Log($"targetstat : {targetStat[0]}");
     }
