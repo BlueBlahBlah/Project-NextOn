@@ -1,12 +1,20 @@
-Number,Type,TargetStat,Description,Weight,Value,ValueType
-0,stat,health,increases health 50,1,50,Fixed
-1,stat,health,increases health 5%,1,5,Percent
-2,stat,healthRegen,increases healthregen,1,5,Fixed
-3,stat,depense,increases depense,1,5,Percent
-4,stat,speed,increases speed,1,1,Fixed
-5,stat,damage,increases damage,1,10,Fixed
-6,stat,attackSpeed,increases attackSpeed,1,30,Percent
-7,stat,skillCooldown,increases skillcooldown,1,5,Fixed
-8,stat,skillDamage,increases skilldamage,1,10,Fixed
-9,stat,critProbability,increases critprobability,1,10,Fixed
-10,stat,critDamage,increases critdamage,1,20,Fixed
+Number,Name,Type,TargetStat,Description,Weight,Value,ValueType
+0,,stat,health,increases health 50,1,50,Fixed
+1,,stat,health,increases health 100,1,100,Fixed
+2,,stat,health,increases health 150,1,150,Fixed
+3,,stat,health,increases health 5%,1,5,Percent
+4,,stat,health,increases health 7%,1,7,Percent
+5,,stat,health,increases health 10%,1,10,Percent
+6,,stat,healthRegen,increases healthregen 5,1,5,Fixed
+7,,stat,depense,increases depense 5%,1,5,Percent
+8,,stat,depense,increases depense 7%,1,7,Percent
+9,,stat,depense,increases depense 10%,1,10,Percent
+10,,stat,speed,increases speed 1,1,1,Fixed
+11,,stat,damage,increases damage 10,1,10,Fixed
+12,,stat,damage,increases damage 15,1,15,Fixed
+13,,stat,damage,increases damage 5%,1,5,Percent
+14,,stat,attackSpeed,increases attackSpeed 30%,1,30,Percent
+15,,stat,skillCooldown,increases skillcooldown 5,1,5,Fixed
+16,,stat,skillDamage,increases skilldamage 10,1,10,Fixed
+17,,stat,critProbability,increases critprobability 10%,1,10,Fixed
+18,,stat,critDamage,increases critdamage 20,1,20,Fixed

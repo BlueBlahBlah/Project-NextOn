@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerStatManager : MonoBehaviour
 {
+    // PlayerStatManager 의 경우 증강과 다르게, 인게임 시작 전에서도 캐릭터 변경 등의 이유로
+    // Stat 변경이 존재할 수 있기 때문에 다른 씬에서도 고유한 인스턴스만 존재하도록 싱글톤으로 작성하였음
+
     public static PlayerStatManager instance = null;
 
     private void Awake()

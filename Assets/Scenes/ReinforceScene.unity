@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 561239085}
   - component: {fileID: 561239084}
   m_Layer: 0
-  m_Name: '@Reinforce Giver'
+  m_Name: '@Reinforce Manager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,7 +368,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85309b93cbd4ebf4abca18f8dcde8059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReinforceContainer: 
   UI: {fileID: 2189617034363217711}
+  reinforceName:
+  - 
+  - 
+  - 
+  reinforceNum: 000000000000000000000000
   targetStat:
   - 
   - 
@@ -516,6 +522,38 @@ PrefabInstance:
       propertyPath: ReinforceGiver
       value: 
       objectReference: {fileID: 561239084}
+    - target: {fileID: 498641330388248649, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: ReinforceManager
+      value: 
+      objectReference: {fileID: 561239084}
+    - target: {fileID: 3165605724756491720, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165605724756491720, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165605724756491720, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 283018131150988375}
+    - target: {fileID: 3165605724756491720, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165605724756491720, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReinforceRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165605724756491720, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ReinforceUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165605724756491720, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4247797878383726020, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -606,13 +644,41 @@ PrefabInstance:
       objectReference: {fileID: 283018131150988375}
     - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ReinforceStat
+      value: ReinforceLeft
       objectReference: {fileID: 0}
     - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: ReinforceUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704952267253288077, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704952267253288077, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704952267253288077, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 283018131150988375}
+    - target: {fileID: 8704952267253288077, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704952267253288077, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReinforceMiddle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704952267253288077, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ReinforceUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704952267253288077, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
