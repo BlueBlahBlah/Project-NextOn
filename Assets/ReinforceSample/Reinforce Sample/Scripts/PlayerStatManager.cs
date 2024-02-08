@@ -24,25 +24,33 @@ public class PlayerStatManager : MonoBehaviour
     [SerializeField]
     public  float health;
     [SerializeField]
-    private float healthRegen;
+    public float healthRegen;
     [SerializeField]
-    private float stamina;
+    public float depense;
     [SerializeField]
-    private float staminaRegen;
-    [SerializeField]
-    private float depense;
-    [SerializeField]
-    private float speed;
+    public float speed;
+
+    // 구르기 삭제에 따라 stamina 관련 요소는 사용처가 불분명해져 보류
+    // [SerializeField]
+    // private float stamina;
+    // [SerializeField]
+    // private float staminaRegen;
 
     [Header("Attack")]
     [SerializeField]
-    private float skillCooldown;
+    public float damage;
     [SerializeField]
-    private float skillDamage;
+    public float attackSpeed;
     [SerializeField]
-    private float critProbability;
+    public float skillCooldown;
     [SerializeField]
-    private float critDamage;
+    public float skillDamage;
     [SerializeField]
-    private float absorption;
+    public float critProbability;
+    [SerializeField]
+    public float critDamage;
+
+    // absorption (생명력 흡수) 의 경우 게임이 너무 쉬워지거나 하는 밸런스에 영향을 줄 가능성이 높아 보류 
+    // [SerializeField]
+    // private float absorption;
 }

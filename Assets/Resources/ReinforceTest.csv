@@ -1,11 +1,11 @@
-Number,Type,Name,Description,Weight
-0,stat,Test1,increases health,1
-1,stat,Test2,increases healthregen,1
-2,stat,Test3,increases stamina,1
-3,stat,Test4,increases staminaregen,1
-4,stat,Test5,increases depense,1
-5,stat,Test6,increases speed,1
-6,stat,Test7,increases skillcooldown,1
-7,stat,Test8,increases skilldamage,1
-8,stat,Test9,increases critprobability,1
-9,stat,Test10,increases critdamage,1
+Number,Type,TargetStat,Description,Weight,Value,ValueType
+0,stat,health,increases health,1,1,Percent
+1,stat,healthRegen,increases healthregen,1,2,fixed
+2,stat,depense,increases depense,1,3,
+3,stat,speed,increases speed,1,4,
+4,stat,damage,increases damage,1,5,
+5,stat,attackSpeed,increases attackSpeed,1,6,
+6,stat,skillCooldown,increases skillcooldown,1,7,
+7,stat,skillDamage,increases skilldamage,1,8,
+8,stat,critProbability,increases critprobability,1,9,
+9,stat,critDamage,increases critdamage,1,10,

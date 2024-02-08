@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour
+public class ReinforceGiver : MonoBehaviour
 {
-    // Reinforce 컨테이너를 추가하여 (예를 들어 List 형식) 적용된 증강의 넘버를 저장해서
+    // Reinforce 컨테이너 등을 추가하여 (예를 들어 List 형식) 적용된 증강의 넘버를 저장해서
     // 다음에 증강을 호출할 중복된 증강이 호출되지 않도록 방지하는 기능 필요
 
     [SerializeField]
     private GameObject UI;
     private ReinforceUI reinforceUI;
     List<Dictionary<string, object>> data_dialog;
+
+    public string[] targetStat = new string[3]; // 변화할 타겟 스탯
+    public float[] delta = new float[3]; // 스탯의 변화량
 
     private void Start()
     {
@@ -40,9 +43,17 @@ public class Test : MonoBehaviour
 
         int[] numbers = MakeRandomNumbers(0, data_dialog.Count);
 
+        // UI 내의 증강 설명 변경
         reinforceUI.text_left.text = data_dialog[numbers[0]]["Description"].ToString();
         reinforceUI.text_middle.text = data_dialog[numbers[1]]["Description"].ToString();
         reinforceUI.text_right.text = data_dialog[numbers[2]]["Description"].ToString();
+
+        // 증강 타겟 스탯 변경
+        targetStat[0] = data_dialog[numbers[0]]["TargetStat"].ToString();
+        targetStat[1] = data_dialog[numbers[1]]["TargetStat"].ToString();
+        targetStat[2] = data_dialog[numbers[2]]["TargetStat"].ToString();
+
+        Debug.Log($"targetstat : {targetStat[0]}");
     }
 
     private static int[] MakeRandomNumbers(int minValue, int maxValue)
