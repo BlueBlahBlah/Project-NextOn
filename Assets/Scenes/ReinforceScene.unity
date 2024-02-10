@@ -369,6 +369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ReinforceContainer: 
+  normalProbability: 60
+  rareProbability: 30
+  epicProbability: 10
   UI: {fileID: 2189617034363217711}
   reinforceName:
   - 
@@ -637,6 +640,10 @@ PrefabInstance:
     - target: {fileID: 4927336686140479928, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_Name
       value: Reinforce Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927336686140479928, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

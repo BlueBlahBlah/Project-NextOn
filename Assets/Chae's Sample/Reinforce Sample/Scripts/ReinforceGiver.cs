@@ -13,6 +13,16 @@ public class ReinforceManager : MonoBehaviour
     [SerializeField]
     public List<int> ReinforceContainer = new List<int>();
 
+    [Header("Rarity (Sum must be 100)")]
+    // 증강 등급의 확률
+    // 유니티 inspector에서 수정할 수 있음
+    [SerializeField]
+    private int normalProbability;
+    [SerializeField]
+    private int rareProbability;
+    [SerializeField]
+    private int epicProbability;
+
     [Header("UI")]
     [SerializeField]
     private GameObject UI;
@@ -26,12 +36,10 @@ public class ReinforceManager : MonoBehaviour
     public float[] delta = new float[3]; // 스탯의 변화량
     public string[] valueType = new string[3]; // 스탯의 변화 타입
 
-    
-
     private void Start()
     {
         reinforceUI = UI.GetComponent<ReinforceUI>();
-        data_Reinforce = CSVReader.Read("ReinforceTest");
+        
 
     }
 
@@ -40,6 +48,7 @@ public class ReinforceManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            SelectRarity();
             MixReinforce(); // 랜덤한 증강 정보 얻어와 이를 바탕으로 UI 변경
             OnUI(); // UI 활성화
         }
@@ -50,10 +59,35 @@ public class ReinforceManager : MonoBehaviour
         UI.SetActive(true);
     }
 
+    private void SelectRarity()
+    {
+        // 증강의 등급을 확률에 의해 선택
+        int[] Rarity = MakeRandomNumbers(0, 100, 1);
+
+        int _rareProbability = normalProbability + rareProbability; 
+
+        // Normal 확률
+        if (Rarity[0] < normalProbability)
+        {
+            Debug.Log("normal reinforce");
+            data_Reinforce = CSVReader.Read("Data (.csv)/Normal Reinforce");
+        }
+        else if (Rarity[0] < _rareProbability)
+        {
+            Debug.Log("rare reinforce");
+            data_Reinforce = CSVReader.Read("Data (.csv)/Rare Reinforce");
+        }
+        else
+        {
+            Debug.Log("epic reinforce");
+            data_Reinforce = CSVReader.Read("Data (.csv)/Epic Reinforce");
+        }
+    }
+
     private void MixReinforce()
     {
         // csv 데이터에 저장된 증강의 수 안에서 중복되지 않도록 값 생성. 아래 함수 참조
-        int[] numbers = MakeRandomNumbers(0, data_Reinforce.Count);
+        int[] numbers = MakeRandomNumbers(0, data_Reinforce.Count, 3);
 
         // UI 내의 증강 이미지 변경
 
@@ -85,7 +119,7 @@ public class ReinforceManager : MonoBehaviour
         valueType[2] = data_Reinforce[numbers[2]]["ValueType"].ToString();
     }
 
-    private static int[] MakeRandomNumbers(int minValue, int maxValue)
+    private int[] MakeRandomNumbers(int minValue, int maxValue, int number)
     {
         List<int> values = new List<int>();
         for (int v = minValue; v < maxValue; v++)
@@ -93,13 +127,12 @@ public class ReinforceManager : MonoBehaviour
             values.Add(v);
         }
 
-        int[] result = new int[3]; // -> 최대 개수 3개
+        int[] result = new int[number]; // number 개의 result 반환
         System.Random random = new System.Random();
         for (int i = 0; i < result.Length; i++)
         {
             int randomValue = values[random.Next(0, values.Count)];
             result[i] = randomValue;
-            Debug.Log($"randomValue = {randomValue}");
 
             if(!values.Remove(randomValue))
             {
