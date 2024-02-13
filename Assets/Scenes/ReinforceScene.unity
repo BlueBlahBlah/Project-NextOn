@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 176057928}
   - component: {fileID: 176057927}
+  - component: {fileID: 176057929}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -217,6 +218,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &176057929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176057926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &388726254
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,6 +545,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 446457594016326024, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c9f6d0e7bc8541498c9a4799ba184ede, type: 3}
+    - target: {fileID: 446457594016326024, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 446457594016326024, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 498641330388248649, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: ReinforceGiver
       value: 
@@ -637,18 +673,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4842866576392847799, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c9f6d0e7bc8541498c9a4799ba184ede, type: 3}
+    - target: {fileID: 4842866576392847799, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842866576392847799, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4927336686140479928, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_Name
       value: Reinforce Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 4927336686140479928, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 283018131150988375}
+    - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ReinforceLeft
@@ -660,6 +720,18 @@ PrefabInstance:
     - target: {fileID: 5156818858199418078, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864054661185933990, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c9f6d0e7bc8541498c9a4799ba184ede, type: 3}
+    - target: {fileID: 7864054661185933990, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7864054661185933990, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8704952267253288077, guid: b5dd50d1ae739574aa9949c19e5a2222, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
