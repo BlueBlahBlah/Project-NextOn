@@ -1,0 +1,13 @@
+Number,Name,Type,TargetStat,Description,Weight,Value,ValueType
+0,,stat,health,increases health 100,1,100,Fixed
+1,,stat,health,increases health 10%,1,10,Percent
+2,,stat,healthRegen,increases healthregen 7,1,7,Fixed
+3,,stat,depense,increases depense 8%,1,8,Percent
+4,,stat,speed,increases speed 1.5,1,1.5,Fixed
+5,,stat,damage,increases damage 15,1,15,Fixed
+6,,stat,damage,increases damage 7%,1,7,Percent
+7,,stat,attackSpeed,increases attackSpeed 45%,1,45,Percent
+8,,stat,skillCooldown,increases skillcooldown 10,1,10,Fixed
+9,,stat,skillDamage,increases skilldamage 20,1,20,Fixed
+10,,stat,critProbability,increases critprobability 20%,1,20,Fixed
+11,,stat,critDamage,increases critdamage 40,1,40,Fixed
