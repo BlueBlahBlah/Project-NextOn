@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: be2f4a78c83d7ab478236573f6a36052
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Skill_WindHeal: {fileID: 3799281118470991954, guid: 19f46652b2d912f4f8805ebca11cb8bf, type: 3}
+  - Skill_Storm: {fileID: 8416850047379148688, guid: c85bd0e9a16104e4fb34548e7de7e043, type: 3}
+  - Skill_Meteor: {fileID: 2992128105118998066, guid: cdd436d07e8395340a5d246ac1fe4323, type: 3}
+  - Skill_FireGuard: {fileID: 1377051380935397167, guid: ace860486324e3c4792824e3664e91ca, type: 3}
+  - Skill_FireMine: {fileID: 3821064085700860110, guid: d168de469b7025a4cbe22e56a493576f, type: 3}
+  - Skill_Spark: {fileID: 7185692574580326484, guid: 5b50e58805acd4243a6b6151c902359c, type: 3}
+  - Skill_Lightning: {fileID: 1932044764938372624, guid: 24e2c0651714cb34dac9ca2c1ee7f232, type: 3}
+  - Skill_DelayZone: {fileID: 2758280597665029652, guid: 2d6ebca998a6b3e43bff8c4adc299660, type: 3}
+  - Skill_Stun: {fileID: 5697428195824640995, guid: f1e3b40e48b9e35489f430adcc1a2f67, type: 3}
+  - Skill_ZONE: {fileID: 5683886709253992951, guid: f615b1c61e130054696a334363c5d487, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
