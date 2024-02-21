@@ -38,7 +38,7 @@ public class PlayerScriptRifle : MonoBehaviour
 
             // 회전 처리
             Quaternion newRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 100f);
 
             // 현재 위치를 이전 위치로 업데이트
             lastPosition = transform.position;
