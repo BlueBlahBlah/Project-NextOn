@@ -74,4 +74,8 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject, 4); // 처치 시 4초 뒤 삭제
         }
    }
+    public void stopNav()
+       {
+           nav.Stop();
+       }
 }
