@@ -32,6 +32,7 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("탄-몬스터 타격");
             other.GetComponent<Enemy>().curHealth--;
+            Destroy(gameObject);
         }
     }
 }
