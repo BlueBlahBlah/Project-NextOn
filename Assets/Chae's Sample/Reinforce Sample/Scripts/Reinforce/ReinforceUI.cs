@@ -115,8 +115,8 @@ public class ReinforceUI : MonoBehaviour
                     break;
             }
         }
-        
-        
+
+        PlayerStatManager.instance.UpdateFinalDamage();
         UI.SetActive(false);
     }
 
