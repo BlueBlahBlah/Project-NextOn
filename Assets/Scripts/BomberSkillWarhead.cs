@@ -33,7 +33,7 @@ public class BomberSkillWarhead : MonoBehaviour
         }*/
 
         Collider[] colls;
-        colls = Physics.OverlapSphere(transform.position, 20f);
+        colls = Physics.OverlapSphere(transform.position, 10f);
         if (colls.Length == 0)
         {
             Destroy(gameObject,5);
@@ -43,7 +43,7 @@ public class BomberSkillWarhead : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
-                //공격하는 메커니즘
+                collider.GetComponent<Enemy>().curHealth -= 70 ;
             }
         }
         

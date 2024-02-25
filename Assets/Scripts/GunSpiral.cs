@@ -7,11 +7,17 @@ public class Gunspiral : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        attack();
         Destroy(gameObject, 3f);
     }
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    void attack()
     {
         Collider[] colls;
         colls = Physics.OverlapSphere(transform.position, 5f);
@@ -24,7 +30,7 @@ public class Gunspiral : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
-                //공격하는 메커니즘
+                collider.GetComponent<Enemy>().curHealth -= 10 ;
             }
         }
     }

@@ -22,7 +22,7 @@ public class TurretMissile : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             //적을 공격
-            Debug.Log("터렛이 공격");
+            other.GetComponent<Enemy>().curHealth -= 3 ;
         }    
         
     }

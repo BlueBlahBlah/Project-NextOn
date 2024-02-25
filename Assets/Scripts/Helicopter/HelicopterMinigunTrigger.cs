@@ -68,15 +68,15 @@ public class HelicopterMinigunTrigger : MonoBehaviour
 
         float elapsedTime = 0f;
         Vector3 startingPosition = mainCamera.transform.position;
-
-        while (elapsedTime < cameraMoveDuration)
+        
+       while (elapsedTime < cameraMoveDuration)
         {
-            mainCamera.transform.position = Vector3.Lerp(startingPosition, new Vector3(targetPosition.x, 20, -10), elapsedTime / cameraMoveDuration);
+            mainCamera.transform.position = Vector3.Lerp(startingPosition, new Vector3(startingPosition.x, startingPosition.y + 5, startingPosition.z-4), elapsedTime / cameraMoveDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        mainCamera.transform.position = new Vector3(targetPosition.x, 20, -10);
+        mainCamera.transform.position = new Vector3(startingPosition.x, startingPosition.y + 5, startingPosition.z-4);
 
         isCameraMoving = false;
     }
