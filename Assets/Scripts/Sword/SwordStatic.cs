@@ -10,6 +10,7 @@ public class SwordStatic : MonoBehaviour
     [SerializeField] private int SkillTime;     //스킬타수
     [SerializeField] private float findDistance;     //스킬거리
     [SerializeField] private GameObject Effect;     //이펙트
+    public int Damage;
     
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class SwordStatic : MonoBehaviour
         collider = GetComponent<MeshCollider>();
         SkillTime = 5;      //기본 3번 튕김
         findDistance = 10f;      //스킬반경 10f
+        Damage = 5;
     }
 
     // Update is called once per frame

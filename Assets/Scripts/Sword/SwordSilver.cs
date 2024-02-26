@@ -10,6 +10,7 @@ public class SwordSilver : MonoBehaviour
     //[SerializeField] private int attackNum;     //유효타횟수
     [SerializeField] private float attackRadius;  //바위 범위
     [SerializeField] private Button Btn;
+    public int Damage;
     
     
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class SwordSilver : MonoBehaviour
         //attackNum = 0;
         attackRadius = 20f;
         Btn.onClick.AddListener(SpawnRock);
+        Damage = 5;
     }
 
     // Update is called once per frame
