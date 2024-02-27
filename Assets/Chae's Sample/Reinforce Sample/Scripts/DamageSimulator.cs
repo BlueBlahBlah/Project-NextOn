@@ -12,19 +12,20 @@ public class DamageSimulator : MonoBehaviour
     public float MaxHp;
     public TextMeshProUGUI Hp;
 
+    private float finalDamage;
+    private float finalCritDamage;
+    private float finalSkillDamage;
+    private float finalSkillCritDamage;
+
     private void Start()
     {
         Hp.text = MaxHp.ToString();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void AttackHit() 
     {
-        Hp.text = (float.Parse(Hp.text) - PlayerStatManager.instance.FinalDamage).ToString();
+        finalDamage = FinalDamage(PlayerStatManager.instance.ExpectedDamage);
+        Hp.text = (float.Parse(Hp.text) - finalDamage).ToString();
 
         if ((float.Parse(Hp.text) / MaxHp) >= 0)
             Hpbar.fillAmount = float.Parse(Hp.text) / MaxHp;
@@ -32,12 +33,33 @@ public class DamageSimulator : MonoBehaviour
 
     public void SkillHit()
     {
-        Hp.text = (float.Parse(Hp.text) - PlayerStatManager.instance.FinalSkillDamage).ToString();
+        finalDamage = FinalDamage(PlayerStatManager.instance.ExpectedSkillDamage);
+        Hp.text = (float.Parse(Hp.text) - finalDamage).ToString();
 
         if ((float.Parse(Hp.text) / MaxHp) >= 0)
             Hpbar.fillAmount = float.Parse(Hp.text) / MaxHp;
     }
 
+
+    public float FinalDamage(float _damage)
+    {
+        float _finalDamage;
+
+        float upperBound = _damage + _damage * (20f/100f); // 상한 +20%
+        Debug.Log($"upperBound is {upperBound}");
+        float lowerBound = _damage - _damage * (20f/100f); // 하한 -20%
+        Debug.Log($"lowerBound is {lowerBound}");
+
+        _finalDamage = (float)MakeRandomNumbers((int)lowerBound, (int)upperBound + 1, 1)[0];
+
+        Debug.Log($"{_finalDamage}");
+        return _finalDamage;
+    }
+
+    public void CriticalHit()
+    {
+
+    }
 
     // 크리티컬 용도의 난수 생성기. 증강 매커니즘에도 공용으로 사용되기 때문에 Static 스크립트인 Utils 를 추가할 필요 있음
     private int[] MakeRandomNumbers(int minValue, int maxValue, int number)

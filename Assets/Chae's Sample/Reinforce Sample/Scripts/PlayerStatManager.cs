@@ -64,26 +64,26 @@ public class PlayerStatManager : MonoBehaviour
 
     [Header("Final Damage")]
     [SerializeField]
-    private float finalDamage;
+    private float expectedDamage;
     [SerializeField]
-    private float finalCritDamage;
+    private float expectedCritDamage;
     [SerializeField]
-    private float finalSkillDamage;
+    private float expectedSkillDamage;
     [SerializeField]
-    private float finalSkillCritDamage;
+    private float expectedSkillCritDamage;
 
-    public float FinalDamage => finalDamage;
-    public float FinalCritDamage => finalCritDamage;
-    public float FinalSkillDamage => finalSkillDamage;
-    public float FinalSkillCritDamage => finalSkillCritDamage;
+    public float ExpectedDamage => expectedDamage;
+    public float ExpectedCritDamage => expectedCritDamage;
+    public float ExpectedSkillDamage => expectedSkillDamage;
+    public float ExpectedSkillCritDamage => expectedSkillCritDamage;
 
 
     public void UpdateFinalDamage()
     {
-        finalDamage = DamageFormula.UpdateDamage();
-        finalCritDamage = DamageFormula.UpdateCritDamage();
-        finalSkillDamage = DamageFormula.UpdateSkillDamage();
-        finalSkillCritDamage = DamageFormula.UpdateSkillCritDamage();
+        expectedDamage = DamageFormula.UpdateDamage();
+        expectedCritDamage = DamageFormula.UpdateCritDamage();
+        expectedSkillDamage = DamageFormula.UpdateSkillDamage();
+        expectedSkillCritDamage = DamageFormula.UpdateSkillCritDamage();
     }
     
 }
