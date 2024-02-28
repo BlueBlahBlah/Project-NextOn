@@ -167,6 +167,10 @@ public class PlayerScriptOneHand : MonoBehaviour
             if (col.CompareTag("Enemy"))
             {
                 col.GetComponent<Enemy>().curHealth--;
+                if (SwordStatic != null && SwordStatic.gameObject.activeSelf)
+                {
+                    SwordStatic.GetComponent<SwordStatic>().attackNum++;        //스태틱의 경우 스택 추가
+                }
             }
         }
     }

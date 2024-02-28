@@ -56832,8 +56832,7 @@ GameObject:
   - component: {fileID: 4922765940162066}
   - component: {fileID: 198690204200233858}
   - component: {fileID: 199687598524789310}
-  - component: {fileID: 8150133698532963868}
-  - component: {fileID: 1058109404902716169}
+  - component: {fileID: 8387909943104394144}
   m_Layer: 0
   m_Name: FX_ShardRock_Shooting_01
   m_TagString: Untagged
@@ -61776,19 +61775,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &8150133698532963868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672181623104776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58a729903003df438bd964c712e3fce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!136 &1058109404902716169
+--- !u!136 &8387909943104394144
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

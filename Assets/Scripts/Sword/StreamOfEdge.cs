@@ -8,10 +8,6 @@ public class StreamOfEdge : MonoBehaviour
     [SerializeField] private GameObject Sphere1;
     [SerializeField] private GameObject Sphere2;
 
-   
-
-    
-
     // Start is called before the first frame update
     void Start()
     {

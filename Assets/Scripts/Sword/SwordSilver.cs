@@ -76,6 +76,11 @@ public class SwordSilver : MonoBehaviour
             }
         }
 
+        if (enemyList.Count == 0)       //근처에 적이 없는 경우
+        {
+            return Vector3.zero;
+        }
+
         int i = Random.Range(0, enemyList.Count);
         //적중에 랜덤한 적을 선택
         Vector3 enemyPosition = enemyList[i].gameObject.transform.position;
@@ -89,6 +94,7 @@ public class SwordSilver : MonoBehaviour
     void SpawnRock()
     {
         Vector3 directionToEnemy = findNearEnemy();
+        directionToEnemy.y = 0f;
         // 방향 벡터가 유효한지 확인
         if (directionToEnemy != Vector3.zero)
         {

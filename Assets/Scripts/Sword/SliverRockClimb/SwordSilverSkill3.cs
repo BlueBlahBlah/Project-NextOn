@@ -10,6 +10,7 @@ public class SwordSilverSkill3 : MonoBehaviour
     [SerializeField] private GameObject Rock4;
     [SerializeField] private GameObject Rock5;
     [SerializeField] private GameObject Rock6;
+    public List<Enemy> enemyAgain;
     
     // Start is called before the first frame update
     void Start()

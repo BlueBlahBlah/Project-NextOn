@@ -7,6 +7,9 @@ public class FantasyAxwSkill : MonoBehaviour
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private GameObject[] shelds;
     [SerializeField] private GameObject[] magicEffect;
+
+    [SerializeField] private float DamageZone;
+    [SerializeField] private int Damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +36,7 @@ public class FantasyAxwSkill : MonoBehaviour
         }
 
         Collider[] colls;
-        colls = Physics.OverlapSphere(transform.position, 7f);
+        colls = Physics.OverlapSphere(transform.position, DamageZone);
         if (colls.Length != 0)
         {
             foreach (Collider target in colls)
@@ -41,7 +44,7 @@ public class FantasyAxwSkill : MonoBehaviour
                 if (target.CompareTag("Enemy"))
                 {
                     //공격 로직
-                    Debug.Log("마오카이 궁");
+                    target.GetComponent<Enemy>().curHealth -= Damage;
                 }
             }
         }

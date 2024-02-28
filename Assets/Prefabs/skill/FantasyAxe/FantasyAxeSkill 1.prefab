@@ -64,8 +64,8 @@ MonoBehaviour:
   magicEffect:
   - {fileID: 5158724023691114974}
   - {fileID: 8955732190416535944}
-  time: 3
-  radius: 1
+  DamageZone: 2
+  Damage: 5
 --- !u!1001 &161767310421935467
 PrefabInstance:
   m_ObjectHideFlags: 0
