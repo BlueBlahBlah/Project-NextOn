@@ -64,100 +64,47 @@ public class PlayerScriptOneHand : MonoBehaviour
             walking = false;
         }
         Anim.SetBool("walk", walking);
-        
-        
-        if (SwordStreamOfEdge != null && SwordStreamOfEdge.gameObject.activeSelf)
-        {
-            Damage = SwordStreamOfEdge.GetComponent<SwordStreamOfEdge>().Damage;
-        }
-        else if (SwordStatic != null && SwordStatic.gameObject.activeSelf)
-        {
-            Damage = SwordStatic.GetComponent<SwordStatic>().Damage;
-        }
-        else if (SwordSilver != null && SwordSilver.gameObject.activeSelf)
-        {
-            Damage = SwordSilver.GetComponent<SwordSilver>().Damage;
-        }
-        else if (SwordDemacia != null && SwordDemacia.gameObject.activeSelf)
-        {
-            Damage = SwordDemacia.GetComponent<SwordDemacia>().Damage;
-        }
-        else if (FantasyAxe != null && FantasyAxe.gameObject.activeSelf)
-        {
-            Damage = FantasyAxe.GetComponent<FantasyAxe>().Damage;
-        }
     }
 
     void OnAttackButtonClick()
     {
         Anim.SetTrigger("attack");
-        //OnAtaackColliider();
         //ColliderAttack();         //애니메이션에 이벤트로 넣어둠
     }
-
-    /*void OnAtaackColliider()
-    {
-        if (SwordStreamOfEdge != null && SwordStreamOfEdge.gameObject.activeSelf)
-        {
-            //Debug.Log("SwordStreamOfEdge 휘두르기전 Collider 켜기");
-            SwordStreamOfEdge.GetComponent<MeshCollider>().enabled = true;
-        }
-        /*if (SwordStatic != null && SwordStatic.gameObject.activeSelf)
-        {
-            //Debug.Log("SwordStatic 휘두르기전 Collider 켜기");
-            SwordStatic.GetComponent<MeshCollider>().enabled = true;
-        }#1#
-        if (SwordSilver != null && SwordSilver.gameObject.activeSelf)
-        {
-            //Debug.Log("SwordSilver 휘두르기전 Collider 켜기");
-            SwordSilver.GetComponent<MeshCollider>().enabled = true;
-        }
-        if (SwordDemacia != null && SwordDemacia.gameObject.activeSelf)
-        {
-            //Debug.Log("SwordDemacia 휘두르기전 Collider 켜기");
-            SwordDemacia.GetComponent<MeshCollider>().enabled = true;
-        }
-        if (FantasyAxe != null && FantasyAxe.gameObject.activeSelf)
-        {
-            //Debug.Log("FantasyAxe 휘두르기전 Collider 켜기");
-            FantasyAxe.GetComponent<MeshCollider>().enabled = true;
-        }
-    }*/
-    /*void OffAttackCollider()
-    {
-        if (SwordStreamOfEdge != null && SwordStreamOfEdge.gameObject.activeSelf)
-        {
-            //Debug.Log("SwordStreamOfEdge 휘두르기전 Collider 켜기");
-            SwordStreamOfEdge.GetComponent<MeshCollider>().enabled = false;
-        }
-        /*if (SwordStatic != null && SwordStatic.gameObject.activeSelf)
-        {
-            //Debug.Log("SwordStatic 휘두르기전 Collider 켜기");
-            SwordStatic.GetComponent<MeshCollider>().enabled = false;
-        }#1#
-        if (SwordSilver != null && SwordSilver.gameObject.activeSelf)
-        {
-            //Debug.Log("SwordSilver 휘두르기전 Collider 켜기");
-            SwordSilver.GetComponent<MeshCollider>().enabled = false;
-        }
-        if (SwordDemacia != null && SwordDemacia.gameObject.activeSelf)
-        {
-            //Debug.Log("SwordDemacia 휘두르기전 Collider 켜기");
-            SwordDemacia.GetComponent<MeshCollider>().enabled = false;
-        }
-        if (FantasyAxe != null && FantasyAxe.gameObject.activeSelf)
-        {
-            //Debug.Log("FantasyAxe 휘두르기전 Collider 켜기");
-            FantasyAxe.GetComponent<MeshCollider>().enabled = false;
-        }
-    }*/
+    
     void OnRollButtonClick()
     {
         Anim.SetTrigger("roll");
     }
 
-    void ColliderAttack()
+    void ColliderAttack()       //애니메이션 호출
     {
+        Damage = 0;
+        if (SwordStreamOfEdge != null && SwordStreamOfEdge.gameObject.activeSelf)
+        {
+            Damage = SwordStreamOfEdge.GetComponent<SwordStreamOfEdge>().Damage;
+            Damage *= GetComponent<StageManager>().SwordStreamEdge_DamageCounting;
+        }
+        else if (SwordStatic != null && SwordStatic.gameObject.activeSelf)
+        {
+            Damage = SwordStatic.GetComponent<SwordStatic>().Damage;
+            Damage *= GetComponent<StageManager>().SwordStatic_DamageCounting;
+        }
+        else if (SwordSilver != null && SwordSilver.gameObject.activeSelf)
+        {
+            Damage = SwordSilver.GetComponent<SwordSilver>().Damage;
+            Damage *= GetComponent<StageManager>().SwordSliver_DamageCounting;
+        }
+        else if (SwordDemacia != null && SwordDemacia.gameObject.activeSelf)
+        {
+            Damage = SwordDemacia.GetComponent<SwordDemacia>().Damage;
+            Damage *= GetComponent<StageManager>().SwordDemacia_DamageCounting;
+        }
+        else if (FantasyAxe != null && FantasyAxe.gameObject.activeSelf)
+        {
+            Damage = FantasyAxe.GetComponent<FantasyAxe>().Damage;
+            Damage *= GetComponent<StageManager>().FantasyAxe_DamageCounting;
+        }
         
         Collider[] hitColliders = Physics.OverlapBox(DamageZone.bounds.center, DamageZone.bounds.extents,
             DamageZone.transform.rotation);
@@ -166,7 +113,8 @@ public class PlayerScriptOneHand : MonoBehaviour
         {
             if (col.CompareTag("Enemy"))
             {
-                col.GetComponent<Enemy>().curHealth--;
+                // 데미지 = 계수 * 무기 데미지
+                col.GetComponent<Enemy>().curHealth -= Damage;         //계수 추가
                 if (SwordStatic != null && SwordStatic.gameObject.activeSelf)
                 {
                     SwordStatic.GetComponent<SwordStatic>().attackNum++;        //스태틱의 경우 스택 추가

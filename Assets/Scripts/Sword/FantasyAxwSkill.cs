@@ -9,7 +9,7 @@ public class FantasyAxwSkill : MonoBehaviour
     [SerializeField] private GameObject[] magicEffect;
 
     [SerializeField] private float DamageZone;
-    [SerializeField] private int Damage;
+    public int Damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +25,7 @@ public class FantasyAxwSkill : MonoBehaviour
 
     void explore()
     {
+        int TempDamage =  GetComponent<StageManager>().FantasyAxe_Skill_DamageCounting * Damage;
         explosionEffect.SetActive(true);
         foreach (GameObject VARIABLE in shelds)
         {
@@ -44,7 +45,7 @@ public class FantasyAxwSkill : MonoBehaviour
                 if (target.CompareTag("Enemy"))
                 {
                     //공격 로직
-                    target.GetComponent<Enemy>().curHealth -= Damage;
+                    target.GetComponent<Enemy>().curHealth -= TempDamage;
                 }
             }
         }

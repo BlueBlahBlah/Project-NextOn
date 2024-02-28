@@ -6,10 +6,12 @@ public class BulletSniper : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     public float destroyDistance = 30f;
+    public int Damage;
 
     private void Start()
     {
         player = GameObject.Find("Player");
+        Damage = 1;
     }
 
     private void Update()
@@ -25,12 +27,10 @@ public class BulletSniper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("명중");
-        Debug.Log(other.tag);
+        int TempDamage =  GetComponent<StageManager>().Sniper_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("탄-몬스터 타격");
-            other.GetComponent<Enemy>().curHealth -= 10;
+            other.GetComponent<Enemy>().curHealth -= TempDamage;
         }
     }
 }

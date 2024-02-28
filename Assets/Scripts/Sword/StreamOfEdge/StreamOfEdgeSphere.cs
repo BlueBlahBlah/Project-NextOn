@@ -6,6 +6,7 @@ using UnityEngine;
 public class StreamOfEdgeSphere : MonoBehaviour
 {
     private SphereCollider SphereCollider;
+    public int Damage;
 
     private float TickTime;       //데미지를 주는 틱 간격
     // Start is called before the first frame update
@@ -13,6 +14,7 @@ public class StreamOfEdgeSphere : MonoBehaviour
     {
         SphereCollider = GetComponent<SphereCollider>();
         TickTime = 0;
+        Damage = 1;    //기본 스킬 데미지
     }
 
     // Update is called once per frame
@@ -25,7 +27,9 @@ public class StreamOfEdgeSphere : MonoBehaviour
     {
         if (other.CompareTag("Enemy") && TickTime >= 0.25f)
         {
-            other.GetComponent<Enemy>().curHealth--;
+            //스킬계수 추가
+            int TempDamage =  GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;         
+            other.GetComponent<Enemy>().curHealth -= TempDamage;
             TickTime = 0;
         }
     }

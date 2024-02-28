@@ -20,7 +20,7 @@ public class HelicopterMinigunTrigger : MonoBehaviour
     private bool isCameraMoving = false;  // 카메라 이동 중 여부를 나타내는 플래그
     private Vector3 targetCameraPosition;  // 목표 카메라 위치
     private float cameraMoveDuration = 1.0f;  // 카메라 이동에 걸리는 시간
-
+    
     private void Start()
     {
         helicopterMinigunParticle = GameObject.Find("ParticleArea").GetComponent<HelicopterMinigunParticle>();
@@ -40,6 +40,8 @@ public class HelicopterMinigunTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SplineAnimate spline = Helicopter.GetComponent<SplineAnimate>();
+            //헬기 스킬 공격계수 전달
+            helicopterMinigunParticle.CalculateDamage(GetComponent<StageManager>().Helicopter_Skill_DamageCounting);
             if (spline.NormalizedTime == 1f)  // 스킬이 끝나면 다시 준비
             {
                 spline.NormalizedTime = 0;

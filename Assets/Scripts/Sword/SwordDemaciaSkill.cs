@@ -9,7 +9,7 @@ public class SwordDemaciaSkill : MonoBehaviour
     [SerializeField] private Rigidbody rigid;
     [SerializeField] private bool attackDone;
 
-    [SerializeField] private int damage;
+    public int Damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +17,7 @@ public class SwordDemaciaSkill : MonoBehaviour
         sword.SetActive(true);
         effect.SetActive(false);
         attackDone = false;
-        damage = 10;
+        Damage = 10;
     }
 
     // Update is called once per frame
@@ -44,6 +44,7 @@ public class SwordDemaciaSkill : MonoBehaviour
 
     void SkillAttack()
     {
+        int TempDamage =  GetComponent<StageManager>().SwordDemacia_Skill_DamageCounting * Damage;
         //전달받은 몬스터를 중심으로 맞닿은 물체 탐색
         Collider[] colliders = Physics.OverlapBox(
             transform.position,
@@ -55,7 +56,7 @@ public class SwordDemaciaSkill : MonoBehaviour
         {
             if (collider.gameObject.CompareTag("Enemy")) 
             {
-                collider.GetComponent<Enemy>().curHealth -= damage;
+                collider.GetComponent<Enemy>().curHealth -= TempDamage;
             }
         }
     }

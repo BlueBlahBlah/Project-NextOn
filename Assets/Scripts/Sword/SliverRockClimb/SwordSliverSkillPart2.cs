@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SwordSliverSkillPart2 : MonoBehaviour
 {
-    //[SerializeField] private List<Enemy> enemyAgain;
+    
     [SerializeField] private SwordSilverSkill2 Parent;
-    // Start is called before the first frame update
+    public int Damage;
     void Start()
     {
         Invoke("SecondAttack", 3f);
@@ -20,12 +20,13 @@ public class SwordSliverSkillPart2 : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
+        int TempDamage =  GetComponent<StageManager>().SwordSliver_Skill_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null && IsAlready1Attack(enemy) == false)      
             {
-                enemy.curHealth -= 10;
+                enemy.curHealth -= TempDamage;
                 Parent.enemyAgain.Add(enemy);
             }
         }
@@ -44,6 +45,7 @@ public class SwordSliverSkillPart2 : MonoBehaviour
 
     void SecondAttack()
     {
+        int TempDamage =  GetComponent<StageManager>().SwordSliver_Skill_DamageCounting * Damage;
         foreach (var enemy in Parent.enemyAgain)
         {
             if (enemy != null && enemy.gameObject.activeInHierarchy)
@@ -51,7 +53,7 @@ public class SwordSliverSkillPart2 : MonoBehaviour
                 // Check if the enemy is in contact with SwordSilverEffect
                 if (ISContact(enemy.gameObject))
                 {
-                    enemy.curHealth -= 10;
+                    enemy.curHealth -= TempDamage;
                 }
             }
         }

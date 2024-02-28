@@ -7,8 +7,8 @@ public class GrenadeAmmo : MonoBehaviour
 {
     [SerializeField] private GameObject Bullet;
     [SerializeField] private GameObject Effect;
-
     [SerializeField] private Rigidbody rigidbody;
+    public int Damage;
     public float boomTimer = 1;
 
     private bool dead;          //유탄이 터지면 데미지가 여러번 들어가는 것 방지
@@ -19,6 +19,7 @@ public class GrenadeAmmo : MonoBehaviour
         Effect.SetActive(false);
         dead = false;
         rigidbody = GetComponent<Rigidbody>();
+        Damage = 1;
     }
 
     // Update is called once per frame
@@ -56,6 +57,8 @@ public class GrenadeAmmo : MonoBehaviour
         rigidbody.angularVelocity = new Vector3(0, 0, 0);             //회전 그만
         Effect.SetActive(true);
         Bullet.SetActive(false);
+        
+        int TempDamage =  GetComponent<StageManager>().GrenadeLauncher_DamageCounting * Damage;
 
         Collider[] colls;
         colls = Physics.OverlapSphere(transform.position, 3f);
@@ -66,12 +69,10 @@ public class GrenadeAmmo : MonoBehaviour
 
         foreach (Collider collider in colls)
         {
-            Debug.Log("유탄 명중" + colls.Length);
             if (collider.CompareTag("Enemy"))       //Enemy tag를 가진경우
             {
                 //공격하는 매커니즘
-                Debug.Log("유탄 공격성공");
-                collider.GetComponent<Enemy>().curHealth -=3 ;
+                collider.GetComponent<Enemy>().curHealth -= TempDamage ;
             }
         }
         Destroy(gameObject,1.5f);

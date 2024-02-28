@@ -18,7 +18,7 @@ public class SwordStatic : MonoBehaviour
         collider = GetComponent<MeshCollider>();
         SkillTime = 3;      //기본 3번 튕김
         findDistance = 5f;      //스킬반경 5f
-        Damage = 5;
+        Damage = 3;
     }
 
     // Update is called once per frame
@@ -37,27 +37,29 @@ public class SwordStatic : MonoBehaviour
     private void swordSkill()
     {
         List<GameObject> nearEnemy = FindRandomEnemy();
+        //스킬 계수 추가
+        int TempDamage =  GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;
 
         int numEnemNear = nearEnemy.Count;
         if (numEnemNear == 1)       //주변에 다른 몬스터가 없을때
         {
             Instantiate(Effect, nearEnemy[0].transform.position, Quaternion.identity);
-            nearEnemy[0].GetComponent<Enemy>().curHealth -= 3;
+            nearEnemy[0].GetComponent<Enemy>().curHealth-= TempDamage;
         }
         else            //다른 몬스터가 주변에 더 있을때
         {
             // 첫번째 적과 자기자신의 중간 지점 계산 후 이펙트 생성
             Vector3 middlePoint = (nearEnemy[0].transform.position + this.gameObject.transform.position) / 2f;
             Instantiate(Effect, middlePoint, Quaternion.identity);
-            nearEnemy[0].GetComponent<Enemy>().curHealth -= 3;
+            nearEnemy[0].GetComponent<Enemy>().curHealth-= TempDamage;
             //다른 적들 사이에도 이펙트
             for (int i = 1; i < numEnemNear - 1; i++)
             {
                 middlePoint = (nearEnemy[i - 1].transform.position + nearEnemy[i].transform.position) / 2f;
                 Instantiate(Effect, middlePoint, Quaternion.identity);
-                nearEnemy[i].GetComponent<Enemy>().curHealth -= 3;
+                nearEnemy[0].GetComponent<Enemy>().curHealth-= TempDamage;
             }
-            nearEnemy[numEnemNear].GetComponent<Enemy>().curHealth -= 3;
+            nearEnemy[0].GetComponent<Enemy>().curHealth-= TempDamage;
         }
     }
     

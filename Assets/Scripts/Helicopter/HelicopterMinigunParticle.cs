@@ -16,22 +16,25 @@ public class HelicopterMinigunParticle : MonoBehaviour
     private Coroutine respawnCoroutine;  // 코루틴을 저장할 변수 추가
     private BoxCollider BoxCollider;
     private Rigidbody rigidbody;
+
+    public int Damage;          //공격계수 없는 데미지
+    public int TotalDamage;     //공격계수 더한 데미지
     
     [SerializeField] private SplineAnimate splineAnimate;   //헬리콥터 이동 관리 컴포넌트
 
 
     private void Awake()
     {
-        rangeCollider = rangeObject.GetComponent<BoxCollider>();
-        splineAnimate = Helicopter.GetComponent<SplineAnimate>();
-        BoxCollider = GetComponent<BoxCollider>();
-        rigidbody = GetComponent<Rigidbody>();
+       
     }
 
     private void Start()
     {
-        //StartCoroutine(RandomRespawn_Coroutine());
-        
+        rangeCollider = rangeObject.GetComponent<BoxCollider>();
+        splineAnimate = Helicopter.GetComponent<SplineAnimate>();
+        BoxCollider = GetComponent<BoxCollider>();
+        rigidbody = GetComponent<Rigidbody>();
+        Damage = 3;
     }
 
     public void ParticleStop()
@@ -43,6 +46,12 @@ public class HelicopterMinigunParticle : MonoBehaviour
         }
     }
 
+    //공격 계수를 전달받아 공격데미지를 결정
+    public void CalculateDamage(int d)
+    {
+        TotalDamage = Damage * d;
+    }
+
     public void ParticleStart()
     {
         respawnCoroutine = StartCoroutine(RandomRespawn_Coroutine());
@@ -50,7 +59,7 @@ public class HelicopterMinigunParticle : MonoBehaviour
 
     private void Update()
     {
-        //transform.rotation = Quaternion.identity;
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -60,7 +69,7 @@ public class HelicopterMinigunParticle : MonoBehaviour
             //Debug.LogError("헬리콥터 스킬 인식한 물체 " + other.tag);
             if (other.CompareTag("Enemy"))
             {
-                other.GetComponent<Enemy>().curHealth -= 3 ;
+                other.GetComponent<Enemy>().curHealth -= TotalDamage ;
             }
         }
     }

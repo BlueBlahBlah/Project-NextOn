@@ -5,30 +5,33 @@ using UnityEngine;
 
 public class FireGunFlame : MonoBehaviour
 {
-    //[SerializeField] private Collider thisCollider;
     public float raycastLength = 7f; // 레이의 최대 길이
-
+    private float TickTime;        //데미지를 주는 틱 간격
+    public int Damage;
+    
     public bool active;
-    // Start is called before the first frame update
+    
     void Start() 
     {
-        Debug.Log("화염방사기 시작");
-        //thisCollider = GetComponent<CapsuleCollider>();
+        TickTime = 0;
+        Damage = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (active)
+        TickTime += Time.deltaTime;
+        if (active && TickTime >= 0.25)
         {
+            TickTime = 0;
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, raycastLength))
             {
+                int TempDamage =  GetComponent<StageManager>().FlameGun_DamageCounting * Damage;
                 Collider collider = hit.collider;
                 if (collider != null && collider.CompareTag("Enemy"))
                 {
-                    collider.GetComponent<Enemy>().curHealth--;
-                    Debug.Log("화염방사기 공격");
+                    collider.GetComponent<Enemy>().curHealth -= TempDamage;
                 }
             }
 
@@ -36,14 +39,5 @@ public class FireGunFlame : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + transform.forward * raycastLength, Color.red);
         }
     }
-
-    /*void OnTriggerStay(Collider collider)
-    {
-        Debug.Log("화염방사기 출력");
-        if (collider.CompareTag("Enemy"))
-        {
-            collider.GetComponent<Enemy>().curHealth--;
-            Debug.Log("화염방사기 공격");
-        }
-    }*/
+    
 }
