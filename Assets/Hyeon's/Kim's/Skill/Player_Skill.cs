@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class Player_Skill : MonoBehaviour
 {
+    private float skill_power = 10.0f;      //스킬 피해량
+    private float skill_inrease = 1.0f;     //스킬 피해 증가량
+    private float heal = 10.0f;             //회복량
+    private float heal_increase = 1.0f;     //회복 증가량
+    private float Skill_Round = 2.0f;       //스킬 실행 원길이
+
 
     private int playerHp = 0;               //임시 확인용 HP
     private Transform PlayerTr;             //플레이어 위치 확인용
-    private Vector3 PlayerForward;          //플레이어의 정면 확인용
-    private float Skill_Round = 2.0f;       //스킬 실행 원길이
     GameObject particleSystemObject;        //스킬 프리팹 대용
     GameObject zonePre;
 
@@ -18,15 +22,24 @@ public class Player_Skill : MonoBehaviour
     [Header("SplashSkill")]
     public GameObject Skill_Storm;
     [Header("GuardSkill")]
-    public GameObject Skill_FireGuard;
+    public GameObject Skill_FireGuard_LV1;
+    public GameObject Skill_FireGuard_LV2;
+    public GameObject Skill_FireGuard_LV3;
+    private GameObject FireGuard;
     [Header("MineSkill")]
-    public GameObject Skill_FireMine;
+    public GameObject Skill_FireMine_LV1;
+    public GameObject Skill_FireMine_LV2;
+    public GameObject Skill_FireMine_LV3;
+    private GameObject FireMine;
     [Header("ElectDelaySkill")]
     public GameObject Skill_Spark;
     public GameObject Skill_Lightning;
     public GameObject Skill_DelayZone;
     [Header("StunSKill")]
-    public GameObject Skill_Stun;
+    public GameObject Skill_Stun_LV1;
+    public GameObject Skill_Stun_LV2;
+    public GameObject Skill_Stun_LV3;
+    private GameObject Stun;
     [Header("SkillZone")]
     public GameObject Skill_ZONE;
 
@@ -40,6 +53,25 @@ public class Player_Skill : MonoBehaviour
         zonePre =  Instantiate(Skill_ZONE);
         zonePre.GetComponent<Transform>().localPosition = transform.position;
         zonePre.GetComponent<Transform>().parent = this.transform;
+
+        if(skill_inrease > 0 && skill_inrease < 100)
+        {
+            FireGuard = Skill_FireGuard_LV1;
+            FireMine = Skill_FireMine_LV1;
+            Stun = Skill_Stun_LV1;
+        }
+        else if(skill_inrease > 100)
+        {
+            FireGuard = Skill_FireGuard_LV2;
+            FireMine = Skill_FireMine_LV2;
+            Stun = Skill_Stun_LV2;
+        }
+        else
+        {
+            FireGuard = Skill_FireGuard_LV3;
+            FireMine = Skill_FireMine_LV3;
+            Stun = Skill_Stun_LV3;
+        }
 
     }
     void Update()
@@ -62,48 +94,59 @@ public class Player_Skill : MonoBehaviour
     }
     private void P_Skill_WindHeal()
     {
+        float Heal_round = Skill_Round * heal_increase;
         particleSystemObject = Instantiate(Skill_WindHeal, PlayerTr.position, Quaternion.identity);
-        particleSystemObject.transform.localScale = new Vector3(Skill_Round, Skill_Round, Skill_Round);
+        particleSystemObject.transform.localScale = new Vector3(Heal_round, Heal_round, Heal_round);
         particleSystemObject.transform.parent = this.transform;
         /*
          * 플레이어 체력회복
-         * playerHp += 10;
+         * 총 회복량 = 체력 계수 * 회복량
+         * 체력계수만큼 스킬 이펙트 크기가 증가함
+         * player_HP += heal * heal_increase;
         */
-        Debug.Log($"After Hp :{playerHp}");
     }
 
     private void P_Skill_Storm()
     {
+        float Storm_round = Skill_Round * skill_inrease; 
         particleSystemObject = Instantiate(Skill_Storm, PlayerTr.position, Quaternion.identity);
-        particleSystemObject.transform.localScale = new Vector3(Skill_Round, Skill_Round, Skill_Round);
+        particleSystemObject.transform.localScale = new Vector3(Storm_round, Storm_round, Storm_round);
         particleSystemObject.transform.parent = this.transform;
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, Skill_Round);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, Storm_round);
 
         foreach (Collider collider in colliders) //collider 에 대미지 부가
         {
             /*
                 * 해당 collider 적들에게 대미지 부가
+                * 총 피해량 = 스킬계수 * 스킬피해량
+                * colliders....
             */
-            Debug.Log($"enemy hp: collider.hp");
         }
 
     }
 
     private void P_Skill_FireMine()
     {
-        particleSystemObject = Instantiate(Skill_FireMine, PlayerTr.position, Quaternion.identity);
+        particleSystemObject = Instantiate(FireMine, PlayerTr.position, Quaternion.identity);
         particleSystemObject.transform.localScale = new Vector3(Skill_Round, particleSystemObject.transform.localScale.y, Skill_Round);
-        //particleSystemObject.transform.GetChild(1).transform.localScale = new Vector3(5.0f, 5.0f, 5.0f);
+        /*
+         * 스킬 사용시 지뢰 설치됨
+         * -> 일정시간 지날시 폭발(Fire_Mine스크립트 발동함)
+         */
     }
 
     private void P_Skill_FireGuard()
     {
-        particleSystemObject = Instantiate(Skill_FireGuard, PlayerTr.position, Quaternion.identity);
+        particleSystemObject = Instantiate(FireGuard, PlayerTr.position, Quaternion.identity);
         particleSystemObject.transform.localScale = new Vector3(Skill_Round, Skill_Round, Skill_Round);
         particleSystemObject.transform.parent = this.transform;
 
         StartCoroutine(WaitAndDestroy(particleSystemObject, null, null,null,10f));
+        /*
+         * 스킬 사용시 일정 시간 지나면 자동으로 삭제됨
+         * 콜라이더 접촉시 데미지부가
+         */
     }
 
     private void P_Skill_Spark()
@@ -146,7 +189,7 @@ public class Player_Skill : MonoBehaviour
                 if (collider.tag == "Enemy")
                 {
                     Vector3 enemyPosition = collider.transform.position;
-                    particleSystemObject = Instantiate(Skill_Stun, new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z), Quaternion.identity);
+                    particleSystemObject = Instantiate(Stun, new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z), Quaternion.identity);
 
                     /*
                      * 해당 collider 적들에게 대미지 부가
