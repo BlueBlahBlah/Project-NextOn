@@ -27,7 +27,7 @@ public class BulletSniper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GetComponent<StageManager>().Sniper_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Sniper_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().curHealth -= TempDamage;

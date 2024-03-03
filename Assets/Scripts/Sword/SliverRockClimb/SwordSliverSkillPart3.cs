@@ -20,7 +20,7 @@ public class SwordSliverSkillPart3 : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GetComponent<StageManager>().SwordSliver_Skill_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordSliver_Skill_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();

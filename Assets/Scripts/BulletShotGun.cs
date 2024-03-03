@@ -28,7 +28,7 @@ public class BulletShotGun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GetComponent<StageManager>().ShotGun_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().ShotGun_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().curHealth -= TempDamage;

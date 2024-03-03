@@ -33,6 +33,16 @@ public class StageManager : MonoBehaviour
     public int Helicopter_Skill_DamageCounting;
     public int GunSpire_Skill_DamageCounting;
     
+    // ------ Wave별 몬스터 ------ //
+    [SerializeField] private GameObject[] Wave1_Monsters;
+    [SerializeField] private GameObject[] Wave2_Monsters;
+    [SerializeField] private GameObject[] Wave3_Monsters;
+    
+    // ------ Wave trigger Collider------ //
+    [SerializeField] private BoxCollider Area1;
+    [SerializeField] private BoxCollider Area2;
+    [SerializeField] private bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
+    
     
     
     // Start is called before the first frame update

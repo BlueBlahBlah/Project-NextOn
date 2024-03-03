@@ -28,7 +28,7 @@ public class BulletRifle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GetComponent<StageManager>().Rifle_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Rifle_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().curHealth -= TempDamage;

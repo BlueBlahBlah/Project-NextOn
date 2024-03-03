@@ -38,7 +38,7 @@ public class SwordStatic : MonoBehaviour
     {
         List<GameObject> nearEnemy = FindRandomEnemy();
         //스킬 계수 추가
-        int TempDamage =  GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;
 
         int numEnemNear = nearEnemy.Count;
         if (numEnemNear == 1)       //주변에 다른 몬스터가 없을때

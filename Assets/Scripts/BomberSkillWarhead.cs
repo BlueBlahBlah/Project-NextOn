@@ -32,7 +32,7 @@ public class BomberSkillWarhead : MonoBehaviour
             //피격된 적의 체력 감소 및 이펙트
         }*/
 
-        int TempDamage =  GetComponent<StageManager>().Bomber_Skill_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Bomber_Skill_DamageCounting * Damage;
         
         Collider[] colls;
         colls = Physics.OverlapSphere(transform.position, 10f);

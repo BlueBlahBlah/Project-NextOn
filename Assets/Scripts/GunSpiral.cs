@@ -21,7 +21,7 @@ public class Gunspiral : MonoBehaviour
 
     void attack()
     {
-        int TempDamage =  GetComponent<StageManager>().GunSpire_Skill_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().GunSpire_Skill_DamageCounting * Damage;
         Collider[] colls;
         colls = Physics.OverlapSphere(transform.position, 5f);
         if (colls.Length == 0)

@@ -27,7 +27,7 @@ public class FireGunFlame : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, raycastLength))
             {
-                int TempDamage =  GetComponent<StageManager>().FlameGun_DamageCounting * Damage;
+                int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().FlameGun_DamageCounting * Damage;
                 Collider collider = hit.collider;
                 if (collider != null && collider.CompareTag("Enemy"))
                 {

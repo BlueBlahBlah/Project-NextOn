@@ -58,7 +58,7 @@ public class GrenadeAmmo : MonoBehaviour
         Effect.SetActive(true);
         Bullet.SetActive(false);
         
-        int TempDamage =  GetComponent<StageManager>().GrenadeLauncher_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().GrenadeLauncher_DamageCounting * Damage;
 
         Collider[] colls;
         colls = Physics.OverlapSphere(transform.position, 3f);

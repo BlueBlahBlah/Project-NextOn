@@ -19,7 +19,7 @@ public class TurretMissile : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GetComponent<StageManager>().Turret_Skill_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Turret_Skill_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             //적을 공격

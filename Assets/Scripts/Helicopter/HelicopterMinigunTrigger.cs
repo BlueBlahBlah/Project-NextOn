@@ -41,7 +41,7 @@ public class HelicopterMinigunTrigger : MonoBehaviour
         {
             SplineAnimate spline = Helicopter.GetComponent<SplineAnimate>();
             //헬기 스킬 공격계수 전달
-            helicopterMinigunParticle.CalculateDamage(GetComponent<StageManager>().Helicopter_Skill_DamageCounting);
+            helicopterMinigunParticle.CalculateDamage(GameObject.Find("StageManager").GetComponent<StageManager>().Helicopter_Skill_DamageCounting);
             if (spline.NormalizedTime == 1f)  // 스킬이 끝나면 다시 준비
             {
                 spline.NormalizedTime = 0;

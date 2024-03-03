@@ -25,7 +25,7 @@ public class FantasyAxwSkill : MonoBehaviour
 
     void explore()
     {
-        int TempDamage =  GetComponent<StageManager>().FantasyAxe_Skill_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().FantasyAxe_Skill_DamageCounting * Damage;
         explosionEffect.SetActive(true);
         foreach (GameObject VARIABLE in shelds)
         {
