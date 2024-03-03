@@ -33,8 +33,9 @@ public class StageManager : MonoBehaviour
     public int Helicopter_Skill_DamageCounting;
     public int GunSpire_Skill_DamageCounting;
     
-    // ------ Wave별 몬스터 ------ //
+    // ------ Wave별 몬스터 및 기타 사물------ //
     [SerializeField] private GameObject[] Wave1_Monsters;
+    [SerializeField] private GameObject[] Wave1_Directions;
     [SerializeField] private GameObject[] Wave2_Monsters;
     [SerializeField] private GameObject[] Wave3_Monsters;
     
@@ -71,6 +72,16 @@ public class StageManager : MonoBehaviour
         Turret_Skill_DamageCounting = 1;
         Helicopter_Skill_DamageCounting = 1;
         GunSpire_Skill_DamageCounting = 1;
+
+        foreach (GameObject g in Wave1_Monsters)
+        {
+            //g.GetComponent<Enemy>().stopNav();
+            g.SetActive(false);
+        }
+        foreach (GameObject g in Wave1_Directions)
+        {
+            g.SetActive(false);
+        }
         
     }
 
@@ -79,4 +90,19 @@ public class StageManager : MonoBehaviour
     {
         
     }
+
+    public void Area1Function()
+    {
+        foreach (GameObject g in Wave1_Monsters)
+        {
+            g.SetActive(true);
+            g.GetComponent<Enemy>().startNav();
+        }
+        foreach (GameObject d in Wave1_Directions)
+        {
+            d.SetActive(true);
+        }
+    }
+    
+    
 }

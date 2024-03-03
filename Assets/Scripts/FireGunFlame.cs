@@ -1,37 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FireGunFlame : MonoBehaviour
 {
     public float raycastLength = 7f; // 레이의 최대 길이
-    private float TickTime;        //데미지를 주는 틱 간격
-    public int Damage;
+    private float tickTime;        // 데미지를 주는 틱 간격
+    public int damage;
     
     public bool active;
     
     void Start() 
     {
-        TickTime = 0;
-        Damage = 1;
+        tickTime = 0;
+        damage = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        TickTime += Time.deltaTime;
-        if (active && TickTime >= 0.25)
+        tickTime += Time.deltaTime;
+        if (active && tickTime >= 0.25)
         {
-            TickTime = 0;
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, raycastLength))
+            tickTime = 0;
+            RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, raycastLength);
+            foreach (RaycastHit hit in hits)
             {
-                int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().FlameGun_DamageCounting * Damage;
+                int tempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().FlameGun_DamageCounting * damage;
                 Collider collider = hit.collider;
                 if (collider != null && collider.CompareTag("Enemy"))
                 {
-                    collider.GetComponent<Enemy>().curHealth -= TempDamage;
+                    collider.GetComponent<Enemy>().curHealth -= tempDamage;
                 }
             }
 
@@ -39,5 +38,4 @@ public class FireGunFlame : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + transform.forward * raycastLength, Color.red);
         }
     }
-    
 }

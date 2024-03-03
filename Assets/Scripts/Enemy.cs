@@ -79,4 +79,8 @@ public class Enemy : MonoBehaviour
    {
        nav.Stop();
    }
+   public void startNav()
+   {
+       nav.Resume();
+   }
 }
