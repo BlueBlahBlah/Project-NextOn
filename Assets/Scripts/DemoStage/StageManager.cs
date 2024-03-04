@@ -45,6 +45,12 @@ public class StageManager : MonoBehaviour
     [SerializeField] private bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
     
     
+    //스택 몬스터
+    [SerializeField] private GameObject[] Stack;
+    [SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
+   
+    
+    
     
     // Start is called before the first frame update
     void Start()
@@ -82,7 +88,13 @@ public class StageManager : MonoBehaviour
         {
             g.SetActive(false);
         }
-        
+        foreach (GameObject g in Wave2_Monsters)
+        {
+            g.SetActive(false);
+        }
+
+        Stack = new GameObject[10];
+        StackIndex = 0;
     }
 
     // Update is called once per frame
@@ -101,6 +113,75 @@ public class StageManager : MonoBehaviour
         foreach (GameObject d in Wave1_Directions)
         {
             d.SetActive(true);
+        }
+    }
+    public void Area2Function()
+    {
+        foreach (GameObject d in Wave1_Directions)
+        {
+            d.SetActive(false);
+        }
+        foreach (GameObject g in Wave2_Monsters)
+        {
+            g.SetActive(true);
+            g.GetComponent<Enemy>().startNav();
+        }
+        
+    }
+
+    //적을 죽인 경우
+    public void AddStackMonster(GameObject g)
+    {
+        
+        //처음 들어온 몬스터인경우
+        if (StackIndex == 0)
+        {
+            
+            Stack[StackIndex] = g;
+            StackIndex++; 
+            return;
+        }
+        else if (StackIndex >= 10)      //스택이 꽉 찼는데 몬스터가 죽은 경우
+        {
+            if (g.GetComponent<Parenthesis>().identity == Stack[9].GetComponent<Parenthesis>().identity)
+            {
+                Stack[9].GetComponent<Parenthesis>().HitTheMonster();      //몬스터 삭제
+                Stack[9] = null;       //스택 pop
+                StackIndex = 9;       //인덱스 줄이기
+            }
+            else
+            {
+                g.GetComponent<Parenthesis>().NotDeath();
+            }
+            
+        }
+        else
+        {
+            Stack[StackIndex] = g;
+            StackIndex++;
+            if (CheckParenthesis())         //괄호가 맞아 떨어진 경우
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    Stack[StackIndex-1].GetComponent<Parenthesis>().HitTheMonster();      //몬스터 삭제
+                    Stack[StackIndex-1] = null;       //스택 pop
+                    StackIndex--;       //인덱스 줄이기
+                }
+            }
+        }
+    }
+
+    //괄호의 유효성 검사
+    private bool CheckParenthesis()
+    {
+        if (Stack[StackIndex - 1].GetComponent<Parenthesis>().identity ==
+            Stack[StackIndex - 2].GetComponent<Parenthesis>().identity)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
     

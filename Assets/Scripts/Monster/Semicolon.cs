@@ -30,6 +30,7 @@ public class Semicolon : Enemy
         {
             GetComponent<Enemy>().isChase = false;
             GetComponent<Enemy>().stopNav();
+            Destroy(gameObject,3f);
         }
         else        //살아있는경우
         {
