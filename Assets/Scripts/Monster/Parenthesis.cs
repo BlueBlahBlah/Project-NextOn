@@ -30,6 +30,8 @@ public class Parenthesis : Enemy
         _animator.SetBool("isRunning",true);
         isDeath = false;
         isInStack = false;
+        this.GetComponent<Enemy>().target = GameObject.Find("Player").transform;
+        this.target = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -83,13 +85,19 @@ public class Parenthesis : Enemy
         //스택에 들어가 있는 경우 처치
         if (isInStack == true)
         {
-            _animator.SetTrigger("Death");
-            GetComponent<Enemy>().isChase = false;
-            isDeath = true;
-            //3초후 삭제
-            Destroy(gameObject,3f);
+            ClearTheMonster();
         }
-        
+    }
+    //몬스터를 처치할 때 호출되는 함수
+    public void ClearTheMonster()
+    {
+        _animator.SetTrigger("Death");
+        GetComponent<Enemy>().isChase = false;
+        isDeath = true;
+        //3초후 삭제
+        Destroy(gameObject,3f);
+        ///StageManager stageManager = 
+        GameObject.Find("StageManager").GetComponent<StageManager>().Wave2_Monsters.Remove(this.gameObject);
     }
     //스택이 다 찬경우에 몬스터가 처치될 시 호출
     //괄호 몬스터가 죽지 않는 코드

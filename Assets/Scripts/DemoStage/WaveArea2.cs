@@ -5,10 +5,12 @@ using UnityEngine;
 public class WaveArea2 : MonoBehaviour
 {
     [SerializeField] private StageManager StageManager;
+    [SerializeField] private bool Active;
     // Start is called before the first frame update
     void Start()
     {
         StageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        Active = false;
     }
 
     // Update is called once per frame
@@ -19,8 +21,9 @@ public class WaveArea2 : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && Active == false)
         {
+            Active = true;
             StageManager.Area2Function();
         }
         

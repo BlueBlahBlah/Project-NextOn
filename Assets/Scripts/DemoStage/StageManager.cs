@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,18 +37,23 @@ public class StageManager : MonoBehaviour
     // ------ Wave별 몬스터 및 기타 사물------ //
     [SerializeField] private GameObject[] Wave1_Monsters;
     [SerializeField] private GameObject[] Wave1_Directions;
-    [SerializeField] private GameObject[] Wave2_Monsters;
+    public List<GameObject> Wave2_Monsters;
+    [SerializeField] private GameObject[] Wave2_Monsters_Spawner;
     [SerializeField] private GameObject[] Wave3_Monsters;
     
     // ------ Wave trigger Collider------ //
     [SerializeField] private BoxCollider Area1;
     [SerializeField] private BoxCollider Area2;
     [SerializeField] private bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
+    [SerializeField] private bool Wave2MonsterClear;        //wave2몬스터를 모두 잡았는지
     
     
     //스택 몬스터
     [SerializeField] private GameObject[] Stack;
     [SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
+    public int Gauge;                               //스택 몬스터를 잡는 게이지
+    [SerializeField] private GameObject Wave2_Gauge;
+    
    
     
     
@@ -59,7 +65,7 @@ public class StageManager : MonoBehaviour
         SwordStatic_DamageCounting = 1;
         SwordSliver_DamageCounting = 1;
         SwordDemacia_DamageCounting = 1;
-        FantasyAxe_DamageCounting = 1;
+        FantasyAxe_DamageCounting = 100;
         
         SwordStreamEdge_Skill_DamageCounting = 1;
         SwordStatic_Skill_DamageCounting = 1;
@@ -92,14 +98,24 @@ public class StageManager : MonoBehaviour
         {
             g.SetActive(false);
         }
+        foreach (GameObject g in Wave2_Monsters_Spawner)
+        {
+            g.SetActive(false);
+        }
 
         Stack = new GameObject[10];
         StackIndex = 0;
+        Gauge = 0;
+        Wave2MonsterClear = false;
+        Wave2_Gauge.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //스택몬스터 20 게이지 채우면 모두 삭제
+        if (Gauge >= 20 && Wave2MonsterClear == false)
+            Clear_Wave2_Monsters();
         
     }
 
@@ -126,6 +142,11 @@ public class StageManager : MonoBehaviour
             g.SetActive(true);
             g.GetComponent<Enemy>().startNav();
         }
+        foreach (GameObject g in Wave2_Monsters_Spawner)
+        {
+            g.SetActive(true);
+        }
+        Wave2_Gauge.SetActive(true);
         
     }
 
@@ -163,10 +184,11 @@ public class StageManager : MonoBehaviour
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Stack[StackIndex-1].GetComponent<Parenthesis>().HitTheMonster();      //몬스터 삭제
+                    Stack[StackIndex-1].GetComponentInChildren<Parenthesis>().HitTheMonster();      //몬스터 삭제
                     Stack[StackIndex-1] = null;       //스택 pop
                     StackIndex--;       //인덱스 줄이기
                 }
+                Gauge++;        //스택 게이지증가
             }
         }
     }
@@ -183,6 +205,48 @@ public class StageManager : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void Clear_Wave2_Monsters()
+    {
+        //모든 스포너 생성중단
+        foreach (GameObject g in Wave2_Monsters_Spawner)
+        {
+            g.GetComponent<Wave2StackMonsterSpawner>().Active = false;
+        }
+        
+        Wave2MonsterClear = true;
+        /*foreach (GameObject g in Wave2_Monsters)
+        {
+            g.GetComponent<Parenthesis>().ClearTheMonster();
+        }*/
+        Wave2_Gauge.SetActive(false);
+        Invoke("ClearWave2MonsterInvoke",5);
+    }
+
+    private void ClearWave2MonsterInvoke()
+    {
+        Debug.LogError(Wave2_Monsters.Count-1);
+        for (int i = Wave2_Monsters.Count-1; i >= 0; i--)
+        {
+            try
+            {
+                if(Wave2_Monsters[i] != null)
+                    Wave2_Monsters[i].GetComponentInChildren<Parenthesis>().ClearTheMonster();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Debug.LogError(i);
+                throw;
+            }
+            
+        }
+    }
+
+    public void AddStackMonster_In_Array(GameObject m)
+    {
+        Wave2_Monsters.Add(m);
     }
     
     
