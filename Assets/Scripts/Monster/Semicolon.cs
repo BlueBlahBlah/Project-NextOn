@@ -21,6 +21,8 @@ public class Semicolon : Enemy
         _animator = GetComponent<Animator>();
         _animator.SetBool("isRunning",true);
         IsDeath = false;
+        this.GetComponent<Enemy>().target = GameObject.Find("Player").transform;
+        this.target = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
