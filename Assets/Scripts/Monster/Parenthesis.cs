@@ -51,6 +51,7 @@ public class Parenthesis : Enemy
                 if (curHealth <= 0 && isInStack == false)
                 {
                     isInStack = true;
+                    health = curHealth;
                     //체력이 다 닳은 경우 아직 죽지말고 스택에 추가
                     GameObject.Find("StageManager").GetComponent<StageManager>().AddStackMonster(this.gameObject);
                 }
@@ -96,8 +97,6 @@ public class Parenthesis : Enemy
         isDeath = true;
         //3초후 삭제
         Destroy(gameObject,3f);
-        ///StageManager stageManager = 
-        GameObject.Find("StageManager").GetComponent<StageManager>().Wave2_Monsters.Remove(this.gameObject);
     }
     //스택이 다 찬경우에 몬스터가 처치될 시 호출
     //괄호 몬스터가 죽지 않는 코드

@@ -52,11 +52,8 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject[] Stack;
     [SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
     public int Gauge;                               //스택 몬스터를 잡는 게이지
-    [SerializeField] private GameObject Wave2_Gauge;
-    
+    [SerializeField] private GameObject wave2Gauge;
    
-    
-    
     
     // Start is called before the first frame update
     void Start()
@@ -107,7 +104,7 @@ public class StageManager : MonoBehaviour
         StackIndex = 0;
         Gauge = 0;
         Wave2MonsterClear = false;
-        Wave2_Gauge.SetActive(false);
+        wave2Gauge.SetActive(false);
     }
 
     // Update is called once per frame
@@ -146,51 +143,51 @@ public class StageManager : MonoBehaviour
         {
             g.SetActive(true);
         }
-        Wave2_Gauge.SetActive(true);
+        wave2Gauge.SetActive(true);
         
     }
 
     //적을 죽인 경우
     public void AddStackMonster(GameObject g)
     {
-        
         //처음 들어온 몬스터인경우
         if (StackIndex == 0)
         {
-            
             Stack[StackIndex] = g;
-            StackIndex++; 
+            StackIndex++;
             return;
         }
-        else if (StackIndex >= 10)      //스택이 꽉 찼는데 몬스터가 죽은 경우
+        else if (StackIndex >= 10) //스택이 꽉 찼는데 몬스터가 죽은 경우
         {
             if (g.GetComponent<Parenthesis>().identity == Stack[9].GetComponent<Parenthesis>().identity)
             {
-                Stack[9].GetComponent<Parenthesis>().HitTheMonster();      //몬스터 삭제
-                Stack[9] = null;       //스택 pop
-                StackIndex = 9;       //인덱스 줄이기
+                Stack[9].GetComponent<Parenthesis>().HitTheMonster(); //몬스터 삭제
+                Stack[9] = null; //스택 pop
+                StackIndex = 9; //인덱스 줄이기
             }
             else
             {
                 g.GetComponent<Parenthesis>().NotDeath();
             }
-            
         }
         else
         {
             Stack[StackIndex] = g;
             StackIndex++;
-            if (CheckParenthesis())         //괄호가 맞아 떨어진 경우
+            if (CheckParenthesis()) //괄호가 맞아 떨어진 경우
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Stack[StackIndex-1].GetComponentInChildren<Parenthesis>().HitTheMonster();      //몬스터 삭제
-                    Stack[StackIndex-1] = null;       //스택 pop
-                    StackIndex--;       //인덱스 줄이기
+                    Stack[StackIndex - 1].GetComponentInChildren<Parenthesis>().HitTheMonster(); //스택에서 몬스터 삭제
+                    Stack[StackIndex - 1] = null; //스택 pop
+                    StackIndex--; //인덱스 줄이기
                 }
-                Gauge++;        //스택 게이지증가
+
+                Gauge++; //스택 게이지증가
             }
         }
+        
+       
     }
 
     //괄호의 유효성 검사
@@ -209,24 +206,19 @@ public class StageManager : MonoBehaviour
 
     public void Clear_Wave2_Monsters()
     {
+        Wave2MonsterClear = true;
         //모든 스포너 생성중단
         foreach (GameObject g in Wave2_Monsters_Spawner)
         {
             g.GetComponent<Wave2StackMonsterSpawner>().Active = false;
+            g.SetActive(false);
         }
-        
-        Wave2MonsterClear = true;
-        /*foreach (GameObject g in Wave2_Monsters)
-        {
-            g.GetComponent<Parenthesis>().ClearTheMonster();
-        }*/
-        Wave2_Gauge.SetActive(false);
-        Invoke("ClearWave2MonsterInvoke",5);
+        wave2Gauge.SetActive(false);
+        Invoke("ClearWave2MonsterInvoke",3);
     }
 
     private void ClearWave2MonsterInvoke()
     {
-        Debug.LogError(Wave2_Monsters.Count-1);
         for (int i = Wave2_Monsters.Count-1; i >= 0; i--)
         {
             try
