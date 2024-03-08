@@ -184,6 +184,7 @@ public class StageManager : MonoBehaviour
                 }
 
                 Gauge++; //스택 게이지증가
+                wave2Gauge.GetComponent<HealthBar>().SetHealth(Gauge);
             }
         }
         
@@ -213,7 +214,8 @@ public class StageManager : MonoBehaviour
             g.GetComponent<Wave2StackMonsterSpawner>().Active = false;
             g.SetActive(false);
         }
-        wave2Gauge.SetActive(false);
+
+        wave2Gauge.GetComponent<HealthBar>().ClearWave2();
         Invoke("ClearWave2MonsterInvoke",3);
     }
 
@@ -232,8 +234,8 @@ public class StageManager : MonoBehaviour
                 Debug.LogError(i);
                 throw;
             }
-            
         }
+        wave2Gauge.SetActive(false);
     }
 
     public void AddStackMonster_In_Array(GameObject m)

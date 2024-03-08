@@ -14,7 +14,7 @@ public class Wave2StackMonsterSpawner : MonoBehaviour
     void Start()
     {
         Active = true;
-        period = Random.Range(5, 10);
+        period = Random.Range(10, 20);
         StageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
     }
 
