@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class StageManager : MonoBehaviour
 {
@@ -37,15 +38,22 @@ public class StageManager : MonoBehaviour
     // ------ Wave별 몬스터 및 기타 사물------ //
     [SerializeField] private GameObject[] Wave1_Monsters;
     [SerializeField] private GameObject[] Wave1_Directions;
+    [SerializeField] private GameObject[] Wave3_Directions;
     public List<GameObject> Wave2_Monsters;
     [SerializeField] private GameObject[] Wave2_Monsters_Spawner;
     [SerializeField] private GameObject[] Wave3_Monsters;
+    [SerializeField] private GameObject[] Before3Peiz;
+    [SerializeField] private GameObject[] After3Peiz;
+    
+    [SerializeField] private GameObject EventBtn;
     
     // ------ Wave trigger Collider------ //
     [SerializeField] private BoxCollider Area1;
     [SerializeField] private BoxCollider Area2;
-    [SerializeField] private bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
+    public bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
     [SerializeField] private bool Wave2MonsterClear;        //wave2몬스터를 모두 잡았는지
+    [SerializeField] private GameObject WaveArea3Scrit;
+    [SerializeField] private GameObject WaveArea3Barrier;
     
     
     //스택 몬스터
@@ -99,10 +107,23 @@ public class StageManager : MonoBehaviour
         {
             g.SetActive(false);
         }
+        foreach (GameObject g in Before3Peiz)
+        {
+            g.SetActive(true);
+        }
+        foreach (GameObject g in After3Peiz)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in Wave3_Directions)
+        {
+            g.SetActive(false);
+        }
 
         Stack = new GameObject[10];
         StackIndex = 0;
         Gauge = 0;
+        Area3 = false;
         Wave2MonsterClear = false;
         wave2Gauge.SetActive(false);
     }
@@ -116,6 +137,7 @@ public class StageManager : MonoBehaviour
         
     }
 
+    //1페이즈 시작
     public void Area1Function()
     {
         foreach (GameObject g in Wave1_Monsters)
@@ -130,20 +152,43 @@ public class StageManager : MonoBehaviour
     }
     public void Area2Function()
     {
-        foreach (GameObject d in Wave1_Directions)
+        //2페이즈
+        if (Area3 == false)
         {
-            d.SetActive(false);
+            foreach (GameObject d in Wave1_Directions)
+            {
+                d.SetActive(false);
+            }
+            foreach (GameObject g in Wave2_Monsters)
+            {
+                g.SetActive(true);
+                g.GetComponent<Enemy>().startNav();
+            }
+            foreach (GameObject g in Wave2_Monsters_Spawner)
+            {
+                g.SetActive(true);
+            }
+            wave2Gauge.SetActive(true);
         }
-        foreach (GameObject g in Wave2_Monsters)
+        else        //3페이즈 시작
         {
-            g.SetActive(true);
-            g.GetComponent<Enemy>().startNav();
+            Debug.LogError("3페이즈 시작");
+            //다리를 연결
+            foreach (GameObject g in Before3Peiz)
+            {
+                g.SetActive(false);
+            }
+            foreach (GameObject g in After3Peiz)
+            {
+                g.SetActive(true);
+            }
+            //길목 제거
+            WaveArea3Scrit.SetActive(false);
+            WaveArea3Barrier.SetActive(false);
+            //EventBtn 비활성화
+            EventBtn.SetActive(false);
         }
-        foreach (GameObject g in Wave2_Monsters_Spawner)
-        {
-            g.SetActive(true);
-        }
-        wave2Gauge.SetActive(true);
+        
         
     }
 
@@ -241,6 +286,15 @@ public class StageManager : MonoBehaviour
     public void AddStackMonster_In_Array(GameObject m)
     {
         Wave2_Monsters.Add(m);
+    }
+
+    //3페이즈 방향
+    public void OnWave3Direction()
+    {
+        foreach (GameObject g in Wave3_Directions)
+        {
+            g.SetActive(true);
+        }
     }
     
     

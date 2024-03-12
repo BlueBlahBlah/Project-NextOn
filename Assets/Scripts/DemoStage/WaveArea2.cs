@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WaveArea2 : MonoBehaviour
 {
     [SerializeField] private StageManager StageManager;
-    [SerializeField] private bool Active;
+    [SerializeField] private bool peiz2Active;
+    [SerializeField] private bool peiz3Active;
     // Start is called before the first frame update
     void Start()
     {
         StageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
-        Active = false;
+        peiz2Active = false;
+        peiz3Active = false;
     }
 
     // Update is called once per frame
@@ -21,9 +24,14 @@ public class WaveArea2 : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && Active == false)
+        if (other.CompareTag("Player") && peiz2Active == false)
         {
-            Active = true;
+            peiz2Active = true;
+            StageManager.Area2Function();
+        }
+        else if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false)
+        {
+            peiz3Active = true;
             StageManager.Area2Function();
         }
         
