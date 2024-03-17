@@ -17,6 +17,7 @@ public class CompilerTrigger : MonoBehaviour
     {
         //player와 발전기 사이의 거리가 4이하일때
         if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= 4f)
+           // && GameObject.Find("StageManager").GetComponent<StageManager>().Wave2MonsterClear)
         {
             eventBtn.SetActive(true);
         }

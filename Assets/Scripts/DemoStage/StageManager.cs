@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -44,14 +45,19 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject[] Wave3_Monsters;
     [SerializeField] private GameObject[] Before3Peiz;
     [SerializeField] private GameObject[] After3Peiz;
-    
+
+    [SerializeField] private GameObject Peiz3Monster_1;
+    public GameObject Peiz3Monster_2;
+    [SerializeField] private GameObject Wave3_Block_Directions;
     [SerializeField] private GameObject EventBtn;
     
     // ------ Wave trigger Collider------ //
     [SerializeField] private BoxCollider Area1;
     [SerializeField] private BoxCollider Area2;
     public bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
-    [SerializeField] private bool Wave2MonsterClear;        //wave2몬스터를 모두 잡았는지
+    [SerializeField] private bool Peiz3Start;  
+    [SerializeField] private bool Peiz3Monster2UpdateControl;   
+    public bool Wave2MonsterClear;        //wave2몬스터를 모두 잡았는지
     [SerializeField] private GameObject WaveArea3Scrit;
     [SerializeField] private GameObject WaveArea3Barrier;
     
@@ -119,6 +125,7 @@ public class StageManager : MonoBehaviour
         {
             g.SetActive(false);
         }
+        Wave3_Block_Directions.SetActive(true);
 
         Stack = new GameObject[10];
         StackIndex = 0;
@@ -126,6 +133,10 @@ public class StageManager : MonoBehaviour
         Area3 = false;
         Wave2MonsterClear = false;
         wave2Gauge.SetActive(false);
+        Peiz3Start = false;
+        Peiz3Monster_1.SetActive(false);
+        Peiz3Monster_2.SetActive(false);
+        Peiz3Monster2UpdateControl = false;
     }
 
     // Update is called once per frame
@@ -134,7 +145,14 @@ public class StageManager : MonoBehaviour
         //스택몬스터 20 게이지 채우면 모두 삭제
         if (Gauge >= 20 && Wave2MonsterClear == false)
             Clear_Wave2_Monsters();
-        
+
+        //Area3는 DemoEventBtn에서 True로 변경
+        if (Area3 == true && Peiz3Start == false)
+        {
+            Peiz3Start = true;
+            Peiz3Monster_1.SetActive(true);
+            
+        }
     }
 
     //1페이즈 시작
@@ -187,6 +205,7 @@ public class StageManager : MonoBehaviour
             WaveArea3Barrier.SetActive(false);
             //EventBtn 비활성화
             EventBtn.SetActive(false);
+            Peiz3Monster_2.SetActive(true); 
         }
         
         
@@ -295,6 +314,7 @@ public class StageManager : MonoBehaviour
         {
             g.SetActive(true);
         }
+        Wave3_Block_Directions.SetActive(false);
     }
     
     

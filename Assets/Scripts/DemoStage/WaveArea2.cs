@@ -24,12 +24,13 @@ public class WaveArea2 : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        //2페이즈시작
         if (other.CompareTag("Player") && peiz2Active == false)
         {
             peiz2Active = true;
             StageManager.Area2Function();
         }
-        else if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false)
+        else if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false)  //3페이즈 중에 Area 통과
         {
             peiz3Active = true;
             StageManager.Area2Function();
