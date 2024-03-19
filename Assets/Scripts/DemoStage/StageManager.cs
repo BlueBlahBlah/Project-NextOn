@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
@@ -67,7 +68,33 @@ public class StageManager : MonoBehaviour
     [SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
     public int Gauge;                               //스택 몬스터를 잡는 게이지
     [SerializeField] private GameObject wave2Gauge;
-   
+    
+    
+    //튜토리얼 패널들
+    [SerializeField] private GameObject WelcomePanel;
+    [SerializeField] private Button WelcomPanel_Btn;
+    [SerializeField] private GameObject[] WelcomePanel_Text;
+    [SerializeField] private int WelcomPanel_Text_Number;
+    
+    //페이즈2 시작시 패널
+    [SerializeField] private GameObject Peiz2StartPanel;
+    [SerializeField] private Button Peiz2StartPanel_Btn;
+    [SerializeField] private GameObject[] Peiz2StartPanel_Text;
+    [SerializeField] private int Peiz2StartPanel_Text_Number;
+    
+    //페이즈2 종료시 패널
+    [SerializeField] private GameObject Peiz2EndPanel;
+    [SerializeField] private Button Peiz2EndPanel_Btn;
+    [SerializeField] private GameObject[] Peiz2EndPanel_Text;
+    [SerializeField] private int Peiz2EndPanel_Text_Number;
+    
+    //컴파일러 고친다음 패널
+    [SerializeField] private GameObject AfterCompilerPanel ;
+    [SerializeField] private Button AfterCompilerPanel_Btn;
+    [SerializeField] private GameObject[] AfterCompilerPanel_Text;
+    [SerializeField] private int AfterCompilerPanel_Text_Number;
+
+    [SerializeField] private bool isPause;  //현재 게임 시간이 멈췄는지
     
     // Start is called before the first frame update
     void Start()
@@ -137,6 +164,41 @@ public class StageManager : MonoBehaviour
         Peiz3Monster_1.SetActive(false);
         Peiz3Monster_2.SetActive(false);
         Peiz3Monster2UpdateControl = false;
+        isPause = false;
+        
+        //패널 비활성화
+        WelcomePanel.SetActive(false);
+        WelcomPanel_Text_Number = 0;
+        foreach (GameObject g in WelcomePanel_Text)
+        {
+            g.SetActive(false);
+        }
+        
+        Peiz2StartPanel.SetActive(false);
+        Peiz2StartPanel_Text_Number = 0;
+        foreach (GameObject g in Peiz2StartPanel_Text)
+        {
+            g.SetActive(false);
+        }
+        
+        Peiz2EndPanel.SetActive(false);
+        Peiz2EndPanel_Text_Number = 0;
+        foreach (GameObject g in Peiz2EndPanel_Text)
+        {
+            g.SetActive(false);
+        }
+        
+        AfterCompilerPanel.SetActive(false);
+        AfterCompilerPanel_Text_Number = 0;
+        foreach (GameObject g in AfterCompilerPanel_Text)
+        {
+            g.SetActive(false);
+        }
+        
+        
+        
+        
+        Invoke("Start_WelcomePanel",1);
     }
 
     // Update is called once per frame
@@ -151,7 +213,8 @@ public class StageManager : MonoBehaviour
         {
             Peiz3Start = true;
             Peiz3Monster_1.SetActive(true);
-            
+            //Start_AfterCompilerPanel();    //컴파일러 고친 뒤 패널 등장
+            Start_Panel(AfterCompilerPanel,AfterCompilerPanel_Btn,AfterCompilerPanel_Text,AfterCompilerPanel_Text_Number,false);
         }
     }
 
@@ -170,7 +233,7 @@ public class StageManager : MonoBehaviour
     }
     public void Area2Function()
     {
-        //2페이즈
+        //2페이즈 시작
         if (Area3 == false)
         {
             foreach (GameObject d in Wave1_Directions)
@@ -187,6 +250,9 @@ public class StageManager : MonoBehaviour
                 g.SetActive(true);
             }
             wave2Gauge.SetActive(true);
+
+            //Start_Peiz2StartPanel();  //2페이즈 패널 등장
+            Start_Panel(Peiz2StartPanel, Peiz2StartPanel_Btn, Peiz2StartPanel_Text, Peiz2StartPanel_Text_Number, true);
         }
         else        //3페이즈 시작
         {
@@ -269,6 +335,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    //2페이즈 끝
     public void Clear_Wave2_Monsters()
     {
         Wave2MonsterClear = true;
@@ -300,6 +367,9 @@ public class StageManager : MonoBehaviour
             }
         }
         wave2Gauge.SetActive(false);
+
+        //Start_Peiz2EndPanel(); //2페이즈 끝난 패널 등장
+        Start_Panel(Peiz2EndPanel,Peiz2EndPanel_Btn,Peiz2EndPanel_Text,Peiz2EndPanel_Text_Number,false);
     }
 
     public void AddStackMonster_In_Array(GameObject m)
@@ -315,6 +385,75 @@ public class StageManager : MonoBehaviour
             g.SetActive(true);
         }
         Wave3_Block_Directions.SetActive(false);
+    }
+    
+    private void Start_Panel(GameObject panal, Button btn, GameObject[] text, int number, bool timestop)
+    {
+        if (timestop == true)
+        {
+            Time.timeScale = 0;    //게임 일시정지
+            isPause = true;
+        }
+        btn.onClick.AddListener(() => NextText(panal, text, ref number));
+        panal.SetActive(true);    //패널등장
+        text[number].SetActive(true);      //첫 패널 메세지 등장
+    }
+
+    //스테이지 첫 패널 등장 함수
+    private void Start_WelcomePanel()
+    {
+        Time.timeScale = 0;    //게임 일시정지
+        isPause = true;
+        WelcomPanel_Btn.onClick.AddListener(() => NextText(WelcomePanel,WelcomePanel_Text, ref WelcomPanel_Text_Number));
+        WelcomePanel.SetActive(true);    //패널등장
+        WelcomePanel_Text[WelcomPanel_Text_Number].SetActive(true);      //첫 패널 메세지 등장
+    }
+    
+    /*private void Start_Peiz2StartPanel()
+    {
+        Time.timeScale = 0;    //게임 일시정지
+        isPause = true;
+        Peiz2StartPanel_Btn.onClick.AddListener(() => NextText(Peiz2StartPanel_Text, ref Peiz2StartPanel_Text_Number));
+        Peiz2StartPanel.SetActive(true);    //패널등장
+        Peiz2StartPanel_Text[Peiz2StartPanel_Text_Number].SetActive(true);      //첫 패널 메세지 등장
+    }
+    
+    private void Start_Peiz2EndPanel()
+    {
+        Peiz2EndPanel_Btn.onClick.AddListener(() => NextText(Peiz2EndPanel_Text, ref Peiz2EndPanel_Text_Number));
+        Peiz2EndPanel.SetActive(true);    //패널등장
+        Peiz2EndPanel_Text[Peiz2EndPanel_Text_Number].SetActive(true);      //첫 패널 메세지 등장
+    }
+    
+    private void Start_AfterCompilerPanel()
+    {
+        AfterCompilerPanel_Btn.onClick.AddListener(() => NextText(AfterCompilerPanel_Text, ref AfterCompilerPanel_Text_Number));
+        AfterCompilerPanel.SetActive(true);    //패널등장
+        AfterCompilerPanel_Text[AfterCompilerPanel_Text_Number].SetActive(true);      //첫 패널 메세지 등장
+    }*/
+
+    //스테이지 첫 패널의 텍스트를 넘기는 함수 
+    private void NextText(GameObject panal,GameObject[] TextArray, ref int TextIndex)
+    {
+        if (TextArray[TextIndex].activeSelf)  //다음 패널 메세지 등장
+        {
+            TextArray[TextIndex].SetActive(false);
+            TextIndex++;
+            if (TextIndex >= TextArray.Length)     //마지막 패널 메세지라면
+            {
+                panal.SetActive(false);
+                if (isPause == true)    //시간이 멈췄다면 
+                {
+                    Time.timeScale = 1;  //시간되돌리기
+                    isPause = false;
+                }
+                
+            }
+            else
+            {
+                TextArray[TextIndex].SetActive(true);
+            }
+        }
     }
     
     

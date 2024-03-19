@@ -24,6 +24,9 @@ public class WaveArea1 : MonoBehaviour
     {
         if (other.CompareTag("Player") && Active == false)
         {
+            //튜토리얼 시작하는 부분 추가
+            
+            
             Active = true;
             StageManager.Area1Function();
         }
