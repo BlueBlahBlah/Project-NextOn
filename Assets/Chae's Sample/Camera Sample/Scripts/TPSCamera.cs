@@ -8,6 +8,7 @@ public class TPSCamera : MonoBehaviour
     public Transform target; // 캐릭터(Transform)를 지정합니다.
     public float distance = 5.0f; // 카메라와 캐릭터 간의 거리를 지정합니다.
     public float height = 2.0f; // 카메라의 높이를 지정합니다.
+    public float offset = 1.0f; // 카메라를 캐릭터의 오른쪽으로 오프셋할 거리를 지정합니다.
     public float rotationSpeed = 5.0f; // 회전 속도를 지정합니다.
 
     private float currentRotationAngle = 0.0f;
@@ -53,6 +54,12 @@ public class TPSCamera : MonoBehaviour
             // 회전 각도를 기준으로 거리를 조정하여 카메라 위치를 설정합니다.
             Vector3 negDistance = new Vector3(0.0f, height, -distance);
             Vector3 position = rotation * negDistance + target.position;
+
+            // 오른쪽으로의 오프셋 벡터를 계산합니다.
+            Vector3 offsetVector = Quaternion.Euler(0, currentRotationAngle, 0) * Vector3.right * offset;
+
+            // 카메라 위치에 오른쪽 오프셋을 더합니다.
+            position += offsetVector;
 
             // 카메라의 위치와 회전을 적용합니다.
             transform.rotation = rotation;
