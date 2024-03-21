@@ -68,39 +68,94 @@ public class PlayerScriptRifle : MonoBehaviour
         FireGun fireGun = GameObject.FindObjectOfType<FireGun>();
         if (rifle != null && rifle.gameObject.activeSelf)
         {
-            Debug.Log("라이플 재장전");
-            rifle.bulletCount += 30; // 30발 추가
-            rifle.nowReloading = false; // 이제 장전 끝
+            if (rifle.maxBulletCount >= 30)
+            {
+                rifle.maxBulletCount -= 30;         //탄 잔량 30 감소
+                rifle.bulletCount += 30; // 30발 추가
+                rifle.nowReloading = false; // 이제 장전 끝
+            }
+            else
+            {
+                rifle.bulletCount += rifle.maxBulletCount; //남은 탄 모조리 재장전
+                rifle.maxBulletCount = 0;    //잔탄 소모
+                rifle.nowReloading = false; // 이제 장전 끝
+            }
+           
         }
         if (shotgun != null && shotgun.gameObject.activeSelf)
         {
-            Debug.Log("샷건 재장전");
-            shotgun.bulletCount += 30; // 30발 추가
-            shotgun.nowReloading = false; // 이제 장전 끝
+            if (shotgun.maxBulletCount >= 15)
+            {
+                shotgun.maxBulletCount -= 15;         //탄 잔량 15 감소
+                shotgun.bulletCount += 15; // 15발 추가
+                shotgun.nowReloading = false; // 이제 장전 끝
+            }
+            else
+            {
+                shotgun.bulletCount += shotgun.maxBulletCount; //남은 탄 모조리 재장전
+                shotgun.maxBulletCount = 0;    //잔탄 소모
+                shotgun.nowReloading = false; // 이제 장전 끝
+            }
         }
         if (sniper != null && sniper.gameObject.activeSelf)
         {
-            Debug.Log("저격총 재장전");
-            sniper.bulletCount += 1; // 30발 추가
-            sniper.nowReloading = false; // 이제 장전 끝
+            if (sniper.maxBulletCount >= 15)
+            {
+                sniper.maxBulletCount -= 15;         //탄 잔량 15 감소
+                sniper.bulletCount += 15; // 15발 추가
+                sniper.nowReloading = false; // 이제 장전 끝
+            }
+            else
+            {
+                sniper.bulletCount += sniper.maxBulletCount; //남은 탄 모조리 재장전
+                sniper.maxBulletCount = 0;    //잔탄 소모
+                sniper.nowReloading = false; // 이제 장전 끝
+            }
         }
         if (grenadeLauncher != null && grenadeLauncher.gameObject.activeSelf)
         {
-            Debug.Log("유탄발사기 재장전");
-            grenadeLauncher.bulletCount += 30; // 30발 추가
-            grenadeLauncher.nowReloading = false; // 이제 장전 끝
+            if (grenadeLauncher.maxBulletCount >= 30)
+            {
+                grenadeLauncher.maxBulletCount -= 30;         //탄 잔량 30 감소
+                grenadeLauncher.bulletCount += 30; // 30발 추가
+                grenadeLauncher.nowReloading = false; // 이제 장전 끝
+            }
+            else
+            {
+                grenadeLauncher.bulletCount += grenadeLauncher.maxBulletCount; //남은 탄 모조리 재장전
+                grenadeLauncher.maxBulletCount = 0;    //잔탄 소모
+                grenadeLauncher.nowReloading = false; // 이제 장전 끝
+            }
         }
         if (machineGun != null && machineGun.gameObject.activeSelf)
         {
-            Debug.Log("기관총 재장전");
-            machineGun.bulletCount += 100; // 100발 추가
-            machineGun.nowReloading = false; // 이제 장전 끝
+            if (machineGun.maxBulletCount >= 100)
+            {
+                machineGun.maxBulletCount -= 100;         //탄 잔량 100 감소
+                machineGun.bulletCount += 100; // 100발 추가
+                machineGun.nowReloading = false; // 이제 장전 끝
+            }
+            else
+            {
+                machineGun.bulletCount += machineGun.maxBulletCount; //남은 탄 모조리 재장전
+                machineGun.maxBulletCount = 0;    //잔탄 소모
+                machineGun.nowReloading = false; // 이제 장전 끝
+            }
         }
         if (fireGun != null && fireGun.gameObject.activeSelf)
         {
-            Debug.Log("화염방사기 재장전");
-            fireGun.bulletCount += 100; // 100발 추가
-            fireGun.nowReloading = false; // 이제 장전 끝
+            if (fireGun.maxBulletCount >= 50)
+            {
+                fireGun.maxBulletCount -= 50;         //탄 잔량 50 감소
+                fireGun.bulletCount += 50; // 50발 추가
+                fireGun.nowReloading = false; // 이제 장전 끝
+            }
+            else
+            {
+                fireGun.bulletCount += fireGun.maxBulletCount; //남은 탄 모조리 재장전
+                fireGun.maxBulletCount = 0;    //잔탄 소모
+                fireGun.nowReloading = false; // 이제 장전 끝
+            }
         }
         
     }
