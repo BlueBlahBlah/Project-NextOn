@@ -8,6 +8,8 @@ public class BomberSkillWarhead : MonoBehaviour
     public GameObject effect;
     public Rigidbody rigid;
     public int Damage;
+
+    public int Range;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,7 @@ public class BomberSkillWarhead : MonoBehaviour
         int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Bomber_Skill_DamageCounting * Damage;
         
         Collider[] colls;
-        colls = Physics.OverlapSphere(transform.position, 10f);
+        colls = Physics.OverlapSphere(transform.position, Range);
         if (colls.Length == 0)
         {
             Destroy(gameObject,5);

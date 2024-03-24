@@ -5023,6 +5023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 148547364670232468}
   - component: {fileID: 9027436965429375036}
+  - component: {fileID: 3244224832223459465}
   m_Layer: 0
   m_Name: FattyCatapultG
   m_TagString: Untagged
@@ -5073,6 +5074,18 @@ MonoBehaviour:
   muzzleSub: {fileID: 0}
   muzzleEff: {fileID: 1497772684437746, guid: bd75ef4ae186f454a90b2de71bed2854, type: 3}
   bullet: {fileID: 1986743744459060, guid: 9487ab9774304a24585b7f05a0cfcf09, type: 3}
+--- !u!114 &3244224832223459465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2165256760489552545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf17e364b2878e4e976303cd1071bf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3513559477092323662
 GameObject:
   m_ObjectHideFlags: 0

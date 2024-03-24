@@ -32,7 +32,10 @@ public class StageManager : MonoBehaviour
     public int ShotGun_DamageCounting;
     
     //총기류 스킬
-    public int Bomber_Skill_DamageCounting;
+    public int Bomber_Skill_DamageCounting;             //폭탄의 데미지
+    public int Bomber_Skill_WarheadKind;                //폭탄의 크기
+    public int Bomber_Skill_WarheadColor;                //폭탄의 색상  0:회색 1:빨강, 2:초록, 3:파랑, 4:노랑
+    public int Turret_Skill_BulletColor;                //미사일의 색상  0:흰색 1:빨강, 2:초록, 3:파랑, 4:노랑 5:투석기
     public int Turret_Skill_DamageCounting;
     public int Helicopter_Skill_DamageCounting;
     public int GunSpire_Skill_DamageCounting;
@@ -117,8 +120,11 @@ public class StageManager : MonoBehaviour
         Sniper_DamageCounting = 1;
         Rifle_DamageCounting = 1;
         ShotGun_DamageCounting = 1;
-        
+
+        Bomber_Skill_WarheadKind = 0;
+        Bomber_Skill_WarheadColor = 0;
         Bomber_Skill_DamageCounting = 1;
+        Turret_Skill_BulletColor = 0;
         Turret_Skill_DamageCounting = 1;
         Helicopter_Skill_DamageCounting = 1;
         GunSpire_Skill_DamageCounting = 1;
