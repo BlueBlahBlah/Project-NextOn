@@ -1,44 +1,121 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed; // Inspector 창에서 설정할 수 있도록 Public으로 변수 추가 
     float hAxis;
     float vAxis;
-    bool wDown;
-
     Vector3 moveVec;
 
-    Animator anim;
+    bool Run;
+    bool jdown;
+    bool isJump;
 
-    // Start is called before the first frame update
-    void Start()
+    public float speed;
+    public float jumpPower;
+
+    Animator animator;
+    Rigidbody rigid;
+    CharacterController characterController;
+
+    void Awake()
     {
-        anim = GetComponentInChildren<Animator>(); // 자식 오브젝트의 Animator를 불러온다
+        rigid = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
+        characterController = GetComponent<CharacterController>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        // InputManager에서 관리하는 Input 값들을 정수로 받아오기 
+        GetInput();
+        Move();
+        CameraTurn();
+        Jump();
+        Attack();
+    }
+    
+    void FreezeRotation()
+    {
+        rigid.angularVelocity = Vector3.zero;
+    }
+    void FixedUpdate()
+    {
+        FreezeRotation();
+    }
+
+    
+
+    void Attack()
+    {   
+        if(Input.GetKeyDown(KeyCode.E)){
+        List<GameObject> Enemies;
+        Enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        float shortDis = Vector3.Distance(gameObject.transform.position, Enemies[0].transform.position); // 첫번째를 기준으로 잡아주기 
+        GameObject enemy = Enemies[0];
+        foreach (GameObject found in Enemies)
+        {
+            float Distance = Vector3.Distance(gameObject.transform.position, found.transform.position);
+ 
+            if (Distance < shortDis) // 위에서 잡은 기준으로 거리 재기
+            {
+                enemy = found;
+                shortDis = Distance;
+            }
+        }
+            Destroy(enemy);
+        }
+ 
+    }
+    void GetInput()
+    {
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
+        Run = Input.GetButton("Run");
+        jdown = Input.GetButtonDown("Jump");
+    }
+    void Move()
+    {
+        moveVec = new Vector3(hAxis,0,vAxis).normalized;
 
-        wDown = Input.GetButton("Walk");
+        if(moveVec != Vector3.zero)
+        {
+            animator.SetBool("isWalk", true);
 
-        moveVec = new Vector3(hAxis, 0, vAxis).normalized; // 전 방향으로 이동 거리를 평준화 하여 적용 -> *.normalized
+            if(Run)
+            {
+                transform.position += moveVec *speed * Time.deltaTime;
+                animator.SetBool("isRun", Run);
+            }
+            else
+            {
+                animator.SetBool("isRun",Run);
+                transform.position += moveVec *speed * 0.5f * Time.deltaTime;
+            }
+        }
+        else
+        {
+            animator.SetBool("isWalk", false);
+            animator.SetBool("isRun", Run);
+        }
+    }
 
-        // 관성에 의한 쓰러짐은 RigidBody -> Constraint -> FreezeRotation 으로 해결
-        transform.position += moveVec * speed * (wDown ? 0.3f : 1f) * Time.deltaTime; // transform 이동은 꼭 Time.deltaTime 곱해주기
-
-        anim.SetBool("isRun", moveVec != Vector3.zero);
-        anim.SetBool("isWalk", wDown);
-
-
-        // 회전 구현
-        // LookAt() : 지정된 벡터를 향해서 회전시켜주는 함수
+    void Jump()
+    {
+        if(jdown && !isJump)
+        {
+            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse) ;
+            isJump = true;
+        }
+    }
+    void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.tag == "Floor")
+            isJump = false;   
+    }
+    void CameraTurn()
+    {
         transform.LookAt(transform.position + moveVec);
     }
 }
