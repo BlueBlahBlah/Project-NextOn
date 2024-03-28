@@ -59,29 +59,31 @@ public class TPSCamera : MonoBehaviour
             currentRotationAngle += Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime * 5f;
             currentHeight -= Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime * 5f;
 
-            // 회전 각도를 Quaternion으로 변환합니다.
-            Quaternion rotation = Quaternion.Euler(currentHeight, currentRotationAngle, 0);
-
-            // 회전 각도를 기준으로 거리를 조정하여 카메라 위치를 설정합니다.
-            Vector3 negDistance = new Vector3(0.0f, height, -distance);
-            Vector3 position = rotation * negDistance + target.position;
-
-            // 오른쪽으로의 오프셋 벡터를 계산합니다.
-            Vector3 offsetVector = Quaternion.Euler(0, currentRotationAngle, 0) * Vector3.right * offset;
-
-            // 카메라 위치에 오른쪽 오프셋을 더합니다.
-            position += offsetVector;
-
-            // 카메라의 위치와 회전을 적용합니다.
-            transform.rotation = rotation;
-            transform.position = position;
-
-            // 플레이어의 회전을 적용합니다. 이 때, rotation의 y값만 수정되도록 주의합니다.
-            // 현재 임시 코드, 수정 필요
-            target.rotation = rotation;
+            
 
         }
+        // 회전 각도를 Quaternion으로 변환합니다.
+        Quaternion rotation = Quaternion.Euler(currentHeight, currentRotationAngle, 0);
 
-        
+        // 회전 각도를 기준으로 거리를 조정하여 카메라 위치를 설정합니다.
+        Vector3 negDistance = new Vector3(0.0f, height, -distance);
+        Vector3 position = rotation * negDistance + target.position;
+
+        // 오른쪽으로의 오프셋 벡터를 계산합니다.
+        Vector3 offsetVector = Quaternion.Euler(0, currentRotationAngle, 0) * Vector3.right * offset;
+
+        // 카메라 위치에 오른쪽 오프셋을 더합니다.
+        position += offsetVector;
+
+        // 카메라의 위치와 회전을 적용합니다.
+        transform.rotation = rotation;
+        transform.position = position;
+
+        // 플레이어의 회전을 적용합니다. 이 때, rotation의 y값만 수정되도록 주의합니다.
+        // 현재 임시 코드, 수정 필요
+        Quaternion playerRotation = Quaternion.Euler(0, currentRotationAngle, 0);
+        target.rotation = playerRotation;
+
+
     }
 }
