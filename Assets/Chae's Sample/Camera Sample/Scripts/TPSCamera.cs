@@ -5,16 +5,27 @@ using UnityEngine.EventSystems;
 
 public class TPSCamera : MonoBehaviour
 {
-    public Transform target; // 캐릭터(Transform)를 지정합니다.
-    public float distance = 5.0f; // 카메라와 캐릭터 간의 거리를 지정합니다.
-    public float height = 2.0f; // 카메라의 높이를 지정합니다.
-    public float offset = 1.0f; // 카메라를 캐릭터의 오른쪽으로 오프셋할 거리를 지정합니다.
-    public float rotationSpeed = 5.0f; // 회전 속도를 지정합니다.
+    [SerializeField]
+    private Transform target; // 캐릭터(Transform)를 지정합니다.
+    [SerializeField]
+    private float distance = 5.0f; // 카메라와 캐릭터 간의 거리를 지정합니다.
+    [SerializeField]
+    private float height = 2.0f; // 카메라의 높이를 지정합니다.
+    [SerializeField]
+    private float offset = 1.0f; // 카메라를 캐릭터의 오른쪽으로 오프셋할 거리를 지정합니다.
+    [SerializeField]
+    private float rotationSpeed = 5.0f; // 회전 속도를 지정합니다.
+    
 
     private float currentRotationAngle = 0.0f;
     private float currentHeight = 0.0f;
     private bool isDragging = false; // 마우스 왼쪽 버튼이 눌렸는지 여부를 저장합니다.
     private Vector3 dragStartPosition; // 드래그를 시작한 마우스 위치를 저장합니다.
+
+    private void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -64,6 +75,13 @@ public class TPSCamera : MonoBehaviour
             // 카메라의 위치와 회전을 적용합니다.
             transform.rotation = rotation;
             transform.position = position;
+
+            // 플레이어의 회전을 적용합니다. 이 때, rotation의 y값만 수정되도록 주의합니다.
+            // 현재 임시 코드, 수정 필요
+            target.rotation = rotation;
+
         }
+
+        
     }
 }
