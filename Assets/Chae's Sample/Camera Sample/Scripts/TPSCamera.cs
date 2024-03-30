@@ -22,27 +22,30 @@ public class TPSCamera : MonoBehaviour
 
     [Header("Shake")]
     [SerializeField]
-    private bool isShake;
+    public bool isShake;
     [SerializeField]
     private float shakeTime = 0.1f;
     [SerializeField]
     private float shakeAmount = 0.1f;
     
-    
-
     private float currentRotationAngle = 0.0f;
     private float currentHeight = 0.0f;
     private bool isDragging = false; // 마우스 왼쪽 버튼이 눌렸는지 여부를 저장합니다.
     private Vector3 dragStartPosition; // 드래그를 시작한 마우스 위치를 저장합니다.
 
+    public bool isCameraMove;
+
     private void Start()
     {
-        
+        isCameraMove = true;
     }
 
     void Update()
     {
-        CameraRotation();
+        if (isCameraMove)
+        {
+            CameraRotation();
+        }
         if (isShake)
         {
             StartCoroutine("CameraShaking");
