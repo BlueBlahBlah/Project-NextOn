@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TPSCamera : MonoBehaviour
 {
+    [Header("Target")]
     [SerializeField]
     private Transform target; // 캐릭터(Transform)를 지정합니다.
+
+    [Header("Setting")]
     [SerializeField]
     private float distance = 5.0f; // 카메라와 캐릭터 간의 거리를 지정합니다.
     [SerializeField]
@@ -15,6 +19,15 @@ public class TPSCamera : MonoBehaviour
     private float offset = 1.0f; // 카메라를 캐릭터의 오른쪽으로 오프셋할 거리를 지정합니다.
     [SerializeField]
     private float rotationSpeed = 5.0f; // 회전 속도를 지정합니다.
+
+    [Header("Shake")]
+    [SerializeField]
+    private bool isShake;
+    [SerializeField]
+    private float shakeTime = 0.1f;
+    [SerializeField]
+    private float shakeAmount = 0.1f;
+    
     
 
     private float currentRotationAngle = 0.0f;
@@ -30,6 +43,10 @@ public class TPSCamera : MonoBehaviour
     void Update()
     {
         CameraRotation();
+        if (isShake)
+        {
+            StartCoroutine("CameraShaking");
+        }
     }
 
     public void CameraRotation()
@@ -85,5 +102,23 @@ public class TPSCamera : MonoBehaviour
         target.rotation = playerRotation;
 
 
+    }
+
+    IEnumerator CameraShaking()
+    {
+        Vector3 camPos = transform.position;
+
+        float _timer = 0f;
+
+        while (_timer <= shakeTime)
+        {
+            transform.position = Random.insideUnitSphere * shakeAmount + camPos;
+            yield return null;
+
+            _timer += Time.deltaTime;
+        }
+
+        transform.position = camPos;
+        isShake = false;
     }
 }
