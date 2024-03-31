@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Item
+  - Weapon
+  - Melee
+  - Terrain
+  - Range
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -17,9 +23,9 @@ TagManager:
   - Ground
   - AllIgnore
   - Enemy
-  - 
-  - 
-  - 
+  - PlayerBullet
+  - PlayerBulletCase
+  - EnemyDead
   - 
   - 
   - 
