@@ -9,12 +9,13 @@ public class SwordStreamOfEdge : MonoBehaviour
     [SerializeField] private GameObject Skill;
     [SerializeField] private Button Btn;
     [SerializeField] private GameObject Player;
-    [SerializeField] private int Damage;
+    public int Damage;
     
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<MeshCollider>();
+        collider.enabled = false;
         Btn.onClick.AddListener(SkillSpawn);
     }
 
@@ -40,10 +41,22 @@ public class SwordStreamOfEdge : MonoBehaviour
     
     void OnTriggerEnter(Collider enemy)
     {
+        Debug.LogError("스트롭엣지 칼 인식");
         if (enemy.CompareTag("Enemy"))
         {
             //collider.damage--; //collider의 체력이 닳는 메커니즘
-            Debug.Log("스트림오브엣지 공격");
+            Debug.LogError("스트림오브엣지 칼 공격");
+            enemy.GetComponent<Enemy>().curHealth -= Damage ;
         }
     }
+
+    /*public void OnCollider()
+    {
+        collider.enabled = true;
+    }
+
+    public void OffCollider()
+    {
+        collider.enabled = false;
+    }*/
 }

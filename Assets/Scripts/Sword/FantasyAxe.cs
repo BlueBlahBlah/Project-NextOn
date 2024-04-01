@@ -9,12 +9,13 @@ public class FantasyAxe : MonoBehaviour
     [SerializeField] private GameObject Skill;
     [SerializeField] private Button Btn;
     
-    [SerializeField] private int Damage;
+    public int Damage;
     
     // Start is called before the first frame update
     void Start()
     {
         Btn.onClick.AddListener(SkillSpawn);
+        Damage = 5;
     }
 
     // Update is called once per frame

@@ -20,7 +20,7 @@ public class HelicopterMinigunTrigger : MonoBehaviour
     private bool isCameraMoving = false;  // 카메라 이동 중 여부를 나타내는 플래그
     private Vector3 targetCameraPosition;  // 목표 카메라 위치
     private float cameraMoveDuration = 1.0f;  // 카메라 이동에 걸리는 시간
-
+    
     private void Start()
     {
         helicopterMinigunParticle = GameObject.Find("ParticleArea").GetComponent<HelicopterMinigunParticle>();
@@ -40,6 +40,8 @@ public class HelicopterMinigunTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SplineAnimate spline = Helicopter.GetComponent<SplineAnimate>();
+            //헬기 스킬 공격계수 전달
+            helicopterMinigunParticle.CalculateDamage(GameObject.Find("StageManager").GetComponent<StageManager>().Helicopter_Skill_DamageCounting);
             if (spline.NormalizedTime == 1f)  // 스킬이 끝나면 다시 준비
             {
                 spline.NormalizedTime = 0;
@@ -68,15 +70,15 @@ public class HelicopterMinigunTrigger : MonoBehaviour
 
         float elapsedTime = 0f;
         Vector3 startingPosition = mainCamera.transform.position;
-
-        while (elapsedTime < cameraMoveDuration)
+        
+       while (elapsedTime < cameraMoveDuration)
         {
-            mainCamera.transform.position = Vector3.Lerp(startingPosition, new Vector3(targetPosition.x, 20, -10), elapsedTime / cameraMoveDuration);
+            mainCamera.transform.position = Vector3.Lerp(startingPosition, new Vector3(startingPosition.x, startingPosition.y + 5, startingPosition.z-4), elapsedTime / cameraMoveDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        mainCamera.transform.position = new Vector3(targetPosition.x, 20, -10);
+        mainCamera.transform.position = new Vector3(startingPosition.x, startingPosition.y + 5, startingPosition.z-4);
 
         isCameraMoving = false;
     }

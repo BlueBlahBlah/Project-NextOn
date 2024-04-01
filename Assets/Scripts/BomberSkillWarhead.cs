@@ -5,15 +5,17 @@ using UnityEngine;
 public class BomberSkillWarhead : MonoBehaviour
 {
     public GameObject warhead;
-
     public GameObject effect;
-
     public Rigidbody rigid;
+    public int Damage;
+
+    public int Range;
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
         StartCoroutine(Explosion());
+        Damage = 70;
     }
 
     IEnumerator Explosion()
@@ -32,8 +34,10 @@ public class BomberSkillWarhead : MonoBehaviour
             //피격된 적의 체력 감소 및 이펙트
         }*/
 
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Bomber_Skill_DamageCounting * Damage;
+        
         Collider[] colls;
-        colls = Physics.OverlapSphere(transform.position, 20f);
+        colls = Physics.OverlapSphere(transform.position, Range);
         if (colls.Length == 0)
         {
             Destroy(gameObject,5);
@@ -43,7 +47,7 @@ public class BomberSkillWarhead : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
-                //공격하는 메커니즘
+                collider.GetComponent<Enemy>().curHealth -= TempDamage ;
             }
         }
         

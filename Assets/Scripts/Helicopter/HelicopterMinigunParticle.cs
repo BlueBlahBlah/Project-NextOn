@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Splines;
 using Random = UnityEngine.Random;
@@ -13,20 +14,27 @@ public class HelicopterMinigunParticle : MonoBehaviour
     [SerializeField] private GameObject Helicopter;
     BoxCollider rangeCollider;
     private Coroutine respawnCoroutine;  // 코루틴을 저장할 변수 추가
+    private BoxCollider BoxCollider;
+    private Rigidbody rigidbody;
+
+    public int Damage;          //공격계수 없는 데미지
+    public int TotalDamage;     //공격계수 더한 데미지
     
     [SerializeField] private SplineAnimate splineAnimate;   //헬리콥터 이동 관리 컴포넌트
 
 
     private void Awake()
     {
-        rangeCollider = rangeObject.GetComponent<BoxCollider>();
-        splineAnimate = Helicopter.GetComponent<SplineAnimate>();
+       
     }
 
     private void Start()
     {
-        //StartCoroutine(RandomRespawn_Coroutine());
-        
+        rangeCollider = rangeObject.GetComponent<BoxCollider>();
+        splineAnimate = Helicopter.GetComponent<SplineAnimate>();
+        BoxCollider = GetComponent<BoxCollider>();
+        rigidbody = GetComponent<Rigidbody>();
+        Damage = 3;
     }
 
     public void ParticleStop()
@@ -38,6 +46,12 @@ public class HelicopterMinigunParticle : MonoBehaviour
         }
     }
 
+    //공격 계수를 전달받아 공격데미지를 결정
+    public void CalculateDamage(int d)
+    {
+        TotalDamage = Damage * d;
+    }
+
     public void ParticleStart()
     {
         respawnCoroutine = StartCoroutine(RandomRespawn_Coroutine());
@@ -45,16 +59,17 @@ public class HelicopterMinigunParticle : MonoBehaviour
 
     private void Update()
     {
-       
+        
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (splineAnimate.NormalizedTime > 0 && splineAnimate.NormalizedTime < 1)   //스킬 실행중일때
         {
+            //Debug.LogError("헬리콥터 스킬 인식한 물체 " + other.tag);
             if (other.CompareTag("Enemy"))
             {
-                //적을 공격
+                other.GetComponent<Enemy>().curHealth -= TotalDamage ;
             }
         }
     }

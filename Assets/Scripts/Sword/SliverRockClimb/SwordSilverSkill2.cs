@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwordSilverSkill2 : MonoBehaviour
@@ -8,7 +10,7 @@ public class SwordSilverSkill2 : MonoBehaviour
     [SerializeField] private GameObject Rock2;
     [SerializeField] private GameObject Rock3;
     [SerializeField] private GameObject Rock4;
-    
+    public List<Enemy> enemyAgain;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,4 +34,12 @@ public class SwordSilverSkill2 : MonoBehaviour
         Rock3.SetActive(true);
         Rock4.SetActive(true);
     }
+
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.LogError("DAddwad");
+        }
+    }*/
 }

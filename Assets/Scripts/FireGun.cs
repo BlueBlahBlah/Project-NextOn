@@ -35,6 +35,7 @@ public class FireGun : MonoBehaviour
         }
         else if (fireBtnDowing == false)
         {
+            Effect.GetComponent<FireGunFlame>().active = false;
             Effect.SetActive(false);
         }
     }
@@ -45,6 +46,7 @@ public class FireGun : MonoBehaviour
         if (bulletCount > 0)
         {
             Effect.SetActive(true);
+            Effect.GetComponent<FireGunFlame>().active = true;
             // 버튼이 눌렸을 때 발사
             bulletCount--;
             
@@ -53,6 +55,7 @@ public class FireGun : MonoBehaviour
         {
             if (nowReloading == false)
             {
+                Effect.GetComponent<FireGunFlame>().active = false;
                 Effect.SetActive(false);
                 // 탄알이 없을 때의 처리 (e.g., 재장전 등)
                 Debug.Log("탄알이 없습니다!");

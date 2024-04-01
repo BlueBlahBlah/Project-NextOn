@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class TurretSkillTriggerBox : MonoBehaviour
 {
+    public GameObject Normalturret;
+    public GameObject Redturret;
+    public GameObject Greenturret;
+    public GameObject Bluelturret;
+    public GameObject Yellowturret;
+    public GameObject Bombturret;
     public GameObject turret;
     // Start is called before the first frame update
     void Start()
@@ -61,9 +67,30 @@ public class TurretSkillTriggerBox : MonoBehaviour
 
             // placeObject의 회전값을 얻어옵니다.
             Quaternion placeRotation = placeTransform.rotation;
-
-            // 얻어온 정보를 사용하여 어떤 작업을 수행합니다.
-            // 이 예제에서는 turret을 placePosition에 인스턴스화합니다.
+            
+            int MissileColor = GameObject.Find("StageManager").GetComponent<StageManager>().Turret_Skill_BulletColor;
+            switch (MissileColor)
+            {
+                case 0:
+                    turret = Normalturret;
+                    break;
+                case 1:
+                    turret = Redturret;
+                    break;
+                case 2:
+                    turret = Greenturret;
+                    break;
+                case 3:
+                    turret = Bluelturret;
+                    break;
+                case 4:
+                    turret = Yellowturret;
+                    break;
+                case 5:
+                    turret = Bombturret;
+                    break;
+            }
+            
             Instantiate(turret, placePosition, placeRotation);
 
             return true; // 터렛이 성공적으로 생성되었음을 나타냅니다.

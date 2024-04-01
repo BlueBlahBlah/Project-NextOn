@@ -24,5 +24,15 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("명중");
+        Debug.Log(other.tag);
+        if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("탄-몬스터 타격");
+            other.GetComponent<Enemy>().curHealth--;
+            Destroy(gameObject);
+        }
+    }
 }
