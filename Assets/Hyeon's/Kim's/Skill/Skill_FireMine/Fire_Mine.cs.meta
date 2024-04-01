@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0d1afc1ebf4984447932eb85fab45ed7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Lv1Mine: {fileID: 3843370915450240282, guid: b83102deee3599141a48bebebcc64324, type: 3}
+  - Lv2Mine: {fileID: 2758655934223587025, guid: 9c4525bd2d5ad6d4889f6591a4a23bb6, type: 3}
+  - Lv3Mine: {fileID: 3821064085700860110, guid: d168de469b7025a4cbe22e56a493576f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
