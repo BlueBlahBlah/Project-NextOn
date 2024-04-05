@@ -23,9 +23,14 @@ public class PlayerStatManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        UpdateFinalDamage();
+    }
+
     [Header("Physical")]
     [SerializeField]
-    public  float health;
+    public float health;
     [SerializeField]
     public float healthRegen;
     [SerializeField]
@@ -56,4 +61,29 @@ public class PlayerStatManager : MonoBehaviour
     // absorption (생명력 흡수) 의 경우 게임이 너무 쉬워지거나 하는 밸런스에 영향을 줄 가능성이 높아 보류 
     // [SerializeField]
     // private float absorption;
+
+    [Header("Final Damage")]
+    [SerializeField]
+    private float expectedDamage;
+    [SerializeField]
+    private float expectedCritDamage;
+    [SerializeField]
+    private float expectedSkillDamage;
+    [SerializeField]
+    private float expectedSkillCritDamage;
+
+    public float ExpectedDamage => expectedDamage;
+    public float ExpectedCritDamage => expectedCritDamage;
+    public float ExpectedSkillDamage => expectedSkillDamage;
+    public float ExpectedSkillCritDamage => expectedSkillCritDamage;
+
+
+    public void UpdateFinalDamage()
+    {
+        expectedDamage = DamageFormula.UpdateDamage();
+        expectedCritDamage = DamageFormula.UpdateCritDamage();
+        expectedSkillDamage = DamageFormula.UpdateSkillDamage();
+        expectedSkillCritDamage = DamageFormula.UpdateSkillCritDamage();
+    }
+    
 }

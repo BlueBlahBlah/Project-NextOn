@@ -53,8 +53,8 @@ public class PlayerScriptOneHand : MonoBehaviour
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
 
             // 회전 처리
-            Quaternion newRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10f);
+            //Quaternion newRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 10f);
 
             // 현재 위치를 이전 위치로 업데이트
             lastPosition = transform.position;
