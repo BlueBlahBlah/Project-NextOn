@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwordStatic : MonoBehaviour
 {
@@ -12,13 +13,29 @@ public class SwordStatic : MonoBehaviour
     [SerializeField] private GameObject Effect;     //이펙트
     public int Damage;
     
+    [SerializeField] private Button Btn;
+    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Skill;
+    
     // Start is called before the first frame update
     void Start()
     {
+        Btn.onClick.AddListener(SkillSpawn);
         collider = GetComponent<MeshCollider>();
         SkillTime = 3;      //기본 3번 튕김
         findDistance = 5f;      //스킬반경 5f
         Damage = 3;
+    }
+    
+    void SkillSpawn()
+    {
+        // 현재 오브젝트가 바라보는 방향을 얻기 위해 transform.forward 사용
+        Vector3 direction = Player.transform.forward.normalized;
+
+        // 새로운 위치를 현재 위치 + (바라보는 방향 * 거리) 로 설정
+        Vector3 skillPosition = transform.position + (direction * 15f) + (Vector3.up * 5f) + (Vector3.right * 5f);
+
+        Instantiate(Skill, skillPosition, Quaternion.Euler(0,90,0));
     }
 
     // Update is called once per frame
@@ -38,7 +55,7 @@ public class SwordStatic : MonoBehaviour
     {
         List<GameObject> nearEnemy = FindRandomEnemy();
         //스킬 계수 추가
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;
+        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordStatic_Passive_DamageCounting * Damage;
 
         int numEnemNear = nearEnemy.Count;
         if (numEnemNear == 1)       //주변에 다른 몬스터가 없을때

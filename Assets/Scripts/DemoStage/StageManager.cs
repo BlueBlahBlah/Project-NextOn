@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
     
     //근접 무기 스킬
     public int SwordStreamEdge_Skill_DamageCounting;
+    public int SwordStatic_Passive_DamageCounting;
     public int SwordStatic_Skill_DamageCounting;
     public int SwordSliver_Skill_DamageCounting;
     public int SwordDemacia_Skill_DamageCounting;
@@ -109,6 +110,7 @@ public class StageManager : MonoBehaviour
         FantasyAxe_DamageCounting = 100;
         
         SwordStreamEdge_Skill_DamageCounting = 1;
+        SwordStatic_Passive_DamageCounting = 1;
         SwordStatic_Skill_DamageCounting = 1;
         SwordSliver_Skill_DamageCounting = 1;
         SwordDemacia_Skill_DamageCounting = 1;

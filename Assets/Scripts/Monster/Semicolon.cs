@@ -17,12 +17,12 @@ public class Semicolon : Enemy
         this.maxHealth = GetComponent<Enemy>().maxHealth;
         this.curHealth = this.maxHealth;
         health = maxHealth;
+        //isWalking = true;
         target = GameObject.Find("Player").transform;
+        GetComponent<Enemy>().target = target;
         _animator = GetComponent<Animator>();
-        _animator.SetBool("isRunning",true);
+        _animator.SetBool("isWalking",true);
         IsDeath = false;
-        this.GetComponent<Enemy>().target = GameObject.Find("Player").transform;
-        this.target = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -57,14 +57,18 @@ public class Semicolon : Enemy
             //가까우면 공격
             if (Vector3.Distance(target.position, this.transform.position) < 3)
             {
-                _animator.SetBool("isRunning",false);
+                //isWalking = false;
+                //isAttacking = true;
+                _animator.SetBool("isWalking",false);
                 _animator.SetBool("isAttacking",true);
                 GetComponent<Enemy>().isChase = false;
                 transform.LookAt(target);
             }
             else  //멀면 다시 쫒아가기
             {
-                _animator.SetBool("isRunning",true);
+                //isWalking = true;
+                //isAttacking = false;
+                _animator.SetBool("isWalking",true);
                 _animator.SetBool("isAttacking",false);
                 GetComponent<Enemy>().isChase = true;
             }

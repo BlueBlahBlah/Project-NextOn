@@ -32,6 +32,7 @@ public class Parenthesis : Enemy
         isInStack = false;
         this.GetComponent<Enemy>().target = GameObject.Find("Player").transform;
         this.target = GameObject.Find("Player").transform;
+        GetComponent<Enemy>().target = target;
     }
 
     // Update is called once per frame
