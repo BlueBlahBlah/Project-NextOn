@@ -40,7 +40,7 @@ public class PlayerScriptRifle : MonoBehaviour
 
             // 이동 방향을 기준으로 앞, 뒤, 오른쪽, 왼쪽 여부 판단
             float angle = Vector3.SignedAngle(moveDirection, transform.forward, Vector3.up);
-            Debug.LogError(angle);
+            //Debug.LogError(angle);
             if (angle > 45f && angle < 135f)
             {
                 isMovingLeft = true;

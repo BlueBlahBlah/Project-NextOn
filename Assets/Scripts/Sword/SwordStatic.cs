@@ -20,11 +20,16 @@ public class SwordStatic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Btn.onClick.AddListener(SkillSpawn);
         collider = GetComponent<MeshCollider>();
         SkillTime = 3;      //기본 3번 튕김
         findDistance = 5f;      //스킬반경 5f
         Damage = 3;
+    }
+    
+    private void OnEnable()
+    {
+        // 버튼 클릭 이벤트 등록
+        Btn.onClick.AddListener(SkillSpawn);
     }
     
     void SkillSpawn()

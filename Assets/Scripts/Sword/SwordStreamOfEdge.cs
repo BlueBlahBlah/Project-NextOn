@@ -16,6 +16,11 @@ public class SwordStreamOfEdge : MonoBehaviour
     {
         collider = GetComponent<MeshCollider>();
         collider.enabled = false;
+    }
+    
+    private void OnEnable()
+    {
+        // 버튼 클릭 이벤트 등록
         Btn.onClick.AddListener(SkillSpawn);
     }
 

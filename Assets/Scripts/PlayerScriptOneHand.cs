@@ -66,7 +66,7 @@ public class PlayerScriptOneHand : MonoBehaviour
         Anim.SetBool("walk", walking);
     }
 
-    void OnAttackButtonClick()
+    public void OnAttackButtonClick()
     {
         Anim.SetTrigger("attack");
         //ColliderAttack();         //애니메이션에 이벤트로 넣어둠
