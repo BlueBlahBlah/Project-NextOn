@@ -191,6 +191,7 @@ MonoBehaviour:
   curHealth: 0
   target: {fileID: 0}
   isChase: 0
+  damaged: {fileID: 4549694754306120695, guid: 27857f3a52e694b46b8dced61afc04c0, type: 3}
 --- !u!195 &2083667491991204792
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Semicolon : Enemy
@@ -9,6 +11,7 @@ public class Semicolon : Enemy
     private Animator _animator;
     private int health;         //현재 스크립트에 관리하는 체력 - Enemy와 비교홰 닳았는지 판단
     private bool IsDeath;
+    [SerializeField] private TextMeshPro damaged;
     
     
     // Start is called before the first frame update
@@ -23,6 +26,7 @@ public class Semicolon : Enemy
         _animator = GetComponent<Animator>();
         _animator.SetBool("isWalking",true);
         IsDeath = false;
+        damaged.SetText("");  //데미지를 입은 경우에만 표시
     }
 
     // Update is called once per frame
@@ -42,12 +46,16 @@ public class Semicolon : Enemy
             {
                 if (curHealth <= 0)
                 {
+                    int DamageDone = health - curHealth;       //입은 데미지.
+                    ShowDamage(DamageDone);
                     _animator.SetTrigger("Death");
                     GetComponent<Enemy>().isChase = false;
                     IsDeath = true;
                 }
                 else
                 {
+                    int DamageDone = health - curHealth;        //입은 데미지.
+                    ShowDamage(DamageDone);
                     health = curHealth;
                     _animator.SetTrigger("Hit");
                 }
@@ -73,5 +81,19 @@ public class Semicolon : Enemy
                 GetComponent<Enemy>().isChase = true;
             }
         }
+    }
+
+    private void ShowDamage(int d)
+    {
+        //CancelInvoke();         //기존의 데미지가 있었다면 해당 데미지 삭제 1초 타이머 종료 => 새로운 데미지를 받으면 그 데미지 1초동안 표시
+        TextMeshPro tempDamage = Instantiate(damaged, transform.position + new Vector3(0,3.5f,0), Quaternion.identity);
+        tempDamage.SetText(d.ToString());
+        //Invoke("HideDamage",1);
+        
+    }
+    
+    private void HideDamage()
+    {
+       damaged.SetText("");
     }
 }
