@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Semicolon : Enemy
 {
@@ -12,6 +13,7 @@ public class Semicolon : Enemy
     private int health;         //현재 스크립트에 관리하는 체력 - Enemy와 비교홰 닳았는지 판단
     private bool IsDeath;
     [SerializeField] private TextMeshPro damaged;
+    public Image hpBar;
     
     
     // Start is called before the first frame update
@@ -27,6 +29,7 @@ public class Semicolon : Enemy
         _animator.SetBool("isWalking",true);
         IsDeath = false;
         damaged.SetText("");  //데미지를 입은 경우에만 표시
+        InitHPBarSize();  //체력바 사이즈 초기화
     }
 
     // Update is called once per frame
@@ -48,6 +51,7 @@ public class Semicolon : Enemy
                 {
                     int DamageDone = health - curHealth;       //입은 데미지.
                     ShowDamage(DamageDone);
+                    hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
                     _animator.SetTrigger("Death");
                     GetComponent<Enemy>().isChase = false;
                     IsDeath = true;
@@ -56,6 +60,7 @@ public class Semicolon : Enemy
                 {
                     int DamageDone = health - curHealth;        //입은 데미지.
                     ShowDamage(DamageDone);
+                    hpBar.rectTransform.localScale = new Vector3((float)curHealth/(float)maxHealth, 1f, 1f);
                     health = curHealth;
                     _animator.SetTrigger("Hit");
                 }
@@ -91,9 +96,10 @@ public class Semicolon : Enemy
         //Invoke("HideDamage",1);
         
     }
-    
-    private void HideDamage()
+
+    void InitHPBarSize()
     {
-       damaged.SetText("");
+        //hpBar의 사이즈를 원래 자신의 사이즈의 1배 크기로 초기화
+        hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }
 }
