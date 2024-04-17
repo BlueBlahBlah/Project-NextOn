@@ -16,10 +16,10 @@ public class InGameUI : MonoBehaviour
     private TextMeshProUGUI playerHp; // 플레이어의 체력 텍스트
     [SerializeField]
     private Image playerHpBar; // 플레이어의 체력 바
-    [SerializeField]
-    private Image playerWeapon1; // 플레이어의 무기 이미지1
-    [SerializeField]
-    private Image playerWeapon2; // 플레이어의 무기 이미지2
+    //[SerializeField]
+    //private Image playerWeapon1; // 플레이어의 무기 이미지1
+    //[SerializeField]
+    //private Image playerWeapon2; // 플레이어의 무기 이미지2
 
     [Header("Boss Information")]
     [SerializeField]
