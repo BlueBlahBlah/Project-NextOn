@@ -49,27 +49,27 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI numOfEnemy; // 몬스터 수
 
-    // Start 함수나 다른 스크립트에서 가져올 변수
-    private float PlayerHp;
-    private float PlayerMaxHp;
 
-    private bool isBoss;
-    private float BossHp;
-    private float BossMaxHp;
+    // 실제 연결할 변수
+    private float PlayerHp; // 플레이어 현재 체력 연결
+    private float PlayerMaxHp; // 플레이어 최대 체력 연결
 
-    private bool isGimmick;
-    private float GimmickPercent;
+    private bool isBoss; // 보스 존재 유무 연결
+    private float BossHp; // 보스 체력 연결
+    private float BossMaxHp; // 보스 최대 체력 연결
+    private string BossName; // 보스 이름 연결
 
-    private int NumOfEnemy;
+    private bool isGimmick; // 기믹 존재 유무 연결
+    private float GimmickPercent; // 기믹 진행도 연결
+    private string GimmickName; // 기믹 이름 연결
+
+    private int NumOfEnemy; // 필드 내 몬스터 수 연결
     
     // Start is called before the first frame update
     void Start()
     {
         FunctionTestStart(); // 테스트용 코드
-        PlayerMaxHp = PlayerHp; 
-        BossMaxHp = BossHp;
-        GimmickPercent = 0f;
-        NumOfEnemy = 0;
+        
     }
 
     // Update is called once per frame
@@ -83,22 +83,33 @@ public class InGameUI : MonoBehaviour
         FunctionTestUpdate(); // 테스트용 코드
     }
 
-    private void FunctionTestStart()
+    private void FunctionTestStart() 
     {
+        // 테스트 초기화
         PlayerHp = 100f;
         BossHp = 100f;
 
         isBoss = true;
         isGimmick = true;
+
+        PlayerMaxHp = PlayerHp;
+        BossMaxHp = BossHp;
+        GimmickPercent = 0f;
+        NumOfEnemy = 0;
+
+        BossName = "Overflow"; // 현재 출현한 보스 이름 연결
+        GimmickName = "Gimmick"; // 기믹 이름 연결
     }
     
     private void FunctionTestUpdate()
     {
+        // 테스트 업데이트
         if (PlayerHp == PlayerMaxHp) StartCoroutine("TestCoroutine");
     }
 
     IEnumerator TestCoroutine()
     {
+        // 테스트 코루틴
         PlayerHp--;
         BossHp -= 7;
         NumOfEnemy++;
@@ -125,14 +136,14 @@ public class InGameUI : MonoBehaviour
 
     // Update
     #region
-    public void UpdatePlayerInfo()
+    public void UpdatePlayerInfo() // 플레이어 정보 갱신
     {
         // 체력 관련
         playerHp.text = PlayerHp.ToString() + " / " + PlayerMaxHp.ToString(); // 체력 갱신
         playerHpBar.fillAmount = PlayerHp / PlayerMaxHp; // 체력바 이미지 갱신
     }
 
-    public void UpdateBossInfo()
+    public void UpdateBossInfo() // 보스 정보 갱신
     {
 
         if (!bossInfo.activeInHierarchy)
@@ -140,17 +151,22 @@ public class InGameUI : MonoBehaviour
             // 보스가 출현 했지만, UI가 켜지지 않은 상태에서 호출
             // >> 보스 Info 초기화
             // 보스의 이름, 이미지 등 업데이트
-            // bossName.text = "BossName";
-            // bossIcon.sprite = Resource~~
+            bossName.text = BossName;
+            bossIcon.sprite = Resources.Load($"UI/Image/BossIcons/{BossName}", typeof(Sprite)) as Sprite;
             bossInfo.SetActive(true);// UI 활성화
         }
         bossHp.text = (Mathf.Round(BossHp / BossMaxHp * 100)).ToString() + "%"; // 체력 갱신
         bossHpBar.fillAmount = BossHp / BossMaxHp; // 체력바 이미지 갱신
 
-
+        if (!isBoss)
+        {
+            // 보스 처치 시, 필드 내에 보스가 존재하지 않을 때
+            // >> 보스 Info 비활성화
+            bossInfo.SetActive(false);
+        }
     }
 
-    public void UpdateGimmickInfo()
+    public void UpdateGimmickInfo() // 기믹 정보 갱신
     {
         // UI 활성화
         if (!gimmickInfo.activeInHierarchy)
@@ -158,10 +174,13 @@ public class InGameUI : MonoBehaviour
             // 기믹이 출현 했지만, UI가 켜지지 않은 상태에서 호출
             // >> 기믹 Info 초기화
             // 기믹의 이름, 이미지 등 업데이트
-            // GimmickName.text = "GimmickName";
-            // GimmickIcon.sprite = Resource~~
+            //gimmickName.text = GimmickName;
+            //gimmickIcon.sprite = Resources.Load($"UI/Image/GimmickIcons/{GimmickName}", typeof(Sprite)) as Sprite;
+
+            // 기믹 호출 시 0%로 시작한다고 가정
             gimmickPercent.text = "0%";
             gimmickProgressBar.fillAmount = 0f;
+
             gimmickInfo.SetActive(true);
         }
 
