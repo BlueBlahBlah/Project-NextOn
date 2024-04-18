@@ -49,6 +49,16 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI numOfEnemy; // 몬스터 수
 
+    [Header("Dialogue")]
+    [SerializeField]
+    private GameObject dialogue; // 대화창 오브젝트
+    [SerializeField]
+    private Image dialogueImage; // 대화 캐릭터 이미지
+    [SerializeField]
+    private TextMeshProUGUI dialogueName; // 대화 캐릭터 이름
+    [SerializeField]
+    private TextMeshProUGUI dialogueContent; // 대화 내용
+
 
     // 실제 연결할 변수
     private float PlayerHp; // 플레이어 현재 체력 연결
@@ -64,12 +74,16 @@ public class InGameUI : MonoBehaviour
     private string GimmickName; // 기믹 이름 연결
 
     private int NumOfEnemy; // 필드 내 몬스터 수 연결
-    
+
+    private bool isDialogue; // 대화창 표시 여부
+    private List<Dictionary<string, object>> data_Dialogue; // csv 파일 담을 변수
+
     // Start is called before the first frame update
     void Start()
     {
         FunctionTestStart(); // 테스트용 코드
-        
+
+        data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // csv 파일 호출
     }
 
     // Update is called once per frame
@@ -117,7 +131,8 @@ public class InGameUI : MonoBehaviour
         PlayerHp--;
         BossHp -= 7;
         NumOfEnemy++;
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(1f);
+        UpdateDialogue(0);
         PlayerHp--;
         BossHp -= 7;
         NumOfEnemy++;
@@ -160,8 +175,9 @@ public class InGameUI : MonoBehaviour
 
         if (!isBoss)
         {
-            // 보스 처치 시, 필드 내에 보스가 존재하지 않을 때
+            // 보스 처치 시, 필드 내에 보스가 존재하지 않을 때 
             // >> 보스 Info 비활성화
+            // ***** Update 에서 !isBoss 면 이 함수로 접근 불가능하므로 수정 필요
             bossInfo.SetActive(false);
         }
     }
@@ -194,6 +210,21 @@ public class InGameUI : MonoBehaviour
     }
     #endregion
     
+    public void UpdateDialogue(int number) // 대화 번호 입력값으로 받음
+    {
+        if (!dialogue.activeInHierarchy)
+        {
+            dialogue.SetActive(true);
+        }
+        string Name = data_Dialogue[number]["Character Name"].ToString();
+        Debug.Log(Name);
+        // 이미지 변경
+        // dialogueImage.sprite = Resources.Load($"UI/Image/Characters/{Name}", typeof(Sprite)) as Sprite;
+        // 이름 변경
+        dialogueName.text = Name;
+        // 내용 변경
+        dialogueContent.text = data_Dialogue[number]["Contents"].ToString();
+    }
     // Button
     #region
     public void ButtonPause()
