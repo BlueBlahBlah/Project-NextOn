@@ -47,7 +47,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject[] Wave3_Directions;
     public List<GameObject> Wave2_Monsters;
     [SerializeField] private GameObject[] Wave2_Monsters_Spawner;
-    [SerializeField] private GameObject[] Wave3_Monsters;
+    [SerializeField] private GameObject[] Wave3_Monsters_Spawner;
     [SerializeField] private GameObject[] Before3Peiz;
     [SerializeField] private GameObject[] After3Peiz;
 
@@ -72,6 +72,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
     public int Gauge;                               //스택 몬스터를 잡는 게이지
     [SerializeField] private GameObject wave2Gauge;
+    [SerializeField] private GameObject wave3Gauge;
     
     
     //튜토리얼 패널들
@@ -92,7 +93,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject[] Peiz2EndPanel_Text;
     [SerializeField] private int Peiz2EndPanel_Text_Number;
     
-    //컴파일러 고친다음 패널
+    //컴파일러 고친다음 패널 (3페이즈 Big monster등장)
     [SerializeField] private GameObject AfterCompilerPanel ;
     [SerializeField] private Button AfterCompilerPanel_Btn;
     [SerializeField] private GameObject[] AfterCompilerPanel_Text;
@@ -148,6 +149,10 @@ public class StageManager : MonoBehaviour
         {
             g.SetActive(false);
         }
+        foreach (GameObject g in Wave3_Monsters_Spawner)
+        {
+            g.SetActive(false);
+        }
         foreach (GameObject g in Before3Peiz)
         {
             g.SetActive(true);
@@ -168,6 +173,7 @@ public class StageManager : MonoBehaviour
         Area3 = false;
         Wave2MonsterClear = false;
         wave2Gauge.SetActive(false);
+        wave3Gauge.SetActive(false);
         Peiz3Start = false;
         Peiz3Monster_1.SetActive(false);
         Peiz3Monster_2.SetActive(false);
@@ -220,7 +226,7 @@ public class StageManager : MonoBehaviour
         if (Area3 == true && Peiz3Start == false)
         {
             Peiz3Start = true;
-            Peiz3Monster_1.SetActive(true);
+            Peiz3Monster_1.SetActive(true);  //3페이즈 몬스터1 등장
             //Start_AfterCompilerPanel();    //컴파일러 고친 뒤 패널 등장
             Start_Panel(AfterCompilerPanel,AfterCompilerPanel_Btn,AfterCompilerPanel_Text,AfterCompilerPanel_Text_Number,false);
         }
@@ -461,6 +467,14 @@ public class StageManager : MonoBehaviour
             {
                 TextArray[TextIndex].SetActive(true);
             }
+        }
+    }
+
+    public void Peiz3MonsterSpawn()
+    {
+        foreach (GameObject g in Wave3_Monsters_Spawner)
+        {
+            g.SetActive(true);
         }
     }
     
