@@ -6,7 +6,8 @@ using TMPro;
 
 public class InGameUI : MonoBehaviour
 {
-    // 사전에 미리 연결 필요한 변수
+    // 사전에 미리 연결 필요한 변수 [SerializeField]
+    #region
     [Header("Player Information")]
     [SerializeField]
     private GameObject playerInfo;
@@ -16,10 +17,14 @@ public class InGameUI : MonoBehaviour
     private TextMeshProUGUI playerHp; // 플레이어의 체력 텍스트
     [SerializeField]
     private Image playerHpBar; // 플레이어의 체력 바
-    //[SerializeField]
-    //private Image playerWeapon1; // 플레이어의 무기 이미지1
-    //[SerializeField]
-    //private Image playerWeapon2; // 플레이어의 무기 이미지2
+
+    [Header("Weapon Information")]
+    [SerializeField]
+    private Image weaponImage;
+    [SerializeField]
+    private TextMeshProUGUI currentBullet;
+    [SerializeField]
+    private TextMeshProUGUI maxBullet;
 
     [Header("Boss Information")]
     [SerializeField]
@@ -58,11 +63,16 @@ public class InGameUI : MonoBehaviour
     private TextMeshProUGUI dialogueName; // 대화 캐릭터 이름
     [SerializeField]
     private TextMeshProUGUI dialogueContent; // 대화 내용
-
+    #endregion
 
     // 실제 연결할 변수
+    #region
     private float PlayerHp; // 플레이어 현재 체력 연결
     private float PlayerMaxHp; // 플레이어 최대 체력 연결
+
+    private string WeaponName; // 무기 이름 연결 << 이미지 호출용
+    private int CurrentBullet; // 실제 현재 총알 수 연결
+    private int MaxBullet; // 실제 최대 총알 수 연결
 
     private bool isBoss; // 보스 존재 유무 연결
     private float BossHp; // 보스 체력 연결
@@ -78,6 +88,7 @@ public class InGameUI : MonoBehaviour
     private bool isDialogue; // 대화창 표시 여부
     private List<Dictionary<string, object>> data_Dialogue; // csv 파일 담을 변수
     public int DialogueNumber;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -108,6 +119,21 @@ public class InGameUI : MonoBehaviour
         // 체력 관련
         playerHp.text = PlayerHp.ToString() + " / " + PlayerMaxHp.ToString(); // 체력 갱신
         playerHpBar.fillAmount = PlayerHp / PlayerMaxHp; // 체력바 이미지 갱신
+    }
+
+    public void UpdateBullet() // 총알 갱신 
+    {
+        
+    }
+
+    public void InitWeaponInfo() // 무기 정보 초기화 << 무기 1개 사용 할 때로 가정
+    {
+        // 이미지 초기화
+        // weaponImage.sprite = Resources.Load($"UI/Image/Weapons/{WeaponName}", typeof(Sprite)) as Sprite;
+
+        // 총알 수 초기화
+        currentBullet.text = CurrentBullet.ToString();
+        maxBullet.text = MaxBullet.ToString();
     }
 
     public void UpdateBossInfo() // 보스 정보 갱신
@@ -240,6 +266,11 @@ public class InGameUI : MonoBehaviour
 
         BossName = "Overflow"; // 현재 출현한 보스 이름 연결
         GimmickName = "Gimmick"; // 기믹 이름 연결
+
+        WeaponName = "TestWeapon";
+        CurrentBullet = 60;
+        MaxBullet = 300;
+        InitWeaponInfo();
     }
 
     private void FunctionTestUpdate()
