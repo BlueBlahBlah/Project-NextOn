@@ -14,6 +14,7 @@ public class Semicolon : Enemy
     private bool IsDeath;
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
+    [SerializeField] private Collider capsulCollider;
     
     
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class Semicolon : Enemy
         _animator.SetBool("isWalking",true);
         IsDeath = false;
         damaged.SetText("");  //데미지를 입은 경우에만 표시
+        capsulCollider = GetComponent<CapsuleCollider>();
         InitHPBarSize();  //체력바 사이즈 초기화
     }
 
@@ -53,6 +55,7 @@ public class Semicolon : Enemy
                     ShowDamage(DamageDone);
                     hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
                     _animator.SetTrigger("Death");
+                    capsulCollider.enabled = false;
                     GetComponent<Enemy>().isChase = false;
                     IsDeath = true;
                 }

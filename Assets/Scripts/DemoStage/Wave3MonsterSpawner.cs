@@ -15,7 +15,7 @@ public class Wave3MonsterSpawner : MonoBehaviour
     void Start()
     {
         Active = true;
-        period = Random.Range(10, 20);
+        period = Random.Range(2, 5);
         StageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         index = 0;
     }
@@ -26,7 +26,7 @@ public class Wave3MonsterSpawner : MonoBehaviour
         time += Time.deltaTime;
         if (time >= period && Active)
         {
-            period = Random.Range(5, 10);
+            period = Random.Range(10, 15);
             index = Random.Range(0, Monsters.Count);
             time = 0;
             //몬스터 생성

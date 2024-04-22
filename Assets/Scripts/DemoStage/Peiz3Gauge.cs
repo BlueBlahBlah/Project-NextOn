@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class Peiz3Gauge : MonoBehaviour
 {
+    //3페이즈 90% 넘어갔는지
+    private bool Peiz3PersentOver;
+    private StageManager stagemanager;
     public Slider slider;
 
     private void Start()
     {
+        Peiz3PersentOver = false;
         slider.value = 0;
         slider = GetComponent<Slider>();
+        stagemanager = GameObject.Find("StageManager").GetComponent<StageManager>();
     }
     
     public void SetGauge(int h)
@@ -45,6 +50,15 @@ public class Peiz3Gauge : MonoBehaviour
             slider.value += Time.deltaTime * 0.1f; 
             if (slider.value >= 91)
                 slider.value--;
+            if (Peiz3PersentOver == false)
+            {
+                Peiz3PersentOver = true;
+                //AfterCompilerPannel 패널등장
+                //대형몬스터 등장
+                Debug.LogError("Area3 true");
+                stagemanager.Area3 = true;
+                stagemanager.OnWave3Direction();  //3페이즈 화살표 활성화 + 탈출 벽 비활성화
+            }
             yield return null;
         }
     }

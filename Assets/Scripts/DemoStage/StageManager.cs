@@ -93,7 +93,15 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject[] Peiz2EndPanel_Text;
     [SerializeField] private int Peiz2EndPanel_Text_Number;
     
-    //컴파일러 고친다음 패널 (3페이즈 Big monster등장)
+    //컴파일러 고친다음 패널 (컴파일러 고치는 동안 디펜스)
+    [SerializeField] private GameObject Start3PeizPanel ;
+    [SerializeField] private Button Start3PeizPanel_Btn;
+    [SerializeField] private GameObject[] Start3PeizPanel_Text;
+    [SerializeField] private int Start3PeizPanel_Text_Number;
+
+   
+    
+    //개발자 어 금지 패널 3페이즈 Big monster등장
     [SerializeField] private GameObject AfterCompilerPanel ;
     [SerializeField] private Button AfterCompilerPanel_Btn;
     [SerializeField] private GameObject[] AfterCompilerPanel_Text;
@@ -124,13 +132,15 @@ public class StageManager : MonoBehaviour
         Rifle_DamageCounting = 1;
         ShotGun_DamageCounting = 1;
 
-        Bomber_Skill_WarheadKind = 0;
+        Bomber_Skill_WarheadKind = 4;
         Bomber_Skill_WarheadColor = 0;
         Bomber_Skill_DamageCounting = 1;
         Turret_Skill_BulletColor = 0;
         Turret_Skill_DamageCounting = 1;
         Helicopter_Skill_DamageCounting = 1;
         GunSpire_Skill_DamageCounting = 1;
+
+        
 
         foreach (GameObject g in Wave1_Monsters)
         {
@@ -202,6 +212,13 @@ public class StageManager : MonoBehaviour
             g.SetActive(false);
         }
         
+        Start3PeizPanel.SetActive(false);
+        Start3PeizPanel_Text_Number = 0;
+        foreach (GameObject g in Start3PeizPanel_Text)
+        {
+            g.SetActive(false);
+        }
+        
         AfterCompilerPanel.SetActive(false);
         AfterCompilerPanel_Text_Number = 0;
         foreach (GameObject g in AfterCompilerPanel_Text)
@@ -219,10 +236,10 @@ public class StageManager : MonoBehaviour
     void Update()
     {
         //스택몬스터 20 게이지 채우면 모두 삭제
-        if (Gauge >= 20 && Wave2MonsterClear == false)
+        if (Gauge >= 2 && Wave2MonsterClear == false)
             Clear_Wave2_Monsters();
 
-        //Area3는 DemoEventBtn에서 True로 변경
+        //Area3는 Peiz3Gauge에서 True로 변경
         if (Area3 == true && Peiz3Start == false)
         {
             Peiz3Start = true;
@@ -477,6 +494,10 @@ public class StageManager : MonoBehaviour
             g.SetActive(true);
         }
     }
-    
+
+    public void StartPeiz3Pannel()
+    {
+        Start_Panel(Start3PeizPanel,Start3PeizPanel_Btn,Start3PeizPanel_Text,Start3PeizPanel_Text_Number,true);
+    }
     
 }
