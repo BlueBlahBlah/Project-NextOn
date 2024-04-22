@@ -1,0 +1,10 @@
+ - Dialogue.csv 파일의 헤드로는 Number, Character Name, Contents, Time, Continuous 가 있습니다.
+
+ 1) Number
+출력할 대화의 번호입니다.
+
+ 2) Character Name
+대사를 할 캐릭터의 이름입니다. 이 이름을 기반으로 TMP를 변경하고, 리소스에서 이미지를 가져옵니다
+
+ 3) Contents
+실제 출력될 대사입니다.

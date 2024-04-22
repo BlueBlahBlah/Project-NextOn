@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class InGameUI : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class InGameUI : MonoBehaviour
     private TextMeshProUGUI dialogueContent; // 대화 내용
     #endregion
 
-    // 실제 연결할 변수
+    // 실제 연결할 변수 혹은 스크립트 내에서 InGameUI 클래스 내에서 지역변수
     #region
     private float PlayerHp; // 플레이어 현재 체력 연결
     private float PlayerMaxHp; // 플레이어 최대 체력 연결
@@ -87,15 +88,16 @@ public class InGameUI : MonoBehaviour
 
     private bool isDialogue; // 대화창 표시 여부
     private List<Dictionary<string, object>> data_Dialogue; // csv 파일 담을 변수
-    public int DialogueNumber;
+    public int DialogueNumber; // 출력할 대화의 번호
+    private float dialogueTime; // 대화의 길이 (WaitforSeconds 입력 변수)
+    private int dialogueIsContinuous; // 이어지는 대화가 있는지 확인할 변수
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // 다이얼로그 csv 파일 호출
         FunctionTestStart(); // 테스트용 코드
-
-        data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // csv 파일 호출
     }
 
     // Update is called once per frame
@@ -105,12 +107,24 @@ public class InGameUI : MonoBehaviour
         UpdateBossInfo(); // 보스 출현 시 보스 info 업데이트
         UpdateGimmickInfo(); // 기믹 출현 시 기믹 info 업데이트
         UpdateNumOfEnemy(); // 적의 수 업데이트
-        UpdateDialogue(); // 다이얼로그 업데이트
+        UpdateBullet();
 
 
         FunctionTestUpdate(); // 테스트용 코드
     }
-    
+
+
+    // Initailize
+    #region
+    public void InitWeaponInfo() // 무기 정보 초기화 << 무기 1개 사용 할 때로 가정
+    {
+        // 이미지 초기화
+        weaponImage.sprite = Resources.Load($"UI/Image/Icons/Weapons/{WeaponName}", typeof(Sprite)) as Sprite;
+
+        // 총알 수 초기화
+        UpdateBullet();
+    }
+    #endregion
 
     // Update
     #region
@@ -123,15 +137,6 @@ public class InGameUI : MonoBehaviour
 
     public void UpdateBullet() // 총알 갱신 
     {
-        
-    }
-
-    public void InitWeaponInfo() // 무기 정보 초기화 << 무기 1개 사용 할 때로 가정
-    {
-        // 이미지 초기화
-        // weaponImage.sprite = Resources.Load($"UI/Image/Weapons/{WeaponName}", typeof(Sprite)) as Sprite;
-
-        // 총알 수 초기화
         currentBullet.text = CurrentBullet.ToString();
         maxBullet.text = MaxBullet.ToString();
     }
@@ -147,7 +152,7 @@ public class InGameUI : MonoBehaviour
                 // >> 보스 Info 초기화
                 // 보스의 이름, 이미지 등 업데이트
                 bossName.text = BossName;
-                bossIcon.sprite = Resources.Load($"UI/Image/BossIcons/{BossName}", typeof(Sprite)) as Sprite;
+                bossIcon.sprite = Resources.Load($"UI/Image/Icons/BossIcons/{BossName}", typeof(Sprite)) as Sprite;
                 bossInfo.SetActive(true);// UI 활성화
             }
             // 보스 정보 갱신
@@ -171,8 +176,8 @@ public class InGameUI : MonoBehaviour
                 // 기믹이 출현 했지만, UI가 켜지지 않은 상태에서 호출
                 // >> 기믹 Info 초기화
                 // 기믹의 이름, 이미지 등 업데이트
-                //gimmickName.text = GimmickName;
-                //gimmickIcon.sprite = Resources.Load($"UI/Image/GimmickIcons/{GimmickName}", typeof(Sprite)) as Sprite;
+                gimmickName.text = GimmickName;
+                gimmickIcon.sprite = Resources.Load($"UI/Image/Icons/GimmickIcons/{GimmickName}", typeof(Sprite)) as Sprite;
 
                 // 기믹 호출 시 0%로 시작한다고 가정
                 gimmickPercent.text = "0%";
@@ -197,8 +202,10 @@ public class InGameUI : MonoBehaviour
         // 몬스터가 출현, 혹은 사망 시 미니맵 하단의 몬스터 수 갱신
         numOfEnemy.text = NumOfEnemy.ToString();
     }
+    #endregion
 
-    public void UpdateDialogue() // 대화 번호 입력값으로 받음
+    // Event
+    public void DialogueEvent() // 대화 번호 입력값으로 받음
     {
         if (isDialogue)
         {
@@ -207,26 +214,31 @@ public class InGameUI : MonoBehaviour
                 dialogue.SetActive(true);
             }
             string Name = data_Dialogue[DialogueNumber]["Character Name"].ToString();
-            
-            // 이미지 변경 << **csv에 저장된 캐릭터 이름은 한글인데, 리소스에서 Load할 이름은 영어여야 함.
-            // 해결 방법
+
+            // 이미지 변경
+            // ** 수정 필요한 곳1) csv에 저장된 캐릭터 이름은 한글인데, 리소스에서 Load할 이름은 영어여야 함.
+            // - 아이디어
             // 대화 이미지를 사용할 캐릭터가 많지 않으니 Switch문으로 받아온 Name 비교.
             // dialogueImage.sprite = Resources.Load($"UI/Image/Characters/{Name}", typeof(Sprite)) as Sprite;
-            
+
             // 이름 변경
             dialogueName.text = Name;
-            
+
             // 내용 변경
             dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString();
+
+            // ** 수정 필요한 곳4) 다이얼로그의 대사 순서가 선형적이지 않을 때, 특정 넘버에서 시작하도록 하는 기능이 필요함
+            dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
+            dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
+
+            Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
+            StartCoroutine("Dialogue");
         }
         else
         {
             if (dialogue.activeInHierarchy) dialogue.SetActive(false);
         }
     }
-    #endregion
-
-
 
     // Button
     #region
@@ -236,27 +248,40 @@ public class InGameUI : MonoBehaviour
 
         // 다시하기, Setting, 저장 및 종료 UI 호출
     }
-
-    public void ButtonPlayerInfo()
-    {
-        // 실제 플레이 Pause 기능
-
-        // 플레이어의 현재 정보 (무기, 공격력, 체력 등 스탯 확인?) 열람 가능한 UI 호출
-    }
     #endregion
 
+    // Coroutine
+    #region
+    IEnumerator Dialogue()
+    {
+        yield return new WaitForSeconds(dialogueTime);
+        if (dialogueIsContinuous == 1)
+        {
+            DialogueNumber++;
+            DialogueEvent();
+        }
+        else if (dialogueIsContinuous == 0)
+        {
+            isDialogue = false;
+            DialogueEvent();
+        }
+        yield return null;
+    }
+    #endregion
 
     // Test
     #region
     private void FunctionTestStart()
     {
+        // 이 함수를 응용하여, 아래 변수들에 실제 연결할 값을 대입합니다.
+
         // 테스트 초기화
         PlayerHp = 100f;
         BossHp = 100f;
 
-        isBoss = true;
-        isGimmick = true;
-        isDialogue = true;
+        isBoss = true; // 보스가 출현하였음을 가정합니다.
+        isGimmick = true; // 기믹이 출현하였음을 가정합니다.
+        isDialogue = true; // 대사가 출력됨을 가정합니다.
 
         PlayerMaxHp = PlayerHp;
         BossMaxHp = BossHp;
@@ -264,24 +289,35 @@ public class InGameUI : MonoBehaviour
         NumOfEnemy = 0;
         DialogueNumber = 0;
 
-        BossName = "Overflow"; // 현재 출현한 보스 이름 연결
-        GimmickName = "Gimmick"; // 기믹 이름 연결
-
-        WeaponName = "TestWeapon";
         CurrentBullet = 60;
-        MaxBullet = 300;
+        MaxBullet = 60;
+
+        BossName = "Overflow"; // 현재 출현한 보스 이름 연결
+        GimmickName = "Error404"; // 기믹 이름 연결
+        WeaponName = "Weapon1"; // 현재 착용 중인 무기 이름 연결
+        
+        
         InitWeaponInfo();
+        DialogueEvent();
     }
+
+    
 
     private void FunctionTestUpdate()
     {
         // 테스트 업데이트
-        if (PlayerHp == PlayerMaxHp) StartCoroutine("TestCoroutine");
+        if (PlayerHp == PlayerMaxHp)
+        {
+            StartCoroutine("TestCoroutine");
+            StartCoroutine("TestCoroutineBullet");
+        }
     }
 
     IEnumerator TestCoroutine()
     {
         // 테스트 코루틴
+        // 플레이어의 체력, 보스의 체력, 다이얼로그의 출현 및 갱신, 미니맵 하단 적의 수 기능을 테스트합니다.
+
         PlayerHp--;
         BossHp -= 10;
         NumOfEnemy++;
@@ -302,7 +338,6 @@ public class InGameUI : MonoBehaviour
         BossHp -= 10;
         NumOfEnemy++;
         yield return new WaitForSeconds(1f);
-        DialogueNumber++;
         PlayerHp--;
         BossHp -= 10;
         NumOfEnemy++;
@@ -320,11 +355,76 @@ public class InGameUI : MonoBehaviour
         NumOfEnemy++;
         yield return new WaitForSeconds(1f);
         PlayerHp--;
+        NumOfEnemy++;
+        yield return new WaitForSeconds(5f);
         isBoss = false;
         isGimmick = false;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
 
+        yield return null;
+    }
+
+    IEnumerator TestCoroutineBullet()
+    {
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
+        CurrentBullet--;
+        yield return new WaitForSeconds(0.2f);
         yield return null;
     }
     #endregion
