@@ -47,18 +47,24 @@ public class Peiz3Gauge : MonoBehaviour
         // 30초 이후에는 값이 90이 되지 않고 계속 증가합니다.
         while (true)
         {
-            slider.value += Time.deltaTime * 0.1f; 
+            slider.value += Time.deltaTime * 0.1f;
             if (slider.value >= 91)
-                slider.value--;
-            if (Peiz3PersentOver == false)
             {
-                Peiz3PersentOver = true;
-                //AfterCompilerPannel 패널등장
-                //대형몬스터 등장
-                Debug.LogError("Area3 true");
-                stagemanager.Area3 = true;
-                stagemanager.OnWave3Direction();  //3페이즈 화살표 활성화 + 탈출 벽 비활성화
+                slider.value--;
+                if (Peiz3PersentOver == false)
+                {
+                    Peiz3PersentOver = true;
+                    //AfterCompilerPannel 패널등장
+                    //대형몬스터 등장
+                    Debug.LogError("Area3 true");
+                    stagemanager.Area3 = true;
+                    stagemanager.OnWave3Direction();  //3페이즈 화살표 활성화 + 탈출 벽 비활성화
+                    //큰 몬스터 바라보기
+                    GameObject.Find("Main Camera").GetComponent<CameraAbove>().LookBigMonster();
+                    GameObject.Find("Player").GetComponent<PlayerSpec>().ProtectPlayerWhenBigMonAppear();
+                }
             }
+            
             yield return null;
         }
     }

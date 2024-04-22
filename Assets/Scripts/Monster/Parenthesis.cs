@@ -21,6 +21,7 @@ public class Parenthesis : Enemy
     [SerializeField]private bool isInStack;
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
+    [SerializeField] private Collider capsulCollider;
     
     
     // Start is called before the first frame update
@@ -37,6 +38,7 @@ public class Parenthesis : Enemy
         this.GetComponent<Enemy>().target = GameObject.Find("Player").transform;
         this.target = GameObject.Find("Player").transform;
         GetComponent<Enemy>().target = target;
+        capsulCollider = GetComponent<CapsuleCollider>();
         InitHPBarSize();  //체력바 사이즈 초기화
     }
 
@@ -113,6 +115,7 @@ public class Parenthesis : Enemy
         _animator.SetTrigger("Death");
         GetComponent<Enemy>().isChase = false;
         isDeath = true;
+        capsulCollider.enabled = false;
         //3초후 삭제
         Destroy(gameObject,3f);
     }
