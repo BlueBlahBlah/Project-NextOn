@@ -64,6 +64,8 @@ public class InGameUI : MonoBehaviour
     private TextMeshProUGUI dialogueName; // 대화 캐릭터 이름
     [SerializeField]
     private TextMeshProUGUI dialogueContent; // 대화 내용
+    [SerializeField]
+    private float typingSpeed = 0.05f; // 대화 출력 속도
     #endregion
 
     // 실제 연결할 변수 혹은 스크립트 내에서 InGameUI 클래스 내에서 지역변수
@@ -205,7 +207,7 @@ public class InGameUI : MonoBehaviour
     #endregion
 
     // Event
-    public void DialogueEvent() // 대화 번호 입력값으로 받음
+    public void DialogueEvent(int DialogueNumber) // 대화 번호 입력값으로 받음
     {
         if (isDialogue)
         {
@@ -225,7 +227,7 @@ public class InGameUI : MonoBehaviour
             dialogueName.text = Name;
 
             // 내용 변경
-            dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString();
+            StartCoroutine("TypeText");
 
             // ** 수정 필요한 곳4) 다이얼로그의 대사 순서가 선형적이지 않을 때, 특정 넘버에서 시작하도록 하는 기능이 필요함
             dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
@@ -254,18 +256,30 @@ public class InGameUI : MonoBehaviour
     #region
     IEnumerator Dialogue()
     {
+        // 다이얼로그 종료 시간 이후 연속해서 출력할지 종료할지 판단하는 코루틴
         yield return new WaitForSeconds(dialogueTime);
         if (dialogueIsContinuous == 1)
         {
             DialogueNumber++;
-            DialogueEvent();
+            DialogueEvent(DialogueNumber);
         }
         else if (dialogueIsContinuous == 0)
         {
             isDialogue = false;
-            DialogueEvent();
+            DialogueEvent(DialogueNumber);
         }
         yield return null;
+    }
+
+    IEnumerator TypeText()
+    {
+        // 문자열을 차례대로 입력하는 코루틴
+        for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
+        {
+            ;
+            dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString().Substring(0, i);
+            yield return new WaitForSeconds(typingSpeed);
+        }
     }
     #endregion
 
@@ -287,7 +301,6 @@ public class InGameUI : MonoBehaviour
         BossMaxHp = BossHp;
         GimmickPercent = 0f;
         NumOfEnemy = 0;
-        DialogueNumber = 0;
 
         CurrentBullet = 60;
         MaxBullet = 60;
@@ -298,7 +311,7 @@ public class InGameUI : MonoBehaviour
         
         
         InitWeaponInfo();
-        DialogueEvent();
+        DialogueEvent(0);
     }
 
     
