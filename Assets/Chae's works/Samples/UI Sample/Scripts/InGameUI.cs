@@ -207,8 +207,10 @@ public class InGameUI : MonoBehaviour
     #endregion
 
     // Event
-    public void DialogueEvent(int DialogueNumber) // 대화 번호 입력값으로 받음
+    public void DialogueEvent(int _DialogueNumber) // 출력할 대화 번호(csv 파일 기준)를 입력값으로 받음
     {
+        DialogueNumber = _DialogueNumber;
+
         if (isDialogue)
         {
             if (!dialogue.activeInHierarchy)
@@ -226,15 +228,14 @@ public class InGameUI : MonoBehaviour
             // 이름 변경
             dialogueName.text = Name;
 
-            // 내용 변경
-            StartCoroutine("TypeText");
+            
 
-            // ** 수정 필요한 곳4) 다이얼로그의 대사 순서가 선형적이지 않을 때, 특정 넘버에서 시작하도록 하는 기능이 필요함
             dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
             dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
 
             Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
-            StartCoroutine("Dialogue");
+            // 내용 변경
+            StartCoroutine("TypeText");
         }
         else
         {
@@ -254,9 +255,16 @@ public class InGameUI : MonoBehaviour
 
     // Coroutine
     #region
-    IEnumerator Dialogue()
+    IEnumerator TypeText()
     {
-        // 다이얼로그 종료 시간 이후 연속해서 출력할지 종료할지 판단하는 코루틴
+        // 문자열을 차례대로 입력하는 코루틴
+        for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
+        {
+            ;
+            dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString().Substring(0, i);
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
         yield return new WaitForSeconds(dialogueTime);
         if (dialogueIsContinuous == 1)
         {
@@ -269,17 +277,6 @@ public class InGameUI : MonoBehaviour
             DialogueEvent(DialogueNumber);
         }
         yield return null;
-    }
-
-    IEnumerator TypeText()
-    {
-        // 문자열을 차례대로 입력하는 코루틴
-        for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
-        {
-            ;
-            dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString().Substring(0, i);
-            yield return new WaitForSeconds(typingSpeed);
-        }
     }
     #endregion
 
