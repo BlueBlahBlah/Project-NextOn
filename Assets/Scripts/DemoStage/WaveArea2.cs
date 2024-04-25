@@ -30,7 +30,7 @@ public class WaveArea2 : MonoBehaviour
             peiz2Active = true;
             StageManager.Area2Function();
         }
-        else if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false)  //3페이즈 중에 Area 통과
+        else if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false && StageManager.Area3 == true)  //3페이즈 중에 Area 통과
         {
             peiz3Active = true;
             StageManager.Area2Function();

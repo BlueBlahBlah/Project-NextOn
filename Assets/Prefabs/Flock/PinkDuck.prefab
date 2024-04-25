@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Duck: {fileID: 6575062858246671931}
   Effect: {fileID: 1698068915230344, guid: 39b1d83ff048f29469b10957d2123a92, type: 3}
+  respawnTime: 0
 --- !u!1001 &4268491698172159092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,6 +146,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199843303328931898, guid: 39b1d83ff048f29469b10957d2123a92, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
