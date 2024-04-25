@@ -108,6 +108,8 @@ public class StageManager : MonoBehaviour
     [SerializeField] private int AfterCompilerPanel_Text_Number;
 
     [SerializeField] private bool isPause;  //현재 게임 시간이 멈췄는지
+
+    public GameObject[] enemies;  //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
     
     // Start is called before the first frame update
     void Start()
@@ -247,6 +249,9 @@ public class StageManager : MonoBehaviour
             //Start_AfterCompilerPanel();    //컴파일러 고친 뒤 패널 등장
             Start_Panel(AfterCompilerPanel,AfterCompilerPanel_Btn,AfterCompilerPanel_Text,AfterCompilerPanel_Text_Number,false);
         }
+        
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log("태그가 'Enemy'인 게임 오브젝트의 개수: " + enemies.Length);
     }
 
     //1페이즈 시작
