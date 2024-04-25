@@ -33,7 +33,7 @@ public class StreamOfEdge2 : MonoBehaviour
         if (other.CompareTag("Enemy") && TickTime >= 0.25f)
         {
             //스킬계수추가
-            int TempDamage =  GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;   
+            int TempDamage =  GetComponent<StageManager>().SwordStreamEdge_Skill_DamageCounting * Damage;   
             other.GetComponent<Enemy>().curHealth -= TempDamage;
             TickTime = 0;
         }

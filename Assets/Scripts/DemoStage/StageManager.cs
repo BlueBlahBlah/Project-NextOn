@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
     
     //근접 무기 스킬
     public int SwordStreamEdge_Skill_DamageCounting;
+    public int SwordStatic_Passive_DamageCounting;
     public int SwordStatic_Skill_DamageCounting;
     public int SwordSliver_Skill_DamageCounting;
     public int SwordDemacia_Skill_DamageCounting;
@@ -46,7 +47,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject[] Wave3_Directions;
     public List<GameObject> Wave2_Monsters;
     [SerializeField] private GameObject[] Wave2_Monsters_Spawner;
-    [SerializeField] private GameObject[] Wave3_Monsters;
+    [SerializeField] private GameObject[] Wave3_Monsters_Spawner;
     [SerializeField] private GameObject[] Before3Peiz;
     [SerializeField] private GameObject[] After3Peiz;
 
@@ -71,6 +72,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
     public int Gauge;                               //스택 몬스터를 잡는 게이지
     [SerializeField] private GameObject wave2Gauge;
+    [SerializeField] private GameObject wave3Gauge;
     
     
     //튜토리얼 패널들
@@ -91,13 +93,23 @@ public class StageManager : MonoBehaviour
     [SerializeField] private GameObject[] Peiz2EndPanel_Text;
     [SerializeField] private int Peiz2EndPanel_Text_Number;
     
-    //컴파일러 고친다음 패널
+    //컴파일러 고친다음 패널 (컴파일러 고치는 동안 디펜스)
+    [SerializeField] private GameObject Start3PeizPanel ;
+    [SerializeField] private Button Start3PeizPanel_Btn;
+    [SerializeField] private GameObject[] Start3PeizPanel_Text;
+    [SerializeField] private int Start3PeizPanel_Text_Number;
+
+   
+    
+    //개발자 어 금지 패널 3페이즈 Big monster등장
     [SerializeField] private GameObject AfterCompilerPanel ;
     [SerializeField] private Button AfterCompilerPanel_Btn;
     [SerializeField] private GameObject[] AfterCompilerPanel_Text;
     [SerializeField] private int AfterCompilerPanel_Text_Number;
 
     [SerializeField] private bool isPause;  //현재 게임 시간이 멈췄는지
+
+    public GameObject[] enemies;  //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
     
     // Start is called before the first frame update
     void Start()
@@ -109,6 +121,7 @@ public class StageManager : MonoBehaviour
         FantasyAxe_DamageCounting = 100;
         
         SwordStreamEdge_Skill_DamageCounting = 1;
+        SwordStatic_Passive_DamageCounting = 1;
         SwordStatic_Skill_DamageCounting = 1;
         SwordSliver_Skill_DamageCounting = 1;
         SwordDemacia_Skill_DamageCounting = 1;
@@ -121,13 +134,15 @@ public class StageManager : MonoBehaviour
         Rifle_DamageCounting = 1;
         ShotGun_DamageCounting = 1;
 
-        Bomber_Skill_WarheadKind = 0;
+        Bomber_Skill_WarheadKind = 4;
         Bomber_Skill_WarheadColor = 0;
         Bomber_Skill_DamageCounting = 1;
         Turret_Skill_BulletColor = 0;
         Turret_Skill_DamageCounting = 1;
         Helicopter_Skill_DamageCounting = 1;
         GunSpire_Skill_DamageCounting = 1;
+
+        
 
         foreach (GameObject g in Wave1_Monsters)
         {
@@ -143,6 +158,10 @@ public class StageManager : MonoBehaviour
             g.SetActive(false);
         }
         foreach (GameObject g in Wave2_Monsters_Spawner)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in Wave3_Monsters_Spawner)
         {
             g.SetActive(false);
         }
@@ -166,6 +185,7 @@ public class StageManager : MonoBehaviour
         Area3 = false;
         Wave2MonsterClear = false;
         wave2Gauge.SetActive(false);
+        wave3Gauge.SetActive(false);
         Peiz3Start = false;
         Peiz3Monster_1.SetActive(false);
         Peiz3Monster_2.SetActive(false);
@@ -194,6 +214,13 @@ public class StageManager : MonoBehaviour
             g.SetActive(false);
         }
         
+        Start3PeizPanel.SetActive(false);
+        Start3PeizPanel_Text_Number = 0;
+        foreach (GameObject g in Start3PeizPanel_Text)
+        {
+            g.SetActive(false);
+        }
+        
         AfterCompilerPanel.SetActive(false);
         AfterCompilerPanel_Text_Number = 0;
         foreach (GameObject g in AfterCompilerPanel_Text)
@@ -211,17 +238,20 @@ public class StageManager : MonoBehaviour
     void Update()
     {
         //스택몬스터 20 게이지 채우면 모두 삭제
-        if (Gauge >= 20 && Wave2MonsterClear == false)
+        if (Gauge >= 2 && Wave2MonsterClear == false)
             Clear_Wave2_Monsters();
 
-        //Area3는 DemoEventBtn에서 True로 변경
+        //Area3는 Peiz3Gauge에서 True로 변경
         if (Area3 == true && Peiz3Start == false)
         {
             Peiz3Start = true;
-            Peiz3Monster_1.SetActive(true);
+            Peiz3Monster_1.SetActive(true);  //3페이즈 몬스터1 등장
             //Start_AfterCompilerPanel();    //컴파일러 고친 뒤 패널 등장
             Start_Panel(AfterCompilerPanel,AfterCompilerPanel_Btn,AfterCompilerPanel_Text,AfterCompilerPanel_Text_Number,false);
         }
+        
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log("태그가 'Enemy'인 게임 오브젝트의 개수: " + enemies.Length);
     }
 
     //1페이즈 시작
@@ -461,6 +491,18 @@ public class StageManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void Peiz3MonsterSpawn()
+    {
+        foreach (GameObject g in Wave3_Monsters_Spawner)
+        {
+            g.SetActive(true);
+        }
+    }
+
+    public void StartPeiz3Pannel()
+    {
+        Start_Panel(Start3PeizPanel,Start3PeizPanel_Btn,Start3PeizPanel_Text,Start3PeizPanel_Text_Number,true);
+    }
     
 }

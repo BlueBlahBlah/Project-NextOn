@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,6 +40,14 @@ public class Peiz3Monster : MonoBehaviour
         Debug.LogError("RageDone 호출");
         anim.SetTrigger("Chase");
         isChase = true;
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Player"))
+        {
+            //스크립트 가져와서 피 닳기
+        }
     }
 }
 

@@ -14,9 +14,14 @@ public class FantasyAxe : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Btn.onClick.AddListener(SkillSpawn);
         Damage = 5;
     }
+    private void OnEnable()
+    {
+        // 버튼 클릭 이벤트 등록
+        Btn.onClick.AddListener(SkillSpawn);
+    }
+    
 
     // Update is called once per frame
     void Update()

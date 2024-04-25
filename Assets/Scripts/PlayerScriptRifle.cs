@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,13 @@ public class PlayerScriptRifle : MonoBehaviour
     Animator Anim;
     public Button RollBtn;
     public bool[] NowWeapon;
-
+    
+    public bool isMovingForward;
+    public bool isMovingBackward;
+    public bool isMovingRight;
+    public bool isMovingLeft;
+    [SerializeField] private CharacterLocomotion playerMovingScript;
+    
     void Start()
     {
         // 초기 위치 저장
@@ -28,26 +35,80 @@ public class PlayerScriptRifle : MonoBehaviour
         if (transform.position != lastPosition)
         {
             walking = true;
-            // 위치가 변경되었을 때만 아래 코드 실행
 
             // 이동 방향 설정
             Vector3 moveDirection = (transform.position - lastPosition).normalized;
 
+            // 이동 방향을 기준으로 앞, 뒤, 오른쪽, 왼쪽 여부 판단
+            float angle = Vector3.SignedAngle(moveDirection, transform.forward, Vector3.up);
+            //Debug.LogError(angle);
+            if (angle > 45f && angle < 135f)
+            {
+                isMovingLeft = true;
+                isMovingRight = false;
+                isMovingForward = false;
+                isMovingBackward = false;
+                playerMovingScript.walkSpeed = 3;
+
+            }
+            else if (angle < -45f && angle > -135f)
+            {
+                isMovingRight = true;
+                isMovingLeft = false;
+                isMovingForward = false;
+                isMovingBackward = false;
+                playerMovingScript.walkSpeed = 3;
+            }
+            else if(angle > 70 || angle < -70)
+            {
+                isMovingLeft = false;
+                isMovingRight = false;
+                if (Vector3.Dot(moveDirection, transform.forward) > 0)      //안쓰이는 코드인듯? forward는 아래 else에
+                {
+                    isMovingForward = true;
+                    isMovingBackward = false;
+                    playerMovingScript.walkSpeed = 3;
+                }
+                else
+                {
+                    isMovingForward = false;
+                    isMovingBackward = true;
+                    playerMovingScript.walkSpeed = 3;
+                }
+            }
+            else
+            {
+                isMovingForward = true;
+                isMovingBackward = false;
+                isMovingLeft = false;
+                isMovingRight = false;
+                playerMovingScript.walkSpeed = 3;
+            }
             // 움직임 처리
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
 
             // 회전 처리
-            Quaternion newRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 100f);
+            //Quaternion newRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 100f);
 
             // 현재 위치를 이전 위치로 업데이트
             lastPosition = transform.position;
+            
         }
         else
         {
             walking = false;
+            isMovingForward = false;
+            isMovingBackward = false;
+            isMovingRight = false;
+            isMovingLeft = false;
         }
         Anim.SetBool("walk", walking);
+        Anim.SetBool("Front", isMovingForward);
+        Anim.SetBool("Back", isMovingBackward);
+        Anim.SetBool("Left", isMovingLeft);
+        Anim.SetBool("Right", isMovingRight);
+        
 
         if (reloaing == true)       //재장전중이라면
         {

@@ -19,8 +19,13 @@ public class SwordSilver : MonoBehaviour
         collider = GetComponent<MeshCollider>();
         //attackNum = 0;
         attackRadius = 20f;
-        Btn.onClick.AddListener(SpawnRock);
         Damage = 5;
+    }
+    
+    private void OnEnable()
+    {
+        // 버튼 클릭 이벤트 등록
+        Btn.onClick.AddListener(SpawnRock);
     }
 
     // Update is called once per frame

@@ -21,9 +21,13 @@ public class Shotgun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        nowReloading = false;
+    }
+    
+    private void OnEnable()
+    {
         // 버튼 클릭 이벤트 등록
         fireBtn.onClick.AddListener(OnFireButtonClick);
-        nowReloading = false;
     }
     
 
