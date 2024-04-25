@@ -84,6 +84,7 @@ public class InGameUI : MonoBehaviour
 
     private bool isGimmick; // 기믹 존재 유무 연결
     private float GimmickPercent; // 기믹 진행도 연결
+    private int GimmickCount;
     private string GimmickName; // 기믹 이름 연결
 
     private int NumOfEnemy; // 필드 내 몬스터 수 연결
@@ -93,12 +94,16 @@ public class InGameUI : MonoBehaviour
     public int DialogueNumber; // 출력할 대화의 번호
     private float dialogueTime; // 대화의 길이 (WaitforSeconds 입력 변수)
     private int dialogueIsContinuous; // 이어지는 대화가 있는지 확인할 변수
+
+    [SerializeField]
+    private StageManager stageManager;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // 다이얼로그 csv 파일 호출
+        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         FunctionTestStart(); // 테스트용 코드
     }
 
@@ -202,6 +207,7 @@ public class InGameUI : MonoBehaviour
     public void UpdateNumOfEnemy()
     {
         // 몬스터가 출현, 혹은 사망 시 미니맵 하단의 몬스터 수 갱신
+        NumOfEnemy = stageManager.enemies.Length;
         numOfEnemy.text = NumOfEnemy.ToString();
     }
     #endregion
@@ -290,9 +296,7 @@ public class InGameUI : MonoBehaviour
         PlayerHp = 100f;
         BossHp = 100f;
 
-        isBoss = true; // 보스가 출현하였음을 가정합니다.
-        isGimmick = true; // 기믹이 출현하였음을 가정합니다.
-        isDialogue = true; // 대사가 출력됨을 가정합니다.
+        // isDialogue = true; // 대사가 출력됨을 가정합니다.
 
         PlayerMaxHp = PlayerHp;
         BossMaxHp = BossHp;
@@ -308,7 +312,7 @@ public class InGameUI : MonoBehaviour
         
         
         InitWeaponInfo();
-        DialogueEvent(0);
+        // DialogueEvent(0);
     }
 
     
@@ -318,8 +322,7 @@ public class InGameUI : MonoBehaviour
         // 테스트 업데이트
         if (PlayerHp == PlayerMaxHp)
         {
-            StartCoroutine("TestCoroutine");
-            StartCoroutine("TestCoroutineBullet");
+
         }
     }
 

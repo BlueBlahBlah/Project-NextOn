@@ -10,13 +10,15 @@ public class StageManager : MonoBehaviour
 {
     // ------ 공격 계수 ------ //
     //근접 무기
+    [Header("Damage Counting")]
     public int SwordStreamEdge_DamageCounting;
     public int SwordStatic_DamageCounting;
     public int SwordSliver_DamageCounting;
     public int SwordDemacia_DamageCounting;
     public int FantasyAxe_DamageCounting;
-    
+
     //근접 무기 스킬
+    [Header("Skill")]
     public int SwordStreamEdge_Skill_DamageCounting;
     public int SwordStatic_Passive_DamageCounting;
     public int SwordStatic_Skill_DamageCounting;
@@ -109,25 +111,28 @@ public class StageManager : MonoBehaviour
 
     [SerializeField] private bool isPause;  //현재 게임 시간이 멈췄는지
 
+    [Header("Enemies")]
     public GameObject[] enemies;  //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
+
     
     // Start is called before the first frame update
     void Start()
     {
+        // 무기 계수 곱하기 전 데미지 설정
         SwordStreamEdge_DamageCounting = 1;
         SwordStatic_DamageCounting = 1;
         SwordSliver_DamageCounting = 1;
-        SwordDemacia_DamageCounting = 1;
+        SwordDemacia_DamageCounting = 50;
         FantasyAxe_DamageCounting = 100;
         
         SwordStreamEdge_Skill_DamageCounting = 1;
         SwordStatic_Passive_DamageCounting = 1;
         SwordStatic_Skill_DamageCounting = 1;
         SwordSliver_Skill_DamageCounting = 1;
-        SwordDemacia_Skill_DamageCounting = 1;
+        SwordDemacia_Skill_DamageCounting = 50;
         FantasyAxe_Skill_DamageCounting = 1;
         
-        FlameGun_DamageCounting = 1;
+        FlameGun_DamageCounting = 50;
         MachineGun_DamageCounting = 1;
         GrenadeLauncher_DamageCounting = 1;
         Sniper_DamageCounting = 1;
@@ -250,7 +255,7 @@ public class StageManager : MonoBehaviour
             Start_Panel(AfterCompilerPanel,AfterCompilerPanel_Btn,AfterCompilerPanel_Text,AfterCompilerPanel_Text_Number,false);
         }
         
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
         Debug.Log("태그가 'Enemy'인 게임 오브젝트의 개수: " + enemies.Length);
     }
 
