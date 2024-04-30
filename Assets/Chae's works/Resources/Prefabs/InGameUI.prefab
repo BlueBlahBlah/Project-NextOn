@@ -1011,6 +1011,7 @@ MonoBehaviour:
   dialogueContent: {fileID: 2085652597685708084}
   typingSpeed: 0.05
   DialogueNumber: 0
+  stageManager: {fileID: 0}
 --- !u!1 &1180758615664767246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,7 +3862,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3839463646965557151}
   m_Layer: 5
-  m_Name: Dialogue
+  m_Name: Short Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
