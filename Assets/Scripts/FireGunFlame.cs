@@ -7,13 +7,14 @@ public class FireGunFlame : MonoBehaviour
     public float raycastLength = 7f; // 레이의 최대 길이
     private float tickTime;        // 데미지를 주는 틱 간격
     public int damage;
-    
     public bool active;
+    [SerializeField] private DamageManager DamageManager;
     
     void Start() 
     {
         tickTime = 0;
         damage = 1;
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
     }
 
     // Update is called once per frame
@@ -26,7 +27,7 @@ public class FireGunFlame : MonoBehaviour
             RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, raycastLength);
             foreach (RaycastHit hit in hits)
             {
-                int tempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().FlameGun_DamageCounting * damage;
+                int tempDamage = DamageManager.FlameGun_DamageCounting * damage;    //데미지 가져오기
                 Collider collider = hit.collider;
                 if (collider != null && collider.CompareTag("Enemy"))
                 {

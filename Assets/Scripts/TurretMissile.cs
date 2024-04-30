@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TurretMissile : MonoBehaviour
 {
+    [SerializeField] private DamageManager DamageManager;
     public int Damage;
     // Start is called before the first frame update
     void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         Damage = 3;
     }
 
@@ -19,7 +21,7 @@ public class TurretMissile : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Turret_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.Turret_Skill_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             //적을 공격

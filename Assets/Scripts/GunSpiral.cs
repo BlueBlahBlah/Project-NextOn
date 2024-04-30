@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Gunspiral : MonoBehaviour
 {
+    [SerializeField] private DamageManager DamageManager;
     public int Damage;
     // Start is called before the first frame update
     void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         Damage = 10;
         attack();
         Destroy(gameObject, 3f);
@@ -21,7 +23,7 @@ public class Gunspiral : MonoBehaviour
 
     void attack()
     {
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().GunSpire_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.GunSpire_Skill_DamageCounting * Damage;
         Collider[] colls;
         colls = Physics.OverlapSphere(transform.position, 5f);
         if (colls.Length == 0)

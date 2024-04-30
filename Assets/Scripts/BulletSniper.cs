@@ -5,12 +5,14 @@ using UnityEngine;
 public class BulletSniper : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private DamageManager DamageManager;
     public float destroyDistance = 30f;
     public int Damage;
 
     private void Start()
     {
         player = GameObject.Find("Player");
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         Damage = 1;
     }
 
@@ -27,7 +29,7 @@ public class BulletSniper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Sniper_DamageCounting * Damage;
+        int TempDamage = DamageManager.Sniper_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().curHealth -= TempDamage;

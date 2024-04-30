@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwordSilverSkill1 : MonoBehaviour
 {
     [SerializeField] private List<Enemy> enemyAgain;
+    [SerializeField] private DamageManager DamageManager;
 
     public int Damage;
     // Start is called before the first frame update
@@ -12,6 +13,7 @@ public class SwordSilverSkill1 : MonoBehaviour
     {
         Invoke("SecondAttack", 3f);
         Damage = 10;
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class SwordSilverSkill1 : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordSliver_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.SwordSliver_Skill_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();

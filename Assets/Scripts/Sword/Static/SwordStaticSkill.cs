@@ -6,8 +6,10 @@ public class SwordStaticSkill : MonoBehaviour
 {
     [SerializeField] private BoxCollider Collider;
     public int Damage;
+    [SerializeField] private DamageManager DamageManager;
     void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         Damage = 10;
         Invoke("Attack",1f);
         Destroy(gameObject,3f);
@@ -21,7 +23,7 @@ public class SwordStaticSkill : MonoBehaviour
 
    void Attack()
     {
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.SwordStatic_Skill_DamageCounting * Damage;
         //전달받은 몬스터를 중심으로 맞닿은 물체 탐색
         Collider[] colliders = Physics.OverlapBox(
             Collider.transform.position,

@@ -4,6 +4,7 @@ using UnityEngine.Splines;
 
 public class HelicopterMinigunTrigger : MonoBehaviour
 {
+    [SerializeField] private DamageManager DamageManager;
     public GameObject Helicopter;  // 헬리콥터
     public GameObject EffectField;  // 이펙트필드
     public HelicopterMinigunParticle helicopterMinigunParticle;  // 이펙트필드 스크립트
@@ -23,6 +24,7 @@ public class HelicopterMinigunTrigger : MonoBehaviour
     
     private void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         helicopterMinigunParticle = GameObject.Find("ParticleArea").GetComponent<HelicopterMinigunParticle>();
         LeftMuzzle = GameObject.Find("HelLeftMuzzles");
         RightMuzzle = GameObject.Find("HelRightMuzzles");
@@ -41,7 +43,7 @@ public class HelicopterMinigunTrigger : MonoBehaviour
         {
             SplineAnimate spline = Helicopter.GetComponent<SplineAnimate>();
             //헬기 스킬 공격계수 전달
-            helicopterMinigunParticle.CalculateDamage(GameObject.Find("StageManager").GetComponent<StageManager>().Helicopter_Skill_DamageCounting);
+            helicopterMinigunParticle.CalculateDamage(DamageManager.Helicopter_Skill_DamageCounting);
             if (spline.NormalizedTime == 1f)  // 스킬이 끝나면 다시 준비
             {
                 spline.NormalizedTime = 0;

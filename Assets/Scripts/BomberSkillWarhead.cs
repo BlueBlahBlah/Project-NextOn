@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BomberSkillWarhead : MonoBehaviour
 {
+    [SerializeField] private DamageManager DamageManager;
     public GameObject warhead;
     public GameObject effect;
     public Rigidbody rigid;
@@ -13,6 +14,7 @@ public class BomberSkillWarhead : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         rigid = GetComponent<Rigidbody>();
         StartCoroutine(Explosion());
         Damage = 70;
@@ -34,7 +36,7 @@ public class BomberSkillWarhead : MonoBehaviour
             //피격된 적의 체력 감소 및 이펙트
         }*/
 
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Bomber_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.Bomber_Skill_DamageCounting * Damage;
         
         Collider[] colls;
         colls = Physics.OverlapSphere(transform.position, Range);

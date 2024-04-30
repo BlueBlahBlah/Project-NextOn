@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StreamOfEdge3 : MonoBehaviour
 {
+    [SerializeField] private DamageManager DamageManager;
     [SerializeField] private float degreePerSecond = 20; //회전속도
     private Transform[] currentTarget; // 현재 목표 지점
     private float TickTime;       //데미지를 주는 틱 간격
@@ -12,6 +13,7 @@ public class StreamOfEdge3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         TickTime = 0;
         Destroy(gameObject, 10f);
         transform.rotation = new Quaternion(0f, transform.rotation.y, 0f,0f);
@@ -31,7 +33,7 @@ public class StreamOfEdge3 : MonoBehaviour
         if (other.CompareTag("Enemy") && TickTime >= 0.25f)
         {
             //스킬계수추가
-            int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordStreamEdge_Skill_DamageCounting * Damage;   
+            int TempDamage =  DamageManager.SwordStreamEdge_Skill_DamageCounting * Damage;   
             other.GetComponent<Enemy>().curHealth -= TempDamage;
             TickTime = 0;
         }

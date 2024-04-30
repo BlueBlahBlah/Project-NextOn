@@ -6,11 +6,13 @@ using UnityEngine;
 public class BulletRifle : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private DamageManager DamageManager;
     public float destroyDistance = 30f;
     public int Damage;
 
     private void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         player = GameObject.Find("Player");
         Damage = 1;
     }
@@ -28,7 +30,7 @@ public class BulletRifle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().Rifle_DamageCounting * Damage;
+        int TempDamage =  DamageManager.Rifle_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().curHealth -= TempDamage;

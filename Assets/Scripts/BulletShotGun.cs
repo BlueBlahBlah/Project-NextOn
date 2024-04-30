@@ -6,11 +6,13 @@ using UnityEngine;
 public class BulletShotGun : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private DamageManager DamageManager;
     public float destroyDistance = 30f;
     public int Damage;
 
     private void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         player = GameObject.Find("Player");
         Damage = 1;
     }
@@ -28,7 +30,7 @@ public class BulletShotGun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().ShotGun_DamageCounting * Damage;
+        int TempDamage = DamageManager.ShotGun_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<Enemy>().curHealth -= TempDamage;
