@@ -1,4 +1,4 @@
- - Dialogue.csv 파일의 헤드로는 Number, Character Name, Contents, Time, Continuous 가 있습니다.
+ - Dialogue.csv 파일의 헤드로는 Number, Character Name, Contents, Time, Keyword, Continuous 가 있습니다.
 
  1) Number
 출력할 대화의 번호입니다.
@@ -8,3 +8,11 @@
 
  3) Contents
 실제 출력될 대사입니다.
+
+ 4) Time
+
+ 5) Keyword
+원하는 대사로 바로 접근하기 위한 키워드입니다.
+
+ 6) Continuous
+연계되는 대사의 출력여부를 판단합니다. 값이 1이면 Number가 1 높은 대사를 이어서 출력합니다.

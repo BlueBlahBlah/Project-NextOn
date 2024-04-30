@@ -103,7 +103,8 @@ public class InGameUI : MonoBehaviour
     void Start()
     {
         data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // 다이얼로그 csv 파일 호출
-        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+
+        if (GameObject.Find("StageManager") != null) stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         FunctionTestStart(); // 테스트용 코드
     }
 
@@ -207,7 +208,14 @@ public class InGameUI : MonoBehaviour
     public void UpdateNumOfEnemy()
     {
         // 몬스터가 출현, 혹은 사망 시 미니맵 하단의 몬스터 수 갱신
-        NumOfEnemy = stageManager.enemies.Length;
+        if (stageManager != null)
+        {
+            NumOfEnemy = stageManager.enemies.Length;
+        }
+        else
+        {
+            Debug.Log("There's no stageManager!");
+        }
         numOfEnemy.text = NumOfEnemy.ToString();
     }
     #endregion
