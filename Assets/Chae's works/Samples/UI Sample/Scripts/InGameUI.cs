@@ -89,12 +89,6 @@ public class InGameUI : MonoBehaviour
 
     private int NumOfEnemy; // 필드 내 몬스터 수 연결
 
-    private bool isDialogue; // 대화창 표시 여부
-    private List<Dictionary<string, object>> data_Dialogue; // csv 파일 담을 변수
-    public int DialogueNumber; // 출력할 대화의 번호
-    private float dialogueTime; // 대화의 길이 (WaitforSeconds 입력 변수)
-    private int dialogueIsContinuous; // 이어지는 대화가 있는지 확인할 변수
-
     [SerializeField]
     private StageManager stageManager;
     #endregion
@@ -102,8 +96,6 @@ public class InGameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // 다이얼로그 csv 파일 호출
-
         if (GameObject.Find("StageManager") != null) stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         FunctionTestStart(); // 테스트용 코드
     }
@@ -220,42 +212,7 @@ public class InGameUI : MonoBehaviour
     }
     #endregion
 
-    // Event
-    public void DialogueEvent(int _DialogueNumber) // 출력할 대화 번호(csv 파일 기준)를 입력값으로 받음
-    {
-        DialogueNumber = _DialogueNumber;
-
-        if (isDialogue)
-        {
-            if (!dialogue.activeInHierarchy)
-            {
-                dialogue.SetActive(true);
-            }
-            string Name = data_Dialogue[DialogueNumber]["Character Name"].ToString();
-
-            // 이미지 변경
-            // ** 수정 필요한 곳1) csv에 저장된 캐릭터 이름은 한글인데, 리소스에서 Load할 이름은 영어여야 함.
-            // - 아이디어
-            // 대화 이미지를 사용할 캐릭터가 많지 않으니 Switch문으로 받아온 Name 비교.
-            // dialogueImage.sprite = Resources.Load($"UI/Image/Characters/{Name}", typeof(Sprite)) as Sprite;
-
-            // 이름 변경
-            dialogueName.text = Name;
-
-            
-
-            dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
-            dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
-
-            Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
-            // 내용 변경
-            StartCoroutine("TypeText");
-        }
-        else
-        {
-            if (dialogue.activeInHierarchy) dialogue.SetActive(false);
-        }
-    }
+ 
 
     // Button
     #region
@@ -269,29 +226,7 @@ public class InGameUI : MonoBehaviour
 
     // Coroutine
     #region
-    IEnumerator TypeText()
-    {
-        // 문자열을 차례대로 입력하는 코루틴
-        for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
-        {
-            ;
-            dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString().Substring(0, i);
-            yield return new WaitForSeconds(typingSpeed);
-        }
-
-        yield return new WaitForSeconds(dialogueTime);
-        if (dialogueIsContinuous == 1)
-        {
-            DialogueNumber++;
-            DialogueEvent(DialogueNumber);
-        }
-        else if (dialogueIsContinuous == 0)
-        {
-            isDialogue = false;
-            DialogueEvent(DialogueNumber);
-        }
-        yield return null;
-    }
+    
     #endregion
 
     // Test
@@ -320,7 +255,6 @@ public class InGameUI : MonoBehaviour
         
         
         InitWeaponInfo();
-        // DialogueEvent(0);
     }
 
     

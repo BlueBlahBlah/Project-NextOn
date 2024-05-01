@@ -3863,7 +3863,7 @@ GameObject:
   - component: {fileID: 3839463646965557151}
   - component: {fileID: 193326585355503975}
   m_Layer: 5
-  m_Name: Short Dialogue
+  m_Name: ShortDialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3906,11 +3906,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueType: Short
-  dialogue: {fileID: 0}
+  dialogue: {fileID: 5189001737212919944}
   dialogueImage: {fileID: 0}
-  dialogueName: {fileID: 0}
-  dialogueContent: {fileID: 0}
+  dialogueName: {fileID: 2698679343503270310}
+  dialogueContent: {fileID: 2085652597685708084}
   typingSpeed: 0.05
+  DialogueNumber: 0
 --- !u!1 &5234112205449487986
 GameObject:
   m_ObjectHideFlags: 0

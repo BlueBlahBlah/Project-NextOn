@@ -20,7 +20,11 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private float typingSpeed = 0.05f; // 대화 출력 속도
 
-    private List<Dictionary<string, object>> data_Dialogue;
+    public bool isDialogue; // 대화창 표시 여부
+    private List<Dictionary<string, object>> data_Dialogue; // csv 파일 담을 변수
+    public int DialogueNumber; // 출력할 대화의 번호
+    private float dialogueTime; // 대화의 길이 (WaitforSeconds 입력 변수)
+    private int dialogueIsContinuous; // 이어지는 대화가 있는지 확인할 변수
 
 
     // Start is called before the first frame update
@@ -29,6 +33,8 @@ public class Dialogue : MonoBehaviour
         // 다이얼로그 타입 (길이) 에 맞춰 적합한 다이얼로그 csv 호출
         if (dialogueType == "Short") data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue");
         else if (dialogueType == "Long") data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue");
+
+        dialogue.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,4 +42,83 @@ public class Dialogue : MonoBehaviour
     {
         
     }
+
+    // 필요한 함수
+    #region
+    public void PrintDialogueByNumber(int _DialogueNumber) 
+    {
+        // 출력할 대화 번호(csv 파일 기준)를 입력값으로 받는 대화 출력 함수
+        DialogueNumber = _DialogueNumber;
+
+        if (isDialogue)
+        {
+            if (!dialogue.activeInHierarchy)
+            {
+                dialogue.SetActive(true);
+            }
+            string Name = data_Dialogue[DialogueNumber]["Character Name"].ToString();
+
+            // 이미지 변경
+            // ** 수정 필요한 곳1) csv에 저장된 캐릭터 이름은 한글인데, 리소스에서 Load할 이름은 영어여야 함.
+            // - 아이디어
+            // 대화 이미지를 사용할 캐릭터가 많지 않으니 Switch문으로 받아온 Name 비교.
+            // dialogueImage.sprite = Resources.Load($"UI/Image/Characters/{Name}", typeof(Sprite)) as Sprite;
+
+            // 이름 변경
+            dialogueName.text = Name;
+
+
+
+            dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
+            dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
+
+            Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
+            // 내용 변경
+            StartCoroutine("TypeText");
+        }
+        else
+        {
+            if (dialogue.activeInHierarchy) dialogue.SetActive(false);
+        }
+    }
+
+    public void PrintDialogueByKeyword(string _keyword)
+    {
+        // 키워드를 입력값으로 받는 대화 출력 함수
+
+    }
+
+    public void Skip() // 대화 스킵
+    {
+
+    }
+    #endregion
+
+
+    // 필요한 코루틴
+    #region
+    IEnumerator TypeText()
+    {
+        // 문자열을 차례대로 입력하는 코루틴
+        for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
+        {
+            ;
+            dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString().Substring(0, i);
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        yield return new WaitForSeconds(dialogueTime);
+        if (dialogueIsContinuous == 1)
+        {
+            DialogueNumber++;
+            PrintDialogueByNumber(DialogueNumber);
+        }
+        else if (dialogueIsContinuous == 0)
+        {
+            isDialogue = false;
+            PrintDialogueByNumber(DialogueNumber);
+        }
+        yield return null;
+    }
+    #endregion
 }
