@@ -52,5 +52,10 @@ public class WeaponChange : MonoBehaviour
                 g.SetActive(false);
             }
         }
+
+        if (Wt == WeaponType.closeType)
+        {
+            player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();
+        }
     }
 }

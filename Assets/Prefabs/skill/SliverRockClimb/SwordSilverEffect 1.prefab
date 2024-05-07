@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 748870223342574429}
   - component: {fileID: 983745378304450812}
-  - component: {fileID: 7198970223297100869}
   - component: {fileID: 623799297281344608}
   m_Layer: 0
   m_Name: SwordSilverEffect 1
@@ -50,29 +49,6 @@ MonoBehaviour:
   enemyAgain: []
   DamageManager: {fileID: 0}
   Damage: 0
---- !u!136 &7198970223297100869
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1445054311665758884}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 1.13
-  m_Height: 10
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 4.91}
 --- !u!54 &623799297281344608
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -95,7 +71,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

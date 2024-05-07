@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerScriptOneHand : MonoBehaviour
 {
-    public float moveSpeed = 0f;        
+    public float moveSpeed = 0f;
     public bool walking;
     private Vector3 lastPosition;
     Animator Anim;
     [SerializeField] private int Damage;
-    
+
     public Button attackBtn;
 
     [SerializeField] private BoxCollider DamageZone;
@@ -21,7 +22,7 @@ public class PlayerScriptOneHand : MonoBehaviour
     [SerializeField] private SwordSilver SwordSilver;
     [SerializeField] private SwordDemacia SwordDemacia;
     [SerializeField] private FantasyAxe FantasyAxe;
-    
+
     [SerializeField] private DamageManager DamageManager;
 
     void Start()
@@ -33,16 +34,42 @@ public class PlayerScriptOneHand : MonoBehaviour
         attackBtn.onClick.AddListener(OnAttackButtonClick);
         //RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
 
-        SwordStreamOfEdge = GameObject.FindObjectOfType<SwordStreamOfEdge>();
-        SwordStatic = GameObject.FindObjectOfType<SwordStatic>();
-        SwordSilver = GameObject.FindObjectOfType<SwordSilver>();
-        SwordDemacia = GameObject.FindObjectOfType<SwordDemacia>();
-        FantasyAxe = GameObject.FindObjectOfType<FantasyAxe>();
-        
-        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
+        try
+        {
+            SwordStreamOfEdge = GameObject.Find("SwordStreamOfEgde").GetComponent<SwordStreamOfEdge>();
+            SwordStatic = GameObject.Find("SwordStatic").GetComponent<SwordStatic>();
+            SwordSilver = GameObject.Find("SwordSilver").GetComponent<SwordSilver>();
+            SwordDemacia = GameObject.Find("SwordDemacia").GetComponent<SwordDemacia>();
+            FantasyAxe = GameObject.Find("FantasyAxe_Unity").GetComponent<FantasyAxe>();
+
+            DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
+       
     }
 
-    void Update()
+    public void WeaponSynchronization()
+    {
+        try
+        {
+            SwordStreamOfEdge = GameObject.Find("SwordStreamOfEgde").GetComponent<SwordStreamOfEdge>();
+            SwordStatic = GameObject.Find("SwordStatic").GetComponent<SwordStatic>();
+            SwordSilver = GameObject.Find("SwordSilver").GetComponent<SwordSilver>();
+            SwordDemacia = GameObject.Find("SwordDemacia").GetComponent<SwordDemacia>();
+            FantasyAxe = GameObject.Find("FantasyAxe_Unity").GetComponent<FantasyAxe>();
+
+            DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
+    }
+
+void Update()
     {
         // 현재 위치와 이전 위치 비교
         if (transform.position != lastPosition)

@@ -49,7 +49,7 @@ public class SwordSilverSkill1 : MonoBehaviour
 
     void SecondAttack()
     {
-        int TempDamage =  GetComponent<StageManager>().SwordSliver_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.SwordSliver_Skill_DamageCounting * Damage;
         foreach (var enemy in enemyAgain)
         {
             if (enemy != null && enemy.gameObject.activeInHierarchy)
