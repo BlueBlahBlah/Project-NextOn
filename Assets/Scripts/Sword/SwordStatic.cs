@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SwordStatic : MonoBehaviour
 {
-    [SerializeField] private DamageManager DamageManager;
+    //[SerializeField] private DamageManager DamageManager;
     [SerializeField] private Collider collider;
     public int attackNum;     //유효타횟수
     [SerializeField] private int SkillTime;     //스킬타수
@@ -21,7 +21,6 @@ public class SwordStatic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         collider = GetComponent<MeshCollider>();
         SkillTime = 3;      //기본 3번 튕김
         findDistance = 5f;      //스킬반경 5f
@@ -62,7 +61,7 @@ public class SwordStatic : MonoBehaviour
     {
         List<GameObject> nearEnemy = FindRandomEnemy();
         //스킬 계수 추가
-        int TempDamage =  DamageManager.SwordStatic_Passive_DamageCounting * Damage;
+        int TempDamage =  DamageManager.Instance.SwordStatic_Passive_DamageCounting * Damage;
 
         int numEnemNear = nearEnemy.Count;
         if (numEnemNear == 1)       //주변에 다른 몬스터가 없을때

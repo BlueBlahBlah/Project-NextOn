@@ -23,7 +23,7 @@ public class PlayerScriptOneHand : MonoBehaviour
     [SerializeField] private SwordDemacia SwordDemacia;
     [SerializeField] private FantasyAxe FantasyAxe;
 
-    [SerializeField] private DamageManager DamageManager;
+    //[SerializeField] private DamageManager DamageManager;
 
     void Start()
     {
@@ -36,13 +36,7 @@ public class PlayerScriptOneHand : MonoBehaviour
 
         try
         {
-            SwordStreamOfEdge = GameObject.Find("SwordStreamOfEgde").GetComponent<SwordStreamOfEdge>();
-            SwordStatic = GameObject.Find("SwordStatic").GetComponent<SwordStatic>();
-            SwordSilver = GameObject.Find("SwordSilver").GetComponent<SwordSilver>();
-            SwordDemacia = GameObject.Find("SwordDemacia").GetComponent<SwordDemacia>();
-            FantasyAxe = GameObject.Find("FantasyAxe_Unity").GetComponent<FantasyAxe>();
-
-            DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
+            WeaponSynchronization();
         }
         catch (NullReferenceException e)
         {
@@ -53,20 +47,11 @@ public class PlayerScriptOneHand : MonoBehaviour
 
     public void WeaponSynchronization()
     {
-        try
-        {
-            SwordStreamOfEdge = GameObject.Find("SwordStreamOfEgde").GetComponent<SwordStreamOfEdge>();
-            SwordStatic = GameObject.Find("SwordStatic").GetComponent<SwordStatic>();
-            SwordSilver = GameObject.Find("SwordSilver").GetComponent<SwordSilver>();
-            SwordDemacia = GameObject.Find("SwordDemacia").GetComponent<SwordDemacia>();
-            FantasyAxe = GameObject.Find("FantasyAxe_Unity").GetComponent<FantasyAxe>();
-
-            DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
-        }
-        catch (NullReferenceException e)
-        {
-            
-        }
+        SwordStreamOfEdge = GameObject.Find("SwordStreamOfEgde").GetComponent<SwordStreamOfEdge>();
+        SwordStatic = GameObject.Find("SwordStatic").GetComponent<SwordStatic>();
+        SwordSilver = GameObject.Find("SwordSilver").GetComponent<SwordSilver>();
+        SwordDemacia = GameObject.Find("SwordDemacia").GetComponent<SwordDemacia>();
+        FantasyAxe = GameObject.Find("FantasyAxe_Unity").GetComponent<FantasyAxe>();
     }
 
 void Update()
@@ -114,27 +99,27 @@ void Update()
         if (SwordStreamOfEdge != null && SwordStreamOfEdge.gameObject.activeSelf)
         {
             Damage = SwordStreamOfEdge.GetComponent<SwordStreamOfEdge>().Damage;
-            Damage *= DamageManager.SwordStreamEdge_DamageCounting;
+            Damage *= DamageManager.Instance.SwordStreamEdge_DamageCounting;
         }
         else if (SwordStatic != null && SwordStatic.gameObject.activeSelf)
         {
             Damage = SwordStatic.GetComponent<SwordStatic>().Damage;
-            Damage *= DamageManager.SwordStatic_DamageCounting;
+            Damage *= DamageManager.Instance.SwordStatic_DamageCounting;
         }
         else if (SwordSilver != null && SwordSilver.gameObject.activeSelf)
         {
             Damage = SwordSilver.GetComponent<SwordSilver>().Damage;
-            Damage *= DamageManager.SwordSliver_DamageCounting;
+            Damage *= DamageManager.Instance.SwordSliver_DamageCounting;
         }
         else if (SwordDemacia != null && SwordDemacia.gameObject.activeSelf)
         {
             Damage = SwordDemacia.GetComponent<SwordDemacia>().Damage;
-            Damage *= DamageManager.SwordDemacia_DamageCounting;
+            Damage *= DamageManager.Instance.SwordDemacia_DamageCounting;
         }
         else if (FantasyAxe != null && FantasyAxe.gameObject.activeSelf)
         {
             Damage = FantasyAxe.GetComponent<FantasyAxe>().Damage;
-            Damage *= DamageManager.FantasyAxe_DamageCounting;
+            Damage *= DamageManager.Instance.FantasyAxe_DamageCounting;
         }
         
         Collider[] hitColliders = Physics.OverlapBox(DamageZone.bounds.center, DamageZone.bounds.extents,

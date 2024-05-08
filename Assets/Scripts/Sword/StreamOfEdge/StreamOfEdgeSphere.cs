@@ -7,12 +7,11 @@ public class StreamOfEdgeSphere : MonoBehaviour
 {
     private SphereCollider SphereCollider;
     public int Damage;
-    [SerializeField] private DamageManager DamageManager;
+    //[SerializeField] private DamageManager DamageManager;
     private float TickTime;       //데미지를 주는 틱 간격
     // Start is called before the first frame update
     void Start()
     {
-        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         SphereCollider = GetComponent<SphereCollider>();
         TickTime = 0;
         Damage = 1;    //기본 스킬 데미지
@@ -29,7 +28,7 @@ public class StreamOfEdgeSphere : MonoBehaviour
         if (other.CompareTag("Enemy") && TickTime >= 0.25f)
         {
             //스킬계수 추가
-            int TempDamage = DamageManager.SwordStreamEdge_Skill_DamageCounting * Damage;         
+            int TempDamage = DamageManager.Instance.SwordStreamEdge_Skill_DamageCounting * Damage;         
             other.GetComponent<Enemy>().curHealth -= TempDamage;
             TickTime = 0;
         }

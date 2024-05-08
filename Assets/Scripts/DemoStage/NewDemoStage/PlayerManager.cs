@@ -1,18 +1,162 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    private static PlayerManager instance = null;
+    /*[SerializeField] private Rifle rifle = GameObject.FindObjectOfType<Rifle>();
+    [SerializeField] private Shotgun shotgun = GameObject.FindObjectOfType<Shotgun>();
+    [SerializeField] private Sniper sniper = GameObject.FindObjectOfType<Sniper>();
+    [SerializeField] private GrenadeLauncher grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
+    [SerializeField] private MachineGun machineGun = GameObject.FindObjectOfType<MachineGun>();
+    [SerializeField] private FireGun fireGun = GameObject.FindObjectOfType<FireGun>();*/
+    
+    public float TotalHealth;                          //최대체력
+    public float Health;                          //현재체력
+    public float HealthGen;                     //체젠
+    public int DefensivePower;                  //방어력
+    public int MovingSpeed;                     //이동속도
+    public int PlayerPlainHitDamage;            //평타 공격력
+    public int PlayerSkillDamage;               //스킬 공격력
+    public int CurrentBullet;                   //현재 잔탄 수
+    public int TotalBullet;                     //남은 탄창 수
+    
+    public enum WeaponType
+    {
+        nonType,
+        closeType,
+        longType
+    }
+    [SerializeField] private GameObject player_LongWeapon;
+    [SerializeField] private GameObject player_NonWeapon;
+    [SerializeField] private GameObject player_CloseWeapon;
+    [SerializeField] private List<GameObject> player_WeaponList;
+    [SerializeField] private Button attackBtn;
+
+    
+    
+    
+    private void Awake()
+    {
+        if (null == instance)
+        {
+            //이 클래스 인스턴스가 탄생했을 때 전역변수 instance에 게임매니저 인스턴스가 담겨있지 않다면, 자신을 넣어준다.
+            instance = this;
+
+            //씬 전환이 되더라도 파괴되지 않게 한다.
+            //gameObject만으로도 이 스크립트가 컴포넌트로서 붙어있는 Hierarchy상의 게임오브젝트라는 뜻이지만, 
+            //나는 헷갈림 방지를 위해 this를 붙여주기도 한다.
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            //만약 씬 이동이 되었는데 그 씬에도 Hierarchy에 GameMgr이 존재할 수도 있다.
+            //그럴 경우엔 이전 씬에서 사용하던 인스턴스를 계속 사용해주는 경우가 많은 것 같다.
+            //그래서 이미 전역변수인 instance에 인스턴스가 존재한다면 자신(새로운 씬의 GameMgr)을 삭제해준다.
+            Destroy(this.gameObject);
+        }
+    }
+    //게임 매니저 인스턴스에 접근할 수 있는 프로퍼티. static이므로 다른 클래스에서 맘껏 호출할 수 있다.
+    public static PlayerManager Instance
+    {
+        get
+        {
+            if (null == instance)
+            {
+                return null;
+            }
+            return instance;
+        }
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
-        
+        //현재 총기류를 먹은경우
+        if (player_LongWeapon.activeSelf)
+        {
+            player_LongWeapon.GetComponent<PlayerScriptRifle>().BulletInfo();
+            Debug.LogError("현재 잔탄 "  + CurrentBullet);
+            Debug.LogError("총 잔탄 "  + TotalBullet);
+        }
+        else
+        {
+            //잔탄의 수를 무한대로 하는 코드
+        }
     }
+    
+    public void ChangeWeapon(WeaponType Wt, GameObject Weapon)
+    {
+        if (Wt == WeaponType.closeType)
+        {
+            player_LongWeapon.SetActive(false);
+            player_NonWeapon.SetActive(false);
+            player_CloseWeapon.SetActive(true);
+            //근접무기의 경우 무기에서 버튼 이벤트를 등록하는 것이 아니기에 근접공격 모션을 여기서 등록
+            attackBtn.onClick.AddListener(player_CloseWeapon.GetComponent<PlayerScriptOneHand>().OnAttackButtonClick);
+        }
+        else if (Wt == WeaponType.longType)
+        {
+            player_LongWeapon.SetActive(true);
+            player_NonWeapon.SetActive(false);
+            player_CloseWeapon.SetActive(false);
+        }
+        else if (Wt == WeaponType.nonType)
+        {
+            player_LongWeapon.SetActive(false);
+            player_NonWeapon.SetActive(true);
+            player_CloseWeapon.SetActive(false);
+        }
+        foreach (GameObject g in player_WeaponList)
+        {
+            if (Weapon == g)
+            {
+                g.SetActive(true);
+            }
+            else
+            {
+                g.SetActive(false);
+            }
+        }
+
+        if (Wt == WeaponType.closeType)
+        {
+            try
+            {
+                player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();  //현재 잡은 무기 다시 탐색
+            }
+            catch (NullReferenceException e)
+            {
+               
+            }
+            
+        }
+        else if (Wt == WeaponType.longType)
+        {
+            try
+            {
+                player_LongWeapon.GetComponent<PlayerScriptRifle>().WeaponSynchronization();    //현재 잡은 무기 다시 탐색
+            }
+            catch (NullReferenceException e)
+            {
+               
+            }
+        }
+    }
+    
+    
+    //원거리 무기가 바뀌어도 현재 들고있는 무기의 탄을 가져오기
+    //근접 무기의 경우 잔탄의 수는 무한대로 하면
+    //-> 현재 들고있는 무기부터 판단
 }

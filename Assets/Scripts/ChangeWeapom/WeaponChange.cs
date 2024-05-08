@@ -55,7 +55,11 @@ public class WeaponChange : MonoBehaviour
 
         if (Wt == WeaponType.closeType)
         {
-            player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();
+            player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();  //현재 잡은 무기 다시 탐색
+        }
+        else if (Wt == WeaponType.longType)
+        {
+            player_LongWeapon.GetComponent<PlayerScriptRifle>().WeaponSynchronization();    //현재 잡은 무기 다시 탐색
         }
     }
 }

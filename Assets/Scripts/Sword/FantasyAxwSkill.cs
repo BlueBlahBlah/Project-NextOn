@@ -7,14 +7,13 @@ public class FantasyAxwSkill : MonoBehaviour
     [SerializeField] private GameObject explosionEffect;
     [SerializeField] private GameObject[] shelds;
     [SerializeField] private GameObject[] magicEffect;
-    [SerializeField] private DamageManager DamageManager;
+    //[SerializeField] private DamageManager DamageManager;
 
     [SerializeField] private float DamageZone;
     public int Damage;
     // Start is called before the first frame update
     void Start()
     {
-        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         explosionEffect.SetActive(false);
         Invoke("explore",10f);
     }
@@ -27,7 +26,7 @@ public class FantasyAxwSkill : MonoBehaviour
 
     void explore()
     {
-        int TempDamage = DamageManager.FantasyAxe_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.Instance.FantasyAxe_Skill_DamageCounting * Damage;
         explosionEffect.SetActive(true);
         foreach (GameObject VARIABLE in shelds)
         {

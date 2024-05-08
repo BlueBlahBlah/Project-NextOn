@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WeaponChange_Trigger : MonoBehaviour
 {
-    [SerializeField] private WeaponChange.WeaponType WeaponType;
+    [SerializeField] private PlayerManager.WeaponType WeaponType;
     [SerializeField] private GameObject self;
     [SerializeField] private Button fireBtn;
     [SerializeField] private Button skillBtn;
@@ -29,7 +29,7 @@ public class WeaponChange_Trigger : MonoBehaviour
         {
             fireBtn.onClick.RemoveAllListeners();
             skillBtn.onClick.RemoveAllListeners();
-            other.GetComponent<WeaponChange>().ChangeWeapon(WeaponType, self);
+            PlayerManager.Instance.ChangeWeapon(WeaponType, self);
         }
     }
 }
