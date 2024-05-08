@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    // @UIManager 오브젝트에 포함되는 스크립트입니다.
+    // 같은 하이어라키 내에 'InGameUI'와 'LongDialogue' UI 프리팹이
+    // 포함된 캔버스가 존재해야 오류가 발생하지 않습니다.
+
     // 연동할 스크립트 선언
     public InGameUI inGameUI;
     public Dialogue longDialogue;
@@ -37,14 +41,35 @@ public class UIManager : MonoBehaviour
     
     void Start()
     {
-        
+        // GetManager => 싱글톤으로 선언되지 않은 매니저들을 가져옵니다.
+        // 매니저들을 싱글톤으로 선언하도록 구조를 변경한다면 호출 방식을 바꿉니다.
+        inGameUI.GetManager();
     }
 
     void Update()
     {
-        
+        UpdateUI();
     }
 
+    // Initailize
+    public void InitUI()
+    {
+        // 현재 UIManagerTester 스크립트에서 UI 초기화를 하고있음.
+    }
+
+    // Update
+    public void UpdateUI()
+    {
+        // InGameUI 스크립트에서 선언된 다양한 UI Update 함수들을 실행
+        inGameUI.UpdatePlayerInfo();
+        inGameUI.UpdateBossInfo();
+        inGameUI.UpdateGimmickInfo();
+        inGameUI.UpdateNumOfEnemy();
+        inGameUI.UpdateBullet();
+    }
+
+    // Dialogue
+    #region
     public void DialogueEventByNumber(Dialogue _dialogue, int _dialogueNumber)
     {
         _dialogue.isDialogue = true;
@@ -53,6 +78,8 @@ public class UIManager : MonoBehaviour
 
     public void DialogueEventByKeyword(Dialogue _dialogue, string _keyword)
     {
+        // 아직 미구현된 코드
         _dialogue.PrintDialogueByKeyword(_keyword);
     }
+    #endregion
 }

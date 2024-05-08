@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 public class InGameUI : MonoBehaviour
 {
+    // 유저 인터페이스에 보여지는 수치를 조절하는 변수들을 저장하고, 이를 수정하는 함수들을
+    // 작성한 스크립트로, 'InGameUI' 프리팹에 포함되는 스크립트입니다.
+    // 캔버스의 각 요소를 연결하고, 여러 매니저에서 데이터를 가져와 알맞은 부분에 적용시킵니다.
+    // 단, 실제로는 <UIManager> 스크립트에서 InGameUI 스크립트를 가져와 업데이트 함수들을 수행합니다.
+
     // 사전에 미리 연결 필요한 변수 [SerializeField]
     #region
     [Header("Player Information")]
@@ -70,24 +74,24 @@ public class InGameUI : MonoBehaviour
 
     // 실제 연결할 변수 혹은 스크립트 내에서 InGameUI 클래스 내에서 지역변수
     #region
-    private float PlayerHp; // 플레이어 현재 체력 연결
-    private float PlayerMaxHp; // 플레이어 최대 체력 연결
+    public float PlayerHp; // 플레이어 현재 체력 연결
+    public float PlayerMaxHp; // 플레이어 최대 체력 연결
 
-    private string WeaponName; // 무기 이름 연결 << 이미지 호출용
-    private int CurrentBullet; // 실제 현재 총알 수 연결
-    private int MaxBullet; // 실제 최대 총알 수 연결
+    public string WeaponName; // 무기 이름 연결 << 이미지 호출용
+    public int CurrentBullet; // 실제 현재 총알 수 연결
+    public int MaxBullet; // 실제 최대 총알 수 연결
 
-    private bool isBoss; // 보스 존재 유무 연결
-    private float BossHp; // 보스 체력 연결
-    private float BossMaxHp; // 보스 최대 체력 연결
-    private string BossName; // 보스 이름 연결
+    public bool isBoss; // 보스 존재 유무 연결
+    public float BossHp; // 보스 체력 연결
+    public float BossMaxHp; // 보스 최대 체력 연결
+    public string BossName; // 보스 이름 연결
 
-    private bool isGimmick; // 기믹 존재 유무 연결
-    private float GimmickPercent; // 기믹 진행도 연결
-    private int GimmickCount;
-    private string GimmickName; // 기믹 이름 연결
+    public bool isGimmick; // 기믹 존재 유무 연결
+    public float GimmickPercent; // 기믹 진행도 연결
+    public int GimmickCount;
+    public string GimmickName; // 기믹 이름 연결
 
-    private int NumOfEnemy; // 필드 내 몬스터 수 연결
+    public int NumOfEnemy; // 필드 내 몬스터 수 연결
 
     [SerializeField]
     private StageManager stageManager;
@@ -96,23 +100,27 @@ public class InGameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GameObject.Find("StageManager") != null) stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
-        FunctionTestStart(); // 테스트용 코드
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdatePlayerInfo(); // 플레이어 info 항상 업데이트
-        UpdateBossInfo(); // 보스 출현 시 보스 info 업데이트
-        UpdateGimmickInfo(); // 기믹 출현 시 기믹 info 업데이트
-        UpdateNumOfEnemy(); // 적의 수 업데이트
-        UpdateBullet();
-
-
-        FunctionTestUpdate(); // 테스트용 코드
+        
     }
 
+    // GetManager => 싱글톤으로 선언되지 않은 매니저들을 가져옵니다.
+    // 매니저들을 싱글톤으로 선언하도록 구조를 변경한다면 호출 방식을 바꿉니다.
+    public void GetManager()
+    {
+        GetStageManager();
+    }
+
+    public void GetStageManager()
+    {
+        if (GameObject.Find("StageManager") != null) 
+            stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+    }
 
     // Initailize
     #region
@@ -126,7 +134,7 @@ public class InGameUI : MonoBehaviour
     }
     #endregion
 
-    // Update
+    // Update **가져오는 변수들을 다른 매니저에서 호출 할 수 있도록 변경 필요
     #region
     public void UpdatePlayerInfo() // 플레이어 정보 갱신
     {
@@ -215,172 +223,7 @@ public class InGameUI : MonoBehaviour
  
 
     // Button
-    #region
-    public void ButtonPause()
-    {
-        // 실제 플레이 Pause 기능
 
-        // 다시하기, Setting, 저장 및 종료 UI 호출
-    }
-    #endregion
-
-    // Coroutine
-    #region
-    
-    #endregion
-
-    // Test
-    #region
-    private void FunctionTestStart()
-    {
-        // 이 함수를 응용하여, 아래 변수들에 실제 연결할 값을 대입합니다.
-
-        // 테스트 초기화
-        PlayerHp = 100f;
-        BossHp = 100f;
-
-        // isDialogue = true; // 대사가 출력됨을 가정합니다.
-
-        PlayerMaxHp = PlayerHp;
-        BossMaxHp = BossHp;
-        GimmickPercent = 0f;
-        NumOfEnemy = 0;
-
-        CurrentBullet = 60;
-        MaxBullet = 60;
-
-        BossName = "Overflow"; // 현재 출현한 보스 이름 연결
-        GimmickName = "Error404"; // 기믹 이름 연결
-        WeaponName = "Weapon1"; // 현재 착용 중인 무기 이름 연결
-        
-        
-        InitWeaponInfo();
-    }
 
     
-
-    private void FunctionTestUpdate()
-    {
-        // 테스트 업데이트
-        if (PlayerHp == PlayerMaxHp)
-        {
-
-        }
-    }
-
-    IEnumerator TestCoroutine()
-    {
-        // 테스트 코루틴
-        // 플레이어의 체력, 보스의 체력, 다이얼로그의 출현 및 갱신, 미니맵 하단 적의 수 기능을 테스트합니다.
-
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(5f);
-        isBoss = false;
-        isGimmick = false;
-
-        yield return null;
-    }
-
-    IEnumerator TestCoroutineBullet()
-    {
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        yield return null;
-    }
-    #endregion
 }

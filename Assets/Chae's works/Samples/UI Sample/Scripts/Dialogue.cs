@@ -6,6 +6,9 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
+    // 다이얼로그에 필요한 정보들을 저장하고, 사전에 저장된 csv 파일을 호출하는 스크립트입니다.
+    // 'LongDialogue', 'ShortDialogue' UI 오브젝트에 포함되는 스크립트입니다. 
+
     [Header("Dialogue")]
     [SerializeField]
     private string dialogueType; // 다이얼로그 타입 (길이)
