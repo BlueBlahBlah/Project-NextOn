@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5197337170351239435}
   - component: {fileID: 9042870507425485874}
   m_Layer: 5
-  m_Name: Dark
+  m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,6 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1030285682010473525}
+  - component: {fileID: 1974474934771639043}
   m_Layer: 5
   m_Name: Scenario 1
   m_TagString: Untagged
@@ -112,6 +113,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1974474934771639043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785761734278116724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be65a314335377409f4ba3cc9ff89f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Darkness: {fileID: 9042870507425485874}
 --- !u!1 &8401669866982206344
 GameObject:
   m_ObjectHideFlags: 0

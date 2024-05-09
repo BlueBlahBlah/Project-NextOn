@@ -13,6 +13,12 @@ public class UIManager : MonoBehaviour
     public Dialogue longDialogue;
     public Dialogue shortDialogue;
 
+    private bool isInGameUI;
+    private bool isLongDialogue;
+    private bool isShortDialogue;
+
+    public bool isCompletelyPrinted; // 완전히 출력됐는지 여부 판단.
+
     // 싱글톤 선언
     #region
     public static UIManager instance = null;
@@ -31,11 +37,24 @@ public class UIManager : MonoBehaviour
         }
 
         // 필요한 컴포넌트 가져오기
-        inGameUI = GameObject.Find("InGameUI").GetComponent<InGameUI>();
+        if (GameObject.Find("InGameUI") != null) 
+        { 
+            inGameUI = GameObject.Find("InGameUI").GetComponent<InGameUI>();
+            isInGameUI = true; 
+        }
 
         // **Find함수 사용 시, 하이어라키 내에서 반드시 활성화되어있어야 함. (Dialogue의 Start에서 스스로 비활성화함)
-        longDialogue = GameObject.Find("LongDialogue").GetComponent<Dialogue>();
-        shortDialogue = GameObject.Find("ShortDialogue").GetComponent<Dialogue>();
+        if (GameObject.Find("LongDialogue") != null) 
+        { 
+            longDialogue = GameObject.Find("LongDialogue").GetComponent<Dialogue>();
+            isLongDialogue = true;
+        }
+        if (GameObject.Find("ShortDialogue") != null)
+        {
+            shortDialogue = GameObject.Find("ShortDialogue").GetComponent<Dialogue>();
+            isShortDialogue = true;
+        }
+        
     }
     #endregion
     
@@ -43,12 +62,13 @@ public class UIManager : MonoBehaviour
     {
         // GetManager => 싱글톤으로 선언되지 않은 매니저들을 가져옵니다.
         // 매니저들을 싱글톤으로 선언하도록 구조를 변경한다면 호출 방식을 바꿉니다.
-        inGameUI.GetManager();
+        if (isInGameUI) { inGameUI.GetManager(); }
     }
 
     void Update()
     {
-        UpdateUI();
+        if (isInGameUI) { UpdateUI(); }
+        
     }
 
     // Initailize

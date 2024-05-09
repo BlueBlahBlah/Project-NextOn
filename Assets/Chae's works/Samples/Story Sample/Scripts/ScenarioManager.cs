@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scenario1 : MonoBehaviour
+public class ScenarioManager : MonoBehaviour
 {
-    [SerializeField]
-    private int DialogueNumber = 0;
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +14,5 @@ public class Scenario1 : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void PrintLongDialogue()
-    {
-        UIManager.instance.DialogueEventByNumber(UIManager.instance.longDialogue, DialogueNumber);
     }
 }

@@ -91,9 +91,16 @@ public class Dialogue : MonoBehaviour
 
     }
 
-    public void Skip() // 대화 스킵
+    public void SkipAndNext() // 대화 스킵, 넘기기
     {
-
+        if (!UIManager.instance.isCompletelyPrinted)
+        {
+            // 온전히 출력되지 않은 상태. (Skip)
+        }
+        else
+        {
+            // 모든 내용이 출력된 상태 (Next)
+        }
     }
     #endregion
 
