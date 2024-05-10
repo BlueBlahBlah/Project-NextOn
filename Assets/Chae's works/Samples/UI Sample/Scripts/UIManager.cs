@@ -9,15 +9,25 @@ public class UIManager : MonoBehaviour
     // 포함된 캔버스가 존재해야 오류가 발생하지 않습니다.
 
     // 연동할 스크립트 선언
+    [Header("Components")]
+    [SerializeField]
     public InGameUI inGameUI;
+    [SerializeField]
     public Dialogue longDialogue;
+    [SerializeField]
     public Dialogue shortDialogue;
+
+    [Header("Data")]
+    [SerializeField]
+    public int ScenarioNumber; // 현재 시나리오 넘버
+    [SerializeField]
+    public int DialogueNumber; // 현재 csv 파일의 라인 넘버
+    [SerializeField]
+    public bool isCompletelyPrinted; // 스킵&다음 함수를 위해 필요. 텍스트의 완전한 출력 여부 판단
 
     private bool isInGameUI;
     private bool isLongDialogue;
     private bool isShortDialogue;
-
-    public bool isCompletelyPrinted; // 완전히 출력됐는지 여부 판단.
 
     // 싱글톤 선언
     #region
@@ -67,18 +77,18 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (isInGameUI) { UpdateUI(); }
+        if (isInGameUI) { UpdateInGameUI(); }
         
     }
 
-    // Initailize
+    // InGameUI 기능
+    #region
     public void InitUI()
     {
         // 현재 UIManagerTester 스크립트에서 UI 초기화를 하고있음.
     }
 
-    // Update
-    public void UpdateUI()
+    public void UpdateInGameUI()
     {
         // InGameUI 스크립트에서 선언된 다양한 UI Update 함수들을 실행
         inGameUI.UpdatePlayerInfo();
@@ -87,6 +97,7 @@ public class UIManager : MonoBehaviour
         inGameUI.UpdateNumOfEnemy();
         inGameUI.UpdateBullet();
     }
+    #endregion
 
     // Dialogue
     #region

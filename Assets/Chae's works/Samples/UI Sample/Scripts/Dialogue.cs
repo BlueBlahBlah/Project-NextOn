@@ -33,11 +33,7 @@ public class Dialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 다이얼로그 타입 (길이) 에 맞춰 적합한 다이얼로그 csv 호출
-        if (dialogueType == "Short") data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue");
-        else if (dialogueType == "Long") data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue");
-
-        dialogue.SetActive(false);
+        Init();
     }
 
     // Update is called once per frame
@@ -70,8 +66,6 @@ public class Dialogue : MonoBehaviour
             // 이름 변경
             dialogueName.text = Name;
 
-
-
             dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
             dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
 
@@ -102,6 +96,16 @@ public class Dialogue : MonoBehaviour
             // 모든 내용이 출력된 상태 (Next)
         }
     }
+
+    private void Init()
+    {
+        // 다이얼로그 타입 (길이) 에 맞춰 적합한 csv 호출
+        if (dialogueType == "Short") data_Dialogue = CSVReader.Read("Data (.csv)/Announce"); // 인게임 내의 안내 메세지
+        if (dialogueType == "Long") data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // 시나리오용 대사
+
+        dialogue.SetActive(false);
+    }
+    
     #endregion
 
 
@@ -128,6 +132,7 @@ public class Dialogue : MonoBehaviour
             isDialogue = false;
             PrintDialogueByNumber(DialogueNumber);
         }
+        UIManager.instance.DialogueNumber = DialogueNumber;
         yield return null;
     }
     #endregion
