@@ -61,7 +61,8 @@ public class Parenthesis : Enemy
                     isInStack = true;
                     health = curHealth;
                     //체력이 다 닳은 경우 아직 죽지말고 스택에 추가
-                    GameObject.Find("StageManager").GetComponent<StageManager>().AddStackMonster(this.gameObject);
+                    //GameObject.Find("StageManager").GetComponent<StageManager>().AddStackMonster(this.gameObject);
+                    MonsterManager.Instance.AddStackMonster(this.gameObject);
                     hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
                 }
                 else    //체력이 다 닳아 스택에 들어가 있는 경우

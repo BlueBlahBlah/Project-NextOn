@@ -6,13 +6,6 @@ using UnityEngine;
 public class NewStageManager : MonoBehaviour
 {
     private static NewStageManager instance = null;
-     
-    public PlayerManager PlayerManager;
-    public MonsterManager MonsterManager;
-    public EventManager EventManager;
-    public PannelManager PannelManager;
-    public DamageManager DamageManager;
-
     private void Awake()
     {
         if (null == instance)

@@ -95,15 +95,14 @@ public class InGameUI : MonoBehaviour
     private float dialogueTime; // ��ȭ�� ���� (WaitforSeconds �Է� ����)
     private int dialogueIsContinuous; // �̾����� ��ȭ�� �ִ��� Ȯ���� ����
 
-    [SerializeField]
-    private StageManager stageManager;
+    //[SerializeField] private StageManager stageManager;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // ���̾�α� csv ���� ȣ��
-        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        //stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         FunctionTestStart(); // �׽�Ʈ�� �ڵ�
     }
 
@@ -206,9 +205,10 @@ public class InGameUI : MonoBehaviour
 
     public void UpdateNumOfEnemy()
     {
+        //Todo
         // ���Ͱ� ����, Ȥ�� ��� �� �̴ϸ� �ϴ��� ���� �� ����
-        NumOfEnemy = stageManager.enemies.Length;
-        numOfEnemy.text = NumOfEnemy.ToString();
+        //NumOfEnemy = stageManager.enemies.Length;
+        //numOfEnemy.text = NumOfEnemy.ToString();
     }
     #endregion
 

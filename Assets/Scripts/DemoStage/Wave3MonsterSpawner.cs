@@ -7,7 +7,6 @@ public class Wave3MonsterSpawner : MonoBehaviour
     [SerializeField] private List<GameObject> Monsters;
     private float time;
     private float period;
-    private StageManager StageManager;
     private int index;
     //몬스터 생성 중앙제어
     public bool Active;
@@ -16,7 +15,6 @@ public class Wave3MonsterSpawner : MonoBehaviour
     {
         Active = true;
         period = Random.Range(2, 5);
-        StageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         index = 0;
     }
 
@@ -32,7 +30,7 @@ public class Wave3MonsterSpawner : MonoBehaviour
             //몬스터 생성
             GameObject newMon = Instantiate(Monsters[index], transform.position, Quaternion.identity);
             //배열에 추가
-            StageManager.AddStackMonster_In_Array(newMon);
+            MonsterManager.Instance.AddStackMonster_In_Array(newMon);
         }
     }
 }

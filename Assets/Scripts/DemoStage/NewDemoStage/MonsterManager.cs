@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -37,16 +39,136 @@ public class MonsterManager : MonoBehaviour
             return instance;
         }
     }
+
+    [Header("StageMonster Number")]    //스테이지 몬스터 총 개수
+    public int TotalMonsters;
+    
+    
+    [Header("Stack")]//스택 몬스터
+    [SerializeField] private GameObject[] Stack;
+    [SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
+    public int Gauge;                               //스택 몬스터를 잡는 게이지
+    [SerializeField] private GameObject ParenthesisGauge;
+    
+    [Header("Parenthesis_Monsters")]    //스택 몬스터 관련
+    public List<GameObject> Parenthesis_Monsters;
+    [SerializeField] private GameObject[] Parenthesis_Monsters_Spawner ;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        TotalMonsters = 0;
+        Stack = new GameObject[10];
+        StackIndex = 0;
+        Gauge = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+         GameObject[] enemies;  //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
+         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+         TotalMonsters = enemies.Length;
+         
+    }
+    
+    //적을 죽인 경우(스택에 추가)
+    public void AddStackMonster(GameObject g)
+    {
+        //처음 들어온 몬스터인경우
+        if (StackIndex == 0)
+        {
+            Stack[StackIndex] = g;
+            StackIndex++;
+            return;
+        }
+        else if (StackIndex >= 10) //스택이 꽉 찼는데 몬스터가 죽은 경우
+        {
+            if (g.GetComponent<Parenthesis>().identity == Stack[9].GetComponent<Parenthesis>().identity)
+            {
+                Stack[9].GetComponent<Parenthesis>().HitTheMonster(); //몬스터 삭제
+                Stack[9] = null; //스택 pop
+                StackIndex = 9; //인덱스 줄이기
+            }
+            else
+            {
+                g.GetComponent<Parenthesis>().NotDeath();
+            }
+        }
+        else
+        {
+            Stack[StackIndex] = g;
+            StackIndex++;
+            if (CheckParenthesis()) //괄호가 맞아 떨어진 경우
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    Stack[StackIndex - 1].GetComponentInChildren<Parenthesis>().HitTheMonster(); //스택에서 몬스터 삭제
+                    Stack[StackIndex - 1] = null; //스택 pop
+                    StackIndex--; //인덱스 줄이기
+                }
+
+                Gauge++; //스택 게이지증가
+                ParenthesisGauge.GetComponent<HealthBar>().SetHealth(Gauge);
+            }
+        }
         
+       
+    }
+
+    //괄호의 유효성 검사
+    private bool CheckParenthesis()
+    {
+        if (Stack[StackIndex - 1].GetComponent<Parenthesis>().identity ==
+            Stack[StackIndex - 2].GetComponent<Parenthesis>().identity)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //2페이즈 끝
+    public void Clear_Wave2_Monsters()
+    {
+        //Wave2MonsterClear = true;
+        //모든 스포너 생성중단
+        foreach (GameObject g in Parenthesis_Monsters_Spawner)
+        {
+            g.GetComponent<Wave2StackMonsterSpawner>().Active = false;
+            g.SetActive(false);
+        }
+
+        ParenthesisGauge.GetComponent<HealthBar>().ClearWave2();
+        Invoke("ClearWave2MonsterInvoke",3);
+    }
+
+    //2페이즈 끝난 후 모든 스택몬스터 삭제
+    private void ClearWave2MonsterInvoke()
+    {
+        for (int i = Parenthesis_Monsters.Count-1; i >= 0; i--)
+        {
+            try
+            {
+                if(Parenthesis_Monsters[i] != null)
+                    Parenthesis_Monsters[i].GetComponentInChildren<Parenthesis>().ClearTheMonster();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Debug.LogError(i);
+                throw;
+            }
+        }
+        ParenthesisGauge.SetActive(false);
+        
+    }
+    
+    //현재 몬스터목록에 추가
+    public void AddStackMonster_In_Array(GameObject m)
+    {
+        Parenthesis_Monsters.Add(m);
     }
 }

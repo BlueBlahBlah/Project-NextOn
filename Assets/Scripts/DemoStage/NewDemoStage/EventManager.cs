@@ -37,15 +37,67 @@ public class EventManager : MonoBehaviour
             return instance;
         }
     }
+    
+    
+    [SerializeField] private GameObject[] Before3Peiz;      //막혀있는 다리 오브젝트
+    [SerializeField] private GameObject[] After3Peiz;       //뚫린 다리 오브젝트
+    [SerializeField] private GameObject WaveArea3Scrit;     //플레이어가 일찍 지나가지 못하게 하는 콜라이더
+    [SerializeField] private GameObject WaveArea3Barrier;   //몬스터들이 쫒아오지 못하게 하는 콜라이더
+    [SerializeField] private GameObject EventBtn;           //이벤트 버튼
+    public GameObject Peiz3Monster_2;
+    public bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
+    public bool Wave2MonsterClear;
+
+    public bool isPause;                                    //시간이 멈추었는지
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        Area3 = false;
+        Wave2MonsterClear = false;
+        isPause = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //스택몬스터 20 게이지 채우면 모두 삭제
+        if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
+            MonsterManager.Instance.Clear_Wave2_Monsters();
+    }
+
+    //탈출하는 다리 수정
+    public void EscapeCompletion()
+    {
+        //다리를 연결
+        foreach (GameObject g in Before3Peiz)
+        {
+            g.SetActive(false);
+        }
+
+        foreach (GameObject g in After3Peiz)
+        {
+            g.SetActive(true);
+        }
+
+        //길목 제거
+        WaveArea3Scrit.SetActive(false);
+        WaveArea3Barrier.SetActive(false);
+        //EventBtn 비활성화
+        EventBtn.SetActive(false);
+        Peiz3Monster_2.SetActive(true);
+    }
+
+    void TimeStop()
+    {
+        Time.timeScale = 0;    //게임 일시정지
+        isPause = true;
+    }
+
+    void TimeResume()
+    {
+        Time.timeScale = 1;    //게임 일시정지
+        isPause = false;
     }
 }
