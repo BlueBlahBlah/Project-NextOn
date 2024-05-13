@@ -113,4 +113,12 @@ public class UIManager : MonoBehaviour
         _dialogue.PrintDialogueByKeyword(_keyword);
     }
     #endregion
+
+    // Util
+    #region
+    public void ShakeUI()
+    {
+
+    }
+    #endregion
 }

@@ -21,7 +21,7 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI dialogueContent; // 대화 내용
     [SerializeField]
-    private float typingSpeed = 0.05f; // 대화 출력 속도
+    private float typingSpeed = 0.03f; // 대화 출력 속도
 
     public bool isDialogue; // 대화창 표시 여부
     private List<Dictionary<string, object>> data_Dialogue; // csv 파일 담을 변수
@@ -57,17 +57,14 @@ public class Dialogue : MonoBehaviour
             }
             string Name = data_Dialogue[DialogueNumber]["Character Name"].ToString();
 
-            // 이미지 변경
-            // ** 수정 필요한 곳1) csv에 저장된 캐릭터 이름은 한글인데, 리소스에서 Load할 이름은 영어여야 함.
-            // - 아이디어
-            // 대화 이미지를 사용할 캐릭터가 많지 않으니 Switch문으로 받아온 Name 비교.
-            // dialogueImage.sprite = Resources.Load($"UI/Image/Characters/{Name}", typeof(Sprite)) as Sprite;
-
             // 이름 변경
             dialogueName.text = Name;
 
             dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
             dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
+
+            // 이미지 변경
+            if (dialogueType == "Long") ChangeImage(Name);
 
             Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
             // 내용 변경
@@ -106,6 +103,26 @@ public class Dialogue : MonoBehaviour
         dialogue.SetActive(false);
     }
     
+    private void ChangeImage(string Name)
+    {
+        // 전달받은 이름에 따라 사용 이미지 초기화
+        switch (Name)
+        {
+            case "데빈":
+                dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin", typeof(Sprite)) as Sprite;
+                dialogueImage.color = new Color(255, 255, 255, 255);
+                break;
+            case "작업관리자":
+                dialogueImage.sprite = null;
+                dialogueImage.color = new Color(0, 0, 0, 0);
+                break;
+            default:
+                dialogueImage.sprite = null;
+                dialogueImage.color = new Color(0, 0, 0, 0);
+                break;
+        }
+        
+    }
     #endregion
 
 
@@ -132,7 +149,8 @@ public class Dialogue : MonoBehaviour
             isDialogue = false;
             PrintDialogueByNumber(DialogueNumber);
         }
-        UIManager.instance.DialogueNumber = DialogueNumber;
+        UIManager.instance.DialogueNumber++;
+
         yield return null;
     }
     #endregion

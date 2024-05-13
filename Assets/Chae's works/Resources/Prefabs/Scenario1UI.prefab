@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 1030285682010473525}
   - component: {fileID: 1974474934771639043}
   m_Layer: 5
-  m_Name: Scenario 1
+  m_Name: Scenario1UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Darkness: {fileID: 9042870507425485874}
+  Spark: {fileID: 0}
 --- !u!1 &8401669866982206344
 GameObject:
   m_ObjectHideFlags: 0
