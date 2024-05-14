@@ -28,12 +28,12 @@ public class WaveArea2 : MonoBehaviour
             peiz2Active = true;
             StageManager.Area2Function();
         }*/
-        if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false && EventManager.Instance.Area3 == true)  //3페이즈 중에 Area 통과
+        /*if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false && EventManager.Instance.Area3 == true)  //3페이즈 중에 Area 통과
         {
             peiz3Active = true;
             //StageManager.Area2Function();
-            EventManager.Instance.EscapeCompletion();
-        }
+            
+        }*/
         
     }
 }

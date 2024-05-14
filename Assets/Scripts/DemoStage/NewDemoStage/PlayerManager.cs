@@ -24,6 +24,8 @@ public class PlayerManager : MonoBehaviour
     public int CurrentBullet;                   //현재 잔탄 수
     public int TotalBullet;                     //남은 탄창 수
     
+    public bool Death;
+    
     public enum WeaponType
     {
         nonType,
@@ -41,6 +43,9 @@ public class PlayerManager : MonoBehaviour
     
     private void Awake()
     {
+        TotalHealth = 100;  //시작 시 체력 100
+        Health = TotalHealth;
+        Death = false;
         if (null == instance)
         {
             //이 클래스 인스턴스가 탄생했을 때 전역변수 instance에 게임매니저 인스턴스가 담겨있지 않다면, 자신을 넣어준다.

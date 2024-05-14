@@ -15,6 +15,7 @@ public class Semicolon : Enemy
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
     [SerializeField] private Collider capsulCollider;
+    [SerializeField] private BoxCollider AttackArea;
     
     
     // Start is called before the first frame update
@@ -105,4 +106,22 @@ public class Semicolon : Enemy
         //hpBar의 사이즈를 원래 자신의 사이즈의 1배 크기로 초기화
         hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }
+    
+    void ColliderAttack()       //애니메이션 호출
+    {
+        int Damage = 10;
+        
+        Collider[] hitColliders = Physics.OverlapBox(AttackArea.bounds.center, AttackArea.bounds.extents,
+            AttackArea.transform.rotation);
+
+        foreach (Collider col in hitColliders)
+        {
+            if (col.CompareTag("Player"))
+            {
+                PlayerManager.Instance.Health -= Damage;
+                Debug.LogError("몬스터 공격 성공");
+            }
+        }
+    }
+    
 }

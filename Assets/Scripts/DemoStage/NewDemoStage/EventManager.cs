@@ -66,6 +66,18 @@ public class EventManager : MonoBehaviour
         if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
             MonsterManager.Instance.Clear_Wave2_Monsters();
     }
+    void TimeStop()
+    {
+        Time.timeScale = 0;    //게임 일시정지
+        isPause = true;
+    }
+
+    void TimeResume()
+    {
+        Time.timeScale = 1;    //게임 일시정지
+        isPause = false;
+    }
+    
 
     //탈출하는 다리 수정
     public void EscapeCompletion()
@@ -89,15 +101,9 @@ public class EventManager : MonoBehaviour
         Peiz3Monster_2.SetActive(true);
     }
 
-    void TimeStop()
+    public void FirstWelcomeMSG()
     {
-        Time.timeScale = 0;    //게임 일시정지
-        isPause = true;
+        //첫번째 패널 진행
     }
-
-    void TimeResume()
-    {
-        Time.timeScale = 1;    //게임 일시정지
-        isPause = false;
-    }
+    
 }

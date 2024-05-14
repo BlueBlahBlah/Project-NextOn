@@ -56,6 +56,7 @@ public class Peiz3Gauge : MonoBehaviour
                     //대형몬스터 등장
                     Debug.LogError("Area3 true");
                     EventManager.Instance.Area3 = true;
+                    EventManager.Instance.EscapeCompletion();   //탈출 벽 비활성화
                     //stagemanager.OnWave3Direction();  //3페이즈 화살표 활성화 + 탈출 벽 비활성화
                     //큰 몬스터 바라보기
                     //GameObject.Find("Main Camera").GetComponent<CameraAbove>().LookBigMonster();
