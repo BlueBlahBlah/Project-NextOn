@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chang.unity
     guid: 747a3f51201f1a5418676893ba28cab0
+  - enabled: 1
+    path: Assets/Chae's works/Scene/Scenario1 Scene.unity
+    guid: 1738e956bb8853f4093b084798915578
   m_configObjects: {}

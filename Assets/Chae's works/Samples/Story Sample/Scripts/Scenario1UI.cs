@@ -9,6 +9,8 @@ public class Scenario1UI : MonoBehaviour
     private Image Darkness;
     [SerializeField]
     private Image Spark;
+    [SerializeField]
+    private Image characterPixel;
 
     public void SetLittleDark()
     {
@@ -30,6 +32,13 @@ public class Scenario1UI : MonoBehaviour
 
     public void SparkEvent()
     {
-        
+        // 순간 강한 전기가 흐르는 연출
+    }
+
+    public void StopCharacter()
+    {
+        // 캐릭터의 정지
+        characterPixel.GetComponent<Animator>().enabled = false;
+        characterPixel.sprite = Resources.Load($"UI/Image/Characters/coding 1", typeof(Sprite)) as Sprite;
     }
 }

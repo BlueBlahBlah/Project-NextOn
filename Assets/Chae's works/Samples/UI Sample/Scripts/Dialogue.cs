@@ -10,8 +10,7 @@ public class Dialogue : MonoBehaviour
     // 'LongDialogue', 'ShortDialogue' UI 오브젝트에 포함되는 스크립트입니다. 
 
     [Header("Dialogue")]
-    [SerializeField]
-    private string dialogueType; // 다이얼로그 타입 (길이)
+    [Header("Connect")]
     [SerializeField]
     private GameObject dialogue; // 대화창 오브젝트
     [SerializeField]
@@ -21,8 +20,17 @@ public class Dialogue : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI dialogueContent; // 대화 내용
     [SerializeField]
+    private Button printSpeed;
+    [SerializeField]
+    private Button auto;
+
+    [Header("Option")]
+    [SerializeField]
+    private string dialogueType; // 다이얼로그 타입 (길이)
+    [SerializeField]
     private float typingSpeed = 0.03f; // 대화 출력 속도
 
+    [Header("Data")]
     public bool isDialogue; // 대화창 표시 여부
     private List<Dictionary<string, object>> data_Dialogue; // csv 파일 담을 변수
     public int DialogueNumber; // 출력할 대화의 번호
@@ -82,18 +90,6 @@ public class Dialogue : MonoBehaviour
 
     }
 
-    public void SkipAndNext() // 대화 스킵, 넘기기
-    {
-        if (!UIManager.instance.isCompletelyPrinted)
-        {
-            // 온전히 출력되지 않은 상태. (Skip)
-        }
-        else
-        {
-            // 모든 내용이 출력된 상태 (Next)
-        }
-    }
-
     private void Init()
     {
         // 다이얼로그 타입 (길이) 에 맞춰 적합한 csv 호출
@@ -125,20 +121,46 @@ public class Dialogue : MonoBehaviour
     }
     #endregion
 
+    // 옵션 관련 함수
+    #region
+    public void Auto() 
+    {
+        UIManager.instance.isAuto = !UIManager.instance.isAuto;
+    }
+    public void PrintSpeed() 
+    { 
+        UIManager.instance.printSpeed = UIManager.instance.printSpeed == 1 ? 2 : 1; 
+    }
+
+    public void SkipAndNext() // 대화 스킵, 넘기기
+    {
+        if (!UIManager.instance.isCompletelyPrinted)
+        {
+            // 온전히 출력되지 않은 상태. (Skip)
+        }
+        else
+        {
+            // 모든 내용이 출력된 상태 (Next)
+        }
+    }
+    #endregion
 
     // 필요한 코루틴
     #region
     IEnumerator TypeText()
     {
+        UIManager.instance.isCompletelyPrinted = false;
         // 문자열을 차례대로 입력하는 코루틴
         for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
         {
             ;
             dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString().Substring(0, i);
-            yield return new WaitForSeconds(typingSpeed);
+            yield return new WaitForSeconds(typingSpeed / UIManager.instance.printSpeed);
         }
 
-        yield return new WaitForSeconds(dialogueTime);
+        UIManager.instance.isCompletelyPrinted = true;
+
+        yield return new WaitForSeconds(dialogueTime / UIManager.instance.printSpeed);
         if (dialogueIsContinuous == 1)
         {
             DialogueNumber++;

@@ -7,23 +7,23 @@ public class UIManager : MonoBehaviour
     // @UIManager 오브젝트에 포함되는 스크립트입니다.
     // 같은 하이어라키 내에 'InGameUI'와 'LongDialogue' UI 프리팹이
     // 포함된 캔버스가 존재해야 오류가 발생하지 않습니다.
+    // Dialogue 스크립트, InGameUI 스크립트에서 메소드를 가져오는 코드가 많아
+    // 해당 스크립트를 참조하면 좋습니다.
 
     // 연동할 스크립트 선언
     [Header("Components")]
-    [SerializeField]
     public InGameUI inGameUI;
-    [SerializeField]
     public Dialogue longDialogue;
-    [SerializeField]
     public Dialogue shortDialogue;
 
     [Header("Data")]
-    [SerializeField]
     public int ScenarioNumber; // 현재 시나리오 넘버
-    [SerializeField]
     public int DialogueNumber; // 현재 csv 파일의 라인 넘버
-    [SerializeField]
-    public bool isCompletelyPrinted; // 스킵&다음 함수를 위해 필요. 텍스트의 완전한 출력 여부 판단
+    public bool isCompletelyPrinted; // SkipAndNext 함수를 위해 필요. 텍스트의 완전한 출력 여부 판단
+
+    [Header("Option")]
+    public bool isAuto;
+    public int printSpeed = 1;
 
     private bool isInGameUI;
     private bool isLongDialogue;
@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
             isInGameUI = true; 
         }
 
-        // **Find함수 사용 시, 하이어라키 내에서 반드시 활성화되어있어야 함. (Dialogue의 Start에서 스스로 비활성화함)
+        // **Find함수 사용 시, 하이어라키 내에서 활성화되어있지 않으면 오류 발생. (Dialogue의 Start에서 스스로 비활성화함)
         if (GameObject.Find("LongDialogue") != null) 
         { 
             longDialogue = GameObject.Find("LongDialogue").GetComponent<Dialogue>();

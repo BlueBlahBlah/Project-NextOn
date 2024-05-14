@@ -483,7 +483,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 593953842}
         m_TargetAssemblyTypeName: Scenario1, Assembly-CSharp
-        m_MethodName: PrintLongDialogue
+        m_MethodName: TestCoroutine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -701,6 +701,8 @@ MonoBehaviour:
   ScenarioNumber: 0
   DialogueNumber: 0
   isCompletelyPrinted: 0
+  isAuto: 0
+  printSpeed: 1
 --- !u!1001 &1185991213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -822,6 +824,14 @@ PrefabInstance:
     - target: {fileID: 6393943713049481752, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
       propertyPath: m_Name
       value: LongDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752271923940195602, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752271923940195602, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8645688777342820538, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
       propertyPath: m_Pivot.x
@@ -1489,7 +1499,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Print Dialogue
+  m_text: Test Coroutine
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
