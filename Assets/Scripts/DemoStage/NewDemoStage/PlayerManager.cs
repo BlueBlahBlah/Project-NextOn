@@ -92,8 +92,8 @@ public class PlayerManager : MonoBehaviour
         if (player_LongWeapon.activeSelf)
         {
             player_LongWeapon.GetComponent<PlayerScriptRifle>().BulletInfo();
-            Debug.LogError("현재 잔탄 "  + CurrentBullet);
-            Debug.LogError("총 잔탄 "  + TotalBullet);
+            //Debug.LogError("현재 잔탄 "  + CurrentBullet);
+            //Debug.LogError("총 잔탄 "  + TotalBullet);
         }
         else
         {

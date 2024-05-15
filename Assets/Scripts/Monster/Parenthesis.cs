@@ -23,6 +23,9 @@ public class Parenthesis : Enemy
     public Image hpBar;
     [SerializeField] private Collider capsulCollider;
     [SerializeField] private BoxCollider AttackArea;
+
+    [SerializeField] private float MsgTimer;
+    [SerializeField] private float MsgAgainTime;
     
     
     // Start is called before the first frame update
@@ -41,11 +44,14 @@ public class Parenthesis : Enemy
         GetComponent<Enemy>().target = target;
         capsulCollider = GetComponent<CapsuleCollider>();
         InitHPBarSize();  //체력바 사이즈 초기화
+        MsgTimer = 0f;
+        MsgAgainTime = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        MsgTimer -= Time.deltaTime;
         if (isDeath == true)  //죽은경우
         {
             GetComponent<Enemy>().isChase = false;
@@ -74,10 +80,10 @@ public class Parenthesis : Enemy
                         ShowDamage(DamageDone);
                         hpBar.rectTransform.localScale = new Vector3((float)curHealth/(float)maxHealth, 1f, 1f);
                     }
-                    else if(isInStack == true)    //스택에 있는 경우 닫는 괄호를 만들어야 한다는 메세지
+                    else if(isInStack == true && MsgTimer <= 0f)    //스택에 있는 경우 닫는 괄호를 만들어야 한다는 메세지
                     {
                         ShowDamage("닫는 괄호 몬스터를 처치해야 합니다!");
-                        
+                        MsgTimer = MsgAgainTime;
                     }
                     health = curHealth;
                     _animator.SetTrigger("Hit");
