@@ -59,8 +59,6 @@ public class PlayerInfo : MonoBehaviour
     
     private void ShowDamage(float d)
     {
-        Debug.LogError("몬스터 공격 피격 데미지 출력");
-        //CancelInvoke();         //기존의 데미지가 있었다면 해당 데미지 삭제 1초 타이머 종료 => 새로운 데미지를 받으면 그 데미지 1초동안 표시
         TextMeshPro tempDamage = Instantiate(damaged, transform.position + new Vector3(0,3.5f,0), Quaternion.identity);
         tempDamage.SetText(d.ToString());
     }

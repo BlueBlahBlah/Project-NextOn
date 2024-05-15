@@ -182,6 +182,59 @@ Transform:
   - {fileID: 1913924837064279248}
   m_Father: {fileID: 4978105015770109410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8528656880598864087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8095760422037054336}
+  - component: {fileID: 3565405119981311835}
+  m_Layer: 0
+  m_Name: AttackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8095760422037054336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8528656880598864087}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4978105015770109410}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3565405119981311835
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8528656880598864087}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 1}
 --- !u!1 &8659210935306333292
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +417,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e3620e67e281b2b4da5f073e53c55d0d, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1112930465764979191}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e3620e67e281b2b4da5f073e53c55d0d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8095760422037054336}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e3620e67e281b2b4da5f073e53c55d0d, type: 3}
       insertIndex: -1
@@ -489,10 +545,12 @@ MonoBehaviour:
   curHealth: 3
   target: {fileID: 0}
   isChase: 0
-  identity: 2
+  identity: 0
   isInStack: 0
   damaged: {fileID: 4549694754306120695, guid: 27857f3a52e694b46b8dced61afc04c0, type: 3}
   hpBar: {fileID: 1686040349594186679}
+  capsulCollider: {fileID: 0}
+  AttackArea: {fileID: 3565405119981311835}
 --- !u!195 &1737806902076862890
 NavMeshAgent:
   m_ObjectHideFlags: 0
