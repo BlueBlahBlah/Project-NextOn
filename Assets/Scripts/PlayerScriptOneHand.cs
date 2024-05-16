@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerScriptOneHand : MonoBehaviour
 {
-    public float moveSpeed = 0f;        
+    public float moveSpeed = 0f;
     public bool walking;
     private Vector3 lastPosition;
     Animator Anim;
     [SerializeField] private int Damage;
-    
+
     public Button attackBtn;
 
     [SerializeField] private BoxCollider DamageZone;
@@ -22,6 +23,8 @@ public class PlayerScriptOneHand : MonoBehaviour
     [SerializeField] private SwordDemacia SwordDemacia;
     [SerializeField] private FantasyAxe FantasyAxe;
 
+    //[SerializeField] private DamageManager DamageManager;
+
     void Start()
     {
         // 초기 위치 저장
@@ -31,14 +34,27 @@ public class PlayerScriptOneHand : MonoBehaviour
         attackBtn.onClick.AddListener(OnAttackButtonClick);
         //RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
 
-        SwordStreamOfEdge = GameObject.FindObjectOfType<SwordStreamOfEdge>();
-        SwordStatic = GameObject.FindObjectOfType<SwordStatic>();
-        SwordSilver = GameObject.FindObjectOfType<SwordSilver>();
-        SwordDemacia = GameObject.FindObjectOfType<SwordDemacia>();
-        FantasyAxe = GameObject.FindObjectOfType<FantasyAxe>();
+        try
+        {
+            WeaponSynchronization();
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
+       
     }
 
-    void Update()
+    public void WeaponSynchronization()
+    {
+        SwordStreamOfEdge = GameObject.Find("SwordStreamOfEgde").GetComponent<SwordStreamOfEdge>();
+        SwordStatic = GameObject.Find("SwordStatic").GetComponent<SwordStatic>();
+        SwordSilver = GameObject.Find("SwordSilver").GetComponent<SwordSilver>();
+        SwordDemacia = GameObject.Find("SwordDemacia").GetComponent<SwordDemacia>();
+        FantasyAxe = GameObject.Find("FantasyAxe_Unity").GetComponent<FantasyAxe>();
+    }
+
+void Update()
     {
         // 현재 위치와 이전 위치 비교
         if (transform.position != lastPosition)
@@ -83,27 +99,27 @@ public class PlayerScriptOneHand : MonoBehaviour
         if (SwordStreamOfEdge != null && SwordStreamOfEdge.gameObject.activeSelf)
         {
             Damage = SwordStreamOfEdge.GetComponent<SwordStreamOfEdge>().Damage;
-            Damage *= GameObject.Find("StageManager").GetComponent<StageManager>().SwordStreamEdge_DamageCounting;
+            Damage *= DamageManager.Instance.SwordStreamEdge_DamageCounting;
         }
         else if (SwordStatic != null && SwordStatic.gameObject.activeSelf)
         {
             Damage = SwordStatic.GetComponent<SwordStatic>().Damage;
-            Damage *= GameObject.Find("StageManager").GetComponent<StageManager>().SwordStatic_DamageCounting;
+            Damage *= DamageManager.Instance.SwordStatic_DamageCounting;
         }
         else if (SwordSilver != null && SwordSilver.gameObject.activeSelf)
         {
             Damage = SwordSilver.GetComponent<SwordSilver>().Damage;
-            Damage *= GameObject.Find("StageManager").GetComponent<StageManager>().SwordSliver_DamageCounting;
+            Damage *= DamageManager.Instance.SwordSliver_DamageCounting;
         }
         else if (SwordDemacia != null && SwordDemacia.gameObject.activeSelf)
         {
             Damage = SwordDemacia.GetComponent<SwordDemacia>().Damage;
-            Damage *= GameObject.Find("StageManager").GetComponent<StageManager>().SwordDemacia_DamageCounting;
+            Damage *= DamageManager.Instance.SwordDemacia_DamageCounting;
         }
         else if (FantasyAxe != null && FantasyAxe.gameObject.activeSelf)
         {
             Damage = FantasyAxe.GetComponent<FantasyAxe>().Damage;
-            Damage *= GameObject.Find("StageManager").GetComponent<StageManager>().FantasyAxe_DamageCounting;
+            Damage *= DamageManager.Instance.FantasyAxe_DamageCounting;
         }
         
         Collider[] hitColliders = Physics.OverlapBox(DamageZone.bounds.center, DamageZone.bounds.extents,

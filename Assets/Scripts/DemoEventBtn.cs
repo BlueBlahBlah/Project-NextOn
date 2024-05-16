@@ -23,8 +23,8 @@ public class DemoEventBtn : MonoBehaviour
     {
         peiz3Gauge.SetActive(true);
         peiz3Gauge.GetComponent<Peiz3Gauge>().StartPeiz3Gauge();
-        GameObject.Find("StageManager").GetComponent<StageManager>().Peiz3MonsterSpawn();
-        GameObject.Find("StageManager").GetComponent<StageManager>().StartPeiz3Pannel();
+        //GameObject.Find("StageManager").GetComponent<StageManager>().Peiz3MonsterSpawn();
+        //GameObject.Find("StageManager").GetComponent<StageManager>().StartPeiz3Pannel();
         Debug.LogError("컴파일러 해결");
         
     }

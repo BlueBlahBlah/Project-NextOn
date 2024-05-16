@@ -6,9 +6,11 @@ public class SwordSliverSkillPart3 : MonoBehaviour
 {
     
     [SerializeField] private SwordSilverSkill3 Parent;
+    [SerializeField] private DamageManager DamageManager;
     public int Damage;
     void Start()
     {
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
         Invoke("SecondAttack", 3f);
     }
 
@@ -20,7 +22,7 @@ public class SwordSliverSkillPart3 : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordSliver_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.SwordSliver_Skill_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();
@@ -45,7 +47,7 @@ public class SwordSliverSkillPart3 : MonoBehaviour
 
     void SecondAttack()
     {
-        int TempDamage =  GetComponent<StageManager>().SwordSliver_Skill_DamageCounting * Damage;
+        int TempDamage = DamageManager.Instance.SwordSliver_Skill_DamageCounting * Damage;
         foreach (var enemy in Parent.enemyAgain)
         {
             if (enemy != null && enemy.gameObject.activeInHierarchy)

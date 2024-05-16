@@ -8,6 +8,7 @@ public class GrenadeAmmo : MonoBehaviour
     [SerializeField] private GameObject Bullet;
     [SerializeField] private GameObject Effect;
     [SerializeField] private Rigidbody rigidbody;
+    //[SerializeField] private DamageManager DamageManager;
     public int Damage;
     public float boomTimer = 1;
 
@@ -58,7 +59,7 @@ public class GrenadeAmmo : MonoBehaviour
         Effect.SetActive(true);
         Bullet.SetActive(false);
         
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().GrenadeLauncher_DamageCounting * Damage;
+        int TempDamage =  DamageManager.Instance.GrenadeLauncher_DamageCounting * Damage;
 
         Collider[] colls;
         colls = Physics.OverlapSphere(transform.position, 3f);

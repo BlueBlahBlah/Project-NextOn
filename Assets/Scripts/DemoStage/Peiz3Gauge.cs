@@ -7,7 +7,6 @@ public class Peiz3Gauge : MonoBehaviour
 {
     //3페이즈 90% 넘어갔는지
     private bool Peiz3PersentOver;
-    private StageManager stagemanager;
     public Slider slider;
 
     private void Start()
@@ -15,7 +14,6 @@ public class Peiz3Gauge : MonoBehaviour
         Peiz3PersentOver = false;
         slider.value = 0;
         slider = GetComponent<Slider>();
-        stagemanager = GameObject.Find("StageManager").GetComponent<StageManager>();
     }
     
     public void SetGauge(int h)
@@ -57,11 +55,12 @@ public class Peiz3Gauge : MonoBehaviour
                     //AfterCompilerPannel 패널등장
                     //대형몬스터 등장
                     Debug.LogError("Area3 true");
-                    stagemanager.Area3 = true;
-                    stagemanager.OnWave3Direction();  //3페이즈 화살표 활성화 + 탈출 벽 비활성화
+                    EventManager.Instance.Area3 = true;
+                    EventManager.Instance.EscapeCompletion();   //탈출 벽 비활성화
+                    //stagemanager.OnWave3Direction();  //3페이즈 화살표 활성화 + 탈출 벽 비활성화
                     //큰 몬스터 바라보기
-                    GameObject.Find("Main Camera").GetComponent<CameraAbove>().LookBigMonster();
-                    GameObject.Find("Player").GetComponent<PlayerSpec>().ProtectPlayerWhenBigMonAppear();
+                    //GameObject.Find("Main Camera").GetComponent<CameraAbove>().LookBigMonster();
+                    //GameObject.Find("Player").GetComponent<PlayerSpec>().ProtectPlayerWhenBigMonAppear();
                 }
             }
             

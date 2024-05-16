@@ -22,6 +22,10 @@ public class Parenthesis : Enemy
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
     [SerializeField] private Collider capsulCollider;
+    [SerializeField] private BoxCollider AttackArea;
+
+    [SerializeField] private float MsgTimer;
+    [SerializeField] private float MsgAgainTime;
     
     
     // Start is called before the first frame update
@@ -40,11 +44,14 @@ public class Parenthesis : Enemy
         GetComponent<Enemy>().target = target;
         capsulCollider = GetComponent<CapsuleCollider>();
         InitHPBarSize();  //체력바 사이즈 초기화
+        MsgTimer = 0f;
+        MsgAgainTime = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        MsgTimer -= Time.deltaTime;
         if (isDeath == true)  //죽은경우
         {
             GetComponent<Enemy>().isChase = false;
@@ -61,7 +68,8 @@ public class Parenthesis : Enemy
                     isInStack = true;
                     health = curHealth;
                     //체력이 다 닳은 경우 아직 죽지말고 스택에 추가
-                    GameObject.Find("StageManager").GetComponent<StageManager>().AddStackMonster(this.gameObject);
+                    //GameObject.Find("StageManager").GetComponent<StageManager>().AddStackMonster(this.gameObject);
+                    MonsterManager.Instance.AddStackMonster(this.gameObject);
                     hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
                 }
                 else    //체력이 다 닳아 스택에 들어가 있는 경우
@@ -72,10 +80,10 @@ public class Parenthesis : Enemy
                         ShowDamage(DamageDone);
                         hpBar.rectTransform.localScale = new Vector3((float)curHealth/(float)maxHealth, 1f, 1f);
                     }
-                    else if(isInStack == true)    //스택에 있는 경우 닫는 괄호를 만들어야 한다는 메세지
+                    else if(isInStack == true && MsgTimer <= 0f)    //스택에 있는 경우 닫는 괄호를 만들어야 한다는 메세지
                     {
                         ShowDamage("닫는 괄호 몬스터를 처치해야 합니다!");
-                        
+                        MsgTimer = MsgAgainTime;
                     }
                     health = curHealth;
                     _animator.SetTrigger("Hit");
@@ -141,5 +149,21 @@ public class Parenthesis : Enemy
     {
         //hpBar의 사이즈를 원래 자신의 사이즈의 1배 크기로 초기화
         hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+    }
+    
+    void ColliderAttack()       //애니메이션 호출
+    {
+        int Damage = 10;
+        
+        Collider[] hitColliders = Physics.OverlapBox(AttackArea.bounds.center, AttackArea.bounds.extents,
+            AttackArea.transform.rotation);
+
+        foreach (Collider col in hitColliders)
+        {
+            if (col.CompareTag("Player"))
+            {
+                PlayerManager.Instance.Health -= Damage;
+            }
+        }
     }
 }

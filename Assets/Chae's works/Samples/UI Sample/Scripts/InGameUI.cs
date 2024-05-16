@@ -6,22 +6,24 @@ using TMPro;
 
 public class InGameUI : MonoBehaviour
 {
-    // À¯Àú ÀÎÅÍÆäÀÌ½º¿¡ º¸¿©Áö´Â ¼öÄ¡¸¦ Á¶ÀıÇÏ´Â º¯¼öµéÀ» ÀúÀåÇÏ°í, ÀÌ¸¦ ¼öÁ¤ÇÏ´Â ÇÔ¼öµéÀ»
-    // ÀÛ¼ºÇÑ ½ºÅ©¸³Æ®·Î, 'InGameUI' ÇÁ¸®ÆÕ¿¡ Æ÷ÇÔµÇ´Â ½ºÅ©¸³Æ®ÀÔ´Ï´Ù.
-    // Äµ¹ö½ºÀÇ °¢ ¿ä¼Ò¸¦ ¿¬°áÇÏ°í, ¿©·¯ ¸Å´ÏÀú¿¡¼­ µ¥ÀÌÅÍ¸¦ °¡Á®¿Í ¾Ë¸ÂÀº ºÎºĞ¿¡ Àû¿ë½ÃÅµ´Ï´Ù.
-    // ´Ü, ½ÇÁ¦·Î´Â <UIManager> ½ºÅ©¸³Æ®¿¡¼­ InGameUI ½ºÅ©¸³Æ®¸¦ °¡Á®¿Í ¾÷µ¥ÀÌÆ® ÇÔ¼öµéÀ» ¼öÇàÇÕ´Ï´Ù.
 
-    // »çÀü¿¡ ¹Ì¸® ¿¬°á ÇÊ¿äÇÑ º¯¼ö [SerializeField]
+    // ìœ ì € ì¸í„°í˜ì´ìŠ¤ì— ë³´ì—¬ì§€ëŠ” ìˆ˜ì¹˜ë¥¼ ì¡°ì ˆí•˜ëŠ” ë³€ìˆ˜ë“¤ì„ ì €ì¥í•˜ê³ , ì´ë¥¼ ìˆ˜ì •í•˜ëŠ” í•¨ìˆ˜ë“¤ì„
+    // ì‘ì„±í•œ ìŠ¤í¬ë¦½íŠ¸ë¡œ, 'InGameUI' í”„ë¦¬íŒ¹ì— í¬í•¨ë˜ëŠ” ìŠ¤í¬ë¦½íŠ¸ì…ë‹ˆë‹¤.
+    // ìº”ë²„ìŠ¤ì˜ ê° ìš”ì†Œë¥¼ ì—°ê²°í•˜ê³ , ì—¬ëŸ¬ ë§¤ë‹ˆì €ì—ì„œ ë°ì´í„°ë¥¼ ê°€ì ¸ì™€ ì•Œë§ì€ ë¶€ë¶„ì— ì ìš©ì‹œí‚µë‹ˆë‹¤.
+    // ë‹¨, ì‹¤ì œë¡œëŠ” <UIManager> ìŠ¤í¬ë¦½íŠ¸ì—ì„œ InGameUI ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì ¸ì™€ ì—…ë°ì´íŠ¸ í•¨ìˆ˜ë“¤ì„ ìˆ˜í–‰í•©ë‹ˆë‹¤.
+
+    // ì‚¬ì „ì— ë¯¸ë¦¬ ì—°ê²° í•„ìš”í•œ ë³€ìˆ˜ [SerializeField]
+
     #region
     [Header("Player Information")]
     [SerializeField]
     private GameObject playerInfo;
     [SerializeField]
-    private Image playerIcon; // ÇÃ·¹ÀÌ¾îÀÇ ¾ÆÀÌÄÜ. »óÅÂ¿¡ µû¶ó º¯°æ °¡´É
+    private Image playerIcon; // å ì‹œë¤„ì˜™å ì‹±ì–µì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™. å ì™ì˜™å ìŠ¹ìš¸ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     [SerializeField]
-    private TextMeshProUGUI playerHp; // ÇÃ·¹ÀÌ¾îÀÇ Ã¼·Â ÅØ½ºÆ®
+    private TextMeshProUGUI playerHp; // å ì‹œë¤„ì˜™å ì‹±ì–µì˜™å ì™ì˜™ ì²´å ì™ì˜™ å ìŒ”ì™ì˜™íŠ¸
     [SerializeField]
-    private Image playerHpBar; // ÇÃ·¹ÀÌ¾îÀÇ Ã¼·Â ¹Ù
+    private Image playerHpBar; // å ì‹œë¤„ì˜™å ì‹±ì–µì˜™å ì™ì˜™ ì²´å ì™ì˜™ å ì™ì˜™
 
     [Header("Weapon Information")]
     [SerializeField]
@@ -35,85 +37,88 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private GameObject bossInfo;
     [SerializeField]
-    private Image bossIcon; // º¸½º ¾ÆÀÌÄÜ
+    private Image bossIcon; // å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™
     [SerializeField]
-    private TextMeshProUGUI bossName; // º¸½º ÀÌ¸§
+    private TextMeshProUGUI bossName; // å ì™ì˜™å ì™ì˜™ å ì‹±ëªŒì˜™
     [SerializeField]
-    private TextMeshProUGUI bossHp; // º¸½º Ã¼·Â ÅØ½ºÆ® (ÆÛ¼¾Æ®)
+    private TextMeshProUGUI bossHp; // å ì™ì˜™å ì™ì˜™ ì²´å ì™ì˜™ å ìŒ”ì™ì˜™íŠ¸ (å ìŒœì‡½ì˜™íŠ¸)
     [SerializeField]
-    private Image bossHpBar; // º¸½º Ã¼·Â ¹Ù
+    private Image bossHpBar; // å ì™ì˜™å ì™ì˜™ ì²´å ì™ì˜™ å ì™ì˜™
 
     [Header("Gimmick Information")]
     [SerializeField]
     private GameObject gimmickInfo;
     [SerializeField]
-    private Image gimmickIcon; // ±â¹Í ¾ÆÀÌÄÜ
+    private Image gimmickIcon; // å ì™ì˜™å  å ì™ì˜™å ì™ì˜™å ì™ì˜™
     [SerializeField]
-    private TextMeshProUGUI gimmickName; // ±â¹Í ÀÌ¸§
+    private TextMeshProUGUI gimmickName; // å ì™ì˜™å  å ì‹±ëªŒì˜™
     [SerializeField]
-    private TextMeshProUGUI gimmickPercent; // ±â¹Í ÁøÇàµµ (ÆÛ¼¾Æ®)
+    private TextMeshProUGUI gimmickPercent; // å ì™ì˜™å  å ì™ì˜™å ì…ë„ (å ìŒœì‡½ì˜™íŠ¸)
     [SerializeField]
-    private Image gimmickProgressBar; // ±â¹Í ÁøÇà ¹Ù
+    private Image gimmickProgressBar; // å ì™ì˜™å  å ì™ì˜™å ì™ì˜™ å ì™ì˜™
 
     [Header("Minimap")]
     [SerializeField]
-    private TextMeshProUGUI numOfEnemy; // ¸ó½ºÅÍ ¼ö
+    private TextMeshProUGUI numOfEnemy; // å ì™ì˜™å ì™ì˜™ å ì™ì˜™
 
     [Header("Dialogue")]
     [SerializeField]
-    private GameObject dialogue; // ´ëÈ­Ã¢ ¿ÀºêÁ§Æ®
+    private GameObject dialogue; // å ì™ì˜™í™”ì°½ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸
     [SerializeField]
-    private Image dialogueImage; // ´ëÈ­ Ä³¸¯ÅÍ ÀÌ¹ÌÁö
+    private Image dialogueImage; // å ì™ì˜™í™” ìºå ì™ì˜™å ì™ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™
     [SerializeField]
-    private TextMeshProUGUI dialogueName; // ´ëÈ­ Ä³¸¯ÅÍ ÀÌ¸§
+    private TextMeshProUGUI dialogueName; // å ì™ì˜™í™” ìºå ì™ì˜™å ì™ì˜™ å ì‹±ëªŒì˜™
     [SerializeField]
-    private TextMeshProUGUI dialogueContent; // ´ëÈ­ ³»¿ë
+    private TextMeshProUGUI dialogueContent; // å ì™ì˜™í™” å ì™ì˜™å ì™ì˜™
     [SerializeField]
-    private float typingSpeed = 0.05f; // ´ëÈ­ Ãâ·Â ¼Óµµ
+    private float typingSpeed = 0.05f; // å ì™ì˜™í™” å ì™ì˜™å  å ìŒˆë“¸ì˜™
     #endregion
 
-    // ½ÇÁ¦ ¿¬°áÇÒ º¯¼ö È¤Àº ½ºÅ©¸³Æ® ³»¿¡¼­ InGameUI Å¬·¡½º ³»¿¡¼­ Áö¿ªº¯¼ö
+    // å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ í˜¹å ì™ì˜™ å ì™ì˜™í¬å ì™ì˜™íŠ¸ å ì™ì˜™å ì™ì˜™å ì™ì˜™ InGameUI í´å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™
     #region
-    public float PlayerHp; // ÇÃ·¹ÀÌ¾î ÇöÀç Ã¼·Â ¿¬°á
-    public float PlayerMaxHp; // ÇÃ·¹ÀÌ¾î ÃÖ´ë Ã¼·Â ¿¬°á
 
-    public string WeaponName; // ¹«±â ÀÌ¸§ ¿¬°á << ÀÌ¹ÌÁö È£Ãâ¿ë
-    public int CurrentBullet; // ½ÇÁ¦ ÇöÀç ÃÑ¾Ë ¼ö ¿¬°á
-    public int MaxBullet; // ½ÇÁ¦ ÃÖ´ë ÃÑ¾Ë ¼ö ¿¬°á
+    public float PlayerHp; // í”Œë ˆì´ì–´ í˜„ì¬ ì²´ë ¥ ì—°ê²°
+    public float PlayerMaxHp; // í”Œë ˆì´ì–´ ìµœëŒ€ ì²´ë ¥ ì—°ê²°
 
-    public bool isBoss; // º¸½º Á¸Àç À¯¹« ¿¬°á
-    public float BossHp; // º¸½º Ã¼·Â ¿¬°á
-    public float BossMaxHp; // º¸½º ÃÖ´ë Ã¼·Â ¿¬°á
-    public string BossName; // º¸½º ÀÌ¸§ ¿¬°á
+    public string WeaponName; // ë¬´ê¸° ì´ë¦„ ì—°ê²° << ì´ë¯¸ì§€ í˜¸ì¶œìš©
+    public int CurrentBullet; // ì‹¤ì œ í˜„ì¬ ì´ì•Œ ìˆ˜ ì—°ê²°
+    public int MaxBullet; // ì‹¤ì œ ìµœëŒ€ ì´ì•Œ ìˆ˜ ì—°ê²°
 
-    public bool isGimmick; // ±â¹Í Á¸Àç À¯¹« ¿¬°á
-    public float GimmickPercent; // ±â¹Í ÁøÇàµµ ¿¬°á
+    public bool isBoss; // ë³´ìŠ¤ ì¡´ì¬ ìœ ë¬´ ì—°ê²°
+    public float BossHp; // ë³´ìŠ¤ ì²´ë ¥ ì—°ê²°
+    public float BossMaxHp; // ë³´ìŠ¤ ìµœëŒ€ ì²´ë ¥ ì—°ê²°
+    public string BossName; // ë³´ìŠ¤ ì´ë¦„ ì—°ê²°
+
+    public bool isGimmick; // ê¸°ë¯¹ ì¡´ì¬ ìœ ë¬´ ì—°ê²°
+    public float GimmickPercent; // ê¸°ë¯¹ ì§„í–‰ë„ ì—°ê²°
     public int GimmickCount;
-    public string GimmickName; // ±â¹Í ÀÌ¸§ ¿¬°á
+    public string GimmickName; // ê¸°ë¯¹ ì´ë¦„ ì—°ê²°
 
-    public int NumOfEnemy; // ÇÊµå ³» ¸ó½ºÅÍ ¼ö ¿¬°á
+    public int NumOfEnemy; // í•„ë“œ ë‚´ ëª¬ìŠ¤í„° ìˆ˜ ì—°ê²°
 
-    [SerializeField]
-    private StageManager stageManager;
+
+    //[SerializeField] private StageManager stageManager;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         
     }
 
-    // GetManager => ½Ì±ÛÅæÀ¸·Î ¼±¾ğµÇÁö ¾ÊÀº ¸Å´ÏÀúµéÀ» °¡Á®¿É´Ï´Ù.
-    // ¸Å´ÏÀúµéÀ» ½Ì±ÛÅæÀ¸·Î ¼±¾ğÇÏµµ·Ï ±¸Á¶¸¦ º¯°æÇÑ´Ù¸é È£Ãâ ¹æ½ÄÀ» ¹Ù²ß´Ï´Ù.
+    // GetManager => ì‹±ê¸€í†¤ìœ¼ë¡œ ì„ ì–¸ë˜ì§€ ì•Šì€ ë§¤ë‹ˆì €ë“¤ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
+    // ë§¤ë‹ˆì €ë“¤ì„ ì‹±ê¸€í†¤ìœ¼ë¡œ ì„ ì–¸í•˜ë„ë¡ êµ¬ì¡°ë¥¼ ë³€ê²½í•œë‹¤ë©´ í˜¸ì¶œ ë°©ì‹ì„ ë°”ê¿‰ë‹ˆë‹¤.
     public void GetManager()
     {
         GetStageManager();
+
     }
 
     public void GetStageManager()
@@ -124,82 +129,82 @@ public class InGameUI : MonoBehaviour
 
     // Initailize
     #region
-    public void InitWeaponInfo() // ¹«±â Á¤º¸ ÃÊ±âÈ­ << ¹«±â 1°³ »ç¿ë ÇÒ ¶§·Î °¡Á¤
+    public void InitWeaponInfo() // å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì‹­ê¹ì˜™í™” << å ì™ì˜™å ì™ì˜™ 1å ì™ì˜™ å ì™ì˜™å  å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     {
-        // ÀÌ¹ÌÁö ÃÊ±âÈ­
+        // å ì‹±ë±„ì˜™å ì™ì˜™ å ì‹­ê¹ì˜™í™”
         weaponImage.sprite = Resources.Load($"UI/Image/Icons/Weapons/{WeaponName}", typeof(Sprite)) as Sprite;
 
-        // ÃÑ¾Ë ¼ö ÃÊ±âÈ­
+        // å ì‹¼ì–µì˜™ å ì™ì˜™ å ì‹­ê¹ì˜™í™”
         UpdateBullet();
     }
     #endregion
 
-    // Update **°¡Á®¿À´Â º¯¼öµéÀ» ´Ù¸¥ ¸Å´ÏÀú¿¡¼­ È£Ãâ ÇÒ ¼ö ÀÖµµ·Ï º¯°æ ÇÊ¿ä
+    // Update **ê°€ì ¸ì˜¤ëŠ” ë³€ìˆ˜ë“¤ì„ ë‹¤ë¥¸ ë§¤ë‹ˆì €ì—ì„œ í˜¸ì¶œ í•  ìˆ˜ ìˆë„ë¡ ë³€ê²½ í•„ìš”
     #region
-    public void UpdatePlayerInfo() // ÇÃ·¹ÀÌ¾î Á¤º¸ °»½Å
+    public void UpdatePlayerInfo() // å ì‹œë¤„ì˜™å ì‹±ì–µì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     {
-        // Ã¼·Â °ü·Ã
-        playerHp.text = PlayerHp.ToString() + " / " + PlayerMaxHp.ToString(); // Ã¼·Â °»½Å
-        playerHpBar.fillAmount = PlayerHp / PlayerMaxHp; // Ã¼·Â¹Ù ÀÌ¹ÌÁö °»½Å
+        // ì²´å ì™ì˜™ å ì™ì˜™å ì™ì˜™
+        playerHp.text = PlayerHp.ToString() + " / " + PlayerMaxHp.ToString(); // ì²´å ì™ì˜™ å ì™ì˜™å ì™ì˜™
+        playerHpBar.fillAmount = PlayerHp / PlayerMaxHp; // ì²´å ìŠ¹ë±„ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     }
 
-    public void UpdateBullet() // ÃÑ¾Ë °»½Å 
+    public void UpdateBullet() // å ì‹¼ì–µì˜™ å ì™ì˜™å ì™ì˜™ 
     {
         currentBullet.text = CurrentBullet.ToString();
         maxBullet.text = MaxBullet.ToString();
     }
 
-    public void UpdateBossInfo() // º¸½º Á¤º¸ °»½Å
+    public void UpdateBossInfo() // å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     {
         if (isBoss)
         {
-            // º¸½º ÃâÇö ½Ã
+            // å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™
             if (!bossInfo.activeInHierarchy)
             {
-                // º¸½º°¡ ÃâÇö ÇßÁö¸¸, UI°¡ ÄÑÁöÁö ¾ÊÀº »óÅÂ¿¡¼­ È£Ãâ
-                // >> º¸½º Info ÃÊ±âÈ­
-                // º¸½ºÀÇ ÀÌ¸§, ÀÌ¹ÌÁö µî ¾÷µ¥ÀÌÆ®
+                // å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™, UIå ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ìŠ¹ìš¸ì˜™å ì™ì˜™ í˜¸å ì™ì˜™
+                // >> å ì™ì˜™å ì™ì˜™ Info å ì‹­ê¹ì˜™í™”
+                // å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì‹±ëªŒì˜™, å ì‹±ë±„ì˜™å ì™ì˜™ å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸
                 bossName.text = BossName;
                 bossIcon.sprite = Resources.Load($"UI/Image/Icons/BossIcons/{BossName}", typeof(Sprite)) as Sprite;
-                bossInfo.SetActive(true);// UI È°¼ºÈ­
+                bossInfo.SetActive(true);// UI í™œå ì™ì˜™í™”
             }
-            // º¸½º Á¤º¸ °»½Å
-            bossHp.text = (Mathf.Round(BossHp / BossMaxHp * 100)).ToString() + "%"; // Ã¼·Â °»½Å
-            bossHpBar.fillAmount = BossHp / BossMaxHp; // Ã¼·Â¹Ù ÀÌ¹ÌÁö °»½Å
+            // å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
+            bossHp.text = (Mathf.Round(BossHp / BossMaxHp * 100)).ToString() + "%"; // ì²´å ì™ì˜™ å ì™ì˜™å ì™ì˜™
+            bossHpBar.fillAmount = BossHp / BossMaxHp; // ì²´å ìŠ¹ë±„ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
         }
         else
         {
-            // º¸½º Ã³Ä¡ ½Ã, ÇÊµå ³»¿¡ º¸½º°¡ Á¸ÀçÇÏÁö ¾ÊÀ» ¶§ 
-            // >> º¸½º Info ºñÈ°¼ºÈ­
+            // å ì™ì˜™å ì™ì˜™ ì²˜ì¹˜ å ì™ì˜™, å ì‹­ë“¸ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™ 
+            // >> å ì™ì˜™å ì™ì˜™ Info å ì™ì˜™í™œå ì™ì˜™í™”
             if (bossInfo.activeInHierarchy) bossInfo.SetActive(false);
         }
     }
 
-    public void UpdateGimmickInfo() // ±â¹Í Á¤º¸ °»½Å
+    public void UpdateGimmickInfo() // å ì™ì˜™å  å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
     {
         if (isGimmick)
         {
             if (!gimmickInfo.activeInHierarchy)
             {
-                // ±â¹ÍÀÌ ÃâÇö ÇßÁö¸¸, UI°¡ ÄÑÁöÁö ¾ÊÀº »óÅÂ¿¡¼­ È£Ãâ
-                // >> ±â¹Í Info ÃÊ±âÈ­
-                // ±â¹ÍÀÇ ÀÌ¸§, ÀÌ¹ÌÁö µî ¾÷µ¥ÀÌÆ®
+                // å ì™ì˜™å ì™ì˜™å  å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™, UIå ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ìŠ¹ìš¸ì˜™å ì™ì˜™ í˜¸å ì™ì˜™
+                // >> å ì™ì˜™å  Info å ì‹­ê¹ì˜™í™”
+                // å ì™ì˜™å ì™ì˜™å  å ì‹±ëªŒì˜™, å ì‹±ë±„ì˜™å ì™ì˜™ å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸
                 gimmickName.text = GimmickName;
                 gimmickIcon.sprite = Resources.Load($"UI/Image/Icons/GimmickIcons/{GimmickName}", typeof(Sprite)) as Sprite;
 
-                // ±â¹Í È£Ãâ ½Ã 0%·Î ½ÃÀÛÇÑ´Ù°í °¡Á¤
+                // å ì™ì˜™å  í˜¸å ì™ì˜™ å ì™ì˜™ 0%å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì‹¼ë‹¤ê³¤ì˜™ å ì™ì˜™å ì™ì˜™
                 gimmickPercent.text = "0%";
                 gimmickProgressBar.fillAmount = 0f;
 
                 gimmickInfo.SetActive(true);
             }
 
-            // ±â¹ÍÀÇ °æ¿ì, ±â¹ÍÀÇ Å¸ÀÔ (½Ã°£ ±â¹İ / È½¼ö ±â¹İ)¿¡ µû¶ó ´Ù¸£°Ô ÄÚµå ÀÛ¼º
+            // å ì™ì˜™å ì™ì˜™å  å ì™ì˜™å , å ì™ì˜™å ì™ì˜™å  íƒ€å ì™ì˜™ (å ì‹œê³¤ì˜™ å ì™ì˜™å  / íšŸå ì™ì˜™ å ì™ì˜™å )å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ìŒ•ëªŒì˜™å ì™ì˜™ å ìŒ˜ë“¸ì˜™ å ìŒœì‡½ì˜™
 
         }
         else
         {
-            // ±â¹Í ÃâÇö Á¾·á
+            // å ì™ì˜™å  å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
             if (gimmickInfo.activeInHierarchy) gimmickInfo.SetActive(false);
         }
 
@@ -207,7 +212,8 @@ public class InGameUI : MonoBehaviour
 
     public void UpdateNumOfEnemy()
     {
-        // ¸ó½ºÅÍ°¡ ÃâÇö, È¤Àº »ç¸Á ½Ã ¹Ì´Ï¸Ê ÇÏ´ÜÀÇ ¸ó½ºÅÍ ¼ö °»½Å
+
+        // ëª¬ìŠ¤í„°ê°€ ì¶œí˜„, í˜¹ì€ ì‚¬ë§ ì‹œ ë¯¸ë‹ˆë§µ í•˜ë‹¨ì˜ ëª¬ìŠ¤í„° ìˆ˜ ê°±ì‹ 
         if (stageManager != null)
         {
             NumOfEnemy = stageManager.enemies.Length;
@@ -220,10 +226,7 @@ public class InGameUI : MonoBehaviour
     }
     #endregion
 
- 
 
     // Button
 
-
-    
 }

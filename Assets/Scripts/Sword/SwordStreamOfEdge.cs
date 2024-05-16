@@ -16,6 +16,7 @@ public class SwordStreamOfEdge : MonoBehaviour
     {
         collider = GetComponent<MeshCollider>();
         collider.enabled = false;
+        Damage = 3;
     }
     
     private void OnEnable()

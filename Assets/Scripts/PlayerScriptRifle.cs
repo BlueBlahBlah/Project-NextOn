@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening.Core.Easing;
@@ -19,6 +20,12 @@ public class PlayerScriptRifle : MonoBehaviour
     public bool isMovingRight;
     public bool isMovingLeft;
     [SerializeField] private CharacterLocomotion playerMovingScript;
+    [SerializeField] private Rifle rifle;
+    [SerializeField] private Shotgun shotgun;
+    [SerializeField] private Sniper sniper;
+    [SerializeField] private GrenadeLauncher grenadeLauncher;
+    [SerializeField] private MachineGun machineGun;
+    [SerializeField] private FireGun fireGun;
     
     void Start()
     {
@@ -27,6 +34,14 @@ public class PlayerScriptRifle : MonoBehaviour
         walking = false;
         Anim = GetComponentInChildren<Animator>();
         RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
+        try
+        {
+            WeaponSynchronization();
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
     }
 
     void Update()
@@ -117,16 +132,28 @@ public class PlayerScriptRifle : MonoBehaviour
             Invoke("reloadDone",4);      //4초후 재장전 끝
         }
     }
+    
+    public void WeaponSynchronization()
+    {
+        rifle = GameObject.FindObjectOfType<Rifle>();
+        shotgun = GameObject.FindObjectOfType<Shotgun>();
+        sniper = GameObject.FindObjectOfType<Sniper>();
+        grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
+        machineGun = GameObject.FindObjectOfType<MachineGun>();
+        fireGun = GameObject.FindObjectOfType<FireGun>();
+    }
 
     private void reloadDone()
     {
         Anim.SetBool("reload", false);
-        Rifle rifle = GameObject.FindObjectOfType<Rifle>();
-        Shotgun shotgun = GameObject.FindObjectOfType<Shotgun>();
-        Sniper sniper = GameObject.FindObjectOfType<Sniper>();
-        GrenadeLauncher grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
-        MachineGun machineGun = GameObject.FindObjectOfType<MachineGun>();
-        FireGun fireGun = GameObject.FindObjectOfType<FireGun>();
+        try
+        {
+            WeaponSynchronization();
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
         if (rifle != null && rifle.gameObject.activeSelf)
         {
             if (rifle.maxBulletCount >= 30)
@@ -224,5 +251,46 @@ public class PlayerScriptRifle : MonoBehaviour
     void OnRollButtonClick()
     {
         Anim.SetTrigger("roll");
+    }
+
+    //PlayerManager에 현재 탄 잔량 정보를 전달
+    public void BulletInfo()
+    {
+        if (rifle != null && rifle.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = rifle.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = rifle.bulletCount;
+            return;
+        }
+        if (shotgun != null && shotgun.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = shotgun.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = shotgun.bulletCount;
+            return;
+        }
+        if (sniper != null && sniper.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = sniper.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = sniper.bulletCount;
+            return;
+        }
+        if (grenadeLauncher != null && grenadeLauncher.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = grenadeLauncher.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = grenadeLauncher.bulletCount;
+            return;
+        }
+        if (machineGun != null && machineGun.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = machineGun.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = machineGun.bulletCount;
+            return;
+        }
+        if (fireGun != null && fireGun.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = fireGun.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = fireGun.bulletCount;
+            return;
+        }
     }
 }

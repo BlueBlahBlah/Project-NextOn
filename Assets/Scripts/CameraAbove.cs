@@ -57,10 +57,5 @@ public class CameraAbove : MonoBehaviour
         Invoke("CameraReturn", 2f);
     }
 
-    private void CameraReturn()
-    {
-        operating = false;
-        //멈췄던 몬스터들 다시 시작
-        GameObject.Find("Player").GetComponent<PlayerSpec>().ResumeMonsters();
-    }
+    
 }

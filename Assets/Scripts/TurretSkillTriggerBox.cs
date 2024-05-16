@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TurretSkillTriggerBox : MonoBehaviour
 {
+    [SerializeField] private DamageManager DamageManager;
     public GameObject Normalturret;
     public GameObject Redturret;
     public GameObject Greenturret;
@@ -14,7 +15,7 @@ public class TurretSkillTriggerBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        DamageManager = GameObject.Find("DamageManager").GetComponent<DamageManager>();
     }
 
     // Update is called once per frame
@@ -68,7 +69,7 @@ public class TurretSkillTriggerBox : MonoBehaviour
             // placeObject의 회전값을 얻어옵니다.
             Quaternion placeRotation = placeTransform.rotation;
             
-            int MissileColor = GameObject.Find("StageManager").GetComponent<StageManager>().Turret_Skill_BulletColor;
+            int MissileColor = DamageManager.Turret_Skill_BulletColor;
             switch (MissileColor)
             {
                 case 0:
