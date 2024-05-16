@@ -194,7 +194,12 @@ public class Dialogue : MonoBehaviour
     {
         while (true)
         {
-            if (!UIManager.instance.doNext) yield return null;
+            if (!UIManager.instance.doNext) 
+                yield return null;
+            else if (UIManager.instance.isAuto) 
+            { 
+                yield return new WaitForSeconds(dialogueTime / UIManager.instance.printSpeed); 
+            }
             else
             {
                 UIManager.instance.doNext = false;
