@@ -1,4 +1,4 @@
-/*
+
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
-    //DamageManager 이식완료
+    /*//DamageManager 이식완료
     /#1#/ ------ 공격 계수 ------ //
     //근접 무기
     [Header("Damage Counting")]
@@ -515,6 +515,6 @@ public class StageManager : MonoBehaviour
     {
         Start_Panel(Start3PeizPanel,Start3PeizPanel_Btn,Start3PeizPanel_Text,Start3PeizPanel_Text_Number,true);
     }
-    
+*/    
 }
-*/
+

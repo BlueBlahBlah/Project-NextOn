@@ -54,9 +54,17 @@ public class EventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점)
+        //PrintLongDialogue();
         Area3 = false;
         Wave2MonsterClear = false;
         isPause = false;
+    }
+    
+    public void PrintLongDialogue()
+    {
+        UIManager.instance.DialogueEventByNumber(UIManager.instance.longDialogue
+            , UIManager.instance.DialogueNumber);
     }
 
     // Update is called once per frame
