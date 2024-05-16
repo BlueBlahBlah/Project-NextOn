@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 public class InGameUI : MonoBehaviour
 {
-    // ������ �̸� ���� �ʿ��� ���� [SerializeField]
+
+    // 유저 인터페이스에 보여지는 수치를 조절하는 변수들을 저장하고, 이를 수정하는 함수들을
+    // 작성한 스크립트로, 'InGameUI' 프리팹에 포함되는 스크립트입니다.
+    // 캔버스의 각 요소를 연결하고, 여러 매니저에서 데이터를 가져와 알맞은 부분에 적용시킵니다.
+    // 단, 실제로는 <UIManager> 스크립트에서 InGameUI 스크립트를 가져와 업데이트 함수들을 수행합니다.
+
+    // 사전에 미리 연결 필요한 변수 [SerializeField]
+
     #region
     [Header("Player Information")]
     [SerializeField]
     private GameObject playerInfo;
     [SerializeField]
-    private Image playerIcon; // �÷��̾��� ������. ���¿� ���� ���� ����
+    private Image playerIcon; // 占시뤄옙占싱억옙占쏙옙 占쏙옙占쏙옙占쏙옙. 占쏙옙占승울옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
     [SerializeField]
-    private TextMeshProUGUI playerHp; // �÷��̾��� ü�� �ؽ�Ʈ
+    private TextMeshProUGUI playerHp; // 占시뤄옙占싱억옙占쏙옙 체占쏙옙 占쌔쏙옙트
     [SerializeField]
-    private Image playerHpBar; // �÷��̾��� ü�� ��
+    private Image playerHpBar; // 占시뤄옙占싱억옙占쏙옙 체占쏙옙 占쏙옙
 
     [Header("Weapon Information")]
     [SerializeField]
@@ -31,69 +37,65 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private GameObject bossInfo;
     [SerializeField]
-    private Image bossIcon; // ���� ������
+    private Image bossIcon; // 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
     [SerializeField]
-    private TextMeshProUGUI bossName; // ���� �̸�
+    private TextMeshProUGUI bossName; // 占쏙옙占쏙옙 占싱몌옙
     [SerializeField]
-    private TextMeshProUGUI bossHp; // ���� ü�� �ؽ�Ʈ (�ۼ�Ʈ)
+    private TextMeshProUGUI bossHp; // 占쏙옙占쏙옙 체占쏙옙 占쌔쏙옙트 (占쌜쇽옙트)
     [SerializeField]
-    private Image bossHpBar; // ���� ü�� ��
+    private Image bossHpBar; // 占쏙옙占쏙옙 체占쏙옙 占쏙옙
 
     [Header("Gimmick Information")]
     [SerializeField]
     private GameObject gimmickInfo;
     [SerializeField]
-    private Image gimmickIcon; // ��� ������
+    private Image gimmickIcon; // 占쏙옙占 占쏙옙占쏙옙占쏙옙
     [SerializeField]
-    private TextMeshProUGUI gimmickName; // ��� �̸�
+    private TextMeshProUGUI gimmickName; // 占쏙옙占 占싱몌옙
     [SerializeField]
-    private TextMeshProUGUI gimmickPercent; // ��� ���൵ (�ۼ�Ʈ)
+    private TextMeshProUGUI gimmickPercent; // 占쏙옙占 占쏙옙占썅도 (占쌜쇽옙트)
     [SerializeField]
-    private Image gimmickProgressBar; // ��� ���� ��
+    private Image gimmickProgressBar; // 占쏙옙占 占쏙옙占쏙옙 占쏙옙
 
     [Header("Minimap")]
     [SerializeField]
-    private TextMeshProUGUI numOfEnemy; // ���� ��
+    private TextMeshProUGUI numOfEnemy; // 占쏙옙占쏙옙 占쏙옙
 
     [Header("Dialogue")]
     [SerializeField]
-    private GameObject dialogue; // ��ȭâ ������Ʈ
+    private GameObject dialogue; // 占쏙옙화창 占쏙옙占쏙옙占쏙옙트
     [SerializeField]
-    private Image dialogueImage; // ��ȭ ĳ���� �̹���
+    private Image dialogueImage; // 占쏙옙화 캐占쏙옙占쏙옙 占싱뱄옙占쏙옙
     [SerializeField]
-    private TextMeshProUGUI dialogueName; // ��ȭ ĳ���� �̸�
+    private TextMeshProUGUI dialogueName; // 占쏙옙화 캐占쏙옙占쏙옙 占싱몌옙
     [SerializeField]
-    private TextMeshProUGUI dialogueContent; // ��ȭ ����
+    private TextMeshProUGUI dialogueContent; // 占쏙옙화 占쏙옙占쏙옙
     [SerializeField]
-    private float typingSpeed = 0.05f; // ��ȭ ��� �ӵ�
+    private float typingSpeed = 0.05f; // 占쏙옙화 占쏙옙占 占쌈듸옙
     #endregion
 
-    // ���� ������ ���� Ȥ�� ��ũ��Ʈ ������ InGameUI Ŭ���� ������ ��������
+    // 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 혹占쏙옙 占쏙옙크占쏙옙트 占쏙옙占쏙옙占쏙옙 InGameUI 클占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙
     #region
-    private float PlayerHp; // �÷��̾� ���� ü�� ����
-    private float PlayerMaxHp; // �÷��̾� �ִ� ü�� ����
 
-    private string WeaponName; // ���� �̸� ���� << �̹��� ȣ���
-    private int CurrentBullet; // ���� ���� �Ѿ� �� ����
-    private int MaxBullet; // ���� �ִ� �Ѿ� �� ����
+    public float PlayerHp; // 플레이어 현재 체력 연결
+    public float PlayerMaxHp; // 플레이어 최대 체력 연결
 
-    private bool isBoss; // ���� ���� ���� ����
-    private float BossHp; // ���� ü�� ����
-    private float BossMaxHp; // ���� �ִ� ü�� ����
-    private string BossName; // ���� �̸� ����
+    public string WeaponName; // 무기 이름 연결 << 이미지 호출용
+    public int CurrentBullet; // 실제 현재 총알 수 연결
+    public int MaxBullet; // 실제 최대 총알 수 연결
 
-    private bool isGimmick; // ��� ���� ���� ����
-    private float GimmickPercent; // ��� ���൵ ����
-    private int GimmickCount;
-    private string GimmickName; // ��� �̸� ����
+    public bool isBoss; // 보스 존재 유무 연결
+    public float BossHp; // 보스 체력 연결
+    public float BossMaxHp; // 보스 최대 체력 연결
+    public string BossName; // 보스 이름 연결
 
-    private int NumOfEnemy; // �ʵ� �� ���� �� ����
+    public bool isGimmick; // 기믹 존재 유무 연결
+    public float GimmickPercent; // 기믹 진행도 연결
+    public int GimmickCount;
+    public string GimmickName; // 기믹 이름 연결
 
-    private bool isDialogue; // ��ȭâ ǥ�� ����
-    private List<Dictionary<string, object>> data_Dialogue; // csv ���� ���� ����
-    public int DialogueNumber; // ����� ��ȭ�� ��ȣ
-    private float dialogueTime; // ��ȭ�� ���� (WaitforSeconds �Է� ����)
-    private int dialogueIsContinuous; // �̾����� ��ȭ�� �ִ��� Ȯ���� ����
+    public int NumOfEnemy; // 필드 내 몬스터 수 연결
+
 
     //[SerializeField] private StageManager stageManager;
     #endregion
@@ -101,103 +103,108 @@ public class InGameUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // ���̾�α� csv ���� ȣ��
-        //stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
-        FunctionTestStart(); // �׽�Ʈ�� �ڵ�
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdatePlayerInfo(); // �÷��̾� info �׻� ������Ʈ
-        UpdateBossInfo(); // ���� ���� �� ���� info ������Ʈ
-        UpdateGimmickInfo(); // ��� ���� �� ��� info ������Ʈ
-        UpdateNumOfEnemy(); // ���� �� ������Ʈ
-        UpdateBullet();
 
-
-        FunctionTestUpdate(); // �׽�Ʈ�� �ڵ�
+        
     }
 
+    // GetManager => 싱글톤으로 선언되지 않은 매니저들을 가져옵니다.
+    // 매니저들을 싱글톤으로 선언하도록 구조를 변경한다면 호출 방식을 바꿉니다.
+    public void GetManager()
+    {
+        GetStageManager();
+
+    }
+
+    public void GetStageManager()
+    {
+        if (GameObject.Find("StageManager") != null) 
+            stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+    }
 
     // Initailize
     #region
-    public void InitWeaponInfo() // ���� ���� �ʱ�ȭ << ���� 1�� ��� �� ���� ����
+    public void InitWeaponInfo() // 占쏙옙占쏙옙 占쏙옙占쏙옙 占십깍옙화 << 占쏙옙占쏙옙 1占쏙옙 占쏙옙占 占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
     {
-        // �̹��� �ʱ�ȭ
+        // 占싱뱄옙占쏙옙 占십깍옙화
         weaponImage.sprite = Resources.Load($"UI/Image/Icons/Weapons/{WeaponName}", typeof(Sprite)) as Sprite;
 
-        // �Ѿ� �� �ʱ�ȭ
+        // 占싼억옙 占쏙옙 占십깍옙화
         UpdateBullet();
     }
     #endregion
 
-    // Update
+    // Update **가져오는 변수들을 다른 매니저에서 호출 할 수 있도록 변경 필요
     #region
-    public void UpdatePlayerInfo() // �÷��̾� ���� ����
+    public void UpdatePlayerInfo() // 占시뤄옙占싱억옙 占쏙옙占쏙옙 占쏙옙占쏙옙
     {
-        // ü�� ����
-        playerHp.text = PlayerHp.ToString() + " / " + PlayerMaxHp.ToString(); // ü�� ����
-        playerHpBar.fillAmount = PlayerHp / PlayerMaxHp; // ü�¹� �̹��� ����
+        // 체占쏙옙 占쏙옙占쏙옙
+        playerHp.text = PlayerHp.ToString() + " / " + PlayerMaxHp.ToString(); // 체占쏙옙 占쏙옙占쏙옙
+        playerHpBar.fillAmount = PlayerHp / PlayerMaxHp; // 체占승뱄옙 占싱뱄옙占쏙옙 占쏙옙占쏙옙
     }
 
-    public void UpdateBullet() // �Ѿ� ���� 
+    public void UpdateBullet() // 占싼억옙 占쏙옙占쏙옙 
     {
         currentBullet.text = CurrentBullet.ToString();
         maxBullet.text = MaxBullet.ToString();
     }
 
-    public void UpdateBossInfo() // ���� ���� ����
+    public void UpdateBossInfo() // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
     {
         if (isBoss)
         {
-            // ���� ���� ��
+            // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙
             if (!bossInfo.activeInHierarchy)
             {
-                // ������ ���� ������, UI�� ������ ���� ���¿��� ȣ��
-                // >> ���� Info �ʱ�ȭ
-                // ������ �̸�, �̹��� �� ������Ʈ
+                // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙, UI占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占승울옙占쏙옙 호占쏙옙
+                // >> 占쏙옙占쏙옙 Info 占십깍옙화
+                // 占쏙옙占쏙옙占쏙옙 占싱몌옙, 占싱뱄옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙트
                 bossName.text = BossName;
                 bossIcon.sprite = Resources.Load($"UI/Image/Icons/BossIcons/{BossName}", typeof(Sprite)) as Sprite;
-                bossInfo.SetActive(true);// UI Ȱ��ȭ
+                bossInfo.SetActive(true);// UI 활占쏙옙화
             }
-            // ���� ���� ����
-            bossHp.text = (Mathf.Round(BossHp / BossMaxHp * 100)).ToString() + "%"; // ü�� ����
-            bossHpBar.fillAmount = BossHp / BossMaxHp; // ü�¹� �̹��� ����
+            // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+            bossHp.text = (Mathf.Round(BossHp / BossMaxHp * 100)).ToString() + "%"; // 체占쏙옙 占쏙옙占쏙옙
+            bossHpBar.fillAmount = BossHp / BossMaxHp; // 체占승뱄옙 占싱뱄옙占쏙옙 占쏙옙占쏙옙
         }
         else
         {
-            // ���� óġ ��, �ʵ� ���� ������ �������� ���� �� 
-            // >> ���� Info ��Ȱ��ȭ
+            // 占쏙옙占쏙옙 처치 占쏙옙, 占십듸옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 
+            // >> 占쏙옙占쏙옙 Info 占쏙옙활占쏙옙화
             if (bossInfo.activeInHierarchy) bossInfo.SetActive(false);
         }
     }
 
-    public void UpdateGimmickInfo() // ��� ���� ����
+    public void UpdateGimmickInfo() // 占쏙옙占 占쏙옙占쏙옙 占쏙옙占쏙옙
     {
         if (isGimmick)
         {
             if (!gimmickInfo.activeInHierarchy)
             {
-                // ����� ���� ������, UI�� ������ ���� ���¿��� ȣ��
-                // >> ��� Info �ʱ�ȭ
-                // ����� �̸�, �̹��� �� ������Ʈ
+                // 占쏙옙占쏙옙占 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙, UI占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占승울옙占쏙옙 호占쏙옙
+                // >> 占쏙옙占 Info 占십깍옙화
+                // 占쏙옙占쏙옙占 占싱몌옙, 占싱뱄옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙트
                 gimmickName.text = GimmickName;
                 gimmickIcon.sprite = Resources.Load($"UI/Image/Icons/GimmickIcons/{GimmickName}", typeof(Sprite)) as Sprite;
 
-                // ��� ȣ�� �� 0%�� �����Ѵٰ� ����
+                // 占쏙옙占 호占쏙옙 占쏙옙 0%占쏙옙 占쏙옙占쏙옙占싼다곤옙 占쏙옙占쏙옙
                 gimmickPercent.text = "0%";
                 gimmickProgressBar.fillAmount = 0f;
 
                 gimmickInfo.SetActive(true);
             }
 
-            // ����� ���, ����� Ÿ�� (�ð� ��� / Ƚ�� ���)�� ���� �ٸ��� �ڵ� �ۼ�
+            // 占쏙옙占쏙옙占 占쏙옙占, 占쏙옙占쏙옙占 타占쏙옙 (占시곤옙 占쏙옙占 / 횟占쏙옙 占쏙옙占)占쏙옙 占쏙옙占쏙옙 占쌕몌옙占쏙옙 占쌘듸옙 占쌜쇽옙
 
         }
         else
         {
-            // ��� ���� ����
+            // 占쏙옙占 占쏙옙占쏙옙 占쏙옙占쏙옙
             if (gimmickInfo.activeInHierarchy) gimmickInfo.SetActive(false);
         }
 
@@ -205,240 +212,21 @@ public class InGameUI : MonoBehaviour
 
     public void UpdateNumOfEnemy()
     {
-        //Todo
-        // ���Ͱ� ����, Ȥ�� ��� �� �̴ϸ� �ϴ��� ���� �� ����
-        //NumOfEnemy = stageManager.enemies.Length;
-        //numOfEnemy.text = NumOfEnemy.ToString();
-    }
-    #endregion
 
-    // Event
-    public void DialogueEvent(int _DialogueNumber) // ����� ��ȭ ��ȣ(csv ���� ����)�� �Է°����� ����
-    {
-        DialogueNumber = _DialogueNumber;
-
-        if (isDialogue)
+        // 몬스터가 출현, 혹은 사망 시 미니맵 하단의 몬스터 수 갱신
+        if (stageManager != null)
         {
-            if (!dialogue.activeInHierarchy)
-            {
-                dialogue.SetActive(true);
-            }
-            string Name = data_Dialogue[DialogueNumber]["Character Name"].ToString();
-
-            // �̹��� ����
-            // ** ���� �ʿ��� ��1) csv�� ����� ĳ���� �̸��� �ѱ��ε�, ���ҽ����� Load�� �̸��� ����� ��.
-            // - ���̵��
-            // ��ȭ �̹����� ����� ĳ���Ͱ� ���� ������ Switch������ �޾ƿ� Name ��.
-            // dialogueImage.sprite = Resources.Load($"UI/Image/Characters/{Name}", typeof(Sprite)) as Sprite;
-
-            // �̸� ����
-            dialogueName.text = Name;
-
-            
-
-            dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
-            dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
-
-            Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
-            // ���� ����
-            StartCoroutine("TypeText");
+            NumOfEnemy = stageManager.enemies.Length;
         }
         else
         {
-            if (dialogue.activeInHierarchy) dialogue.SetActive(false);
+            Debug.Log("There's no stageManager!");
         }
+        numOfEnemy.text = NumOfEnemy.ToString();
     }
+    #endregion
+
 
     // Button
-    #region
-    public void ButtonPause()
-    {
-        // ���� �÷��� Pause ���
 
-        // �ٽ��ϱ�, Setting, ���� �� ���� UI ȣ��
-    }
-    #endregion
-
-    // Coroutine
-    #region
-    IEnumerator TypeText()
-    {
-        // ���ڿ��� ���ʴ�� �Է��ϴ� �ڷ�ƾ
-        for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
-        {
-            ;
-            dialogueContent.text = data_Dialogue[DialogueNumber]["Contents"].ToString().Substring(0, i);
-            yield return new WaitForSeconds(typingSpeed);
-        }
-
-        yield return new WaitForSeconds(dialogueTime);
-        if (dialogueIsContinuous == 1)
-        {
-            DialogueNumber++;
-            DialogueEvent(DialogueNumber);
-        }
-        else if (dialogueIsContinuous == 0)
-        {
-            isDialogue = false;
-            DialogueEvent(DialogueNumber);
-        }
-        yield return null;
-    }
-    #endregion
-
-    // Test
-    #region
-    private void FunctionTestStart()
-    {
-        // �� �Լ��� �����Ͽ�, �Ʒ� �����鿡 ���� ������ ���� �����մϴ�.
-
-        // �׽�Ʈ �ʱ�ȭ
-        PlayerHp = 100f;
-        BossHp = 100f;
-
-        // isDialogue = true; // ��簡 ��µ��� �����մϴ�.
-
-        PlayerMaxHp = PlayerHp;
-        BossMaxHp = BossHp;
-        GimmickPercent = 0f;
-        NumOfEnemy = 0;
-
-        CurrentBullet = 60;
-        MaxBullet = 60;
-
-        BossName = "Overflow"; // ���� ������ ���� �̸� ����
-        GimmickName = "Error404"; // ��� �̸� ����
-        WeaponName = "Weapon1"; // ���� ���� ���� ���� �̸� ����
-        
-        
-        InitWeaponInfo();
-        // DialogueEvent(0);
-    }
-
-    
-
-    private void FunctionTestUpdate()
-    {
-        // �׽�Ʈ ������Ʈ
-        if (PlayerHp == PlayerMaxHp)
-        {
-
-        }
-    }
-
-    IEnumerator TestCoroutine()
-    {
-        // �׽�Ʈ �ڷ�ƾ
-        // �÷��̾��� ü��, ������ ü��, ���̾�α��� ���� �� ����, �̴ϸ� �ϴ� ���� �� ����� �׽�Ʈ�մϴ�.
-
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        BossHp -= 10;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(1f);
-        PlayerHp--;
-        NumOfEnemy++;
-        yield return new WaitForSeconds(5f);
-        isBoss = false;
-        isGimmick = false;
-
-        yield return null;
-    }
-
-    IEnumerator TestCoroutineBullet()
-    {
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        CurrentBullet--;
-        yield return new WaitForSeconds(0.2f);
-        yield return null;
-    }
-    #endregion
 }
