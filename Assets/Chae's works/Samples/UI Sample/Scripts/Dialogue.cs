@@ -150,6 +150,7 @@ public class Dialogue : MonoBehaviour
     IEnumerator TypeText()
     {
         UIManager.instance.isCompletelyPrinted = false;
+        // 출력 과정
         // 문자열을 차례대로 입력하는 코루틴
         for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
         {
@@ -159,8 +160,21 @@ public class Dialogue : MonoBehaviour
         }
 
         UIManager.instance.isCompletelyPrinted = true;
+        // 출력이 다 된 후
+
+        if (!UIManager.instance.isAuto)
+        {
+            // 수동 넘기기
+            
+        }
+        else 
+        {
+            // 자동 넘기기
+            
+        }
 
         yield return new WaitForSeconds(dialogueTime / UIManager.instance.printSpeed);
+
         if (dialogueIsContinuous == 1)
         {
             DialogueNumber++;

@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     public int ScenarioNumber; // 현재 시나리오 넘버
     public int DialogueNumber; // 현재 csv 파일의 라인 넘버
     public bool isCompletelyPrinted; // SkipAndNext 함수를 위해 필요. 텍스트의 완전한 출력 여부 판단
+    public bool doNext;
 
     [Header("Option")]
     public bool isAuto;

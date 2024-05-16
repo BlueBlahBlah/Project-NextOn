@@ -14,7 +14,7 @@ public class Scenario1 : MonoBehaviour
         if (SceneContainer.instance != null)
         {
             SceneContainer.instance.currentScene = "Scenario1 Scene";
-            SceneContainer.instance.nextScene = "next scene";
+            SceneContainer.instance.nextScene = "DemoStage";
         }
         
         if (UIManager.instance != null)
@@ -37,7 +37,13 @@ public class Scenario1 : MonoBehaviour
 
     public void PrintLongDialogue()
     {
-        UIManager.instance.DialogueEventByNumber(UIManager.instance.longDialogue, UIManager.instance.DialogueNumber);
+        UIManager.instance.DialogueEventByNumber(UIManager.instance.longDialogue
+            , UIManager.instance.DialogueNumber);
+    }
+
+    public void ChangeScene()
+    {
+        LoadingManager.ToLoadScene();
     }
 
     // test

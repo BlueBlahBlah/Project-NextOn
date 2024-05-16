@@ -301,7 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Darkness: {fileID: 9042870507425485874}
   Spark: {fileID: 0}
-  characterPixelAnim: {fileID: 8781667807107253958}
+  characterPixel: {fileID: 7612630744805789014}
 --- !u!1 &8401669866982206344
 GameObject:
   m_ObjectHideFlags: 0
