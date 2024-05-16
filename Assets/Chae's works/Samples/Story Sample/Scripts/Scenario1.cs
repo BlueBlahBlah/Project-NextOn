@@ -29,12 +29,6 @@ public class Scenario1 : MonoBehaviour
         // StartCoroutine("StartScenario1");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void PrintLongDialogue()
     {
         UIManager.instance.DialogueEventByNumber(UIManager.instance.longDialogue
@@ -61,6 +55,9 @@ public class Scenario1 : MonoBehaviour
 
         // 키보드 사운드 출력
         // yield return new WaitForSeconds(5f);
+        // ***** 연출 관련 매커니즘 수정 필요 *****
+
+
 
         PrintLongDialogue();
         yield return new WaitForSeconds(7f); // 대사 출력 방법을 수동으로 변경할 시, 코루틴 동작 변경 필요

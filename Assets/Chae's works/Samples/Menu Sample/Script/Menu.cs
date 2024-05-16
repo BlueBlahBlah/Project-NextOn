@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour
+public class Menu : MonoBehaviour
 {
+    [SerializeField]
+    public GameObject Setting;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +27,18 @@ public class MenuManager : MonoBehaviour
         // 2. Loading Scene 으로 이동한 뒤 로딩을 거쳐 2차적으로 nextScene 으로 이동
 
         LoadingManager.ToLoadScene();
+    }
+
+    public void OpenSetting() { Setting.SetActive(true); }
+
+    public void CloseSetting() { Setting.SetActive(false); }
+
+    public void DoExit()
+    {
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #else 
+        Application.Quit();  
+    #endif
     }
 }

@@ -165,15 +165,15 @@ public class Dialogue : MonoBehaviour
         if (!UIManager.instance.isAuto)
         {
             // 수동 넘기기
-            
+            // RunLoop 라는 무한루프 코루틴 시작
+            // Dialogue UI에서 Next를 실행하면 루프가 종료되며 다음 넘어감
+            yield return StartCoroutine("RunLoop");
         }
         else 
         {
-            // 자동 넘기기
-            
+            yield return new WaitForSeconds(dialogueTime / UIManager.instance.printSpeed);
         }
 
-        yield return new WaitForSeconds(dialogueTime / UIManager.instance.printSpeed);
 
         if (dialogueIsContinuous == 1)
         {
@@ -188,6 +188,19 @@ public class Dialogue : MonoBehaviour
         UIManager.instance.DialogueNumber++;
 
         yield return null;
+    }
+
+    IEnumerator RunLoop()
+    {
+        while (true)
+        {
+            if (!UIManager.instance.doNext) yield return null;
+            else
+            {
+                UIManager.instance.doNext = false;
+                yield break;
+            }
+        }
     }
     #endregion
 }

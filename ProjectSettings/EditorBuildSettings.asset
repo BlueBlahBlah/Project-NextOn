@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Chae's works/Scene/Scenario1 Scene.unity
     guid: 1738e956bb8853f4093b084798915578
+  - enabled: 1
+    path: Assets/Scenes/DemoStage.unity
+    guid: e8d6038da9e79d54cbce917fa3e1fa39
   m_configObjects: {}
