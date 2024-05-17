@@ -48,17 +48,34 @@ public class EventManager : MonoBehaviour
     public bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
     public bool Wave2MonsterClear;
 
+    [SerializeField] private GameObject Joystick;
+    [SerializeField] private GameObject FireBtn;
+    [SerializeField] private GameObject SkillBtn;
+    [SerializeField] private GameObject[] JoyStickDirection;
+
+    [SerializeField] private GameObject FirstPickupRifle;
+
     public bool isPause;                                    //시간이 멈추었는지
     
     
     // Start is called before the first frame update
     void Start()
     {
-        UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점)
-        //PrintLongDialogue();
+        Joystick.SetActive(true);
+        FireBtn.SetActive(false);
+        SkillBtn.SetActive(false);
+        EventBtn.SetActive(false);
         Area3 = false;
         Wave2MonsterClear = false;
         isPause = false;
+        FirstPickupRifle.SetActive(false);
+        foreach (GameObject g in JoyStickDirection)
+        {
+            g.SetActive(false);
+        }
+        
+        UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점)
+        PrintLongDialogue();
     }
     
     public void PrintLongDialogue()
@@ -73,7 +90,22 @@ public class EventManager : MonoBehaviour
         //스택몬스터 20 게이지 채우면 모두 삭제
         if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
             MonsterManager.Instance.Clear_Wave2_Monsters();
+
+        if (UIManager.instance.DialogueNumber == 59 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            foreach (GameObject g in JoyStickDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+        }
+        else if (UIManager.instance.DialogueNumber == 61 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            FirstPickupRifle.SetActive(true);       //총기 떨어짐
+        }
+            
     }
+    
+   
     void TimeStop()
     {
         Time.timeScale = 0;    //게임 일시정지
@@ -109,9 +141,11 @@ public class EventManager : MonoBehaviour
         Peiz3Monster_2.SetActive(true);
     }
 
-    public void FirstWelcomeMSG()
+    public void PrintMSG()
     {
-        //첫번째 패널 진행
+        UIManager.instance.DialogueNumber++;
+        PrintLongDialogue();
     }
+    
     
 }
