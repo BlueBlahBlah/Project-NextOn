@@ -465,6 +465,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441615014}
   m_CullTransparentMesh: 1
+--- !u!1 &477795575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 477795576}
+  m_Layer: 5
+  m_Name: TextContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &477795576
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477795575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1449457230}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &986180521
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,7 +917,7 @@ GameObject:
   - component: {fileID: 1449457231}
   - component: {fileID: 1449457233}
   m_Layer: 5
-  m_Name: BackGround
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -904,6 +939,7 @@ RectTransform:
   - {fileID: 1266440620}
   - {fileID: 199314662}
   - {fileID: 441615015}
+  - {fileID: 477795576}
   m_Father: {fileID: 1528659216}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1137,7 +1173,7 @@ GameObject:
   - component: {fileID: 1528659213}
   - component: {fileID: 1528659217}
   m_Layer: 5
-  m_Name: Menu UI
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1192,7 +1228,7 @@ Canvas:
   m_GameObject: {fileID: 1528659212}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 986180523}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1574,6 +1610,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877601218}
   m_CullTransparentMesh: 1
+--- !u!1 &2030444748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2030444750}
+  - component: {fileID: 2030444749}
+  m_Layer: 0
+  m_Name: TextSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2030444749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030444748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322133607058e31489a9db8c14f6e28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPrefabs:
+  - {fileID: 560818452928402400, guid: b1e9c33be2343df41b198b8c4ddb6609, type: 3}
+  - {fileID: 560818452928402400, guid: 0f0080b0bef481546b6539ebb808881d, type: 3}
+  - {fileID: 560818452928402400, guid: a2ceb673f4a605d488e0ec8186f01b3f, type: 3}
+  canvasRect: {fileID: 1528659216}
+  TextContainer: {fileID: 477795576}
+  spawnInterval: 0.3
+--- !u!4 &2030444750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030444748}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -40.69752, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8598102072897314012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1640,3 +1727,4 @@ SceneRoots:
   - {fileID: 1528659216}
   - {fileID: 1725240442}
   - {fileID: 8598102072897314012}
+  - {fileID: 2030444750}
