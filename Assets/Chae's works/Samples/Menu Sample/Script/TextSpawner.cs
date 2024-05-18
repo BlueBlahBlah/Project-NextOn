@@ -6,7 +6,7 @@ public class TextSpawner : MonoBehaviour
 {
     public GameObject[] textPrefabs; // 서로 다른 3개의 텍스트 프리팹을 저장하는 배열.
     public RectTransform canvasRect; // Canvas의 RectTransform을 연결하세요.
-    public Transform TextContainer;
+    public Transform Container;
     public float spawnInterval = 1f; // 텍스트가 생성되는 간격.
 
     void Start()
@@ -36,7 +36,7 @@ public class TextSpawner : MonoBehaviour
         }
 
         // 선택된 텍스트 프리팹을 스폰
-        GameObject newText = Instantiate(selectedPrefab, TextContainer);
+        GameObject newText = Instantiate(selectedPrefab, Container);
         FallingText fallingText = newText.GetComponent<FallingText>();
 
         // FallingText 스크립트에 Canvas를 설정
