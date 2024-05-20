@@ -1082,7 +1082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6393943713049481752, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8645688777342820538, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
       propertyPath: m_Pivot.x
@@ -1629,6 +1629,12 @@ MonoBehaviour:
   inGameUI: {fileID: 0}
   longDialogue: {fileID: 0}
   shortDialogue: {fileID: 0}
+  ScenarioNumber: 0
+  DialogueNumber: 0
+  isCompletelyPrinted: 0
+  doNext: 0
+  isAuto: 0
+  printSpeed: 1
 --- !u!4 &2060444617
 Transform:
   m_ObjectHideFlags: 0
