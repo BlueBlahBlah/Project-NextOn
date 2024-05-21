@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 358301868}
   m_Layer: 5
-  m_Name: SFX
+  m_Name: SE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1956,7 +1956,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1740359680}
-  textMeshPro: {fileID: 1877601220}
 --- !u!1 &1771286244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2619,7 +2618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   glitchPrefab: {fileID: 39220599976271077, guid: ece1b7fe5896ffb4ba9fc2d08e9dec24, type: 3}
   canvasRect: {fileID: 1528659216}
-  spawnInterval: 0.5
+  spawnInterval: 0.3
   Container: {fileID: 477795576}
 --- !u!1 &2076037436
 GameObject:
