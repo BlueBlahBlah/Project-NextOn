@@ -15,6 +15,7 @@ MonoImporter:
   - Skill_Spark: {fileID: 7185692574580326484, guid: 5b50e58805acd4243a6b6151c902359c, type: 3}
   - Skill_Lightning: {fileID: 1932044764938372624, guid: 24e2c0651714cb34dac9ca2c1ee7f232, type: 3}
   - Skill_DelayZone: {fileID: 2758280597665029652, guid: 2d6ebca998a6b3e43bff8c4adc299660, type: 3}
+  - Skill_Laser: {fileID: 1268243903662671671, guid: 1c6a25cb7036eef4a8c14e645c67e2fa, type: 3}
   - Skill_Stun_LV1: {fileID: 5697428195824640995, guid: f1e3b40e48b9e35489f430adcc1a2f67, type: 3}
   - Skill_Stun_LV2: {fileID: 7672256902484804024, guid: 590504f151a005a44a54275419ec529f, type: 3}
   - Skill_Stun_LV3: {fileID: 5886203570261786116, guid: db9945021675f914d9180f64d2e65b88, type: 3}

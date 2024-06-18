@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player_Skill : MonoBehaviour
 {
     private float skill_power = 10.0f;      //스킬 피해량
-    private float skill_inrease = 1.0f;     //스킬 피해 증가량
+    private float skill_inrease = 1000.0f;     //스킬 피해 증가량
     private float heal = 10.0f;             //회복량
     private float heal_increase = 1.0f;     //회복 증가량
     private float Skill_Round = 2.0f;       //스킬 실행 원길이
@@ -35,6 +35,8 @@ public class Player_Skill : MonoBehaviour
     public GameObject Skill_Spark;
     public GameObject Skill_Lightning;
     public GameObject Skill_DelayZone;
+    public GameObject Skill_Laser;
+    private bool Laser; //Lv1 = true && Lv2 = true && Lv3 = false
     [Header("StunSKill")]
     public GameObject Skill_Stun_LV1;
     public GameObject Skill_Stun_LV2;
@@ -59,18 +61,21 @@ public class Player_Skill : MonoBehaviour
             FireGuard = Skill_FireGuard_LV1;
             FireMine = Skill_FireMine_LV1;
             Stun = Skill_Stun_LV1;
+            Laser = true;
         }
         else if(skill_inrease > 100)
         {
             FireGuard = Skill_FireGuard_LV2;
             FireMine = Skill_FireMine_LV2;
             Stun = Skill_Stun_LV2;
+            Laser = true;
         }
         else
         {
             FireGuard = Skill_FireGuard_LV3;
             FireMine = Skill_FireMine_LV3;
             Stun = Skill_Stun_LV3;
+            Laser = false;
         }
 
     }
@@ -152,31 +157,61 @@ public class Player_Skill : MonoBehaviour
     private void P_Skill_Spark()
     {
         GameObject Lightning, Delay;
-        particleSystemObject = Instantiate(Skill_Spark, new Vector3(PlayerTr.position.x, PlayerTr.position.y + 3f, PlayerTr.position.z), Quaternion.identity);
-        particleSystemObject.transform.parent = this.transform;
-
-        Collider[] colliders = Physics.OverlapSphere(PlayerTr.position, Skill_Round * 3);
-        if (colliders.Length > 0)
+        if (Laser)  //레벨1 ,2 인경우
         {
-            foreach (Collider collider in colliders)
+            particleSystemObject = Instantiate(Skill_Spark, new Vector3(PlayerTr.position.x, PlayerTr.position.y + 3f, PlayerTr.position.z), Quaternion.identity);
+            particleSystemObject.transform.parent = this.transform;
+
+            Collider[] colliders = Physics.OverlapSphere(PlayerTr.position, Skill_Round * 3);
+            if (colliders.Length > 0)
             {
-                if (collider.tag == "Enemy")
+                foreach (Collider collider in colliders)
                 {
-                    Vector3 enemyPosition = collider.transform.position;
-                    Lightning = Instantiate(Skill_Lightning, new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z), Quaternion.identity);
-                    Delay = Instantiate(Skill_DelayZone, new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z), Quaternion.identity);
-                    Delay.transform.parent = collider.transform;
+                    if (collider.tag == "Enemy")
+                    {
+                        Vector3 enemyPosition = collider.transform.position;
+                        Lightning = Instantiate(Skill_Lightning, new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z), Quaternion.identity);
+                        Delay = Instantiate(Skill_DelayZone, new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z), Quaternion.identity);
+                        Delay.transform.parent = collider.transform;
 
-                    /*
-                     * 해당 collider 적들에게 대미지 부가
-                     */
+                        /*
+                         * Lv1 , Lv2 일때의 해당 부분이 실행됨
+                         * 해당 collider 적들에게 대미지 부가
+                         */
 
-                    StartCoroutine(WaitAndDestroy(particleSystemObject, Lightning,Delay, collider,2f));
+                        StartCoroutine(WaitAndDestroy(particleSystemObject, Lightning, Delay, collider, 2f));
+                    }
+
                 }
-
             }
         }
+        else  //레벨3인 경우
+        {
+            particleSystemObject = Instantiate(Skill_Spark, new Vector3(PlayerTr.position.x, PlayerTr.position.y + 3f, PlayerTr.position.z), Quaternion.identity);
+            particleSystemObject.transform.parent = this.transform;
+            Collider[] colliders = Physics.OverlapSphere(PlayerTr.position, Skill_Round * 3);
+            
+            if (colliders.Length > 0)
+            {
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.tag == "Enemy")
+                    {
+                        Vector3 enemyPosition = collider.transform.position;
+                        Lightning = Instantiate(Skill_Laser, new Vector3(enemyPosition.x, enemyPosition.y + 30.0f, enemyPosition.z), Quaternion.identity);
+                        Delay = Instantiate(Skill_DelayZone, new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z), Quaternion.identity);
+                        Delay.transform.parent = collider.transform;
 
+                        /*
+                         * Lv3일 경우 해당부분이 실행됨
+                         * 해당 collider 적들에게 대미지 부가
+                         */
+
+                        StartCoroutine(WaitAndDestroy(particleSystemObject, Lightning, Delay, collider, 10f));
+                    }
+                }
+            }
+        }
     }
 
     private void P_Skill_Stun()
@@ -193,12 +228,12 @@ public class Player_Skill : MonoBehaviour
 
                     /*
                      * 해당 collider 적들에게 대미지 부가
+                     * 
                      */
                     StartCoroutine(WaitAndDestroy(particleSystemObject, null, null, collider, 3.5f));
                 }
 
             }
-            Debug.Log("STUN END");
         }
     }
 
