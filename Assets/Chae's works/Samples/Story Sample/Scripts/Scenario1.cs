@@ -53,7 +53,7 @@ public class Scenario1 : MonoBehaviour
 
         // 대사 출력1
         PrintLongDialogue();
-        yield return new WaitForSeconds(7f); // 대사 출력 방법을 수동으로 변경할 시, 코루틴 동작 변경 필요
+        yield return new WaitForSeconds(1f); // 대사 출력 방법을 수동으로 변경할 시, 코루틴 동작 변경 필요
         yield return StartCoroutine("RunLoopUntilDone");
         yield return new WaitForSeconds(1f);
 
