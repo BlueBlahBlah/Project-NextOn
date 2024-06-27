@@ -103,6 +103,7 @@ public class PlayerManager : MonoBehaviour
     
     public void ChangeWeapon(WeaponType Wt, GameObject Weapon)
     {
+        //모델링 활성화
         if (Wt == WeaponType.closeType)
         {
             player_LongWeapon.SetActive(false);
@@ -123,6 +124,7 @@ public class PlayerManager : MonoBehaviour
             player_NonWeapon.SetActive(true);
             player_CloseWeapon.SetActive(false);
         }
+        //무기 활성화
         foreach (GameObject g in player_WeaponList)
         {
             if (Weapon == g)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI; // Nav 관련 클래스는 UnityEngine.AI 네임스페이스 사용
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour
     NavMeshAgent nav; // Nav Agent를 사용하기 위해서는 Nav Mesh 생성 필수
     // NavMesh : NavAgent가 경로를 그리기 위한 바탕(Mesh)
     Animator anim;
+    private CapsuleCollider _capsuleCollider;
 
     void Awake() 
     {
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
         mat = GetComponentInChildren<MeshRenderer>().material; // Material은 Mesh Render 컴포넌트를 통해서 접근 가능
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
+        _capsuleCollider = GetComponent<CapsuleCollider>();
 
         Invoke("ChaseStart", 1); // 1초 뒤 추적 개시
     }
@@ -82,5 +85,18 @@ public class Enemy : MonoBehaviour
    public void startNav()
    {
        nav.Resume();
+   }
+   
+   public void SetNavSpeed(float s)
+   {
+       nav.speed = s;
+   }
+
+   //처치되면 모든 콜라이더 비활성화
+   public void Death_Collider_False()
+   {
+       //AttackArea는 공격을 가로막을 일이 없기때문에 생략
+       nav.enabled = false;
+       _capsuleCollider.enabled = false;
    }
 }

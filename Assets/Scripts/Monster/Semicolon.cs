@@ -40,8 +40,12 @@ public class Semicolon : Enemy
     {
         if (IsDeath == true)  //죽은경우
         {
+            if (GetComponent<Enemy>().isChase == true)                  //update안에서 오류가 너무 많이 발생하지 않도록하기 위함
+            {
+                GetComponent<Enemy>().stopNav();
+                GetComponent<Enemy>().Death_Collider_False();           //콜라이더 비활성화
+            }
             GetComponent<Enemy>().isChase = false;
-            GetComponent<Enemy>().stopNav();
             Destroy(gameObject,3f);
         }
         else        //살아있는경우

@@ -29,6 +29,7 @@ public class BulletRifle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Debug.LogError(other.tag + " " + other.name);
         int TempDamage =  DamageManager.Instance.Rifle_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {

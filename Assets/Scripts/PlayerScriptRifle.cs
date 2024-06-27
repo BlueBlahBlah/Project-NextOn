@@ -63,7 +63,7 @@ public class PlayerScriptRifle : MonoBehaviour
                 isMovingRight = false;
                 isMovingForward = false;
                 isMovingBackward = false;
-                playerMovingScript.walkSpeed = 3;
+                playerMovingScript.walkSpeed = 5;
 
             }
             else if (angle < -45f && angle > -135f)
@@ -72,7 +72,7 @@ public class PlayerScriptRifle : MonoBehaviour
                 isMovingLeft = false;
                 isMovingForward = false;
                 isMovingBackward = false;
-                playerMovingScript.walkSpeed = 3;
+                playerMovingScript.walkSpeed = 5;
             }
             else if(angle > 70 || angle < -70)
             {
@@ -82,13 +82,13 @@ public class PlayerScriptRifle : MonoBehaviour
                 {
                     isMovingForward = true;
                     isMovingBackward = false;
-                    playerMovingScript.walkSpeed = 3;
+                    playerMovingScript.walkSpeed = 5;
                 }
                 else
                 {
                     isMovingForward = false;
                     isMovingBackward = true;
-                    playerMovingScript.walkSpeed = 3;
+                    playerMovingScript.walkSpeed = 5;
                 }
             }
             else
@@ -97,7 +97,7 @@ public class PlayerScriptRifle : MonoBehaviour
                 isMovingBackward = false;
                 isMovingLeft = false;
                 isMovingRight = false;
-                playerMovingScript.walkSpeed = 3;
+                playerMovingScript.walkSpeed = 5;
             }
             // 움직임 처리
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);

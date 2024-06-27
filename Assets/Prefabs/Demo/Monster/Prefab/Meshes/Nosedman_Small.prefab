@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7881951733673435739}
   - component: {fileID: 6205273567847302269}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,12 +553,14 @@ MonoBehaviour:
   curHealth: 3
   target: {fileID: 0}
   isChase: 0
-  identity: 0
+  identity: 1
   isInStack: 0
   damaged: {fileID: 4549694754306120695, guid: 27857f3a52e694b46b8dced61afc04c0, type: 3}
   hpBar: {fileID: 1228979137706646591}
   capsulCollider: {fileID: 0}
   AttackArea: {fileID: 6205273567847302269}
+  MsgTimer: 0
+  MsgAgainTime: 0
 --- !u!195 &4426102411652856197
 NavMeshAgent:
   m_ObjectHideFlags: 0

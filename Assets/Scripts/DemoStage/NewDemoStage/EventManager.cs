@@ -61,7 +61,7 @@ public class EventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Joystick.SetActive(true);
+        Joystick.SetActive(false);
         FireBtn.SetActive(false);
         SkillBtn.SetActive(false);
         EventBtn.SetActive(false);
@@ -97,10 +97,20 @@ public class EventManager : MonoBehaviour
             {
                 g.SetActive(true);                  //화살표 켜지기
             }
+            Joystick.SetActive(true);
         }
         else if (UIManager.instance.DialogueNumber == 61 && UIManager.instance.isCompletelyPrinted == true)
         {
             FirstPickupRifle.SetActive(true);       //총기 떨어짐
+        }
+        else if (UIManager.instance.DialogueNumber == 64 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            FireBtn.SetActive(true);
+            MonsterManager.Instance.Appearance_First_Monster();
+        }
+        else if (UIManager.instance.DialogueNumber == 71 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            SkillBtn.SetActive(true);
         }
             
     }
@@ -141,6 +151,7 @@ public class EventManager : MonoBehaviour
         Peiz3Monster_2.SetActive(true);
     }
 
+    //타 클래스에서 대화창을 재개하는 경우 호출
     public void PrintMSG()
     {
         UIManager.instance.DialogueNumber++;

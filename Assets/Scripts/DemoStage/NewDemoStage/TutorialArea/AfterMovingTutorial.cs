@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AfterMovingTutorial : MonoBehaviour
 {
-    [SerializeField] private bool Active;
+    [SerializeField] private bool Active;       //발동했는지? 한번 발동하면 다시 발동하지 않도록
     // Start is called before the first frame update
     void Start()
     {

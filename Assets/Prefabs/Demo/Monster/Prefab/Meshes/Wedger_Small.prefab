@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6251823640535486862}
   - component: {fileID: 5791506045705158994}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,6 +546,8 @@ MonoBehaviour:
   hpBar: {fileID: 7645258579180394461}
   capsulCollider: {fileID: 0}
   AttackArea: {fileID: 5791506045705158994}
+  MsgTimer: 0
+  MsgAgainTime: 0
 --- !u!195 &6788663815973403880
 NavMeshAgent:
   m_ObjectHideFlags: 0
