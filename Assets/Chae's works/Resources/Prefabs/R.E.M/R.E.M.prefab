@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766199623890668298}
   - component: {fileID: 658455980819196754}
+  - component: {fileID: 6821854635402020284}
   m_Layer: 0
   m_Name: R.E.M
   m_TagString: Untagged
@@ -49,6 +50,23 @@ MonoBehaviour:
   speed: 2
   floatAmplitude: 0.2
   floatFrequency: 3
+  timeSinceLastAction: 0
+  actionInterval: 5
+  timeElapsed: 0
+--- !u!114 &6821854635402020284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236980773946907710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbeca22f2b8839a418be6e9cb6d3a34a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 1
+  isActioning: 0
 --- !u!1001 &2587947527641572265
 PrefabInstance:
   m_ObjectHideFlags: 0

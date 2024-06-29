@@ -448,6 +448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152233079}
+  - component: {fileID: 1152233080}
   m_Layer: 0
   m_Name: '@RemManager'
   m_TagString: Untagged
@@ -470,6 +471,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1152233080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152233078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5644d962dfd7cda409c8f19f51b69c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  isNear: 0
 --- !u!1 &1533667916
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +602,10 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 1533667916}
+    - target: {fileID: 658455980819196754, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
+      propertyPath: actionInterval
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1236980773946907710, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
       propertyPath: m_Name
       value: R.E.M

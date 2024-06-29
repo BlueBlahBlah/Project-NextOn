@@ -4,40 +4,55 @@ using UnityEngine;
 
 public class RemController : MonoBehaviour
 {
+    [Header("Move")]
     public GameObject Target; // 타겟 객체
     public float speed = 2.0f; // 이동 속도
     public float floatAmplitude = 0.5f; // 부유하는 높이 진폭
     public float floatFrequency = 1.0f; // 부유하는 속도
 
     private List<UtilityAction> actions = new List<UtilityAction>();
-    private float timeSinceLastAction = 0.0f; // 지난 행동 이후 경과된 시간
-    private const float actionInterval = 5.0f; // 5초 간격
+
+    [Header("System")]
+    [SerializeField]
+    public float timeSinceLastAction = 0.0f; // 지난 행동 이후 경과된 시간
+    [SerializeField]
+    private float actionInterval = 5.0f; // 의도한 행동 간격
+    [SerializeField]
+    private float timeElapsed = 0.0f; // 경과 시간
 
     private float initialRotationX;
-    private float timeElapsed = 0.0f; // 경과 시간
+    private RemAction remAction;
 
     void Start()
     {
+        remAction = this.gameObject.GetComponent<RemAction>();
+
         initialRotationX = transform.eulerAngles.x;
 
         // 행동 정의와 추가
         actions.Add(new UtilityAction(
             "Heal",
-            () => RemTestManager.instance.hp < 30 ? 1.0f / RemTestManager.instance.hp : 0, // 체력이 낮을수록 유틸리티 증가
-            () => RemAction.Heal() // RemAction을 통한 치유 행동
-        ));
+            () => RemTestManager.instance.hp < 50 ? 1.0f / RemTestManager.instance.hp : 0, // 체력이 낮을수록 유틸리티 증가
+            () => remAction.Heal()
+            ));
 
         actions.Add(new UtilityAction(
             "DeployShield",
-            () => RemTestManager.instance.hp < 50 ? (100 - RemTestManager.instance.hp) / 50.0f : 0, // 체력이 50% 이하일 때 유틸리티 증가
-            () => RemAction.DeployShield() // RemAction을 통한 방어막 전개 행동
-        ));
+            () => RemTestManager.instance.hp < 90 ? (100 - RemTestManager.instance.hp) / 50.0f : 0, // 체력이 50% 이하일 때 유틸리티 증가
+            () => remAction.DeployShield()
+            ));
 
         actions.Add(new UtilityAction(
             "Attack",
-            () => RemTestManager.instance.isNear ? 1.0f : 0, // 적이 가까울 때 유틸리티 증가
-            () => RemAction.Attack() // RemAction을 통한 공격 행동
-        ));
+            () => (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 80.0f : 0, // 적이 가까울 때 유틸리티 증가
+            () => remAction.Attack()
+            ));
+
+        actions.Add(new UtilityAction(
+            "Debuff",
+            () => (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 79.0f : 0,
+            () => remAction.Debuff()
+            ));
     }
 
     void Update()
@@ -46,14 +61,13 @@ public class RemController : MonoBehaviour
         timeElapsed += Time.deltaTime;
 
         // 5초 간격으로 실행
-        if (timeSinceLastAction >= actionInterval)
+        if (timeSinceLastAction >= actionInterval && !remAction.isActioning)
         {
             SelectAndExecuteBestAction();
-            timeSinceLastAction = 0.0f; // 시간 초기화
         }
 
         // Target과의 거리 확인 및 이동
-        if (Target != null)
+        if (Target != null && remAction.isMovable)
         {
             MoveTowardsTarget();
         }
