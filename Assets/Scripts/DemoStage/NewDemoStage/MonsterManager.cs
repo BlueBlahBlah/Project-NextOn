@@ -58,6 +58,10 @@ public class MonsterManager : MonoBehaviour
     public List<GameObject> First_Monsters;
     public bool First_Monsters_Clear;   //첫 조우 몬스터 모두 처치되었는지
     
+    [Header("Second_Monster")]    //첫 조우 몬스터 관련
+    public List<GameObject> Second_Monsters;
+    public bool Second_Monsters_Clear;   //첫 조우 몬스터 모두 처치되었는지
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -66,9 +70,14 @@ public class MonsterManager : MonoBehaviour
         StackIndex = 0;
         Gauge = 0;
         First_Monsters_Clear = false;
+        Second_Monsters_Clear = false;
         
         //첫 조우 몬스터 비활성화
         foreach (GameObject E in First_Monsters)
+        {
+            E.SetActive(false);
+        }
+        foreach (GameObject E in Second_Monsters)
         {
             E.SetActive(false);
         }
@@ -87,6 +96,24 @@ public class MonsterManager : MonoBehaviour
              {
                  First_Monsters_Clear = true;
                  EventManager.Instance.PrintMSG();              //다음 대화로
+             }
+         }
+
+         if (Second_Monsters_Clear == false)
+         {
+             bool allMonstersDestroyed = true;
+             foreach (GameObject monster in Second_Monsters)
+             {
+                 if (monster != null)
+                 {
+                     allMonstersDestroyed = false;
+                     break;
+                 }
+             }
+             if (allMonstersDestroyed == true)
+             {
+                 Second_Monsters_Clear = true;
+                 EventManager.Instance.PrintMSG();      //다음대화로
              }
          }
          
@@ -197,6 +224,17 @@ public class MonsterManager : MonoBehaviour
     {
         //활성화 후 움직임
         foreach (GameObject E in First_Monsters)
+        {
+            E.SetActive(true);
+            E.GetComponent<Enemy>().SetNavSpeed(3.5f);
+        }
+    }
+    
+    //두번째 조우 몬스터 조작 함수
+    public void Appearance_Seconde_Monster()
+    {
+        //활성화 후 움직임
+        foreach (GameObject E in Second_Monsters)
         {
             E.SetActive(true);
             E.GetComponent<Enemy>().SetNavSpeed(3.5f);

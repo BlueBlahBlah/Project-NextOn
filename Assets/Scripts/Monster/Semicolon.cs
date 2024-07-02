@@ -123,7 +123,7 @@ public class Semicolon : Enemy
             if (col.CompareTag("Player"))
             {
                 PlayerManager.Instance.Health -= Damage;
-                Debug.LogError("몬스터 공격 성공");
+                //Debug.LogError("몬스터 공격 성공");
             }
         }
     }

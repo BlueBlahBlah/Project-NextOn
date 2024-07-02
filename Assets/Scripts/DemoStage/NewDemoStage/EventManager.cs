@@ -54,6 +54,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject[] JoyStickDirection;
 
     [SerializeField] private GameObject FirstPickupRifle;
+    [SerializeField] private GameObject SecondPickUpSword;
 
     public bool isPause;                                    //시간이 멈추었는지
     
@@ -69,6 +70,7 @@ public class EventManager : MonoBehaviour
         Wave2MonsterClear = false;
         isPause = false;
         FirstPickupRifle.SetActive(false);
+        SecondPickUpSword.SetActive(false);
         foreach (GameObject g in JoyStickDirection)
         {
             g.SetActive(false);
@@ -110,7 +112,12 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 71 && UIManager.instance.isCompletelyPrinted == true)
         {
+            SecondPickUpSword.SetActive(true);       //근접무기 떨어짐
             SkillBtn.SetActive(true);
+        }
+        else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            MonsterManager.Instance.Appearance_Seconde_Monster();
         }
             
     }
