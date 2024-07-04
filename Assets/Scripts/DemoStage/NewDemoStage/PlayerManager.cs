@@ -37,6 +37,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject player_CloseWeapon;
     [SerializeField] private List<GameObject> player_WeaponList;
     [SerializeField] private Button attackBtn;
+    
+    public DropItemPosition _dropItemPosition;
 
     
     

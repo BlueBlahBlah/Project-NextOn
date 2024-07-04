@@ -53,8 +53,8 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject SkillBtn;
     [SerializeField] private GameObject[] JoyStickDirection;
 
-    [SerializeField] private GameObject FirstPickupRifle;
-    [SerializeField] private GameObject SecondPickUpSword;
+    private bool FirstPickupRifle;
+    private bool SecondPickUpSword;
 
     public bool isPause;                                    //시간이 멈추었는지
     
@@ -69,8 +69,8 @@ public class EventManager : MonoBehaviour
         Area3 = false;
         Wave2MonsterClear = false;
         isPause = false;
-        FirstPickupRifle.SetActive(false);
-        SecondPickUpSword.SetActive(false);
+        FirstPickupRifle = false;
+        SecondPickUpSword = false;
         foreach (GameObject g in JoyStickDirection)
         {
             g.SetActive(false);
@@ -103,7 +103,13 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 61 && UIManager.instance.isCompletelyPrinted == true)
         {
-            FirstPickupRifle.SetActive(true);       //총기 떨어짐
+            //FirstPickupRifle.SetActive(true);       //총기 떨어짐
+            if (FirstPickupRifle == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.ChangeWeaponRifle);
+                FirstPickupRifle = true;
+            }
+            
         }
         else if (UIManager.instance.DialogueNumber == 64 && UIManager.instance.isCompletelyPrinted == true)
         {
@@ -112,7 +118,12 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 71 && UIManager.instance.isCompletelyPrinted == true)
         {
-            SecondPickUpSword.SetActive(true);       //근접무기 떨어짐
+            //SecondPickUpSword.SetActive(true);       //근접무기 떨어짐
+            if (SecondPickUpSword == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.ChangeWeaponDemacia);
+                SecondPickUpSword = true;
+            }
             SkillBtn.SetActive(true);
         }
         else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)

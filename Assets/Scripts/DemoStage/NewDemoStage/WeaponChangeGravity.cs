@@ -11,6 +11,7 @@ public class WeaponChangeGravity : MonoBehaviour
     {
         _boxCollider = GetComponent<BoxCollider>();
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.useGravity = true;
     }
 
     // Update is called once per frame
