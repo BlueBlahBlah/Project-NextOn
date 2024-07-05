@@ -6,6 +6,7 @@ public class RemController : MonoBehaviour
 {
     [Header("Move")]
     public GameObject Target; // 타겟 객체
+    public GameObject Particle; // 불 이펙트
     public float speed = 2.0f; // 이동 속도
     public float floatAmplitude = 0.5f; // 부유하는 높이 진폭
     public float floatFrequency = 1.0f; // 부유하는 속도
@@ -101,6 +102,12 @@ public class RemController : MonoBehaviour
             // 타겟을 향해 이동
             Vector3 moveDirection = direction.normalized;
             transform.position += moveDirection * speed * Time.deltaTime;
+
+            // 파티클의 각도 변경
+        }
+        else
+        {
+            // 파티클의 각도 변경
         }
 
         // 타겟을 바라보도록 회전, x축 회전은 초기값을 유지
