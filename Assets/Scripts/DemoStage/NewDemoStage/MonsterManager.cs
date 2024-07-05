@@ -92,10 +92,19 @@ public class MonsterManager : MonoBehaviour
 
          if (First_Monsters_Clear == false)
          {
-             if (First_Monsters[0] == null && First_Monsters[1] == null && First_Monsters[2] == null)       //첫조우 몬스터가 모두 처치되었다면
+             bool allMonstersDestroyed = true;
+             foreach (GameObject monster in First_Monsters)
+             {
+                 if (monster != null)
+                 {
+                     allMonstersDestroyed = false;
+                     break;
+                 }
+             }
+             if (allMonstersDestroyed == true)
              {
                  First_Monsters_Clear = true;
-                 EventManager.Instance.PrintMSG();              //다음 대화로
+                 EventManager.Instance.PrintMSG();      //다음대화로
              }
          }
 
@@ -113,7 +122,8 @@ public class MonsterManager : MonoBehaviour
              if (allMonstersDestroyed == true)
              {
                  Second_Monsters_Clear = true;
-                 EventManager.Instance.PrintMSG();      //다음대화로
+                 //EventManager.Instance.PrintMSG();      //다음대화로
+                 //두번째 몬스터들(스킬사용부분)은 모두 처치해도 대화창 등장하지 않게
              }
          }
          

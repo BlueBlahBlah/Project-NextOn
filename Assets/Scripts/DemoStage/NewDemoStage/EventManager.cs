@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EventManager : MonoBehaviour
 {
@@ -51,9 +52,14 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject Joystick;
     [SerializeField] private GameObject FireBtn;
     [SerializeField] private GameObject SkillBtn;
-    [SerializeField] private GameObject[] JoyStickDirection;
+    [SerializeField] private GameObject[] FirstDirection;
+    [SerializeField] private GameObject[] SecondDirection;
+    [SerializeField] private GameObject[] ThirdDirection;
 
     private bool FirstPickupRifle;
+    private bool FirstPickUpBombSkill;
+    private bool FirstPickUpBulletSupply;
+    private bool SecondPickUpHelicopterSkill;
     private bool SecondPickUpSword;
 
     public bool isPause;                                    //시간이 멈추었는지
@@ -70,8 +76,19 @@ public class EventManager : MonoBehaviour
         Wave2MonsterClear = false;
         isPause = false;
         FirstPickupRifle = false;
+        FirstPickUpBombSkill = false;
+        FirstPickUpBulletSupply = false;
+        SecondPickUpHelicopterSkill = false;
         SecondPickUpSword = false;
-        foreach (GameObject g in JoyStickDirection)
+        foreach (GameObject g in FirstDirection)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in SecondDirection)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in ThirdDirection)
         {
             g.SetActive(false);
         }
@@ -95,7 +112,7 @@ public class EventManager : MonoBehaviour
 
         if (UIManager.instance.DialogueNumber == 59 && UIManager.instance.isCompletelyPrinted == true)
         {
-            foreach (GameObject g in JoyStickDirection)
+            foreach (GameObject g in FirstDirection)
             {
                 g.SetActive(true);                  //화살표 켜지기
             }
@@ -103,33 +120,70 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 61 && UIManager.instance.isCompletelyPrinted == true)
         {
-            //FirstPickupRifle.SetActive(true);       //총기 떨어짐
+            //총기 떨어짐
             if (FirstPickupRifle == false)
             {
-                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.ChangeWeaponRifle);
+                GameObject Item = PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.ChangeWeaponRifle);
+                Item.GetComponent<WeaponChangeGravity>().SetDialog();       //해당 아이템은 획득 시 대화창 나오기
                 FirstPickupRifle = true;
             }
-            
         }
         else if (UIManager.instance.DialogueNumber == 64 && UIManager.instance.isCompletelyPrinted == true)
         {
             FireBtn.SetActive(true);
             MonsterManager.Instance.Appearance_First_Monster();
         }
+        else if (UIManager.instance.DialogueNumber == 69 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            if (FirstPickUpBulletSupply == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.BulletSupply);     //탄 보충 아이템 떨어짐
+                FirstPickUpBulletSupply = true;
+            }
+        }
+        else if (UIManager.instance.DialogueNumber == 70 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            if (FirstPickUpBombSkill == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.SkillBomb);     //폭격스킬 떨어짐
+                FirstPickUpBombSkill = true;
+            }
+        }
         else if (UIManager.instance.DialogueNumber == 71 && UIManager.instance.isCompletelyPrinted == true)
         {
-            //SecondPickUpSword.SetActive(true);       //근접무기 떨어짐
+            foreach (GameObject g in SecondDirection)                           //2차 화살표 켜지기
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+            MonsterManager.Instance.Appearance_Seconde_Monster();               //두번째 몬스터들 등장
+        }
+        else if (UIManager.instance.DialogueNumber == 72 && MonsterManager.Instance.TotalMonsters <= 12)
+        {
+            //두번째 몬스터 절반정도 잡았을때
+            if (SecondPickUpHelicopterSkill == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.SkillHeilcopter);     //헬기스킬 떨어짐
+                SecondPickUpHelicopterSkill = true;
+            }
+        }
+        else if (UIManager.instance.DialogueNumber == 73 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            //근접무기 떨어짐
             if (SecondPickUpSword == false)
             {
                 PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.ChangeWeaponDemacia);
                 SecondPickUpSword = true;
             }
             SkillBtn.SetActive(true);
+            foreach (GameObject g in ThirdDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
         }
-        else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
+        /*else if (UIManager.instance.DialogueNumber == //75 && UIManager.instance.isCompletelyPrinted == true)
         {
-            MonsterManager.Instance.Appearance_Seconde_Monster();
-        }
+            
+        }*/
             
     }
     
