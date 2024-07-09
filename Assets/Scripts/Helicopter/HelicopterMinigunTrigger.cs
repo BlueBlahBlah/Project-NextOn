@@ -31,8 +31,9 @@ public class HelicopterMinigunTrigger : MonoBehaviour
         mainCameraScript = mainCamera.GetComponent<CameraAbove>();
         Player = GameObject.Find("Player");
 
-        LeftMuzzle.SetActive(false);
-        RightMuzzle.SetActive(false);
+        //LeftMuzzle.SetActive(false);
+        //RightMuzzle.SetActive(false);
+        isCameraMoving = false;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -51,8 +52,8 @@ public class HelicopterMinigunTrigger : MonoBehaviour
             {
                 spline.Play();  // 헬기 이동 시작
                 helicopterMinigunParticle.ParticleStart();  // 헬기 탄 이펙트 시작
-                LeftMuzzle.SetActive(true);  // 좌측 총구 시작
-                RightMuzzle.SetActive(true);  // 우측 총구 시작
+                //LeftMuzzle.SetActive(true);  // 좌측 총구 시작
+                //RightMuzzle.SetActive(true);  // 우측 총구 시작
                 Helicopter.transform.rotation = Quaternion.Euler(20f, -90f, 0f);  // 헬기 방향 조정
                 mainCameraScript.enabled = false;           //카메라 스크립트(카메라 위치) 비활성화
 
@@ -67,6 +68,7 @@ public class HelicopterMinigunTrigger : MonoBehaviour
     // 카메라를 부드럽게 이동시키는 코루틴
     private IEnumerator MoveCameraSmoothly(Vector3 targetPosition)
     {
+        Debug.LogError("헬기 카메라 이동 시작");
         isCameraMoving = true;
 
         float elapsedTime = 0f;

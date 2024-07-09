@@ -132,6 +132,7 @@ public class DropItemPosition : MonoBehaviour
                 break;
         }
         InitComponent<WeaponChangeGravity>(Item);
+        Item.GetComponent<WeaponChangeGravity>().TypeSelf = s;
         return Item;
     }
 

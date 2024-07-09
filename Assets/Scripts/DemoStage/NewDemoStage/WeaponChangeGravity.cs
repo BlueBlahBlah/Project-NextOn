@@ -6,6 +6,7 @@ public class WeaponChangeGravity : MonoBehaviour
 {
     [SerializeField] private BoxCollider _boxCollider;
     [SerializeField] private Rigidbody rigidbody;
+    public DropItemPosition.ItemList TypeSelf;
 
     public bool Dialog_After_Acquisition;       //해당 아이템 획득 시 대화창이 나오는지
     // Start is called before the first frame update
@@ -42,6 +43,16 @@ public class WeaponChangeGravity : MonoBehaviour
             Dialog_After_Acquisition = true;
         }
     }
+
+    private void DestroyLater()
+    {
+        Invoke("Invoke_Destroy", 1f);
+    }
+
+    private void Invoke_Destroy()
+    {
+        Destroy(this.gameObject);
+    }
     
     void OnTriggerEnter(Collider other)
     {
@@ -51,7 +62,16 @@ public class WeaponChangeGravity : MonoBehaviour
             {
                 EventManager.Instance.PrintMSG();
             }
-            Destroy(this.gameObject);
+            //헬리콥터 스킬의 경우 카메라 코루틴으로 인해 조금 있다가 삭제
+            if (TypeSelf == DropItemPosition.ItemList.SkillHeilcopter)
+            {
+                DestroyLater();
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+            
         }
         
     }

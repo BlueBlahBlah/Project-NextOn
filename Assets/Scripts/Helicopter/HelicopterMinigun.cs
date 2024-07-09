@@ -18,7 +18,7 @@ public class HelicopterMinigun : MonoBehaviour
     private CameraAbove mainCameraScript;
     public GameObject Player;
     
-
+    private Coroutine cameraCoroutine;
     
     // Start is called before the first frame update
     void Start()
@@ -60,9 +60,9 @@ public class HelicopterMinigun : MonoBehaviour
             
             EffectPlane.GetComponent<HelicopterMinigunParticle>().ParticleStop();       //이펙트 그만
             //헬기 총구 그만
-            LeftMuzzle.SetActive(false);
-            RightMuzzle.SetActive(false);
-            //카메라 원래 위치로 부드럽게
+            //LeftMuzzle.SetActive(false);
+            //RightMuzzle.SetActive(false);
+            //카메라 원래 위치로 부드럽게 --- 돌아오는 코루틴의 어색함 으로 사용x
             //originalCameraPosition();
             //카메라 스크립트 재시작
             mainCameraScript.enabled = true;
@@ -70,20 +70,21 @@ public class HelicopterMinigun : MonoBehaviour
         }
     }
 
-    public void originalCameraPosition()
+    /*public void originalCameraPosition()
     {
-        Debug.Log("코루틴 호출");
+        Debug.LogError("코루틴 호출");
         StartCoroutine(originalCameraPositionCoroutine());
     }
 
     public void CameraCoroutineStop()
     {
+        Debug.LogError("코루틴 그만");
         StopCoroutine(originalCameraPositionCoroutine());
     }
 
     IEnumerator originalCameraPositionCoroutine()
     {
-        Debug.Log("코루틴 진입");
+        Debug.LogError("코루틴 진입");
     
         Vector3 startPosition = mainCamera.transform.position;
         Quaternion startRotation = mainCamera.transform.rotation;
@@ -109,7 +110,7 @@ public class HelicopterMinigun : MonoBehaviour
         
         CameraCoroutineStop();
         
-    }
+    }*/
 
 
 
