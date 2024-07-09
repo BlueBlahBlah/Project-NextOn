@@ -19,7 +19,7 @@ public class CharacterLocomotion : MonoBehaviour
     [SerializeField] FixedJoystick moveJoystick;//assign joystick here
     [Tooltip("Self explanatory. After this magnitude player will move ")]
     [SerializeField] float movementThreshold = 0.1f;// self explanatory. After this magnitude player will move 
-    [Header("Animation variables")]
+    [Header("Animation variables")] 
     [Tooltip("This will turn rotation towards the joystick direction")]
     [SerializeField] bool canStrafe = false;
     [Tooltip("Animation variables for blendtrees")]

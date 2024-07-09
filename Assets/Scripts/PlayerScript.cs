@@ -47,6 +47,10 @@ public class PlayerScript : MonoBehaviour
         }
         Anim.SetBool("walk", walking);
         
+        if(transform.position.y < -10)
+        {
+            this.transform.position = new Vector3(0, 0, 43);
+        }
         
     }
     
