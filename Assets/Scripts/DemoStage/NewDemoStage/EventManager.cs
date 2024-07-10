@@ -45,6 +45,8 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject WaveArea3Scrit;     //플레이어가 일찍 지나가지 못하게 하는 콜라이더
     [SerializeField] private GameObject WaveArea3Barrier;   //몬스터들이 쫒아오지 못하게 하는 콜라이더
     [SerializeField] private GameObject EventBtn;           //이벤트 버튼
+    [SerializeField] private GameObject ParenthesisGauge;           //괄호 몬스터 게이지 UI
+          
     public GameObject Peiz3Monster_2;
     public bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
     public bool Wave2MonsterClear;
@@ -72,6 +74,7 @@ public class EventManager : MonoBehaviour
         FireBtn.SetActive(false);
         SkillBtn.SetActive(false);
         EventBtn.SetActive(false);
+        ParenthesisGauge.SetActive(false);
         Area3 = false;
         Wave2MonsterClear = false;
         isPause = false;
@@ -155,7 +158,7 @@ public class EventManager : MonoBehaviour
             {
                 g.SetActive(true);                  //화살표 켜지기
             }
-            MonsterManager.Instance.Appearance_Seconde_Monster();               //두번째 몬스터들 등장
+            MonsterManager.Instance.Appearance_Second_Monster();               //두번째 몬스터들 등장
         }
         else if (UIManager.instance.DialogueNumber == 72 && MonsterManager.Instance.TotalMonsters <= 12)
         {
@@ -179,22 +182,34 @@ public class EventManager : MonoBehaviour
             {
                 g.SetActive(true);                  //화살표 켜지기
             }
-        }
-        /*else if (UIManager.instance.DialogueNumber == //75 && UIManager.instance.isCompletelyPrinted == true)
-        {
             
-        }*/
+        }
+        else if (UIManager.instance.DialogueNumber == 76 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            MonsterManager.Instance.Appearance_Third_Monster(); //세번째 몬스터 웨이브 시작
+        }
+        else if (UIManager.instance.DialogueNumber == 80 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            if (isPause == true)
+            {
+                TimeResume();   //시간 재개
+            }
+            //괄호몬스터 UI등장
+            ParenthesisGauge.SetActive(true);
+            //괄호몬스터 등장
+            MonsterManager.Instance.Appearance_Parenthesis_Monster();
+        }
             
     }
     
    
-    void TimeStop()
+    public void TimeStop()
     {
         Time.timeScale = 0;    //게임 일시정지
         isPause = true;
     }
 
-    void TimeResume()
+    public void TimeResume()
     {
         Time.timeScale = 1;    //게임 일시정지
         isPause = false;

@@ -68,7 +68,7 @@ public class HelicopterMinigunTrigger : MonoBehaviour
     // 카메라를 부드럽게 이동시키는 코루틴
     private IEnumerator MoveCameraSmoothly(Vector3 targetPosition)
     {
-        Debug.LogError("헬기 카메라 이동 시작");
+        //Debug.LogError("헬기 카메라 이동 시작");
         isCameraMoving = true;
 
         float elapsedTime = 0f;

@@ -23,6 +23,7 @@ public class AfterMovingTutorial : MonoBehaviour
         {
             //튜토리얼 시작하는 부분 추가
             Active = true;
+            //EventManager.Instance.TimeStop();   //시간 정지
             EventManager.Instance.PrintMSG();
         }
         

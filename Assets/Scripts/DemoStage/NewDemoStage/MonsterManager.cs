@@ -50,17 +50,25 @@ public class MonsterManager : MonoBehaviour
     public int Gauge;                               //스택 몬스터를 잡는 게이지
     [SerializeField] private GameObject ParenthesisGauge;
     
-    [Header("Parenthesis_Monsters")]    //스택 몬스터 관련
+    /*[Header("Parenthesis_Monsters")]    //스택 몬스터 관련
     public List<GameObject> Parenthesis_Monsters;
-    [SerializeField] private GameObject[] Parenthesis_Monsters_Spawner ;
+    [SerializeField] private GameObject[] Parenthesis_Monsters_Spawner ;*/
     
     [Header("First_Monster")]    //첫 조우 몬스터 관련
     public List<GameObject> First_Monsters;
     public bool First_Monsters_Clear;   //첫 조우 몬스터 모두 처치되었는지
     
-    [Header("Second_Monster")]    //첫 조우 몬스터 관련
+    [Header("Second_Monster")]    //두번째 조우 몬스터 관련
     public List<GameObject> Second_Monsters;
-    public bool Second_Monsters_Clear;   //첫 조우 몬스터 모두 처치되었는지
+    public bool Second_Monsters_Clear;   //두번째 조우 몬스터 모두 처치되었는지
+    
+    [Header("Third_Monster")]    //세번째(근접무기 먹고난 뒤) 조우 몬스터 관련
+    public List<GameObject> Third_Monsters;
+    public bool Third_Monsters_Clear;   //세번째(근접무기 먹고난 뒤) 조우 몬스터 모두 처치되었는지
+    
+    [Header("Parenthesis_Monster")]    //괄호 몬스터 관련
+    public List<GameObject> Parenthesis_Monster_Spawner;        //괄호몬스터 스포너
+    public List<GameObject> Initial_Parenthesis_Monster;        //시작할때 필드에 있는 괄호 몬스터들
     
     // Start is called before the first frame update
     void Start()
@@ -71,6 +79,7 @@ public class MonsterManager : MonoBehaviour
         Gauge = 0;
         First_Monsters_Clear = false;
         Second_Monsters_Clear = false;
+        Third_Monsters_Clear = false;
         
         //첫 조우 몬스터 비활성화
         foreach (GameObject E in First_Monsters)
@@ -78,6 +87,18 @@ public class MonsterManager : MonoBehaviour
             E.SetActive(false);
         }
         foreach (GameObject E in Second_Monsters)
+        {
+            E.SetActive(false);
+        }
+        foreach (GameObject E in Third_Monsters)
+        {
+            E.SetActive(false);
+        }
+        foreach (GameObject E in Parenthesis_Monster_Spawner)
+        {
+            E.SetActive(false);
+        }
+        foreach (GameObject E in Initial_Parenthesis_Monster)
         {
             E.SetActive(false);
         }
@@ -124,6 +145,24 @@ public class MonsterManager : MonoBehaviour
                  Second_Monsters_Clear = true;
                  //EventManager.Instance.PrintMSG();      //다음대화로
                  //두번째 몬스터들(스킬사용부분)은 모두 처치해도 대화창 등장하지 않게
+             }
+         }
+         
+         if (Third_Monsters_Clear == false)
+         {
+             bool allMonstersDestroyed = true;
+             foreach (GameObject monster in Third_Monsters)
+             {
+                 if (monster != null)
+                 {
+                     allMonstersDestroyed = false;
+                     break;
+                 }
+             }
+             if (allMonstersDestroyed == true)
+             {
+                 Third_Monsters_Clear = true;
+                 
              }
          }
          
@@ -187,12 +226,12 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    //2페이즈 끝
+    //괄호 몬스터 게이지 채워서 모든 괄호 몬스터 처치
     public void Clear_Wave2_Monsters()
     {
         //Wave2MonsterClear = true;
         //모든 스포너 생성중단
-        foreach (GameObject g in Parenthesis_Monsters_Spawner)
+        foreach (GameObject g in Parenthesis_Monster_Spawner)
         {
             g.GetComponent<Wave2StackMonsterSpawner>().Active = false;
             g.SetActive(false);
@@ -205,12 +244,12 @@ public class MonsterManager : MonoBehaviour
     //2페이즈 끝난 후 모든 스택몬스터 삭제
     private void ClearWave2MonsterInvoke()
     {
-        for (int i = Parenthesis_Monsters.Count-1; i >= 0; i--)
+        for (int i = Parenthesis_Monster_Spawner.Count-1; i >= 0; i--)
         {
             try
             {
-                if(Parenthesis_Monsters[i] != null)
-                    Parenthesis_Monsters[i].GetComponentInChildren<Parenthesis>().ClearTheMonster();
+                if(Parenthesis_Monster_Spawner[i] != null)
+                    Parenthesis_Monster_Spawner[i].GetComponentInChildren<Parenthesis>().ClearTheMonster();
             }
             catch (Exception e)
             {
@@ -226,7 +265,7 @@ public class MonsterManager : MonoBehaviour
     //현재 몬스터목록에 추가
     public void AddStackMonster_In_Array(GameObject m)
     {
-        Parenthesis_Monsters.Add(m);
+        Parenthesis_Monster_Spawner.Add(m);
     }
 
     //첫 조우 몬스터 조작 함수
@@ -241,13 +280,40 @@ public class MonsterManager : MonoBehaviour
     }
     
     //두번째 조우 몬스터 조작 함수
-    public void Appearance_Seconde_Monster()
+    public void Appearance_Second_Monster()
     {
         //활성화 후 움직임
         foreach (GameObject E in Second_Monsters)
         {
             E.SetActive(true);
             E.GetComponent<Enemy>().SetNavSpeed(3.5f);
+        }
+    }
+    
+    //세번째 조우 몬스터 조작 함수
+    public void Appearance_Third_Monster()
+    {
+        //활성화 후 움직임
+        foreach (GameObject E in Third_Monsters)
+        {
+            E.SetActive(true);
+            E.GetComponent<Enemy>().SetNavSpeed(3.5f);
+        }
+    }
+    
+    //세번째 조우 몬스터 조작 함수
+    public void Appearance_Parenthesis_Monster()
+    {
+        //활성화 후 움직임
+        foreach (GameObject E in Initial_Parenthesis_Monster)
+        {
+            E.SetActive(true);
+            E.GetComponent<Enemy>().SetNavSpeed(3.5f);
+            Parenthesis_Monster_Spawner.Add(E);     //이미 필드에 존재하는 몬스터들 Array에 추가
+        }
+        foreach (GameObject E in Parenthesis_Monster_Spawner)
+        {
+            E.SetActive(true);
         }
     }
 }
