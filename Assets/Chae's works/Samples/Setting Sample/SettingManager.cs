@@ -3,13 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingButton : MonoBehaviour
+public class SettingManager : MonoBehaviour
 {
+    [Header("Setting")]
     public RectTransform panel; // 드롭다운 패널의 RectTransform
     public Button showButton; // 패널을 내리는 버튼
     public Button hideButton; // 패널을 올리는 버튼
 
     private bool isPanelVisible = false; // 패널이 현재 보이는지 여부
+
+    [Header("Dictionary")]
+    public Button showDictionaryButton;
+    public Button hideDictionaryButton;
+    public GameObject Dictionary;
+
+    private bool isDictionaryVisible = false;
 
     private void Start()
     {
@@ -17,8 +25,12 @@ public class SettingButton : MonoBehaviour
         showButton.onClick.AddListener(ShowPanel);
         hideButton.onClick.AddListener(HidePanel);
 
+        showDictionaryButton.onClick.AddListener(ShowDictionary);
+        hideDictionaryButton.onClick.AddListener(HideDictionary);
+
         // 패널을 초기 위치로 이동 (화면 위로 숨기기)
         panel.anchoredPosition = new Vector2(0, panel.rect.height);
+        panel.gameObject.SetActive(true);
     }
 
     private void ShowPanel()
@@ -75,5 +87,23 @@ public class SettingButton : MonoBehaviour
         }
         panel.anchoredPosition = endPos;
         isPanelVisible = false;
+    }
+
+    private void ShowDictionary()
+    {
+        if (!isDictionaryVisible)
+        {
+            Dictionary.SetActive(true);
+            isDictionaryVisible = true;
+        }
+    }
+
+    private void HideDictionary()
+    {
+        if (isDictionaryVisible)
+        {
+            Dictionary.SetActive(false);
+            isDictionaryVisible = false;
+        }
     }
 }
