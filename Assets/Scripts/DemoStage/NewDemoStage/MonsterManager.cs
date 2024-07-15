@@ -41,6 +41,7 @@ public class MonsterManager : MonoBehaviour
     }
 
     [Header("StageMonster Number")]    //스테이지 몬스터 총 개수
+    GameObject[] enemies;  //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
     public int TotalMonsters;
     
     
@@ -107,7 +108,7 @@ public class MonsterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         GameObject[] enemies;  //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
+         
          enemies = GameObject.FindGameObjectsWithTag("Enemy");
          TotalMonsters = enemies.Length;
 
@@ -166,6 +167,44 @@ public class MonsterManager : MonoBehaviour
              }
          }
          
+    }
+
+    //현재 필드 몬스터들의 동작을 멈추는 함수
+    public void MonsterTimeStop()
+    {
+        foreach (GameObject m in enemies)
+        {
+            Animator animator = m.GetComponent<Animator>();
+            Enemy enemy = m.GetComponent<Enemy>();
+            if (animator != null)           //애니메이션 멈추고
+            {
+                animator.speed = 0;
+            }
+            if (enemy != null)              //이동도 멈추기
+            {
+                enemy.stopNav();
+            }
+        }
+        
+    }
+    
+    //현재 필드 몬스터들의 동작을 재개하는 함수
+    public void MonsterTimeResume()
+    {
+        foreach (GameObject m in enemies)
+        {
+            Animator animator = m.GetComponent<Animator>();
+            Enemy enemy = m.GetComponent<Enemy>();
+            if (animator != null)           //애니메이션 멈추고
+            {
+                animator.speed = 1;
+            }
+            if (enemy != null)              //이동도 멈추기
+            {
+                enemy.startNav();
+            }
+        }
+        
     }
     
     //적을 죽인 경우(스택에 추가)

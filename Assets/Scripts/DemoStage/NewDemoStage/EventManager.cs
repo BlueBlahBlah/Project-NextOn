@@ -184,16 +184,13 @@ public class EventManager : MonoBehaviour
             }
             
         }
-        else if (UIManager.instance.DialogueNumber == 76 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
         {
             MonsterManager.Instance.Appearance_Third_Monster(); //세번째 몬스터 웨이브 시작
         }
         else if (UIManager.instance.DialogueNumber == 80 && UIManager.instance.isCompletelyPrinted == true)
         {
-            if (isPause == true)
-            {
-                TimeResume();   //시간 재개
-            }
+            MonsterManager.Instance.MonsterTimeResume();
             //괄호몬스터 UI등장
             ParenthesisGauge.SetActive(true);
             //괄호몬스터 등장
