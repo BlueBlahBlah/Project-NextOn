@@ -19,8 +19,7 @@ public class CameraManager : MonoBehaviour
     {
         this.transform.position = targetPos[idx].position;
         this.transform.rotation = targetPos[idx].rotation;
-        //Camera.main.transform.position = targetPos[idx].position;
-        //Camera.main.transform.rotation = targetPos[idx].rotation;
+
         currentRoomIndex = idx;
     }
 }
