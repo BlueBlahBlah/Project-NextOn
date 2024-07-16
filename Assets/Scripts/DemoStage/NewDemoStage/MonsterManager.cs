@@ -69,7 +69,7 @@ public class MonsterManager : MonoBehaviour
     
     [Header("Parenthesis_Monster")]    //괄호 몬스터 관련
     public List<GameObject> Parenthesis_Monster_Spawner;        //괄호몬스터 스포너
-    public List<GameObject> Initial_Parenthesis_Monster;        //시작할때 필드에 있는 괄호 몬스터들
+    public List<GameObject> Parenthesis_Monsters;        //시작할때 필드에 있는 괄호 몬스터들
     
     // Start is called before the first frame update
     void Start()
@@ -99,7 +99,7 @@ public class MonsterManager : MonoBehaviour
         {
             E.SetActive(false);
         }
-        foreach (GameObject E in Initial_Parenthesis_Monster)
+        foreach (GameObject E in Parenthesis_Monsters)
         {
             E.SetActive(false);
         }
@@ -283,12 +283,12 @@ public class MonsterManager : MonoBehaviour
     //2페이즈 끝난 후 모든 스택몬스터 삭제
     private void ClearWave2MonsterInvoke()
     {
-        for (int i = Parenthesis_Monster_Spawner.Count-1; i >= 0; i--)
+        for (int i = Parenthesis_Monsters.Count-1; i >= 0; i--)
         {
             try
             {
-                if(Parenthesis_Monster_Spawner[i] != null)
-                    Parenthesis_Monster_Spawner[i].GetComponentInChildren<Parenthesis>().ClearTheMonster();
+                if(Parenthesis_Monsters[i] != null)
+                    Parenthesis_Monsters[i].GetComponentInChildren<Parenthesis>().ClearTheMonster();
             }
             catch (Exception e)
             {
@@ -304,7 +304,7 @@ public class MonsterManager : MonoBehaviour
     //현재 몬스터목록에 추가
     public void AddStackMonster_In_Array(GameObject m)
     {
-        Parenthesis_Monster_Spawner.Add(m);
+        Parenthesis_Monsters.Add(m);
     }
 
     //첫 조우 몬스터 조작 함수
@@ -344,11 +344,11 @@ public class MonsterManager : MonoBehaviour
     public void Appearance_Parenthesis_Monster()
     {
         //활성화 후 움직임
-        foreach (GameObject E in Initial_Parenthesis_Monster)
+        foreach (GameObject E in Parenthesis_Monsters)
         {
             E.SetActive(true);
             E.GetComponent<Enemy>().SetNavSpeed(3.5f);
-            Parenthesis_Monster_Spawner.Add(E);     //이미 필드에 존재하는 몬스터들 Array에 추가
+            
         }
         foreach (GameObject E in Parenthesis_Monster_Spawner)
         {
