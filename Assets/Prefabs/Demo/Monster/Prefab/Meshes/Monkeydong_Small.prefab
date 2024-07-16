@@ -545,7 +545,7 @@ MonoBehaviour:
   curHealth: 3
   target: {fileID: 0}
   isChase: 0
-  identity: 0
+  identity: 2
   isInStack: 0
   damaged: {fileID: 4549694754306120695, guid: 27857f3a52e694b46b8dced61afc04c0, type: 3}
   hpBar: {fileID: 1686040349594186679}

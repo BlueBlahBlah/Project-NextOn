@@ -20,8 +20,9 @@ public class BracketSyntaxErrorArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") )
+        if (other.CompareTag("Player") && Active == false)
         {
+            Active = true;
             //EventManager.Instance.TimeStop();   //시간 정지
             EventManager.Instance.PrintMSG();
             MonsterManager.Instance.MonsterTimeStop();

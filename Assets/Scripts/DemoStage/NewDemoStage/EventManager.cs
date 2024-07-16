@@ -190,13 +190,18 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 80 && UIManager.instance.isCompletelyPrinted == true)
         {
-            MonsterManager.Instance.MonsterTimeResume();
+            Invoke("MonsterTimeResume_Invoke",2f);
             //괄호몬스터 UI등장
             ParenthesisGauge.SetActive(true);
             //괄호몬스터 등장
             MonsterManager.Instance.Appearance_Parenthesis_Monster();
         }
             
+    }
+
+    private void MonsterTimeResume_Invoke()
+    {
+        MonsterManager.Instance.MonsterTimeResume();
     }
     
    
