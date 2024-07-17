@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,15 +16,16 @@ public class SettingManager : MonoBehaviour
     [Header("Dictionary")]
     public Button showDictionaryButton;
     public Button hideDictionaryButton;
-    public GameObject Dictionary;
+    public RectTransform DictionaryPanel;
 
+    public float animationDuration = 0.5f; // 애니메이션 지속 시간
     private bool isDictionaryVisible = false;
 
     private void Start()
     {
         // 버튼 클릭 이벤트 리스너 등록
-        showButton.onClick.AddListener(ShowPanel);
-        hideButton.onClick.AddListener(HidePanel);
+        showButton.onClick.AddListener(ShowStatusbar);
+        hideButton.onClick.AddListener(HideStatusbar);
 
         showDictionaryButton.onClick.AddListener(ShowDictionary);
         hideDictionaryButton.onClick.AddListener(HideDictionary);
@@ -31,27 +33,30 @@ public class SettingManager : MonoBehaviour
         // 패널을 초기 위치로 이동 (화면 위로 숨기기)
         panel.anchoredPosition = new Vector2(0, panel.rect.height);
         panel.gameObject.SetActive(true);
+
+        DictionaryPanel.localScale = Vector3.zero;
     }
 
-    private void ShowPanel()
+    // 상태표시줄 내려오는 애니메이션
+    private void ShowStatusbar()
     {
         if (!isPanelVisible)
         {
             // 패널 보이기
-            StartCoroutine(ShowPanelAnimation());
+            StartCoroutine(ShowPanelUpToDownAnimation());
         }
     }
 
-    private void HidePanel()
+    private void HideStatusbar()
     {
         if (isPanelVisible)
         {
             // 패널 숨기기
-            StartCoroutine(HidePanelAnimation());
+            StartCoroutine(HidePanelDownToUpAnimation());
         }
     }
-
-    private IEnumerator ShowPanelAnimation()
+    
+    private IEnumerator ShowPanelUpToDownAnimation()
     {
         // 패널을 화면 상단에서 내려오는 애니메이션
         float elapsedTime = 0f;
@@ -70,7 +75,7 @@ public class SettingManager : MonoBehaviour
         isPanelVisible = true;
     }
 
-    private IEnumerator HidePanelAnimation()
+    private IEnumerator HidePanelDownToUpAnimation()
     {
         // 패널을 화면 상단으로 올리는 애니메이션
         float elapsedTime = 0f;
@@ -93,17 +98,51 @@ public class SettingManager : MonoBehaviour
     {
         if (!isDictionaryVisible)
         {
-            Dictionary.SetActive(true);
-            isDictionaryVisible = true;
+            StartCoroutine(ShowPanelGrowAnimation());
         }
     }
-
     private void HideDictionary()
     {
         if (isDictionaryVisible)
         {
-            Dictionary.SetActive(false);
-            isDictionaryVisible = false;
+            StartCoroutine(ClosePanelDownsizeAnimation());
         }
     }
+
+    // 확장되어 나타나는 애니메이션
+    private IEnumerator ShowPanelGrowAnimation()
+    {
+        float elapsedTime = 0f;
+        Vector3 startScale = Vector3.zero;
+        Vector3 endScale = Vector3.one;
+
+        while (elapsedTime < animationDuration)
+        {
+            DictionaryPanel.localScale = Vector3.Lerp(startScale, endScale, elapsedTime / animationDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        DictionaryPanel.localScale = endScale;
+        isDictionaryVisible = true;
+    }
+
+    private IEnumerator ClosePanelDownsizeAnimation()
+    {
+        float elapsedTime = 0f;
+        Vector3 startScale = Vector3.one;
+        Vector3 endScale = Vector3.zero;
+
+        while (elapsedTime < animationDuration)
+        {
+            DictionaryPanel.localScale = Vector3.Lerp(startScale, endScale, elapsedTime / animationDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        DictionaryPanel.localScale = endScale;
+        isDictionaryVisible = false;
+    }
+
+    
 }
