@@ -11,18 +11,6 @@ public class Setting : MonoBehaviour
     [SerializeField]
     private Scrollbar SEScrollBar;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetBgmVolume()
     {
         if (0 <= BgmScrollBar.value && BgmScrollBar.value <= 0.125f)

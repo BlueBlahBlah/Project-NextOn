@@ -21,6 +21,19 @@ public class SettingManager : MonoBehaviour
     public float animationDuration = 0.5f; // 애니메이션 지속 시간
     private bool isDictionaryVisible = false;
 
+    [Header("Sound")]
+    public Button showSoundButton;
+    public RectTransform soundPanel;
+
+    [Header("REM")]
+    public Button showREMButton;
+
+    [Header("Item")]
+    public Button showItemButton;
+
+    [Header("Quit")]
+    public Button showQuitButton;
+
     private void Start()
     {
         // 버튼 클릭 이벤트 리스너 등록
@@ -35,9 +48,10 @@ public class SettingManager : MonoBehaviour
         panel.gameObject.SetActive(true);
 
         DictionaryPanel.localScale = Vector3.zero;
+        DictionaryPanel.gameObject.SetActive(true);
     }
 
-    // 상태표시줄 내려오는 애니메이션
+   
     private void ShowStatusbar()
     {
         if (!isPanelVisible)
@@ -55,7 +69,67 @@ public class SettingManager : MonoBehaviour
             StartCoroutine(HidePanelDownToUpAnimation());
         }
     }
+
+    private void ShowDictionary()
+    {
+        if (!isDictionaryVisible)
+        {
+            StartCoroutine(ShowPanelGrowAnimation());
+        }
+    }
+
+    private void HideDictionary()
+    {
+        if (isDictionaryVisible)
+        {
+            StartCoroutine(ClosePanelDownsizeAnimation());
+        }
+    }
+
+    private void ShowSoundButton()
+    {
+
+    }
     
+    public void HideSoundButton()
+    {
+
+    }
+
+    private void ShowREMButton()
+    {
+
+    }
+
+    private void HideREMButton()
+    {
+
+    }
+
+    private void ShowItemButton()
+    {
+
+    }
+
+    private void HideItemButton()
+    {
+
+    }
+
+    private void ShowQuitButton()
+    {
+
+    }
+
+    private void HideQuitButton()
+    {
+
+    }
+
+    // 애니메이션 관련
+    #region
+
+    // 상태표시줄 내려오는 애니메이션
     private IEnumerator ShowPanelUpToDownAnimation()
     {
         // 패널을 화면 상단에서 내려오는 애니메이션
@@ -94,21 +168,6 @@ public class SettingManager : MonoBehaviour
         isPanelVisible = false;
     }
 
-    private void ShowDictionary()
-    {
-        if (!isDictionaryVisible)
-        {
-            StartCoroutine(ShowPanelGrowAnimation());
-        }
-    }
-    private void HideDictionary()
-    {
-        if (isDictionaryVisible)
-        {
-            StartCoroutine(ClosePanelDownsizeAnimation());
-        }
-    }
-
     // 확장되어 나타나는 애니메이션
     private IEnumerator ShowPanelGrowAnimation()
     {
@@ -144,5 +203,5 @@ public class SettingManager : MonoBehaviour
         isDictionaryVisible = false;
     }
 
-    
+    #endregion
 }
