@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Parenthesis : Enemy
@@ -18,7 +19,7 @@ public class Parenthesis : Enemy
     private Animator _animator;
     private int health;         //현재 스크립트에 관리하는 체력 - Enemy와 비교홰 닳았는지 판단
     private bool isDeath;
-    [SerializeField]private bool isInStack;
+    public bool Waiting_Mate;
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
     [SerializeField] private Collider capsulCollider;
@@ -26,6 +27,13 @@ public class Parenthesis : Enemy
 
     [SerializeField] private float MsgTimer;
     [SerializeField] private float MsgAgainTime;
+
+    [SerializeField] public GameObject Mate_Monster;
+
+    public void Set_Mate_Monster(GameObject m)
+    {
+        this.Mate_Monster = m;
+    }
     
     
     // Start is called before the first frame update
@@ -38,7 +46,7 @@ public class Parenthesis : Enemy
         _animator = GetComponent<Animator>();
         _animator.SetBool("isRunning",true);
         isDeath = false;
-        isInStack = false;
+        Waiting_Mate = false;
         this.GetComponent<Enemy>().target = GameObject.Find("Player").transform;
         this.target = GameObject.Find("Player").transform;
         GetComponent<Enemy>().target = target;
@@ -56,34 +64,43 @@ public class Parenthesis : Enemy
         {
             GetComponent<Enemy>().isChase = false;
             GetComponent<Enemy>().stopNav();
+            _animator.SetTrigger("Death");
+            capsulCollider.enabled = false;
+            //3초후 삭제
+            Destroy(gameObject,3f);
         }
         else        //살아있는경우
         {
             //체력관련
             this.curHealth = GetComponent<Enemy>().curHealth;
-            if (curHealth < health)
+            if (curHealth < health)                             //체력이 감소한 경우
             {
-                if (curHealth <= 0 && isInStack == false)    //체력이 다 닳고 스택에 들어가는 경우
+                if (curHealth <= 0 && Waiting_Mate == false)    //처음 체력이 다 닳은 경우
                 {
-                    isInStack = true;
+                    Waiting_Mate = true;
                     health = curHealth;
-                    //체력이 다 닳은 경우 아직 죽지말고 스택에 추가
-                    //GameObject.Find("StageManager").GetComponent<StageManager>().AddStackMonster(this.gameObject);
-                    MonsterManager.Instance.AddStackMonster(this.gameObject);
                     hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
                 }
-                else    //체력이 다 닳아 스택에 들어가 있는 경우
+                else    
                 {
-                    if (isInStack == false)         //아직 체력이 남아있고 스택에 들어가지 않은 경우
+                    if (Waiting_Mate == false)         //아직 체력이 남아있는 경우
                     {
                         int DamageDone = health - curHealth;        //입은 데미지
                         ShowDamage(DamageDone);
                         hpBar.rectTransform.localScale = new Vector3((float)curHealth/(float)maxHealth, 1f, 1f);
                     }
-                    else if(isInStack == true && MsgTimer <= 0f)    //스택에 있는 경우 닫는 괄호를 만들어야 한다는 메세지
+                    else if(Waiting_Mate == true && MsgTimer <= 0f)    //체력이 다 닳았으나 짝이 처치되지 않은 경우
                     {
-                        ShowDamage("닫는 괄호 몬스터를 처치해야 합니다!");
-                        MsgTimer = MsgAgainTime;
+                        if (Mate_Monster.GetComponent<Parenthesis>().Waiting_Mate == true)      //짝도 체력이 다 닳은 경우
+                        {
+                            isDeath = true;
+                        }
+                        else                //짝의 체력이 다 닳지 않은경우
+                        {
+                            ShowDamage("닫는 괄호 몬스터를 처치해야 합니다!");
+                            MsgTimer = MsgAgainTime;
+                        }
+                        
                     }
                     health = curHealth;
                     _animator.SetTrigger("Hit");
@@ -109,10 +126,10 @@ public class Parenthesis : Enemy
     }
 
     //괄호가 채워지는 경우 호출될 함수
-    public void HitTheMonster()
+    /*public void HitTheMonster()
     {
         //스택에 들어가 있는 경우 처치
-        if (isInStack == true)
+        if (Waiting_Mate == true)
         {
             ClearTheMonster();
         }
@@ -126,14 +143,14 @@ public class Parenthesis : Enemy
         capsulCollider.enabled = false;
         //3초후 삭제
         Destroy(gameObject,3f);
-    }
+    }*/
     //스택이 다 찬경우에 몬스터가 처치될 시 호출
     //괄호 몬스터가 죽지 않는 코드
-    public void NotDeath()
+    /*public void NotDeath()
     {
         this.curHealth = maxHealth;         //체력 만땅
-        this.isInStack = false;             //스택에 들어가지 않았음
-    }
+        this.Waiting_Mate = false;             //스택에 들어가지 않았음
+    }*/
     
     private void ShowDamage(int d)
     {

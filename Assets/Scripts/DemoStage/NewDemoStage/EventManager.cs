@@ -111,7 +111,8 @@ public class EventManager : MonoBehaviour
     {
         //스택몬스터 20 게이지 채우면 모두 삭제
         if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
-            MonsterManager.Instance.Clear_Wave2_Monsters();
+            //TODO 
+            //MonsterManager.Instance.Clear_Wave2_Monsters();
 
         if (UIManager.instance.DialogueNumber == 59 && UIManager.instance.isCompletelyPrinted == true)
         {
@@ -193,8 +194,8 @@ public class EventManager : MonoBehaviour
             Invoke("MonsterTimeResume_Invoke",2f);
             //괄호몬스터 UI등장
             ParenthesisGauge.SetActive(true);
-            //괄호몬스터 등장
-            MonsterManager.Instance.Appearance_Parenthesis_Monster();
+            //괄호몬스터 생성함수를 어떻게 호출할 것인가
+            // TODO
         }
             
     }

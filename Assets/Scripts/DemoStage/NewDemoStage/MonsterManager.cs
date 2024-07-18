@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class MonsterManager : MonoBehaviour
 {
@@ -46,14 +47,10 @@ public class MonsterManager : MonoBehaviour
     
     
     [Header("Stack")]//스택 몬스터
-    [SerializeField] private GameObject[] Stack;
-    [SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
+    //[SerializeField] private GameObject[] Stack;
+    //[SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
     public int Gauge;                               //스택 몬스터를 잡는 게이지
     [SerializeField] private GameObject ParenthesisGauge;
-    
-    /*[Header("Parenthesis_Monsters")]    //스택 몬스터 관련
-    public List<GameObject> Parenthesis_Monsters;
-    [SerializeField] private GameObject[] Parenthesis_Monsters_Spawner ;*/
     
     [Header("First_Monster")]    //첫 조우 몬스터 관련
     public List<GameObject> First_Monsters;
@@ -69,14 +66,17 @@ public class MonsterManager : MonoBehaviour
     
     [Header("Parenthesis_Monster")]    //괄호 몬스터 관련
     public List<GameObject> Parenthesis_Monster_Spawner;        //괄호몬스터 스포너
-    public List<GameObject> Parenthesis_Monsters;        //시작할때 필드에 있는 괄호 몬스터들
+    public List<GameObject> Parenthesis_Monsters;        //필드에 있는 괄호 몬스터들
+    [SerializeField] private GameObject Small_Parenthesis_Monster;
+    [SerializeField] private GameObject Medium_Parenthesis_Monster;
+    [SerializeField] private GameObject Big_Parenthesis_Monster;
     
     // Start is called before the first frame update
     void Start()
     {
         TotalMonsters = 0;
-        Stack = new GameObject[10];
-        StackIndex = 0;
+        //Stack = new GameObject[10];
+        //StackIndex = 0;
         Gauge = 0;
         First_Monsters_Clear = false;
         Second_Monsters_Clear = false;
@@ -208,7 +208,7 @@ public class MonsterManager : MonoBehaviour
     }
     
     //적을 죽인 경우(스택에 추가)
-    public void AddStackMonster(GameObject g)
+    /*public void AddStackMonster(GameObject g)
     {
         //처음 들어온 몬스터인경우
         if (StackIndex == 0)
@@ -246,13 +246,12 @@ public class MonsterManager : MonoBehaviour
                 Gauge++; //스택 게이지증가
                 ParenthesisGauge.GetComponent<HealthBar>().SetHealth(Gauge);
             }
-        }
-        
+        }       
        
-    }
+    }*/
 
     //괄호의 유효성 검사
-    private bool CheckParenthesis()
+    /*private bool CheckParenthesis()
     {
         if (Stack[StackIndex - 1].GetComponent<Parenthesis>().identity ==
             Stack[StackIndex - 2].GetComponent<Parenthesis>().identity)
@@ -263,10 +262,10 @@ public class MonsterManager : MonoBehaviour
         {
             return false;
         }
-    }
+    }*/
 
     //괄호 몬스터 게이지 채워서 모든 괄호 몬스터 처치
-    public void Clear_Wave2_Monsters()
+    /*public void Clear_Wave2_Monsters()
     {
         //Wave2MonsterClear = true;
         //모든 스포너 생성중단
@@ -278,10 +277,10 @@ public class MonsterManager : MonoBehaviour
 
         ParenthesisGauge.GetComponent<HealthBar>().ClearWave2();
         Invoke("ClearWave2MonsterInvoke",3);
-    }
+    }*/
 
     //2페이즈 끝난 후 모든 스택몬스터 삭제
-    private void ClearWave2MonsterInvoke()
+    /*private void ClearWave2MonsterInvoke()
     {
         for (int i = Parenthesis_Monsters.Count-1; i >= 0; i--)
         {
@@ -299,13 +298,13 @@ public class MonsterManager : MonoBehaviour
         }
         ParenthesisGauge.SetActive(false);
         
-    }
+    }*/
     
     //현재 몬스터목록에 추가
-    public void AddStackMonster_In_Array(GameObject m)
+    /*public void AddStackMonster_In_Array(GameObject m)
     {
         Parenthesis_Monsters.Add(m);
-    }
+    }*/
 
     //첫 조우 몬스터 조작 함수
     public void Appearance_First_Monster()
@@ -354,5 +353,44 @@ public class MonsterManager : MonoBehaviour
         {
             E.SetActive(true);
         }
+    }
+    
+    //괄호몬스터를 생성하는 코드
+    public void Spawn_Parenthesis()
+    {
+        //괄호몬스터를 생성할 두 스포너 랜덤지정
+        int spawner1 = Random.Range(0, Parenthesis_Monster_Spawner.Count), spawner2 = Random.Range(0, Parenthesis_Monster_Spawner.Count);
+        //생성할 괄호몬스터 종류
+        int Monster_Kind_Number = Random.Range(0, 2);
+        GameObject Spawn_Monster;
+        switch (Monster_Kind_Number)
+        {
+            case 0:
+                Spawn_Monster = Small_Parenthesis_Monster;
+                break;
+            case 1:
+                Spawn_Monster = Medium_Parenthesis_Monster;
+                break;
+            case 2:
+                Spawn_Monster = Big_Parenthesis_Monster;
+                break;
+            default:
+                Spawn_Monster = Small_Parenthesis_Monster;
+                break;
+        }
+        
+        //생성
+        GameObject Monster1 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner1].transform.position,
+            Quaternion.identity);
+        GameObject Monster2 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner1].transform.position,
+            Quaternion.identity);
+        
+        //연결
+        Monster1.GetComponent<Parenthesis>().Set_Mate_Monster(Monster2);
+        Monster2.GetComponent<Parenthesis>().Set_Mate_Monster(Monster1);
+        
+        //TODO
+        //이펙트 연결하기
+
     }
 }
