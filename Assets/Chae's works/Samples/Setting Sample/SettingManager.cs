@@ -13,26 +13,12 @@ public class SettingManager : MonoBehaviour
 
     private bool isPanelVisible = false; // 패널이 현재 보이는지 여부
 
-    [Header("Dictionary")]
-    public Button showDictionaryButton;
-    public Button hideDictionaryButton;
-    public RectTransform DictionaryPanel;
+    [Header("Panels")]
+    public RectTransform[] panels; // 애니메이션을 적용할 패널들의 RectTransform 배열
+    public Button[] openButtons; // 패널을 여는 버튼 배열
+    public Button[] closeButtons; // 패널을 닫는 버튼 배열
 
     public float animationDuration = 0.5f; // 애니메이션 지속 시간
-    private bool isDictionaryVisible = false;
-
-    [Header("Sound")]
-    public Button showSoundButton;
-    public RectTransform soundPanel;
-
-    [Header("REM")]
-    public Button showREMButton;
-
-    [Header("Item")]
-    public Button showItemButton;
-
-    [Header("Quit")]
-    public Button showQuitButton;
 
     private void Start()
     {
@@ -40,18 +26,24 @@ public class SettingManager : MonoBehaviour
         showButton.onClick.AddListener(ShowStatusbar);
         hideButton.onClick.AddListener(HideStatusbar);
 
-        showDictionaryButton.onClick.AddListener(ShowDictionary);
-        hideDictionaryButton.onClick.AddListener(HideDictionary);
+        for (int i = 0; i < openButtons.Length; i++)
+        {
+            int index = i;
+            openButtons[i].onClick.AddListener(() => OpenPanel(index));
+            closeButtons[i].onClick.AddListener(() => ClosePanel(index));
+
+            // 패널 크기 초기화
+            panels[i].localScale = Vector3.zero;
+        }
 
         // 패널을 초기 위치로 이동 (화면 위로 숨기기)
         panel.anchoredPosition = new Vector2(0, panel.rect.height);
         panel.gameObject.SetActive(true);
 
-        DictionaryPanel.localScale = Vector3.zero;
-        DictionaryPanel.gameObject.SetActive(true);
     }
 
-   
+    // UI 애니메이션 관련 함수
+    #region
     private void ShowStatusbar()
     {
         if (!isPanelVisible)
@@ -70,63 +62,18 @@ public class SettingManager : MonoBehaviour
         }
     }
 
-    private void ShowDictionary()
+    private void OpenPanel(int panelIndex)
     {
-        if (!isDictionaryVisible)
-        {
-            StartCoroutine(ShowPanelGrowAnimation());
-        }
+        StartCoroutine(OpenPanelCoroutine(panelIndex, openButtons[panelIndex].transform as RectTransform));
     }
 
-    private void HideDictionary()
+    private void ClosePanel(int panelIndex)
     {
-        if (isDictionaryVisible)
-        {
-            StartCoroutine(ClosePanelDownsizeAnimation());
-        }
+        StartCoroutine(ClosePanelCoroutine(panelIndex, openButtons[panelIndex].transform as RectTransform));
     }
+    #endregion
 
-    private void ShowSoundButton()
-    {
-
-    }
-    
-    public void HideSoundButton()
-    {
-
-    }
-
-    private void ShowREMButton()
-    {
-
-    }
-
-    private void HideREMButton()
-    {
-
-    }
-
-    private void ShowItemButton()
-    {
-
-    }
-
-    private void HideItemButton()
-    {
-
-    }
-
-    private void ShowQuitButton()
-    {
-
-    }
-
-    private void HideQuitButton()
-    {
-
-    }
-
-    // 애니메이션 관련
+    // UI 애니메이션 관련 코루틴
     #region
 
     // 상태표시줄 내려오는 애니메이션
@@ -168,40 +115,89 @@ public class SettingManager : MonoBehaviour
         isPanelVisible = false;
     }
 
-    // 확장되어 나타나는 애니메이션
-    private IEnumerator ShowPanelGrowAnimation()
+    // 패널 열기 애니메이션
+    private IEnumerator OpenPanelCoroutine(int panelIndex, RectTransform buttonRectTransform)
     {
         float elapsedTime = 0f;
         Vector3 startScale = Vector3.zero;
         Vector3 endScale = Vector3.one;
+        RectTransform panel = panels[panelIndex];
+        panel.gameObject.SetActive(true);
+
+        // 월드 좌표에서 패널 로컬 좌표로 변환
+        Vector2 buttonPivot = GetButtonPivotInPanel(buttonRectTransform, panel);
+
+        // 원래 피벗을 저장하고 새로운 피벗 설정
+        Vector2 originalPivot = panel.pivot;
+        panel.pivot = buttonPivot;
 
         while (elapsedTime < animationDuration)
         {
-            DictionaryPanel.localScale = Vector3.Lerp(startScale, endScale, elapsedTime / animationDuration);
+            float t = elapsedTime / animationDuration;
+            panel.localScale = Vector3.LerpUnclamped(startScale, endScale, EaseOutQuint(t));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        DictionaryPanel.localScale = endScale;
-        isDictionaryVisible = true;
+        panel.localScale = endScale;
+        panel.pivot = originalPivot;
     }
 
-    private IEnumerator ClosePanelDownsizeAnimation()
+    // 패널 닫기 애니메이션
+    private IEnumerator ClosePanelCoroutine(int panelIndex, RectTransform buttonRectTransform)
     {
         float elapsedTime = 0f;
         Vector3 startScale = Vector3.one;
         Vector3 endScale = Vector3.zero;
+        RectTransform panel = panels[panelIndex];
+
+        // 월드 좌표에서 패널 로컬 좌표로 변환
+        Vector2 buttonPivot = GetButtonPivotInPanel(buttonRectTransform, panel);
+
+        // 원래 피벗을 저장하고 새로운 피벗 설정
+        Vector2 originalPivot = panel.pivot;
+        panel.pivot = buttonPivot;
 
         while (elapsedTime < animationDuration)
         {
-            DictionaryPanel.localScale = Vector3.Lerp(startScale, endScale, elapsedTime / animationDuration);
+            float t = elapsedTime / animationDuration;
+            panel.localScale = Vector3.LerpUnclamped(startScale, endScale, EaseOutQuint(t));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        DictionaryPanel.localScale = endScale;
-        isDictionaryVisible = false;
+        panel.localScale = endScale;
+        panel.pivot = originalPivot;
+        panel.gameObject.SetActive(false); // 패널 비활성화
+    }
+
+    // 버튼의 피벗을 패널 로컬 좌표로 변환
+    private Vector2 GetButtonPivotInPanel(RectTransform buttonRectTransform, RectTransform panelRectTransform)
+    {
+        Vector3[] buttonWorldCorners = new Vector3[4];
+        buttonRectTransform.GetWorldCorners(buttonWorldCorners);
+
+        // 버튼의 중앙점 계산
+        Vector3 buttonCenterWorld = (buttonWorldCorners[0] + buttonWorldCorners[2]) / 2;
+
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(panelRectTransform, buttonCenterWorld, null, out localPoint);
+
+        // 로컬 좌표를 피벗 비율로 변환
+        return new Vector2(localPoint.x / panelRectTransform.rect.width + 0.5f, localPoint.y / panelRectTransform.rect.height + 0.5f);
+    }
+
+    // Ease out quintic function for a smoother animation
+    private float EaseOutQuint(float t)
+    {
+        return 1 - Mathf.Pow(1 - t, 5);
     }
 
     #endregion
+
+    // UI 기능 관련 함수
+    private void GoToMenu()
+    {
+
+    }
 }
