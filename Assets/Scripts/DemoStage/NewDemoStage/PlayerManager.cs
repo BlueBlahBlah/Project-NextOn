@@ -24,6 +24,8 @@ public class PlayerManager : MonoBehaviour
     public int CurrentBullet;                   //현재 잔탄 수
     public int TotalBullet;                     //남은 탄창 수
     
+    public float SkillCoolTimeRate;                     //근접무기 쿨타임감소율
+    
     public bool Death;
     
     public enum WeaponType
@@ -47,6 +49,7 @@ public class PlayerManager : MonoBehaviour
     {
         TotalHealth = 100;  //시작 시 체력 100
         Health = TotalHealth;
+        SkillCoolTimeRate = 0;     //시작 시 스킬 쿨타임
         Death = false;
         if (null == instance)
         {

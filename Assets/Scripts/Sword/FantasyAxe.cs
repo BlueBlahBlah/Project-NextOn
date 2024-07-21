@@ -36,12 +36,5 @@ public class FantasyAxe : MonoBehaviour
         
     }
     
-    void OnTriggerEnter(Collider enemy)
-    {
-        if (enemy.CompareTag("Enemy"))
-        {
-            //collider.damage--; //collider의 체력이 닳는 메커니즘
-            Debug.Log("판타지도끼 공격");
-        }
-    }
+   
 }

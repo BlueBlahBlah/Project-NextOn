@@ -39,12 +39,5 @@ public class SwordDemacia : MonoBehaviour
         Instantiate(Skill, skillPosition, Quaternion.identity);
     }
     
-    void OnTriggerEnter(Collider enemy)
-    {
-        if (enemy.CompareTag("Enemy"))
-        {
-            //collider.damage--; //collider의 체력이 닳는 메커니즘
-            Debug.Log("데마시아칼 공격");
-        }
-    }
+    
 }

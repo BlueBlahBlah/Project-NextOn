@@ -49,15 +49,7 @@ public class SwordSilver : MonoBehaviour
         }*/
     }
     
-    void OnTriggerEnter(Collider enemy)
-    {
-        if (enemy.CompareTag("Enemy"))
-        {
-            //collider.damage--; //collider의 체력이 닳는 메커니즘
-            //attackNum++;
-            
-        }
-    }
+    
 
     //범위내 무작위 적의 방향
     private Vector3 findNearEnemy()
