@@ -111,8 +111,11 @@ public class EventManager : MonoBehaviour
     {
         //스택몬스터 20 게이지 채우면 모두 삭제
         if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
+        {
             //TODO 
             //MonsterManager.Instance.Clear_Wave2_Monsters();
+        }
+            
 
         if (UIManager.instance.DialogueNumber == 59 && UIManager.instance.isCompletelyPrinted == true)
         {
@@ -131,11 +134,13 @@ public class EventManager : MonoBehaviour
                 Item.GetComponent<WeaponChangeGravity>().SetDialog();       //해당 아이템은 획득 시 대화창 나오기
                 FirstPickupRifle = true;
             }
+            JoystickActivation();     //조이스틱 활성화
         }
         else if (UIManager.instance.DialogueNumber == 64 && UIManager.instance.isCompletelyPrinted == true)
         {
             FireBtn.SetActive(true);
             MonsterManager.Instance.Appearance_First_Monster();
+            JoystickActivation();     //조이스틱 활성화
         }
         else if (UIManager.instance.DialogueNumber == 69 && UIManager.instance.isCompletelyPrinted == true)
         {
@@ -160,6 +165,7 @@ public class EventManager : MonoBehaviour
                 g.SetActive(true);                  //화살표 켜지기
             }
             MonsterManager.Instance.Appearance_Second_Monster();               //두번째 몬스터들 등장
+            JoystickActivation();     //조이스틱 활성화
         }
         else if (UIManager.instance.DialogueNumber == 72 && MonsterManager.Instance.TotalMonsters <= 12)
         {
@@ -183,11 +189,11 @@ public class EventManager : MonoBehaviour
             {
                 g.SetActive(true);                  //화살표 켜지기
             }
-            
         }
         else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
         {
             MonsterManager.Instance.Appearance_Third_Monster(); //세번째 몬스터 웨이브 시작
+            JoystickActivation();     //조이스틱 활성화
         }
         else if (UIManager.instance.DialogueNumber == 80 && UIManager.instance.isCompletelyPrinted == true)
         {
@@ -196,6 +202,7 @@ public class EventManager : MonoBehaviour
             ParenthesisGauge.SetActive(true);
             //괄호몬스터 생성함수를 어떻게 호출할 것인가
             // TODO
+            JoystickActivation();     //조이스틱 활성화
         }
             
     }
@@ -216,6 +223,17 @@ public class EventManager : MonoBehaviour
     {
         Time.timeScale = 1;    //게임 일시정지
         isPause = false;
+    }
+
+    //조이스틱을 비활성화 하는 함수
+    private void JoystickDeactivation()
+    {
+        GameObject.Find("Player").GetComponent<CharacterLocomotion>().enabled = false;
+    }
+    //조이스틱을 활성화 하는 함수
+    private void JoystickActivation()
+    {
+        GameObject.Find("Player").GetComponent<CharacterLocomotion>().enabled = true;
     }
     
 
@@ -244,6 +262,7 @@ public class EventManager : MonoBehaviour
     //타 클래스에서 대화창을 재개하는 경우 호출
     public void PrintMSG()
     {
+        JoystickDeactivation();     //조이스틱 비활성화
         UIManager.instance.DialogueNumber++;
         PrintLongDialogue();
     }
