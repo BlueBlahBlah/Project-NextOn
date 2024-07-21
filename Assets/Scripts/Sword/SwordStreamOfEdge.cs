@@ -42,7 +42,7 @@ public class SwordStreamOfEdge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.LogError(ThisCoolTime);
+        //Debug.LogError(ThisCoolTime);
         if (ThisCoolTime > 0)                  //쿨타임이 0보다 클때 (쿨이 남아있는 경우)
         {
             ThisCoolTime -= Time.deltaTime;     //쿨타임 감소
