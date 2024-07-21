@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private MachineGun machineGun = GameObject.FindObjectOfType<MachineGun>();
     [SerializeField] private FireGun fireGun = GameObject.FindObjectOfType<FireGun>();*/
     
+    
     public float TotalHealth;                          //최대체력
     public float Health;                          //현재체력
     public float HealthGen;                     //체젠
@@ -93,6 +94,11 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Health <= 0)        //체력이 다 닳은 경우
+        {
+            Health = 0;         //체력바가 길어지는 것을 방지
+        }
+        
         //현재 총기류를 먹은경우
         if (player_LongWeapon.activeSelf)
         {

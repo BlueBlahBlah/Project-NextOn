@@ -46,7 +46,15 @@ public class PlayerScriptRifle : MonoBehaviour
 
     void Update()
     {
-        // 현재 위치와 이전 위치 비교
+        if (PlayerManager.Instance.Health <= 0)        //체력이 다 닳은 경우
+        {
+            GetComponentInParent<CharacterLocomotion>().enabled = false;
+            Anim.applyRootMotion = true;
+            Anim.SetTrigger("Death");
+        }
+        else
+        {
+             // 현재 위치와 이전 위치 비교
         if (transform.position != lastPosition)
         {
             walking = true;
@@ -131,6 +139,8 @@ public class PlayerScriptRifle : MonoBehaviour
             reloaing = false;
             Invoke("reloadDone",4);      //4초후 재장전 끝
         }
+        }
+       
     }
     
     public void WeaponSynchronization()
