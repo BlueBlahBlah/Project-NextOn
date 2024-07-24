@@ -6,12 +6,7 @@ using UnityEngine.UI;
 
 public class SettingManager : MonoBehaviour
 {
-    [Header("Setting")]
-    public RectTransform panel; // 드롭다운 패널의 RectTransform
-    public Button showButton; // 패널을 내리는 버튼
-    public Button hideButton; // 패널을 올리는 버튼
-
-    private bool isPanelVisible = false; // 패널이 현재 보이는지 여부
+    
 
     [Header("Panels")]
     public RectTransform[] panels; // 애니메이션을 적용할 패널들의 RectTransform 배열
@@ -22,9 +17,7 @@ public class SettingManager : MonoBehaviour
 
     private void Start()
     {
-        // 버튼 클릭 이벤트 리스너 등록
-        showButton.onClick.AddListener(ShowStatusbar);
-        hideButton.onClick.AddListener(HideStatusbar);
+        
 
         for (int i = 0; i < openButtons.Length; i++)
         {
@@ -36,31 +29,13 @@ public class SettingManager : MonoBehaviour
             panels[i].localScale = Vector3.zero;
         }
 
-        // 패널을 초기 위치로 이동 (화면 위로 숨기기)
-        panel.anchoredPosition = new Vector2(0, panel.rect.height);
-        panel.gameObject.SetActive(true);
+        
 
     }
 
     // UI 애니메이션 관련 함수
     #region
-    private void ShowStatusbar()
-    {
-        if (!isPanelVisible)
-        {
-            // 패널 보이기
-            StartCoroutine(ShowPanelUpToDownAnimation());
-        }
-    }
-
-    private void HideStatusbar()
-    {
-        if (isPanelVisible)
-        {
-            // 패널 숨기기
-            StartCoroutine(HidePanelDownToUpAnimation());
-        }
-    }
+    
 
     private void OpenPanel(int panelIndex)
     {
@@ -77,6 +52,7 @@ public class SettingManager : MonoBehaviour
     #region
 
     // 상태표시줄 내려오는 애니메이션
+    /*
     private IEnumerator ShowPanelUpToDownAnimation()
     {
         // 패널을 화면 상단에서 내려오는 애니메이션
@@ -114,6 +90,7 @@ public class SettingManager : MonoBehaviour
         panel.anchoredPosition = endPos;
         isPanelVisible = false;
     }
+    */
 
     // 패널 열기 애니메이션
     private IEnumerator OpenPanelCoroutine(int panelIndex, RectTransform buttonRectTransform)

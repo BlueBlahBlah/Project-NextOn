@@ -6,7 +6,6 @@ public class RemController : MonoBehaviour
 {
     [Header("Move")]
     public GameObject Target; // 타겟 객체
-    public GameObject Particle; // 불 이펙트
     public float speed = 2.0f; // 이동 속도
     public float floatAmplitude = 0.5f; // 부유하는 높이 진폭
     public float floatFrequency = 1.0f; // 부유하는 속도
@@ -14,7 +13,6 @@ public class RemController : MonoBehaviour
     private List<UtilityAction> actions = new List<UtilityAction>();
 
     [Header("System")]
-    [SerializeField]
     public float timeSinceLastAction = 0.0f; // 지난 행동 이후 경과된 시간
     [SerializeField]
     private float actionInterval = 5.0f; // 의도한 행동 간격
@@ -23,6 +21,14 @@ public class RemController : MonoBehaviour
 
     private float initialRotationX;
     private RemAction remAction;
+
+    [Header("Effects")]
+    public GameObject REM_Heal;
+    public GameObject REM_HealTarget;
+    public GameObject REM_Shield;
+    public GameObject REM_AttackCharge;
+    public GameObject REM_AttackLaser;
+    public GameObject REM_Debuff;
 
     void Start()
     {
