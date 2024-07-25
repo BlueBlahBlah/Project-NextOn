@@ -30,7 +30,7 @@ public class RemAction : MonoBehaviour
 
         // 이펙트
         ActivateEffect(remController.REM_Heal);
-        CreateEffectAtTarget(remController.REM_HealTarget, remController.Target);
+        CreateEffectAtTarget(remController.REM_HealTarget, remController.Target, 2.0f);
         
         // 치유 코드 작성
 
@@ -49,7 +49,7 @@ public class RemAction : MonoBehaviour
         isActioning = true;
 
         // 이펙트
-        ActivateEffect(remController.REM_Shield);
+        CreateEffectAtTarget(remController.REM_Shield, remController.Target, 4.0f);
 
         // 방어막 전개 코드 작성
         Debug.Log("Shield deployed!");
@@ -109,7 +109,7 @@ public class RemAction : MonoBehaviour
         effect.SetActive(false);
     }
 
-    void CreateEffectAtTarget(GameObject effectPrefab, GameObject target)
+    void CreateEffectAtTarget(GameObject effectPrefab, GameObject target, float destroyTime)
     {
         if (target != null)
         {
@@ -118,7 +118,7 @@ public class RemAction : MonoBehaviour
             effectInstance.SetActive(true);
 
             // 일정 시간 후에 삭제
-            Destroy(effectInstance, 2.0f);
+            Destroy(effectInstance, destroyTime);
         }
     }
 }

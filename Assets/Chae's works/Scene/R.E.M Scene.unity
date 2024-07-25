@@ -485,6 +485,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 0
   isNear: 0
+--- !u!1 &1286109382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1056789406277311308, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
+  m_PrefabInstance: {fileID: 7775276068159238616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1533667916
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,10 +603,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 423805593816285686, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 423805593816285686, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 423805593816285686, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 658455980819196754, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
       propertyPath: Target
       value: 
       objectReference: {fileID: 1533667916}
+    - target: {fileID: 658455980819196754, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
+      propertyPath: REM_Shield
+      value: 
+      objectReference: {fileID: 1286109382}
+    - target: {fileID: 1056789406277311308, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1236980773946907710, guid: 0aca20ea487946c459c3029c8f7a574a, type: 3}
       propertyPath: m_Name
       value: R.E.M
