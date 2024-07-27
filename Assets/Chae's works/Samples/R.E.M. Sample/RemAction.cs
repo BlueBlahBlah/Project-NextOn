@@ -63,9 +63,39 @@ public class RemAction : MonoBehaviour
     {
         isMovable = false;
         isActioning = true;
-        // 공격 코드 작성
-        Debug.Log("Attacking the enemy!");
-        yield return new WaitForSeconds(1f);
+
+        GameObject teleportEffect = remController.REM_Teleport;
+        GameObject laserEffect = remController.REM_AttackLaser;
+        Transform target = remController.Target.transform;
+
+        // 1. 텔레포트 이펙트 생성 및 순간이동
+        Vector3 teleportPosition = new Vector3(target.position.x, remController.transform.position.y, target.position.z);
+        GameObject teleportInstance = GameObject.Instantiate(teleportEffect, remController.transform.position, Quaternion.identity);
+        teleportInstance.SetActive(true);
+        yield return new WaitForSeconds(0.1f); // 잠시 대기
+        remController.transform.position = teleportPosition;
+        yield return new WaitForSeconds(0.5f); // 0.5초 대기
+
+        // 2. 텔레포트 이펙트 제거
+        GameObject.Destroy(teleportInstance);
+
+        // 레이저 이펙트 생성 및 방향 회전
+        GameObject laserInstance = GameObject.Instantiate(laserEffect, remController.transform.position, remController.transform.rotation, remController.EffectContainer.transform);
+        laserInstance.SetActive(true);
+
+        float rotateDuration = 2.5f; // 2.5초 동안 회전
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rotateDuration)
+        {
+            float rotationSpeed = 60f / rotateDuration * Time.deltaTime; // 60도를 서서히 회전
+            remController.transform.Rotate(0, rotationSpeed, 0);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 레이저 이펙트 제거
+        GameObject.Destroy(laserInstance);
 
         EndAction();
         yield return null;

@@ -23,9 +23,11 @@ public class RemController : MonoBehaviour
     private RemAction remAction;
 
     [Header("Effects")]
+    public GameObject EffectContainer;
     public GameObject REM_Heal;
     public GameObject REM_HealTarget;
     public GameObject REM_Shield;
+    public GameObject REM_Teleport;
     public GameObject REM_AttackCharge;
     public GameObject REM_AttackLaser;
     public GameObject REM_Debuff;
@@ -39,25 +41,25 @@ public class RemController : MonoBehaviour
         // 행동 정의와 추가
         actions.Add(new UtilityAction(
             "Heal",
-            () => RemTestManager.instance.hp < 50 ? 1.0f / RemTestManager.instance.hp : 0, // 체력이 낮을수록 유틸리티 증가
+            () => 50, // RemTestManager.instance.hp < 50 ? 1.0f / RemTestManager.instance.hp : 0, // 체력이 낮을수록 유틸리티 증가
             () => remAction.Heal()
             ));
 
         actions.Add(new UtilityAction(
             "DeployShield",
-            () => RemTestManager.instance.hp < 90 ? (100 - RemTestManager.instance.hp) / 50.0f : 0, // 체력이 50% 이하일 때 유틸리티 증가
+            () => 50, // RemTestManager.instance.hp < 90 ? (100 - RemTestManager.instance.hp) / 50.0f : 0, // 체력이 50% 이하일 때 유틸리티 증가
             () => remAction.DeployShield()
             ));
 
         actions.Add(new UtilityAction(
             "Attack",
-            () => (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 80.0f : 0, // 적이 가까울 때 유틸리티 증가
+            () => 90, // (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 80.0f : 0, // 적이 가까울 때 유틸리티 증가
             () => remAction.Attack()
             ));
 
         actions.Add(new UtilityAction(
             "Debuff",
-            () => (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 79.0f : 0,
+            () => 50, // (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 79.0f : 0,
             () => remAction.Debuff()
             ));
     }
