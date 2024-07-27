@@ -63,22 +63,25 @@ public class RemAction : MonoBehaviour
     {
         isMovable = false;
         isActioning = true;
+        remController.REM_Mesh.SetActive(false);
 
         GameObject teleportEffect = remController.REM_Teleport;
+        GameObject chargeEffect = remController.REM_AttackCharge;
         GameObject laserEffect = remController.REM_AttackLaser;
         Transform target = remController.Target.transform;
 
         // 1. 텔레포트 이펙트 생성 및 순간이동
         Vector3 teleportPosition = new Vector3(target.position.x, remController.transform.position.y, target.position.z);
-        GameObject teleportInstance = GameObject.Instantiate(teleportEffect, remController.transform.position, Quaternion.identity);
+        GameObject teleportInstance = GameObject.Instantiate(teleportEffect, remController.transform.position, Quaternion.identity, remController.EffectContainer.transform);
         teleportInstance.SetActive(true);
         yield return new WaitForSeconds(0.1f); // 잠시 대기
         remController.transform.position = teleportPosition;
-        yield return new WaitForSeconds(0.5f); // 0.5초 대기
-
-        // 2. 텔레포트 이펙트 제거
-        GameObject.Destroy(teleportInstance);
-
+        remController.REM_Mesh.SetActive(true);
+        GameObject chargeInstance = GameObject.Instantiate(chargeEffect, remController.transform.position, Quaternion.identity, remController.EffectContainer.transform);
+        chargeInstance.SetActive(true);
+        yield return new WaitForSeconds(0.9f); // 0.5초 대기
+        StopParticleSystem(teleportInstance);
+        StopParticleSystem(chargeInstance);
         // 레이저 이펙트 생성 및 방향 회전
         GameObject laserInstance = GameObject.Instantiate(laserEffect, remController.transform.position, remController.transform.rotation, remController.EffectContainer.transform);
         laserInstance.SetActive(true);
@@ -88,14 +91,15 @@ public class RemAction : MonoBehaviour
 
         while (elapsedTime < rotateDuration)
         {
-            float rotationSpeed = 60f / rotateDuration * Time.deltaTime; // 60도를 서서히 회전
+            float rotationSpeed = 120f / rotateDuration * Time.deltaTime; // 60도를 서서히 회전
             remController.transform.Rotate(0, rotationSpeed, 0);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // 레이저 이펙트 제거
-        GameObject.Destroy(laserInstance);
+        StopParticleSystem(laserInstance);
+        yield return new WaitForSeconds(0.7f);
 
         EndAction();
         yield return null;
@@ -125,18 +129,33 @@ public class RemAction : MonoBehaviour
         isActioning = false;
     }
 
-    private void ActivateEffect(GameObject effect)
+    private void ActivateEffect(GameObject effect, float delay = 2.0f)
     {
         if (effect == null) return;
         effect.SetActive(true);
 
-        StartCoroutine(DeactivateEffect(effect, 2.0f)); // 2초 후 이펙트 비활성화
+        StopParticleSystem(effect, delay); // 2초 후 이펙트 비활성화
     }
 
-    IEnumerator DeactivateEffect(GameObject effect, float delay)
+    void StopParticleSystem(GameObject effect, float delay = 0f)
+    {
+        StartCoroutine(StopParticleSystemCoroutine(effect, delay));
+    }
+
+    IEnumerator StopParticleSystemCoroutine(GameObject effect, float delay)
     {
         yield return new WaitForSeconds(delay);
-        effect.SetActive(false);
+
+        ParticleSystem ps = effect.GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            ps.Stop();
+            // Wait for the particles to complete before destroying the object
+            float totalDuration = ps.main.duration + ps.main.startLifetime.constantMax;
+            yield return new WaitForSeconds(totalDuration);
+        }
+
+        Destroy(effect);
     }
 
     void CreateEffectAtTarget(GameObject effectPrefab, GameObject target, float destroyTime)
