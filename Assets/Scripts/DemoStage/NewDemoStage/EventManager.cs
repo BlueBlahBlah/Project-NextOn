@@ -47,7 +47,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject EventBtn;           //이벤트 버튼
     [SerializeField] private GameObject ParenthesisGauge;           //괄호 몬스터 게이지 UI
           
-    public GameObject Peiz3Monster_2;
+    //public GameObject Peiz3Monster_2;
     public bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
     public bool Wave2MonsterClear;
 
@@ -83,6 +83,10 @@ public class EventManager : MonoBehaviour
         FirstPickUpBulletSupply = false;
         SecondPickUpHelicopterSkill = false;
         SecondPickUpSword = false;
+        foreach (GameObject g in After3Peiz)
+        {
+            g.SetActive(false);
+        }
         foreach (GameObject g in FirstDirection)
         {
             g.SetActive(false);
@@ -110,11 +114,11 @@ public class EventManager : MonoBehaviour
     void Update()
     {
         //스택몬스터 20 게이지 채우면 모두 삭제
-        if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
+        /*if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
         {
             //TODO 
             //MonsterManager.Instance.Clear_Wave2_Monsters();
-        }
+        }*/
             
 
         if (UIManager.instance.DialogueNumber == 59 && UIManager.instance.isCompletelyPrinted == true)
@@ -197,12 +201,17 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 80 && UIManager.instance.isCompletelyPrinted == true)
         {
-            Invoke("MonsterTimeResume_Invoke",2f);
+            Invoke("MonsterTimeResume_Invoke",2.5f);
             //괄호몬스터 UI등장
             ParenthesisGauge.SetActive(true);
-            //괄호몬스터 생성함수를 어떻게 호출할 것인가
-            // TODO
+            ParenthesisGauge.GetComponent<FinalGauge>().DecreaseGauge_Coriutine();          //UI 100초에 걸쳐 감소
             JoystickActivation();     //조이스틱 활성화
+            if (MonsterManager.Instance.FinalPeiz == false)
+            {
+                MonsterManager.Instance.FinalPeiz = true;
+                MonsterManager.Instance.Spawn_Parenthesis();
+                MonsterManager.Instance.Spawn_Semicolon();
+            }
         }
             
     }
@@ -256,7 +265,7 @@ public class EventManager : MonoBehaviour
         WaveArea3Barrier.SetActive(false);
         //EventBtn 비활성화
         EventBtn.SetActive(false);
-        Peiz3Monster_2.SetActive(true);
+        //Peiz3Monster_2.SetActive(true);
     }
 
     //타 클래스에서 대화창을 재개하는 경우 호출

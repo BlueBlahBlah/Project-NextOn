@@ -71,6 +71,11 @@ public class MonsterManager : MonoBehaviour
     [SerializeField] private GameObject Medium_Parenthesis_Monster;
     [SerializeField] private GameObject Big_Parenthesis_Monster;
     
+    [SerializeField] private List<GameObject> Semicolon_Monsters;
+    
+    public List<GameObject> Semicolon_Monster_Spawner;        //세미콜론몬스터 스포너
+    public bool FinalPeiz;                                    //마지막 페이즈 해당 변수가 True면 계속 몬스터 생성
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -103,6 +108,8 @@ public class MonsterManager : MonoBehaviour
         {
             E.SetActive(false);
         }
+
+        FinalPeiz = false;
     }
 
     // Update is called once per frame
@@ -392,5 +399,31 @@ public class MonsterManager : MonoBehaviour
         //TODO
         //이펙트 연결하기
 
+        if (FinalPeiz == true)
+        {
+            //재귀호출
+            Invoke("Spawn_Parenthesis", 2f);
+        }
+
+    }
+
+    public void Spawn_Semicolon()
+    {
+        //5마리 동시 생성
+        for (int i = 0; i < 5; i++)
+        {
+            int spawnerNum = Random.Range(0, Semicolon_Monster_Spawner.Count);
+            int monsterNum = Random.Range(0, Second_Monsters.Count);
+            
+            Instantiate(Semicolon_Monster_Spawner[monsterNum], Semicolon_Monster_Spawner[spawnerNum].transform.position,
+                Quaternion.identity);
+        }
+        
+            
+        if (FinalPeiz == true)
+        {
+            //재귀호출
+            Invoke("Spawn_Semicolon", 2f);
+        }
     }
 }
