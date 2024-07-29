@@ -365,10 +365,10 @@ public class MonsterManager : MonoBehaviour
     //괄호몬스터를 생성하는 코드
     public void Spawn_Parenthesis()
     {
-        //괄호몬스터를 생성할 두 스포너 랜덤지정
+       //괄호몬스터를 생성할 두 스포너 랜덤지정
         int spawner1 = Random.Range(0, Parenthesis_Monster_Spawner.Count), spawner2 = Random.Range(0, Parenthesis_Monster_Spawner.Count);
         //생성할 괄호몬스터 종류
-        int Monster_Kind_Number = Random.Range(0, 2);
+        int Monster_Kind_Number = Random.Range(0, 3);
         GameObject Spawn_Monster;
         switch (Monster_Kind_Number)
         {
@@ -389,7 +389,7 @@ public class MonsterManager : MonoBehaviour
         //생성
         GameObject Monster1 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner1].transform.position,
             Quaternion.identity);
-        GameObject Monster2 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner1].transform.position,
+        GameObject Monster2 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner2].transform.position,
             Quaternion.identity);
         
         //연결
@@ -413,9 +413,9 @@ public class MonsterManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             int spawnerNum = Random.Range(0, Semicolon_Monster_Spawner.Count);
-            int monsterNum = Random.Range(0, Second_Monsters.Count);
+            int monsterNum = Random.Range(0, Semicolon_Monsters.Count);
             
-            Instantiate(Semicolon_Monster_Spawner[monsterNum], Semicolon_Monster_Spawner[spawnerNum].transform.position,
+            Instantiate(Semicolon_Monsters[monsterNum], Semicolon_Monster_Spawner[spawnerNum].transform.position,
                 Quaternion.identity);
         }
         
