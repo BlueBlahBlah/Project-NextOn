@@ -5004,7 +5004,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 43296751615901192, guid: 6f4fba99d4f9d5848b34beb62502614a, type: 2}
 --- !u!1 &4062038554337333273
@@ -5020,6 +5020,7 @@ GameObject:
   - component: {fileID: 653852193650286522}
   - component: {fileID: 109551374173222648}
   - component: {fileID: 7553813111959258351}
+  - component: {fileID: 2481196842994486101}
   m_Layer: 0
   m_Name: FireaxeProb
   m_TagString: Untagged
@@ -5109,7 +5110,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -5138,6 +5139,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2481196842994486101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4062038554337333273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12db499fbfa60d44994cba59b96f78e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5510936945929276096
 GameObject:
   m_ObjectHideFlags: 0
