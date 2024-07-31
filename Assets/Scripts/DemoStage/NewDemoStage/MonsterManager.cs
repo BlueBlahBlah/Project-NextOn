@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class MonsterManager : MonoBehaviour
 {
     private static MonsterManager instance = null;
+
     private void Awake()
     {
         if (null == instance)
@@ -28,6 +30,7 @@ public class MonsterManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
     //게임 매니저 인스턴스에 접근할 수 있는 프로퍼티. static이므로 다른 클래스에서 맘껏 호출할 수 있다.
     public static MonsterManager Instance
     {
@@ -37,45 +40,52 @@ public class MonsterManager : MonoBehaviour
             {
                 return null;
             }
+
             return instance;
         }
     }
 
-    [Header("StageMonster Number")]    //스테이지 몬스터 총 개수
-    GameObject[] enemies;  //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
+    [Header("StageMonster Number")] //스테이지 몬스터 총 개수
+    GameObject[] enemies; //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
+
     public int TotalMonsters;
-    
-    
-    [Header("Stack")]//스택 몬스터
+
+
+    [Header("Stack")] //스택 몬스터
     //[SerializeField] private GameObject[] Stack;
     //[SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
-    public int Gauge;                               //스택 몬스터를 잡는 게이지
+    public int Gauge; //스택 몬스터를 잡는 게이지
+
     [SerializeField] private GameObject ParenthesisGauge;
-    
-    [Header("First_Monster")]    //첫 조우 몬스터 관련
+
+    [Header("First_Monster")] //첫 조우 몬스터 관련
     public List<GameObject> First_Monsters;
-    public bool First_Monsters_Clear;   //첫 조우 몬스터 모두 처치되었는지
-    
-    [Header("Second_Monster")]    //두번째 조우 몬스터 관련
+
+    public bool First_Monsters_Clear; //첫 조우 몬스터 모두 처치되었는지
+
+    [Header("Second_Monster")] //두번째 조우 몬스터 관련
     public List<GameObject> Second_Monsters;
-    public bool Second_Monsters_Clear;   //두번째 조우 몬스터 모두 처치되었는지
-    
-    [Header("Third_Monster")]    //세번째(근접무기 먹고난 뒤) 조우 몬스터 관련
+
+    public bool Second_Monsters_Clear; //두번째 조우 몬스터 모두 처치되었는지
+
+    [Header("Third_Monster")] //세번째(근접무기 먹고난 뒤) 조우 몬스터 관련
     public List<GameObject> Third_Monsters;
-    public bool Third_Monsters_Clear;   //세번째(근접무기 먹고난 뒤) 조우 몬스터 모두 처치되었는지
-    
-    [Header("Parenthesis_Monster")]    //괄호 몬스터 관련
-    public List<GameObject> Parenthesis_Monster_Spawner;        //괄호몬스터 스포너
-    public List<GameObject> Parenthesis_Monsters;        //필드에 있는 괄호 몬스터들
+
+    public bool Third_Monsters_Clear; //세번째(근접무기 먹고난 뒤) 조우 몬스터 모두 처치되었는지
+
+    [Header("Parenthesis_Monster")] //괄호 몬스터 관련
+    public List<GameObject> Parenthesis_Monster_Spawner; //괄호몬스터 스포너
+
+    public List<GameObject> Parenthesis_Monsters; //필드에 있는 괄호 몬스터들
     [SerializeField] private GameObject Small_Parenthesis_Monster;
     [SerializeField] private GameObject Medium_Parenthesis_Monster;
     [SerializeField] private GameObject Big_Parenthesis_Monster;
-    
+
     [SerializeField] private List<GameObject> Semicolon_Monsters;
-    
-    public List<GameObject> Semicolon_Monster_Spawner;        //세미콜론몬스터 스포너
-    public bool FinalPeiz;                                    //마지막 페이즈 해당 변수가 True면 계속 몬스터 생성
-    
+
+    public List<GameObject> Semicolon_Monster_Spawner; //세미콜론몬스터 스포너
+    public bool FinalPeiz; //마지막 페이즈 해당 변수가 True면 계속 몬스터 생성
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,28 +96,33 @@ public class MonsterManager : MonoBehaviour
         First_Monsters_Clear = false;
         Second_Monsters_Clear = false;
         Third_Monsters_Clear = false;
-        
+
         //첫 조우 몬스터 비활성화
         foreach (GameObject E in First_Monsters)
         {
             E.SetActive(false);
         }
+
         foreach (GameObject E in Second_Monsters)
         {
             E.SetActive(false);
         }
+
         foreach (GameObject E in Third_Monsters)
         {
             E.SetActive(false);
         }
+
         foreach (GameObject E in Parenthesis_Monster_Spawner)
         {
             E.SetActive(false);
         }
+
         foreach (GameObject E in Semicolon_Monster_Spawner)
         {
             E.SetActive(false);
         }
+
         foreach (GameObject E in Parenthesis_Monsters)
         {
             E.SetActive(false);
@@ -119,65 +134,68 @@ public class MonsterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         
-         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-         TotalMonsters = enemies.Length;
 
-         if (First_Monsters_Clear == false)
-         {
-             bool allMonstersDestroyed = true;
-             foreach (GameObject monster in First_Monsters)
-             {
-                 if (monster != null)
-                 {
-                     allMonstersDestroyed = false;
-                     break;
-                 }
-             }
-             if (allMonstersDestroyed == true)
-             {
-                 First_Monsters_Clear = true;
-                 EventManager.Instance.PrintMSG();      //다음대화로
-             }
-         }
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        TotalMonsters = enemies.Length;
 
-         if (Second_Monsters_Clear == false)
-         {
-             bool allMonstersDestroyed = true;
-             foreach (GameObject monster in Second_Monsters)
-             {
-                 if (monster != null)
-                 {
-                     allMonstersDestroyed = false;
-                     break;
-                 }
-             }
-             if (allMonstersDestroyed == true)
-             {
-                 Second_Monsters_Clear = true;
-                 //EventManager.Instance.PrintMSG();      //다음대화로
-                 //두번째 몬스터들(스킬사용부분)은 모두 처치해도 대화창 등장하지 않게
-             }
-         }
-         
-         if (Third_Monsters_Clear == false)
-         {
-             bool allMonstersDestroyed = true;
-             foreach (GameObject monster in Third_Monsters)
-             {
-                 if (monster != null)
-                 {
-                     allMonstersDestroyed = false;
-                     break;
-                 }
-             }
-             if (allMonstersDestroyed == true)
-             {
-                 Third_Monsters_Clear = true;
-                 
-             }
-         }
-         
+        if (First_Monsters_Clear == false)
+        {
+            bool allMonstersDestroyed = true;
+            foreach (GameObject monster in First_Monsters)
+            {
+                if (monster != null)
+                {
+                    allMonstersDestroyed = false;
+                    break;
+                }
+            }
+
+            if (allMonstersDestroyed == true)
+            {
+                First_Monsters_Clear = true;
+                EventManager.Instance.PrintMSG(); //다음대화로
+            }
+        }
+
+        if (Second_Monsters_Clear == false)
+        {
+            bool allMonstersDestroyed = true;
+            foreach (GameObject monster in Second_Monsters)
+            {
+                if (monster != null)
+                {
+                    allMonstersDestroyed = false;
+                    break;
+                }
+            }
+
+            if (allMonstersDestroyed == true)
+            {
+                Second_Monsters_Clear = true;
+                //EventManager.Instance.PrintMSG();      //다음대화로
+                //두번째 몬스터들(스킬사용부분)은 모두 처치해도 대화창 등장하지 않게
+            }
+        }
+
+        if (Third_Monsters_Clear == false)
+        {
+            bool allMonstersDestroyed = true;
+            foreach (GameObject monster in Third_Monsters)
+            {
+                if (monster != null)
+                {
+                    allMonstersDestroyed = false;
+                    break;
+                }
+            }
+
+            if (allMonstersDestroyed == true)
+            {
+                Third_Monsters_Clear = true;
+
+            }
+        }
+
     }
 
     //현재 필드 몬스터들의 동작을 멈추는 함수
@@ -187,18 +205,19 @@ public class MonsterManager : MonoBehaviour
         {
             Animator animator = m.GetComponent<Animator>();
             Enemy enemy = m.GetComponent<Enemy>();
-            if (animator != null)           //애니메이션 멈추고
+            if (animator != null) //애니메이션 멈추고
             {
                 animator.speed = 0;
             }
-            if (enemy != null)              //이동도 멈추기
+
+            if (enemy != null) //이동도 멈추기
             {
                 enemy.stopNav();
             }
         }
-        
+
     }
-    
+
     //현재 필드 몬스터들의 동작을 재개하는 함수
     public void MonsterTimeResume()
     {
@@ -206,18 +225,19 @@ public class MonsterManager : MonoBehaviour
         {
             Animator animator = m.GetComponent<Animator>();
             Enemy enemy = m.GetComponent<Enemy>();
-            if (animator != null)           //애니메이션 멈추고
+            if (animator != null) //애니메이션 멈추고
             {
                 animator.speed = 1;
             }
-            if (enemy != null)              //이동도 멈추기
+
+            if (enemy != null) //이동도 멈추기
             {
                 enemy.startNav();
             }
         }
-        
+
     }
-    
+
     //적을 죽인 경우(스택에 추가)
     /*public void AddStackMonster(GameObject g)
     {
@@ -257,8 +277,8 @@ public class MonsterManager : MonoBehaviour
                 Gauge++; //스택 게이지증가
                 ParenthesisGauge.GetComponent<HealthBar>().SetHealth(Gauge);
             }
-        }       
-       
+        }
+
     }*/
 
     //괄호의 유효성 검사
@@ -308,9 +328,9 @@ public class MonsterManager : MonoBehaviour
             }
         }
         ParenthesisGauge.SetActive(false);
-        
+
     }*/
-    
+
     //현재 몬스터목록에 추가
     /*public void AddStackMonster_In_Array(GameObject m)
     {
@@ -327,7 +347,7 @@ public class MonsterManager : MonoBehaviour
             E.GetComponent<Enemy>().SetNavSpeed(3.5f);
         }
     }
-    
+
     //두번째 조우 몬스터 조작 함수
     public void Appearance_Second_Monster()
     {
@@ -338,7 +358,7 @@ public class MonsterManager : MonoBehaviour
             E.GetComponent<Enemy>().SetNavSpeed(3.5f);
         }
     }
-    
+
     //세번째 조우 몬스터 조작 함수
     public void Appearance_Third_Monster()
     {
@@ -349,7 +369,7 @@ public class MonsterManager : MonoBehaviour
             E.GetComponent<Enemy>().SetNavSpeed(3.5f);
         }
     }
-    
+
     //세번째 조우 몬스터 조작 함수
     public void Appearance_Parenthesis_Monster()
     {
@@ -358,25 +378,27 @@ public class MonsterManager : MonoBehaviour
         {
             E.SetActive(true);
             E.GetComponent<Enemy>().SetNavSpeed(3.5f);
-            
+
         }
+
         foreach (GameObject E in Parenthesis_Monster_Spawner)
         {
             E.SetActive(true);
         }
     }
-    
+
     //떨어지는 몬스터에 Nav를 start하는  LastPeizSpawnMonsterMeshControl 를 추가하는 함수
     private T InitComponent<T>(GameObject gameObject) where T : MonoBehaviour
     {
         return gameObject.AddComponent<T>();
     }
-    
+
     //괄호몬스터를 생성하는 코드
     public void Spawn_Parenthesis()
     {
-       //괄호몬스터를 생성할 두 스포너 랜덤지정
-        int spawner1 = Random.Range(0, Parenthesis_Monster_Spawner.Count), spawner2 = Random.Range(0, Parenthesis_Monster_Spawner.Count);
+        //괄호몬스터를 생성할 두 스포너 랜덤지정
+        int spawner1 = Random.Range(0, Parenthesis_Monster_Spawner.Count),
+            spawner2 = Random.Range(0, Parenthesis_Monster_Spawner.Count);
         //생성할 괄호몬스터 종류
         int Monster_Kind_Number = Random.Range(0, 3);
         GameObject Spawn_Monster;
@@ -395,17 +417,20 @@ public class MonsterManager : MonoBehaviour
                 Spawn_Monster = Small_Parenthesis_Monster;
                 break;
         }
-        
+
         //생성
         GameObject Monster1 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner1].transform.position,
             Quaternion.identity);
         GameObject Monster2 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner2].transform.position,
             Quaternion.identity);
-        
+
         //연결
         Monster1.GetComponent<Parenthesis>().Set_Mate_Monster(Monster2);
         Monster2.GetComponent<Parenthesis>().Set_Mate_Monster(Monster1);
-        
+
+        LastPeizMosnterNavOff(Monster1);
+        LastPeizMosnterNavOff(Monster2);
+
         //TODO
         //이펙트 연결하기
 
@@ -424,16 +449,27 @@ public class MonsterManager : MonoBehaviour
         {
             int spawnerNum = Random.Range(0, Semicolon_Monster_Spawner.Count);
             int monsterNum = Random.Range(0, Semicolon_Monsters.Count);
-            
-            GameObject Monster = Instantiate(Semicolon_Monsters[monsterNum], Semicolon_Monster_Spawner[spawnerNum].transform.position,
+
+            GameObject Monster = Instantiate(Semicolon_Monsters[monsterNum],
+                Semicolon_Monster_Spawner[spawnerNum].transform.position,
                 Quaternion.identity);
+            LastPeizMosnterNavOff(Monster);
         }
         
-            
+
         if (FinalPeiz == true)
         {
             //재귀호출
             Invoke("Spawn_Semicolon", 2f);
         }
     }
+
+    //마지막 페이즈 몬스터 공중부양 방지q
+    private void LastPeizMosnterNavOff(GameObject m)
+    {
+        m.GetComponent<Enemy>().stopNav();                      //네비게이션 종료
+        InitComponent<LastMonsterNavCont>(m);                   //착지 판정 스크립트 추가
+        m.GetComponent<NavMeshAgent>().enabled = false;         //NavMeshAgent비활성화
+    }
+
 }
