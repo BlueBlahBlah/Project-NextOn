@@ -104,6 +104,10 @@ public class MonsterManager : MonoBehaviour
         {
             E.SetActive(false);
         }
+        foreach (GameObject E in Semicolon_Monster_Spawner)
+        {
+            E.SetActive(false);
+        }
         foreach (GameObject E in Parenthesis_Monsters)
         {
             E.SetActive(false);
@@ -362,6 +366,12 @@ public class MonsterManager : MonoBehaviour
         }
     }
     
+    //떨어지는 몬스터에 Nav를 start하는  LastPeizSpawnMonsterMeshControl 를 추가하는 함수
+    private T InitComponent<T>(GameObject gameObject) where T : MonoBehaviour
+    {
+        return gameObject.AddComponent<T>();
+    }
+    
     //괄호몬스터를 생성하는 코드
     public void Spawn_Parenthesis()
     {
@@ -415,7 +425,7 @@ public class MonsterManager : MonoBehaviour
             int spawnerNum = Random.Range(0, Semicolon_Monster_Spawner.Count);
             int monsterNum = Random.Range(0, Semicolon_Monsters.Count);
             
-            Instantiate(Semicolon_Monsters[monsterNum], Semicolon_Monster_Spawner[spawnerNum].transform.position,
+            GameObject Monster = Instantiate(Semicolon_Monsters[monsterNum], Semicolon_Monster_Spawner[spawnerNum].transform.position,
                 Quaternion.identity);
         }
         

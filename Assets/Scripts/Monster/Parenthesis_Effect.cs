@@ -7,7 +7,7 @@ public class Parenthesis_Effect : MonoBehaviour
 {
     [SerializeField] private GameObject Mate_Monster;
     private Transform parentTransform;
-    private float distance = 2f; // Parent와의 거리
+    private float distance = 1f; // Parent와의 거리
 
     // Start는 첫 프레임 업데이트 전에 호출됩니다.
     void Start()
@@ -37,6 +37,9 @@ public class Parenthesis_Effect : MonoBehaviour
             // Parent의 위치에서 Mate_Monster의 정반대 방향으로 distance 거리를 두고 이동
             Vector3 newPosition = parentTransform.position + oppositeDirection * distance;
 
+            // Y 값을 1.5로 설정
+            newPosition.y = 1.5f;
+
             // Parenthesis_Effect 위치 업데이트
             transform.position = newPosition;
 
@@ -45,4 +48,5 @@ public class Parenthesis_Effect : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(lookDirection);
         }
     }
+
 }
