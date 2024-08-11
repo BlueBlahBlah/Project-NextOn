@@ -39,6 +39,6 @@ public class Scenario1UI : MonoBehaviour
     {
         // 캐릭터의 정지
         characterPixel.GetComponent<Animator>().enabled = false;
-        characterPixel.sprite = Resources.Load($"UI/Image/Characters/coding 1", typeof(Sprite)) as Sprite;
+        characterPixel.sprite = Resources.Load($"UI/Image/Characters/Devin/coding 1", typeof(Sprite)) as Sprite;
     }
 }
