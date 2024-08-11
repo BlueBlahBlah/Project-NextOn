@@ -5,13 +5,11 @@ using UnityEngine.Serialization;
 
 public class WaveArea2 : MonoBehaviour
 {
-    [SerializeField] private StageManager StageManager;
     [SerializeField] private bool peiz2Active;
     [SerializeField] private bool peiz3Active;
     // Start is called before the first frame update
     void Start()
     {
-        StageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
         peiz2Active = false;
         peiz3Active = false;
     }
@@ -24,17 +22,18 @@ public class WaveArea2 : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //2페이즈시작
+        /*//2페이즈시작
         if (other.CompareTag("Player") && peiz2Active == false)
         {
             peiz2Active = true;
             StageManager.Area2Function();
-        }
-        else if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false)  //3페이즈 중에 Area 통과
+        }*/
+        /*if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false && EventManager.Instance.Area3 == true)  //3페이즈 중에 Area 통과
         {
             peiz3Active = true;
-            StageManager.Area2Function();
-        }
+            //StageManager.Area2Function();
+            
+        }*/
         
     }
 }

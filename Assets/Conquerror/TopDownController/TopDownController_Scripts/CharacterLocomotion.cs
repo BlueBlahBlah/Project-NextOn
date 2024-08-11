@@ -10,7 +10,7 @@ public class CharacterLocomotion : MonoBehaviour
     [Tooltip("Character controller is a built in component in unity. Feel free to use rigidbody or changing transform directly")]
     [SerializeField] CharacterController characterController;
     [Tooltip("how fast the player walks")]
-    [SerializeField] float walkSpeed = 3f;
+    [SerializeField] public float walkSpeed = 5f;
     [Tooltip("if you would like separate visual from player assign something else here")]
     [SerializeField] Transform characterVisual;//if you would like separate visual from player assign something else here
     [Tooltip("Turn this off if you want to separate movement and aiming")]
@@ -19,7 +19,7 @@ public class CharacterLocomotion : MonoBehaviour
     [SerializeField] FixedJoystick moveJoystick;//assign joystick here
     [Tooltip("Self explanatory. After this magnitude player will move ")]
     [SerializeField] float movementThreshold = 0.1f;// self explanatory. After this magnitude player will move 
-    [Header("Animation variables")]
+    [Header("Animation variables")] 
     [Tooltip("This will turn rotation towards the joystick direction")]
     [SerializeField] bool canStrafe = false;
     [Tooltip("Animation variables for blendtrees")]

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +14,19 @@ public class PlayerScriptRifle : MonoBehaviour
     Animator Anim;
     public Button RollBtn;
     public bool[] NowWeapon;
-
+    
+    public bool isMovingForward;
+    public bool isMovingBackward;
+    public bool isMovingRight;
+    public bool isMovingLeft;
+    [SerializeField] private CharacterLocomotion playerMovingScript;
+    [SerializeField] private Rifle rifle;
+    [SerializeField] private Shotgun shotgun;
+    [SerializeField] private Sniper sniper;
+    [SerializeField] private GrenadeLauncher grenadeLauncher;
+    [SerializeField] private MachineGun machineGun;
+    [SerializeField] private FireGun fireGun;
+    
     void Start()
     {
         // 초기 위치 저장
@@ -20,19 +34,79 @@ public class PlayerScriptRifle : MonoBehaviour
         walking = false;
         Anim = GetComponentInChildren<Animator>();
         RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
+        try
+        {
+            WeaponSynchronization();
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
     }
 
     void Update()
     {
-        // 현재 위치와 이전 위치 비교
+        if (PlayerManager.Instance.Health <= 0)        //체력이 다 닳은 경우
+        {
+            GetComponentInParent<CharacterLocomotion>().enabled = false;
+            Anim.applyRootMotion = true;
+            Anim.SetTrigger("Death");
+        }
+        else
+        {
+             // 현재 위치와 이전 위치 비교
         if (transform.position != lastPosition)
         {
             walking = true;
-            // 위치가 변경되었을 때만 아래 코드 실행
 
             // 이동 방향 설정
             Vector3 moveDirection = (transform.position - lastPosition).normalized;
 
+            // 이동 방향을 기준으로 앞, 뒤, 오른쪽, 왼쪽 여부 판단
+            float angle = Vector3.SignedAngle(moveDirection, transform.forward, Vector3.up);
+            //Debug.LogError(angle);
+            if (angle > 45f && angle < 135f)
+            {
+                isMovingLeft = true;
+                isMovingRight = false;
+                isMovingForward = false;
+                isMovingBackward = false;
+                playerMovingScript.walkSpeed = 5;
+
+            }
+            else if (angle < -45f && angle > -135f)
+            {
+                isMovingRight = true;
+                isMovingLeft = false;
+                isMovingForward = false;
+                isMovingBackward = false;
+                playerMovingScript.walkSpeed = 5;
+            }
+            else if(angle > 70 || angle < -70)
+            {
+                isMovingLeft = false;
+                isMovingRight = false;
+                if (Vector3.Dot(moveDirection, transform.forward) > 0)      //안쓰이는 코드인듯? forward는 아래 else에
+                {
+                    isMovingForward = true;
+                    isMovingBackward = false;
+                    playerMovingScript.walkSpeed = 5;
+                }
+                else
+                {
+                    isMovingForward = false;
+                    isMovingBackward = true;
+                    playerMovingScript.walkSpeed = 5;
+                }
+            }
+            else
+            {
+                isMovingForward = true;
+                isMovingBackward = false;
+                isMovingLeft = false;
+                isMovingRight = false;
+                playerMovingScript.walkSpeed = 5;
+            }
             // 움직임 처리
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
 
@@ -42,12 +116,22 @@ public class PlayerScriptRifle : MonoBehaviour
 
             // 현재 위치를 이전 위치로 업데이트
             lastPosition = transform.position;
+            
         }
         else
         {
             walking = false;
+            isMovingForward = false;
+            isMovingBackward = false;
+            isMovingRight = false;
+            isMovingLeft = false;
         }
         Anim.SetBool("walk", walking);
+        Anim.SetBool("Front", isMovingForward);
+        Anim.SetBool("Back", isMovingBackward);
+        Anim.SetBool("Left", isMovingLeft);
+        Anim.SetBool("Right", isMovingRight);
+        
 
         if (reloaing == true)       //재장전중이라면
         {
@@ -55,17 +139,31 @@ public class PlayerScriptRifle : MonoBehaviour
             reloaing = false;
             Invoke("reloadDone",4);      //4초후 재장전 끝
         }
+        }
+       
+    }
+    
+    public void WeaponSynchronization()
+    {
+        rifle = GameObject.FindObjectOfType<Rifle>();
+        shotgun = GameObject.FindObjectOfType<Shotgun>();
+        sniper = GameObject.FindObjectOfType<Sniper>();
+        grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
+        machineGun = GameObject.FindObjectOfType<MachineGun>();
+        fireGun = GameObject.FindObjectOfType<FireGun>();
     }
 
     private void reloadDone()
     {
         Anim.SetBool("reload", false);
-        Rifle rifle = GameObject.FindObjectOfType<Rifle>();
-        Shotgun shotgun = GameObject.FindObjectOfType<Shotgun>();
-        Sniper sniper = GameObject.FindObjectOfType<Sniper>();
-        GrenadeLauncher grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
-        MachineGun machineGun = GameObject.FindObjectOfType<MachineGun>();
-        FireGun fireGun = GameObject.FindObjectOfType<FireGun>();
+        try
+        {
+            WeaponSynchronization();
+        }
+        catch (NullReferenceException e)
+        {
+            
+        }
         if (rifle != null && rifle.gameObject.activeSelf)
         {
             if (rifle.maxBulletCount >= 30)
@@ -163,5 +261,46 @@ public class PlayerScriptRifle : MonoBehaviour
     void OnRollButtonClick()
     {
         Anim.SetTrigger("roll");
+    }
+
+    //PlayerManager에 현재 탄 잔량 정보를 전달
+    public void BulletInfo()
+    {
+        if (rifle != null && rifle.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = rifle.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = rifle.bulletCount;
+            return;
+        }
+        if (shotgun != null && shotgun.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = shotgun.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = shotgun.bulletCount;
+            return;
+        }
+        if (sniper != null && sniper.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = sniper.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = sniper.bulletCount;
+            return;
+        }
+        if (grenadeLauncher != null && grenadeLauncher.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = grenadeLauncher.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = grenadeLauncher.bulletCount;
+            return;
+        }
+        if (machineGun != null && machineGun.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = machineGun.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = machineGun.bulletCount;
+            return;
+        }
+        if (fireGun != null && fireGun.gameObject.activeSelf)
+        {
+            PlayerManager.Instance.TotalBullet = fireGun.maxBulletCount;
+            PlayerManager.Instance.CurrentBullet = fireGun.bulletCount;
+            return;
+        }
     }
 }

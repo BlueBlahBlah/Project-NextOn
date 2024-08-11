@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.16502833, g: 0.20688932, b: 0.2867549, a: 1}
+  m_IndirectSpecularColor: {r: 0.44300663, g: 0.49219644, b: 0.57192457, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: turretType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199253916382638466, guid: a970ba0fc593c9347b1ca8a4e50197f1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -113,6 +113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket30_Green
       objectReference: {fileID: 0}
+    - target: {fileID: 1345097562714794, guid: 09b4b980a85df244983d9eec271f66a6, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4326051959405618, guid: 09b4b980a85df244983d9eec271f66a6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -190,7 +194,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1010119977784964, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1056904543853562, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_Name
@@ -198,7 +202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1056904543853562, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1056904543853562, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_IsActive
@@ -206,11 +210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1368536608535506, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1989805736563948, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4020996693717984, guid: 701f70234e0275d488f46f7e89f98f10, type: 3}
       propertyPath: m_LocalPosition.x

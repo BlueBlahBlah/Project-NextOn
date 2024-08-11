@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StreamOfEdge2 : MonoBehaviour
 {
+    //[SerializeField] private DamageManager DamageManager;
     private Transform[] currentTarget; // 현재 목표 지점
     private float TickTime;       //데미지를 주는 틱 간격
     public int Damage;
@@ -33,7 +34,7 @@ public class StreamOfEdge2 : MonoBehaviour
         if (other.CompareTag("Enemy") && TickTime >= 0.25f)
         {
             //스킬계수추가
-            int TempDamage =  GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;   
+            int TempDamage = DamageManager.Instance.SwordStreamEdge_Skill_DamageCounting * Damage;   
             other.GetComponent<Enemy>().curHealth -= TempDamage;
             TickTime = 0;
         }

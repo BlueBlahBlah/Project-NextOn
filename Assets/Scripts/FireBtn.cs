@@ -6,13 +6,13 @@ using UnityEngine;
 public class FireBtn : MonoBehaviour
 {
     public bool BtnDown;
-    public MachineGun machineGun;
-    public FireGun fireGun;
+    public GameObject machineGun;
+    public GameObject fireGun;
 
     private void Start()
     {
-        machineGun = GameObject.FindObjectOfType<MachineGun>();
-        fireGun = GameObject.FindObjectOfType<FireGun>();
+        //machineGun = GameObject.FindObjectOfType<MachineGun>();
+        //fireGun = GameObject.FindObjectOfType<FireGun>();
     }
 
     void Update()

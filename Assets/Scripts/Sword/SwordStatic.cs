@@ -2,15 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwordStatic : MonoBehaviour
 {
+    //[SerializeField] private DamageManager DamageManager;
     [SerializeField] private Collider collider;
     public int attackNum;     //유효타횟수
     [SerializeField] private int SkillTime;     //스킬타수
     [SerializeField] private float findDistance;     //스킬거리
     [SerializeField] private GameObject Effect;     //이펙트
     public int Damage;
+    
+    [SerializeField] private Button Btn;
+    [SerializeField] private GameObject Player;
+    [SerializeField] private GameObject Skill;
+    
+    public float ThisCoolTime;            //현재 무기의 돌아가고 있는 쿨타임
+    public float SkillCoolTime;           //현재 무기 스킬의 총 쿨타임
+    [SerializeField] private float SkillCoolTimeRate;       //PlayerManager에서 가져오는 쿨타임 감소율
     
     // Start is called before the first frame update
     void Start()
@@ -19,6 +29,37 @@ public class SwordStatic : MonoBehaviour
         SkillTime = 3;      //기본 3번 튕김
         findDistance = 5f;      //스킬반경 5f
         Damage = 3;
+        
+        SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
+        SkillCoolTime = 10f;            //현재 무기의 쿨타임을 10초로 초기화 
+        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨타임은 감소율을 적용한 값으로 
+        ThisCoolTime = 0;
+        Btn.interactable = true;        //처음에는(먹자마자) 스킬 사용가능
+    }
+    
+    private void OnEnable()
+    {
+        // 버튼 클릭 이벤트 등록
+        Btn.onClick.AddListener(SkillSpawn);
+        
+        SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
+        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨타임은 감소율을 적용한 값으로 
+        ThisCoolTime = 0;               //쿨타임 초기화
+        
+        Btn.interactable = true;        //처음에는(먹자마자) 스킬 사용가능
+    }
+    
+    void SkillSpawn()
+    {
+        // 현재 오브젝트가 바라보는 방향을 얻기 위해 transform.forward 사용
+        Vector3 direction = Player.transform.forward.normalized;
+
+        // 새로운 위치를 현재 위치 + (바라보는 방향 * 거리) 로 설정
+        Vector3 skillPosition = transform.position + (direction * 15f) + (Vector3.up * 5f) + (Vector3.right * 5f);
+
+        Instantiate(Skill, skillPosition, Quaternion.Euler(0,90,0));
+        Btn.interactable = false;       //스킬 사용후 다음 쿨타임까지 버튼 잠금
+        ThisCoolTime = SkillCoolTime;   //쿨타임 생김
     }
 
     // Update is called once per frame
@@ -30,6 +71,15 @@ public class SwordStatic : MonoBehaviour
             swordSkill();           //스킬
         }
         
+        if (ThisCoolTime > 0)                  //쿨타임이 0보다 클때 (쿨이 남아있는 경우)
+        {
+            ThisCoolTime -= Time.deltaTime;     //쿨타임 감소
+        }
+        else if (ThisCoolTime <= 0)           //쿨타임이 0일때 
+        {
+            Btn.interactable = true;         //스킬 사용 가능
+        }
+        
     }
 
    
@@ -38,7 +88,7 @@ public class SwordStatic : MonoBehaviour
     {
         List<GameObject> nearEnemy = FindRandomEnemy();
         //스킬 계수 추가
-        int TempDamage =  GameObject.Find("StageManager").GetComponent<StageManager>().SwordStatic_Skill_DamageCounting * Damage;
+        int TempDamage =  DamageManager.Instance.SwordStatic_Passive_DamageCounting * Damage;
 
         int numEnemNear = nearEnemy.Count;
         if (numEnemNear == 1)       //주변에 다른 몬스터가 없을때

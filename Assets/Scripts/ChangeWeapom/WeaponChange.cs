@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class WeaponChange : MonoBehaviour
 {
@@ -14,6 +17,7 @@ public class WeaponChange : MonoBehaviour
     [SerializeField] private GameObject player_NonWeapon;
     [SerializeField] private GameObject player_CloseWeapon;
     [SerializeField] private List<GameObject> player_WeaponList;
+    [SerializeField] private Button attackBtn;
 
     public void ChangeWeapon(WeaponType Wt, GameObject Weapon)
     {
@@ -22,6 +26,8 @@ public class WeaponChange : MonoBehaviour
             player_LongWeapon.SetActive(false);
             player_NonWeapon.SetActive(false);
             player_CloseWeapon.SetActive(true);
+            //근접무기의 경우 무기에서 버튼 이벤트를 등록하는 것이 아니기에 근접공격 모션을 여기서 등록
+            attackBtn.onClick.AddListener(player_CloseWeapon.GetComponent<PlayerScriptOneHand>().OnAttackButtonClick);
         }
         else if (Wt == WeaponType.longType)
         {
@@ -45,6 +51,15 @@ public class WeaponChange : MonoBehaviour
             {
                 g.SetActive(false);
             }
+        }
+
+        if (Wt == WeaponType.closeType)
+        {
+            player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();  //현재 잡은 무기 다시 탐색
+        }
+        else if (Wt == WeaponType.longType)
+        {
+            player_LongWeapon.GetComponent<PlayerScriptRifle>().WeaponSynchronization();    //현재 잡은 무기 다시 탐색
         }
     }
 }

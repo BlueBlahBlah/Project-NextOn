@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 748870223342574429}
   - component: {fileID: 7673378489090551393}
   - component: {fileID: 3899016819389937012}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SwordSilverSkill 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent: {fileID: 7673378489090551393}
+  Damage: 0
 --- !u!1001 &6160558004151010914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -471,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent: {fileID: 7673378489090551393}
+  Damage: 0
 --- !u!1001 &7314573365496399873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -550,6 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent: {fileID: 7673378489090551393}
+  Damage: 0
 --- !u!4 &7319449466579105299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4922765940162066, guid: 95166de42885d31428c1f4461fa7a693, type: 3}
@@ -634,6 +637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent: {fileID: 7673378489090551393}
+  Damage: 0
 --- !u!4 &7474907519493539682 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4922765940162066, guid: 95166de42885d31428c1f4461fa7a693, type: 3}
@@ -718,6 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent: {fileID: 7673378489090551393}
+  Damage: 0
 --- !u!4 &7571766636911351173 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4922765940162066, guid: 95166de42885d31428c1f4461fa7a693, type: 3}
@@ -807,3 +812,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent: {fileID: 7673378489090551393}
+  Damage: 0

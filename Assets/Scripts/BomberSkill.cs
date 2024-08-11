@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class BomberSkill : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed = 35f; // 전진 속도
-    [SerializeField]
-    private GameObject Player;
+    //[SerializeField] private DamageManager DamageManager;
+    [SerializeField] private float moveSpeed = 35f; // 전진 속도
+    [SerializeField] private GameObject Player;
     [SerializeField] private List<GameObject> GraywarheadPrefab;
     [SerializeField] private List<GameObject> RedwarheadPrefab;
     [SerializeField] private List<GameObject> GreenwarheadPrefab;
@@ -43,8 +42,8 @@ public class BomberSkill : MonoBehaviour
         {
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
             elapsed += Time.deltaTime;
-            int BombKind = GameObject.Find("StageManager").GetComponent<StageManager>().Bomber_Skill_WarheadKind;
-            int BombColor = GameObject.Find("StageManager").GetComponent<StageManager>().Bomber_Skill_WarheadColor;
+            int BombKind = DamageManager.Instance.Bomber_Skill_WarheadKind;
+            int BombColor = DamageManager.Instance.Bomber_Skill_WarheadColor;
             
             switch (BombColor)
             {

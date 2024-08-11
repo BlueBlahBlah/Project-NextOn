@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class DemoEventBtn : MonoBehaviour
 {
-    [SerializeField] private Button eventBtn; 
+    [SerializeField] private Button eventBtn;
+    [SerializeField] private GameObject peiz3Gauge;
     void Start()
     {
         eventBtn.onClick.AddListener(CompilerErrorClear);
@@ -20,10 +21,12 @@ public class DemoEventBtn : MonoBehaviour
 
     private void CompilerErrorClear()
     {
-        GameObject.Find("StageManager").GetComponent<StageManager>().Area3 = true;
-        GameObject.Find("StageManager").GetComponent<StageManager>().OnWave3Direction();
+        peiz3Gauge.SetActive(true);
+        peiz3Gauge.GetComponent<Peiz3Gauge>().StartPeiz3Gauge();
+        //GameObject.Find("StageManager").GetComponent<StageManager>().Peiz3MonsterSpawn();
+        //GameObject.Find("StageManager").GetComponent<StageManager>().StartPeiz3Pannel();
         Debug.LogError("컴파일러 해결");
-        Debug.LogError("Area3 true");
+        
     }
     
 }

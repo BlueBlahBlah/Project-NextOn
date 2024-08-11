@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    [SerializeField]
+    public float progressPercent = 0;
+
     public Slider slider;
 
     private void Start()
