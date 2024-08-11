@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8562340054247253262}
   - component: {fileID: 1691398290531177417}
   - component: {fileID: 2190665473309128299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Wep_Bullet_Ammo_01 Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

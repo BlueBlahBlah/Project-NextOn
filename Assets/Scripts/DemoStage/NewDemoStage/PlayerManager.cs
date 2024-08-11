@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private MachineGun machineGun = GameObject.FindObjectOfType<MachineGun>();
     [SerializeField] private FireGun fireGun = GameObject.FindObjectOfType<FireGun>();*/
     
+    
     public float TotalHealth;                          //최대체력
     public float Health;                          //현재체력
     public float HealthGen;                     //체젠
@@ -23,6 +24,8 @@ public class PlayerManager : MonoBehaviour
     public int PlayerSkillDamage;               //스킬 공격력
     public int CurrentBullet;                   //현재 잔탄 수
     public int TotalBullet;                     //남은 탄창 수
+    
+    public float SkillCoolTimeRate;                     //근접무기 쿨타임감소율
     
     public bool Death;
     
@@ -37,6 +40,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject player_CloseWeapon;
     [SerializeField] private List<GameObject> player_WeaponList;
     [SerializeField] private Button attackBtn;
+    
+    public DropItemPosition _dropItemPosition;
 
     
     
@@ -45,6 +50,7 @@ public class PlayerManager : MonoBehaviour
     {
         TotalHealth = 100;  //시작 시 체력 100
         Health = TotalHealth;
+        SkillCoolTimeRate = 0;     //시작 시 스킬 쿨타임
         Death = false;
         if (null == instance)
         {
@@ -88,6 +94,11 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Health <= 0)        //체력이 다 닳은 경우
+        {
+            Health = 0;         //체력바가 길어지는 것을 방지
+        }
+        
         //현재 총기류를 먹은경우
         if (player_LongWeapon.activeSelf)
         {
@@ -103,6 +114,7 @@ public class PlayerManager : MonoBehaviour
     
     public void ChangeWeapon(WeaponType Wt, GameObject Weapon)
     {
+        //모델링 활성화
         if (Wt == WeaponType.closeType)
         {
             player_LongWeapon.SetActive(false);
@@ -123,6 +135,7 @@ public class PlayerManager : MonoBehaviour
             player_NonWeapon.SetActive(true);
             player_CloseWeapon.SetActive(false);
         }
+        //무기 활성화
         foreach (GameObject g in player_WeaponList)
         {
             if (Weapon == g)
