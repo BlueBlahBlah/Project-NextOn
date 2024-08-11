@@ -127,6 +127,16 @@ public class Parenthesis : Enemy
         }
     }
     
+    //외부에서 몬스터를 처치하는 동작을 할 때 호출하는 함수
+    public void MonsterClear()
+    {
+        this.isDeath = true;
+    }
+    public bool get_isDeath()
+    {
+        return this.isDeath;
+    }
+    
     
     private void ShowDamage(int d)
     {

@@ -28,24 +28,30 @@ public class Parenthesis_Effect : MonoBehaviour
         // Mate_Monster와 Parent가 null이 아닌 경우 실행
         if (Mate_Monster != null && parentTransform != null)
         {
-            // Mate_Monster를 바라보는 방향 계산
-            Vector3 directionToMate = (Mate_Monster.transform.position - parentTransform.position).normalized;
+            //만약 둘다 죽은 상태라면 더이상 방향 관여 x
+            //둘중 하나라도 아직 살아있다면 해당 코드 동작
+            if (Mate_Monster.GetComponent<Parenthesis>().get_isDeath() == false || this.gameObject.GetComponentInParent<Parenthesis>().get_isDeath() == false)
+            {
+                // Mate_Monster를 바라보는 방향 계산
+                Vector3 directionToMate = (Mate_Monster.transform.position - parentTransform.position).normalized;
 
-            // Mate_Monster의 정반대 방향 계산
-            Vector3 oppositeDirection = -directionToMate;
+                // Mate_Monster의 정반대 방향 계산
+                Vector3 oppositeDirection = -directionToMate;
 
-            // Parent의 위치에서 Mate_Monster의 정반대 방향으로 distance 거리를 두고 이동
-            Vector3 newPosition = parentTransform.position + oppositeDirection * distance;
+                // Parent의 위치에서 Mate_Monster의 정반대 방향으로 distance 거리를 두고 이동
+                Vector3 newPosition = parentTransform.position + oppositeDirection * distance;
 
-            // Y 값을 1.5로 설정
-            newPosition.y = 1.5f;
+                // Y 값을 1.5로 설정
+                newPosition.y = 1.5f;
 
-            // Parenthesis_Effect 위치 업데이트
-            transform.position = newPosition;
+                // Parenthesis_Effect 위치 업데이트
+                transform.position = newPosition;
 
-            // Parenthesis_Effect가 Mate_Monster의 정반대 방향을 바라보도록 설정
-            Vector3 lookDirection = parentTransform.position - Mate_Monster.transform.position;
-            transform.rotation = Quaternion.LookRotation(lookDirection);
+                // Parenthesis_Effect가 Mate_Monster의 정반대 방향을 바라보도록 설정
+                Vector3 lookDirection = parentTransform.position - Mate_Monster.transform.position;
+                transform.rotation = Quaternion.LookRotation(lookDirection);
+            }
+            
         }
     }
 

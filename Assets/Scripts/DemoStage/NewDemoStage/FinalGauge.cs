@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class FinalGauge : MonoBehaviour
 {
     public Slider slider;
+    private bool LastPeizDone = false;
 
     private void Start()
     {
@@ -35,6 +36,13 @@ public class FinalGauge : MonoBehaviour
         }
 
         slider.value = targetValue; // Ensure the value is exactly zero
-        MonsterManager.Instance.FinalPeiz = false;
+        MonsterManager.Instance.FinalPeiz = false;      //이제 몬스터 그만 생성
+        EventManager.Instance.LastPeizDone();           //모든 몬스터 처치
+        
+        if (LastPeizDone == false)
+        {
+            LastPeizDone = true;
+            EventManager.Instance.PrintMSG();               //다음 대화창
+        }
     }
 }

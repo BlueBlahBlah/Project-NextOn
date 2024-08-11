@@ -428,8 +428,8 @@ public class MonsterManager : MonoBehaviour
         Monster1.GetComponent<Parenthesis>().Set_Mate_Monster(Monster2);
         Monster2.GetComponent<Parenthesis>().Set_Mate_Monster(Monster1);
 
-        LastPeizMosnterNavOff(Monster1);
-        LastPeizMosnterNavOff(Monster2);
+        //LastPeizMosnterNavOff(Monster1);
+        //LastPeizMosnterNavOff(Monster2);
 
         //TODO
         //이펙트 연결하기
@@ -437,7 +437,7 @@ public class MonsterManager : MonoBehaviour
         if (FinalPeiz == true)
         {
             //재귀호출
-            Invoke("Spawn_Parenthesis", 2f);
+            Invoke("Spawn_Parenthesis", 10f);
         }
 
     }
@@ -445,7 +445,7 @@ public class MonsterManager : MonoBehaviour
     public void Spawn_Semicolon()
     {
         //5마리 동시 생성
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             int spawnerNum = Random.Range(0, Semicolon_Monster_Spawner.Count);
             int monsterNum = Random.Range(0, Semicolon_Monsters.Count);
@@ -453,14 +453,14 @@ public class MonsterManager : MonoBehaviour
             GameObject Monster = Instantiate(Semicolon_Monsters[monsterNum],
                 Semicolon_Monster_Spawner[spawnerNum].transform.position,
                 Quaternion.identity);
-            LastPeizMosnterNavOff(Monster);
+            //LastPeizMosnterNavOff(Monster);
         }
         
 
         if (FinalPeiz == true)
         {
             //재귀호출
-            Invoke("Spawn_Semicolon", 2f);
+            Invoke("Spawn_Semicolon", 10f);
         }
     }
 

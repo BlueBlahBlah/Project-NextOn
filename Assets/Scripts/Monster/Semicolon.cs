@@ -40,6 +40,7 @@ public class Semicolon : Enemy
     {
         if (IsDeath == true)  //죽은경우
         {
+            _animator.SetTrigger("Death");
             if (GetComponent<Enemy>().isChase == true)                  //update안에서 오류가 너무 많이 발생하지 않도록하기 위함
             {
                 GetComponent<Enemy>().stopNav();
@@ -94,6 +95,12 @@ public class Semicolon : Enemy
                 GetComponent<Enemy>().isChase = true;
             }
         }
+    }
+
+    //외부에서 몬스터를 처치하는 동작을 할 때 호출하는 함수
+    public void MonsterClear()
+    {
+        this.IsDeath = true;
     }
 
     private void ShowDamage(int d)

@@ -57,6 +57,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject[] FirstDirection;
     [SerializeField] private GameObject[] SecondDirection;
     [SerializeField] private GameObject[] ThirdDirection;
+    [SerializeField] private GameObject[] FinalDirection;
 
     private bool FirstPickupRifle;
     private bool FirstPickUpBombSkill;
@@ -99,8 +100,12 @@ public class EventManager : MonoBehaviour
         {
             g.SetActive(false);
         }
+        foreach (GameObject g in FinalDirection)
+        {
+            g.SetActive(false);
+        }
         
-        UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점) 50
+        UIManager.instance.DialogueNumber = 77; // 다이얼로그 넘버 저장 (대사 시작지점) 50
         PrintLongDialogue();
     }
     
@@ -201,6 +206,10 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 80 && UIManager.instance.isCompletelyPrinted == true)
         {
+            foreach (GameObject g in ThirdDirection)
+            {
+                g.SetActive(false);                  //화살표 꺼지기
+            }
             Invoke("MonsterTimeResume_Invoke",2.5f);
             //괄호몬스터 UI등장
             ParenthesisGauge.SetActive(true);
@@ -213,12 +222,57 @@ public class EventManager : MonoBehaviour
                 MonsterManager.Instance.Spawn_Semicolon();
             }
         }
+        else if (UIManager.instance.DialogueNumber == 85 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            //마지막 최종 다리로 이동하는 화살표
+            /*foreach (GameObject g in FirstDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+            foreach (GameObject g in SecondDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }*/
+            foreach (GameObject g in FinalDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+            ParenthesisGauge.SetActive(false);      //게이지 꺼주기
+            JoystickActivation();     //조이스틱 활성화
+            foreach (GameObject g in After3Peiz)
+            {
+                g.SetActive(true);
+            }
+            foreach (GameObject g in Before3Peiz)
+            {
+                g.SetActive(false);
+            }
+
+            Area3 = true;       //다리 장벽 넘어갈 수 있음
+        }
             
     }
 
     private void MonsterTimeResume_Invoke()
     {
         MonsterManager.Instance.MonsterTimeResume();
+    }
+    
+    //마지막 페이즈가 끝나 모든 몬스터 처치
+    public void LastPeizDone()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject g in enemies)
+        {
+            if (g.GetComponent<Semicolon>())
+            {
+                g.GetComponent<Semicolon>().MonsterClear();
+            }
+            else if(g.GetComponent<Parenthesis>())
+            {
+                g.GetComponent<Parenthesis>().MonsterClear();
+            }
+        }
     }
     
    
