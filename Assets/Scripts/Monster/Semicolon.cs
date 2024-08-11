@@ -40,8 +40,13 @@ public class Semicolon : Enemy
     {
         if (IsDeath == true)  //죽은경우
         {
+            _animator.SetTrigger("Death");
+            if (GetComponent<Enemy>().isChase == true)                  //update안에서 오류가 너무 많이 발생하지 않도록하기 위함
+            {
+                GetComponent<Enemy>().stopNav();
+                GetComponent<Enemy>().Death_Collider_False();           //콜라이더 비활성화
+            }
             GetComponent<Enemy>().isChase = false;
-            GetComponent<Enemy>().stopNav();
             Destroy(gameObject,3f);
         }
         else        //살아있는경우
@@ -92,6 +97,12 @@ public class Semicolon : Enemy
         }
     }
 
+    //외부에서 몬스터를 처치하는 동작을 할 때 호출하는 함수
+    public void MonsterClear()
+    {
+        this.IsDeath = true;
+    }
+
     private void ShowDamage(int d)
     {
         //CancelInvoke();         //기존의 데미지가 있었다면 해당 데미지 삭제 1초 타이머 종료 => 새로운 데미지를 받으면 그 데미지 1초동안 표시
@@ -119,7 +130,7 @@ public class Semicolon : Enemy
             if (col.CompareTag("Player"))
             {
                 PlayerManager.Instance.Health -= Damage;
-                Debug.LogError("몬스터 공격 성공");
+                //Debug.LogError("몬스터 공격 성공");
             }
         }
     }

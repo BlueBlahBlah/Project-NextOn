@@ -27,7 +27,7 @@ public class WaveArea1 : MonoBehaviour
             //튜토리얼 시작하는 부분 추가
 
             Active = true;
-            EventManager.Instance.FirstWelcomeMSG();
+            //EventManager.Instance.FirstWelcomeMSG();
         }
         
     }

@@ -27,7 +27,7 @@ public class Wave2StackMonsterSpawner : MonoBehaviour
             //몬스터 생성
             GameObject newMon = Instantiate(Monster, transform.position, Quaternion.identity);
             //배열에 추가
-            MonsterManager.Instance.AddStackMonster_In_Array(newMon);
+            //MonsterManager.Instance.AddStackMonster_In_Array(newMon);
         }
     }
     

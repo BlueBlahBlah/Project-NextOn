@@ -18,8 +18,8 @@ TagManager:
   - Ground
   - AllIgnore
   - Enemy
-  - 
-  - 
+  - EnemyAttackArea
+  - spawner
   - 
   - 
   - 

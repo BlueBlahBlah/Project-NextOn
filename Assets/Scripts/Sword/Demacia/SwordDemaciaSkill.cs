@@ -50,7 +50,7 @@ public class SwordDemaciaSkill : MonoBehaviour
         //전달받은 몬스터를 중심으로 맞닿은 물체 탐색
         Collider[] colliders = Physics.OverlapBox(
             transform.position,
-            GetComponent<Collider>().bounds.extents,
+            GetComponent<BoxCollider>().bounds.extents,
             Quaternion.identity
         );
         //맞닿은 물체중에 해당 스킬 오브젝트가 있다면 true

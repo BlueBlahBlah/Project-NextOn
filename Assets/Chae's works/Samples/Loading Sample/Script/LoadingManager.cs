@@ -12,10 +12,11 @@ public class LoadingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (SceneContainer.instance.nextScene == null)
-            SceneContainer.instance.nextScene = "Menu Scene";
+        if (SceneContainer.instance.nextScene == null) SceneContainer.instance.nextScene = "Menu Scene";
 
         StartCoroutine("LoadScene");
+
+        if (SoundManager.instance != null) SoundManager.instance.StopMusic();
     }
 
     public static void ToLoadScene()

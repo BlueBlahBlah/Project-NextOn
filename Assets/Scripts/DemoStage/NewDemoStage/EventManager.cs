@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EventManager : MonoBehaviour
 {
@@ -44,9 +45,25 @@ public class EventManager : MonoBehaviour
     [SerializeField] private GameObject WaveArea3Scrit;     //플레이어가 일찍 지나가지 못하게 하는 콜라이더
     [SerializeField] private GameObject WaveArea3Barrier;   //몬스터들이 쫒아오지 못하게 하는 콜라이더
     [SerializeField] private GameObject EventBtn;           //이벤트 버튼
-    public GameObject Peiz3Monster_2;
+    [SerializeField] private GameObject ParenthesisGauge;           //괄호 몬스터 게이지 UI
+          
+    //public GameObject Peiz3Monster_2;
     public bool Area3;        //Wave3의 경우 해당 변수 true && Area2 일시 진행
     public bool Wave2MonsterClear;
+
+    [SerializeField] private GameObject Joystick;
+    [SerializeField] private GameObject FireBtn;
+    [SerializeField] private GameObject SkillBtn;
+    [SerializeField] private GameObject[] FirstDirection;
+    [SerializeField] private GameObject[] SecondDirection;
+    [SerializeField] private GameObject[] ThirdDirection;
+    [SerializeField] private GameObject[] FinalDirection;
+
+    private bool FirstPickupRifle;
+    private bool FirstPickUpBombSkill;
+    private bool FirstPickUpBulletSupply;
+    private bool SecondPickUpHelicopterSkill;
+    private bool SecondPickUpSword;
 
     public bool isPause;                                    //시간이 멈추었는지
     
@@ -54,11 +71,42 @@ public class EventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점)
-        //PrintLongDialogue();
+        Joystick.SetActive(false);
+        FireBtn.SetActive(false);
+        SkillBtn.SetActive(false);
+        EventBtn.SetActive(false);
+        ParenthesisGauge.SetActive(false);
         Area3 = false;
         Wave2MonsterClear = false;
         isPause = false;
+        FirstPickupRifle = false;
+        FirstPickUpBombSkill = false;
+        FirstPickUpBulletSupply = false;
+        SecondPickUpHelicopterSkill = false;
+        SecondPickUpSword = false;
+        foreach (GameObject g in After3Peiz)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in FirstDirection)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in SecondDirection)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in ThirdDirection)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in FinalDirection)
+        {
+            g.SetActive(false);
+        }
+        
+        UIManager.instance.DialogueNumber = 77; // 다이얼로그 넘버 저장 (대사 시작지점) 50
+        PrintLongDialogue();
     }
     
     public void PrintLongDialogue()
@@ -71,19 +119,184 @@ public class EventManager : MonoBehaviour
     void Update()
     {
         //스택몬스터 20 게이지 채우면 모두 삭제
-        if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
-            MonsterManager.Instance.Clear_Wave2_Monsters();
+        /*if (MonsterManager.Instance.Gauge >= 10 && Wave2MonsterClear == false)
+        {
+            //TODO 
+            //MonsterManager.Instance.Clear_Wave2_Monsters();
+        }*/
+            
+
+        if (UIManager.instance.DialogueNumber == 59 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            foreach (GameObject g in FirstDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+            Joystick.SetActive(true);
+        }
+        else if (UIManager.instance.DialogueNumber == 61 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            //총기 떨어짐
+            if (FirstPickupRifle == false)
+            {
+                GameObject Item = PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.ChangeWeaponRifle);
+                Item.GetComponent<WeaponChangeGravity>().SetDialog();       //해당 아이템은 획득 시 대화창 나오기
+                FirstPickupRifle = true;
+            }
+            JoystickActivation();     //조이스틱 활성화
+        }
+        else if (UIManager.instance.DialogueNumber == 64 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            FireBtn.SetActive(true);
+            MonsterManager.Instance.Appearance_First_Monster();
+            JoystickActivation();     //조이스틱 활성화
+        }
+        else if (UIManager.instance.DialogueNumber == 69 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            if (FirstPickUpBulletSupply == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.BulletSupply);     //탄 보충 아이템 떨어짐
+                FirstPickUpBulletSupply = true;
+            }
+        }
+        else if (UIManager.instance.DialogueNumber == 70 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            if (FirstPickUpBombSkill == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.SkillBomb);     //폭격스킬 떨어짐
+                FirstPickUpBombSkill = true;
+            }
+        }
+        else if (UIManager.instance.DialogueNumber == 71 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            foreach (GameObject g in SecondDirection)                           //2차 화살표 켜지기
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+            MonsterManager.Instance.Appearance_Second_Monster();               //두번째 몬스터들 등장
+            JoystickActivation();     //조이스틱 활성화
+        }
+        else if (UIManager.instance.DialogueNumber == 72 && MonsterManager.Instance.TotalMonsters <= 12)
+        {
+            //두번째 몬스터 절반정도 잡았을때
+            if (SecondPickUpHelicopterSkill == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.SkillHeilcopter);     //헬기스킬 떨어짐
+                SecondPickUpHelicopterSkill = true;
+            }
+        }
+        else if (UIManager.instance.DialogueNumber == 73 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            //근접무기 떨어짐
+            if (SecondPickUpSword == false)
+            {
+                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.ChangeWeaponDemacia);
+                SecondPickUpSword = true;
+            }
+            SkillBtn.SetActive(true);
+            foreach (GameObject g in ThirdDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+        }
+        else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            MonsterManager.Instance.Appearance_Third_Monster(); //세번째 몬스터 웨이브 시작
+            JoystickActivation();     //조이스틱 활성화
+        }
+        else if (UIManager.instance.DialogueNumber == 80 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            foreach (GameObject g in ThirdDirection)
+            {
+                g.SetActive(false);                  //화살표 꺼지기
+            }
+            Invoke("MonsterTimeResume_Invoke",2.5f);
+            //괄호몬스터 UI등장
+            ParenthesisGauge.SetActive(true);
+            ParenthesisGauge.GetComponent<FinalGauge>().DecreaseGauge_Coriutine();          //UI 100초에 걸쳐 감소
+            JoystickActivation();     //조이스틱 활성화
+            if (MonsterManager.Instance.FinalPeiz == false)
+            {
+                MonsterManager.Instance.FinalPeiz = true;
+                MonsterManager.Instance.Spawn_Parenthesis();
+                MonsterManager.Instance.Spawn_Semicolon();
+            }
+        }
+        else if (UIManager.instance.DialogueNumber == 85 && UIManager.instance.isCompletelyPrinted == true)
+        {
+            //마지막 최종 다리로 이동하는 화살표
+            /*foreach (GameObject g in FirstDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+            foreach (GameObject g in SecondDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }*/
+            foreach (GameObject g in FinalDirection)
+            {
+                g.SetActive(true);                  //화살표 켜지기
+            }
+            ParenthesisGauge.SetActive(false);      //게이지 꺼주기
+            JoystickActivation();     //조이스틱 활성화
+            foreach (GameObject g in After3Peiz)
+            {
+                g.SetActive(true);
+            }
+            foreach (GameObject g in Before3Peiz)
+            {
+                g.SetActive(false);
+            }
+
+            Area3 = true;       //다리 장벽 넘어갈 수 있음
+        }
+            
     }
-    void TimeStop()
+
+    private void MonsterTimeResume_Invoke()
+    {
+        MonsterManager.Instance.MonsterTimeResume();
+    }
+    
+    //마지막 페이즈가 끝나 모든 몬스터 처치
+    public void LastPeizDone()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject g in enemies)
+        {
+            if (g.GetComponent<Semicolon>())
+            {
+                g.GetComponent<Semicolon>().MonsterClear();
+            }
+            else if(g.GetComponent<Parenthesis>())
+            {
+                g.GetComponent<Parenthesis>().MonsterClear();
+            }
+        }
+    }
+    
+   
+    public void TimeStop()
     {
         Time.timeScale = 0;    //게임 일시정지
         isPause = true;
     }
 
-    void TimeResume()
+    public void TimeResume()
     {
         Time.timeScale = 1;    //게임 일시정지
         isPause = false;
+    }
+
+    //조이스틱을 비활성화 하는 함수
+    private void JoystickDeactivation()
+    {
+        GameObject.Find("Player").GetComponent<CharacterLocomotion>().enabled = false;
+    }
+    //조이스틱을 활성화 하는 함수
+    private void JoystickActivation()
+    {
+        GameObject.Find("Player").GetComponent<CharacterLocomotion>().enabled = true;
     }
     
 
@@ -106,12 +319,16 @@ public class EventManager : MonoBehaviour
         WaveArea3Barrier.SetActive(false);
         //EventBtn 비활성화
         EventBtn.SetActive(false);
-        Peiz3Monster_2.SetActive(true);
+        //Peiz3Monster_2.SetActive(true);
     }
 
-    public void FirstWelcomeMSG()
+    //타 클래스에서 대화창을 재개하는 경우 호출
+    public void PrintMSG()
     {
-        //첫번째 패널 진행
+        JoystickDeactivation();     //조이스틱 비활성화
+        UIManager.instance.DialogueNumber++;
+        PrintLongDialogue();
     }
+    
     
 }

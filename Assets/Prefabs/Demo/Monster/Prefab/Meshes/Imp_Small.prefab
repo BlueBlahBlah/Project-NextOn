@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4537874458894131605}
   - component: {fileID: 2865162657131047362}
-  m_Layer: 7
+  m_Layer: 11
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +594,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

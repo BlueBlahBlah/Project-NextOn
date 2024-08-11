@@ -46,7 +46,15 @@ public class PlayerScriptRifle : MonoBehaviour
 
     void Update()
     {
-        // 현재 위치와 이전 위치 비교
+        if (PlayerManager.Instance.Health <= 0)        //체력이 다 닳은 경우
+        {
+            GetComponentInParent<CharacterLocomotion>().enabled = false;
+            Anim.applyRootMotion = true;
+            Anim.SetTrigger("Death");
+        }
+        else
+        {
+             // 현재 위치와 이전 위치 비교
         if (transform.position != lastPosition)
         {
             walking = true;
@@ -63,7 +71,7 @@ public class PlayerScriptRifle : MonoBehaviour
                 isMovingRight = false;
                 isMovingForward = false;
                 isMovingBackward = false;
-                playerMovingScript.walkSpeed = 3;
+                playerMovingScript.walkSpeed = 5;
 
             }
             else if (angle < -45f && angle > -135f)
@@ -72,7 +80,7 @@ public class PlayerScriptRifle : MonoBehaviour
                 isMovingLeft = false;
                 isMovingForward = false;
                 isMovingBackward = false;
-                playerMovingScript.walkSpeed = 3;
+                playerMovingScript.walkSpeed = 5;
             }
             else if(angle > 70 || angle < -70)
             {
@@ -82,13 +90,13 @@ public class PlayerScriptRifle : MonoBehaviour
                 {
                     isMovingForward = true;
                     isMovingBackward = false;
-                    playerMovingScript.walkSpeed = 3;
+                    playerMovingScript.walkSpeed = 5;
                 }
                 else
                 {
                     isMovingForward = false;
                     isMovingBackward = true;
-                    playerMovingScript.walkSpeed = 3;
+                    playerMovingScript.walkSpeed = 5;
                 }
             }
             else
@@ -97,7 +105,7 @@ public class PlayerScriptRifle : MonoBehaviour
                 isMovingBackward = false;
                 isMovingLeft = false;
                 isMovingRight = false;
-                playerMovingScript.walkSpeed = 3;
+                playerMovingScript.walkSpeed = 5;
             }
             // 움직임 처리
             transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
@@ -131,6 +139,8 @@ public class PlayerScriptRifle : MonoBehaviour
             reloaing = false;
             Invoke("reloadDone",4);      //4초후 재장전 끝
         }
+        }
+       
     }
     
     public void WeaponSynchronization()

@@ -140,7 +140,7 @@ public class InGameUI : MonoBehaviour
     {
         // 체력 관련
         playerHp.text = PlayerHp.ToString() + " / " + PlayerMaxHp.ToString(); // 체력 갱신
-        playerHpBar.fillAmount = PlayerHp / PlayerMaxHp; // 체력바 이미지 갱신
+        playerHpBar.fillAmount = PlayerHp / PlayerMaxHp; // 체력바 이미지 갱신}
     }
 
     public void UpdateBullet() // 총알 갱신 

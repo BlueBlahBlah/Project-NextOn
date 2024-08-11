@@ -12,13 +12,10 @@ public class Menu : MonoBehaviour
     {
         SceneContainer.instance.currentScene = "Menu Scene";
         SceneContainer.instance.nextScene = "Scenario1 Scene";
+
+        // Invoke("PlayBGM", 4);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ChangeScene()
     {
@@ -27,6 +24,11 @@ public class Menu : MonoBehaviour
         // 2. Loading Scene 으로 이동한 뒤 로딩을 거쳐 2차적으로 nextScene 으로 이동
 
         LoadingManager.ToLoadScene();
+    }
+
+    private void PlayBGM()
+    {
+        SoundManager.instance.PlayMusic("Redemption"); // 메뉴 테마 음악 재생
     }
 
     public void OpenSetting() { Setting.SetActive(true); }

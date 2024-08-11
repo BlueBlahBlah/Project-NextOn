@@ -59,6 +59,8 @@ public class Dialogue : MonoBehaviour
 
         if (isDialogue)
         {
+            UIManager.instance.isDone = false;
+
             if (!dialogue.activeInHierarchy)
             {
                 dialogue.SetActive(true);
@@ -80,6 +82,7 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
+            UIManager.instance.isDone = true;
             if (dialogue.activeInHierarchy) dialogue.SetActive(false);
         }
     }
@@ -105,7 +108,7 @@ public class Dialogue : MonoBehaviour
         switch (Name)
         {
             case "데빈":
-                dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin", typeof(Sprite)) as Sprite;
+                dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin/Devin", typeof(Sprite)) as Sprite;
                 dialogueImage.color = new Color(255, 255, 255, 255);
                 break;
             case "작업관리자":
@@ -121,16 +124,12 @@ public class Dialogue : MonoBehaviour
     }
     #endregion
 
-    // 옵션 관련 함수
+    // 버튼 작동 함수
     #region
-    public void Auto() 
-    {
-        UIManager.instance.isAuto = !UIManager.instance.isAuto;
-    }
-    public void PrintSpeed() 
-    { 
-        UIManager.instance.printSpeed = UIManager.instance.printSpeed == 1 ? 2 : 1; 
-    }
+    // 오토 설정
+    public void Auto() { UIManager.instance.isAuto = !UIManager.instance.isAuto; }
+    // 2배 설정
+    public void PrintSpeed() { UIManager.instance.printSpeed = UIManager.instance.printSpeed == 1 ? 2 : 1; }
 
     public void SkipAndNext() // 대화 스킵, 넘기기
     {
@@ -141,6 +140,7 @@ public class Dialogue : MonoBehaviour
         else
         {
             // 모든 내용이 출력된 상태 (Next)
+            UIManager.instance.doNext = true;
         }
     }
     #endregion
@@ -194,11 +194,13 @@ public class Dialogue : MonoBehaviour
     {
         while (true)
         {
-            if (!UIManager.instance.doNext) 
+            if (!UIManager.instance.doNext)
+            {
+                if (UIManager.instance.isAuto)
+                {
+                    yield return new WaitForSeconds(dialogueTime / UIManager.instance.printSpeed);
+                }
                 yield return null;
-            else if (UIManager.instance.isAuto) 
-            { 
-                yield return new WaitForSeconds(dialogueTime / UIManager.instance.printSpeed); 
             }
             else
             {
