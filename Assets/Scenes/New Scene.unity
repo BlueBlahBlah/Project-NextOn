@@ -1651,6 +1651,9 @@ MonoBehaviour:
   Btn: {fileID: 0}
   Player: {fileID: 432138286}
   Damage: 3
+  ThisCoolTime: 0
+  SkillCoolTime: 0
+  SkillCoolTimeRate: 0
 --- !u!1 &303479481
 GameObject:
   m_ObjectHideFlags: 0
@@ -4243,6 +4246,9 @@ MonoBehaviour:
   attackRadius: 0
   Btn: {fileID: 0}
   Damage: 0
+  ThisCoolTime: 0
+  SkillCoolTime: 0
+  SkillCoolTimeRate: 0
 --- !u!1 &1098535913
 GameObject:
   m_ObjectHideFlags: 0
@@ -5589,6 +5595,7 @@ MonoBehaviour:
   - {fileID: 1058485722}
   - {fileID: 1869509863}
   - {fileID: 1581340507}
+  attackBtn: {fileID: 0}
 --- !u!136 &1358990186
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5778,6 +5785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 420273531}
+  BigMonLocation: {fileID: 0}
+  operating: 0
 --- !u!81 &1361805226
 AudioListener:
   m_ObjectHideFlags: 0
@@ -6507,6 +6516,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199090720937877538, guid: 9b449323c2d79e945bf69d1ae7fbf02e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 199330513609412702, guid: 9b449323c2d79e945bf69d1ae7fbf02e, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -6515,6 +6528,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199592190327692758, guid: 9b449323c2d79e945bf69d1ae7fbf02e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 199636261051362214, guid: 9b449323c2d79e945bf69d1ae7fbf02e, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -6548,6 +6565,9 @@ MonoBehaviour:
   Skill: {fileID: 2312213747299557942, guid: ab8cf61012e0970448e2e9db838b3274, type: 3}
   Btn: {fileID: 0}
   Damage: 0
+  ThisCoolTime: 0
+  SkillCoolTime: 0
+  SkillCoolTimeRate: 0
 --- !u!4 &1581340512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6864278290743850110, guid: 4218163e0d6ca1a4386ff7e178065d6c, type: 3}
@@ -6722,6 +6742,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199090720937877538, guid: 9b449323c2d79e945bf69d1ae7fbf02e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 199330513609412702, guid: 9b449323c2d79e945bf69d1ae7fbf02e, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -6730,6 +6754,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199592190327692758, guid: 9b449323c2d79e945bf69d1ae7fbf02e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
     - target: {fileID: 199636261051362214, guid: 9b449323c2d79e945bf69d1ae7fbf02e, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -7024,6 +7052,9 @@ MonoBehaviour:
   Btn: {fileID: 0}
   Player: {fileID: 432138286}
   Damage: 0
+  ThisCoolTime: 0
+  SkillCoolTime: 0
+  SkillCoolTimeRate: 0
 --- !u!1 &1877882275
 GameObject:
   m_ObjectHideFlags: 0
@@ -7152,6 +7183,13 @@ MonoBehaviour:
   isMovingBackward: 0
   isMovingRight: 0
   isMovingLeft: 0
+  playerMovingScript: {fileID: 0}
+  rifle: {fileID: 0}
+  shotgun: {fileID: 0}
+  sniper: {fileID: 0}
+  grenadeLauncher: {fileID: 0}
+  machineGun: {fileID: 0}
+  fireGun: {fileID: 0}
 --- !u!1 &1911688393
 GameObject:
   m_ObjectHideFlags: 0
