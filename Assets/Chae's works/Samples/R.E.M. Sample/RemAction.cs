@@ -35,8 +35,8 @@ public class RemAction : MonoBehaviour
         // 치유 코드 작성
 
 
-        RemTestManager.instance.hp = Mathf.Min(RemTestManager.instance.hp + 20, 100); // 20만큼 체력 회복, 최대 체력 100 제한
-        Debug.Log("Healed to: " + RemTestManager.instance.hp);
+        PlayerManager.instance.Health = Mathf.Min(PlayerManager.instance.Health + 20, PlayerManager.instance.TotalHealth); // 20만큼 체력 회복, Player의 최대체력만큼 제한
+        Debug.Log("Healed to: " + PlayerManager.instance.Health);
         yield return new WaitForSeconds(2f);
 
         EndAction();

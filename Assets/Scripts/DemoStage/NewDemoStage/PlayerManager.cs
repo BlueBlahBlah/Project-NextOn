@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    private static PlayerManager instance = null;
+    public static PlayerManager instance = null;
     /*[SerializeField] private Rifle rifle = GameObject.FindObjectOfType<Rifle>();
     [SerializeField] private Shotgun shotgun = GameObject.FindObjectOfType<Shotgun>();
     [SerializeField] private Sniper sniper = GameObject.FindObjectOfType<Sniper>();

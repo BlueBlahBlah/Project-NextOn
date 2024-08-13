@@ -40,6 +40,13 @@ public class RemController : MonoBehaviour
         initialRotationX = transform.eulerAngles.x;
 
         // 행동 정의와 추가
+
+        ///////////////////////////////////////////////
+        ///
+        /// 아래의 RemTestManeger.instance 등을 PlayerManager.instance로 변경해야함 
+        ///
+        /////////////////////////////////////////////
+        ///
         actions.Add(new UtilityAction(
             "Heal",
             () => 50, // RemTestManager.instance.hp < 50 ? 1.0f / RemTestManager.instance.hp : 0, // 체력이 낮을수록 유틸리티 증가
@@ -54,13 +61,13 @@ public class RemController : MonoBehaviour
 
         actions.Add(new UtilityAction(
             "Attack",
-            () => 90, // (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 80.0f : 0, // 적이 가까울 때 유틸리티 증가
+            () => 50, // (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 80.0f : 0, // 적이 가까울 때 유틸리티 증가
             () => remAction.Attack()
             ));
 
         actions.Add(new UtilityAction(
             "Debuff",
-            () => 50, // (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 79.0f : 0,
+            () => 0, // (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 79.0f : 0,
             () => remAction.Debuff()
             ));
     }
