@@ -9,6 +9,7 @@ public class Scenario : MonoBehaviour
     public GameObject Scenario_3;
     public GameObject Scenario_4;
 
+    public GameObject Dialogue;
     // ½Ì±ÛÅæ ¼±¾ð
     #region
     public static Scenario instance = null;
@@ -33,6 +34,8 @@ public class Scenario : MonoBehaviour
         Scenario_2.SetActive(false);
         Scenario_3.SetActive(false);
         Scenario_4.SetActive(false);
+
+        StartCoroutine("Scenario1Start");
     }
 
     void Update()
@@ -41,6 +44,23 @@ public class Scenario : MonoBehaviour
     }
     IEnumerator Scenario1Start()
     {
+        Scenario_1.SetActive(true);
+        yield return null;
+    }
+
+    IEnumerator Scenario2Start()
+    {
+        StopCoroutine("Scenario1Start");
+        Scenario_1.SetActive(false);
+        Scenario_2.SetActive(true);
+        yield return null;
+    }
+
+    IEnumerator Scenario3Start()
+    {
+        StopCoroutine("Scenario2Start");
+        Scenario_2.SetActive(false);
+        Scenario_3.SetActive(true);
         yield return null;
     }
 }
