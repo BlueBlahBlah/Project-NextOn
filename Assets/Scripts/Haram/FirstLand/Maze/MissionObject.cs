@@ -31,7 +31,10 @@ public class MissionObject : MonoBehaviour
                     slider.gameObject.SetActive(false);
                     slider.value = 0;
                     ItemImage.SetActive(true);
-                    MazeGenerate.mazeGenerate.Generate(5 * maze.missionCount + 1);
+                    for(int i = 0; i < 5 * (maze.missionCount + 1); i++)
+                    {
+                        PoolManager.poolManager.Get(0);
+                    }
                     maze.missionCount++;
                     parent.SetActive(false);
                 }
@@ -56,7 +59,7 @@ public class MissionObject : MonoBehaviour
 
     private void OnTriggerExit(Collider collision)
     {
-        slider.value = 0;
+        curtime = 0;
         slider.gameObject.SetActive(false);
         isClose = false;
         isStay = false;
