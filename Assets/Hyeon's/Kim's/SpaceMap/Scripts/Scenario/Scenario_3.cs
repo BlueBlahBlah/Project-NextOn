@@ -57,6 +57,11 @@ public class Scenario_3 : MonoBehaviour
         {
             cameraManager.SpecialView = false;
         }
+
+        if(is1_TriggerPass && is2_TriggerPass && is_End)
+        {
+            scenario.StartCoroutine("Scenario4Start");
+        }
     }
     internal void OnChildTriggerEnter(Collider other, ChildCollisionHandler child)
     {

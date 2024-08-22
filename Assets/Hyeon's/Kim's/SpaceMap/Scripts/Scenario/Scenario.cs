@@ -63,4 +63,12 @@ public class Scenario : MonoBehaviour
         Scenario_3.SetActive(true);
         yield return null;
     }
+
+    IEnumerator Scenario4Start() 
+    {
+        StopCoroutine("Scenario3Start");
+        Scenario_3.SetActive(false);
+        Scenario_4.SetActive(true);
+        yield return null;
+    }
 }
