@@ -5,11 +5,13 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    public AudioSource effectsSource;
     public AudioSource musicSource;
 
     public bool isBgmMute;
     public bool isSEMute;
+
+    private List<AudioSource> activeEffectsSources = new List<AudioSource>();
+    private Dictionary<AudioSource, float> originalVolumes = new Dictionary<AudioSource, float>();
 
     void Awake()
     {
@@ -25,13 +27,21 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // 단발성 사운드 재생 메서드 (SE 디렉토리)
-    public void PlayEffectSound(string clipName)
+    // 단발성 사운드 재생 메서드 (SE 디렉토리) - 볼륨 설정 가능
+    public void PlayEffectSound(string clipName, float volume = 1.0f)
     {
         AudioClip clip = Resources.Load<AudioClip>("Sound/SE/" + clipName);
         if (clip != null)
         {
-            effectsSource.PlayOneShot(clip);
+            AudioSource effectSource = gameObject.AddComponent<AudioSource>();
+            effectSource.clip = clip;
+            effectSource.volume = volume;  // 초기 볼륨 설정
+            effectSource.Play();
+
+            activeEffectsSources.Add(effectSource);
+            originalVolumes[effectSource] = volume; // 원래 볼륨 저장
+
+            StartCoroutine(RemoveSourceWhenDone(effectSource));
         }
         else
         {
@@ -60,10 +70,18 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-
-    public void SetEffectsVolume(float volume)
+    // 효과음들의 볼륨을 비율에 따라 설정하는 메서드
+    public void SetEffectsVolume(float scale)
     {
-        effectsSource.volume = volume;
+        scale = Mathf.Clamp(scale, 0f, 1f); // 비율 범위 제한 (0~1)
+
+        foreach (AudioSource source in activeEffectsSources)
+        {
+            if (originalVolumes.TryGetValue(source, out float originalVolume))
+            {
+                source.volume = originalVolume * scale;
+            }
+        }
     }
 
     public void SetMusicVolume(float volume)
@@ -73,12 +91,25 @@ public class SoundManager : MonoBehaviour
 
     public void StopEffects()
     {
-        effectsSource.Stop();
+        foreach (AudioSource source in activeEffectsSources)
+        {
+            source.Stop();
+            Destroy(source);
+        }
+        activeEffectsSources.Clear();
+        originalVolumes.Clear();
     }
 
     public void StopMusic()
     {
         musicSource.Stop();
     }
-}
 
+    private IEnumerator RemoveSourceWhenDone(AudioSource source)
+    {
+        yield return new WaitUntil(() => !source.isPlaying);
+        activeEffectsSources.Remove(source);
+        originalVolumes.Remove(source);
+        Destroy(source);
+    }
+}
