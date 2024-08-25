@@ -27,6 +27,7 @@ public class WeaponChange_Trigger : MonoBehaviour
         // 충돌한 물체가 Player 태그를 가진 경우
         if (other.CompareTag("Player") && self.activeSelf == false)
         {
+            Debug.LogError("qwe");
             fireBtn.onClick.RemoveAllListeners();
             skillBtn.onClick.RemoveAllListeners();
             PlayerManager.Instance.ChangeWeapon(WeaponType, self);

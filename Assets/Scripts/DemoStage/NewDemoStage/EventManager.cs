@@ -105,7 +105,7 @@ public class EventManager : MonoBehaviour
             g.SetActive(false);
         }
         
-        UIManager.instance.DialogueNumber = 77; // 다이얼로그 넘버 저장 (대사 시작지점) 50
+        UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점) 50
         PrintLongDialogue();
     }
     

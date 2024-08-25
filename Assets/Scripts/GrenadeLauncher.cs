@@ -20,11 +20,15 @@ public class GrenadeLauncher : MonoBehaviour
     void Start()
     {
         // 버튼 클릭 이벤트 등록
-        fireBtn.onClick.AddListener(OnFireButtonClick);
+        //fireBtn.onClick.AddListener(OnFireButtonClick);
         nowReloading = false;
+    }
+    
+    private void OnEnable()
+    {
+        // 버튼 클릭 이벤트 등록
+        fireBtn.onClick.AddListener(OnFireButtonClick);
         Muzzle = GameObject.Find("Grenade_Launcher_Muzzle").GetComponent<GrenadeLauncherMuzzle>();
-
-
     }
 
 
@@ -51,6 +55,7 @@ public class GrenadeLauncher : MonoBehaviour
 
     void Shoot()
     {
+        Debug.LogError("Shoot");
         /*// 총알 생성
         GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
 
