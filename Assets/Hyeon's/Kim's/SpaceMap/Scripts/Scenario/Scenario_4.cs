@@ -25,6 +25,7 @@ public class Scenario_4 : MonoBehaviour
     private float duration = 120f;
     private float Door_Distance = 10;
     private float Air_Distance = 3;
+    private float spawnInterval = 20;
 
     public GameObject Player;
     
@@ -45,14 +46,46 @@ public class Scenario_4 : MonoBehaviour
         else if(child.name ==secondTrigger.name && !is2_TriggerPass)
         {
             StartCoroutine("StartLastGame");
+            StartCoroutine("StartLastSpawn");
             Debug.Log("이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
             is2_TriggerPass = true;
         }
     }
 
+    IEnumerator StartLastSpawn()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnInterval);
+            //Instantiate(objectCPrefab, Vector3.zero, Quaternion.identity); // C 오브젝트 생성
+        }
+        yield return null;
+    }
+
     IEnumerator StartLastGame()
     {
-        yield return null;
+        Vector3 startPositionA = Open_Door1.transform.position;
+        Vector3 startPositionB = Open_Door2.transform.position;
+
+        Vector3 endPositionA = startPositionA + Vector3.right * Door_Distance;
+        Vector3 endPositionB = startPositionB + Vector3.left * Door_Distance;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float t = elapsedTime / duration;
+
+            Open_Door1.transform.position = Vector3.Lerp(startPositionA, endPositionA, t);
+            Open_Door2.transform.position = Vector3.Lerp(startPositionB, endPositionB, t);
+
+            yield return null;
+        }
+
+        Open_Door1.transform.position = endPositionA;
+        Open_Door2.transform.position = endPositionB;
     }
         // Update is called once per frame
         void Update()
