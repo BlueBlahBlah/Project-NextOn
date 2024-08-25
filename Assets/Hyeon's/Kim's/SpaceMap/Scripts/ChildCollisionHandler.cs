@@ -9,6 +9,7 @@ public class ChildCollisionHandler : MonoBehaviour
     private Scenario_1 scenario_1;
     private Scenario_2 scenario_2;
     private Scenario_3 scenario_3;
+    private Scenario_4 scenario_4;
     void Start()
     {
         parentHandler = this.transform.parent.gameObject;
@@ -27,6 +28,10 @@ public class ChildCollisionHandler : MonoBehaviour
         else if(parentHandler.GetComponent<Scenario_3>() != null)
         {
             scenario_3 = parentHandler.GetComponent<Scenario_3>();
+        }
+        else if (parentHandler.GetComponent<Scenario_4>() != null)
+        {
+            scenario_4 = parentHandler.GetComponent<Scenario_4>();
         }
     }
 
@@ -49,6 +54,10 @@ public class ChildCollisionHandler : MonoBehaviour
             else if(scenario_3 != null)
             {
                 scenario_3.OnChildTriggerEnter(other, this);
+            }
+            else if (scenario_4 != null)
+            {
+                scenario_4.OnChildTriggerEnter(other, this);
             }
         }
 

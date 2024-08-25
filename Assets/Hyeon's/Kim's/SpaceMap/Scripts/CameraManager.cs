@@ -30,7 +30,7 @@ public class CameraManager : MonoBehaviour
         if (SpecialView)    //시나리오 3만을 위한 3에 의한 3을 위해
         {
             transform.position = new Vector3(Player.transform.position.x + offsetX, transform.position.y, offsetZ);
-            if (!isTopview)
+            if (isTopview)
             {
                 TopCam.enabled = false;
                 FreeLookCam.enabled = true;

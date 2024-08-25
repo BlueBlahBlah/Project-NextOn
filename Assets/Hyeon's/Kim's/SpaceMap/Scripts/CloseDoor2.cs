@@ -11,7 +11,7 @@ public class CloseDoor2 : MonoBehaviour
     private void Start()
     {
         openPosition = this.transform.position;
-        closedPosition = this.transform.position - new Vector3(0, openPosition.y, 0);
+        closedPosition = this.transform.position - new Vector3(0, 3, 0);
         // 문을 닫는 코루틴 시작
         StartCoroutine(CloseDoor());
     }

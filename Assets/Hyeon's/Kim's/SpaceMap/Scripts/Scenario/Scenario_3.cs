@@ -15,6 +15,7 @@ public class Scenario_3 : MonoBehaviour
     public GameObject[] secondTrigger;
     [Header("End Point")]
     public GameObject thirdTrigger;
+
     public GameObject Player;
 
     [Header("Smoke")]
@@ -40,6 +41,7 @@ public class Scenario_3 : MonoBehaviour
         {
             Smoke[i].SetActive(false);
         }
+
     }
 
     // Update is called once per frame
@@ -48,9 +50,13 @@ public class Scenario_3 : MonoBehaviour
         if(Player.transform.position.y > 2f)
         {
             cameraManager.SpecialView = true;
-            if (Player.transform.position.z < -35f)
+            if (Player.transform.position.z < -34f)
             {
                 cameraManager.isTopview = false;
+            }
+            else
+            {
+                cameraManager.isTopview = true;
             }
         }
         else
@@ -71,11 +77,13 @@ public class Scenario_3 : MonoBehaviour
             Debug.Log("대사 비상탈출? 우선 살아야겠어 최대한 아래로 도망치자");
             Smoke[0].SetActive(true);
             Smoke[1].SetActive(true);
+            is1_TriggerPass = true;
         }
         else if(child.name == "Second_Trigger" && !is2_TriggerPass)
         {
             Smoke[2].SetActive(true);
             Smoke[3].SetActive(true);
+            is2_TriggerPass = true;
         }
         else if(child.name == "1_Door"  && !_doorClose1)
         {
