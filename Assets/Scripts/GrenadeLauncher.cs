@@ -22,7 +22,7 @@ public class GrenadeLauncher : MonoBehaviour
         // 버튼 클릭 이벤트 등록
         fireBtn.onClick.AddListener(OnFireButtonClick);
         nowReloading = false;
-        Muzzle = GameObject.Find("Grenade_Launcher_Muzzle").GetComponent<GrenadeLauncherMuzzle>();
+        //Muzzle = GameObject.Find("Grenade_Launcher_Muzzle").GetComponent<GrenadeLauncherMuzzle>();
 
 
     }
