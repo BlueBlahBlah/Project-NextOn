@@ -1126,8 +1126,8 @@ MonoBehaviour:
   dialogueImage: {fileID: 4108133511552641807}
   dialogueName: {fileID: 6777401820739960343}
   dialogueContent: {fileID: 6752271923940195602}
-  printSpeed: {fileID: 0}
-  auto: {fileID: 0}
+  printSpeed: {fileID: 9000448173153908978}
+  auto: {fileID: 7558398168160373241}
   dialogueType: Long
   typingSpeed: 0.03
   isDialogue: 0
