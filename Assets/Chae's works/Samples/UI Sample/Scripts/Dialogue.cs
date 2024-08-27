@@ -155,6 +155,9 @@ public class Dialogue : MonoBehaviour
     {
         UIManager.instance.isCompletelyPrinted = false;
 
+        // 텍스트 출력 시작 시 효과음 재생
+        SoundManager.instance.PlayEffectSound("TypeSound", 0.3f);
+
         string content = data_Dialogue[DialogueNumber]["Contents"].ToString();
         for (int i = 0; i <= content.Length; i++)
         {
@@ -192,7 +195,9 @@ public class Dialogue : MonoBehaviour
         dialogueContent.text = content; // 모든 내용을 한 번에 출력
         UIManager.instance.isCompletelyPrinted = true;
 
-        // 타이핑이 완료된 후에는 다음 동작으로 바로 넘어가도록 설정
+        // 타이핑이 완료되었거나 스킵 시 효과음 중지
+        SoundManager.instance.StopEffects();
+
         if (UIManager.instance.isAuto)
         {
             yield return new WaitForSeconds(dialogueTime / UIManager.instance.printSpeed);
@@ -202,7 +207,6 @@ public class Dialogue : MonoBehaviour
             yield return StartCoroutine("RunLoop");
         }
 
-        // 대화가 이어지면 다음 대화로 진행
         if (dialogueIsContinuous == 1)
         {
             DialogueNumber++;
