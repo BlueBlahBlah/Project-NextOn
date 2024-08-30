@@ -304,6 +304,9 @@ MonoBehaviour:
   Btn: {fileID: 0}
   Player: {fileID: 0}
   Skill: {fileID: 0}
+  ThisCoolTime: 0
+  SkillCoolTime: 0
+  SkillCoolTimeRate: 0
 --- !u!1 &3490195600095066089
 GameObject:
   m_ObjectHideFlags: 0

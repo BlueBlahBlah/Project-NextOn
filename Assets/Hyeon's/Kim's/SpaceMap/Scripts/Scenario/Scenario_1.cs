@@ -17,7 +17,10 @@ public class Scenario_1 : MonoBehaviour
         is1_TriggerPass = false;
         is_End = false;
         scenario = FindObjectOfType<Scenario>();
-
+        for (int i = 0; i < WeaponSpawn.Length; i++)
+        {
+            WeaponSpawn[i].gameObject.SetActive(true);
+        }
     }
 
     internal void OnChildTriggerEnter(Collider other, ChildCollisionHandler child)
@@ -34,7 +37,7 @@ public class Scenario_1 : MonoBehaviour
         }
         if(child.name == "Prob")
         {
-            Debug.Log("대사 도끼를 발견했다\r\n이게 왜 여기 있는지는 모르겠지만, 없는거보다는...");
+            Debug.Log("대사 무기를 발견했다\r\n이게 왜 여기 있는지는 모르겠지만, 없는거보다는...");
             for(int i=0;i < WeaponSpawn.Length; i++)
             {
                 WeaponSpawn[i].gameObject.SetActive(false);

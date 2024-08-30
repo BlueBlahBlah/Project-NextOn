@@ -9,6 +9,8 @@ public class Scenario : MonoBehaviour
     public GameObject Scenario_3;
     public GameObject Scenario_4;
 
+
+    public PlayerManager playerManager;
     public GameObject Dialogue;
     public bool is_End;
     // ½Ì±ÛÅæ ¼±¾ð
@@ -37,7 +39,7 @@ public class Scenario : MonoBehaviour
         Scenario_4.SetActive(false);
 
         is_End = false;
-        StartCoroutine("Scenario1Start");
+        StartCoroutine(Scenario1Start());
     }
 
     void Update()
@@ -47,39 +49,39 @@ public class Scenario : MonoBehaviour
 
         }
     }
-    IEnumerator Scenario1Start()
+    public IEnumerator Scenario1Start()
     {
         Scenario_1.SetActive(true);
         yield return null;
     }
 
-    IEnumerator Scenario2Start()
+    public IEnumerator Scenario2Start()
     {
-        StopCoroutine("Scenario1Start");
+        StopCoroutine(Scenario1Start());
         Scenario_1.SetActive(false);
         Scenario_2.SetActive(true);
         yield return null;
     }
 
-    IEnumerator Scenario3Start()
+    public IEnumerator Scenario3Start()
     {
-        StopCoroutine("Scenario2Start");
+        StopCoroutine(Scenario2Start());
         Scenario_2.SetActive(false);
         Scenario_3.SetActive(true);
         yield return null;
     }
 
-    IEnumerator Scenario4Start() 
+    public IEnumerator Scenario4Start() 
     {
-        StopCoroutine("Scenario3Start");
+        StopCoroutine(Scenario3Start());
         Scenario_3.SetActive(false);
         Scenario_4.SetActive(true);
         yield return null;
     }
 
-    IEnumerator END()
+    public IEnumerator END()
     {
-        StopCoroutine("Scenario4Start");
+        StopCoroutine(Scenario4Start());
         Scenario_4.SetActive(false);
         is_End = true;
         yield return null;

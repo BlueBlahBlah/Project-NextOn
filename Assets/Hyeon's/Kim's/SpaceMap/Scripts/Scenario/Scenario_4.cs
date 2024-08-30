@@ -32,6 +32,7 @@ public class Scenario_4 : MonoBehaviour
     
     void Start()
     {
+        cameraManager.SpecialView = false;
         Gague.SetActive(false);
     }
     internal void OnChildTriggerEnter(Collider other, ChildCollisionHandler child)
@@ -45,9 +46,9 @@ public class Scenario_4 : MonoBehaviour
         }
         else if(child.name ==secondTrigger.name && !is2_TriggerPass)
         {
+            Debug.Log("이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
             StartCoroutine("StartLastGame");
             StartCoroutine("StartLastSpawn");
-            Debug.Log("이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
             is2_TriggerPass = true;
         }
     }
@@ -90,10 +91,11 @@ public class Scenario_4 : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        if (Player.transform.position.y > 2f)
+        /*
+        if (Player.transform.position.y > 5f)
         {
             cameraManager.SpecialView = true;
-            if (Player.transform.position.z < -34f)
+            if (Player.transform.position.z < -35f)
             {
                 cameraManager.isTopview = false;
             }
@@ -106,7 +108,7 @@ public class Scenario_4 : MonoBehaviour
         {
             cameraManager.SpecialView = false;
         }
-
+        */
         if (is1_TriggerPass && is2_TriggerPass && is_End)
         {
             scenario.StartCoroutine("END");

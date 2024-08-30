@@ -25,6 +25,14 @@ public class Scenario_2 : MonoBehaviour
 
         firstTrigger.GetComponent<CloseDoor>().enabled = false;
         secondTrigger.GetComponent<CloseDoor>().enabled = false;
+
+        for(int i = 3; i< EnemySpawn.Length; i++)
+        {
+            EnemySpawn[i].SetActive(false);
+        }
+        EnemySpawn[0].SetActive(true);
+        EnemySpawn[1].SetActive(true);
+        EnemySpawn[2].SetActive(true);
     }
 
     // Update is called once per frame
@@ -42,11 +50,17 @@ public class Scenario_2 : MonoBehaviour
         if ((is1_TriggerPass || is2_TriggerPass) && !cmd1IsPass)
         {//둘다 작동된 상태
             cmd1IsPass = true;
+            EnemySpawn[3].SetActive(true);
+            EnemySpawn[4].SetActive(true);
+            EnemySpawn[5].SetActive(true);
             Debug.Log("대사 여기를 막는건가");
         }
         else if ((is1_TriggerPass && is2_TriggerPass) && !cmd2IsPass)
         {//둘중 하나만 작동된 상태
             cmd2IsPass = true;
+            EnemySpawn[6].SetActive(true);
+            EnemySpawn[7].SetActive(true);
+            EnemySpawn[8].SetActive(true);
             Debug.Log("대사 이제 재시작을 하러 가보자");
         }
         
@@ -54,7 +68,7 @@ public class Scenario_2 : MonoBehaviour
 
         if(is1_TriggerPass && is2_TriggerPass && is_End)
         {
-            scenario.StartCoroutine("Scenario3Start");
+            scenario.StartCoroutine(scenario.Scenario3Start());
         }
     }
 
