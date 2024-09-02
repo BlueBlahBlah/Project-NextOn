@@ -9,7 +9,8 @@ public class Scenario_4 : MonoBehaviour
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private GameObject Gague;
     [SerializeField] bool is1_TriggerPass, is2_TriggerPass, is_End;
-    public GameObject[] EnemySpawn;
+    public GameObject[] EnemySpawnPos;
+    public GameObject[] EnemyProbs;
 
     [Header("Door Trigger")]
     public GameObject firstTrigger;
@@ -28,29 +29,75 @@ public class Scenario_4 : MonoBehaviour
     private float spawnInterval = 20;
 
     public GameObject Player;
-    
-    
+
+    public int poolSize = 5; // 각 적 타입당 풀 사이즈
+    private Dictionary<int, List<GameObject>> pools; // 오브젝트 풀을 저장할 딕셔너리
+
+
     void Start()
     {
         cameraManager.SpecialView = false;
         Gague.SetActive(false);
+
+
+        pools = new Dictionary<int, List<GameObject>>();
+
+        for (int i = 0; i < EnemyProbs.Length; i++)
+        {
+            pools[i] = new List<GameObject>();
+
+            for (int j = 0; j < poolSize; j++)
+            {
+                GameObject obj = Instantiate(EnemyProbs[i]);
+                obj.SetActive(false);
+                pools[i].Add(obj);
+            }
+        }
     }
+
+    public GameObject GetPooledEnemy(int enemyType)
+    {
+        foreach (GameObject obj in pools[enemyType])
+        {
+            if (!obj.activeInHierarchy)
+            {
+                return obj;
+            }
+        }
+
+        // 풀에 사용 가능한 오브젝트가 없으면 새로 생성하여 추가
+        GameObject newObj = Instantiate(EnemyProbs[enemyType]);
+        newObj.SetActive(false);
+        pools[enemyType].Add(newObj);
+        return newObj;
+    }
+
     internal void OnChildTriggerEnter(Collider other, ChildCollisionHandler child)
     {
         if (child.name == firstTrigger.name && !is1_TriggerPass)
         {
             firstTrigger.GetComponent<CloseDoor2>().enabled = true;
-            Debug.Log("대사 이제 저기있는 비행선까지 이동해보자");
+
             is1_TriggerPass = true;
 
         }
         else if(child.name ==secondTrigger.name && !is2_TriggerPass)
         {
-            Debug.Log("이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
-            StartCoroutine("StartLastGame");
-            StartCoroutine("StartLastSpawn");
+            Debug.Log("대사 저 비행선을 통해서 탈출해보자 그러기위해서는 문이 열릴때까지 기다려야할거같아");
+
             is2_TriggerPass = true;
+            StartCoroutine(DelayFunction(5f));
+
         }
+    }
+
+    IEnumerator DelayFunction(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        Debug.Log("대사 이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
+        StartCoroutine(StartLastGame());
+        StartCoroutine(StartLastSpawn());
+
     }
 
     IEnumerator StartLastSpawn()
@@ -82,33 +129,20 @@ public class Scenario_4 : MonoBehaviour
             Open_Door1.transform.position = Vector3.Lerp(startPositionA, endPositionA, t);
             Open_Door2.transform.position = Vector3.Lerp(startPositionB, endPositionB, t);
 
-            yield return null;
         }
 
         Open_Door1.transform.position = endPositionA;
         Open_Door2.transform.position = endPositionB;
+
+        Debug.Log("대사 Game Over");
+        is_End = true;
+        yield return null;
     }
         // Update is called once per frame
-        void Update()
+    void Update()
     {
-        /*
-        if (Player.transform.position.y > 5f)
-        {
-            cameraManager.SpecialView = true;
-            if (Player.transform.position.z < -35f)
-            {
-                cameraManager.isTopview = false;
-            }
-            else
-            {
-                cameraManager.isTopview = true;
-            }
-        }
-        else
-        {
-            cameraManager.SpecialView = false;
-        }
-        */
+        cameraManager.SpecialView = false;
+
         if (is1_TriggerPass && is2_TriggerPass && is_End)
         {
             scenario.StartCoroutine("END");
