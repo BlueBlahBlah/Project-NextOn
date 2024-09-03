@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Scenario_4 : MonoBehaviour
 {
@@ -23,54 +24,28 @@ public class Scenario_4 : MonoBehaviour
     public GameObject AirPlane;
     
     
-    private float duration = 120f;
+    private float duration = 60f;
     private float Door_Distance = 10;
     private float Air_Distance = 3;
-    private float spawnInterval = 20;
+    private float spawnInterval = 5;
 
     public GameObject Player;
-
-    public int poolSize = 5; // 각 적 타입당 풀 사이즈
-    private Dictionary<int, List<GameObject>> pools; // 오브젝트 풀을 저장할 딕셔너리
-
+    public Slider Bar;
 
     void Start()
     {
         cameraManager.SpecialView = false;
-        Gague.SetActive(false);
+        Gague.gameObject.SetActive(false);
 
-
-        pools = new Dictionary<int, List<GameObject>>();
-
-        for (int i = 0; i < EnemyProbs.Length; i++)
+        // Slider 초기화
+        if (Gague != null)
         {
-            pools[i] = new List<GameObject>();
-
-            for (int j = 0; j < poolSize; j++)
-            {
-                GameObject obj = Instantiate(EnemyProbs[i]);
-                obj.SetActive(false);
-                pools[i].Add(obj);
-            }
+            Bar = Gague.GetComponent<Slider>();
+            Bar.maxValue = duration;
+            Bar.value = 0;
         }
     }
 
-    public GameObject GetPooledEnemy(int enemyType)
-    {
-        foreach (GameObject obj in pools[enemyType])
-        {
-            if (!obj.activeInHierarchy)
-            {
-                return obj;
-            }
-        }
-
-        // 풀에 사용 가능한 오브젝트가 없으면 새로 생성하여 추가
-        GameObject newObj = Instantiate(EnemyProbs[enemyType]);
-        newObj.SetActive(false);
-        pools[enemyType].Add(newObj);
-        return newObj;
-    }
 
     internal void OnChildTriggerEnter(Collider other, ChildCollisionHandler child)
     {
@@ -81,7 +56,7 @@ public class Scenario_4 : MonoBehaviour
             is1_TriggerPass = true;
 
         }
-        else if(child.name ==secondTrigger.name && !is2_TriggerPass)
+        else if(child.name ==secondTrigger.name && !is2_TriggerPass && other.tag == "Player")
         {
             Debug.Log("대사 저 비행선을 통해서 탈출해보자 그러기위해서는 문이 열릴때까지 기다려야할거같아");
 
@@ -96,43 +71,61 @@ public class Scenario_4 : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         Debug.Log("대사 이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
         StartCoroutine(StartLastGame());
-        StartCoroutine(StartLastSpawn());
 
-    }
-
-    IEnumerator StartLastSpawn()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(spawnInterval);
-            //Instantiate(objectCPrefab, Vector3.zero, Quaternion.identity); // C 오브젝트 생성
-        }
-        yield return null;
     }
 
     IEnumerator StartLastGame()
     {
         Vector3 startPositionA = Open_Door1.transform.position;
         Vector3 startPositionB = Open_Door2.transform.position;
+        Vector3 startPositionC = Plane.transform.position;
+        Vector3 startPositionD = AirPlane.transform.position;
+
 
         Vector3 endPositionA = startPositionA + Vector3.right * Door_Distance;
         Vector3 endPositionB = startPositionB + Vector3.left * Door_Distance;
+        Vector3 endPositionC = startPositionC + Vector3.up * Air_Distance;
+        Vector3 endPositionD = startPositionD + Vector3.up * Air_Distance;
+
+        Gague.gameObject.SetActive(true);
 
         float elapsedTime = 0f;
+        float nextSpawnTime = 0f;
+        
 
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
+            nextSpawnTime += Time.deltaTime;
 
             float t = elapsedTime / duration;
+    
+            Bar.value = elapsedTime;
 
             Open_Door1.transform.position = Vector3.Lerp(startPositionA, endPositionA, t);
             Open_Door2.transform.position = Vector3.Lerp(startPositionB, endPositionB, t);
+            Plane.transform.position = Vector3.Lerp(startPositionC, endPositionC, t);
+            AirPlane.transform.position = Vector3.Lerp(startPositionD, endPositionD, t);
 
+            if (nextSpawnTime >= spawnInterval)
+            {
+                nextSpawnTime = 0f; // 스폰 타이머 초기화
+
+                int randomEnemyIndex = Random.Range(0, EnemyProbs.Length);
+                int randomSpawnPosIndex = Random.Range(0, EnemySpawnPos.Length);
+
+                GameObject ene = Instantiate(EnemyProbs[randomEnemyIndex],
+                            EnemySpawnPos[randomSpawnPosIndex].transform.position,
+                            Quaternion.identity);
+                ene.gameObject.SetActive(true);
+            }
+            yield return null;
         }
 
         Open_Door1.transform.position = endPositionA;
         Open_Door2.transform.position = endPositionB;
+        Plane.transform.position = endPositionC;
+        AirPlane.transform.position = endPositionD;
 
         Debug.Log("대사 Game Over");
         is_End = true;
