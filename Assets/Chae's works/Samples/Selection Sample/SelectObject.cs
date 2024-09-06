@@ -5,10 +5,10 @@ using UnityEngine;
 public class SelectObject : MonoBehaviour
 {
     [SerializeField]
-    private string sceneName;
+    private string stageName;
 
     [SerializeField]
-    private GameObject selectCanvas;
+    private SelectUI selectCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,8 @@ public class SelectObject : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-
+            selectCanvas.OpenSelectUI(stageName);
         }
+        
     }
 }
