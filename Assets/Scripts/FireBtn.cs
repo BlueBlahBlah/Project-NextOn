@@ -19,11 +19,11 @@ public class FireBtn : MonoBehaviour
     {
         if (machineGun != null && machineGun.gameObject.activeSelf)
         {
-            GameObject.Find("SM_Wep_MachineGun_01").GetComponent<MachineGun>().fireBtnDowing = BtnDown;
+            machineGun.GetComponent<MachineGun>().fireBtnDowing = BtnDown;
         }
         if (fireGun != null && fireGun.gameObject.activeSelf)
         {
-            GameObject.Find("FlameGun").GetComponent<FireGun>().fireBtnDowing = BtnDown;
+            fireGun.GetComponent<FireGun>().fireBtnDowing = BtnDown;
         }
         
     }

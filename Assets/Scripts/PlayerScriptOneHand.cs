@@ -47,11 +47,11 @@ public class PlayerScriptOneHand : MonoBehaviour
 
     public void WeaponSynchronization()
     {
-        SwordStreamOfEdge = GameObject.Find("SwordStreamOfEgde").GetComponent<SwordStreamOfEdge>();
+        /*SwordStreamOfEdge = GameObject.Find("SwordStreamOfEgde").GetComponent<SwordStreamOfEdge>();
         SwordStatic = GameObject.Find("SwordStatic").GetComponent<SwordStatic>();
         SwordSilver = GameObject.Find("SwordSilver").GetComponent<SwordSilver>();
         SwordDemacia = GameObject.Find("SwordDemacia").GetComponent<SwordDemacia>();
-        FantasyAxe = GameObject.Find("FantasyAxe_Unity").GetComponent<FantasyAxe>();
+        FantasyAxe = GameObject.Find("FantasyAxe_Unity").GetComponent<FantasyAxe>();*/
     }
 
     void Update()

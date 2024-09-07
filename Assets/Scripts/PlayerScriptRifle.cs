@@ -145,12 +145,12 @@ public class PlayerScriptRifle : MonoBehaviour
     
     public void WeaponSynchronization()
     {
-        rifle = GameObject.FindObjectOfType<Rifle>();
+        /*rifle = GameObject.FindObjectOfType<Rifle>();
         shotgun = GameObject.FindObjectOfType<Shotgun>();
         sniper = GameObject.FindObjectOfType<Sniper>();
         grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
         machineGun = GameObject.FindObjectOfType<MachineGun>();
-        fireGun = GameObject.FindObjectOfType<FireGun>();
+        fireGun = GameObject.FindObjectOfType<FireGun>();*/
     }
 
     private void reloadDone()
@@ -242,10 +242,10 @@ public class PlayerScriptRifle : MonoBehaviour
         }
         if (fireGun != null && fireGun.gameObject.activeSelf)
         {
-            if (fireGun.maxBulletCount >= 50)
+            if (fireGun.maxBulletCount >= 100)
             {
-                fireGun.maxBulletCount -= 50;         //탄 잔량 50 감소
-                fireGun.bulletCount += 50; // 50발 추가
+                fireGun.maxBulletCount -= 100;         //탄 잔량 50 감소
+                fireGun.bulletCount += 100; // 50발 추가
                 fireGun.nowReloading = false; // 이제 장전 끝
             }
             else
