@@ -10,6 +10,7 @@ public class SelectUI : MonoBehaviour
     private GameObject selectUI;
 
     private Image stageImage;
+
     private string stageName;
     private TextMeshProUGUI stageInfo;
 
@@ -45,6 +46,7 @@ public class SelectUI : MonoBehaviour
 
     public void ChangeScene()
     {
-
+        SceneContainer.instance.nextScene = "NewDemoStage";
+        LoadingManager.ToLoadScene();
     }
 }
