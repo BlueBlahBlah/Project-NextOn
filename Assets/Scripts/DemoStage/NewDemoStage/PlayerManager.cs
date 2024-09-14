@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -86,7 +87,28 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player_LongWeapon = GameObject.Find("Check_Sprite_Long");
+        player_NonWeapon = GameObject.Find("Check_Sprite");
+        player_CloseWeapon = GameObject.Find("Check_Sprite_Short");
+
+        player_WeaponList.Add(player_LongWeapon.transform.Find("FlameGum").gameObject);
+        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_MachineGun_01").gameObject);
+        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_Grenade_Launcher_01").gameObject);
+        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_Sniper_Mil_01").gameObject);
+        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_Rifle_Assault_01").gameObject);
+        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_Shotgun_01").gameObject);
         
+        player_WeaponList.Add(player_CloseWeapon.transform.Find("SwordStatic").gameObject);
+        player_WeaponList.Add(player_CloseWeapon.transform.Find("SwordStreamOfEgde").gameObject);
+        player_WeaponList.Add(player_CloseWeapon.transform.Find("SwordSilver").gameObject);
+        player_WeaponList.Add(player_CloseWeapon.transform.Find("SwordDemacia").gameObject);
+        player_WeaponList.Add(player_CloseWeapon.transform.Find("FantasyAxe_Unity").gameObject);
+
+        GameObject canvas = GameObject.Find("Canvas");
+        attackBtn = canvas.transform.Find("FireBtn").GetComponent<Button>();
+
+        _dropItemPosition.AddComponent<DropItemPosition>();
+
     }
 
     
