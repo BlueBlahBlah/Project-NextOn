@@ -36,7 +36,7 @@ public class Sniper : MonoBehaviour
         if (nowReloading == false)
         {
             Shoot();
-            GameObject.Find("Character_GhillieSuit_01 RifleTest").GetComponent<PlayerScriptRifle>().reloaing = true;     //재장전중으로 수정
+            GameObject.Find("Check_Sprite_Long").GetComponent<PlayerScriptRifle>().reloaing = true;     //재장전중으로 수정
             nowReloading = true;
         }
         

@@ -41,7 +41,7 @@ public class GrenadeLauncher : MonoBehaviour
             {
                 // 탄알이 없을 때의 처리 (e.g., 재장전 등)
                 Debug.Log("탄알이 없습니다!");
-                GameObject.Find("Character_GhillieSuit_01 RifleTest").GetComponent<PlayerScriptRifle>().reloaing =
+                GameObject.Find("Check_Sprite_Long").GetComponent<PlayerScriptRifle>().reloaing =
                     true; //재장전중으로 수정
                 nowReloading = true;
             }
