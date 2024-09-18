@@ -91,24 +91,88 @@ public class PlayerManager : MonoBehaviour
         player_NonWeapon = GameObject.Find("Check_Sprite");
         player_CloseWeapon = GameObject.Find("Check_Sprite_Short");
 
-        player_WeaponList.Add(player_LongWeapon.transform.Find("FlameGum").gameObject);
-        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_MachineGun_01").gameObject);
-        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_Grenade_Launcher_01").gameObject);
-        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_Sniper_Mil_01").gameObject);
-        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_Rifle_Assault_01").gameObject);
-        player_WeaponList.Add(player_LongWeapon.transform.Find("SM_Wep_Shotgun_01").gameObject);
-        
-        player_WeaponList.Add(player_CloseWeapon.transform.Find("SwordStatic").gameObject);
-        player_WeaponList.Add(player_CloseWeapon.transform.Find("SwordStreamOfEgde").gameObject);
-        player_WeaponList.Add(player_CloseWeapon.transform.Find("SwordSilver").gameObject);
-        player_WeaponList.Add(player_CloseWeapon.transform.Find("SwordDemacia").gameObject);
-        player_WeaponList.Add(player_CloseWeapon.transform.Find("FantasyAxe_Unity").gameObject);
+        // 각 무기 리스트에 추가할 오브젝트 이름
+        string[] longWeaponNames = {
+            "FlameGun",
+            "SM_Wep_MachineGun_01",
+            "SM_Wep_Grenade_Launcher_01",
+            "SM_Wep_Sniper_Mil_01",
+            "SM_Wep_Rifle_Assault_01",
+            "SM_Wep_Shotgun_01"
+        };
+
+        string[] closeWeaponNames = {
+            "SwordStatic",
+            "SwordStreamOfEgde",
+            "SwordSilver",
+            "SwordDemacia",
+            "FantasyAxe_Unity"
+        };
+
+        // parent 오브젝트 찾기
+        player_LongWeapon = GameObject.Find("Check_Sprite_Long");
+        player_NonWeapon = GameObject.Find("Check_Sprite");
+        player_CloseWeapon = GameObject.Find("Check_Sprite_Short");
+
+        // 모든 자식 오브젝트들 가져오기
+        Transform[] longWeaponChildren = player_LongWeapon.GetComponentsInChildren<Transform>(true);
+        Transform[] closeWeaponChildren = player_CloseWeapon.GetComponentsInChildren<Transform>(true);
+
+        // longWeapon 자식 중 무기 이름과 일치하는 오브젝트 추가
+        foreach (string weaponName in longWeaponNames)
+        {
+            foreach (Transform child in longWeaponChildren)
+            {
+                if (child.name == weaponName)
+                {
+                    player_WeaponList.Add(child.gameObject);
+                    break;
+                }
+            }
+        }
+
+        // closeWeapon 자식 중 무기 이름과 일치하는 오브젝트 추가
+        foreach (string weaponName in closeWeaponNames)
+        {
+            foreach (Transform child in closeWeaponChildren)
+            {
+                if (child.name == weaponName)
+                {
+                    player_WeaponList.Add(child.gameObject);
+                    break;
+                }
+            }
+        }
+
 
         GameObject canvas = GameObject.Find("Canvas");
         attackBtn = canvas.transform.Find("FireBtn").GetComponent<Button>();
 
-        _dropItemPosition.AddComponent<DropItemPosition>();
+        // player_NonWeapon과 같은 깊이의(같은 부모를 가진) 오브젝트를 찾음
+        Transform parentTransform = player_NonWeapon.transform.parent;
 
+        // 부모의 자식 오브젝트들 중 DropItemPosition을 가지고 있는 오브젝트 찾기
+        foreach (Transform sibling in parentTransform)
+        {
+            DropItemPosition dropItemPosition = sibling.GetComponent<DropItemPosition>();
+    
+            if (dropItemPosition != null)
+            {
+                // DropItemPosition을 가진 오브젝트를 찾았을 때 _dropItemPosition에 연결
+                _dropItemPosition = dropItemPosition;
+                break;
+            }
+        }
+        
+        int i;
+        for (i=0; i < player_WeaponList.Count; i++)
+        {
+            player_WeaponList[i].SetActive(false);
+        }
+        
+        player_LongWeapon.SetActive(false);
+        player_CloseWeapon.SetActive(false);
+        
     }
 
     
