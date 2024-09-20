@@ -21,7 +21,7 @@ public class Scenario1UI : MonoBehaviour
     public void SetTotallyDark()
     {
         // 화면의 암전 연출
-        Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 1f);
+        Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 0.8f);
     }
 
     public void SetLight()

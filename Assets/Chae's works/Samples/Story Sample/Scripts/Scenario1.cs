@@ -14,7 +14,7 @@ public class Scenario1 : MonoBehaviour
         if (SceneContainer.instance != null)
         {
             SceneContainer.instance.currentScene = "Scenario1 Scene";
-            SceneContainer.instance.nextScene = "DemoStage";
+            SceneContainer.instance.nextScene = "Selection Scene";
         }
         
         if (UIManager.instance != null)
@@ -53,9 +53,9 @@ public class Scenario1 : MonoBehaviour
 
         // 대사 출력1
         PrintLongDialogue();
-        yield return new WaitForSeconds(1f); // 대사 출력 방법을 수동으로 변경할 시, 코루틴 동작 변경 필요
-        yield return StartCoroutine("RunLoopUntilDone");
         yield return new WaitForSeconds(1f);
+        yield return StartCoroutine("RunLoopUntilDone");
+        yield return new WaitForSeconds(2f);
 
         // 깜빡임 연출
         scenario1UI.SetLittleDark();
@@ -65,12 +65,25 @@ public class Scenario1 : MonoBehaviour
         scenario1UI.SetLittleDark();
         yield return new WaitForSeconds(0.1f);
         scenario1UI.SetLight();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         // 대사 출력2 및 캐릭터 도트 정지
         PrintLongDialogue();
         scenario1UI.StopCharacter();
-        yield return null;
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine("RunLoopUntilDone");
+        yield return new WaitForSeconds(1f);
+        scenario1UI.SetLittleDark();
+        yield return new WaitForSeconds(0.5f);
+        scenario1UI.SetLight();
+        yield return new WaitForSeconds(1f);
+        scenario1UI.SetTotallyDark();
+        yield return new WaitForSeconds(2.5f);
+
+        PrintLongDialogue();
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine("RunLoopUntilDone");
+
     }
 
     IEnumerator Scenario1Sound()
