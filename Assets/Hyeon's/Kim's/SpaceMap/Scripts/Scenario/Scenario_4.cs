@@ -22,20 +22,26 @@ public class Scenario_4 : MonoBehaviour
     public GameObject Open_Door2;
     public GameObject Plane;
     public GameObject AirPlane;
-    
+    public GameObject Wall;
     
     private float duration = 60f;
     private float Door_Distance = 10;
     private float Air_Distance = 3;
     private float spawnInterval = 5;
 
+
+
+    [Header("Player Respawn")]
+    public Transform Respawn;
     public GameObject Player;
     public Slider Bar;
 
     void Start()
     {
+        //Player.transform.position = Respawn.localPosition;
         cameraManager.SpecialView = false;
         Gague.gameObject.SetActive(false);
+        Wall.SetActive(false);
 
         // Slider 초기화
         if (Gague != null)
@@ -58,6 +64,7 @@ public class Scenario_4 : MonoBehaviour
         }
         else if(child.name ==secondTrigger.name && !is2_TriggerPass && other.tag == "Player")
         {
+            scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 109);
             Debug.Log("대사 저 비행선을 통해서 탈출해보자 그러기위해서는 문이 열릴때까지 기다려야할거같아");
 
             is2_TriggerPass = true;
@@ -69,6 +76,8 @@ public class Scenario_4 : MonoBehaviour
     IEnumerator DelayFunction(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);
+        Wall.SetActive(true);
+        scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 110);
         Debug.Log("대사 이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
         StartCoroutine(StartLastGame());
 
@@ -138,7 +147,8 @@ public class Scenario_4 : MonoBehaviour
 
         if (is1_TriggerPass && is2_TriggerPass && is_End)
         {
-            scenario.StartCoroutine("END");
+            Scenario.instance.playing_Scenario = 4;
+            Scenario.instance.StartCoroutine(scenario.END());
         }
     }
 }

@@ -14,9 +14,13 @@ public class Scenario_2 : MonoBehaviour
     [Header("End Point")]
     public GameObject thirdTrigger;
 
+    [Header("Player Respawn")]
+    public Transform Respawn;
+    public GameObject Player;
 
     void Start()
     {
+        //Player.transform.position = Respawn.localPosition;
         is1_TriggerPass = false;
         is2_TriggerPass = false;
         is_End = false;
@@ -53,6 +57,7 @@ public class Scenario_2 : MonoBehaviour
             EnemySpawn[3].SetActive(true);
             EnemySpawn[4].SetActive(true);
             EnemySpawn[5].SetActive(true);
+            scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 101);
             Debug.Log("대사 여기를 막는건가");
         }
         else if ((is1_TriggerPass && is2_TriggerPass) && !cmd2IsPass)
@@ -61,6 +66,7 @@ public class Scenario_2 : MonoBehaviour
             EnemySpawn[6].SetActive(true);
             EnemySpawn[7].SetActive(true);
             EnemySpawn[8].SetActive(true);
+            scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 102);
             Debug.Log("대사 이제 재시작을 하러 가보자");
         }
         
@@ -68,7 +74,8 @@ public class Scenario_2 : MonoBehaviour
 
         if(is1_TriggerPass && is2_TriggerPass && is_End)
         {
-            scenario.StartCoroutine(scenario.Scenario3Start());
+            Scenario.instance.playing_Scenario = 3;
+            Scenario.instance.StartCoroutine(scenario.Scenario3Start());
         }
     }
 
@@ -76,6 +83,7 @@ public class Scenario_2 : MonoBehaviour
     {
         if (child.name == "2_End" && !is_End)
         {
+            scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 103);
             Debug.Log("대사 여기서 재시작하는건가? 작동 시켜보자 \r\n\r\n시스템 : 방화벽 프로그램 작동... 재시작 준비완료");
             is_End = true;
         }
