@@ -44,8 +44,9 @@ public class PlayerManager : MonoBehaviour
     
     public DropItemPosition _dropItemPosition;
 
-    
-    
+
+    public int revive;      //부활 횟수
+    private bool revive_decrease_once;      //부활 횟수를 1만 줄이기 위한 변수
     
     private void Awake()
     {
@@ -145,9 +146,6 @@ public class PlayerManager : MonoBehaviour
         }
 
 
-        GameObject canvas = GameObject.Find("Canvas");
-        attackBtn = canvas.transform.Find("FireBtn").GetComponent<Button>();
-
         // player_NonWeapon과 같은 깊이의(같은 부모를 가진) 오브젝트를 찾음
         Transform parentTransform = player_NonWeapon.transform.parent;
 
@@ -172,7 +170,9 @@ public class PlayerManager : MonoBehaviour
         
         player_LongWeapon.SetActive(false);
         player_CloseWeapon.SetActive(false);
-        
+
+        revive = 3;
+        revive_decrease_once = false;
     }
 
     
@@ -183,6 +183,21 @@ public class PlayerManager : MonoBehaviour
         if (Health <= 0)        //체력이 다 닳은 경우
         {
             Health = 0;         //체력바가 길어지는 것을 방지
+            if (revive_decrease_once == false)
+            {
+                revive_decrease_once = true;
+                revive -= 1;
+                if(revive >= 1)
+                    revive_Health_Invoke();
+                else if (revive == 0)
+                {
+                    //진짜 끝남
+                    EventManager.Instance.fadeout();
+                    //씬 이동하는 코드
+                }
+            }
+            
+            
         }
         
         //현재 총기류를 먹은경우
@@ -197,7 +212,28 @@ public class PlayerManager : MonoBehaviour
             //잔탄의 수를 무한대로 하는 코드
         }
     }
+
     
+    public void find_attackBtn_Invoke()
+    {
+        Invoke("find_attackBtn",3f);
+    }
+    private void find_attackBtn()
+    {
+       attackBtn = GameObject.Find("FireBtn").GetComponent<Button>();
+    }
+
+    private void revive_Health_Invoke()
+    {
+        Invoke("revive_Health",5.5f);
+    }
+
+    public void revive_Health()
+    {
+        Health = 100;
+        revive_decrease_once = false;
+        Death = false;
+    }
     public void ChangeWeapon(WeaponType Wt, GameObject Weapon)
     {
         //모델링 활성화

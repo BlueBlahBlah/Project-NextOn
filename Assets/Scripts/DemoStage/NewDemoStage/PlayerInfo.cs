@@ -53,8 +53,9 @@ public class PlayerInfo : MonoBehaviour
         {
             float DamageDone = curHealth - Health;        //입은 데미지.
             ShowDamage(DamageDone);
-            hpBar.rectTransform.localScale = new Vector3((float)Health/(float)TotalHealth, 1f, 1f);
+            
         }
+        hpBar.rectTransform.localScale = new Vector3((float)Health/(float)TotalHealth, 1f, 1f);
     }
     
     private void ShowDamage(float d)

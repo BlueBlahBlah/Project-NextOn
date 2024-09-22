@@ -22,6 +22,8 @@ public class PlayerScriptOneHand : MonoBehaviour
     [SerializeField] private SwordSilver SwordSilver;
     [SerializeField] private SwordDemacia SwordDemacia;
     [SerializeField] private FantasyAxe FantasyAxe;
+    
+    private bool temporary_death;           //임시 죽음 스위치 - Update 제어
 
     //[SerializeField] private DamageManager DamageManager;
 
@@ -42,7 +44,7 @@ public class PlayerScriptOneHand : MonoBehaviour
         {
             
         }
-       
+        temporary_death = false;
     }
 
     public void WeaponSynchronization()
@@ -64,6 +66,7 @@ public class PlayerScriptOneHand : MonoBehaviour
         }
         else
         {
+            
             // 현재 위치와 이전 위치 비교
             if (transform.position != lastPosition)
             {
@@ -90,6 +93,23 @@ public class PlayerScriptOneHand : MonoBehaviour
             Anim.SetBool("walk", walking);
         }
         
+    }
+    
+    private void after_Death_Animation()
+    {
+        //아직 부활이 남아있다면
+        if (PlayerManager.Instance.revive >= 1)
+        {
+            temporary_death = true;
+            Anim.SetTrigger("Revive");        //애니메이션 트리거
+        }
+    }
+    
+    private void after_Landing_Animation()
+    {
+        GetComponentInParent<CharacterLocomotion>().enabled = true;
+        Anim.applyRootMotion = false;
+        temporary_death = false;
     }
 
     public void OnAttackButtonClick()
