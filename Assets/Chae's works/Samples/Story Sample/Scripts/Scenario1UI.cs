@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,18 @@ public class Scenario1UI : MonoBehaviour
     private Image Spark;
     [SerializeField]
     private Image characterPixel;
+
+    private VolumeController volumeController;
+
+    private void Start()
+    {
+        if (volumeController == null)
+        {
+            // 새로운 GameObject를 만들고 VolumeController를 추가
+            GameObject volumeControllerObject = new GameObject("VolumeController");
+            volumeController = volumeControllerObject.AddComponent<VolumeController>();
+        }
+    }
 
     public void SetLittleDark()
     {
@@ -40,5 +53,10 @@ public class Scenario1UI : MonoBehaviour
         // 캐릭터의 정지
         characterPixel.GetComponent<Animator>().enabled = false;
         characterPixel.sprite = Resources.Load($"UI/Image/Characters/Devin/coding 1", typeof(Sprite)) as Sprite;
+    }
+
+    public void Fadein()
+    {
+        volumeController.TriggerFadeIn();
     }
 }

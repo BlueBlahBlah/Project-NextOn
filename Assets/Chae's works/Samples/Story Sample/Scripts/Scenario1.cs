@@ -84,6 +84,7 @@ public class Scenario1 : MonoBehaviour
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine("RunLoopUntilDone");
 
+        scenario1UI.Fadein();
     }
 
     IEnumerator Scenario1Sound()

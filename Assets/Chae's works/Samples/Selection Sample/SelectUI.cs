@@ -14,6 +14,19 @@ public class SelectUI : MonoBehaviour
     private string stageName;
     private TextMeshProUGUI stageInfo;
 
+    private VolumeController volumeController;
+
+    private void Start()
+    {
+        if (volumeController == null)
+        {
+            // 새로운 GameObject를 만들고 VolumeController를 추가
+            GameObject volumeControllerObject = new GameObject("VolumeController");
+            volumeController = volumeControllerObject.AddComponent<VolumeController>();
+        }
+    }
+
+
     public void SetStageName(string newStageName)
     {
         stageName = newStageName;
@@ -42,6 +55,18 @@ public class SelectUI : MonoBehaviour
     public void CloseSelectUI()
     {
         selectUI.SetActive(false);
+    }
+
+    public void ChangeSceneUI()
+    {
+        volumeController.TriggerFadeIn();
+
+        Invoke("ChangeScene", 1.5f);
+    }
+
+    public void FadeInBlack()
+    {
+
     }
 
     public void ChangeScene()

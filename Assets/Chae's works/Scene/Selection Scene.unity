@@ -214,10 +214,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 395654969797316313, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 510250726145383162, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
       propertyPath: moveJoystick
       value: 
       objectReference: {fileID: 908210371}
+    - target: {fileID: 646792634076120872, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474948384709835620, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206595845310864276, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7231917072454230920, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -261,7 +277,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7206595845310864276, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 282979458}
   m_SourcePrefab: {fileID: 100100000, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
 --- !u!114 &84732265 stripped
 MonoBehaviour:
@@ -374,7 +393,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1266816984}
         m_TargetAssemblyTypeName: SelectUI, Assembly-CSharp
-        m_MethodName: ChangeScene
+        m_MethodName: ChangeSceneUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -422,6 +441,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106005489}
   m_CullTransparentMesh: 1
+--- !u!1 &282979452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7206595845310864276, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
+  m_PrefabInstance: {fileID: 84732264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &282979458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282979452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: 0e0da2512eb228249b90c3a2d729080b, type: 2}
 --- !u!1 &291312142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1649,7 +1690,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectUI: {fileID: 540365285}
-  stageName: DemoStage
 --- !u!1001 &1354252482
 PrefabInstance:
   m_ObjectHideFlags: 0
