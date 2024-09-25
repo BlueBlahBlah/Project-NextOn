@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MissionObject : MonoBehaviour
 {
-    private bool isClose;
+    public bool isClose;
     private bool isStay;
     [SerializeField]
     private GameObject ItemImage;
@@ -31,9 +31,10 @@ public class MissionObject : MonoBehaviour
                     slider.gameObject.SetActive(false);
                     slider.value = 0;
                     ItemImage.SetActive(true);
+                    ItemImage.GetComponent<Button>().interactable = false;
                     for(int i = 0; i < 5 * (maze.missionCount + 1); i++)
                     {
-                        PoolManager.poolManager.Get(0);
+                        PoolManager.poolManager.FirstGet(0);
                     }
                     maze.missionCount++;
                     parent.SetActive(false);

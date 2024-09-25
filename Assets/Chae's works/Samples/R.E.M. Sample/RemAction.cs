@@ -28,14 +28,14 @@ public class RemAction : MonoBehaviour
         isMovable = false;
         isActioning = true;
 
-        // ÀÌÆåÆ®
+        // ï¿½ï¿½ï¿½ï¿½Æ®
         ActivateEffect(remController.REM_Heal);
         CreateEffectAtTarget(remController.REM_HealTarget, remController.Target, 2.0f);
         
-        // Ä¡À¯ ÄÚµå ÀÛ¼º
+        // Ä¡ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Û¼ï¿½
 
 
-        PlayerManager.instance.Health = Mathf.Min(PlayerManager.instance.Health + 20, PlayerManager.instance.TotalHealth); // 20¸¸Å­ Ã¼·Â È¸º¹, PlayerÀÇ ÃÖ´ëÃ¼·Â¸¸Å­ Á¦ÇÑ
+        PlayerManager.instance.Health = Mathf.Min(PlayerManager.instance.Health + 20, PlayerManager.instance.TotalHealth); // 20ï¿½ï¿½Å­ Ã¼ï¿½ï¿½ È¸ï¿½ï¿½, Playerï¿½ï¿½ ï¿½Ö´ï¿½Ã¼ï¿½Â¸ï¿½Å­ ï¿½ï¿½ï¿½ï¿½
         Debug.Log("Healed to: " + PlayerManager.instance.Health);
         yield return new WaitForSeconds(2f);
 
@@ -48,10 +48,10 @@ public class RemAction : MonoBehaviour
         isMovable = false;
         isActioning = true;
 
-        // ÀÌÆåÆ®
+        // ï¿½ï¿½ï¿½ï¿½Æ®
         CreateEffectAtTarget(remController.REM_Shield, remController.Target, 4.0f);
 
-        // ¹æ¾î¸· Àü°³ ÄÚµå ÀÛ¼º
+        // ï¿½ï¿½î¸· ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½Û¼ï¿½
         Debug.Log("Shield deployed!");
         yield return new WaitForSeconds(3f);
 
@@ -70,34 +70,34 @@ public class RemAction : MonoBehaviour
         GameObject laserEffect = remController.REM_AttackLaser;
         Transform target = remController.Target.transform;
 
-        // 1. ÅÚ·¹Æ÷Æ® ÀÌÆåÆ® »ý¼º ¹× ¼ø°£ÀÌµ¿
+        // 1. ï¿½Ú·ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½
         Vector3 teleportPosition = new Vector3(target.position.x, remController.transform.position.y, target.position.z);
         GameObject teleportInstance = GameObject.Instantiate(teleportEffect, remController.transform.position, Quaternion.identity, remController.EffectContainer.transform);
         teleportInstance.SetActive(true);
-        yield return new WaitForSeconds(0.1f); // Àá½Ã ´ë±â
+        yield return new WaitForSeconds(0.1f); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         remController.transform.position = teleportPosition;
         remController.REM_Mesh.SetActive(true);
         GameObject chargeInstance = GameObject.Instantiate(chargeEffect, remController.transform.position, Quaternion.identity, remController.EffectContainer.transform);
         chargeInstance.SetActive(true);
-        yield return new WaitForSeconds(0.9f); // 0.5ÃÊ ´ë±â
+        yield return new WaitForSeconds(0.9f); // 0.5ï¿½ï¿½ ï¿½ï¿½ï¿½
         StopParticleSystem(teleportInstance);
         StopParticleSystem(chargeInstance);
-        // ·¹ÀÌÀú ÀÌÆåÆ® »ý¼º ¹× ¹æÇâ È¸Àü
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
         GameObject laserInstance = GameObject.Instantiate(laserEffect, remController.transform.position, remController.transform.rotation, remController.EffectContainer.transform);
         laserInstance.SetActive(true);
 
-        float rotateDuration = 2.5f; // 2.5ÃÊ µ¿¾È È¸Àü
+        float rotateDuration = 2.5f; // 2.5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
         float elapsedTime = 0f;
 
         while (elapsedTime < rotateDuration)
         {
-            float rotationSpeed = 120f / rotateDuration * Time.deltaTime; // 60µµ¸¦ ¼­¼­È÷ È¸Àü
+            float rotationSpeed = 120f / rotateDuration * Time.deltaTime; // 60ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
             remController.transform.Rotate(0, rotationSpeed, 0);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // ·¹ÀÌÀú ÀÌÆåÆ® Á¦°Å
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         StopParticleSystem(laserInstance);
         yield return new WaitForSeconds(0.7f);
 
@@ -134,7 +134,7 @@ public class RemAction : MonoBehaviour
         if (effect == null) return;
         effect.SetActive(true);
 
-        StopParticleSystem(effect, delay); // 2ÃÊ ÈÄ ÀÌÆåÆ® ºñÈ°¼ºÈ­
+        StopParticleSystem(effect, delay); // 2ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½È°ï¿½ï¿½È­
     }
 
     void StopParticleSystem(GameObject effect, float delay = 0f)
@@ -162,11 +162,11 @@ public class RemAction : MonoBehaviour
     {
         if (target != null)
         {
-            // ÀÌÆåÆ®¸¦ Å¸°ÙÀÇ ÀÚ½ÄÀ¸·Î »ý¼º
+            // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             GameObject effectInstance = Instantiate(effectPrefab, target.transform.position, Quaternion.identity, target.transform);
             effectInstance.SetActive(true);
 
-            // ÀÏÁ¤ ½Ã°£ ÈÄ¿¡ »èÁ¦
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½
             Destroy(effectInstance, destroyTime);
         }
     }

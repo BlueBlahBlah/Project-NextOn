@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Maze : MonoBehaviour
 {
     private bool isStart = false;
+
     [SerializeField]
     private GameObject Player;
     [SerializeField]
     private GameObject MazePlayerSpawnPoint;
+    [SerializeField]
+    private GameObject leaderMob;
     //[SerializeField]
     //private GameObject[] MazeSpawnPoint;
     [SerializeField]
@@ -30,16 +35,16 @@ public class Maze : MonoBehaviour
     {
         if(missionCount == 3)
         {
-            if(MazeGenerate.mazeGenerate.monsCount == 0)
+            if(PoolManager.poolManager.GetAllPoolSetActive() == 0)
             {
                 MazeStart.mazeStart.isMazeStart = false;
             }
         }
     }
 
-    IEnumerator MazeRoutine(){
+    public IEnumerator MazeRoutine(){
         //처음 시작하면 스폰포인트에 플레이어를 스폰한다
-        Player.transform.position = MazePlayerSpawnPoint.transform.position;
+        //Player.transform.position = MazePlayerSpawnPoint.transform.position;
         yield return new WaitForSeconds(0.5f);
         //메이즈 시작 트리거를 지나갈 때까지 대기
         yield return new WaitUntil(() => MazeStart.mazeStart.isMazeStart);
@@ -49,18 +54,19 @@ public class Maze : MonoBehaviour
         yield return new WaitUntil(() => missionCount == 2);
         Debug.Log("마지막으로 하나만 남았어. 얼른 부탁할게");
         yield return new WaitUntil(() => missionCount == 3);
-        Debug.Log("메모리를 모두 복구했구나. 맵에 있는 나만의 영화관에 찾아와주겠어?");
-        Debug.Log("지금 몬스터들이 내 영화관 근처에도 침입해서 움직일 수가 없어..");
-    
-        MazeStart.mazeStart.isMazeStart = false; 
+        Debug.Log("메모리를 모두 복구했구나. 남은 몬스터를 처치해줘?");
 
-        //말풍선 영화를 봐야하는데 컴퓨터의 메모리가 유출됐으니 찾아달라는 대사
+        yield return new WaitUntil(() => PoolManager.poolManager.GetAllPoolSetActive() == 0);
+        MazeStart.mazeStart.isMazeStart = false; 
 
         //세 개의 메모리를 찾아올 때까지 대기
         yield return new WaitUntil(() => !MazeStart.mazeStart.isMazeStart);
-        
         //찾은거 가지고 자신이 있는 곳으로 와달라는 대사 끝나면
-        
-        Player.transform.position = MazePlayerSecondPoint.transform.position;
+        Debug.Log("스폰된 몬스터를 따라와줘 내가 키우는 몬스터야");
+        GameObject leader = Instantiate(leaderMob,Player.transform.position, Player.transform.rotation);
+        leader.GetComponent<LeaderMob>().SetTarget(GameObject.Find("PointtoDrop").transform);
+        yield return new WaitUntil(() => MissionObject[3].GetComponent<FinishMaze>().isClose);
+
+        FirstLandManager.firstLandManager.isMazeFin = true;
     }
 }

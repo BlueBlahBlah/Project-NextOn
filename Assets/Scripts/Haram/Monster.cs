@@ -22,7 +22,6 @@ public class Monster : CreatureInfo
     {
         if(GetHP() == 0)
         {
-            MazeGenerate.mazeGenerate.monsCount--;
             //죽는 애니메이션
             Destroy(this);
         }
