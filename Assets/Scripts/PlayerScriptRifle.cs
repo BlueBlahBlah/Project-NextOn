@@ -145,6 +145,7 @@ public class PlayerScriptRifle : MonoBehaviour
 
                 if (reloaing == true)       //재장전중이라면
                 {
+                    PlayerSoundManager.Instance.reload_Sound();
                     Anim.SetBool("reload", true);       //재장전 애니메이션
                     reloaing = false;
                     Invoke("reloadDone",4);      //4초후 재장전 끝
@@ -323,6 +324,7 @@ public class PlayerScriptRifle : MonoBehaviour
         {
             temporary_death = true;
             Anim.SetTrigger("Revive");        //애니메이션 트리거
+            PlayerSoundManager.Instance.revive_Sound();
         }
     }
     

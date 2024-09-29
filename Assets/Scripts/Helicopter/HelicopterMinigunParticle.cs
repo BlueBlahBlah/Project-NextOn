@@ -44,6 +44,7 @@ public class HelicopterMinigunParticle : MonoBehaviour
             StopCoroutine(respawnCoroutine);
             respawnCoroutine = null;  // 코루틴이 정지되면 변수를 null로 설정
         }
+        
     }
 
     //공격 계수를 전달받아 공격데미지를 결정

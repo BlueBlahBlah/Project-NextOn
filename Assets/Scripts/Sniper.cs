@@ -36,6 +36,7 @@ public class Sniper : MonoBehaviour
         if (nowReloading == false)
         {
             Shoot();
+            PlayerSoundManager.Instance.Sniper_Shoot_Sound();
             GameObject.Find("Check_Sprite_Long").GetComponent<PlayerScriptRifle>().reloaing = true;     //재장전중으로 수정
             nowReloading = true;
         }

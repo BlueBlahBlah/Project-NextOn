@@ -11,6 +11,7 @@ public class SwordSilverSkill1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerSoundManager.Instance.Sliver_Skill_Sound();
         Invoke("SecondAttack", 3f);
         Damage = 10;
     }
@@ -60,6 +61,7 @@ public class SwordSilverSkill1 : MonoBehaviour
                 }
             }
         }
+        
     }
 
     bool ISContact(GameObject enemyObject)

@@ -54,6 +54,7 @@ public class GrenadeAmmo : MonoBehaviour
 
     void explosion()
     {
+        PlayerSoundManager.Instance.Granade_Explosion_Sound();
         rigidbody.velocity = Vector3.zero;                                  //움직임 그만
         rigidbody.angularVelocity = new Vector3(0, 0, 0);             //회전 그만
         Effect.SetActive(true);

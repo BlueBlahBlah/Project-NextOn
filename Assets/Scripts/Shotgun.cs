@@ -37,6 +37,7 @@ public class Shotgun : MonoBehaviour
         {
             // 버튼이 눌렸을 때 발사
             Shoot();
+            PlayerSoundManager.Instance.ShootGun_Shoot_Sound();
         }
         else
         {

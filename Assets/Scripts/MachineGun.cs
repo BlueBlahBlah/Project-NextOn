@@ -55,7 +55,6 @@ public class MachineGun : MonoBehaviour
             Effect.SetActive(true);
             // 버튼이 눌렸을 때 발사
             Shoot();
-            
         }
         else
         {

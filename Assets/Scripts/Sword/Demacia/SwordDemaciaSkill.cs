@@ -36,6 +36,7 @@ public class SwordDemaciaSkill : MonoBehaviour
 
     void skillStart()
     {
+        PlayerSoundManager.Instance.Demacia_Skill_Land_Sound();
         rigid.velocity = Vector3.zero;                                  //움직임 그만
         rigid.angularVelocity = new Vector3(0, 0, 0);             //회전 그만
         effect.SetActive(true);

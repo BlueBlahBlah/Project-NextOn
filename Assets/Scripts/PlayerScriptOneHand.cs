@@ -145,7 +145,7 @@ public class PlayerScriptOneHand : MonoBehaviour
         
         Collider[] hitColliders = Physics.OverlapBox(DamageZone.bounds.center, DamageZone.bounds.extents,
             DamageZone.transform.rotation);
-
+        PlayerSoundManager.Instance.Close_Attack_1_Sound();
         foreach (Collider col in hitColliders)
         {
             if (col.CompareTag("Enemy"))
@@ -167,6 +167,7 @@ public class PlayerScriptOneHand : MonoBehaviour
         {
             temporary_death = true;
             Anim.SetTrigger("Revive");        //애니메이션 트리거
+            PlayerSoundManager.Instance.revive_Sound();
         }
     }
     

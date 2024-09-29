@@ -181,6 +181,7 @@ public class TurretAI : MonoBehaviour {
 
             Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
             GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
+            PlayerSoundManager.Instance.Turret_Shoot_Sound();
             Projectile projectile = missleGo.GetComponent<Projectile>();
             projectile.target = lockOnPos;
         }
@@ -190,6 +191,7 @@ public class TurretAI : MonoBehaviour {
             {
                 Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
                 GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
+                PlayerSoundManager.Instance.Turret_Shoot_Sound();
                 Projectile projectile = missleGo.GetComponent<Projectile>();
                 projectile.target = transform.GetComponent<TurretAI>().currentTarget.transform;
             }
@@ -197,6 +199,7 @@ public class TurretAI : MonoBehaviour {
             {
                 Instantiate(muzzleEff, muzzleSub.transform.position, muzzleSub.rotation);
                 GameObject missleGo = Instantiate(bullet, muzzleSub.transform.position, muzzleSub.rotation);
+                PlayerSoundManager.Instance.Turret_Shoot_Sound();
                 Projectile projectile = missleGo.GetComponent<Projectile>();
                 projectile.target = transform.GetComponent<TurretAI>().currentTarget.transform;
             }
@@ -207,6 +210,7 @@ public class TurretAI : MonoBehaviour {
         {
             Instantiate(muzzleEff, muzzleMain.transform.position, muzzleMain.rotation);
             GameObject missleGo = Instantiate(bullet, muzzleMain.transform.position, muzzleMain.rotation);
+            PlayerSoundManager.Instance.Turret_Shoot_Sound();
             Projectile projectile = missleGo.GetComponent<Projectile>();
             projectile.target = currentTarget.transform;
         }

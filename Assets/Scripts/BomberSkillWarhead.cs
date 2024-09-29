@@ -26,6 +26,7 @@ public class BomberSkillWarhead : MonoBehaviour
         rigid.angularVelocity = Vector3.zero;
         warhead.SetActive(false);
         effect.SetActive(true);
+        PlayerSoundManager.Instance.Bomb_Expolosion_Sound();
 
         /*RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 
             15, Vector3.up, 0f, LayerMask.GetMask("Enemy"));

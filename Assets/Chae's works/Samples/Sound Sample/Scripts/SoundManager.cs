@@ -13,7 +13,7 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton ÆĞÅÏ
+        // Singleton íŒ¨í„´
         if (instance == null)
         {
             instance = this;
@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ´Ü¹ß¼º »ç¿îµå Àç»ı ¸Ş¼­µå (SE µğ·ºÅä¸®)
+    // ë‹¨ë°œì„± ì‚¬ìš´ë“œ ì¬ìƒ ë©”ì„œë“œ (SE ë””ë ‰í† ë¦¬)
     public void PlayEffectSound(string clipName)
     {
         AudioClip clip = Resources.Load<AudioClip>("Sound/SE/" + clipName);
@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ¹è°æÀ½¾Ç Àç»ı ¸Ş¼­µå (BGM µğ·ºÅä¸®)
+    // ë°°ê²½ìŒì•… ì¬ìƒ ë©”ì„œë“œ (BGM ë””ë ‰í† ë¦¬)
     public void PlayMusic(string clipName)
     {
         string path = "Sound/BGM/" + clipName;
@@ -50,8 +50,8 @@ public class SoundManager : MonoBehaviour
         {
             Debug.Log("Successfully loaded music clip: " + clipName);
             musicSource.clip = clip;
-            musicSource.loop = true; // ¹İº¹ Àç»ı ¼³Á¤
-            musicSource.volume = Mathf.Clamp(musicSource.volume, 0f, 0.3f); // º¼·ı Á¦ÇÑ
+            musicSource.loop = true; // ë°˜ë³µ ì¬ìƒ ì„¤ì •
+            musicSource.volume = Mathf.Clamp(musicSource.volume, 0f, 0.3f); // ë³¼ë¥¨ ì œí•œ
             musicSource.Play();
         }
         else

@@ -90,6 +90,7 @@ public class PlayerScript : MonoBehaviour
         {
             temporary_death = true;
             Anim.SetTrigger("Revive");        //애니메이션 트리거
+            PlayerSoundManager.Instance.revive_Sound();
         }
     }
     

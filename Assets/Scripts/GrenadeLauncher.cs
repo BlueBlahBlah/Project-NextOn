@@ -34,6 +34,7 @@ public class GrenadeLauncher : MonoBehaviour
         {
             // 버튼이 눌렸을 때 발사
             Shoot();
+            PlayerSoundManager.Instance.Granade_Shoot_Sound();
         }
         else
         {

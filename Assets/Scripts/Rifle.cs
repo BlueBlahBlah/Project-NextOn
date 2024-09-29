@@ -38,6 +38,7 @@ public class Rifle : MonoBehaviour
         {
             // 버튼이 눌렸을 때 발사
             Shoot();
+            PlayerSoundManager.Instance.Rifle_Shoot_Sound();
         }
         else
         {
