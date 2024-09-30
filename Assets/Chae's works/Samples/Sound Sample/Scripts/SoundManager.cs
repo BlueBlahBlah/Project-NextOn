@@ -107,9 +107,15 @@ public class SoundManager : MonoBehaviour
 
     private IEnumerator RemoveSourceWhenDone(AudioSource source)
     {
-        yield return new WaitUntil(() => !source.isPlaying);
-        activeEffectsSources.Remove(source);
-        originalVolumes.Remove(source);
-        Destroy(source);
+        // 오디오 소스가 더 이상 재생되지 않을 때까지 대기
+        yield return new WaitUntil(() => source == null || !source.isPlaying);
+
+        if (source != null) // 소스가 여전히 유효한지 확인
+        {
+            activeEffectsSources.Remove(source);
+            originalVolumes.Remove(source);
+            Destroy(source);
+        }
     }
+
 }
