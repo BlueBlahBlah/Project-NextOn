@@ -33,7 +33,7 @@ public class PlayerScriptRifle : MonoBehaviour
         lastPosition = transform.position;
         walking = false;
         Anim = GetComponentInChildren<Animator>();
-        RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
+        // RollBtn.onClick.AddListener(OnRollButtonClick);         //구르기버튼
         try
         {
             WeaponSynchronization();
