@@ -44,7 +44,7 @@ public class Maze : MonoBehaviour
 
     public IEnumerator MazeRoutine(){
         //처음 시작하면 스폰포인트에 플레이어를 스폰한다
-        //Player.transform.position = MazePlayerSpawnPoint.transform.position;
+        Player.transform.position = MazePlayerSpawnPoint.transform.position;
         yield return new WaitForSeconds(0.5f);
         //메이즈 시작 트리거를 지나갈 때까지 대기
         yield return new WaitUntil(() => MazeStart.mazeStart.isMazeStart);

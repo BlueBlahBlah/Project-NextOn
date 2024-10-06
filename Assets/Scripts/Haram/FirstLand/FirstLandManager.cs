@@ -31,10 +31,6 @@ public class FirstLandManager : MonoBehaviour
         SecondLand.SetActive(false);
         StartCoroutine(FirstLandMission());
     }
-    void Update()
-    {
-    
-    } 
 
     IEnumerator FirstLandMission()
     {

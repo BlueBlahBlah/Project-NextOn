@@ -48,7 +48,6 @@ public class RamBossStageManager : MonoBehaviour
     {
         for(int i = 0; i < mobnum; i++)
         {
-            Debug.Log("stage setting2");
             int x = Random.Range(0,2);
             PoolManager.poolManager.MonsterSpawn(_spawnPoint,x);
         }
@@ -59,10 +58,8 @@ public class RamBossStageManager : MonoBehaviour
     }
     public void ViewMobCount()
     {
-        Debug.Log(mobnum);
         StopCoroutine(StageReStart());
         int curMob = PoolManager.poolManager.GetAllPoolSetActive();
-        Debug.Log(curMob);
         if(isStageCleared)
         {
             isMissionStart = false;
@@ -73,7 +70,6 @@ public class RamBossStageManager : MonoBehaviour
         }
         else if((mobnum - curMob) == mobnum) //오버플로우
         {
-            Debug.Log("over");
             isMissionStart = false;
             ramBossMissionObject.curtime = 0;
             ramBossMissionObject.slider.value = 0;
@@ -84,21 +80,17 @@ public class RamBossStageManager : MonoBehaviour
         }
         else if((mobnum - curMob) == (mobnum - 1))
         {
-            Debug.Log("can Mission");
             _mobCountText.text = (mobnum - curMob).ToString();
             isMissionStart = true;
         }
         else
         {
-            Debug.Log("yet");
-            //스테이지 별 최대 몬스터에서 현재 활성화된 몹의 수를 빼면 잡은 몬스터의 수가 나옴
             _mobCountText.text = (mobnum - curMob).ToString();
         }
     }
 
     public IEnumerator StageReStart()
     {
-        Debug.Log("coroutine");
         WaitForSeconds wfs2 = new WaitForSeconds(2f);
         yield return wfs2;
         _mobCountText.text = "OverFlowed!!!";

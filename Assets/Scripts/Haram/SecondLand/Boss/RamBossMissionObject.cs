@@ -22,7 +22,6 @@ public class RamBossMissionObject : MonoBehaviour
             slider.value = curtime / maxtime;
             if (slider.value == 1)
             {
-                Debug.Log("value 1");
                 slider.value = 0;
                 curtime = 0;
                 slider.gameObject.SetActive(false);

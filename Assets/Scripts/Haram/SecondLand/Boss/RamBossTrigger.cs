@@ -15,16 +15,6 @@ public class RamBossTrigger : MonoBehaviour
     {
         instance = new RamBossTrigger();
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void OnTriggerEnter(Collider collision)
     {
         StopAllCoroutines();
@@ -33,7 +23,6 @@ public class RamBossTrigger : MonoBehaviour
             _bossObject = _bossObject.GetComponent<RamBossScenario>();
             _bossObject.StartCoroutine(_bossObject.BossCoroutine());
             _circleTree.SetActive(true);
-            //_bossObject.GetComponent<RamBossScenario>().isBossStart = true;
         }
     }
 }

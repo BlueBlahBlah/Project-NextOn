@@ -11,29 +11,6 @@ public class MobSpawnTrigger : Trigger
     private GameObject _destroyGround;
     [SerializeField]
     private GameObject _wallToPreventDestroy;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*if(isTriggered)
-        {
-            foreach(GameObject _destroy in _destroyGround)
-            {
-                _destroy.SetActive(false);
-            }
-            for(int i = 0; i < 10; i++)
-            {
-                int x = Random.Range(0,2);
-                PoolManager.poolManager.MonsterGet(_spawnPoints, x);
-            }
-            isTriggered = false;
-        }*/
-    }
 
     public override void OnTriggerEnter(Collider collision)
     {

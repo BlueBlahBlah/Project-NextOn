@@ -27,20 +27,9 @@ public class RamBossScenario : MonoBehaviour
     {
         instance = new RamBossScenario();
     }
-    void Start()
-    {
-    
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public IEnumerator BossCoroutine()
     {
-        Debug.Log("scenario");
         _bossTrigger.SetActive(false);
         _bossMissionObject.SetActive(true);
         isBossStart = true;

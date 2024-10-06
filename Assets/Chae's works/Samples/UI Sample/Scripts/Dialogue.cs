@@ -6,19 +6,19 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
-    // ´ÙÀÌ¾ó·Î±×¿¡ ÇÊ¿äÇÑ Á¤º¸µéÀ» ÀúÀåÇÏ°í, »çÀü¿¡ ÀúÀåµÈ csv ÆÄÀÏÀ» È£ÃâÇÏ´Â ½ºÅ©¸³Æ®ÀÔ´Ï´Ù.
-    // 'LongDialogue', 'ShortDialogue' UI ¿ÀºêÁ§Æ®¿¡ Æ÷ÇÔµÇ´Â ½ºÅ©¸³Æ®ÀÔ´Ï´Ù. 
+    // ï¿½ï¿½ï¿½Ì¾ï¿½Î±×¿ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ csv ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È£ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½Ô´Ï´ï¿½.
+    // 'LongDialogue', 'ShortDialogue' UI ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ÔµÇ´ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½Ô´Ï´ï¿½. 
 
     [Header("Dialogue")]
     [Header("Connect")]
     [SerializeField]
-    private GameObject dialogue; // ´ëÈ­Ã¢ ¿ÀºêÁ§Æ®
+    private GameObject dialogue; // ï¿½ï¿½È­Ã¢ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     [SerializeField]
-    private Image dialogueImage; // ´ëÈ­ Ä³¸¯ÅÍ ÀÌ¹ÌÁö
+    private Image dialogueImage; // ï¿½ï¿½È­ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
     [SerializeField]
-    private TextMeshProUGUI dialogueName; // ´ëÈ­ Ä³¸¯ÅÍ ÀÌ¸§
+    private TextMeshProUGUI dialogueName; // ï¿½ï¿½È­ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½
     [SerializeField]
-    private TextMeshProUGUI dialogueContent; // ´ëÈ­ ³»¿ë
+    private TextMeshProUGUI dialogueContent; // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½
     [SerializeField]
     private Button printSpeed;
     [SerializeField]
@@ -26,16 +26,16 @@ public class Dialogue : MonoBehaviour
 
     [Header("Option")]
     [SerializeField]
-    private string dialogueType; // ´ÙÀÌ¾ó·Î±× Å¸ÀÔ (±æÀÌ)
+    private string dialogueType; // ï¿½ï¿½ï¿½Ì¾ï¿½Î±ï¿½ Å¸ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½)
     [SerializeField]
-    private float typingSpeed = 0.03f; // ´ëÈ­ Ãâ·Â ¼Óµµ
+    private float typingSpeed = 0.03f; // ï¿½ï¿½È­ ï¿½ï¿½ï¿½ ï¿½Óµï¿½
 
     [Header("Data")]
-    public bool isDialogue; // ´ëÈ­Ã¢ Ç¥½Ã ¿©ºÎ
-    private List<Dictionary<string, object>> data_Dialogue; // csv ÆÄÀÏ ´ãÀ» º¯¼ö
-    public int DialogueNumber; // Ãâ·ÂÇÒ ´ëÈ­ÀÇ ¹øÈ£
-    private float dialogueTime; // ´ëÈ­ÀÇ ±æÀÌ (WaitforSeconds ÀÔ·Â º¯¼ö)
-    private int dialogueIsContinuous; // ÀÌ¾îÁö´Â ´ëÈ­°¡ ÀÖ´ÂÁö È®ÀÎÇÒ º¯¼ö
+    public bool isDialogue; // ï¿½ï¿½È­Ã¢ Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private List<Dictionary<string, object>> data_Dialogue; // csv ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public int DialogueNumber; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½È£
+    private float dialogueTime; // ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (WaitforSeconds ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    private int dialogueIsContinuous; // ï¿½Ì¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
     // Start is called before the first frame update
@@ -50,11 +50,11 @@ public class Dialogue : MonoBehaviour
         
     }
 
-    // ÇÊ¿äÇÑ ÇÔ¼ö
+    // ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     #region
     public void PrintDialogueByNumber(int _DialogueNumber) 
     {
-        // Ãâ·ÂÇÒ ´ëÈ­ ¹øÈ£(csv ÆÄÀÏ ±âÁØ)¸¦ ÀÔ·Â°ªÀ¸·Î ¹Þ´Â ´ëÈ­ Ãâ·Â ÇÔ¼ö
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½È£(csv ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô·Â°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
         DialogueNumber = _DialogueNumber;
 
         if (isDialogue)
@@ -67,17 +67,17 @@ public class Dialogue : MonoBehaviour
             }
             string Name = data_Dialogue[DialogueNumber]["Character Name"].ToString();
 
-            // ÀÌ¸§ º¯°æ
+            // ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
             dialogueName.text = Name;
 
             dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
             dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
 
-            // ÀÌ¹ÌÁö º¯°æ
+            // ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             if (dialogueType == "Long") ChangeImage(Name);
 
             Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
-            // ³»¿ë º¯°æ
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             StartCoroutine("TypeText");
         }
         else
@@ -89,29 +89,27 @@ public class Dialogue : MonoBehaviour
 
     public void PrintDialogueByKeyword(string _keyword)
     {
-        // Å°¿öµå¸¦ ÀÔ·Â°ªÀ¸·Î ¹Þ´Â ´ëÈ­ Ãâ·Â ÇÔ¼ö
+        // Å°ï¿½ï¿½ï¿½å¸¦ ï¿½Ô·Â°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 
     }
 
     private void Init()
     {
-        // ´ÙÀÌ¾ó·Î±× Å¸ÀÔ (±æÀÌ) ¿¡ ¸ÂÃç ÀûÇÕÇÑ csv È£Ãâ
-        if (dialogueType == "Short") data_Dialogue = CSVReader.Read("Data (.csv)/Announce"); // ÀÎ°ÔÀÓ ³»ÀÇ ¾È³» ¸Þ¼¼Áö
-        if (dialogueType == "Long") data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); // ½Ã³ª¸®¿À¿ë ´ë»ç
+        if (dialogueType == "Short") data_Dialogue = CSVReader.Read("Data (.csv)/Announce"); 
+        if (dialogueType == "Long") data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue"); 
 
         dialogue.SetActive(false);
     }
     
     private void ChangeImage(string Name)
     {
-        // Àü´Þ¹ÞÀº ÀÌ¸§¿¡ µû¶ó »ç¿ë ÀÌ¹ÌÁö ÃÊ±âÈ­
         switch (Name)
         {
-            case "µ¥ºó":
+            case "ï¿½ï¿½ï¿½ï¿½":
                 dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin/Devin", typeof(Sprite)) as Sprite;
                 dialogueImage.color = new Color(255, 255, 255, 255);
                 break;
-            case "ÀÛ¾÷°ü¸®ÀÚ":
+            case "ï¿½Û¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½":
                 dialogueImage.sprite = null;
                 dialogueImage.color = new Color(0, 0, 0, 0);
                 break;
@@ -124,34 +122,34 @@ public class Dialogue : MonoBehaviour
     }
     #endregion
 
-    // ¹öÆ° ÀÛµ¿ ÇÔ¼ö
+    // ï¿½ï¿½Æ° ï¿½Ûµï¿½ ï¿½Ô¼ï¿½
     #region
-    // ¿ÀÅä ¼³Á¤
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void Auto() { UIManager.instance.isAuto = !UIManager.instance.isAuto; }
-    // 2¹è ¼³Á¤
+    // 2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void PrintSpeed() { UIManager.instance.printSpeed = UIManager.instance.printSpeed == 1 ? 2 : 1; }
 
-    public void SkipAndNext() // ´ëÈ­ ½ºÅµ, ³Ñ±â±â
+    public void SkipAndNext() // ï¿½ï¿½È­ ï¿½ï¿½Åµ, ï¿½Ñ±ï¿½ï¿½
     {
         if (!UIManager.instance.isCompletelyPrinted)
         {
-            // ¿ÂÀüÈ÷ Ãâ·ÂµÇÁö ¾ÊÀº »óÅÂ. (Skip)
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Âµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. (Skip)
         }
         else
         {
-            // ¸ðµç ³»¿ëÀÌ Ãâ·ÂµÈ »óÅÂ (Next)
+            // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Âµï¿½ ï¿½ï¿½ï¿½ï¿½ (Next)
             UIManager.instance.doNext = true;
         }
     }
     #endregion
 
-    // ÇÊ¿äÇÑ ÄÚ·çÆ¾
+    // ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾
     #region
     IEnumerator TypeText()
     {
         UIManager.instance.isCompletelyPrinted = false;
-        // Ãâ·Â °úÁ¤
-        // ¹®ÀÚ¿­À» Â÷·Ê´ë·Î ÀÔ·ÂÇÏ´Â ÄÚ·çÆ¾
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ê´ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾
         for (int i = 0; i <= data_Dialogue[DialogueNumber]["Contents"].ToString().Length; i++)
         {
             ;
@@ -160,13 +158,13 @@ public class Dialogue : MonoBehaviour
         }
 
         UIManager.instance.isCompletelyPrinted = true;
-        // Ãâ·ÂÀÌ ´Ù µÈ ÈÄ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½
 
         if (!UIManager.instance.isAuto)
         {
-            // ¼öµ¿ ³Ñ±â±â
-            // RunLoop ¶ó´Â ¹«ÇÑ·çÇÁ ÄÚ·çÆ¾ ½ÃÀÛ
-            // Dialogue UI¿¡¼­ Next¸¦ ½ÇÇàÇÏ¸é ·çÇÁ°¡ Á¾·áµÇ¸ç ´ÙÀ½ ³Ñ¾î°¨
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½
+            // RunLoop ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
+            // Dialogue UIï¿½ï¿½ï¿½ï¿½ Nextï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¨
             yield return StartCoroutine("RunLoop");
         }
         else 
