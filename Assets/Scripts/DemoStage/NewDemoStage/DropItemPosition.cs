@@ -24,7 +24,9 @@ public class DropItemPosition : MonoBehaviour
         ChangeWeaponStatic,
         ChangeWeaponStreamOfEdge,
         SkillBomb,
-        SkillHeilcopter
+        SkillHeilcopter,
+        SkillTurret,
+        SkillRandom,
     }
     
     //떨어지는 무기교체 아이템들
@@ -44,6 +46,7 @@ public class DropItemPosition : MonoBehaviour
     //스킬아이템들
     [SerializeField] private GameObject SkillBomb;
     [SerializeField] private GameObject SkillHeilcopter;
+    [SerializeField] private GameObject SkillTurret;
     
     
     // Start is called before the first frame update
@@ -126,6 +129,17 @@ public class DropItemPosition : MonoBehaviour
                 break;
             case ItemList.SkillHeilcopter:
                 Item = Instantiate(SkillHeilcopter, DropPosition.transform.position, DropPosition.transform.rotation);
+                break;
+            case ItemList.SkillRandom:
+                int i = Random.Range(0, 3);
+                if(i == 0)
+                    Item = Instantiate(SkillBomb, DropPosition.transform.position, DropPosition.transform.rotation);
+                else if(i == 1)
+                    Item = Instantiate(SkillHeilcopter, DropPosition.transform.position, DropPosition.transform.rotation);
+                else if(i == 2)
+                    Item = Instantiate(SkillTurret, DropPosition.transform.position, DropPosition.transform.rotation);
+                else
+                    Item = Instantiate(SkillTurret, DropPosition.transform.position, DropPosition.transform.rotation);
                 break;
             default:
                 Debug.LogError("ItemDrop 인자 오류");

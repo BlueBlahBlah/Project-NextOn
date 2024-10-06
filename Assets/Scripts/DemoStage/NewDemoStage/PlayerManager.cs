@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,8 +44,9 @@ public class PlayerManager : MonoBehaviour
     
     public DropItemPosition _dropItemPosition;
 
-    
-    
+
+    public int revive;      //부활 횟수
+    private bool revive_decrease_once;      //부활 횟수를 1만 줄이기 위한 변수
     
     private void Awake()
     {
@@ -86,7 +88,91 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player_LongWeapon = GameObject.Find("Check_Sprite_Long");
+        player_NonWeapon = GameObject.Find("Check_Sprite");
+        player_CloseWeapon = GameObject.Find("Check_Sprite_Short");
+
+        // 각 무기 리스트에 추가할 오브젝트 이름
+        string[] longWeaponNames = {
+            "FlameGun",
+            "SM_Wep_MachineGun_01",
+            "SM_Wep_Grenade_Launcher_01",
+            "SM_Wep_Sniper_Mil_01",
+            "SM_Wep_Rifle_Assault_01",
+            "SM_Wep_Shotgun_01"
+        };
+
+        string[] closeWeaponNames = {
+            "SwordStatic",
+            "SwordStreamOfEgde",
+            "SwordSilver",
+            "SwordDemacia",
+            "FantasyAxe_Unity"
+        };
+
+        // parent 오브젝트 찾기
+        player_LongWeapon = GameObject.Find("Check_Sprite_Long");
+        player_NonWeapon = GameObject.Find("Check_Sprite");
+        player_CloseWeapon = GameObject.Find("Check_Sprite_Short");
+
+        // 모든 자식 오브젝트들 가져오기
+        Transform[] longWeaponChildren = player_LongWeapon.GetComponentsInChildren<Transform>(true);
+        Transform[] closeWeaponChildren = player_CloseWeapon.GetComponentsInChildren<Transform>(true);
+
+        // longWeapon 자식 중 무기 이름과 일치하는 오브젝트 추가
+        foreach (string weaponName in longWeaponNames)
+        {
+            foreach (Transform child in longWeaponChildren)
+            {
+                if (child.name == weaponName)
+                {
+                    player_WeaponList.Add(child.gameObject);
+                    break;
+                }
+            }
+        }
+
+        // closeWeapon 자식 중 무기 이름과 일치하는 오브젝트 추가
+        foreach (string weaponName in closeWeaponNames)
+        {
+            foreach (Transform child in closeWeaponChildren)
+            {
+                if (child.name == weaponName)
+                {
+                    player_WeaponList.Add(child.gameObject);
+                    break;
+                }
+            }
+        }
+
+
+        // player_NonWeapon과 같은 깊이의(같은 부모를 가진) 오브젝트를 찾음
+        Transform parentTransform = player_NonWeapon.transform.parent;
+
+        // 부모의 자식 오브젝트들 중 DropItemPosition을 가지고 있는 오브젝트 찾기
+        foreach (Transform sibling in parentTransform)
+        {
+            DropItemPosition dropItemPosition = sibling.GetComponent<DropItemPosition>();
+    
+            if (dropItemPosition != null)
+            {
+                // DropItemPosition을 가진 오브젝트를 찾았을 때 _dropItemPosition에 연결
+                _dropItemPosition = dropItemPosition;
+                break;
+            }
+        }
         
+        int i;
+        for (i=0; i < player_WeaponList.Count; i++)
+        {
+            player_WeaponList[i].SetActive(false);
+        }
+        
+        player_LongWeapon.SetActive(false);
+        player_CloseWeapon.SetActive(false);
+
+        revive = 3;
+        revive_decrease_once = false;
     }
 
     
@@ -97,6 +183,21 @@ public class PlayerManager : MonoBehaviour
         if (Health <= 0)        //체력이 다 닳은 경우
         {
             Health = 0;         //체력바가 길어지는 것을 방지
+            if (revive_decrease_once == false)
+            {
+                revive_decrease_once = true;
+                revive -= 1;
+                if(revive >= 1)
+                    revive_Health_Invoke();
+                else if (revive == 0)
+                {
+                    //진짜 끝남
+                    EventManager.Instance.fadeout();
+                    //씬 이동하는 코드
+                }
+            }
+            
+            
         }
         
         //현재 총기류를 먹은경우
@@ -111,7 +212,28 @@ public class PlayerManager : MonoBehaviour
             //잔탄의 수를 무한대로 하는 코드
         }
     }
+
     
+    public void find_attackBtn_Invoke()
+    {
+        Invoke("find_attackBtn",3f);
+    }
+    private void find_attackBtn()
+    {
+       attackBtn = GameObject.Find("FireBtn").GetComponent<Button>();
+    }
+
+    private void revive_Health_Invoke()
+    {
+        Invoke("revive_Health",5.5f);
+    }
+
+    public void revive_Health()
+    {
+        Health = 100;
+        revive_decrease_once = false;
+        Death = false;
+    }
     public void ChangeWeapon(WeaponType Wt, GameObject Weapon)
     {
         //모델링 활성화

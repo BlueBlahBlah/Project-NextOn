@@ -11,6 +11,7 @@ public class SwordStaticSkill : MonoBehaviour
     {
         Damage = 10;
         Invoke("Attack",1f);
+        
         Destroy(gameObject,3f);
     }
 
@@ -22,6 +23,7 @@ public class SwordStaticSkill : MonoBehaviour
 
    void Attack()
     {
+        PlayerSoundManager.Instance.Static_Skill_Land_Sound();
         int TempDamage = DamageManager.Instance.SwordStatic_Skill_DamageCounting * Damage;
         //전달받은 몬스터를 중심으로 맞닿은 물체 탐색
         Collider[] colliders = Physics.OverlapBox(

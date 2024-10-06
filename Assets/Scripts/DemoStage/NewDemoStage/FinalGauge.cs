@@ -43,6 +43,9 @@ public class FinalGauge : MonoBehaviour
         {
             LastPeizDone = true;
             EventManager.Instance.PrintMSG();               //다음 대화창
+            EventManager.Instance.CancelBulletSupply();     //탄 보충 아이템 드랍 그만
+            EventManager.Instance.CancelDropItem();         //랜덤 스킬 아이템 드랍 그만
+            EventManager.Instance.fadeout();                //화면 검은색으로
         }
     }
 }
