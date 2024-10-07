@@ -6,16 +6,17 @@ using TMPro;
 
 public class Dialogue : MonoBehaviour
 {
+
     [Header("Dialogue")]
     [Header("Connect")]
     [SerializeField]
-    private GameObject dialogue; // ´ëÈ­Ã¢ ¿ÀºêÁ§Æ®
+    private GameObject dialogue; // å ì™ì˜™í™”ì°½ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸
     [SerializeField]
-    private Image dialogueImage; // ´ëÈ­ Ä³¸¯ÅÍ ÀÌ¹ÌÁö
+    private Image dialogueImage; // å ì™ì˜™í™” ìºå ì™ì˜™å ì™ì˜™ å ì‹±ë±„ì˜™å ì™ì˜™
     [SerializeField]
-    private TextMeshProUGUI dialogueName; // ´ëÈ­ Ä³¸¯ÅÍ ÀÌ¸§
+    private TextMeshProUGUI dialogueName; // å ì™ì˜™í™” ìºå ì™ì˜™å ì™ì˜™ å ì‹±ëªŒì˜™
     [SerializeField]
-    private TextMeshProUGUI dialogueContent; // ´ëÈ­ ³»¿ë
+    private TextMeshProUGUI dialogueContent; // å ì™ì˜™í™” å ì™ì˜™å ì™ì˜™
     [SerializeField]
     private Button printSpeed;
     [SerializeField]
@@ -23,18 +24,18 @@ public class Dialogue : MonoBehaviour
 
     [Header("Option")]
     [SerializeField]
-    private string dialogueType; // ´ÙÀÌ¾ó·Î±× Å¸ÀÔ (±æÀÌ)
+    private string dialogueType; // å ì™ì˜™å ì‹±ì–µì˜™æ…£å  íƒ€å ì™ì˜™ (å ì™ì˜™å ì™ì˜™)
     [SerializeField]
-    private float typingSpeed = 0.03f; // ´ëÈ­ Ãâ·Â ¼Óµµ
+    private float typingSpeed = 0.03f; // å ì™ì˜™í™” å ì™ì˜™å  å ìŒˆë“¸ì˜™
 
     [Header("Data")]
-    public bool isDialogue; // ´ëÈ­Ã¢ Ç¥½Ã ¿©ºÎ
-    private List<Dictionary<string, object>> data_Dialogue; // csv ÆÄÀÏ ´ãÀ» º¯¼ö
-    public int DialogueNumber; // Ãâ·ÂÇÒ ´ëÈ­ÀÇ ¹øÈ£
-    private float dialogueTime; // ´ëÈ­ÀÇ ±æÀÌ (WaitforSeconds ÀÔ·Â º¯¼ö)
-    private int dialogueIsContinuous; // ÀÌ¾îÁö´Â ´ëÈ­°¡ ÀÖ´ÂÁö È®ÀÎÇÒ º¯¼ö
+    public bool isDialogue; // å ì™ì˜™í™”ì°½ í‘œå ì™ì˜™ å ì™ì˜™å ì™ì˜™
+    private List<Dictionary<string, object>> data_Dialogue; // csv å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
+    public int DialogueNumber; // å ì™ì˜™å ì™ì˜™å  å ì™ì˜™í™”å ì™ì˜™ å ì™ì˜™í˜¸
+    private float dialogueTime; // å ì™ì˜™í™”å ì™ì˜™ å ì™ì˜™å ì™ì˜™ (WaitforSeconds å ìŒ‰ë¤„ì˜™ å ì™ì˜™å ì™ì˜™)
+    private int dialogueIsContinuous; // å ì‹±ì–µì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™í™”å ì™ì˜™ å ìŒëŒì˜™å ì™ì˜™ í™•å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 
-    private Coroutine typingCoroutine; // ÇöÀç ½ÇÇà ÁßÀÎ ÄÚ·çÆ¾À» Á¦¾îÇÒ º¯¼ö
+    private Coroutine typingCoroutine; // í˜„ì¬ ì‹¤í–‰ ì¤‘ì¸ ì½”ë£¨í‹´ì„ ì œì–´í•  ë³€ìˆ˜
 
     void Start()
     {
@@ -60,17 +61,17 @@ public class Dialogue : MonoBehaviour
             }
             string Name = data_Dialogue[DialogueNumber]["Character Name"].ToString();
 
-            // ÀÌ¸§ º¯°æ
+            // å ì‹±ëªŒì˜™ å ì™ì˜™å ì™ì˜™
             dialogueName.text = Name;
 
             dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
             dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
 
-            // ÀÌ¹ÌÁö º¯°æ
+            // å ì‹±ë±„ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
             if (dialogueType == "Long") ChangeImage(Name);
 
             Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
-            // ³»¿ë º¯°æ
+            // ë‚´ìš© ë³€ê²½
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
             typingCoroutine = StartCoroutine(TypeText());
         }
@@ -83,7 +84,6 @@ public class Dialogue : MonoBehaviour
 
     public void PrintDialogueByKeyword(string _keyword)
     {
-        // Å°¿öµå¸¦ ÀÔ·Â°ªÀ¸·Î ¹Ş´Â ´ëÈ­ Ãâ·Â ÇÔ¼ö
     }
 
     private void Init()
@@ -98,11 +98,11 @@ public class Dialogue : MonoBehaviour
     {
         switch (Name)
         {
-            case "µ¥ºó":
+            case "å ì™ì˜™å ì™ì˜™":
                 dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin/Devin", typeof(Sprite)) as Sprite;
                 dialogueImage.color = new Color(255, 255, 255, 255);
                 break;
-            case "ÀÛ¾÷°ü¸®ÀÚ":
+            case "å ìŒœì–µì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™":
                 dialogueImage.sprite = null;
                 dialogueImage.color = new Color(0, 0, 0, 0);
                 break;
@@ -113,11 +113,12 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+
     public void Auto()
     {
         UIManager.instance.isAuto = !UIManager.instance.isAuto;
 
-        // ¹öÆ° »ö»ó º¯°æ
+        // ë²„íŠ¼ ìƒ‰ìƒ ë³€ê²½
         ColorBlock colors = auto.colors;
         colors.normalColor = UIManager.instance.isAuto ? Color.green : Color.white;
         auto.colors = colors;
@@ -127,7 +128,7 @@ public class Dialogue : MonoBehaviour
     {
         UIManager.instance.printSpeed = UIManager.instance.printSpeed == 1 ? 2 : 1;
 
-        // ¹öÆ° »ö»ó º¯°æ
+        // ë²„íŠ¼ ìƒ‰ìƒ ë³€ê²½
         ColorBlock colors = printSpeed.colors;
         colors.normalColor = UIManager.instance.printSpeed == 2 ? Color.green : Color.white;
         printSpeed.colors = colors;
@@ -137,16 +138,16 @@ public class Dialogue : MonoBehaviour
     {
         if (!UIManager.instance.isCompletelyPrinted)
         {
-            // ¿ÂÀüÈ÷ Ãâ·ÂµÇÁö ¾ÊÀº »óÅÂ. (Skip)
+            // ì˜¨ì „íˆ ì¶œë ¥ë˜ì§€ ì•Šì€ ìƒíƒœ. (Skip)
             if (typingCoroutine != null)
             {
-                StopCoroutine(typingCoroutine); // ÇöÀç ½ÇÇà ÁßÀÎ Å¸ÀÌÇÎ ÄÚ·çÆ¾ ÁßÁö
-                StartCoroutine(FinishTyping()); // ³²Àº ÅØ½ºÆ®¸¦ ¸ğµÎ Ãâ·ÂÇÏ´Â ÄÚ·çÆ¾ ½ÃÀÛ
+                StopCoroutine(typingCoroutine); // í˜„ì¬ ì‹¤í–‰ ì¤‘ì¸ íƒ€ì´í•‘ ì½”ë£¨í‹´ ì¤‘ì§€
+                StartCoroutine(FinishTyping()); // ë‚¨ì€ í…ìŠ¤íŠ¸ë¥¼ ëª¨ë‘ ì¶œë ¥í•˜ëŠ” ì½”ë£¨í‹´ ì‹œì‘
             }
         }
         else
         {
-            // ¸ğµç ³»¿ëÀ» ÀÚµ¿À¸·Î Ãâ·ÂµÈ »óÅÂ (Next)
+            // ëª¨ë“  ë‚´ìš©ì„ ìë™ìœ¼ë¡œ ì¶œë ¥ëœ ìƒíƒœ (Next)
             UIManager.instance.doNext = true;
         }
     }
@@ -155,7 +156,7 @@ public class Dialogue : MonoBehaviour
     {
         UIManager.instance.isCompletelyPrinted = false;
 
-        // ÅØ½ºÆ® Ãâ·Â ½ÃÀÛ ½Ã È¿°úÀ½ Àç»ı
+        // í…ìŠ¤íŠ¸ ì¶œë ¥ ì‹œì‘ ì‹œ íš¨ê³¼ìŒ ì¬ìƒ
         SoundManager.instance.PlayEffectSound("TypeSound", 0.3f);
 
         string content = data_Dialogue[DialogueNumber]["Contents"].ToString();
@@ -192,10 +193,10 @@ public class Dialogue : MonoBehaviour
     IEnumerator FinishTyping()
     {
         string content = data_Dialogue[DialogueNumber]["Contents"].ToString();
-        dialogueContent.text = content; // ¸ğµç ³»¿ëÀ» ÇÑ ¹ø¿¡ Ãâ·Â
+        dialogueContent.text = content; // ëª¨ë“  ë‚´ìš©ì„ í•œ ë²ˆì— ì¶œë ¥
         UIManager.instance.isCompletelyPrinted = true;
 
-        // Å¸ÀÌÇÎÀÌ ¿Ï·áµÇ¾ú°Å³ª ½ºÅµ ½Ã È¿°úÀ½ ÁßÁö
+        // íƒ€ì´í•‘ì´ ì™„ë£Œë˜ì—ˆê±°ë‚˜ ìŠ¤í‚µ ì‹œ íš¨ê³¼ìŒ ì¤‘ì§€
         SoundManager.instance.StopEffects();
 
         if (UIManager.instance.isAuto)
