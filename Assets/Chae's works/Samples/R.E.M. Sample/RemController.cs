@@ -33,6 +33,22 @@ public class RemController : MonoBehaviour
     public GameObject REM_AttackLaser;
     public GameObject REM_Debuff;
 
+    [Header("EnemyDetect")]
+    public float detectionRadius = 5f; // 감지할 범위의 반지름
+    public LayerMask enemyLayerMask;   // 감지할 Enemy 레이어
+
+    [Header("Adjustment")]
+    [SerializeField] 
+    private int healUsageCount = 0;
+    [SerializeField] 
+    private int shieldUsageCount = 0;
+    [SerializeField] 
+    private int attackUsageCount = 0;
+    [SerializeField] 
+    private int debuffUsageCount = 0;
+
+    private const float maxAdjustment = 3.0f; // 보정값의 최대치
+
     void Start()
     {
         remAction = this.gameObject.GetComponent<RemAction>();
@@ -46,29 +62,30 @@ public class RemController : MonoBehaviour
         /// 아래의 RemTestManeger.instance 등을 PlayerManager.instance로 변경해야함 
         ///
         /////////////////////////////////////////////
-        ///
+        
+
         actions.Add(new UtilityAction(
             "Heal",
-            () => 50, // RemTestManager.instance.hp < 50 ? 1.0f / RemTestManager.instance.hp : 0, // 체력이 낮을수록 유틸리티 증가
-            () => remAction.Heal()
+            () => CalculateHealUtility(),
+            () => { healUsageCount++; remAction.Heal(); }
             ));
 
         actions.Add(new UtilityAction(
             "DeployShield",
-            () => 50, // RemTestManager.instance.hp < 90 ? (100 - RemTestManager.instance.hp) / 50.0f : 0, // 체력이 50% 이하일 때 유틸리티 증가
-            () => remAction.DeployShield()
+            () => CalculateDeployShieldUtility(),
+            () => { shieldUsageCount++; remAction.DeployShield(); }
             ));
 
         actions.Add(new UtilityAction(
             "Attack",
-            () => 50, // (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 80.0f : 0, // 적이 가까울 때 유틸리티 증가
-            () => remAction.Attack()
+            () => CalculateDebuffUtility(),
+            () => { attackUsageCount++; remAction.Attack(); }
             ));
 
         actions.Add(new UtilityAction(
             "Debuff",
-            () => 0, // (RemTestManager.instance.isNear && RemTestManager.instance.hp >= 90) ? 79.0f : 0,
-            () => remAction.Debuff()
+            () => CalculateDebuffUtility(),
+            () => { debuffUsageCount++; remAction.Debuff(); }
             ));
     }
 
@@ -88,6 +105,8 @@ public class RemController : MonoBehaviour
         {
             MoveTowardsTarget();
         }
+
+        DetectEnemies();
     }
 
     void SelectAndExecuteBestAction()
@@ -141,5 +160,66 @@ public class RemController : MonoBehaviour
         Vector3 newPosition = transform.position;
         newPosition.y = Target.transform.position.y + 1.0f + floatOffset;
         transform.position = newPosition;
+    }
+
+    void DetectEnemies()
+    {
+        // LayerMask를 이용해 특정 레이어의 오브젝트만 검색
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayerMask);
+
+        // 감지된 오브젝트의 수를 셈
+        int enemyCount = hitColliders.Length;
+
+        // 결과를 출력하거나 원하는 동작을 수행
+        Debug.Log("Number of Enemies detected: " + enemyCount);
+    }
+
+    // 감지 범위를 시각적으로 표시 (선택 사항)
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
+    // 유틸리티 계산 함수들
+    float CalculateHealUtility()
+    {
+        //float baseUtility = PlayerManager.instance.hp < 50 ? (1.0f / PlayerManager.instance.hp) * 100 : 0;
+        float adjustment = Mathf.Min(0.1f * (healUsageCount * 0.2f) * (healUsageCount * 0.2f), maxAdjustment);// 사용 횟수에 비례한 보정값
+        //return baseUtility + adjustment;
+
+        Debug.Log(50 + adjustment);
+        return 50 + adjustment; // 임시값
+    }
+
+    float CalculateDeployShieldUtility()
+    {
+        //float baseUtility = PlayerManager.instance.hp < 90 ? (100 - PlayerManager.instance.hp) / 50.0f * 100 : 0;
+        float adjustment = Mathf.Min(0.1f * (shieldUsageCount * 0.2f) * (shieldUsageCount * 0.2f), maxAdjustment);// 사용 횟수에 비례한 보정값
+        //return baseUtility + adjustment;
+
+        Debug.Log(50 + adjustment);
+        return 50 + adjustment; // 임시값
+    }
+
+    float CalculateAttackUtility()
+    {
+        //bool isNear = PlayerManager.instance.isNear;
+        //float baseUtility = (isNear && PlayerManager.instance.hp >= 90) ? 80.0f : 0;
+        float adjustment = Mathf.Min(0.1f * (attackUsageCount * 0.2f) * (attackUsageCount * 0.2f), maxAdjustment);// 사용 횟수에 비례한 보정값
+        //return baseUtility + adjustment;
+
+        Debug.Log(50 + adjustment);
+        return 50 + adjustment; // 임시값
+    }
+
+    float CalculateDebuffUtility()
+    {
+        //bool isNear = PlayerManager.instance.isNear;
+        //float baseUtility = (isNear && PlayerManager.instance.hp >= 90) ? 79.0f : 0;
+        //float adjustment = Mathf.Min(debuffUsageCount * 0.1f, maxAdjustment); // 사용 횟수에 비례한 보정값
+        //return baseUtility + adjustment;
+
+        return 0; // 임시값
     }
 }

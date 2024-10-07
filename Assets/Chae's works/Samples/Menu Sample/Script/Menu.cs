@@ -13,7 +13,7 @@ public class Menu : MonoBehaviour
         SceneContainer.instance.currentScene = "Menu Scene";
         SceneContainer.instance.nextScene = "Scenario1 Scene";
 
-        // Invoke("PlayBGM", 4);
+        Invoke("PlayBGM", 4);
     }
 
 
