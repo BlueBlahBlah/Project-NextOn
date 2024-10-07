@@ -19,6 +19,7 @@ public class StreamOfEdge3 : MonoBehaviour
         // 초기 목표지점 설정
         //currentTarget = Sphere2.transform;
         Damage = 1;    //기본 스킬 데미지
+        PlayerSoundManager.Instance.StreamOfEdge_Skill_Sound();
     }
 
     // Update is called once per frame

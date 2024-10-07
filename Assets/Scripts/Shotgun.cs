@@ -37,6 +37,7 @@ public class Shotgun : MonoBehaviour
         {
             // 버튼이 눌렸을 때 발사
             Shoot();
+            PlayerSoundManager.Instance.ShootGun_Shoot_Sound();
         }
         else
         {
@@ -44,7 +45,7 @@ public class Shotgun : MonoBehaviour
             {
                 // 탄알이 없을 때의 처리 (e.g., 재장전 등)
                 Debug.Log("탄알이 없습니다!");
-                GameObject.Find("Character_GhillieSuit_01 RifleTest").GetComponent<PlayerScriptRifle>().reloaing = true;     //재장전중으로 수정
+                GameObject.Find("Check_Sprite_Long").GetComponent<PlayerScriptRifle>().reloaing = true;     //재장전중으로 수정
                 nowReloading = true;
             }
             //재장전 중인데 버튼 연타시 많이 재장전 됨을 방지
