@@ -9,7 +9,6 @@ public class ProbDestroy : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Untagged"))
         {
-            Debug.Log(collision.gameObject.tag);
             // 충돌이 발생하면 3초 뒤에 오브젝트를 삭제
             StartCoroutine(DestroyAfterDelay());
         }

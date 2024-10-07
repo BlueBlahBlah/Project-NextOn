@@ -5,14 +5,21 @@ using UnityEngine;
 public class DoorTrigger : MonoBehaviour
 {
     public Vector3 m_Position;
-    public bool m_IsGrounded;
 
     private GameObject Door;
     private Coroutine m_ReturnCoroutine;
     private MeshCollider[] ColliderS;
     private void Start()
     {
-        Door = gameObject.transform.GetChild(0).gameObject;
+        if(this.transform.childCount > 1)
+        {
+            Door = gameObject.transform.GetChild(2).gameObject;
+        }
+        else
+        {
+            Door = gameObject.transform.GetChild(0).gameObject;
+        }
+
         ColliderS = gameObject.GetComponents<MeshCollider>();
         m_Position = Door.transform.position;
     }
