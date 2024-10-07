@@ -172,8 +172,7 @@ public class MonsterManager : MonoBehaviour
             if (allMonstersDestroyed == true)
             {
                 Second_Monsters_Clear = true;
-                //EventManager.Instance.PrintMSG();      //다음대화로
-                //두번째 몬스터들(스킬사용부분)은 모두 처치해도 대화창 등장하지 않게
+                EventManager.Instance.PrintMSG();      //다음대화로
             }
         }
 
@@ -192,7 +191,7 @@ public class MonsterManager : MonoBehaviour
             if (allMonstersDestroyed == true)
             {
                 Third_Monsters_Clear = true;
-
+                EventManager.Instance.PrintMSG();   
             }
         }
 

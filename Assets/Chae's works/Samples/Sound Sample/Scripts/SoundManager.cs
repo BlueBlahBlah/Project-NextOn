@@ -5,15 +5,17 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    public AudioSource effectsSource;
     public AudioSource musicSource;
 
     public bool isBgmMute;
     public bool isSEMute;
 
+    private List<AudioSource> activeEffectsSources = new List<AudioSource>();
+    private Dictionary<AudioSource, float> originalVolumes = new Dictionary<AudioSource, float>();
+
     void Awake()
     {
-        // Singleton ÆÐÅÏ
+        // Singleton íŒ¨í„´
         if (instance == null)
         {
             instance = this;
@@ -25,13 +27,21 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ´Ü¹ß¼º »ç¿îµå Àç»ý ¸Þ¼­µå (SE µð·ºÅä¸®)
-    public void PlayEffectSound(string clipName)
+    // ï¿½Ü¹ß¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ (SE ï¿½ï¿½ï¿½ä¸®) - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public void PlayEffectSound(string clipName, float volume = 1.0f)
     {
         AudioClip clip = Resources.Load<AudioClip>("Sound/SE/" + clipName);
         if (clip != null)
         {
-            effectsSource.PlayOneShot(clip);
+            AudioSource effectSource = gameObject.AddComponent<AudioSource>();
+            effectSource.clip = clip;
+            effectSource.volume = volume;  // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            effectSource.Play();
+
+            activeEffectsSources.Add(effectSource);
+            originalVolumes[effectSource] = volume; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+            StartCoroutine(RemoveSourceWhenDone(effectSource));
         }
         else
         {
@@ -39,7 +49,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ¹è°æÀ½¾Ç Àç»ý ¸Þ¼­µå (BGM µð·ºÅä¸®)
+    // ë°°ê²½ìŒì•… ìž¬ìƒ ë©”ì„œë“œ (BGM ë””ë ‰í† ë¦¬)
     public void PlayMusic(string clipName)
     {
         string path = "Sound/BGM/" + clipName;
@@ -50,8 +60,8 @@ public class SoundManager : MonoBehaviour
         {
             Debug.Log("Successfully loaded music clip: " + clipName);
             musicSource.clip = clip;
-            musicSource.loop = true; // ¹Ýº¹ Àç»ý ¼³Á¤
-            musicSource.volume = Mathf.Clamp(musicSource.volume, 0f, 0.3f); // º¼·ý Á¦ÇÑ
+            musicSource.loop = true; // ë°˜ë³µ ìž¬ìƒ ì„¤ì •
+            musicSource.volume = Mathf.Clamp(musicSource.volume, 0f, 0.3f); // ë³¼ë¥¨ ì œí•œ
             musicSource.Play();
         }
         else
@@ -60,10 +70,18 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-
-    public void SetEffectsVolume(float volume)
+    // È¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
+    public void SetEffectsVolume(float scale)
     {
-        effectsSource.volume = volume;
+        scale = Mathf.Clamp(scale, 0f, 1f); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (0~1)
+
+        foreach (AudioSource source in activeEffectsSources)
+        {
+            if (originalVolumes.TryGetValue(source, out float originalVolume))
+            {
+                source.volume = originalVolume * scale;
+            }
+        }
     }
 
     public void SetMusicVolume(float volume)
@@ -73,12 +91,31 @@ public class SoundManager : MonoBehaviour
 
     public void StopEffects()
     {
-        effectsSource.Stop();
+        foreach (AudioSource source in activeEffectsSources)
+        {
+            source.Stop();
+            Destroy(source);
+        }
+        activeEffectsSources.Clear();
+        originalVolumes.Clear();
     }
 
     public void StopMusic()
     {
         musicSource.Stop();
     }
-}
 
+    private IEnumerator RemoveSourceWhenDone(AudioSource source)
+    {
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        yield return new WaitUntil(() => source == null || !source.isPlaying);
+
+        if (source != null) // ï¿½Ò½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+        {
+            activeEffectsSources.Remove(source);
+            originalVolumes.Remove(source);
+            Destroy(source);
+        }
+    }
+
+}

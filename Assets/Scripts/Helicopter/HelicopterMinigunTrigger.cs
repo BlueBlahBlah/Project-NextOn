@@ -24,6 +24,7 @@ public class HelicopterMinigunTrigger : MonoBehaviour
     
     private void Start()
     {
+        Helicopter = GameObject.Find("MSH_N2_LE_Prefab");
         helicopterMinigunParticle = GameObject.Find("ParticleArea").GetComponent<HelicopterMinigunParticle>();
         LeftMuzzle = GameObject.Find("HelLeftMuzzles");
         RightMuzzle = GameObject.Find("HelRightMuzzles");
@@ -52,6 +53,8 @@ public class HelicopterMinigunTrigger : MonoBehaviour
             {
                 spline.Play();  // 헬기 이동 시작
                 helicopterMinigunParticle.ParticleStart();  // 헬기 탄 이펙트 시작
+                PlayerSoundManager.Instance.Heli_Plane_Sound();
+                PlayerSoundManager.Instance.Heli_Shoot_Sound();
                 //LeftMuzzle.SetActive(true);  // 좌측 총구 시작
                 //RightMuzzle.SetActive(true);  // 우측 총구 시작
                 Helicopter.transform.rotation = Quaternion.Euler(20f, -90f, 0f);  // 헬기 방향 조정

@@ -17,7 +17,7 @@ public class BomberSkill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
@@ -34,6 +34,7 @@ public class BomberSkill : MonoBehaviour
 
     IEnumerator MoveAndReturn()
     {
+        PlayerSoundManager.Instance.Bomb_Plane_Sound();
         // 일정 시간 동안 전진
         float elapsed = 0f;
         float timeBetweenWarheads = 0.5f;

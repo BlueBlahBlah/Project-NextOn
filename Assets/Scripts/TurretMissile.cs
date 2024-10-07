@@ -20,6 +20,7 @@ public class TurretMissile : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        PlayerSoundManager.Instance.Turrent_Explosion_Sound();
         int TempDamage = DamageManager.Instance.Turret_Skill_DamageCounting * Damage;
         if (other.CompareTag("Enemy"))
         {

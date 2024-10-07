@@ -407,8 +407,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 82b473859b01c324096754c88cb22470, type: 2}
-  m_sharedMaterial: {fileID: 7309914173979958177, guid: 82b473859b01c324096754c88cb22470, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 89ff0641cf2dc2b429c5c63a228550de, type: 2}
+  m_sharedMaterial: {fileID: 7029026582173735897, guid: 89ff0641cf2dc2b429c5c63a228550de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -541,8 +541,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uCE90\uB9AD\uD130 \uC774\uB984"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 82b473859b01c324096754c88cb22470, type: 2}
-  m_sharedMaterial: {fileID: 7309914173979958177, guid: 82b473859b01c324096754c88cb22470, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 89ff0641cf2dc2b429c5c63a228550de, type: 2}
+  m_sharedMaterial: {fileID: 7029026582173735897, guid: 89ff0641cf2dc2b429c5c63a228550de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1126,8 +1126,8 @@ MonoBehaviour:
   dialogueImage: {fileID: 4108133511552641807}
   dialogueName: {fileID: 6777401820739960343}
   dialogueContent: {fileID: 6752271923940195602}
-  printSpeed: {fileID: 0}
-  auto: {fileID: 0}
+  printSpeed: {fileID: 9000448173153908978}
+  auto: {fileID: 7558398168160373241}
   dialogueType: Long
   typingSpeed: 0.03
   isDialogue: 0

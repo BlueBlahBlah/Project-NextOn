@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class BulletSupply : MonoBehaviour
 {
+
+    [SerializeField] private Rifle rifle;
+    [SerializeField] private Shotgun shotgun;
+    [SerializeField] private Sniper sniper;
+    [SerializeField] private GrenadeLauncher grenadeLauncher;
+    [SerializeField] private MachineGun machineGun;
+
+    [SerializeField] private FireGun fireGun;
     // Start is called before the first frame update
     void Start()
     {
-        
+        /*rifle = GameObject.FindObjectOfType<Rifle>();
+        shotgun = GameObject.FindObjectOfType<Shotgun>();
+        sniper = GameObject.FindObjectOfType<Sniper>();
+        grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
+        machineGun = GameObject.FindObjectOfType<MachineGun>();
+        fireGun = GameObject.FindObjectOfType<FireGun>();*/
     }
 
     // Update is called once per frame
@@ -21,34 +34,29 @@ public class BulletSupply : MonoBehaviour
         // 충돌한 물체가 Player 태그를 가진 경우
         if (other.CompareTag("Player"))
         {
-            Rifle rifle = GameObject.FindObjectOfType<Rifle>();
-            Shotgun shotgun = GameObject.FindObjectOfType<Shotgun>();
-            Sniper sniper = GameObject.FindObjectOfType<Sniper>();
-            GrenadeLauncher grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
-            MachineGun machineGun = GameObject.FindObjectOfType<MachineGun>();
-            FireGun fireGun = GameObject.FindObjectOfType<FireGun>();
+           
             if (rifle != null && rifle.gameObject.activeSelf)
             {
                 Debug.Log("라이플 탄약보충");
-                rifle.maxBulletCount += 30; // 30발 추가
+                rifle.maxBulletCount += 60; // 60발 추가
             }
 
             if (shotgun != null && shotgun.gameObject.activeSelf)
             {
                 Debug.Log("샷건 탄약보충");
-                shotgun.maxBulletCount += 30; // 30발 추가
+                shotgun.maxBulletCount += 60; // 60발 추가
             }
 
             if (sniper != null && sniper.gameObject.activeSelf)
             {
                 Debug.Log("저격총 탄약보충");
-                sniper.maxBulletCount += 1; // 30발 추가
+                sniper.maxBulletCount += 10; // 10발 추가
             }
 
             if (grenadeLauncher != null && grenadeLauncher.gameObject.activeSelf)
             {
                 Debug.Log("유탄발사기 탄약보충");
-                grenadeLauncher.maxBulletCount += 30; // 30발 추가
+                grenadeLauncher.maxBulletCount += 60; // 60발 추가
             }
 
             if (machineGun != null && machineGun.gameObject.activeSelf)
