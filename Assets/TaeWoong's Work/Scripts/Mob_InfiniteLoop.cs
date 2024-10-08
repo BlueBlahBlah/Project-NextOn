@@ -9,10 +9,10 @@ public class MobInfiniteLoop : MonoBehaviour
     public int maxHealth;
     public int curHealth;
     public Transform target; // 추적 할 타겟
-    public bool isChase; // 추적을 결정하는 bool 변수
+    public bool isChase; // 추적을 결정하는 bool 변수       
     Rigidbody rigid;
     BoxCollider boxCollider;
-    Material mat;
+    // Material mat;
     NavMeshAgent nav; // Nav Agent를 사용하기 위해서는 Nav Mesh 생성 필수
     // NavMesh : NavAgent가 경로를 그리기 위한 바탕(Mesh)
     Animator anim;
@@ -24,10 +24,15 @@ public class MobInfiniteLoop : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         // Enemy 오브젝트의 자식 컴포넌트에 MeshRender가 존재하기에 Children으로 부터 불러오기
-        mat = GetComponentInChildren<MeshRenderer>().material; // Material은 Mesh Render 컴포넌트를 통해서 접근 가능
+        //mat = GetComponentInChildren<MeshRenderer>().material; // Material은 Mesh Render 컴포넌트를 통해서 접근 가능
         nav = GetComponent<NavMeshAgent>();
-        // Enemy 오브젝트의 자식 컴포넌트에 Animator가 존재하기에 Children으로 부터 불러오기
-        anim = GetComponentInChildren<Animator>();
+        // Enemy 오브젝트의 컴포넌트에 Animator가 존재하기에 불러오기
+        anim = GetComponent<Animator>();
+
+        if (anim == null)
+        {
+            Debug.LogError("Animator가 발견되지 않았습니다. Animator를 확인하세요.");
+        }
 
         Invoke("ChaseStart", 1); // 1초 뒤 추적 개시
     }
@@ -87,15 +92,15 @@ public class MobInfiniteLoop : MonoBehaviour
 
    IEnumerator OnDamage(Vector3 reactVec) // 피격 로직을 담을 코루틴 생성
    {
-        mat.color = Color.red; // 피격 시 색상을 Red 로 설정
+        //mat.color = Color.red; // 피격 시 색상을 Red 로 설정
 
         yield return new WaitForSeconds(0.1f); // 피격 딜레이 설정
 
         if(curHealth > 0) {
-            mat.color = Color.white;
+            // mat.color = Color.white;
         }
         else {
-            mat.color = Color.grey;
+            // mat.color = Color.grey;
             gameObject.layer = 13; // Enemy의 죽은 상태인 'EnemyDead' 레이어로 변경
 
             // 처치 시 넉백(사망 리액션) 발생
