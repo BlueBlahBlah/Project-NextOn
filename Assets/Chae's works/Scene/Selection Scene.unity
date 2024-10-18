@@ -2053,6 +2053,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 895878484303807736, guid: f28cb032a4dc91f478c71bde721ca104, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1320700673394668139, guid: f28cb032a4dc91f478c71bde721ca104, type: 3}
       propertyPath: m_Camera
       value: 
@@ -2068,6 +2072,10 @@ PrefabInstance:
     - target: {fileID: 2007646468908261387, guid: f28cb032a4dc91f478c71bde721ca104, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -59.199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901020462835659625, guid: f28cb032a4dc91f478c71bde721ca104, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3446101449521987334, guid: f28cb032a4dc91f478c71bde721ca104, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3000,7 +3008,7 @@ Canvas:
   m_GameObject: {fileID: 1266816979}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 2060581222}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -4922,7 +4930,7 @@ PrefabInstance:
       objectReference: {fileID: 1416568128}
     - target: {fileID: 2695156042036193698, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
       propertyPath: weight
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5827861913366663978, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
       propertyPath: m_IsActive
@@ -4938,7 +4946,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7231917072454230920, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7231917072454230920, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5337,6 +5345,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1522043449699817795, guid: b631eb20b6e4c7f4a831d3e72c54335a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb29ec6068d22d3488ff717b5a270124, type: 2}
     - target: {fileID: 5150015063767341884, guid: b631eb20b6e4c7f4a831d3e72c54335a, type: 3}
       propertyPath: selectCanvas
       value: 
@@ -5470,10 +5482,18 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5150733334644484041, guid: ddd00d8ff0fb0f646a5a7480f222728b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cacbd21917cf79141b73a3180f44afeb, type: 2}
     - target: {fileID: 6748609248734636011, guid: ddd00d8ff0fb0f646a5a7480f222728b, type: 3}
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6748609248734636011, guid: ddd00d8ff0fb0f646a5a7480f222728b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ce0125230f27074b8317ffbdc330189, type: 2}
     - target: {fileID: 6765000293119959697, guid: ddd00d8ff0fb0f646a5a7480f222728b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.42
@@ -5679,6 +5699,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2392648406499156084, guid: 87d54d513630fd642a21dbf87202888f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cba3e54160785f241982384020596599, type: 2}
     - target: {fileID: 4832201602139247203, guid: 87d54d513630fd642a21dbf87202888f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5749,6 +5773,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 723256373}
+  - {fileID: 2060581221}
   - {fileID: 965909961}
   - {fileID: 1354252482}
   - {fileID: 1721740466}
@@ -5756,4 +5781,3 @@ SceneRoots:
   - {fileID: 908210369}
   - {fileID: 1266816983}
   - {fileID: 1165152918}
-  - {fileID: 2060581221}
