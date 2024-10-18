@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SelectUI : MonoBehaviour
 {
@@ -24,9 +25,32 @@ public class SelectUI : MonoBehaviour
             // 새로운 GameObject를 만들고 VolumeController를 추가
             GameObject volumeControllerObject = new GameObject("VolumeController");
             volumeController = volumeControllerObject.AddComponent<VolumeController>();
+
+            
         }
+
+        Invoke("TriggerFadeOut", 0.5f);
     }
 
+    private void OnEnable()
+    {
+        // 씬 변경 시 이벤트 등록
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // 씬 변경 시 이벤트 해제
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Selection Scene")
+        {
+           
+        }
+    }
 
     public void SetStageName(string newStageName)
     {
@@ -65,9 +89,14 @@ public class SelectUI : MonoBehaviour
         Invoke("ChangeScene", 1.5f);
     }
 
+    private void TriggerFadeOut()
+    {
+        volumeController.TriggerFadeOut();
+    }
+
     public void FadeIn()
     {
-        volumeController.TriggerFadeIn();
+        // 까맣게 바뀌기
     }
 
     public void ChangeScene()
