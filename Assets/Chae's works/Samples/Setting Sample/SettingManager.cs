@@ -143,6 +143,6 @@ public class SettingManager : MonoBehaviour
     // UI 기능 관련 함수
     private void GoToMenu()
     {
-
+        // 페이드 아웃 이후 게임 종료
     }
 }
