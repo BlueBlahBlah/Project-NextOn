@@ -39,12 +39,12 @@ public class SettingManager : MonoBehaviour
 
     private void OpenPanel(int panelIndex)
     {
-        StartCoroutine(OpenPanelCoroutine(panelIndex, openButtons[panelIndex].transform as RectTransform));
+        StartCoroutine(OpenPanelCoroutine(panelIndex));
     }
 
     private void ClosePanel(int panelIndex)
     {
-        StartCoroutine(ClosePanelCoroutine(panelIndex, openButtons[panelIndex].transform as RectTransform));
+        StartCoroutine(ClosePanelCoroutine(panelIndex));
     }
     #endregion
 
@@ -93,20 +93,13 @@ public class SettingManager : MonoBehaviour
     */
 
     // 패널 열기 애니메이션
-    private IEnumerator OpenPanelCoroutine(int panelIndex, RectTransform buttonRectTransform)
+    private IEnumerator OpenPanelCoroutine(int panelIndex)
     {
         float elapsedTime = 0f;
         Vector3 startScale = Vector3.zero;
         Vector3 endScale = Vector3.one;
         RectTransform panel = panels[panelIndex];
-        panel.gameObject.SetActive(true);
-
-        // 월드 좌표에서 패널 로컬 좌표로 변환
-        Vector2 buttonPivot = GetButtonPivotInPanel(buttonRectTransform, panel);
-
-        // 원래 피벗을 저장하고 새로운 피벗 설정
-        Vector2 originalPivot = panel.pivot;
-        panel.pivot = buttonPivot;
+        panel.gameObject.SetActive(true); // 패널 활성화
 
         while (elapsedTime < animationDuration)
         {
@@ -117,24 +110,16 @@ public class SettingManager : MonoBehaviour
         }
 
         panel.localScale = endScale;
-        panel.pivot = originalPivot;
     }
 
     // 패널 닫기 애니메이션
-    private IEnumerator ClosePanelCoroutine(int panelIndex, RectTransform buttonRectTransform)
+    private IEnumerator ClosePanelCoroutine(int panelIndex)
     {
         float elapsedTime = 0f;
         Vector3 startScale = Vector3.one;
         Vector3 endScale = Vector3.zero;
         RectTransform panel = panels[panelIndex];
 
-        // 월드 좌표에서 패널 로컬 좌표로 변환
-        Vector2 buttonPivot = GetButtonPivotInPanel(buttonRectTransform, panel);
-
-        // 원래 피벗을 저장하고 새로운 피벗 설정
-        Vector2 originalPivot = panel.pivot;
-        panel.pivot = buttonPivot;
-
         while (elapsedTime < animationDuration)
         {
             float t = elapsedTime / animationDuration;
@@ -144,24 +129,7 @@ public class SettingManager : MonoBehaviour
         }
 
         panel.localScale = endScale;
-        panel.pivot = originalPivot;
         panel.gameObject.SetActive(false); // 패널 비활성화
-    }
-
-    // 버튼의 피벗을 패널 로컬 좌표로 변환
-    private Vector2 GetButtonPivotInPanel(RectTransform buttonRectTransform, RectTransform panelRectTransform)
-    {
-        Vector3[] buttonWorldCorners = new Vector3[4];
-        buttonRectTransform.GetWorldCorners(buttonWorldCorners);
-
-        // 버튼의 중앙점 계산
-        Vector3 buttonCenterWorld = (buttonWorldCorners[0] + buttonWorldCorners[2]) / 2;
-
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(panelRectTransform, buttonCenterWorld, null, out localPoint);
-
-        // 로컬 좌표를 피벗 비율로 변환
-        return new Vector2(localPoint.x / panelRectTransform.rect.width + 0.5f, localPoint.y / panelRectTransform.rect.height + 0.5f);
     }
 
     // Ease out quintic function for a smoother animation
