@@ -109,7 +109,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1
+    - _Alpha: 5
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -135,7 +135,7 @@ Material:
     - _Metallic: 0
     - _MetallicStrength: 0
     - _Mode: 0
-    - _NoiseSpeed: 15
+    - _NoiseSpeed: 30
     - _NormalStrength: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -145,7 +145,7 @@ Material:
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SphereRadius: 1
+    - _SphereRadius: 2
     - _SphereSpeed: 0.1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
@@ -159,7 +159,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _EmissionColor: {r: 0.78867924, g: 0.59934527, b: 0.15922391, a: 0}
     - _GlitchEmissionColor: {r: 1, g: 1, b: 1, a: 0}
     - _NormalTilingOffset: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

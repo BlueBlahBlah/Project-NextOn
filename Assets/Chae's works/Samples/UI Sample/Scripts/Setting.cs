@@ -53,11 +53,22 @@ public class Setting : MonoBehaviour
 
     public void SetSEVolume()
     {
-
+        
     }
 
     public void SetSEMute()
     {
-        
+        if(!SoundManager.instance.isSEMute)
+        {
+            SEScrollBar.interactable = false;
+            SoundManager.instance.SetEffectsVolume(0f);
+            SoundManager.instance.isSEMute = true;
+        }
+        else
+        {
+            SEScrollBar.interactable = true;
+            SetSEVolume();
+            SoundManager.instance.isSEMute = false;
+        }
     }
 }

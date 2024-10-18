@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // �ܹ߼� ���� ��� �޼��� (SE ���丮) - ���� ���� ����
+    // 단발성 효과음 (SE) 재생 메서드
     public void PlayEffectSound(string clipName, float volume = 1.0f)
     {
         AudioClip clip = Resources.Load<AudioClip>("Sound/SE/" + clipName);
@@ -35,11 +35,11 @@ public class SoundManager : MonoBehaviour
         {
             AudioSource effectSource = gameObject.AddComponent<AudioSource>();
             effectSource.clip = clip;
-            effectSource.volume = volume;  // �ʱ� ���� ����
+            effectSource.volume = volume; 
             effectSource.Play();
 
             activeEffectsSources.Add(effectSource);
-            originalVolumes[effectSource] = volume; // ���� ���� ����
+            originalVolumes[effectSource] = volume; 
 
             StartCoroutine(RemoveSourceWhenDone(effectSource));
         }
@@ -70,10 +70,10 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // ȿ�������� ������ ������ ���� �����ϴ� �޼���
+    // 단발성 효과음 설정 메서드
     public void SetEffectsVolume(float scale)
     {
-        scale = Mathf.Clamp(scale, 0f, 1f); // ���� ���� ���� (0~1)
+        scale = Mathf.Clamp(scale, 0f, 1f); // 볼륨의 범위 지정
 
         foreach (AudioSource source in activeEffectsSources)
         {
@@ -107,10 +107,9 @@ public class SoundManager : MonoBehaviour
 
     private IEnumerator RemoveSourceWhenDone(AudioSource source)
     {
-        // ����� �ҽ��� �� �̻� ������� ���� ������ ���
         yield return new WaitUntil(() => source == null || !source.isPlaying);
 
-        if (source != null) // �ҽ��� ������ ��ȿ���� Ȯ��
+        if (source != null) 
         {
             activeEffectsSources.Remove(source);
             originalVolumes.Remove(source);
