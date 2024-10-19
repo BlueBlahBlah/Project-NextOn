@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class StageClearManager : MonoBehaviour
 {
     // 싱글톤 인스턴스
-    public static StageClearManager Instance { get; private set; }
+    public static StageClearManager instance { get; private set; }
 
     // Stage 클리어 여부 저장
     private bool[] stageClearStatus = new bool[4]; // 0: Stage1, 1: Stage2, 2: Stage3, 3: Stage4
@@ -14,9 +14,9 @@ public class StageClearManager : MonoBehaviour
     private void Awake()
     {
         // 싱글톤 패턴 구현
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject); // 씬이 변경되어도 객체 유지
 
         }

@@ -82,11 +82,11 @@ public class SelectUI : MonoBehaviour
         ClosePanel();
     }
 
-    public void ChangeSceneUI()
+    public void ChangeScene()
     {
         volumeController.TriggerFadeIn();
 
-        Invoke("ChangeScene", 1.5f);
+        Invoke("DoChangeScene", 1.5f);
     }
 
     private void TriggerFadeOut()
@@ -99,9 +99,9 @@ public class SelectUI : MonoBehaviour
         // 까맣게 바뀌기
     }
 
-    public void ChangeScene()
+    public void DoChangeScene()
     {
-        SceneContainer.instance.nextScene = "NewDemoStage";
+        SceneContainer.instance.nextScene = "NewDemoStage"; // ***** 이 위치에 이동 씬 이름 *****
         LoadingManager.ToLoadScene();
     }
 
