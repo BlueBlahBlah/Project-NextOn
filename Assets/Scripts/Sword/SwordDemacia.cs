@@ -18,7 +18,7 @@ public class SwordDemacia : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         Damage = 5;
+         Damage = 1;
          SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
          SkillCoolTime = 10f;            //현재 무기의 쿨타임을 10초로 초기화 
          SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨타임은 감소율을 적용한 값으로 

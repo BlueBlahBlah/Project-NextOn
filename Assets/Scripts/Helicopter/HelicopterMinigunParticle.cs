@@ -34,7 +34,7 @@ public class HelicopterMinigunParticle : MonoBehaviour
         splineAnimate = Helicopter.GetComponent<SplineAnimate>();
         BoxCollider = GetComponent<BoxCollider>();
         rigidbody = GetComponent<Rigidbody>();
-        Damage = 3;
+        Damage = 1;
     }
 
     public void ParticleStop()

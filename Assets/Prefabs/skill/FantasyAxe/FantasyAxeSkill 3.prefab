@@ -65,7 +65,7 @@ MonoBehaviour:
   - {fileID: 5158724023691114974}
   - {fileID: 8955732190416535944}
   DamageZone: 10
-  Damage: 20
+  Damage: 1
 --- !u!1001 &161767310421935467
 PrefabInstance:
   m_ObjectHideFlags: 0
