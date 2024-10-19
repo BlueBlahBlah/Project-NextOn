@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -221,8 +221,8 @@ RectTransform:
   - {fileID: 1905526715}
   - {fileID: 888195099}
   - {fileID: 1537340748}
-  - {fileID: 222591790}
   - {fileID: 912978386}
+  - {fileID: 222591790}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -385,7 +385,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -45, y: 75}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &222591791
 MonoBehaviour:
@@ -651,7 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61bc0701a1598f43a24a69621ffed42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glitchPrefab: {fileID: 39220599976271077, guid: ece1b7fe5896ffb4ba9fc2d08e9dec24, type: 3}
+  glitchVerticalPrefab: {fileID: 39220599976271077, guid: ca58e4d8210eb2343a1439d57c75a722, type: 3}
+  glitchHorizontalPrefab: {fileID: 39220599976271077, guid: ece1b7fe5896ffb4ba9fc2d08e9dec24, type: 3}
   canvasRect: {fileID: 84027100}
   spawnInterval: 0.1
   Container: {fileID: 912978386}
