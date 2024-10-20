@@ -98,11 +98,11 @@ public class Dialogue : MonoBehaviour
     {
         switch (Name)
         {
-            case "占쏙옙占쏙옙":
+            case "데빈":
                 dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin/Devin", typeof(Sprite)) as Sprite;
                 dialogueImage.color = new Color(255, 255, 255, 255);
                 break;
-            case "占쌜억옙占쏙옙占쏙옙占쏙옙":
+            case "작업 관리자":
                 dialogueImage.sprite = null;
                 dialogueImage.color = new Color(0, 0, 0, 0);
                 break;

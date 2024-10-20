@@ -70,7 +70,8 @@ public class Scenario : MonoBehaviour
         if (playerManager.Death) Die();
         else if (is_End)
         {
-
+            //UI ¶ç¿ì±â, ·Î±×Ã¢ ¶ç¿ì±â
+            Debug.Log("end");
         }
     }
     public IEnumerator Scenario1Start()
