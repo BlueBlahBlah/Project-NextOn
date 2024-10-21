@@ -23,6 +23,8 @@ public class Scenario_3 : MonoBehaviour
     [Header("Smoke")]
     public GameObject[] Smoke;
 
+
+    private bool isSideScrollingCamActivated = false;
     void Start()
     {
         _doorClose1 = false;
@@ -30,7 +32,9 @@ public class Scenario_3 : MonoBehaviour
         is1_TriggerPass = false;
         is2_TriggerPass = false;
         is_End = false;
-
+        
+        scenario.MidBGM.mute = true;
+        scenario.FinalBGM.mute = true;
 
         for(int i=0;i < 2; i++)
         {
@@ -61,7 +65,11 @@ public class Scenario_3 : MonoBehaviour
             Scenario.instance.StartCoroutine(scenario.Scenario4Start());
         }
 
-        if (Player.transform.position.y > 5f) SideScrollingCam();
+        if (!isSideScrollingCamActivated && Player.transform.position.y > 5f)
+        {
+            SideScrollingCam();
+            isSideScrollingCamActivated = true; // 함수 호출 후 플래그를 true로 설정
+        }
 
     }
 
@@ -83,6 +91,8 @@ public class Scenario_3 : MonoBehaviour
             Smoke[1].SetActive(true);
             EnemySpawn[0].SetActive(true);
             is1_TriggerPass = true;
+            scenario.BGM.mute = true;
+            scenario.MidBGM.mute = false;
         }
         else if(child.name == "Second_Trigger" && !is2_TriggerPass)
         {
@@ -104,9 +114,16 @@ public class Scenario_3 : MonoBehaviour
         {
             //scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 107);
             Debug.Log("대사 이제 여긴 안전한거 같아 아까들은 비상탈출방법을 찾아보자");
+            EnemySpawn[0].SetActive(false);
+            EnemySpawn[1].SetActive(false);
+            EnemySpawn[2].SetActive(false);
+            EnemySpawn[3].SetActive(false);
+            EnemySpawn[4].SetActive(false);
             secondTrigger[0].GetComponent<CloseDoor2>().enabled = true;
             secondTrigger[1].GetComponent<CloseDoor2>().enabled = true;
             _doorClose2 = true;
+            scenario.BGM.mute = false;
+            scenario.MidBGM.mute = true;
         }
         else if (child.name == "3_End" && !is_End)
         {

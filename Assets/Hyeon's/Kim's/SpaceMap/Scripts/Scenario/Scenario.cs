@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class Scenario : MonoBehaviour
 {
     public UIManager UIManager;
-    
+
+    public AudioSource BGM;
+    public AudioSource MidBGM;
+    public AudioSource FinalBGM;
 
     public GameObject Scenario_1;
     public GameObject Scenario_2;
@@ -52,6 +55,9 @@ public class Scenario : MonoBehaviour
     #endregion
     void Start()
     {
+        BGM.mute = false;
+        MidBGM.mute = true;
+        FinalBGM.mute = true;
         UIManager = FindAnyObjectByType<UIManager>();
         Debug.Log("대사 시나리오 시작");
         is_End = false;
@@ -71,7 +77,10 @@ public class Scenario : MonoBehaviour
         else if (is_End)
         {
             //UI 띄우기, 로그창 띄우기
-            Debug.Log("end");
+            Debug.Log("대사 end");
+            BGM.mute = true;
+            FinalBGM.mute = true;
+            MidBGM.mute= true;
         }
     }
     public IEnumerator Scenario1Start()

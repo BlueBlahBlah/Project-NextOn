@@ -30,7 +30,6 @@ public class Scenario_4 : MonoBehaviour
     private float spawnInterval = 5;
 
 
-
     [Header("Player Respawn")]
     public Transform Respawn;
     public GameObject Player;
@@ -43,6 +42,7 @@ public class Scenario_4 : MonoBehaviour
         Gague.gameObject.SetActive(false);
         Wall.SetActive(false);
 
+        scenario.FinalBGM.mute = false;
         // Slider 초기화
         if (Gague != null)
         {
@@ -79,6 +79,8 @@ public class Scenario_4 : MonoBehaviour
         Wall.SetActive(true);
         //scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 110);
         Debug.Log("대사 이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
+        scenario.FinalBGM.mute = false;
+        scenario.BGM.mute = true;
         StartCoroutine(StartLastGame());
 
     }
