@@ -30,6 +30,7 @@ public class SelectUI : MonoBehaviour
         }
 
         Invoke("TriggerFadeOut", 0.5f);
+        Invoke("PlayBGM", 1f);
     }
 
     private void OnEnable()
@@ -92,6 +93,11 @@ public class SelectUI : MonoBehaviour
     private void TriggerFadeOut()
     {
         volumeController.TriggerFadeOut();
+    }
+
+    private void PlayBGM()
+    {
+        SoundManager.instance.PlayMusic("Zensen he Totugekiseyo");
     }
 
     public void FadeIn()

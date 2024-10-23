@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 37.5}
+  m_SizeDelta: {x: 0, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2969718009843836914
 CanvasRenderer:
@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 8761240408294368329}
   - component: {fileID: 1969383598502379808}
   - component: {fileID: 3086682528942893127}
+  - component: {fileID: 4577123476003434960}
   m_Layer: 5
   m_Name: Stage Clear Panel
   m_TagString: Untagged
@@ -362,6 +363,23 @@ MonoBehaviour:
   animationDuration: 0.5
   currentStageNumber: 0
   clearButton: {fileID: 7035238351491902938}
+--- !u!114 &4577123476003434960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630028465270640254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69eee916aaa89884aa3b6c7049d9d498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshPro: {fileID: 2670900488750096535}
+  initTime: 1.5
+  power: 0
+  invisibleTime: 1
+  visibleTime: 1
 --- !u!1 &5975271906017873917
 GameObject:
   m_ObjectHideFlags: 0

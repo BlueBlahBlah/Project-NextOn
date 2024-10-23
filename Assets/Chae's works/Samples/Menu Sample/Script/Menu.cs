@@ -7,12 +7,24 @@ public class Menu : MonoBehaviour
     [SerializeField]
     public GameObject Setting;
 
+    private VolumeController volumeController;
+
     // Start is called before the first frame update
     void Start()
     {
         SceneContainer.instance.currentScene = "Menu Scene";
         SceneContainer.instance.nextScene = "Scenario1 Scene";
 
+        if (volumeController == null)
+        {
+            // 새로운 GameObject를 만들고 VolumeController를 추가
+            GameObject volumeControllerObject = new GameObject("VolumeController");
+            volumeController = volumeControllerObject.AddComponent<VolumeController>();
+
+
+        }
+
+        Invoke("TriggerFadeOut", 2f);
         Invoke("PlayBGM", 4);
     }
 
@@ -29,6 +41,11 @@ public class Menu : MonoBehaviour
     private void PlayBGM()
     {
         SoundManager.instance.PlayMusic("Redemption"); // 메뉴 테마 음악 재생
+    }
+
+    private void TriggerFadeOut()
+    {
+        volumeController.TriggerFadeOut();
     }
 
     public void OpenSetting() { Setting.SetActive(true); }
