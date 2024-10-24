@@ -9,7 +9,7 @@ public class MobSpawner : MonoBehaviour
     public int maxMonsters = 10; // 최대 몬스터 수
     public RepairArea repairArea; // RepairArea 참조
 
-    [SerializeField]private List<GameObject> spawnedMonsters = new List<GameObject>(); // 현재 스폰된 몬스터 리스트
+    [SerializeField] private List<GameObject> spawnedMonsters = new List<GameObject>(); // 현재 스폰된 몬스터 리스트
 
     public void SpawnMonster()
     {
@@ -24,12 +24,12 @@ public class MobSpawner : MonoBehaviour
                 GameObject monster = Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
                 spawnedMonsters.Add(monster); // 스폰된 몬스터 추가
 
-                 // 몬스터가 비활성화되지 않도록 확인
+                // 몬스터가 비활성화되지 않도록 확인
                 if (monster != null)
                 {
                     monster.SetActive(true); // 몬스터를 활성화
                     // Enemy_Golem 스크립트 컴포넌트 가져오기
-                    Enemy_Golem enemyComponent = monster.GetComponent<Enemy_Golem>();
+                    Mob enemyComponent = monster.GetComponent<Mob>();
                     if (enemyComponent != null)
                     {
                         enemyComponent.mobSpawner = this; // MobSpawner 참조 설정
@@ -50,5 +50,19 @@ public class MobSpawner : MonoBehaviour
         spawnedMonsters.Remove(monster);
         // RepairArea의 CheckMonstersStatus() 호출
         repairArea.CheckMonstersStatus(); 
+    }
+
+    // 모든 몬스터를 제거하는 메서드
+    public void RemoveAllMonsters()
+    {
+        foreach (GameObject monster in spawnedMonsters)
+        {
+            if (monster != null)
+            {
+                Destroy(monster); // 몬스터를 파괴
+            }
+        }
+        spawnedMonsters.Clear(); // 리스트 초기화
+        // repairArea.CheckMonstersStatus(); // 상태 확인 호출
     }
 }

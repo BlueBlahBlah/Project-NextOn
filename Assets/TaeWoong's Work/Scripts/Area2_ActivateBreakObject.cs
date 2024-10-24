@@ -39,7 +39,7 @@ public class Area2_ActivateBreakObject : MonoBehaviour
     {
         // Trigger가 On되는 로직 (다른 오브젝트에 알리기)
         breakObject.Activate(); // BreakObject 활성화
-
+        MapSoundManager.Instance.EndProgress_Sound();
         Debug.Log("Activate BreakObject But....");
     }
 
@@ -47,6 +47,10 @@ public class Area2_ActivateBreakObject : MonoBehaviour
     {
         if (other.CompareTag("Player")) // 플레이어가 들어왔을 때
         {
+            if(!isPlayerInside)
+            {
+                MapSoundManager.Instance.StartProgress_Sound();
+            }
             isPlayerInside = true;
             fillTimer = 0f; // 다시 초기화
             progressBar.gameObject.SetActive(true); // Progress Bar 활성화

@@ -69,6 +69,7 @@ public class RepairArea : MonoBehaviour
     {
         // Trigger가 On되는 로직 (다른 오브젝트에 알리기)
         monsterSpawner.SpawnMonster(); // 몬스터 스폰
+        MapSoundManager.Instance.EndProgress_Sound();
         Debug.Log("Repair Work in Progress");
     }
 
@@ -76,6 +77,10 @@ public class RepairArea : MonoBehaviour
     {
         if (other.CompareTag("Player")) // 플레이어가 들어왔을 때
         {
+            if(!isPlayerInside)
+            {
+                MapSoundManager.Instance.StartProgress_Sound();
+            }
             isPlayerInside = true;
             fillTimer = 0f; // 다시 초기화
             progressBar.gameObject.SetActive(true); // Progress Bar 활성화
@@ -86,6 +91,7 @@ public class RepairArea : MonoBehaviour
     {
         if (other.CompareTag("Player")) // 플레이어가 나갔을 때
         {
+            
             isPlayerInside = false;
             fillTimer = 0f; // 초기화
             progressBar.fillAmount = 0; // Bar 초기화
