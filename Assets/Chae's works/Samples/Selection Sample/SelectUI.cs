@@ -29,8 +29,8 @@ public class SelectUI : MonoBehaviour
             
         }
 
-        Invoke("TriggerFadeOut", 0.5f);
-        Invoke("PlayBGM", 1f);
+        Invoke("TriggerFadeOut", 2f);
+        Invoke("PlayBGM", 1.5f);
     }
 
     private void OnEnable()
