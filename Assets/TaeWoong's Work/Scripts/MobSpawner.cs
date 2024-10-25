@@ -19,7 +19,7 @@ public class MobSpawner : MonoBehaviour
             {
                 // 오브젝트 주변 범위 내 랜덤한 위치 스폰
                 Vector3 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
-                spawnPosition.y = transform.position.y; // Y좌표 유지
+                spawnPosition.y = transform.position.y + 1; // Y좌표 유지
                 
                 GameObject monster = Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
                 spawnedMonsters.Add(monster); // 스폰된 몬스터 추가

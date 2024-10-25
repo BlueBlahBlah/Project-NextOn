@@ -107,20 +107,21 @@ public class BreakObject : Enemy
 
     void Normalization()
     {
-        if (isNormalization) return; // 이미 죽은 경우 추가 처리 방지
+        // if (isNormalization) return; // 이미 죽은 경우 추가 처리 방지
 
         isNormalization = true; // 사망 상태로 변경
         isEnterArea3 = true; // Area 3 오픈
-        MapSoundManager.Instance.EndProgress_Sound();
         // showNormalizationObj.SetActive(true); // 정상화 표시
 
-        foreach (GameObject obj in showNormalizationObj)
+        if(!isScript12)
         {
-            obj.SetActive(true);
+            foreach (GameObject obj in showNormalizationObj)
+            {
+                obj.SetActive(true);
+            }
+            Debug.Log("[태웅 디버깅] Script #12 설정 "); // 디버깅 로그 추가
+            MapSoundManager.Instance.EndProgress_Sound();
         }
-
-        Debug.Log("[태웅 디버깅] Script #12 설정 "); // 디버깅 로그 추가
-        MapSoundManager.Instance.EndProgress_Sound();
         isScript12 = true;
 
         // 비활성화할 오브젝트들 비활성화

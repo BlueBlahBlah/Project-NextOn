@@ -10,6 +10,7 @@ public class Area2_ActivateBreakObject : MonoBehaviour
     private float fillTimer = 0f;
     [SerializeField]private bool isPlayerInside = false;
     public BreakObject breakObject;
+    public bool isActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,11 @@ public class Area2_ActivateBreakObject : MonoBehaviour
     {
         // Trigger가 On되는 로직 (다른 오브젝트에 알리기)
         breakObject.Activate(); // BreakObject 활성화
-        MapSoundManager.Instance.EndProgress_Sound();
+        if(!isActive)
+        {
+            isActive = true;
+            MapSoundManager.Instance.EndProgress_Sound();
+        }
         Debug.Log("Activate BreakObject But....");
     }
 

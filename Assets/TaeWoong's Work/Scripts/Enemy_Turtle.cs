@@ -139,7 +139,7 @@ public class Enemy_Turtle : Mob
         canDamagePlayer = false; // 플레이어에게 데미지를 줄 수 없는 상태로 변경
 
         MapSoundManager.Instance.Spider_Attack_Sound();
-        yield return new WaitForSeconds(1.0f); // 공격 애니메이션의 길이에 맞춰 대기
+        // yield return new WaitForSeconds(1.0f); // 공격 애니메이션의 길이에 맞춰 대기
 
         Collider[] hitColliders = Physics.OverlapBox(AttackArea.bounds.center, AttackArea.bounds.extents, AttackArea.transform.rotation);
 
@@ -171,7 +171,7 @@ public class Enemy_Turtle : Mob
 
     void Die()
     {
-        // if (isDie) return; // 이미 죽은 경우 추가 처리 방지
+        if (isDie) return; // 이미 죽은 경우 추가 처리 방지
         Debug.Log("[태웅 디버깅] Enemy_Turtle 사망"); // 디버깅 로그 추가
         MapSoundManager.Instance.Die_Mob_Sound();
         _anim.SetTrigger("doDie"); // 죽는 애니메이션 트리거

@@ -10,7 +10,7 @@ public class PlayerGetKeyArea : MonoBehaviour
     private float fillTimer = 0f;
     private bool isPlayerInside = false;
 
-    public GameObject keyEffectPrefab; // 열쇠 이펙트 프리팹
+    // public GameObject keyEffectPrefab; // 열쇠 이펙트 프리팹
     public bool HasKey = false; // 열쇠를 얻었는지 여부를 나타내는 플래그
 
     void Start()
@@ -44,7 +44,7 @@ public class PlayerGetKeyArea : MonoBehaviour
             MapSoundManager.Instance.EndProgress_Sound();
 
             // 이펙트 생성
-            Instantiate(keyEffectPrefab, transform.position, Quaternion.identity); // 영역의 위치에서 이펙트 생성
+            // Instantiate(keyEffectPrefab, transform.position, Quaternion.identity); // 영역의 위치에서 이펙트 생성
         }
     }
 
