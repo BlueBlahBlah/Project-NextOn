@@ -24,9 +24,15 @@ public class StageClearPanel : MonoBehaviour
         if (volumeController == null)
         {
             // 새로운 GameObject를 만들고 VolumeController를 추가
-            GameObject volumeControllerObject = new GameObject("VolumeController");
-            volumeController = volumeControllerObject.AddComponent<VolumeController>();
-
+            if (GameObject.Find("VolumeController") != null)
+            {
+                volumeController = GameObject.Find("VolumeController").GetComponent<VolumeController>();
+            }
+            else
+            {
+                GameObject volumeControllerObject = new GameObject("VolumeController");
+                volumeController = volumeControllerObject.AddComponent<VolumeController>();
+            }
 
         }
     }
@@ -39,10 +45,11 @@ public class StageClearPanel : MonoBehaviour
 
     public void StageClear()
     {
+        
         if (StageClearManager.instance != null) // 만약 StageClearManager 인스턴스가 존재한다면
         {
             // 스테이지 클리어 함수를 불러와 해당 스테이지를 클리어
-            StageClearManager.instance.SetStageClear(currentStageNumber);
+            StageClearManager.instance.SetStageClear(currentStageNumber, true);
         }
         else
         {
@@ -52,6 +59,7 @@ public class StageClearPanel : MonoBehaviour
     
     public void ChangeScene()
     {
+        StageClear();
         volumeController.TriggerFadeIn();
 
         Invoke("DoChangeScene", 1.5f);
@@ -59,6 +67,7 @@ public class StageClearPanel : MonoBehaviour
 
     public void DoChangeScene()
     {
+
         if (SceneContainer.instance != null)
         {
             SceneContainer.instance.nextScene = "Selection Scene";

@@ -20,9 +20,15 @@ public class Scenario1UI : MonoBehaviour
         if (volumeController == null)
         {
             // 새로운 GameObject를 만들고 VolumeController를 추가
-            GameObject volumeControllerObject = new GameObject("VolumeController");
-            volumeController = volumeControllerObject.AddComponent<VolumeController>();
-
+            if (GameObject.Find("VolumeController") != null)
+            {
+                volumeController = GameObject.Find("VolumeController").GetComponent<VolumeController>();
+            }
+            else
+            {
+                GameObject volumeControllerObject = new GameObject("VolumeController");
+                volumeController = volumeControllerObject.AddComponent<VolumeController>();
+            }
             Invoke("FadeOut", 3f);
         }
     }

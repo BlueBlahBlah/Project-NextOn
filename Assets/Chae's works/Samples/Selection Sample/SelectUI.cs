@@ -23,10 +23,16 @@ public class SelectUI : MonoBehaviour
         if (volumeController == null)
         {
             // 새로운 GameObject를 만들고 VolumeController를 추가
-            GameObject volumeControllerObject = new GameObject("VolumeController");
-            volumeController = volumeControllerObject.AddComponent<VolumeController>();
+            if (GameObject.Find("VolumeController") != null)
+            {
+                volumeController = GameObject.Find("VolumeController").GetComponent<VolumeController>();
+            }
+            else
+            {
+                GameObject volumeControllerObject = new GameObject("VolumeController");
+                volumeController = volumeControllerObject.AddComponent<VolumeController>();
+            }
 
-            
         }
 
         Invoke("TriggerFadeOut", 2f);
@@ -74,6 +80,8 @@ public class SelectUI : MonoBehaviour
     {
         // 이미지, 텍스트 등 수정
         SetStageName(newStageName);
+        SetStageImage(newStageName);
+        SetStageInfo(newStageName);
 
         OpenPanel();
     }
@@ -107,7 +115,6 @@ public class SelectUI : MonoBehaviour
 
     public void DoChangeScene()
     {
-        SceneContainer.instance.nextScene = "NewDemoStage"; // ***** 이 위치에 이동 씬 이름 *****
         LoadingManager.ToLoadScene();
     }
 

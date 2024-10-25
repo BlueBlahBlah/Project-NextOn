@@ -9,6 +9,7 @@ public class StageClearManager : MonoBehaviour
     public static StageClearManager instance { get; private set; }
 
     // Stage 클리어 여부 저장
+    [SerializeField]
     private bool[] stageClearStatus = new bool[4]; // 0: Stage1, 1: Stage2, 2: Stage3, 3: Stage4
 
     private void Awake()
@@ -50,17 +51,22 @@ public class StageClearManager : MonoBehaviour
     // 각 Stage 클리어 여부 확인 후 함수 호출 (여기서는 Debug 로그 출력)
     private void CheckStageClearStatus()
     {
+        int clearCount = 0;
+
         for (int i = 0; i < stageClearStatus.Length; i++)
         {
             if (stageClearStatus[i])
             {
                 // i번째 스테이지 클리어 -> i번째 스테이지 입장 오브젝트 파괴
                 ExecuteStageClearFunction(i + 1);
+                clearCount++;
             }
             else
             {
                 // i번째 스테이지 미클리어
             }
+
+            if (clearCount == 4) { DoEnding(); }
         }
     }
 
@@ -87,7 +93,7 @@ public class StageClearManager : MonoBehaviour
 
 
     // Stage 클리어 상태 변경 메서드 (필요 시 외부에서 호출)
-    public void SetStageClear(int stageNumber, bool isClear = true)
+    public void SetStageClear(int stageNumber, bool isClear = true) // 외부에서는 1~4로 접근함
     {
         if (stageNumber >= 1 && stageNumber <= 4)
         {
@@ -98,6 +104,12 @@ public class StageClearManager : MonoBehaviour
         {
             Debug.LogWarning("잘못된 Stage 번호");
         }
+    }
+
+    // 스테이지 전부 클리어 시 호출되는 엔딩 메서드
+    public void DoEnding()
+    {
+        Debug.Log("You Cleared All Stage!");
     }
 }
 

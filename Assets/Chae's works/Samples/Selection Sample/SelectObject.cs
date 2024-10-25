@@ -10,23 +10,16 @@ public class SelectObject : MonoBehaviour
     [SerializeField]
     private SelectUI selectCanvas;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            selectCanvas.OpenSelectUI(stageName);
+            if (SceneContainer.instance != null)
+            {
+                SceneContainer.instance.nextScene = stageName;
+                selectCanvas.OpenSelectUI(stageName);
+            }            
         }
         
     }
