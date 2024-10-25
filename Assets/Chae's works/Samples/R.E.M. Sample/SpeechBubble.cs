@@ -1,68 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class Menu : MonoBehaviour
+public class SpeechBubble : MonoBehaviour
 {
     [SerializeField]
     private RectTransform selectPanel;
 
     public float animationDuration = 0.5f; // 애니메이션 지속 시간
 
-    private VolumeController volumeController;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        SceneContainer.instance.currentScene = "Menu Scene";
-        // SceneContainer.instance.nextScene = "Scenario1 Scene";
-        SceneContainer.instance.nextScene = "Selection Scene";
-
-        if (volumeController == null)
+        if (other.gameObject.CompareTag("Player"))
         {
-            // 새로운 GameObject를 만들고 VolumeController를 추가
-            GameObject volumeControllerObject = new GameObject("VolumeController");
-            volumeController = volumeControllerObject.AddComponent<VolumeController>();
-
-
+            OpenPanel();
         }
-
-        Invoke("TriggerFadeOut", 2f);
-        Invoke("PlayBGM", 4);
     }
 
-
-    public void ChangeScene()
+    private void OnTriggerExit(Collider other)
     {
-        // Scene 변경을 위한 함수
-        // 1. SceneManager 인스턴스에 접근해 nextScene 을 이동하고자 하는 씬(인게임)으로 변경
-        // 2. Loading Scene 으로 이동한 뒤 로딩을 거쳐 2차적으로 nextScene 으로 이동
-
-        LoadingManager.ToLoadScene();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            ClosePanel();
+        }
     }
 
-    private void PlayBGM()
-    {
-        SoundManager.instance.PlayMusic("Tuesday"); // 메뉴 테마 음악 재생
-    }
-
-    private void TriggerFadeOut()
-    {
-        volumeController.TriggerFadeOut();
-    }
-
-    public void OpenSetting() { OpenPanel(); }
-
-    public void CloseSetting() { ClosePanel(); }
-
-    public void DoExit()
-    {
-    #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-    #else 
-        Application.Quit();  
-    #endif
-    }
 
     private void OpenPanel()
     {

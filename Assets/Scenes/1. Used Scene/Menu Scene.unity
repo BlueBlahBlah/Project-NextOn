@@ -368,19 +368,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4617703373085996379, guid: 746699092c512dc42b56d00e9e4d4dc4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4617703373085996379, guid: 746699092c512dc42b56d00e9e4d4dc4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 800966387}
+      objectReference: {fileID: 1528659217}
     - target: {fileID: 4617703373085996379, guid: 746699092c512dc42b56d00e9e4d4dc4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: CloseSetting
       objectReference: {fileID: 0}
     - target: {fileID: 4617703373085996379, guid: 746699092c512dc42b56d00e9e4d4dc4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: Menu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4898702023621687829, guid: 746699092c512dc42b56d00e9e4d4dc4, type: 3}
       propertyPath: m_Pivot.x
@@ -470,11 +470,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 800966390}
   m_SourcePrefab: {fileID: 100100000, guid: 746699092c512dc42b56d00e9e4d4dc4, type: 3}
---- !u!1 &800966387 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1910892366629052637, guid: 746699092c512dc42b56d00e9e4d4dc4, type: 3}
-  m_PrefabInstance: {fileID: 800966386}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &800966388 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4898702023621687829, guid: 746699092c512dc42b56d00e9e4d4dc4, type: 3}
@@ -1263,7 +1258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf04aa3b218f6b44eb0e0f6ac70dd5d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Setting: {fileID: 800966387}
+  selectPanel: {fileID: 800966388}
+  animationDuration: 0.5
 --- !u!1 &1682002987
 GameObject:
   m_ObjectHideFlags: 0

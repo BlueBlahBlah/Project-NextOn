@@ -120,7 +120,7 @@ public class Dialogue : MonoBehaviour
 
         // 버튼 색상 변경
         ColorBlock colors = auto.colors;
-        colors.normalColor = UIManager.instance.isAuto ? Color.green : Color.white;
+        colors.normalColor = UIManager.instance.isAuto ? Color.gray : Color.white;
         auto.colors = colors;
     }
 
@@ -130,7 +130,7 @@ public class Dialogue : MonoBehaviour
 
         // 버튼 색상 변경
         ColorBlock colors = printSpeed.colors;
-        colors.normalColor = UIManager.instance.printSpeed == 2 ? Color.green : Color.white;
+        colors.normalColor = UIManager.instance.printSpeed == 2 ? Color.gray : Color.white;
         printSpeed.colors = colors;
     }
 
