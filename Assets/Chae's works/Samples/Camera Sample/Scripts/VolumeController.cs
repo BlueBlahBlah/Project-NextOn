@@ -73,6 +73,7 @@ public class VolumeController : MonoBehaviour
         {
             if (cam.layer == LayerMask.NameToLayer("Main Camera"))
             {
+                
                 return cam;
             }
         }
@@ -136,6 +137,7 @@ public class VolumeController : MonoBehaviour
     // FadeOut 이벤트를 트리거하는 함수
     public void TriggerFadeOut()
     {
+        Debug.Log("TriggerFadeOut");
         OnFadeOut.Invoke();
     }
 }

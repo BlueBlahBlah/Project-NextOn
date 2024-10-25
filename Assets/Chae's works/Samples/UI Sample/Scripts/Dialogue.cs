@@ -61,13 +61,13 @@ public class Dialogue : MonoBehaviour
             }
             string Name = data_Dialogue[DialogueNumber]["Character Name"].ToString();
 
-            // 占싱몌옙 占쏙옙占쏙옙
+            // 다이얼로그 캐릭터 이름 변경
             dialogueName.text = Name;
 
             dialogueTime = float.Parse(data_Dialogue[DialogueNumber]["Time"].ToString());
             dialogueIsContinuous = int.Parse(data_Dialogue[DialogueNumber]["Continuous"].ToString());
 
-            // 占싱뱄옙占쏙옙 占쏙옙占쏙옙
+            // 다이얼로그 스프라이트 변경
             if (dialogueType == "Long") ChangeImage(Name);
 
             Debug.Log($"Time : {dialogueTime}, Continuous : {dialogueIsContinuous}");
@@ -98,11 +98,11 @@ public class Dialogue : MonoBehaviour
     {
         switch (Name)
         {
-            case "占쏙옙占쏙옙":
+            case "데빈":
                 dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin/Devin", typeof(Sprite)) as Sprite;
                 dialogueImage.color = new Color(255, 255, 255, 255);
                 break;
-            case "占쌜억옙占쏙옙占쏙옙占쏙옙":
+            case "작업 관리자":
                 dialogueImage.sprite = null;
                 dialogueImage.color = new Color(0, 0, 0, 0);
                 break;
@@ -120,7 +120,7 @@ public class Dialogue : MonoBehaviour
 
         // 버튼 색상 변경
         ColorBlock colors = auto.colors;
-        colors.normalColor = UIManager.instance.isAuto ? Color.green : Color.white;
+        colors.normalColor = UIManager.instance.isAuto ? Color.gray : Color.white;
         auto.colors = colors;
     }
 
@@ -130,7 +130,7 @@ public class Dialogue : MonoBehaviour
 
         // 버튼 색상 변경
         ColorBlock colors = printSpeed.colors;
-        colors.normalColor = UIManager.instance.printSpeed == 2 ? Color.green : Color.white;
+        colors.normalColor = UIManager.instance.printSpeed == 2 ? Color.gray : Color.white;
         printSpeed.colors = colors;
     }
 
@@ -157,7 +157,7 @@ public class Dialogue : MonoBehaviour
         UIManager.instance.isCompletelyPrinted = false;
 
         // 텍스트 출력 시작 시 효과음 재생
-        SoundManager.instance.PlayEffectSound("TypeSound", 0.3f);
+        SoundManager.instance.PlayEffectSound("UISound/TypeSound", 0.3f);
 
         string content = data_Dialogue[DialogueNumber]["Contents"].ToString();
         for (int i = 0; i <= content.Length; i++)

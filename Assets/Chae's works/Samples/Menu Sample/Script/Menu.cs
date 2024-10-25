@@ -5,14 +5,29 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
     [SerializeField]
-    public GameObject Setting;
+    private RectTransform selectPanel;
+
+    public float animationDuration = 0.5f; // 애니메이션 지속 시간
+
+    private VolumeController volumeController;
 
     // Start is called before the first frame update
     void Start()
     {
         SceneContainer.instance.currentScene = "Menu Scene";
-        SceneContainer.instance.nextScene = "Scenario1 Scene";
+        // SceneContainer.instance.nextScene = "Scenario1 Scene";
+        SceneContainer.instance.nextScene = "Selection Scene";
 
+        if (volumeController == null)
+        {
+            // 새로운 GameObject를 만들고 VolumeController를 추가
+            GameObject volumeControllerObject = new GameObject("VolumeController");
+            volumeController = volumeControllerObject.AddComponent<VolumeController>();
+
+
+        }
+
+        Invoke("TriggerFadeOut", 2f);
         Invoke("PlayBGM", 4);
     }
 
@@ -28,12 +43,17 @@ public class Menu : MonoBehaviour
 
     private void PlayBGM()
     {
-        SoundManager.instance.PlayMusic("Redemption"); // 메뉴 테마 음악 재생
+        SoundManager.instance.PlayMusic("Tuesday"); // 메뉴 테마 음악 재생
     }
 
-    public void OpenSetting() { Setting.SetActive(true); }
+    private void TriggerFadeOut()
+    {
+        volumeController.TriggerFadeOut();
+    }
 
-    public void CloseSetting() { Setting.SetActive(false); }
+    public void OpenSetting() { OpenPanel(); }
+
+    public void CloseSetting() { ClosePanel(); }
 
     public void DoExit()
     {
@@ -42,5 +62,59 @@ public class Menu : MonoBehaviour
     #else 
         Application.Quit();  
     #endif
+    }
+
+    private void OpenPanel()
+    {
+        StartCoroutine(OpenPanelCoroutine());
+    }
+
+    private void ClosePanel()
+    {
+        StartCoroutine(ClosePanelCoroutine());
+    }
+
+    private IEnumerator OpenPanelCoroutine()
+    {
+        float elapsedTime = 0f;
+        Vector3 startScale = Vector3.zero;
+        Vector3 endScale = Vector3.one;
+        RectTransform panel = selectPanel;
+        panel.gameObject.SetActive(true); // 패널 활성화
+
+        while (elapsedTime < animationDuration)
+        {
+            float t = elapsedTime / animationDuration;
+            panel.localScale = Vector3.LerpUnclamped(startScale, endScale, EaseOutQuint(t));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        panel.localScale = endScale;
+    }
+
+    // 패널 닫기 애니메이션
+    private IEnumerator ClosePanelCoroutine()
+    {
+        float elapsedTime = 0f;
+        Vector3 startScale = Vector3.one;
+        Vector3 endScale = Vector3.zero;
+        RectTransform panel = selectPanel;
+
+        while (elapsedTime < animationDuration)
+        {
+            float t = elapsedTime / animationDuration;
+            panel.localScale = Vector3.LerpUnclamped(startScale, endScale, EaseOutQuint(t));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        panel.localScale = endScale;
+        panel.gameObject.SetActive(false); // 패널 비활성화
+    }
+
+    private float EaseOutQuint(float t)
+    {
+        return 1 - Mathf.Pow(1 - t, 5);
     }
 }

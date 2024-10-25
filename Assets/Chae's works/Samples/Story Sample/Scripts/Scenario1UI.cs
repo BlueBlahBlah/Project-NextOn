@@ -22,6 +22,8 @@ public class Scenario1UI : MonoBehaviour
             // 새로운 GameObject를 만들고 VolumeController를 추가
             GameObject volumeControllerObject = new GameObject("VolumeController");
             volumeController = volumeControllerObject.AddComponent<VolumeController>();
+
+            Invoke("FadeOut", 3f);
         }
     }
 
@@ -58,5 +60,10 @@ public class Scenario1UI : MonoBehaviour
     public void Fadein()
     {
         volumeController.TriggerFadeIn();
+    }
+
+    public void FadeOut()
+    {
+        volumeController.TriggerFadeOut();
     }
 }

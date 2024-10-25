@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class StageClearManager : MonoBehaviour
 {
     // 싱글톤 인스턴스
-    public static StageClearManager Instance { get; private set; }
+    public static StageClearManager instance { get; private set; }
 
     // Stage 클리어 여부 저장
     private bool[] stageClearStatus = new bool[4]; // 0: Stage1, 1: Stage2, 2: Stage3, 3: Stage4
@@ -14,9 +14,9 @@ public class StageClearManager : MonoBehaviour
     private void Awake()
     {
         // 싱글톤 패턴 구현
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject); // 씬이 변경되어도 객체 유지
 
         }
@@ -54,12 +54,12 @@ public class StageClearManager : MonoBehaviour
         {
             if (stageClearStatus[i])
             {
-                Debug.Log($"Stage {i + 1} 클리어 상태: 클리어됨");
+                // i번째 스테이지 클리어 -> i번째 스테이지 입장 오브젝트 파괴
                 ExecuteStageClearFunction(i + 1);
             }
             else
             {
-                Debug.Log($"Stage {i + 1} 클리어 상태: 클리어되지 않음");
+                // i번째 스테이지 미클리어
             }
         }
     }
@@ -75,14 +75,13 @@ public class StageClearManager : MonoBehaviour
 
         if (targetObject != null)
         {
-            // 오브젝트가 존재하면 파괴할 것을 가정하고 로그 출력
-            Debug.Log($"{objectName} 오브젝트를 파괴할 예정입니다.");
+            // 오브젝트가 존재할 시 파괴
             Destroy(targetObject);
-            // 실제 파괴 코드: Destroy(targetObject);  -> 추후에 실제 파괴를 적용
         }
         else
         {
-            Debug.Log($"{objectName} 오브젝트가 존재하지 않습니다.");
+            // 오브젝트가 존재하지 않는다면 스킵
+            
         }
     }
 

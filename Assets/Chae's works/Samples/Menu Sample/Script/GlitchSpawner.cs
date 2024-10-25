@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GlitchSpawner : MonoBehaviour
 {
-    public GameObject glitchPrefab;  // GlitchEffect 프리팹
+    public GameObject glitchVerticalPrefab;  // 세로 GlitchEffect 프리팹
+    public GameObject glitchHorizontalPrefab; // 가로 GlitchEffect 프리팹
     public RectTransform canvasRect;  // Canvas의 RectTransform
     public float spawnInterval = 0.5f;  // 스폰 간격
     public Transform Container;
@@ -21,17 +22,23 @@ public class GlitchSpawner : MonoBehaviour
     void SpawnGlitch()
     {
         bool isVertical = Random.value > 0.5f;
-        GameObject glitch = Instantiate(glitchPrefab, Container);
+        GameObject glitch;
 
-        // 초기 위치 설정
-        RectTransform glitchRect = glitch.GetComponent<RectTransform>();
         if (isVertical)
         {
+            glitch = Instantiate(glitchVerticalPrefab, Container);
+
+            // 세로 Glitch 초기 위치 설정
+            RectTransform glitchRect = glitch.GetComponent<RectTransform>();
             float x = Random.Range(-canvasRect.rect.width / 2, canvasRect.rect.width / 2);
             glitchRect.anchoredPosition = new Vector2(x, canvasRect.rect.height / 2 + glitchRect.sizeDelta.y);
         }
         else
         {
+            glitch = Instantiate(glitchHorizontalPrefab, Container);
+
+            // 가로 Glitch 초기 위치 설정
+            RectTransform glitchRect = glitch.GetComponent<RectTransform>();
             float y = Random.Range(-canvasRect.rect.height / 2, canvasRect.rect.height / 2);
             if (Random.value > 0.5f)
             {

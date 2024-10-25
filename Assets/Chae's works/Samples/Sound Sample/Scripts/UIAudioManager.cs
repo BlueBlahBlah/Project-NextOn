@@ -5,6 +5,78 @@ using UnityEngine.EventSystems;
 
 public class UIAudioManager : MonoBehaviour
 {
+    [SerializeField]
+    private int uiType; // 0: Button, 1: Toggle, 2: Slider, 3: ScrollRect
+    [SerializeField]
+    private string soundName;
+
+    private void Start()
+    {
+        switch (uiType)
+        {
+            case 0: // Button
+                Button button = GetComponent<Button>();
+                if (button != null)
+                {
+                    button.onClick.AddListener(() => PlaySound(soundName));
+                    Debug.Log("Button 사운드 등록 완료");
+                }
+                else
+                {
+                    Debug.LogWarning("Button 컴포넌트가 없습니다.");
+                }
+                break;
+            case 1: // Toggle
+                Toggle toggle = GetComponent<Toggle>();
+                if (toggle != null)
+                {
+                    toggle.onValueChanged.AddListener((value) => PlaySound(soundName));
+                    Debug.Log("Toggle 사운드 등록 완료");
+                }
+                else
+                {
+                    Debug.LogWarning("Toggle 컴포넌트가 없습니다.");
+                }
+                break;
+            case 2: // Slider
+                Slider slider = GetComponent<Slider>();
+                if (slider != null)
+                {
+                    slider.onValueChanged.AddListener((value) => PlaySound(soundName));
+                    Debug.Log("Slider 사운드 등록 완료");
+                }
+                else
+                {
+                    Debug.LogWarning("Slider 컴포넌트가 없습니다.");
+                }
+                break;
+            case 3: // ScrollRect
+                ScrollRect scrollRect = GetComponent<ScrollRect>();
+                if (scrollRect != null)
+                {
+                    scrollRect.onValueChanged.AddListener((value) => PlaySound(soundName));
+                    Debug.Log("ScrollRect 사운드 등록 완료");
+                }
+                else
+                {
+                    Debug.LogWarning("ScrollRect 컴포넌트가 없습니다.");
+                }
+                break;
+            default:
+                Debug.LogError("유효하지 않은 uiType입니다.");
+                break;
+        }
+    }
+
+    private void PlaySound(string soundFileName)
+    {
+        Debug.Log($"UI Sound Name : {soundFileName} ");
+        SoundManager.instance.PlayEffectSound("UISound/" + soundFileName, 1f);
+    }
+
+
+
+    /*
     // 사운드 클립을 할당할 수 있는 공개 변수
     [Header("UI Interaction Sounds")]
     public string buttonClickSound = "ButtonClick";
@@ -20,6 +92,7 @@ public class UIAudioManager : MonoBehaviour
         Button[] buttons = GetComponentsInChildren<Button>(true);
         foreach (Button button in buttons)
         {
+            Debug.Log("Add Buttons");
             button.onClick.AddListener(() => PlayButtonClickSound());
         }
 
@@ -54,6 +127,7 @@ public class UIAudioManager : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(buttonClickSound))
         {
+            Debug.Log("Click Sound Trigger");
             SoundManager.instance.PlayEffectSound(buttonClickSound, 1f);
         }
     }
@@ -96,4 +170,5 @@ public class UIAudioManager : MonoBehaviour
     }
 
     // 필요에 따라 추가적인 UI 상호작용 이벤트 핸들러를 구현할 수 있습니다.
+    */
 }
