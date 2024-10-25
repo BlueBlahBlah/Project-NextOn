@@ -124,6 +124,10 @@ public class EventManager : MonoBehaviour
         
         UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점) 50
         PrintLongDialogue();
+        
+        PlayerSoundManager.Instance.SetBGMVolume(0.2f);
+        PlayerSoundManager.Instance.BGM_Start();
+        
     }
     
     public void PrintLongDialogue()
@@ -224,8 +228,10 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
         {
+            PlayerSoundManager.Instance.StopSound(PlayerSoundManager.Instance.BGM);
             fadeout();
             //씬 넘어가는 코드
+            Debug.LogError("씬 넘어가는 코드 넣어야 합니다");
         }
         
             

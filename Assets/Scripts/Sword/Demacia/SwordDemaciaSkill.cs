@@ -19,7 +19,7 @@ public class SwordDemaciaSkill : MonoBehaviour
         sword.SetActive(true);
         effect.SetActive(false);
         attackDone = false;
-        Damage = 10;
+        Damage = 1;
     }
 
     // Update is called once per frame

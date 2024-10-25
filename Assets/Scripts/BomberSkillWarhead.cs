@@ -16,7 +16,7 @@ public class BomberSkillWarhead : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         StartCoroutine(Explosion());
-        Damage = 70;
+        Damage = 1;
     }
 
     IEnumerator Explosion()

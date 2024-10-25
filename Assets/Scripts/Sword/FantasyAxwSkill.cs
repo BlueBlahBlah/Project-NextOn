@@ -14,6 +14,7 @@ public class FantasyAxwSkill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Damage = 1;
         PlayerSoundManager.Instance.Fantasy_Skill_Sound();
         explosionEffect.SetActive(false);
         Invoke("explore",10f);

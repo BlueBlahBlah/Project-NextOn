@@ -536,8 +536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8548e90c22a6c8e47be8808fb7bd5a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
-  curHealth: 3
+  maxHealth: 8
+  curHealth: 8
   target: {fileID: 0}
   isChase: 0
 --- !u!114 &4373098612878535239

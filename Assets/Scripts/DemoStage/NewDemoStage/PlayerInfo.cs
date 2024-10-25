@@ -13,6 +13,8 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
 
+    private bool updateStart = false;
+
     
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,9 @@ public class PlayerInfo : MonoBehaviour
 
     private void Initialize()       //초기화 함수
     {
+        Health = PlayerManager.Instance.Health;
+        curHealth = Health;
+        
         damaged.SetText("");  //데미지를 입은 경우에만 표시
         InitHPBarSize();  //체력바 사이즈 초기화
         UpdateHealthInfo();
@@ -40,22 +45,29 @@ public class PlayerInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        curHealth = Health;
-        Health = PlayerManager.Instance.Health;     //현재체력 계속 가져오기
-        if (Health == 0 && PlayerManager.Instance.Death == false)                                 //죽은경우
+        if (updateStart)
         {
-            PlayerManager.Instance.Death = true;
-            float DamageDone = curHealth - Health;        //입은 데미지.
-            ShowDamage(DamageDone);
-            hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
-        }
-        else if (curHealth > Health && PlayerManager.Instance.Death == false)                     //체력이 닳은경우
-        {
-            float DamageDone = curHealth - Health;        //입은 데미지.
-            ShowDamage(DamageDone);
+            TotalHealth = PlayerManager.Instance.TotalHealth;
+            curHealth = Health;
+            Health = PlayerManager.Instance.Health;     //현재체력 계속 가져오기
+            if (Health == 0 && PlayerManager.Instance.Death == false)                                 //죽은경우
+            {
+                PlayerManager.Instance.Death = true;
+                float DamageDone = curHealth - Health;        //입은 데미지.
+                ShowDamage(DamageDone);
+                hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
+            }
+            else if (curHealth > Health && PlayerManager.Instance.Death == false)                     //체력이 닳은경우
+            {
+                float DamageDone = curHealth - Health;        //입은 데미지.
+                ShowDamage(DamageDone);
             
+            }
+            //Debug.LogError("TotalHealth : " + TotalHealth);
+            //Debug.LogError("Health : " + Health);
+            hpBar.rectTransform.localScale = new Vector3((float)Health/(float)TotalHealth, 1f, 1f);
         }
-        hpBar.rectTransform.localScale = new Vector3((float)Health/(float)TotalHealth, 1f, 1f);
+        
     }
     
     private void ShowDamage(float d)
@@ -72,10 +84,10 @@ public class PlayerInfo : MonoBehaviour
 
     void UpdateHealthInfo()     //체력관련 내용 가져오는 함수
     {
-        TotalHealth = PlayerManager.Instance.TotalHealth;
         Health = PlayerManager.Instance.Health;     
         HealthGen = PlayerManager.Instance.HealthGen;
         curHealth = Health;
+        updateStart = true;
     }
     
 }

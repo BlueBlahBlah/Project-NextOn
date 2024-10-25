@@ -23,7 +23,7 @@ public class SwordSilver : MonoBehaviour
         collider = GetComponent<MeshCollider>();
         //attackNum = 0;
         attackRadius = 20f;
-        Damage = 5;
+        Damage = 1;
         
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
         SkillCoolTime = 10f;            //현재 무기의 쿨타임을 10초로 초기화 

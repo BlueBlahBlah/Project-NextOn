@@ -28,7 +28,7 @@ public class SwordStatic : MonoBehaviour
         collider = GetComponent<MeshCollider>();
         SkillTime = 3;      //기본 3번 튕김
         findDistance = 5f;      //스킬반경 5f
-        Damage = 3;
+        Damage = 1;
         
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
         SkillCoolTime = 10f;            //현재 무기의 쿨타임을 10초로 초기화 

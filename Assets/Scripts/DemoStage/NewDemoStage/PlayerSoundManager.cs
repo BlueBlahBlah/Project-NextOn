@@ -32,6 +32,8 @@ public class PlayerSoundManager : MonoBehaviour
     
     public AudioClip reload;
     public AudioClip revive;
+    
+    public AudioClip BGM;
 
     // 오디오 소스 관리용 딕셔너리
     private Dictionary<AudioClip, AudioSource> audioSources = new Dictionary<AudioClip, AudioSource>();
@@ -83,6 +85,8 @@ public class PlayerSoundManager : MonoBehaviour
         
         reload = Resources.Load<AudioClip>("Sound/SE/재장전");
         revive = Resources.Load<AudioClip>("Sound/SE/부활");
+        
+        BGM = Resources.Load<AudioClip>("Sound/BGM/A Fight With The Enemy");
     }
 
     // 각 오디오 클립마다 AudioSource를 생성하여 저장하는 메서드
@@ -114,6 +118,9 @@ public class PlayerSoundManager : MonoBehaviour
         
         CreateAudioSource(reload);
         CreateAudioSource(revive);
+        
+        CreateAudioSource(BGM);
+        
     }
 
     // 오디오 클립마다 AudioSource를 생성하는 메서드
@@ -202,7 +209,23 @@ public class PlayerSoundManager : MonoBehaviour
     
     public void reload_Sound() => PlaySound(reload);
     public void revive_Sound() => PlaySound(revive);
+    
+    public void BGM_Start() => PlayLoopingSound(BGM);
 
     public void Stop_Heli_Plane_Sound() => StopSound(Heli_Plane);
     public void Stop_Heli_Shoot_Sound() => StopSound(Heli_Shoot);
+    
+    // BGM 볼륨을 조절하는 메서드
+    public void SetBGMVolume(float volume)
+    {
+        if (audioSources.ContainsKey(BGM))
+        {
+            AudioSource bgmSource = audioSources[BGM];
+            bgmSource.volume = Mathf.Clamp(volume, 0f, 1f); // 0부터 1까지의 범위로 제한
+        }
+        else
+        {
+            Debug.LogError("BGM의 AudioSource를 찾을 수 없습니다.");
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class SwordSilverSkill1 : MonoBehaviour
     {
         PlayerSoundManager.Instance.Sliver_Skill_Sound();
         Invoke("SecondAttack", 3f);
-        Damage = 10;
+        Damage = 1;
     }
 
     // Update is called once per frame

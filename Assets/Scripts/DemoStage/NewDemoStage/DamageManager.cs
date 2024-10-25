@@ -82,30 +82,30 @@ public class DamageManager : MonoBehaviour
     private void Start()
     {
         // 무기 계수 곱하기 전 데미지 설정
-        SwordStreamEdge_DamageCounting = 1;
-        SwordStatic_DamageCounting = 1;
-        SwordSliver_DamageCounting = 1;
-        SwordDemacia_DamageCounting = 50;
-        FantasyAxe_DamageCounting = 100;
+        SwordStreamEdge_DamageCounting = 20;
+        SwordStatic_DamageCounting = 20;
+        SwordSliver_DamageCounting = 20;
+        SwordDemacia_DamageCounting = 20;
+        FantasyAxe_DamageCounting = 20;
         
-        SwordStreamEdge_Skill_DamageCounting = 1;
-        SwordStatic_Passive_DamageCounting = 1;
-        SwordStatic_Skill_DamageCounting = 1;
-        SwordSliver_Skill_DamageCounting = 1;
-        SwordDemacia_Skill_DamageCounting = 50;
-        FantasyAxe_Skill_DamageCounting = 1;
+        SwordStreamEdge_Skill_DamageCounting = 40;
+        SwordStatic_Passive_DamageCounting = 15;
+        SwordStatic_Skill_DamageCounting = 40;
+        SwordSliver_Skill_DamageCounting = 40;
+        SwordDemacia_Skill_DamageCounting = 40;
+        FantasyAxe_Skill_DamageCounting = 100;
         
-        FlameGun_DamageCounting = 50;
+        FlameGun_DamageCounting = 2;
         MachineGun_DamageCounting = 1;
-        GrenadeLauncher_DamageCounting = 1;
-        Sniper_DamageCounting = 1;
+        GrenadeLauncher_DamageCounting = 3;
+        Sniper_DamageCounting = 30;
         Rifle_DamageCounting = 1;
         ShotGun_DamageCounting = 1;
 
         
-        Bomber_Skill_DamageCounting = 1;
-        Turret_Skill_DamageCounting = 1;
-        Helicopter_Skill_DamageCounting = 1;
+        Bomber_Skill_DamageCounting = 30;
+        Turret_Skill_DamageCounting = 10;
+        Helicopter_Skill_DamageCounting = 5;
         GunSpire_Skill_DamageCounting = 1;
         
         Bomber_Skill_WarheadKind = 4;
