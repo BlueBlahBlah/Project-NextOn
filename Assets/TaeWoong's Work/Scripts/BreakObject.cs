@@ -15,10 +15,12 @@ public class BreakObject : Enemy
     BoxCollider _boxCollider;
     NavMeshAgent _nav;
     public GameObject rotationObj; // 회전할 물체
-    public GameObject showNormalizationObj; // 정상화 표시
+    public GameObject[] showNormalizationObj; // 정상화 표시
     public RepairArea repairArea_1st;
     public RepairArea repairArea_2nd;
     public RepairArea repairArea_3rd;
+    public bool isScript11 = false;
+    public bool isScript12 = false;
     public GameObject[] objectsToDisable; // 비활성화할 오브젝트 배열
     public GameObject[] objectsToAble; // 활성화할 오브젝트 배열
     [SerializeField] private TextMeshPro damaged; // 데미지 표시용 텍스트
@@ -37,7 +39,7 @@ public class BreakObject : Enemy
         this.maxHealth = GetComponent<Enemy>().maxHealth;
         this.curHealth = this.maxHealth;
         isChase = false;
-
+        MapSoundManager.Instance.BGM_Sci_Fi_Map_Sound();
         damaged.SetText("");  // 데미지를 입은 경우에만 표시
     }
 
@@ -54,6 +56,16 @@ public class BreakObject : Enemy
             foreach (GameObject obj in objectsToAble)
             {
                 obj.SetActive(true);
+            }
+        }
+
+        if (repairArea_1st.isRepaired && repairArea_2nd.isRepaired && repairArea_3rd.isRepaired) // 데미지를 받을 수 있는 상태인지 확인
+        {
+            if(!isScript11)
+            {
+                Debug.Log("[태웅 디버깅] Script #11 설정 "); // 디버깅 로그 추가
+                MapSoundManager.Instance.EndProgress_Sound();
+                isScript11 = true;
             }
         }
 
@@ -99,10 +111,20 @@ public class BreakObject : Enemy
 
         isNormalization = true; // 사망 상태로 변경
         isEnterArea3 = true; // Area 3 오픈
+        // showNormalizationObj.SetActive(true); // 정상화 표시
 
-        showNormalizationObj.SetActive(true); // 정상화 표시
+        if(!isScript12)
+        {
+            foreach (GameObject obj in showNormalizationObj)
+            {
+                obj.SetActive(true);
+            }
+            Debug.Log("[태웅 디버깅] Script #12 설정 "); // 디버깅 로그 추가
+            MapSoundManager.Instance.EndProgress_Sound();
+        }
+        isScript12 = true;
 
-        // 활성화할 오브젝트들 활성화
+        // 비활성화할 오브젝트들 비활성화
         foreach (GameObject obj in objectsToDisable)
         {
             obj.SetActive(false);

@@ -10,7 +10,7 @@ public class DeactivateObjectsOnPlayerEnter : MonoBehaviour
     public GameObject objectA; // A 오브젝트
     public GameObject objectB; // B 오브젝트
 
-    private PlayerGetKeyArea playerArea; // PlayerGetKeyArea 스크립트 참조
+    public PlayerGetKeyArea playerArea; // PlayerGetKeyArea 스크립트 참조
 
     private void Start()
     {
@@ -36,6 +36,7 @@ public class DeactivateObjectsOnPlayerEnter : MonoBehaviour
                         obj.SetActive(false); // 오브젝트 비활성화
                     }
                 }
+                MapSoundManager.Instance.Unlock_Sound();
             }
             else
             {

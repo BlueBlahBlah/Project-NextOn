@@ -1106,7 +1106,6 @@ GameObject:
   - component: {fileID: 3644340045946395991}
   - component: {fileID: 4032902398657370059}
   - component: {fileID: 7867551600349525928}
-  - component: {fileID: 2046023457343063670}
   - component: {fileID: 1545978188132372745}
   - component: {fileID: 2703781198556925724}
   m_Layer: 10
@@ -1205,22 +1204,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2046023457343063670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4419442133534370776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8548e90c22a6c8e47be8808fb7bd5a99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  curHealth: 5
-  target: {fileID: 0}
-  isChase: 0
 --- !u!114 &1545978188132372745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,10 +1220,12 @@ MonoBehaviour:
   curHealth: 0
   target: {fileID: 0}
   isChase: 0
+  mobSpawner: {fileID: 0}
   isAttack: 0
   isDie: 0
   AttackArea: {fileID: 6848498584073765323}
   Damage: 3
+  damageInterval: 1
   damaged: {fileID: 4549694754306120695, guid: 27857f3a52e694b46b8dced61afc04c0, type: 3}
   hpBar: {fileID: 6110838130545043629}
   anim: {fileID: 0}
@@ -2326,7 +2311,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3209886793011438530}
   - component: {fileID: 8897548813914971257}
-  - component: {fileID: 4294439382115379551}
   - component: {fileID: 5814685513852800401}
   m_Layer: 10
   m_Name: Golem
@@ -2459,22 +2443,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.6563008, y: -0.008264959, z: 0.0011342764}
     m_Extent: {x: 1.1994567, y: 1.1654851, z: 1.7637237}
   m_DirtyAABB: 0
---- !u!114 &4294439382115379551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9057461778846090164}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8548e90c22a6c8e47be8808fb7bd5a99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 0
-  curHealth: 0
-  target: {fileID: 0}
-  isChase: 0
 --- !u!95 &5814685513852800401
 Animator:
   serializedVersion: 5

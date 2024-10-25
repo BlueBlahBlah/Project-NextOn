@@ -5,16 +5,17 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy_Turtle : Enemy
+public class Enemy_Turtle : Mob
 {
     public bool isAttack; // 공격 여부
     public bool isDie; // 사망 여부
+    Vector3 lookVec; // 플레이어 예측 방향
     [SerializeField] private BoxCollider AttackArea; // 공격 범위 콜라이더
     public int Damage = 5; // 몬스터의 공격력
     public float damageInterval = 1.0f; // 데미지를 주는 간격 (초)
     [SerializeField] private TextMeshPro damaged; // 데미지 표시용 텍스트
     public Image hpBar; // 체력바 UI
-    public MobSpawner mobSpawner; // MobSpawner 참조
+    // public MobSpawner mobSpawner; // MobSpawner 참조
     private int health; //현재 스크립트에서 관리하는 체력
     private bool canDamagePlayer = true; // 플레이어에게 데미지를 줄 수 있는 상태
 
@@ -29,7 +30,7 @@ public class Enemy_Turtle : Enemy
         _nav = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
 
-        target = GameObject.Find("Player").transform;
+        // target = GameObject.Find("Player").transform;
 
         this.maxHealth = GetComponent<Enemy>().maxHealth;
         this.curHealth = this.maxHealth;
@@ -53,8 +54,6 @@ public class Enemy_Turtle : Enemy
 
     void Update()
     {
-        UpdateHPBar();
-
         // 체력 관련 처리
         if (isDie)  //죽은경우
         {
@@ -62,6 +61,13 @@ public class Enemy_Turtle : Enemy
         }
         else    //살아있는경우
         {
+            float h = target.position.x - transform.position.x; // 수평 좌표
+            float v = target.position.z - transform.position.z; // 수직 좌표
+
+            lookVec = new Vector3(h, 0, v).normalized * 5f; // 방향 벡터 정규화
+            transform.LookAt(target.position + lookVec);
+
+            UpdateHPBar();
             //체력관련
             this.curHealth = GetComponent<Enemy>().curHealth;
             if (curHealth < health)
@@ -99,7 +105,10 @@ public class Enemy_Turtle : Enemy
     {
         if (other.CompareTag("Player")) // 플레이어와 충돌 시
         {
-            Attack(); // 공격 메서드 호출
+            if(!isDie)
+            {
+                Attack(); // 공격 메서드 호출
+            }
         }
     }
 
@@ -128,6 +137,9 @@ public class Enemy_Turtle : Enemy
     IEnumerator HandleAttack()
     {
         canDamagePlayer = false; // 플레이어에게 데미지를 줄 수 없는 상태로 변경
+
+        MapSoundManager.Instance.Spider_Attack_Sound();
+        // yield return new WaitForSeconds(1.0f); // 공격 애니메이션의 길이에 맞춰 대기
 
         Collider[] hitColliders = Physics.OverlapBox(AttackArea.bounds.center, AttackArea.bounds.extents, AttackArea.transform.rotation);
 
@@ -160,11 +172,13 @@ public class Enemy_Turtle : Enemy
     void Die()
     {
         if (isDie) return; // 이미 죽은 경우 추가 처리 방지
-
+        Debug.Log("[태웅 디버깅] Enemy_Turtle 사망"); // 디버깅 로그 추가
+        MapSoundManager.Instance.Die_Mob_Sound();
         _anim.SetTrigger("doDie"); // 죽는 애니메이션 트리거
         isDie = true; // 사망 상태로 변경
         isAttack = false; // 공격 상태 초기화
-
+        _rigid.isKinematic = true; // 물리적 상호작용 중지
+        _nav.enabled = false;
         // Rigidbody의 물리적 힘 비활성화
         _rigid.isKinematic = true; // 물리적 상호작용 중지
 

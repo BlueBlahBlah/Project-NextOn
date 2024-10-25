@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         // Enemy 오브젝트의 자식 컴포넌트에 MeshRender가 존재하기에 Children으로 부터 불러오기
-        mat = GetComponentInChildren<MeshRenderer>().material; // Material은 Mesh Render 컴포넌트를 통해서 접근 가능
+        // mat = GetComponentInChildren<MeshRenderer>().material; // Material은 Mesh Render 컴포넌트를 통해서 접근 가능
         nav = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
 
          if(isChase) // 추적을 결정하는 bool 변수 사용
              nav.SetDestination(target.position);
+
    }
 
     void OnTriggerEnter(Collider other) {
@@ -62,14 +63,14 @@ public class Enemy : MonoBehaviour
 
    IEnumerator OnDamage() // 로직을 담을 코루틴 생성
    {
-        mat.color = Color.red; // 피격 시 색상을 Red 로 설정
+        // mat.color = Color.red; // 피격 시 색상을 Red 로 설정
         yield return new WaitForSeconds(0.1f); // 피격 설정
 
         if(curHealth > 0) {
-            mat.color = Color.white;
+            // mat.color = Color.white;
         }
         else {
-            mat.color = Color.grey;
+            //mat.color = Color.grey;
             // isChase = false; // 죽을 시 추적 중지
             // nav.enabled = false; // 사망 리액션 유지를 위한 Nav Agent 비활성화
             // anim.SetTrigger("doDie"); // 죽는 시점 설정
