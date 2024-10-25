@@ -57,7 +57,7 @@ public class Scenario_2 : MonoBehaviour
             EnemySpawn[3].SetActive(true);
             EnemySpawn[4].SetActive(true);
             EnemySpawn[5].SetActive(true);
-            scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 101);
+            //scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 101);
             Debug.Log("대사 여기를 막는건가");
         }
         else if ((is1_TriggerPass && is2_TriggerPass) && !cmd2IsPass)
@@ -66,7 +66,7 @@ public class Scenario_2 : MonoBehaviour
             EnemySpawn[6].SetActive(true);
             EnemySpawn[7].SetActive(true);
             EnemySpawn[8].SetActive(true);
-            scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 102);
+            //scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 102);
             Debug.Log("대사 이제 재시작을 하러 가보자");
         }
         
@@ -83,7 +83,7 @@ public class Scenario_2 : MonoBehaviour
     {
         if (child.name == "2_End" && !is_End)
         {
-            scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 103);
+            //scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 103);
             Debug.Log("대사 여기서 재시작하는건가? 작동 시켜보자 \r\n\r\n시스템 : 방화벽 프로그램 작동... 재시작 준비완료");
             is_End = true;
         }
