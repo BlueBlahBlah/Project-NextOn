@@ -75,8 +75,12 @@ public class EventManager : MonoBehaviour
     private bool getFinalBulletSupply;
     private bool getFinalSkill;
     [SerializeField] private GameObject FadeOut;
+    [SerializeField] private GameObject StageClearPanel;
 
     public bool isPause;                                    //시간이 멈추었는지
+    
+    public AudioClip BGM;
+    private AudioSource BGMaudioSource;
     
     
     // Start is called before the first frame update
@@ -86,6 +90,7 @@ public class EventManager : MonoBehaviour
         FireBtn.SetActive(false);
         SkillBtn.SetActive(false);
         EventBtn.SetActive(false);
+        StageClearPanel.SetActive(false);
         ParenthesisGauge.SetActive(false);
         Area3 = false;
         Wave2MonsterClear = false;
@@ -125,8 +130,13 @@ public class EventManager : MonoBehaviour
         UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점) 50
         PrintLongDialogue();
         
-        PlayerSoundManager.Instance.SetBGMVolume(0.2f);
-        PlayerSoundManager.Instance.BGM_Start();
+        BGM = Resources.Load<AudioClip>("Sound/BGM/A Fight With The Enemy");
+        BGMaudioSource = gameObject.AddComponent<AudioSource>();
+        BGMaudioSource.clip = BGM;
+        BGMaudioSource.volume = 0.2f; // Set volume to 0.2
+        BGMaudioSource.loop = true; // Enable looping
+        BGMaudioSource.Play(); // Start playing BGM
+        
         
     }
     
@@ -228,10 +238,15 @@ public class EventManager : MonoBehaviour
         }
         else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
         {
-            PlayerSoundManager.Instance.StopSound(PlayerSoundManager.Instance.BGM);
-            fadeout();
+            //브금 중지
+            if (BGMaudioSource != null && BGMaudioSource.isPlaying)
+            {
+                BGMaudioSource.Stop();
+            }
+            StageClearPanel.SetActive(true);
+            //fadeout();
             //씬 넘어가는 코드
-            Debug.LogError("씬 넘어가는 코드 넣어야 합니다");
+            //Debug.LogError("씬 넘어가는 코드 넣어야 합니다");
         }
         
             
@@ -350,6 +365,22 @@ public class EventManager : MonoBehaviour
         EventBtn.SetActive(false);
         //Peiz3Monster_2.SetActive(true);
     }
+    
+    /*public void BGM_Start() => PlayLoopingSound(BGM);
+    
+    // BGM 볼륨을 조절하는 메서드
+    public void SetBGMVolume(float volume)
+    {
+        if (audioSources.ContainsKey(BGM))
+        {
+            AudioSource bgmSource = audioSources[BGM];
+            bgmSource.volume = Mathf.Clamp(volume, 0f, 1f); // 0부터 1까지의 범위로 제한
+        }
+        else
+        {
+            Debug.LogError("BGM의 AudioSource를 찾을 수 없습니다.");
+        }
+    }*/
 
     //타 클래스에서 대화창을 재개하는 경우 호출
     public void PrintMSG()
