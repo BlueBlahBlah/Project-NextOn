@@ -26,7 +26,6 @@ public class PathToEnter : MonoBehaviour
     }
     IEnumerator PathCoroutine()
     {
-        //yield return new WaitUntil(() => FirstLandManager.firstLandManager.isUnderFin);
         yield return new WaitUntil(() => _triggers[0].GetComponent<Trigger>().isTriggered);
 
         for(int i = 0; i < 10; i++)

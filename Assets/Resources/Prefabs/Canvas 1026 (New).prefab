@@ -6474,6 +6474,7 @@ GameObject:
   - component: {fileID: 5860257238500260073}
   - component: {fileID: 5636161498211452800}
   - component: {fileID: 1313863945099167122}
+  - component: {fileID: 5600885164892998950}
   m_Layer: 5
   m_Name: Canvas 1026 (New)
   m_TagString: Untagged
@@ -6493,7 +6494,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8501017554635196787}
   - {fileID: 2696978170030747840}
   - {fileID: 714874388126404459}
   - {fileID: 5099978631488197032}
@@ -6509,6 +6509,7 @@ RectTransform:
   - {fileID: 8706057298046262736}
   - {fileID: 7193255085143099708}
   - {fileID: 5330227208173041231}
+  - {fileID: 8501017554635196787}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6579,6 +6580,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5600885164892998950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916159022754040242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d1bc305eb41cb42bfb25a021e458a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectPanel: {fileID: 8501017554635196787}
+  animationDuration: 0.5
+  volumeController: {fileID: 0}
+  currentStageNumber: 0
+  clearButton: {fileID: 2154650024002956939}
 --- !u!1 &9026255004180827182
 GameObject:
   m_ObjectHideFlags: 0
@@ -8499,6 +8517,10 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 3086682528942893127, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3941788817443851233, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
       propertyPath: m_SizeDelta.y
       value: -100
@@ -8511,9 +8533,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage Clear Panel
       objectReference: {fileID: 0}
-    - target: {fileID: 5975271906017873917, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
+    - target: {fileID: 5630028465270640254, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5975271906017873917, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7035238351491902938, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5600885164892998950}
+    - target: {fileID: 7035238351491902938, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeScene
       objectReference: {fileID: 0}
     - target: {fileID: 8563677716706270350, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
       propertyPath: m_SizeDelta.y
@@ -8536,6 +8570,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
+--- !u!114 &2154650024002956939 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7035238351491902938, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}
+  m_PrefabInstance: {fileID: 8954540096537396049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8501017554635196787 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 701792616970095138, guid: 68266488c57ae594bbbf2a63bc044819, type: 3}

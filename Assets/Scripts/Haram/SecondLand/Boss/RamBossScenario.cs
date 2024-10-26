@@ -23,6 +23,8 @@ public class RamBossScenario : MonoBehaviour
     private GameObject _lastFence;
     [SerializeField]
     private GameObject _pathToClear;
+    [SerializeField]
+    private GameObject clearObject;
     void Awake()
     {
         instance = new RamBossScenario();
@@ -46,10 +48,11 @@ public class RamBossScenario : MonoBehaviour
         this.GetComponent<RamBossStageManager>().StageSetting();
         yield return new WaitUntil(() => isThirdFin);
         CircleTree.SetActive(false);
-        _bossMob.GetComponent<Animator>().SetBool("Death", true);
+        //_bossMob.GetComponent<Animator>().SetBool("Death", true);
         yield return new WaitForSeconds(2f);
         _bossMob.SetActive(false);
         _lastFence.SetActive(false);
         _pathToClear.SetActive(true);
+        clearObject.SetActive(true);
     }   
 }

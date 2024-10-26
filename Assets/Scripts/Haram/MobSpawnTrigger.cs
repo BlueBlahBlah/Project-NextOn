@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Unity.AI.Navigation;
 
 public class MobSpawnTrigger : Trigger
 {
@@ -12,6 +13,8 @@ public class MobSpawnTrigger : Trigger
     [SerializeField]
     private GameObject _wallToPreventDestroy;
 
+    public NavMeshSurface navMeshSurface;
+
     public override void OnTriggerEnter(Collider collision)
     {
         isTriggered = true;
@@ -20,7 +23,7 @@ public class MobSpawnTrigger : Trigger
             _destroyGround.SetActive(false);
         if(_wallToPreventDestroy != null)
             _wallToPreventDestroy.SetActive(true);
-        
+    
         if(_spawnPoints.Length > 0)
         {
             for(int i = 0; i < 10; i++)

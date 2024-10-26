@@ -9,6 +9,8 @@ public class StageClearPanel : MonoBehaviour
     [SerializeField]
     private RectTransform selectPanel;
     public float animationDuration = 0.5f; // 애니메이션 지속 시간
+
+    [SerializeField]
     private VolumeController volumeController;
 
     // Stage 클리어 판정 관련
@@ -33,7 +35,6 @@ public class StageClearPanel : MonoBehaviour
                 GameObject volumeControllerObject = new GameObject("VolumeController");
                 volumeController = volumeControllerObject.AddComponent<VolumeController>();
             }
-
         }
     }
 

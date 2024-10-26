@@ -14,11 +14,6 @@ public class VolumeController : MonoBehaviour
     private Volume volume;
     private float lerpDuration = 1.5f; // Lerp 시간을 설정
 
-    void Awake()
-    {
-        // 이 오브젝트가 씬 변경 시 파괴되지 않도록 설정
-        DontDestroyOnLoad(gameObject);
-    }
 
     void Start()
     {

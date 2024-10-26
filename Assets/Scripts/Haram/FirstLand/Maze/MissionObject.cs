@@ -22,30 +22,29 @@ public class MissionObject : MonoBehaviour
     {
         if (isStay)
         {
-            //if (Input.GetKey(KeyCode.F))
-            //{
-                curtime += Time.deltaTime;
-                slider.value = curtime / maxtime;
-                if (slider.value == 1)
+
+            curtime += Time.deltaTime;
+            slider.value = curtime / maxtime;
+            if (slider.value == 1)
+            {
+                slider.gameObject.SetActive(false);
+                slider.value = 0;
+                ItemImage.SetActive(true);
+                ItemImage.GetComponent<Button>().interactable = false;
+                for(int i = 0; i < 5 * (maze.missionCount + 1); i++)
                 {
-                    slider.gameObject.SetActive(false);
-                    slider.value = 0;
-                    ItemImage.SetActive(true);
-                    ItemImage.GetComponent<Button>().interactable = false;
-                    for(int i = 0; i < 5 * (maze.missionCount + 1); i++)
-                    {
-                        PoolManager.poolManager.FirstGet(0);
-                    }
-                    maze.missionCount++;
-                    parent.SetActive(false);
+                    PoolManager.poolManager.FirstGet(0);
                 }
-            //}
+                maze.missionCount++;
+                parent.SetActive(false);
+            }
         }
     }
     private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("hi");
             slider.gameObject.SetActive(true);
             isClose = true;
         }
@@ -54,15 +53,20 @@ public class MissionObject : MonoBehaviour
     {
         if(isClose && collision.CompareTag("Player"))
         {
+            Debug.Log("hello");
             isStay = true;
         }
     }
 
     private void OnTriggerExit(Collider collision)
     {
-        curtime = 0;
-        slider.gameObject.SetActive(false);
-        isClose = false;
-        isStay = false;
+        if(isClose && collision.CompareTag("Player"))
+        {   
+            Debug.Log("ho");
+            curtime = 0;
+            slider.gameObject.SetActive(false);
+            isClose = false;
+            isStay = false;
+        }
     }
 }

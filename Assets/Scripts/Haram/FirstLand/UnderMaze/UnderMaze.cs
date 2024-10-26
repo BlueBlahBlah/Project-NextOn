@@ -46,7 +46,10 @@ public class UnderMaze : MonoBehaviour
 
         //몬스터 10마리를 스폰구역 1,2,3에서 랜덤 스폰한다
         for(int i = 0; i < 10; i++)
-            PoolManager.poolManager.SecondGet(0,0,3);
+        {
+            int x = Random.Range(0,2);
+            PoolManager.poolManager.SecondGet(x,0,3);
+        }
         //첫번째 지역에 나온 몬스터를 다 잡을 때까지 기다림
         yield return new WaitUntil(() => PoolManager.poolManager.GetAllPoolSetActive() == 0);
         //오르막길 생성
@@ -84,9 +87,6 @@ public class UnderMaze : MonoBehaviour
 
         //NPC에게 가는 길이 열림
         TempWalls[4].SetActive(false);
-        //leader = Instantiate(leaderMob,Player.transform.position, Player.transform.rotation);
-        //NPC에게 접근하길 기다림
-        //leaderMob.GetComponent<LeaderMob>().SetTarget(Triggers[3].transform);
         yield return new WaitUntil(() => Triggers[3].GetComponent<Trigger>().isTriggered);
         //Destroy(leader);
         Debug.Log("오른쪽 위에 버튼 세 개를 눌러서 메모리를 복구해줘");
