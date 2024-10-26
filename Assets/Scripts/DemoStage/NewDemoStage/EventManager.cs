@@ -75,7 +75,9 @@ public class EventManager : MonoBehaviour
     private bool getFinalBulletSupply;
     private bool getFinalSkill;
     [SerializeField] private GameObject FadeOut;
-    [SerializeField] private GameObject StageClearPanel;
+    [SerializeField] private GameObject StageClearPanelObject;
+    [SerializeField] private StageClearPanel StageClearPanel;
+    private bool stageclearpannel_appearence;
 
     public bool isPause;                                    //시간이 멈추었는지
     
@@ -86,11 +88,12 @@ public class EventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stageclearpannel_appearence = false;
         Joystick.SetActive(false);
         FireBtn.SetActive(false);
         SkillBtn.SetActive(false);
         EventBtn.SetActive(false);
-        StageClearPanel.SetActive(false);
+        StageClearPanelObject.SetActive(false);
         ParenthesisGauge.SetActive(false);
         Area3 = false;
         Wave2MonsterClear = false;
@@ -136,7 +139,6 @@ public class EventManager : MonoBehaviour
         BGMaudioSource.volume = 0.2f; // Set volume to 0.2
         BGMaudioSource.loop = true; // Enable looping
         BGMaudioSource.Play(); // Start playing BGM
-        
         
     }
     
@@ -243,13 +245,26 @@ public class EventManager : MonoBehaviour
             {
                 BGMaudioSource.Stop();
             }
-            StageClearPanel.SetActive(true);
+
+            if (stageclearpannel_appearence == false)
+            {
+                stageclearpannel_appearence = true;
+                StageClearPanelObject.SetActive(true);
+                Invoke("stageclear_invoke",2f);
+            }
+            
+            
             //fadeout();
             //씬 넘어가는 코드
             //Debug.LogError("씬 넘어가는 코드 넣어야 합니다");
         }
         
             
+    }
+
+    private void stageclear_invoke()
+    {
+        StageClearPanel.OpenPanel();
     }
     
     private void MonsterTimeResume_Invoke()

@@ -111,6 +111,7 @@ public class PlayerManager : MonoBehaviour
         Health = TotalHealth;
         SkillCoolTimeRate = 0;     //시작 시 스킬 쿨타임
         Death = false;
+        revive = 3;
     }
     
     /*void OnEnable()
