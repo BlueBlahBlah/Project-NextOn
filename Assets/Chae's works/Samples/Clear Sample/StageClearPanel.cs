@@ -25,16 +25,8 @@ public class StageClearPanel : MonoBehaviour
     {
         if (volumeController == null)
         {
-            // 새로운 GameObject를 만들고 VolumeController를 추가
-            if (GameObject.Find("VolumeController") != null)
-            {
-                volumeController = GameObject.Find("VolumeController").GetComponent<VolumeController>();
-            }
-            else
-            {
-                GameObject volumeControllerObject = new GameObject("VolumeController");
-                volumeController = volumeControllerObject.AddComponent<VolumeController>();
-            }
+            GameObject volumeControllerObject = new GameObject("VolumeController");
+            volumeController = volumeControllerObject.AddComponent<VolumeController>();
         }
     }
 
