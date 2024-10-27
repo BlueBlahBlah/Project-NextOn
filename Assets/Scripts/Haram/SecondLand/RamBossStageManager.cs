@@ -48,7 +48,6 @@ public class RamBossStageManager : MonoBehaviour
     {
         for(int i = 0; i < mobnum; i++)
         {
-            int x = Random.Range(0,2);
             PoolManager.poolManager.MonsterSpawn(_spawnPoint,stageNum);
         }
         _mobCountText.gameObject.SetActive(true);

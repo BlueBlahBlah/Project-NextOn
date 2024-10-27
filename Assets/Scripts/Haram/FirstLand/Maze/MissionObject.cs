@@ -44,7 +44,6 @@ public class MissionObject : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("hi");
             slider.gameObject.SetActive(true);
             isClose = true;
         }
@@ -53,7 +52,6 @@ public class MissionObject : MonoBehaviour
     {
         if(isClose && collision.CompareTag("Player"))
         {
-            Debug.Log("hello");
             isStay = true;
         }
     }
@@ -62,7 +60,6 @@ public class MissionObject : MonoBehaviour
     {
         if(isClose && collision.CompareTag("Player"))
         {   
-            Debug.Log("ho");
             curtime = 0;
             slider.gameObject.SetActive(false);
             isClose = false;

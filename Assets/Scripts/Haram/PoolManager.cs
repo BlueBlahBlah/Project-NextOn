@@ -41,6 +41,8 @@ public class PoolManager : MonoBehaviour
 
         foreach(GameObject item in pools[index])
         {
+            if(item == null)
+                continue;
             if(!item.activeSelf)
             {
                 select = item;
@@ -63,6 +65,8 @@ public class PoolManager : MonoBehaviour
 
         foreach(GameObject item in pools[index])
         {
+            if(item == null)
+                continue;
             if(!item.activeSelf)
             {
                 int x = Random.Range(first,second);
@@ -89,6 +93,8 @@ public class PoolManager : MonoBehaviour
         int x = Random.Range(0, mobPoint.Length);
         foreach(GameObject item in pools[index])
         {
+            if(item == null)
+                continue;
             if(!item.activeSelf)
             {
                 select = item;
@@ -115,6 +121,8 @@ public class PoolManager : MonoBehaviour
         {
             foreach(GameObject item in pools[i])
             {
+                if(item == null)
+                    continue;
                 if(item.activeSelf)
                 {
                     num++; 
@@ -129,6 +137,8 @@ public class PoolManager : MonoBehaviour
     {
         foreach(GameObject item in pools[index])
         {
+            if(item == null)
+                continue;
             if(item.activeSelf)
             {
                 item.SetActive(false);
@@ -141,6 +151,8 @@ public class PoolManager : MonoBehaviour
         {
             foreach(GameObject item in pools[i])
             {
+                if(item == null)
+                    continue;
                 if(item.activeSelf)
                 {
                     item.SetActive(false);
@@ -152,6 +164,8 @@ public class PoolManager : MonoBehaviour
     {
         foreach(GameObject item in pools[index])
         {
+            if(item == null)
+                continue;
             if(item.activeSelf)
             {
                 Destroy(item);
@@ -165,6 +179,8 @@ public class PoolManager : MonoBehaviour
         {
             foreach(GameObject item in pools[i])
             {
+                if(item == null)
+                    continue;
                 if(item.activeSelf)
                 {
                     Destroy(item);
