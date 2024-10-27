@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,28 +38,30 @@ public class SceneReloader : MonoBehaviour
         scenario.Scenario_3.SetActive(false);
         scenario.Scenario_4.SetActive(false);
 
+        scenario.JoyStick.enabled =true;
+
         Debug.Log($"대사  {scenarioNumber}");
         // 시나리오 번호에 따라 다른 로직 실행
         switch (scenarioNumber)
         {
             case 1:
                 Scenario.instance.StartCoroutine(scenario.Scenario1Start());
-                scenario.Scenario_1.GetComponent<Scenario_1>().Player.transform.position =
+                scenario.Player.transform.position =
                     scenario.Scenario_1.GetComponent<Scenario_1>().Respawn.transform.position;
                 break;
             case 2:
                 Scenario.instance.StartCoroutine(scenario.Scenario2Start());
-                scenario.Scenario_2.GetComponent<Scenario_2>().Player.transform.position =
+                scenario.Player.transform.position =
                     scenario.Scenario_2.GetComponent<Scenario_2>().Respawn.transform.position;
                 break;
             case 3:
                 Scenario.instance.StartCoroutine(scenario.Scenario3Start());
-                scenario.Scenario_3.GetComponent<Scenario_3>().Player.transform.position =
+                scenario.Player.transform.position =
                     scenario.Scenario_3.GetComponent<Scenario_3>().Respawn.transform.position;
                 break;
             case 4:
                 Scenario.instance.StartCoroutine(scenario.Scenario4Start());
-                scenario.Scenario_1.GetComponent<Scenario_1>().Player.transform.position =
+                scenario.Player.transform.position =
                     scenario.Scenario_1.GetComponent<Scenario_1>().Respawn.transform.position;
                 break;
         }

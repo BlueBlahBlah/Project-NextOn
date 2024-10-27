@@ -32,7 +32,6 @@ public class Scenario_4 : MonoBehaviour
 
     [Header("Player Respawn")]
     public Transform Respawn;
-    public GameObject Player;
     public Slider Bar;
 
     void Start()

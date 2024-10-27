@@ -10,7 +10,7 @@ public class Scenario : MonoBehaviour
     public AudioSource BGM;
     public AudioSource MidBGM;
     public AudioSource FinalBGM;
-
+    [Header("Scenario")]
     public GameObject Scenario_1;
     public GameObject Scenario_2;
     public GameObject Scenario_3;
@@ -22,10 +22,13 @@ public class Scenario : MonoBehaviour
         get { return Playing_Scenario; }
         set { Playing_Scenario = value; }
     }
+    [Header("Manager Edit")]
     public PlayerManager playerManager;
     public SceneReloader sceneReloader;
     public GameObject Dialogue;
+    public FixedJoystick JoyStick;
     public bool is_End;
+    public GameObject Player;
     // 싱글톤 선언
     #region
     public static Scenario instance;
@@ -59,7 +62,8 @@ public class Scenario : MonoBehaviour
         MidBGM.mute = true;
         FinalBGM.mute = true;
         UIManager = FindAnyObjectByType<UIManager>();
-        Debug.Log("대사 시나리오 시작");
+        Player = GameObject.FindGameObjectWithTag("Player");
+        JoyStick = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
         is_End = false;
     }
     // 에디터 전용 초기화 코드
@@ -68,24 +72,26 @@ public class Scenario : MonoBehaviour
     {
         PlayerPrefs.DeleteAll(); // PlayerPrefs 초기화
         PlayerPrefs.Save();      // 변경 사항을 저장
-        Debug.Log("PlayerPrefs가 Unity 에디터에서 초기화되었습니다.");
     }
 #endif
     void Update()
     {
-        if (playerManager.Death) Die();
+        if (playerManager.Death) 
+        {
+            JoyStick.enabled =false;
+            Die(); 
+        }
         else if (is_End)
         {
             //UI 띄우기, 로그창 띄우기
             Debug.Log("대사 end");
             BGM.mute = true;
             FinalBGM.mute = true;
-            MidBGM.mute= true;
+            MidBGM.mute = true;
         }
     }
     public IEnumerator Scenario1Start()
     {
-        //Playing_Scenario = 1;
         SaveScenarioProgress();
         Debug.Log($"대사 {playing_Scenario} 시나리오 시작");
 
@@ -95,7 +101,6 @@ public class Scenario : MonoBehaviour
 
     public IEnumerator Scenario2Start()
     {
-        //playing_Scenario = 2;
         SaveScenarioProgress();
         Debug.Log($"대사 {playing_Scenario} 시나리오 시작");
 
@@ -107,7 +112,6 @@ public class Scenario : MonoBehaviour
 
     public IEnumerator Scenario3Start()
     {
-        //playing_Scenario = 3;
         SaveScenarioProgress();
         Debug.Log($"대사 {playing_Scenario} 시나리오 시작");
 
@@ -119,7 +123,6 @@ public class Scenario : MonoBehaviour
 
     public IEnumerator Scenario4Start() 
     {
-        //playing_Scenario = 4;
         SaveScenarioProgress();
         Debug.Log($"대사 {playing_Scenario} 시나리오 시작");
 

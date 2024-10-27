@@ -13,7 +13,6 @@ public class Scenario_1 : MonoBehaviour
 
     [Header("Player Respawn")]
     public Transform Respawn;
-    public GameObject Player;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +41,7 @@ public class Scenario_1 : MonoBehaviour
             Debug.Log("대사 컴파일러... 재시작 필요...\r\n누수 방지 프로그램... 작동 필요...\r\n\r\n이게 내가 해야하는 일들인가?\r\n일단 누수된부분을 막는거 부터 해보자");
             is_End=true;
         }
-        if(child.name == "Prob")
+        if(child.name == "Prob" && other.name.Length != 1)
         {
             //scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 99);
             Debug.Log("대사 무기를 발견했다\r\n이게 왜 여기 있는지는 모르겠지만, 없는거보다는...");

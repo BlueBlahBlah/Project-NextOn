@@ -16,7 +16,6 @@ public class Scenario_2 : MonoBehaviour
 
     [Header("Player Respawn")]
     public Transform Respawn;
-    public GameObject Player;
 
     void Start()
     {
