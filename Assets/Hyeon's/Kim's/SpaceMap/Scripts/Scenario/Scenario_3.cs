@@ -18,7 +18,6 @@ public class Scenario_3 : MonoBehaviour
 
     [Header("Player Respawn")]
     public Transform Respawn;
-    public GameObject Player;
 
     [Header("Smoke")]
     public GameObject[] Smoke;
@@ -65,7 +64,7 @@ public class Scenario_3 : MonoBehaviour
             Scenario.instance.StartCoroutine(scenario.Scenario4Start());
         }
 
-        if (!isSideScrollingCamActivated && Player.transform.position.y > 5f)
+        if (!isSideScrollingCamActivated && scenario.Player.transform.position.y > 5f)
         {
             SideScrollingCam();
             isSideScrollingCamActivated = true; // 함수 호출 후 플래그를 true로 설정
