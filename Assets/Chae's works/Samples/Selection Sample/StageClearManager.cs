@@ -10,7 +10,8 @@ public class StageClearManager : MonoBehaviour
 
     // Stage 클리어 여부 저장
     [SerializeField]
-    private bool[] stageClearStatus = new bool[4]; // 0: Stage1, 1: Stage2, 2: Stage3, 3: Stage4
+    public bool[] stageClearStatus = new bool[4]; // 0: Stage1, 1: Stage2, 2: Stage3, 3: Stage4
+    public bool isSuccess = false;
 
     private void Awake()
     {
@@ -65,9 +66,21 @@ public class StageClearManager : MonoBehaviour
             {
                 // i번째 스테이지 미클리어
             }
-
-            if (clearCount == 4) { DoEnding(); }
+            
+            
         }
+
+        if (clearCount == 0)
+        {
+            ExecuteStageClearFunction(2);
+            ExecuteStageClearFunction(3);
+            ExecuteStageClearFunction(4);
+        }
+        if (clearCount == 4)
+        {
+            DoEnding();
+        }
+        
     }
 
     // 각 Stage 가 클리어 되었다면 실행할 함수
@@ -99,6 +112,21 @@ public class StageClearManager : MonoBehaviour
         {
             stageClearStatus[stageNumber - 1] = isClear;
             Debug.Log($"Stage {stageNumber} 클리어 상태가 {isClear}로 설정됨");
+            isSuccess = true;
+        }
+        else
+        {
+            Debug.LogWarning("잘못된 Stage 번호");
+        }
+    }
+
+    public void SetStageFail(int stageNumber, bool isClear = false)
+    {
+        if (stageNumber >= 1 && stageNumber <= 4)
+        {
+            stageClearStatus[stageNumber - 1] = isClear;
+            Debug.Log($"Stage {stageNumber} 클리어 상태가 {isClear}로 설정됨");
+            isSuccess = false;
         }
         else
         {
@@ -109,6 +137,7 @@ public class StageClearManager : MonoBehaviour
     // 스테이지 전부 클리어 시 호출되는 엔딩 메서드
     public void DoEnding()
     {
+        // 엔딩 관련 요소 (오브젝트 추가 등)
         Debug.Log("You Cleared All Stage!");
     }
 }

@@ -427,6 +427,50 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1601598492329198834, guid: e29b19c4538f8df45a9d4349d9ab88d0, type: 3}
   m_PrefabInstance: {fileID: 2060581221}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &83451863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83451865}
+  - component: {fileID: 83451864}
+  m_Layer: 0
+  m_Name: Scenario Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &83451864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83451863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c390304850b3a8340a16eb3c892d38d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &83451865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83451863}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.38713455, y: -1.1185864, z: -0.8430536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &106005489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4857,6 +4901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageClearStatus: 00000000
+  isSuccess: 0
 --- !u!4 &1721740466
 Transform:
   m_ObjectHideFlags: 0
@@ -6788,6 +6833,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -364.1172
       objectReference: {fileID: 0}
+    - target: {fileID: 5518003212366101406, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5791501029721279415, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7708,3 +7757,4 @@ SceneRoots:
   - {fileID: 1353662923424970126}
   - {fileID: 1266816983}
   - {fileID: 1165152918}
+  - {fileID: 83451865}
