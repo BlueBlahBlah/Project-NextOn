@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     public static PoolManager poolManager;
+    public int mobcount = 0;
 
     [SerializeField]
     private GameObject[] prefabs;

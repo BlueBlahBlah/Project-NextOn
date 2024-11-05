@@ -22,6 +22,8 @@ public class UnderMaze : MonoBehaviour
     private GameObject FoodWallTrigger;
     [SerializeField]
     private GameObject PathtoSecondLand;
+    [SerializeField]
+    private GameObject CompletePath;
 
     public int missionCount;
 
@@ -90,7 +92,7 @@ public class UnderMaze : MonoBehaviour
         yield return new WaitUntil(() => Triggers[3].GetComponent<Trigger>().isTriggered);
         //Destroy(leader);
         Debug.Log("오른쪽 위에 버튼 세 개를 눌러서 메모리를 복구해줘");
-
+        CompletePath.SetActive(false);
         //버튼을 활성화시킴
         for(int i = 0; i < 3; i++)
             MissionButton[i].GetComponent<Button>().interactable = true;
