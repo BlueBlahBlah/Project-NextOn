@@ -227,6 +227,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3631321632843353391, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5266491582387478127, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -530,6 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageClearStatus: 00000000
+  isSuccess: 0
 --- !u!4 &611167192
 Transform:
   m_ObjectHideFlags: 0
