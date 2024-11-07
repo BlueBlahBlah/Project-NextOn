@@ -130,7 +130,7 @@ public class EventManager : MonoBehaviour
             g.SetActive(false);
         }
         
-        UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점) 50
+        UIManager.instance.DialogueNumber = 70; // 다이얼로그 넘버 저장 (대사 시작지점) 70
         PrintLongDialogue();
         
         BGM = Resources.Load<AudioClip>("Sound/BGM/A Fight With The Enemy");
@@ -152,7 +152,7 @@ public class EventManager : MonoBehaviour
     void Update()
     {
         
-        if (UIManager.instance.DialogueNumber == 55 && UIManager.instance.isCompletelyPrinted == true)
+        if (UIManager.instance.DialogueNumber == 83)// && UIManager.instance.isCompletelyPrinted == true)
         {
             foreach (GameObject g in FirstDirection)
             {
@@ -164,7 +164,7 @@ public class EventManager : MonoBehaviour
             PlayerManager.Instance.find_attackBtn_Invoke();
             //fadeout();
         }
-        else if (UIManager.instance.DialogueNumber == 57 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 84)// && UIManager.instance.isCompletelyPrinted == true)
         {
             foreach (GameObject g in FirstPickWeapons)
             {
@@ -173,7 +173,7 @@ public class EventManager : MonoBehaviour
             MonsterManager.Instance.Appearance_First_Monster();             //첫 몬스터 등장
             JoystickActivation();     //조이스틱 활성화
         }
-        else if (UIManager.instance.DialogueNumber == 62 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 92)// && UIManager.instance.isCompletelyPrinted == true)
         {
             MonsterManager.Instance.Appearance_Second_Monster();             //두번째 몬스터 등장
             if (getFirsatBulletSupply == false)
@@ -187,7 +187,7 @@ public class EventManager : MonoBehaviour
             }
             JoystickActivation();     //조이스틱 활성화
         }
-        else if (UIManager.instance.DialogueNumber == 66 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 94)// && UIManager.instance.isCompletelyPrinted == true)
         {
             MonsterManager.Instance.Appearance_Third_Monster();             //세번째 몬스터 등장
             randomItemDropSignal = true;                                    //이제 랜덤 아이템 드랍됨
@@ -203,7 +203,7 @@ public class EventManager : MonoBehaviour
             }
             
         }
-        else if (UIManager.instance.DialogueNumber == 72 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 99)// && UIManager.instance.isCompletelyPrinted == true)
         {
             foreach (GameObject g in ThirdDirection)
             {
@@ -238,7 +238,7 @@ public class EventManager : MonoBehaviour
                 getFinalSkill = true;
             }
         }
-        else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 100)// && UIManager.instance.isCompletelyPrinted == true)
         {
             //브금 중지
             if (BGMaudioSource != null && BGMaudioSource.isPlaying)
