@@ -29,6 +29,7 @@ public class Scenario : MonoBehaviour
     public GameObject Player;
     public bool is_End;
     public FixedJoystick joystick;
+    public GameObject GameClearPanel;
     // ½Ì±ÛÅæ ¼±¾ð
     #region
     public static Scenario instance;
