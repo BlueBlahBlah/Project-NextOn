@@ -66,8 +66,6 @@ public class StageClearManager : MonoBehaviour
             {
                 // i번째 스테이지 미클리어
             }
-            
-            
         }
 
         if (clearCount == 0)
@@ -75,10 +73,16 @@ public class StageClearManager : MonoBehaviour
             ExecuteStageClearFunction(2);
             ExecuteStageClearFunction(3);
             ExecuteStageClearFunction(4);
+
+            Destroy(GameObject.Find("Scene Change Object - End"));
+        }
+        else if (clearCount > 0 && clearCount < 4)
+        {
+            Destroy(GameObject.Find("Scene Change Object - End"));
         }
         if (clearCount == 4)
         {
-            DoEnding();
+            GameObject.Find("Scene Change Object - End").SetActive(false);
         }
         
     }
@@ -132,13 +136,6 @@ public class StageClearManager : MonoBehaviour
         {
             Debug.LogWarning("잘못된 Stage 번호");
         }
-    }
-
-    // 스테이지 전부 클리어 시 호출되는 엔딩 메서드
-    public void DoEnding()
-    {
-        // 엔딩 관련 요소 (오브젝트 추가 등)
-        Debug.Log("You Cleared All Stage!");
     }
 }
 

@@ -4,13 +4,28 @@ using UnityEngine;
 
 public class ScenarioSelection : MonoBehaviour
 {
-    
+    [SerializeField]
+    private GameObject TutorialPanel;
+    [SerializeField]
+    private GameObject EndObject;
 
     // Start is called before the first frame update
     void Start()
     {
         
-        Invoke("PlayScenario", 5f);
+        Invoke("PlayScenario", 4f);
+    }
+
+    private void Update()
+    {
+        if (UIManager.instance.DialogueNumber >= 56 || !TutorialPanel.activeInHierarchy)
+        {
+            TutorialPanel.SetActive(true);
+        }
+        if (UIManager.instance.DialogueNumber == 418)
+        {
+            EndObject.SetActive(true);
+        }
     }
 
     public void PlayScenario()
