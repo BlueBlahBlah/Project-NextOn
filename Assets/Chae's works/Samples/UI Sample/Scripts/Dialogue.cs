@@ -102,6 +102,11 @@ public class Dialogue : MonoBehaviour
                 dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin/Devin", typeof(Sprite)) as Sprite;
                 dialogueImage.color = new Color(255, 255, 255, 255);
                 break;
+            case "R.E.M":
+                dialogueImage.sprite = Resources.Load($"UI/Image/Characters/REM/REM", typeof(Sprite)) as Sprite;
+                dialogueImage.color = new Color(255, 255, 255, 255);
+                break;
+
             case "작업 관리자":
                 dialogueImage.sprite = null;
                 dialogueImage.color = new Color(0, 0, 0, 0);

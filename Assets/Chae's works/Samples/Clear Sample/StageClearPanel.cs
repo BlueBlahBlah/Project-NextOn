@@ -43,6 +43,7 @@ public class StageClearPanel : MonoBehaviour
         {
             // 스테이지 클리어 함수를 불러와 해당 스테이지를 클리어
             StageClearManager.instance.SetStageClear(currentStageNumber, true);
+            StageClearManager.instance.isSuccess = true;
         }
         else
         {

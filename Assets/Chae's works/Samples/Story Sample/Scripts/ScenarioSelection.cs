@@ -24,7 +24,7 @@ public class ScenarioSelection : MonoBehaviour
 
         Debug.Log(count);
 
-        if (count == 0)
+        if (count == 0 && StageClearManager.instance.isSuccess == true)
         {
             PlayScenarioExplain();
         }
@@ -36,7 +36,7 @@ public class ScenarioSelection : MonoBehaviour
         {
             PlayScenarioSuccess();
         }
-        else if (count > 0 && count < 4 && StageClearManager.instance.isSuccess == false)
+        else if (count >= 0 && count < 4 && StageClearManager.instance.isSuccess == false)
         {
             PlayScenarioFailure();
         }
@@ -50,19 +50,21 @@ public class ScenarioSelection : MonoBehaviour
 
     public void PlayScenarioSuccess()
     {
-        // UIManager.instance.DialogueNumber = ;
+        // 340, 350, 360 Áß ·£´ı Ãâ·Â
+        UIManager.instance.DialogueNumber = Random.Range(34, 37) * 10;
         PlayDialogue();
     }
 
     public void PlayScenarioFailure()
     {
-        // UIManager.instance.DialogueNumber = ;
+        // 370, 380, 390, 400 Áß ·£´ı Ãâ·Â
+        UIManager.instance.DialogueNumber = Random.Range(37, 41) * 10;
         PlayDialogue();
     }
 
     public void PlayScenarioEnding()
     {
-        // UIManager.instance.DialogueNumber = ;
+        UIManager.instance.DialogueNumber = 410;
         PlayDialogue();
     }
 
