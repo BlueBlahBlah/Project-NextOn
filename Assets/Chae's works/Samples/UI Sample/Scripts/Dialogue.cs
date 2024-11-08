@@ -10,13 +10,17 @@ public class Dialogue : MonoBehaviour
     [Header("Dialogue")]
     [Header("Connect")]
     [SerializeField]
-    private GameObject dialogue; // 占쏙옙화창 占쏙옙占쏙옙占쏙옙트
+    private GameObject dialogue; // 다이얼로그 오브젝트
     [SerializeField]
-    private Image dialogueImage; // 占쏙옙화 캐占쏙옙占쏙옙 占싱뱄옙占쏙옙
+    private GameObject imageDevin; // 데빈의 이미지 오브젝트
     [SerializeField]
-    private TextMeshProUGUI dialogueName; // 占쏙옙화 캐占쏙옙占쏙옙 占싱몌옙
+    private GameObject imageREM; // REM의 이미지 오브젝트
     [SerializeField]
-    private TextMeshProUGUI dialogueContent; // 占쏙옙화 占쏙옙占쏙옙
+    private Image dialogueImage; // 
+    [SerializeField]
+    private TextMeshProUGUI dialogueName; // 대사 주체
+    [SerializeField]
+    private TextMeshProUGUI dialogueContent; // 대사 내용
     [SerializeField]
     private Button printSpeed;
     [SerializeField]
@@ -24,16 +28,16 @@ public class Dialogue : MonoBehaviour
 
     [Header("Option")]
     [SerializeField]
-    private string dialogueType; // 占쏙옙占싱억옙慣占 타占쏙옙 (占쏙옙占쏙옙)
+    private string dialogueType; // 다이얼로그 타입 (현재 사용 x)
     [SerializeField]
-    private float typingSpeed = 0.03f; // 占쏙옙화 占쏙옙占 占쌈듸옙
+    private float typingSpeed = 0.03f; // 타이핑 속도
 
     [Header("Data")]
-    public bool isDialogue; // 占쏙옙화창 표占쏙옙 占쏙옙占쏙옙
-    private List<Dictionary<string, object>> data_Dialogue; // csv 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙
-    public int DialogueNumber; // 占쏙옙占쏙옙占 占쏙옙화占쏙옙 占쏙옙호
-    private float dialogueTime; // 占쏙옙화占쏙옙 占쏙옙占쏙옙 (WaitforSeconds 占쌉뤄옙 占쏙옙占쏙옙)
-    private int dialogueIsContinuous; // 占싱억옙占쏙옙占쏙옙 占쏙옙화占쏙옙 占쌍댐옙占쏙옙 확占쏙옙占쏙옙 占쏙옙占쏙옙
+    public bool isDialogue; // 현재 다이얼로그가 출력 가능한지 판단
+    private List<Dictionary<string, object>> data_Dialogue; // csv 파일로부터 데이터를 불러와 저장하는 자료구조
+    public int DialogueNumber; // 현재 다이얼로그 넘버
+    private float dialogueTime; // Auto 모드에서 다이얼로그 출력 후 대기 시간
+    private int dialogueIsContinuous; // 이어지는 대사가 있는지 판단하는 변수 (1 : 있음, 0 : 없음)
 
     private Coroutine typingCoroutine; // 현재 실행 중인 코루틴을 제어할 변수
 
@@ -99,21 +103,39 @@ public class Dialogue : MonoBehaviour
         switch (Name)
         {
             case "데빈":
-                dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin/Devin", typeof(Sprite)) as Sprite;
-                dialogueImage.color = new Color(255, 255, 255, 255);
+                if (!imageDevin.activeInHierarchy)
+                {
+                    imageDevin.SetActive(true);  
+                }
+                imageDevin.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                imageREM.GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 1);
+
+                // dialogueImage.sprite = Resources.Load($"UI/Image/Characters/Devin/Devin", typeof(Sprite)) as Sprite;
+                // dialogueImage.color = new Color(255, 255, 255, 255);
                 break;
             case "R.E.M":
-                dialogueImage.sprite = Resources.Load($"UI/Image/Characters/REM/REM", typeof(Sprite)) as Sprite;
-                dialogueImage.color = new Color(255, 255, 255, 255);
+                if (!imageREM.activeInHierarchy)
+                {
+                    imageREM.SetActive(true);
+                }
+                imageDevin.GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 1);
+                imageREM.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+
+                // dialogueImage.sprite = Resources.Load($"UI/Image/Characters/REM/REM", typeof(Sprite)) as Sprite;
+                // dialogueImage.color = new Color(255, 255, 255, 255);
                 break;
 
             case "작업 관리자":
-                dialogueImage.sprite = null;
-                dialogueImage.color = new Color(0, 0, 0, 0);
+                imageDevin.GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 1);
+                imageREM.GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 1);
+                // dialogueImage.sprite = null;
+                // dialogueImage.color = new Color(0, 0, 0, 0);
                 break;
             default:
-                dialogueImage.sprite = null;
-                dialogueImage.color = new Color(0, 0, 0, 0);
+                imageDevin.GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 1);
+                imageREM.GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 1);
+                // dialogueImage.sprite = null;
+                // dialogueImage.color = new Color(0, 0, 0, 0);
                 break;
         }
     }
