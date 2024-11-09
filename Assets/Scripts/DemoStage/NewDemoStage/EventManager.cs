@@ -137,8 +137,7 @@ public class EventManager : MonoBehaviour
             g.SetActive(false);
         }
         
-        UIManager.instance.DialogueNumber = 70; // 다이얼로그 넘버 저장 (대사 시작지점) 70
-        PrintLongDialogue();
+       
         
         BGM = Resources.Load<AudioClip>("Sound/BGM/A Fight With The Enemy");
         BGMaudioSource = gameObject.AddComponent<AudioSource>();
@@ -153,7 +152,15 @@ public class EventManager : MonoBehaviour
         dialogue_4 = false;
         dialogue_5 = false;
         dialogue_6= false;
+        
+        Invoke("msg_invoke",1.5f);
 
+    }
+
+    private void msg_invoke()
+    {
+        UIManager.instance.DialogueNumber = 70; // 다이얼로그 넘버 저장 (대사 시작지점) 70
+        PrintLongDialogue();
     }
     
     public void PrintLongDialogue()
