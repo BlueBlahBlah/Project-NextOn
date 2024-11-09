@@ -359,6 +359,43 @@ public class PlayerManager : MonoBehaviour
             }
         }
     }
+
+    public void longtypeweapon_bullet_init()
+    {
+        foreach (GameObject g in player_WeaponList)
+        {
+            if (g.GetComponent<Rifle>())
+            {
+                g.GetComponent<Rifle>().bulletCount = 60; 
+                g.GetComponent<Rifle>().maxBulletCount = 100; 
+            }
+            else if (g.GetComponent<Shotgun>())
+            {
+                g.GetComponent<Shotgun>().bulletCount = 60; 
+                g.GetComponent<Shotgun>().maxBulletCount = 100; 
+            }
+            else if (g.GetComponent<Sniper>())
+            {
+                g.GetComponent<Sniper>().bulletCount = 60; 
+                g.GetComponent<Sniper>().maxBulletCount = 100; 
+            }
+            else if (g.GetComponent<GrenadeLauncher>())
+            {
+                g.GetComponent<GrenadeLauncher>().bulletCount = 60; 
+                g.GetComponent<GrenadeLauncher>().maxBulletCount = 100; 
+            }
+            else if (g.GetComponent<MachineGun>())
+            {
+                g.GetComponent<MachineGun>().bulletCount = 60; 
+                g.GetComponent<MachineGun>().maxBulletCount = 200; 
+            }
+            else if (g.GetComponent<FireGun>())
+            {
+                g.GetComponent<FireGun>().bulletCount = 60; 
+                g.GetComponent<FireGun>().maxBulletCount = 100; 
+            }
+        }
+    }
     
     
     //원거리 무기가 바뀌어도 현재 들고있는 무기의 탄을 가져오기

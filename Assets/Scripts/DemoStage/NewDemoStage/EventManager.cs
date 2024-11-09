@@ -83,6 +83,13 @@ public class EventManager : MonoBehaviour
     
     public AudioClip BGM;
     private AudioSource BGMaudioSource;
+
+    private bool dialogue_1;
+    private bool dialogue_2;
+    private bool dialogue_3;
+    private bool dialogue_4;
+    private bool dialogue_5;
+    private bool dialogue_6;
     
     
     // Start is called before the first frame update
@@ -139,7 +146,14 @@ public class EventManager : MonoBehaviour
         BGMaudioSource.volume = 0.2f; // Set volume to 0.2
         BGMaudioSource.loop = true; // Enable looping
         BGMaudioSource.Play(); // Start playing BGM
-        
+
+        dialogue_1 = false;
+        dialogue_2 = false;
+        dialogue_3 = false;
+        dialogue_4 = false;
+        dialogue_5 = false;
+        dialogue_6= false;
+
     }
     
     public void PrintLongDialogue()
@@ -154,104 +168,136 @@ public class EventManager : MonoBehaviour
         
         if (UIManager.instance.DialogueNumber == 83)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            foreach (GameObject g in FirstDirection)
+            if (dialogue_1 == false)
             {
-                g.SetActive(true);                  //화살표 켜지기
+                dialogue_1 = true;
+                foreach (GameObject g in FirstDirection)
+                {
+                    g.SetActive(true);                  //화살표 켜지기
+                }
+                Joystick.SetActive(true);
+                FireBtn.SetActive(true);
+                SkillBtn.SetActive(true);
+                PlayerManager.Instance.find_attackBtn_Invoke();
             }
-            Joystick.SetActive(true);
-            FireBtn.SetActive(true);
-            SkillBtn.SetActive(true);
-            PlayerManager.Instance.find_attackBtn_Invoke();
+            
             //fadeout();
         }
         else if (UIManager.instance.DialogueNumber == 84)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            foreach (GameObject g in FirstPickWeapons)
+            if (dialogue_2 == false)
             {
-                g.SetActive(false);
+                dialogue_2 = true;
+                foreach (GameObject g in FirstPickWeapons)
+                {
+                    g.SetActive(false);
+                }
+                MonsterManager.Instance.Appearance_First_Monster();             //첫 몬스터 등장
+                JoystickActivation();     //조이스틱 활성화
+                //무기 탄알 초기화 코드
+                PlayerManager.instance.longtypeweapon_bullet_init();
             }
-            MonsterManager.Instance.Appearance_First_Monster();             //첫 몬스터 등장
-            JoystickActivation();     //조이스틱 활성화
+            
         }
         else if (UIManager.instance.DialogueNumber == 92)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            MonsterManager.Instance.Appearance_Second_Monster();             //두번째 몬스터 등장
-            if (getFirsatBulletSupply == false)
+            if (dialogue_3 == false)
             {
-                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.BulletSupply);      //탄 보충 아이템 떨어짐
-                getFirsatBulletSupply = true;
+                dialogue_3 = true;
+                MonsterManager.Instance.Appearance_Second_Monster();             //두번째 몬스터 등장
+                if (getFirsatBulletSupply == false)
+                {
+                    PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.BulletSupply);      //탄 보충 아이템 떨어짐
+                    getFirsatBulletSupply = true;
+                }
+                foreach (GameObject g in SecondDirection)
+                {
+                    g.SetActive(true);
+                }
+                JoystickActivation();     //조이스틱 활성화
             }
-            foreach (GameObject g in SecondDirection)
-            {
-                g.SetActive(true);
-            }
-            JoystickActivation();     //조이스틱 활성화
+            
         }
         else if (UIManager.instance.DialogueNumber == 94)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            MonsterManager.Instance.Appearance_Third_Monster();             //세번째 몬스터 등장
-            randomItemDropSignal = true;                                    //이제 랜덤 아이템 드랍됨
-            foreach (GameObject g in ThirdDirection)
+            if (dialogue_4 == false)
             {
-                g.SetActive(true);
+                dialogue_4 = true;
+                MonsterManager.Instance.Appearance_Third_Monster();             //세번째 몬스터 등장
+                randomItemDropSignal = true;                                    //이제 랜덤 아이템 드랍됨
+                foreach (GameObject g in ThirdDirection)
+                {
+                    g.SetActive(true);
+                }
+                JoystickActivation();     //조이스틱 활성화
+                if (getFirsatSkill == false)
+                {
+                    DropRandomItem_Invoke(5f);                                        //5초 후 랜덤 아이템 드랍
+                    getFirsatSkill = true;
+                }
             }
-            JoystickActivation();     //조이스틱 활성화
-            if (getFirsatSkill == false)
-            {
-                DropRandomItem_Invoke(5f);                                        //5초 후 랜덤 아이템 드랍
-                getFirsatSkill = true;
-            }
+            
             
         }
         else if (UIManager.instance.DialogueNumber == 99)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            foreach (GameObject g in ThirdDirection)
+            if (dialogue_5 == false)
             {
-                g.SetActive(false);                  //화살표 꺼지기
+                dialogue_5 = true;
+                foreach (GameObject g in ThirdDirection)
+                {
+                    g.SetActive(false);                  //화살표 꺼지기
+                }
+                foreach (GameObject g in SecondDirection)
+                {
+                    g.SetActive(false);                  //화살표 꺼지기
+                }
+                foreach (GameObject g in FirstDirection)
+                {
+                    g.SetActive(false);                  //화살표 꺼지기
+                }
+                //괄호몬스터 UI등장
+                ParenthesisGauge.SetActive(true);
+                ParenthesisGauge.GetComponent<FinalGauge>().DecreaseGauge_Coriutine();          //UI 100초에 걸쳐 감소
+                JoystickActivation();     //조이스틱 활성화
+                if (MonsterManager.Instance.FinalPeiz == false)
+                {
+                    MonsterManager.Instance.FinalPeiz = true;
+                    MonsterManager.Instance.Spawn_Parenthesis();
+                    MonsterManager.Instance.Spawn_Semicolon();
+                }
+                if (getFinalBulletSupply == false)
+                {
+                    DropRandomItem_Invoke(5f);                                        //5초 후 랜덤 아이템 드랍
+                    getFinalBulletSupply = true;
+                }
+                if (getFinalSkill == false)
+                {
+                    DropBulletSupply_Invoke(10f);                                        //10초 후 탄약 보충 드랍
+                    getFinalSkill = true;
+                }
             }
-            foreach (GameObject g in SecondDirection)
-            {
-                g.SetActive(false);                  //화살표 꺼지기
-            }
-            foreach (GameObject g in FirstDirection)
-            {
-                g.SetActive(false);                  //화살표 꺼지기
-            }
-            //괄호몬스터 UI등장
-            ParenthesisGauge.SetActive(true);
-            ParenthesisGauge.GetComponent<FinalGauge>().DecreaseGauge_Coriutine();          //UI 100초에 걸쳐 감소
-            JoystickActivation();     //조이스틱 활성화
-            if (MonsterManager.Instance.FinalPeiz == false)
-            {
-                MonsterManager.Instance.FinalPeiz = true;
-                MonsterManager.Instance.Spawn_Parenthesis();
-                MonsterManager.Instance.Spawn_Semicolon();
-            }
-            if (getFinalBulletSupply == false)
-            {
-                DropRandomItem_Invoke(5f);                                        //5초 후 랜덤 아이템 드랍
-                getFinalBulletSupply = true;
-            }
-            if (getFinalSkill == false)
-            {
-                DropBulletSupply_Invoke(10f);                                        //10초 후 탄약 보충 드랍
-                getFinalSkill = true;
-            }
+            
         }
         else if (UIManager.instance.DialogueNumber == 100)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            //브금 중지
-            if (BGMaudioSource != null && BGMaudioSource.isPlaying)
+            if (dialogue_6 == false)
             {
-                BGMaudioSource.Stop();
-            }
+                dialogue_6 = true;
+                //브금 중지
+                if (BGMaudioSource != null && BGMaudioSource.isPlaying)
+                {
+                    BGMaudioSource.Stop();
+                }
 
-            if (stageclearpannel_appearence == false)
-            {
-                stageclearpannel_appearence = true;
-                StageClearPanelObject.SetActive(true);
-                Invoke("stageclear_invoke",2f);
+                if (stageclearpannel_appearence == false)
+                {
+                    stageclearpannel_appearence = true;
+                    StageClearPanelObject.SetActive(true);
+                    Invoke("stageclear_invoke",2f);
+                }
             }
+           
             
             
             //fadeout();
@@ -401,7 +447,7 @@ public class EventManager : MonoBehaviour
     public void PrintMSG()
     {
         JoystickDeactivation();     //조이스틱 비활성화
-        UIManager.instance.DialogueNumber++;
+        //UIManager.instance.DialogueNumber++;
         PrintLongDialogue();
     }
     
