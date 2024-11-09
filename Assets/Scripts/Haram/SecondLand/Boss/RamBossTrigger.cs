@@ -5,6 +5,7 @@ using UnityEngine;
 public class RamBossTrigger : MonoBehaviour
 {
     public static RamBossTrigger instance;
+
     [SerializeField]
     private GameObject _circleTree;
     [SerializeField]
