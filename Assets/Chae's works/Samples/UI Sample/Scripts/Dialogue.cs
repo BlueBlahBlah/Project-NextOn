@@ -95,6 +95,14 @@ public class Dialogue : MonoBehaviour
         if (dialogueType == "Short") data_Dialogue = CSVReader.Read("Data (.csv)/Announce");
         if (dialogueType == "Long") data_Dialogue = CSVReader.Read("Data (.csv)/Dialogue");
 
+        ColorBlock colorsAuto = auto.colors;
+        colorsAuto.normalColor = UIManager.instance.isAuto ? Color.gray : Color.white;
+        auto.colors = colorsAuto;
+
+        ColorBlock colorsPrintSpeed = printSpeed.colors;
+        colorsPrintSpeed.normalColor = UIManager.instance.printSpeed == 2 ? Color.gray : Color.white;
+        printSpeed.colors = colorsPrintSpeed;
+
         dialogue.SetActive(false);
     }
 

@@ -9,7 +9,7 @@ public class Scenario1UI : MonoBehaviour
     [SerializeField]
     private Image Darkness;
     [SerializeField]
-    private Image Spark;
+    private GameObject Spark;
     [SerializeField]
     private Image characterPixel;
 
@@ -39,7 +39,7 @@ public class Scenario1UI : MonoBehaviour
         Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 0.5f);
     }
 
-    public void SetTotallyDark()
+    public void SetAlmostDark()
     {
         // 화면의 암전 연출
         Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 0.8f);
@@ -49,11 +49,6 @@ public class Scenario1UI : MonoBehaviour
     {
         // 조명의 깜빡임 연출 (밝음)
         Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 0f);
-    }
-
-    public void SparkEvent()
-    {
-        // 순간 강한 전기가 흐르는 연출
     }
 
     public void StopCharacter()
@@ -71,5 +66,29 @@ public class Scenario1UI : MonoBehaviour
     public void FadeOut()
     {
         volumeController.TriggerFadeOut();
+    }
+
+    public void ElectricShock()
+    {
+        StartCoroutine(SparkEvent());
+
+        Invoke("Fadein", 2f);
+        Invoke("ChangeSceneToSelectionScene", 3f);
+    }
+    IEnumerator SparkEvent()
+    {
+        SoundManager.instance.PlayEffectSound("ElectricShock2", 1f);
+        Spark.SetActive(true);
+        Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 1f);
+        yield return new WaitForSeconds(0.2f);
+        Spark.SetActive(false);
+
+        // 순간 강한 전기가 흐르는 연출
+        yield break;
+    }
+
+    private void ChangeSceneToSelectionScene()
+    {
+        LoadingManager.ToLoadScene();
     }
 }

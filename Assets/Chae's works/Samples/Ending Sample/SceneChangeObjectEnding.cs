@@ -31,6 +31,7 @@ public class SceneChangeObjectEnding : MonoBehaviour
         {
             if (SceneContainer.instance != null)
             {
+                SoundManager.instance.PlayEffectSound("SceneChangeObject", 0.5f);
                 SceneContainer.instance.nextScene = "Ending Scene";
                 TriggerFadeIn();
                 Invoke("DoChangeScene", 2f);

@@ -15,8 +15,8 @@ public class Menu : MonoBehaviour
     void Start()
     {
         SceneContainer.instance.currentScene = "Menu Scene";
-        // SceneContainer.instance.nextScene = "Scenario1 Scene";
-        SceneContainer.instance.nextScene = "Selection Scene";
+        SceneContainer.instance.nextScene = "Scenario1 Scene";
+        
 
         if (volumeController == null)
         {
