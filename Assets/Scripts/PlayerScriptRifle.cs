@@ -268,7 +268,8 @@ public class PlayerScriptRifle : MonoBehaviour
                 fireGun.nowReloading = false; // 이제 장전 끝
             }
         }
-        
+
+        PlayerSoundManager.Instance.reload_Sound_stop();
     }
     
     void OnRollButtonClick()

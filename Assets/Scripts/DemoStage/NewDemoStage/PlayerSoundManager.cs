@@ -208,6 +208,7 @@ public class PlayerSoundManager : MonoBehaviour
     public void Turrent_Explosion_Sound() => PlaySound(Turrent_Explosion);
     
     public void reload_Sound() => PlaySound(reload);
+    public void reload_Sound_stop() => StopSound(reload);
     public void revive_Sound() => PlaySound(revive);
     
 
