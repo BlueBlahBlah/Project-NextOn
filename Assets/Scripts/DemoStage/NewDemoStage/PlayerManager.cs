@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
 
     public int revive;      //부활 횟수
     private bool revive_decrease_once;      //부활 횟수를 1만 줄이기 위한 변수
+    public bool is_close_weapon;            //현재 근접무기 들고있는지
     
     private void Awake()
     {
@@ -112,6 +113,7 @@ public class PlayerManager : MonoBehaviour
         SkillCoolTimeRate = 0;     //시작 시 스킬 쿨타임
         Death = false;
         revive = 3;
+        is_close_weapon = false;
     }
     
     /*void OnEnable()
@@ -269,12 +271,14 @@ public class PlayerManager : MonoBehaviour
         if (player_LongWeapon.activeSelf)
         {
             player_LongWeapon.GetComponent<PlayerScriptRifle>().BulletInfo();
+            is_close_weapon = false;
             //Debug.LogError("현재 잔탄 "  + CurrentBullet);
             //Debug.LogError("총 잔탄 "  + TotalBullet);
         }
         else
         {
             //잔탄의 수를 무한대로 하는 코드
+            is_close_weapon = true;
         }
     }
 
