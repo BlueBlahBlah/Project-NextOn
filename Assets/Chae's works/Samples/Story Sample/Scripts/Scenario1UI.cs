@@ -73,7 +73,7 @@ public class Scenario1UI : MonoBehaviour
         StartCoroutine(SparkEvent());
 
         Invoke("Fadein", 2f);
-        Invoke("ChangeSceneToSelectionScene", 3f);
+        Invoke("ChangeSceneToSelectionScene", 5f);
     }
     IEnumerator SparkEvent()
     {
@@ -82,6 +82,7 @@ public class Scenario1UI : MonoBehaviour
         Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 1f);
         yield return new WaitForSeconds(0.2f);
         Spark.SetActive(false);
+        yield return new WaitForSeconds(0.8f);
 
         // 순간 강한 전기가 흐르는 연출
         yield break;

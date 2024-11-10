@@ -249,7 +249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5600885164892998950, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: currentStageNumber
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6183690560817675760, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchorMax.x
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb92c0df99619d44811e1f62e80e0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageClearStatus: 00010101
+  stageClearStatus: 01010100
   isSuccess: 0
 --- !u!4 &611167192
 Transform:
@@ -661,8 +661,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageClearPanel: {fileID: 157322631}
   failPanel: {fileID: 157322630}
-  isClear: 0
-  isFail: 1
+  isClear: 1
+  isFail: 0
 --- !u!4 &954526493
 Transform:
   m_ObjectHideFlags: 0
