@@ -138,6 +138,14 @@ public class Scenario_4 : MonoBehaviour
         AirPlane.transform.position = endPositionD;
         
         scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 238);
+        Time.timeScale = 0f;
+        GameObject dialogueUI = scenario.Dialogue; // 대화 UI 오브젝트
+        while (dialogueUI.activeSelf) // UI가 활성화된 동안 대기
+        {
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        Time.timeScale = 1f;
         Debug.Log("대사 Game Over");
         is_End = true;
         yield return null;
