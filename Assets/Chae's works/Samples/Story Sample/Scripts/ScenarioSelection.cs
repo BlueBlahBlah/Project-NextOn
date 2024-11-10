@@ -18,7 +18,7 @@ public class ScenarioSelection : MonoBehaviour
 
     private void Update()
     {
-        if (UIManager.instance.DialogueNumber >= 56 || !TutorialPanel.activeInHierarchy)
+        if (UIManager.instance.DialogueNumber >= 56 && !TutorialPanel.activeInHierarchy)
         {
             TutorialPanel.SetActive(true);
         }

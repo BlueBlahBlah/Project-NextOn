@@ -1360,9 +1360,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2040598949544695203, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040598949544695203, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6393943713049481752, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
       propertyPath: m_Name
       value: LongDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752271923940195602, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 256246aa6397def4dbc9741d04051aac, type: 2}
+    - target: {fileID: 6752271923940195602, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7246513861831667094, guid: 256246aa6397def4dbc9741d04051aac, type: 2}
+    - target: {fileID: 6752271923940195602, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777401820739960343, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 256246aa6397def4dbc9741d04051aac, type: 2}
+    - target: {fileID: 6777401820739960343, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7246513861831667094, guid: 256246aa6397def4dbc9741d04051aac, type: 2}
+    - target: {fileID: 6777401820739960343, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8645688777342820538, guid: a4e5b93cbef248248b04183711c5b4b0, type: 3}
       propertyPath: m_Pivot.x

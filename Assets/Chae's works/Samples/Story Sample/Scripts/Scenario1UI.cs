@@ -82,6 +82,7 @@ public class Scenario1UI : MonoBehaviour
         Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 1f);
         yield return new WaitForSeconds(0.2f);
         Spark.SetActive(false);
+        SoundManager.instance.PlayEffectSound("FailSound", 0.5f);
         yield return new WaitForSeconds(0.8f);
 
         // 순간 강한 전기가 흐르는 연출

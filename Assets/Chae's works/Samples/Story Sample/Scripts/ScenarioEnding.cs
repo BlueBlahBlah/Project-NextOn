@@ -10,7 +10,7 @@ public class ScenarioEnding : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Invoke("DoScenarioEnding", 2f);
     }
 
     // Update is called once per frame
@@ -19,5 +19,13 @@ public class ScenarioEnding : MonoBehaviour
         
     }
 
+    private void DoScenarioEnding()
+    {
+        StartCoroutine(StartScenarioEnding());
+    }
 
+    IEnumerator StartScenarioEnding()
+    {
+        yield return null;
+    }
 }

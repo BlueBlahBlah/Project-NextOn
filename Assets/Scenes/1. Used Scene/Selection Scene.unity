@@ -4117,8 +4117,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2789316597420297433, guid: 6a89e62ab5a67d448975aac8065b0bb4, type: 3}
+      propertyPath: Health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789316597420297433, guid: 6a89e62ab5a67d448975aac8065b0bb4, type: 3}
       propertyPath: attackBtn
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789316597420297433, guid: 6a89e62ab5a67d448975aac8065b0bb4, type: 3}
+      propertyPath: TotalBullet
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789316597420297433, guid: 6a89e62ab5a67d448975aac8065b0bb4, type: 3}
+      propertyPath: TotalHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789316597420297433, guid: 6a89e62ab5a67d448975aac8065b0bb4, type: 3}
+      propertyPath: CurrentBullet
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2789316597420297433, guid: 6a89e62ab5a67d448975aac8065b0bb4, type: 3}
       propertyPath: player_NonWeapon
@@ -4226,7 +4242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7544306749661903463, guid: 6a89e62ab5a67d448975aac8065b0bb4, type: 3}
       propertyPath: m_Name
-      value: '@PlayerManager'
+      value: PlayerManager
       objectReference: {fileID: 0}
     - target: {fileID: 7544306749661903463, guid: 6a89e62ab5a67d448975aac8065b0bb4, type: 3}
       propertyPath: m_IsActive
@@ -6968,6 +6984,14 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 610680506681801765, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 610680506681801765, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1623076116687893536, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7055,6 +7079,18 @@ PrefabInstance:
     - target: {fileID: 5099978631488197032, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -364.1172
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342975933335328657, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 256246aa6397def4dbc9741d04051aac, type: 2}
+    - target: {fileID: 5342975933335328657, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 7246513861831667094, guid: 256246aa6397def4dbc9741d04051aac, type: 2}
+    - target: {fileID: 5342975933335328657, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5518003212366101406, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_IsActive
@@ -7429,6 +7465,14 @@ PrefabInstance:
       propertyPath: m_text
       value: "\uC624\uB958\uC5D0 \uB300\uD574 \uAD81\uAE08\uD55C\uAC8C \uC788\uB2E4\uBA74\n\uC77C\uC2DC\uC815\uC9C0
         \uBC84\uD2BC\uC744 \uB20C\uB7EC\uBCF4\uC138\uC694!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596936767170748661, guid: 4fa35297970e63f44a0f38c821391939, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 256246aa6397def4dbc9741d04051aac, type: 2}
+    - target: {fileID: 7596936767170748661, guid: 4fa35297970e63f44a0f38c821391939, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
