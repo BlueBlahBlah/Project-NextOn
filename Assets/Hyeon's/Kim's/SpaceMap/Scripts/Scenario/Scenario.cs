@@ -136,6 +136,7 @@ public class Scenario : MonoBehaviour
         StopCoroutine(Scenario4Start());
         Scenario_4.SetActive(false);
         is_End = true;
+        GameClearPanel.SetActive(is_End);
         yield return null;
     }
     public void SaveScenarioProgress()
