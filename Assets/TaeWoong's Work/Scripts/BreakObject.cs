@@ -39,7 +39,8 @@ public class BreakObject : Enemy
         this.maxHealth = GetComponent<Enemy>().maxHealth;
         this.curHealth = this.maxHealth;
         isChase = false;
-        MapSoundManager.Instance.BGM_Sci_Fi_Map_Sound();
+        // MapSoundManager.Instance.BGM_Sci_Fi_Map_Sound();
+        SoundManager.instance.PlayMusic("4 - Celestial Echoes (Loop)");
         damaged.SetText("");  // 데미지를 입은 경우에만 표시
     }
 
@@ -64,7 +65,9 @@ public class BreakObject : Enemy
             if(!isScript11)
             {
                 Debug.Log("[태웅 디버깅] Script #11 설정 "); // 디버깅 로그 추가
-                MapSoundManager.Instance.EndProgress_Sound();
+                PrintLongDialogue();
+                // MapSoundManager.Instance.EndProgress_Sound();
+                SoundManager.instance.PlayEffectSound("활설화End");
                 isScript11 = true;
             }
         }
@@ -99,6 +102,11 @@ public class BreakObject : Enemy
         }
     }
 
+    public void PrintLongDialogue()
+    {
+        UIManager.instance.DialogueEventByNumber(UIManager.instance.longDialogue , UIManager.instance.DialogueNumber);
+    }
+    
     private void ShowDamage(int d)
     {
         TextMeshPro tempDamage = Instantiate(damaged, transform.position + new Vector3(0, 3.5f, 0), Quaternion.identity);
@@ -120,7 +128,9 @@ public class BreakObject : Enemy
                 obj.SetActive(true);
             }
             Debug.Log("[태웅 디버깅] Script #12 설정 "); // 디버깅 로그 추가
-            MapSoundManager.Instance.EndProgress_Sound();
+            PrintLongDialogue();
+            // MapSoundManager.Instance.EndProgress_Sound();
+            SoundManager.instance.PlayEffectSound("활설화End");
         }
         isScript12 = true;
 

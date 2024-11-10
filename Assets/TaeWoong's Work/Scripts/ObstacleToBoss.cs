@@ -7,6 +7,7 @@ public class ObstacleToBoss : MonoBehaviour
     Rigidbody _rigid;
     BoxCollider _boxCollider;
     public bool isEnter = false;
+    public bool isPlay = false;
     // 인자 확인용 참조
     public Area3_TakeArgument Arg_int;
     public Area3_TakeArgument Arg_double;
@@ -64,6 +65,11 @@ public class ObstacleToBoss : MonoBehaviour
     private void ShowPortalToBoss()
     {
         portalToBoss.SetActive(true); // showProgress 활성화
-        MapSoundManager.Instance.EndProgress_Sound();
+        if(!isPlay)
+        {
+            isPlay = true;
+            // MapSoundManager.Instance.EndProgress_Sound();
+            SoundManager.instance.PlayEffectSound("활설화End");
+        }
     }
 }

@@ -20,7 +20,8 @@ public class Boss_Boom : MonoBehaviour
         // 공격 영역 비활성화 후 일정 시간이 지나면 활성화
         AttackArea.enabled = false; // 공격 영역 비활성화
         StartCoroutine(ActivateAttackArea());
-        MapSoundManager.Instance.Summon_Boom_Sound();
+        // MapSoundManager.Instance.Summon_Boom_Sound();
+        SoundManager.instance.PlayEffectSound("에너지폭발");
     }
 
     private void OnTriggerEnter(Collider other)

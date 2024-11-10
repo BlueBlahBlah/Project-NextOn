@@ -20,6 +20,7 @@ public class Enemy_Boss : Mob
     public Boss_Boom boss_Boom; // 에너지 공격 오브젝트 참조
     public MobSpawner leftSummon; // MonsterSpawner를 참조
     public MobSpawner rightSummon; // MonsterSpawner를 참조
+    public GameObject clearPanel; // 스테이지 이동을 위한 캔버스
     [SerializeField] private TextMeshPro damaged; // 데미지 표시용 텍스트
     public Image hpBar; // 체력바 UI
     private int health; // 현재 스크립트에서 관리하는 체력
@@ -44,6 +45,11 @@ public class Enemy_Boss : Mob
         InitHPBarSize();  // 체력바 사이즈 초기화
     }
     
+    public void PrintLongDialogue()
+    {
+        UIManager.instance.DialogueEventByNumber(UIManager.instance.longDialogue , UIManager.instance.DialogueNumber);
+    }
+
     void InitHPBarSize()
     {
         hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
@@ -229,7 +235,8 @@ public class Enemy_Boss : Mob
     IEnumerator SummonMob()
     {
         anim.SetTrigger("isAttack03"); // 마법 공격 애니메이션
-        MapSoundManager.Instance.Summon_Mob_Sound();
+        // MapSoundManager.Instance.Summon_Mob_Sound();
+        SoundManager.instance.PlayEffectSound("몬스터 소환");
 
         yield return new WaitForSeconds(3.0f);
 
@@ -269,7 +276,11 @@ public class Enemy_Boss : Mob
         if (isDie) return;
         
         anim.SetTrigger("doDie"); // 죽는 애니메이션 트리거
-        MapSoundManager.Instance.Die_Boss_Sound();
+        // MapSoundManager.Instance.Die_Boss_Sound();
+        SoundManager.instance.PlayEffectSound("보스사망");
+
+        PrintLongDialogue();
+        clearPanel.SetActive(true);
 
         leftSummon.RemoveAllMonsters(); // 몬스터 디스폰
         rightSummon.RemoveAllMonsters(); // 몬스터 디스폰
