@@ -41,8 +41,8 @@ public class PlayerGetKeyArea : MonoBehaviour
         {
             HasKey = true; // 열쇠를 얻었다고 플래그 설정
             Debug.Log("열쇠를 얻었습니다!"); // 로그 출력
-            MapSoundManager.Instance.EndProgress_Sound();
-
+            // MapSoundManager.Instance.EndProgress_Sound();
+            SoundManager.instance.PlayEffectSound("활설화End");
             // 이펙트 생성
             // Instantiate(keyEffectPrefab, transform.position, Quaternion.identity); // 영역의 위치에서 이펙트 생성
         }
