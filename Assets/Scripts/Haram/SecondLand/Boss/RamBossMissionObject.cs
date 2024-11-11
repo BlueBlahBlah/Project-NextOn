@@ -16,7 +16,7 @@ public class RamBossMissionObject : MonoBehaviour
     public float curtime;
     private void Update()
     {
-        if (isStay && ramBossStageManager.isMissionStart)
+        /*if (isStay && ramBossStageManager.isMissionStart)
         {
             curtime += Time.deltaTime;
             slider.value = curtime / maxtime;
@@ -28,7 +28,7 @@ public class RamBossMissionObject : MonoBehaviour
                 ramBossStageManager.isStageCleared = true;
                 PoolManager.poolManager.ActivefalseAllPool();
             }
-        }
+        }*/
     }
     private void OnTriggerEnter(Collider collision)
     {

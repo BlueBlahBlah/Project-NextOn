@@ -32,11 +32,12 @@ public class DeactivateObjectsOnPlayerEnter : MonoBehaviour
                 {
                     if (obj != null)
                     {
-                        Instantiate(effectPrefab, effectPosition, Quaternion.identity); // 고정된 위치에서 이펙트 생성
-                        obj.SetActive(false); // 오브젝트 비활성화
+                        Instantiate(effectPrefab, effectPosition, Quaternion.identity);
+                        obj.SetActive(false);
                     }
                 }
-                MapSoundManager.Instance.Unlock_Sound();
+                // MapSoundManager.Instance.Unlock_Sound();
+                SoundManager.instance.PlayEffectSound("Area2_보안해제"); // MapSoundManager와 동일한 메서드 호출
             }
             else
             {

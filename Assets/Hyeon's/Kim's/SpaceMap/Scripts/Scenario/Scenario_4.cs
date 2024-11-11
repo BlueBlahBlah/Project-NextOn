@@ -32,7 +32,6 @@ public class Scenario_4 : MonoBehaviour
 
     [Header("Player Respawn")]
     public Transform Respawn;
-    public GameObject Player;
     public Slider Bar;
 
     void Start()
@@ -64,7 +63,7 @@ public class Scenario_4 : MonoBehaviour
         }
         else if(child.name ==secondTrigger.name && !is2_TriggerPass && other.tag == "Player")
         {
-            //scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 109);
+
             Debug.Log("대사 저 비행선을 통해서 탈출해보자 그러기위해서는 문이 열릴때까지 기다려야할거같아");
 
             is2_TriggerPass = true;
@@ -77,7 +76,7 @@ public class Scenario_4 : MonoBehaviour
     {
         yield return new WaitForSeconds(delayTime);
         Wall.SetActive(true);
-        //scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 110);
+        scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 236);
         Debug.Log("대사 이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
         scenario.FinalBGM.mute = false;
         scenario.BGM.mute = true;
@@ -137,7 +136,16 @@ public class Scenario_4 : MonoBehaviour
         Open_Door2.transform.position = endPositionB;
         Plane.transform.position = endPositionC;
         AirPlane.transform.position = endPositionD;
+        
+        scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 238);
+        Time.timeScale = 0f;
+        GameObject dialogueUI = scenario.Dialogue; // 대화 UI 오브젝트
+        while (dialogueUI.activeSelf) // UI가 활성화된 동안 대기
+        {
+            yield return null; // 다음 프레임까지 대기
+        }
 
+        Time.timeScale = 1f;
         Debug.Log("대사 Game Over");
         is_End = true;
         yield return null;

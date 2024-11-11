@@ -7585,7 +7585,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: eb29ec6068d22d3488ff717b5a270124, type: 2}
     - target: {fileID: 5150015063767341884, guid: b631eb20b6e4c7f4a831d3e72c54335a, type: 3}
       propertyPath: stageName
-      value: Stage 4
+      value: Sci-fi Map Demo
       objectReference: {fileID: 0}
     - target: {fileID: 5150015063767341884, guid: b631eb20b6e4c7f4a831d3e72c54335a, type: 3}
       propertyPath: selectCanvas

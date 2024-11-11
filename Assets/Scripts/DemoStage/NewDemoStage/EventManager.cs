@@ -75,17 +75,32 @@ public class EventManager : MonoBehaviour
     private bool getFinalBulletSupply;
     private bool getFinalSkill;
     [SerializeField] private GameObject FadeOut;
+    [SerializeField] private GameObject StageClearPanelObject;
+    [SerializeField] private StageClearPanel StageClearPanel;
+    private bool stageclearpannel_appearence;
 
     public bool isPause;                                    //시간이 멈추었는지
+    
+    public AudioClip BGM;
+    private AudioSource BGMaudioSource;
+
+    private bool dialogue_1;
+    private bool dialogue_2;
+    private bool dialogue_3;
+    private bool dialogue_4;
+    private bool dialogue_5;
+    private bool dialogue_6;
     
     
     // Start is called before the first frame update
     void Start()
     {
+        stageclearpannel_appearence = false;
         Joystick.SetActive(false);
         FireBtn.SetActive(false);
         SkillBtn.SetActive(false);
         EventBtn.SetActive(false);
+        StageClearPanelObject.SetActive(false);
         ParenthesisGauge.SetActive(false);
         Area3 = false;
         Wave2MonsterClear = false;
@@ -122,12 +137,30 @@ public class EventManager : MonoBehaviour
             g.SetActive(false);
         }
         
-        UIManager.instance.DialogueNumber = 50; // 다이얼로그 넘버 저장 (대사 시작지점) 50
+       
+        
+        BGM = Resources.Load<AudioClip>("Sound/BGM/A Fight With The Enemy");
+        BGMaudioSource = gameObject.AddComponent<AudioSource>();
+        BGMaudioSource.clip = BGM;
+        BGMaudioSource.volume = 0.2f; // Set volume to 0.2
+        BGMaudioSource.loop = true; // Enable looping
+        BGMaudioSource.Play(); // Start playing BGM
+
+        dialogue_1 = false;
+        dialogue_2 = false;
+        dialogue_3 = false;
+        dialogue_4 = false;
+        dialogue_5 = false;
+        dialogue_6= false;
+        
+        Invoke("msg_invoke",1.5f);
+
+    }
+
+    private void msg_invoke()
+    {
+        UIManager.instance.DialogueNumber = 70; // 다이얼로그 넘버 저장 (대사 시작지점) 70
         PrintLongDialogue();
-        
-        PlayerSoundManager.Instance.SetBGMVolume(0.2f);
-        PlayerSoundManager.Instance.BGM_Start();
-        
     }
     
     public void PrintLongDialogue()
@@ -140,101 +173,151 @@ public class EventManager : MonoBehaviour
     void Update()
     {
         
-        if (UIManager.instance.DialogueNumber == 55 && UIManager.instance.isCompletelyPrinted == true)
+        if (UIManager.instance.DialogueNumber == 83)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            foreach (GameObject g in FirstDirection)
+            if (dialogue_1 == false)
             {
-                g.SetActive(true);                  //화살표 켜지기
+                dialogue_1 = true;
+                foreach (GameObject g in FirstDirection)
+                {
+                    g.SetActive(true);                  //화살표 켜지기
+                }
+                Joystick.SetActive(true);
+                FireBtn.SetActive(true);
+                SkillBtn.SetActive(true);
+                PlayerManager.Instance.find_attackBtn_Invoke();
             }
-            Joystick.SetActive(true);
-            FireBtn.SetActive(true);
-            SkillBtn.SetActive(true);
-            PlayerManager.Instance.find_attackBtn_Invoke();
+            
             //fadeout();
         }
-        else if (UIManager.instance.DialogueNumber == 57 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 84)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            foreach (GameObject g in FirstPickWeapons)
+            if (dialogue_2 == false)
             {
-                g.SetActive(false);
-            }
-            MonsterManager.Instance.Appearance_First_Monster();             //첫 몬스터 등장
-            JoystickActivation();     //조이스틱 활성화
-        }
-        else if (UIManager.instance.DialogueNumber == 62 && UIManager.instance.isCompletelyPrinted == true)
-        {
-            MonsterManager.Instance.Appearance_Second_Monster();             //두번째 몬스터 등장
-            if (getFirsatBulletSupply == false)
-            {
-                PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.BulletSupply);      //탄 보충 아이템 떨어짐
-                getFirsatBulletSupply = true;
-            }
-            foreach (GameObject g in SecondDirection)
-            {
-                g.SetActive(true);
-            }
-            JoystickActivation();     //조이스틱 활성화
-        }
-        else if (UIManager.instance.DialogueNumber == 66 && UIManager.instance.isCompletelyPrinted == true)
-        {
-            MonsterManager.Instance.Appearance_Third_Monster();             //세번째 몬스터 등장
-            randomItemDropSignal = true;                                    //이제 랜덤 아이템 드랍됨
-            foreach (GameObject g in ThirdDirection)
-            {
-                g.SetActive(true);
-            }
-            JoystickActivation();     //조이스틱 활성화
-            if (getFirsatSkill == false)
-            {
-                DropRandomItem_Invoke(5f);                                        //5초 후 랜덤 아이템 드랍
-                getFirsatSkill = true;
+                dialogue_2 = true;
+                foreach (GameObject g in FirstPickWeapons)
+                {
+                    g.SetActive(false);
+                }
+                MonsterManager.Instance.Appearance_First_Monster();             //첫 몬스터 등장
+                JoystickActivation();     //조이스틱 활성화
+                //무기 탄알 초기화 코드
+                PlayerManager.instance.longtypeweapon_bullet_init();
             }
             
         }
-        else if (UIManager.instance.DialogueNumber == 72 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 92)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            foreach (GameObject g in ThirdDirection)
+            if (dialogue_3 == false)
             {
-                g.SetActive(false);                  //화살표 꺼지기
+                dialogue_3 = true;
+                MonsterManager.Instance.Appearance_Second_Monster();             //두번째 몬스터 등장
+                if (getFirsatBulletSupply == false)
+                {
+                    PlayerManager.Instance._dropItemPosition.DropItem(DropItemPosition.ItemList.BulletSupply);      //탄 보충 아이템 떨어짐
+                    getFirsatBulletSupply = true;
+                }
+                foreach (GameObject g in SecondDirection)
+                {
+                    g.SetActive(true);
+                }
+                JoystickActivation();     //조이스틱 활성화
             }
-            foreach (GameObject g in SecondDirection)
-            {
-                g.SetActive(false);                  //화살표 꺼지기
-            }
-            foreach (GameObject g in FirstDirection)
-            {
-                g.SetActive(false);                  //화살표 꺼지기
-            }
-            //괄호몬스터 UI등장
-            ParenthesisGauge.SetActive(true);
-            ParenthesisGauge.GetComponent<FinalGauge>().DecreaseGauge_Coriutine();          //UI 100초에 걸쳐 감소
-            JoystickActivation();     //조이스틱 활성화
-            if (MonsterManager.Instance.FinalPeiz == false)
-            {
-                MonsterManager.Instance.FinalPeiz = true;
-                MonsterManager.Instance.Spawn_Parenthesis();
-                MonsterManager.Instance.Spawn_Semicolon();
-            }
-            if (getFinalBulletSupply == false)
-            {
-                DropRandomItem_Invoke(5f);                                        //5초 후 랜덤 아이템 드랍
-                getFinalBulletSupply = true;
-            }
-            if (getFinalSkill == false)
-            {
-                DropBulletSupply_Invoke(10f);                                        //10초 후 탄약 보충 드랍
-                getFinalSkill = true;
-            }
+            
         }
-        else if (UIManager.instance.DialogueNumber == 75 && UIManager.instance.isCompletelyPrinted == true)
+        else if (UIManager.instance.DialogueNumber == 94)// && UIManager.instance.isCompletelyPrinted == true)
         {
-            PlayerSoundManager.Instance.StopSound(PlayerSoundManager.Instance.BGM);
-            fadeout();
+            if (dialogue_4 == false)
+            {
+                dialogue_4 = true;
+                MonsterManager.Instance.Appearance_Third_Monster();             //세번째 몬스터 등장
+                randomItemDropSignal = true;                                    //이제 랜덤 아이템 드랍됨
+                foreach (GameObject g in ThirdDirection)
+                {
+                    g.SetActive(true);
+                }
+                JoystickActivation();     //조이스틱 활성화
+                if (getFirsatSkill == false)
+                {
+                    DropRandomItem_Invoke(5f);                                        //5초 후 랜덤 아이템 드랍
+                    getFirsatSkill = true;
+                }
+            }
+            
+            
+        }
+        else if (UIManager.instance.DialogueNumber == 99)// && UIManager.instance.isCompletelyPrinted == true)
+        {
+            if (dialogue_5 == false)
+            {
+                dialogue_5 = true;
+                foreach (GameObject g in ThirdDirection)
+                {
+                    g.SetActive(false);                  //화살표 꺼지기
+                }
+                foreach (GameObject g in SecondDirection)
+                {
+                    g.SetActive(false);                  //화살표 꺼지기
+                }
+                foreach (GameObject g in FirstDirection)
+                {
+                    g.SetActive(false);                  //화살표 꺼지기
+                }
+                //괄호몬스터 UI등장
+                ParenthesisGauge.SetActive(true);
+                ParenthesisGauge.GetComponent<FinalGauge>().DecreaseGauge_Coriutine();          //UI 100초에 걸쳐 감소
+                JoystickActivation();     //조이스틱 활성화
+                if (MonsterManager.Instance.FinalPeiz == false)
+                {
+                    MonsterManager.Instance.FinalPeiz = true;
+                    MonsterManager.Instance.Spawn_Parenthesis();
+                    MonsterManager.Instance.Spawn_Semicolon();
+                }
+                if (getFinalBulletSupply == false)
+                {
+                    DropRandomItem_Invoke(5f);                                        //5초 후 랜덤 아이템 드랍
+                    getFinalBulletSupply = true;
+                }
+                if (getFinalSkill == false)
+                {
+                    DropBulletSupply_Invoke(10f);                                        //10초 후 탄약 보충 드랍
+                    getFinalSkill = true;
+                }
+            }
+            
+        }
+        else if (UIManager.instance.DialogueNumber == 100)// && UIManager.instance.isCompletelyPrinted == true)
+        {
+            if (dialogue_6 == false)
+            {
+                dialogue_6 = true;
+                //브금 중지
+                if (BGMaudioSource != null && BGMaudioSource.isPlaying)
+                {
+                    BGMaudioSource.Stop();
+                }
+
+                if (stageclearpannel_appearence == false)
+                {
+                    stageclearpannel_appearence = true;
+                    StageClearPanelObject.SetActive(true);
+                    Invoke("stageclear_invoke",2f);
+                }
+            }
+           
+            
+            
+            //fadeout();
             //씬 넘어가는 코드
-            Debug.LogError("씬 넘어가는 코드 넣어야 합니다");
+            //Debug.LogError("씬 넘어가는 코드 넣어야 합니다");
         }
         
             
+    }
+
+    private void stageclear_invoke()
+    {
+        StageClearPanel.OpenPanel();
     }
     
     private void MonsterTimeResume_Invoke()
@@ -350,12 +433,28 @@ public class EventManager : MonoBehaviour
         EventBtn.SetActive(false);
         //Peiz3Monster_2.SetActive(true);
     }
+    
+    /*public void BGM_Start() => PlayLoopingSound(BGM);
+    
+    // BGM 볼륨을 조절하는 메서드
+    public void SetBGMVolume(float volume)
+    {
+        if (audioSources.ContainsKey(BGM))
+        {
+            AudioSource bgmSource = audioSources[BGM];
+            bgmSource.volume = Mathf.Clamp(volume, 0f, 1f); // 0부터 1까지의 범위로 제한
+        }
+        else
+        {
+            Debug.LogError("BGM의 AudioSource를 찾을 수 없습니다.");
+        }
+    }*/
 
     //타 클래스에서 대화창을 재개하는 경우 호출
     public void PrintMSG()
     {
         JoystickDeactivation();     //조이스틱 비활성화
-        UIManager.instance.DialogueNumber++;
+        //UIManager.instance.DialogueNumber++;
         PrintLongDialogue();
     }
     

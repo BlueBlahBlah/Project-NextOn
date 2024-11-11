@@ -37,7 +37,8 @@ public class Area3_TakeArgument : MonoBehaviour
                 if(GetPlace.isGetArg)
                 {
                     isTakeArg = true; // 플레이어가 인자 획득
-                    MapSoundManager.Instance.EndProgress_Sound();
+                    //MapSoundManager.Instance.EndProgress_Sound();
+                    SoundManager.instance.PlayEffectSound("활설화End");
                     foreach (GameObject obj in EmptyObj)
                     {
                         obj.SetActive(false);
@@ -67,7 +68,8 @@ public class Area3_TakeArgument : MonoBehaviour
         {
             if(!isPlayerInside)
             {
-                MapSoundManager.Instance.StartProgress_Sound();
+                // MapSoundManager.Instance.StartProgress_Sound();
+                SoundManager.instance.PlayEffectSound("활성화Start");
             }
             isPlayerInside = true;
             fillTimer = 0f; // 다시 초기화

@@ -13,8 +13,6 @@ public class MobSpawnTrigger : Trigger
     [SerializeField]
     private GameObject _wallToPreventDestroy;
 
-    public NavMeshSurface navMeshSurface;
-
     public override void OnTriggerEnter(Collider collision)
     {
         isTriggered = true;

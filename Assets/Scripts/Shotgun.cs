@@ -59,7 +59,6 @@ public class Shotgun : MonoBehaviour
         // 총알 생성
         for (int i = 0; i < 7; i++)
         {
-            Debug.Log("muzzle " + (i+1));
             GameObject.Find("muzzle " + (i+1)).GetComponent<ShotgunMuzzle>().shoot(bulletPrefab,speed);
         }
 

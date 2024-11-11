@@ -32,7 +32,8 @@ public class PortalToBoss : MonoBehaviour
         {
             if(!isPlayerInside)
             {
-                MapSoundManager.Instance.StartProgress_Sound();
+                // MapSoundManager.Instance.StartProgress_Sound();
+                SoundManager.instance.PlayEffectSound("활성화Start");
             }
             isPlayerInside = true;
             player = other.gameObject; // 플레이어 GameObject 저장
@@ -45,7 +46,8 @@ public class PortalToBoss : MonoBehaviour
         {
             if(isPlayerInside)
             {
-                MapSoundManager.Instance.EndProgress_Sound();
+                // MapSoundManager.Instance.EndProgress_Sound();
+                SoundManager.instance.PlayEffectSound("활설화End");
             }
             isPlayerInside = false;
             player = null; // 플레이어 GameObject 초기화
