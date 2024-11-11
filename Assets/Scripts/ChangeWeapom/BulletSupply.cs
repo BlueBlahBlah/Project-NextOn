@@ -38,31 +38,31 @@ public class BulletSupply : MonoBehaviour
             if (rifle != null && rifle.gameObject.activeSelf)
             {
                 Debug.Log("라이플 탄약보충");
-                rifle.maxBulletCount += 60; // 60발 추가
+                rifle.maxBulletCount += 100; // 100발 추가
             }
 
             if (shotgun != null && shotgun.gameObject.activeSelf)
             {
                 Debug.Log("샷건 탄약보충");
-                shotgun.maxBulletCount += 60; // 60발 추가
+                shotgun.maxBulletCount += 100; // 100발 추가
             }
 
             if (sniper != null && sniper.gameObject.activeSelf)
             {
                 Debug.Log("저격총 탄약보충");
-                sniper.maxBulletCount += 10; // 10발 추가
+                sniper.maxBulletCount += 100; // 100발 추가
             }
 
             if (grenadeLauncher != null && grenadeLauncher.gameObject.activeSelf)
             {
                 Debug.Log("유탄발사기 탄약보충");
-                grenadeLauncher.maxBulletCount += 60; // 60발 추가
+                grenadeLauncher.maxBulletCount += 100; // 100발 추가
             }
 
             if (machineGun != null && machineGun.gameObject.activeSelf)
             {
                 Debug.Log("기관총 탄약보충");
-                machineGun.maxBulletCount += 100; // 100발 추가
+                machineGun.maxBulletCount += 200; // 200발 추가
             }
 
             if (fireGun != null && fireGun.gameObject.activeSelf)

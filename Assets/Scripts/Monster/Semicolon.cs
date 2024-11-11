@@ -120,7 +120,7 @@ public class Semicolon : Enemy
     
     void ColliderAttack()       //애니메이션 호출
     {
-        int Damage = 10;
+        int Damage = 3;
         
         Collider[] hitColliders = Physics.OverlapBox(AttackArea.bounds.center, AttackArea.bounds.extents,
             AttackArea.transform.rotation);

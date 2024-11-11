@@ -95,17 +95,17 @@ public class DamageManager : MonoBehaviour
         SwordDemacia_Skill_DamageCounting = 40;
         FantasyAxe_Skill_DamageCounting = 100;
         
-        FlameGun_DamageCounting = 2;
-        MachineGun_DamageCounting = 1;
-        GrenadeLauncher_DamageCounting = 3;
-        Sniper_DamageCounting = 30;
-        Rifle_DamageCounting = 1;
-        ShotGun_DamageCounting = 1;
+        FlameGun_DamageCounting = 10;
+        MachineGun_DamageCounting = 12;
+        GrenadeLauncher_DamageCounting = 25;
+        Sniper_DamageCounting = 45;
+        Rifle_DamageCounting = 10;
+        ShotGun_DamageCounting = 7;
 
         
-        Bomber_Skill_DamageCounting = 30;
-        Turret_Skill_DamageCounting = 10;
-        Helicopter_Skill_DamageCounting = 5;
+        Bomber_Skill_DamageCounting = 50;
+        Turret_Skill_DamageCounting = 15;
+        Helicopter_Skill_DamageCounting = 15;
         GunSpire_Skill_DamageCounting = 1;
         
         Bomber_Skill_WarheadKind = 4;
