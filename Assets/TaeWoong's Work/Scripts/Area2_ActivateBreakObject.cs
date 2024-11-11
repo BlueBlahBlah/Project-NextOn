@@ -43,7 +43,8 @@ public class Area2_ActivateBreakObject : MonoBehaviour
         if(!isActive)
         {
             isActive = true;
-            MapSoundManager.Instance.EndProgress_Sound();
+            // MapSoundManager.Instance.EndProgress_Sound();
+            SoundManager.instance.PlayEffectSound("활설화End");
         }
         Debug.Log("Activate BreakObject But....");
     }
@@ -54,7 +55,8 @@ public class Area2_ActivateBreakObject : MonoBehaviour
         {
             if(!isPlayerInside)
             {
-                MapSoundManager.Instance.StartProgress_Sound();
+                // MapSoundManager.Instance.StartProgress_Sound();
+                SoundManager.instance.PlayEffectSound("활성화Start");
             }
             isPlayerInside = true;
             fillTimer = 0f; // 다시 초기화

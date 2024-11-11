@@ -20,7 +20,8 @@ public class Boss_Meteor : MonoBehaviour
         // 공격 영역 비활성화 후 일정 시간이 지나면 활성화
         AttackArea.enabled = false; // 공격 영역 비활성화
         StartCoroutine(ActivateAttackArea());
-        MapSoundManager.Instance.Summon_Meteor_Sound();
+        // MapSoundManager.Instance.Summon_Meteor_Sound();
+        SoundManager.instance.PlayEffectSound("보스메테오");
     }
 
     private void OnTriggerEnter(Collider other)

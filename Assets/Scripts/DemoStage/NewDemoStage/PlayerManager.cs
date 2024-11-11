@@ -48,6 +48,7 @@ public class PlayerManager : MonoBehaviour
 
     public int revive;      //부활 횟수
     private bool revive_decrease_once;      //부활 횟수를 1만 줄이기 위한 변수
+    public bool is_close_weapon;            //현재 근접무기 들고있는지
     
     private void Awake()
     {
@@ -111,6 +112,8 @@ public class PlayerManager : MonoBehaviour
         Health = TotalHealth;
         SkillCoolTimeRate = 0;     //시작 시 스킬 쿨타임
         Death = false;
+        revive = 3;
+        is_close_weapon = false;
     }
     
     /*void OnEnable()
@@ -268,12 +271,14 @@ public class PlayerManager : MonoBehaviour
         if (player_LongWeapon.activeSelf)
         {
             player_LongWeapon.GetComponent<PlayerScriptRifle>().BulletInfo();
+            is_close_weapon = false;
             //Debug.LogError("현재 잔탄 "  + CurrentBullet);
             //Debug.LogError("총 잔탄 "  + TotalBullet);
         }
         else
         {
             //잔탄의 수를 무한대로 하는 코드
+            is_close_weapon = true;
         }
     }
 
@@ -355,6 +360,43 @@ public class PlayerManager : MonoBehaviour
             catch (NullReferenceException e)
             {
                
+            }
+        }
+    }
+
+    public void longtypeweapon_bullet_init()
+    {
+        foreach (GameObject g in player_WeaponList)
+        {
+            if (g.GetComponent<Rifle>())
+            {
+                g.GetComponent<Rifle>().bulletCount = 60; 
+                g.GetComponent<Rifle>().maxBulletCount = 100; 
+            }
+            else if (g.GetComponent<Shotgun>())
+            {
+                g.GetComponent<Shotgun>().bulletCount = 60; 
+                g.GetComponent<Shotgun>().maxBulletCount = 100; 
+            }
+            else if (g.GetComponent<Sniper>())
+            {
+                g.GetComponent<Sniper>().bulletCount = 60; 
+                g.GetComponent<Sniper>().maxBulletCount = 100; 
+            }
+            else if (g.GetComponent<GrenadeLauncher>())
+            {
+                g.GetComponent<GrenadeLauncher>().bulletCount = 60; 
+                g.GetComponent<GrenadeLauncher>().maxBulletCount = 100; 
+            }
+            else if (g.GetComponent<MachineGun>())
+            {
+                g.GetComponent<MachineGun>().bulletCount = 60; 
+                g.GetComponent<MachineGun>().maxBulletCount = 200; 
+            }
+            else if (g.GetComponent<FireGun>())
+            {
+                g.GetComponent<FireGun>().bulletCount = 60; 
+                g.GetComponent<FireGun>().maxBulletCount = 100; 
             }
         }
     }
