@@ -46,6 +46,8 @@ public class PlayerManager : MonoBehaviour
     public DropItemPosition _dropItemPosition;
 
 
+    [Header("Revive")]
+    [SerializeField] private StageFailPanel _stageFailPanel;
     public int revive;      //부활 횟수
     private bool revive_decrease_once;      //부활 횟수를 1만 줄이기 위한 변수
     public bool is_close_weapon;            //현재 근접무기 들고있는지
@@ -260,7 +262,7 @@ public class PlayerManager : MonoBehaviour
                 else if (revive == 0)
                 {
                     //진짜 끝남
-                    EventManager.Instance.fadeout();
+                    Invoke("OpenFailPanel", 3f);   
                     //씬 이동하는 코드
                 }
             }
@@ -282,7 +284,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    
+    private void OpenFailPanel()
+    {
+        _stageFailPanel.OpenPanel();
+    }
+
     public void find_attackBtn_Invoke()
     {
         Invoke("find_attackBtn",3f);

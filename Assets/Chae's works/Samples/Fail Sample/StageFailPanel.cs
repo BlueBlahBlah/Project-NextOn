@@ -36,7 +36,7 @@ public class StageFailPanel : MonoBehaviour
 
     }
 
-    public void StageClear()
+    public void StageFail()
     {
 
         if (StageClearManager.instance != null) // 만약 StageClearManager 인스턴스가 존재한다면
@@ -53,7 +53,7 @@ public class StageFailPanel : MonoBehaviour
 
     public void ChangeScene()
     {
-        StageClear();
+        StageFail();
         volumeController.TriggerFadeIn();
 
         Invoke("DoChangeScene", 1.5f);
