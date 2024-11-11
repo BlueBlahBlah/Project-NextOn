@@ -1207,7 +1207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &611426560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1684,7 +1684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -180, y: -65.000015}
+  m_AnchoredPosition: {x: -180, y: -65}
   m_SizeDelta: {x: 640, y: 640}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &776327445
@@ -3523,7 +3523,7 @@ MonoBehaviour:
   BlackFadeInOut: {fileID: 299825568}
   backgroundComputer: {fileID: 69239557}
   endText1: {fileID: 1376907323}
-  endText2: {fileID: 611426562}
+  endText2: {fileID: 611426559}
   endButton: {fileID: 910666496}
 --- !u!1001 &687158892039535126
 PrefabInstance:
@@ -3781,7 +3781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1523410369159264446, guid: f87f6ee60fcdda34b8c2b088c560cb3e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -65.000015
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 5785761734278116724, guid: f87f6ee60fcdda34b8c2b088c560cb3e, type: 3}
       propertyPath: m_Name
