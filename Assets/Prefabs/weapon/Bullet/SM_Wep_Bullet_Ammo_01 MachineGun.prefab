@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8562340054247253262}
   - component: {fileID: 9123839192848230158}
   - component: {fileID: 2190665473309128299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Wep_Bullet_Ammo_01 MachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  DamageManager: {fileID: 0}
   destroyDistance: 30
   Damage: 0
 --- !u!96 &2190665473309128299
