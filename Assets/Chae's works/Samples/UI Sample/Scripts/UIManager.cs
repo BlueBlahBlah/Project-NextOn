@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public InGameUI inGameUI;
     public Dialogue longDialogue;
     public Dialogue shortDialogue;
+    public PlayerManager playerManager;
 
     [Header("Data")]
     public int ScenarioNumber; // 현재 시나리오 넘버
@@ -35,6 +36,8 @@ public class UIManager : MonoBehaviour
     private bool isLongDialogue;
     [SerializeField]
     private bool isShortDialogue;
+    [SerializeField]
+    private bool isPlayerManager;
 
     // 싱글톤 선언
     #region
@@ -67,7 +70,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (isInGameUI) { UpdateInGameUI(); }
+        if (isInGameUI && isPlayerManager) { UpdateInGameUI(); }
         
     }
 
@@ -121,6 +124,17 @@ public class UIManager : MonoBehaviour
         {
             isShortDialogue = false;
         }
+
+        if (GameObject.Find("PlayerManager") != null)
+        {
+            playerManager = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+            isPlayerManager = true;
+            
+        }
+        else
+        {
+            isPlayerManager = false;
+        }
     }
 
     // InGameUI 기능
@@ -128,6 +142,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateInGameUI()
     {
+        inGameUI.PlayerHp = playerManager.Health;
+        inGameUI.PlayerMaxHp = playerManager.TotalHealth;
+        inGameUI.MaxBullet = playerManager.TotalBullet;
+        inGameUI.CurrentBullet = playerManager.CurrentBullet;
+
         // InGameUI 스크립트에서 선언된 다양한 UI Update 함수들을 실행
         inGameUI.UpdatePlayerInfo();
         inGameUI.UpdateBossInfo();

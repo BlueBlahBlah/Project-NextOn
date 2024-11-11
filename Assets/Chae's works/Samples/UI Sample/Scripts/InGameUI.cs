@@ -74,6 +74,7 @@ public class InGameUI : MonoBehaviour
 
     // 실제 연결할 변수 혹은 스크립트 내에서 InGameUI 클래스 내에서 지역변수
     #region
+    [Header("Value")]
     public float PlayerHp; // 플레이어 현재 체력 연결
     public float PlayerMaxHp; // 플레이어 최대 체력 연결
 
@@ -126,9 +127,6 @@ public class InGameUI : MonoBehaviour
     #region
     public void InitWeaponInfo() // 무기 정보 초기화 << 무기 1개 사용 할 때로 가정
     {
-        // 이미지 초기화
-        weaponImage.sprite = Resources.Load($"UI/Image/Icons/Weapons/{WeaponName}", typeof(Sprite)) as Sprite;
-
         // 총알 수 초기화
         UpdateBullet();
     }

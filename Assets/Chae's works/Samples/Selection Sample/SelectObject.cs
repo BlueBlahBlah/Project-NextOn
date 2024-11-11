@@ -17,6 +17,7 @@ public class SelectObject : MonoBehaviour
         {
             if (SceneContainer.instance != null)
             {
+                SoundManager.instance.PlayEffectSound("SceneChangeObject", 0.5f);
                 SceneContainer.instance.nextScene = stageName;
                 selectCanvas.OpenSelectUI(stageName);
             }            
