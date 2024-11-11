@@ -5,6 +5,8 @@ using UnityEngine;
 public class PathToEnter : MonoBehaviour
 {
     [SerializeField]
+    private Dialogue _dialogue;
+    [SerializeField]
     private GameObject[] _triggers;
     private bool _isEnter;
     private bool _isfinish;
@@ -27,6 +29,9 @@ public class PathToEnter : MonoBehaviour
     IEnumerator PathCoroutine()
     {
         yield return new WaitUntil(() => _triggers[0].GetComponent<Trigger>().isTriggered);
+
+        UIManager.instance.DialogueEventByNumber(_dialogue, 156);
+        yield return new WaitUntil(() => _dialogue.gameObject.activeSelf == false);
 
         for(int i = 0; i < 10; i++)
         {
