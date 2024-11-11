@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1202,7 +1202,7 @@ GameObject:
   - component: {fileID: 611426562}
   - component: {fileID: 611426561}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Text2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1609,7 +1609,7 @@ GameObject:
   - component: {fileID: 743125879}
   - component: {fileID: 743125880}
   m_Layer: 5
-  m_Name: Scenario Ending Tester (1)
+  m_Name: Scenario Ending Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1684,7 +1684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -180, y: -65}
+  m_AnchoredPosition: {x: -180, y: -65.000015}
   m_SizeDelta: {x: 640, y: 640}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &776327445
@@ -1761,7 +1761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &822027736
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2000,7 +2000,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 910666497}
   m_OnClick:
     m_PersistentCalls:
@@ -2869,7 +2869,7 @@ GameObject:
   - component: {fileID: 1376907323}
   - component: {fileID: 1376907325}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2923,8 +2923,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3521,6 +3521,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlackFadeInOut: {fileID: 299825568}
+  backgroundComputer: {fileID: 69239557}
+  endText1: {fileID: 1376907323}
+  endText2: {fileID: 611426562}
+  endButton: {fileID: 910666496}
 --- !u!1001 &687158892039535126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3777,7 +3781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1523410369159264446, guid: f87f6ee60fcdda34b8c2b088c560cb3e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -65
+      value: -65.000015
       objectReference: {fileID: 0}
     - target: {fileID: 5785761734278116724, guid: f87f6ee60fcdda34b8c2b088c560cb3e, type: 3}
       propertyPath: m_Name
