@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterLocomotion : MonoBehaviour
 {
@@ -108,16 +109,42 @@ public class CharacterLocomotion : MonoBehaviour
             right = Quaternion.Euler(new Vector3(0, 90, 0)) * fwd; //camera right
     }
     void MovementAndRotation(){
-        Vector3 direction = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical);//joystick direction
-        Vector3 rightMovement = right * walkSpeed * Time.deltaTime * moveJoystick.Horizontal;//getting right movement out of joystick(relative to camera)
-        Vector3 upMovement = fwd * walkSpeed * Time.deltaTime * moveJoystick.Vertical; //getting up movement out of joystick(relative to camera)
-        Vector3 heading = Vector3.Normalize(rightMovement + upMovement); //final movement vector
-        heading.y = -9.8f;//gravity while moving
-        characterController.Move(heading * walkSpeed*Time.deltaTime);//move
-        if(lookToMovementDirection){
-            characterVisual.forward = new Vector3(heading.x,characterVisual.forward.y,heading.z);
-            //look to movement direction
+        if(SceneManager.GetActiveScene().name =="Stage 3")
+        {
+            Vector3 direction = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical); // joystick direction
+
+            // Adjust the direction by applying a 45-degree rotation offset
+            Quaternion offsetRotation = Quaternion.Euler(0, 50f, 0);
+            Vector3 adjustedDirection = offsetRotation * direction;
+
+            Vector3 rightMovement = right * walkSpeed * Time.deltaTime * adjustedDirection.x; // right movement
+            Vector3 upMovement = fwd * walkSpeed * Time.deltaTime * adjustedDirection.z; // up movement
+
+            Vector3 heading = Vector3.Normalize(rightMovement + upMovement); // final movement vector
+            heading.y = -9.8f; // gravity while moving
+
+            characterController.Move(heading * walkSpeed * Time.deltaTime); // move
+
+            if (lookToMovementDirection)
+            {
+                characterVisual.forward = new Vector3(heading.x, characterVisual.forward.y, heading.z); // look to movement direction
+            }
         }
+        else
+        {
+            Vector3 direction = new Vector3(moveJoystick.Horizontal, 0, moveJoystick.Vertical);//joystick direction
+            Vector3 rightMovement = right * walkSpeed * Time.deltaTime * moveJoystick.Horizontal;//getting right movement out of joystick(relative to camera)
+            Vector3 upMovement = fwd * walkSpeed * Time.deltaTime * moveJoystick.Vertical; //getting up movement out of joystick(relative to camera)
+            Vector3 heading = Vector3.Normalize(rightMovement + upMovement); //final movement vector
+            heading.y = -9.8f;//gravity while moving
+            characterController.Move(heading * walkSpeed * Time.deltaTime);//move
+            if (lookToMovementDirection)
+            {
+                characterVisual.forward = new Vector3(heading.x, characterVisual.forward.y, heading.z);
+                //look to movement direction
+            }
+        }
+
         
     }
     

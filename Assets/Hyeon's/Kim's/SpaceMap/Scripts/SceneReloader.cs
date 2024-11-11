@@ -11,10 +11,9 @@ public class SceneReloader : MonoBehaviour
     public IEnumerator RestartScene()
     {
         yield return new WaitForSeconds(3);
-        // 현재 활성화된 씬의 이름을 가져옵니다.
-        string sceneName = SceneManager.GetActiveScene().name;
-        // 현재 씬을 다시 로드합니다.
-        SceneManager.LoadScene(sceneName);
+        string sceneName = SceneManager.GetActiveScene().name; // 현재 활성화된 씬의 이름을 가져옵니다.
+        scenario.joystick.enabled = true;
+        SceneManager.LoadScene(sceneName);// 현재 씬을 다시 로드
         // Scenario.instance가 존재하는지 확인하고, 진행 상황을 불러옴
         if (Scenario.instance != null)
         {
@@ -43,22 +42,22 @@ public class SceneReloader : MonoBehaviour
         {
             case 1:
                 Scenario.instance.StartCoroutine(scenario.Scenario1Start());
-                scenario.Scenario_1.GetComponent<Scenario_1>().Player.transform.position =
+                scenario.Player.transform.position =
                     scenario.Scenario_1.GetComponent<Scenario_1>().Respawn.transform.position;
                 break;
             case 2:
                 Scenario.instance.StartCoroutine(scenario.Scenario2Start());
-                scenario.Scenario_2.GetComponent<Scenario_2>().Player.transform.position =
+                scenario.Player.transform.position =
                     scenario.Scenario_2.GetComponent<Scenario_2>().Respawn.transform.position;
                 break;
             case 3:
                 Scenario.instance.StartCoroutine(scenario.Scenario3Start());
-                scenario.Scenario_3.GetComponent<Scenario_3>().Player.transform.position =
+                scenario.Player.transform.position =
                     scenario.Scenario_3.GetComponent<Scenario_3>().Respawn.transform.position;
                 break;
             case 4:
                 Scenario.instance.StartCoroutine(scenario.Scenario4Start());
-                scenario.Scenario_1.GetComponent<Scenario_1>().Player.transform.position =
+                scenario.Player.transform.position =
                     scenario.Scenario_1.GetComponent<Scenario_1>().Respawn.transform.position;
                 break;
         }
