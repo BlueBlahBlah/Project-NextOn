@@ -5073,7 +5073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb92c0df99619d44811e1f62e80e0a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageClearStatus: 00000000
+  stageClearStatus: 01000000
   isSuccess: 1
 --- !u!4 &1721740466
 Transform:

@@ -27,6 +27,7 @@ public class FantasyAxe : MonoBehaviour
     private void OnEnable()
     {
         // 버튼 클릭 이벤트 등록
+        //Debug.LogError("도끼 Enable");
         Btn.onClick.AddListener(SkillSpawn);
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
         SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨타임은 감소율을 적용한 값으로 

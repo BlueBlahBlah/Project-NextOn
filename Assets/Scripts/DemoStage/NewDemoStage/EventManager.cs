@@ -82,7 +82,7 @@ public class EventManager : MonoBehaviour
     public bool isPause;                                    //시간이 멈추었는지
     
     public AudioClip BGM;
-    private AudioSource BGMaudioSource;
+    public AudioSource BGMaudioSource;
 
     private bool dialogue_1;
     private bool dialogue_2;

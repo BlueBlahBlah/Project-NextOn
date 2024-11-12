@@ -62,15 +62,7 @@ public class WeaponChangeGravity : MonoBehaviour
             {
                 EventManager.Instance.PrintMSG();
             }
-            //헬리콥터 스킬의 경우 카메라 코루틴으로 인해 조금 있다가 삭제
-            if (TypeSelf == DropItemPosition.ItemList.SkillHeilcopter)
-            {
-                DestroyLater();
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
+            DestroyLater();
             
         }
         
