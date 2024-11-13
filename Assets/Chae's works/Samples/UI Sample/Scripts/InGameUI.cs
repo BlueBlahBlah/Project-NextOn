@@ -93,6 +93,7 @@ public class InGameUI : MonoBehaviour
     public string GimmickName; // 기믹 이름 연결
 
     public int NumOfEnemy; // 필드 내 몬스터 수 연결
+    public bool isCloseWeapon;
 
     [SerializeField]
     private StageManager stageManager;
@@ -143,8 +144,16 @@ public class InGameUI : MonoBehaviour
 
     public void UpdateBullet() // 총알 갱신 
     {
-        currentBullet.text = CurrentBullet.ToString();
-        maxBullet.text = MaxBullet.ToString();
+        if (!isCloseWeapon)
+        {
+            currentBullet.text = CurrentBullet.ToString();
+            maxBullet.text = MaxBullet.ToString();
+        }
+        else
+        {
+            currentBullet.text = "∞";
+            maxBullet.text = "∞";
+        }
     }
 
     public void UpdateBossInfo() // 보스 정보 갱신

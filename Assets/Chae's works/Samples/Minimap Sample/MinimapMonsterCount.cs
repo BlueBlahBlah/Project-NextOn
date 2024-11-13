@@ -11,6 +11,9 @@ public class MinimapMonsterCount : MonoBehaviour
     public LayerMask enemyLayerMask;   // 감지할 Enemy 레이어
     [SerializeField]
     private TextMeshProUGUI enemyCountText;
+
+    private GameObject[] enemies;
+    private int TotalMonsters;
     
 
     // Start is called before the first frame update
@@ -34,13 +37,10 @@ public class MinimapMonsterCount : MonoBehaviour
 
     void DetectEnemies()
     {
-        // LayerMask를 이용해 특정 레이어의 오브젝트만 검색
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayerMask);
-
-        // 감지된 오브젝트의 수를 셈
-        int enemyCount = hitColliders.Length;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        TotalMonsters = enemies.Length;
 
         // 결과를 출력하거나 원하는 동작을 수행
-        enemyCountText.text = enemyCount.ToString();
+        enemyCountText.text = TotalMonsters.ToString();
     }
 }

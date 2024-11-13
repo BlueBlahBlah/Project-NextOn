@@ -146,6 +146,7 @@ public class UIManager : MonoBehaviour
         inGameUI.PlayerMaxHp = playerManager.TotalHealth;
         inGameUI.MaxBullet = playerManager.TotalBullet;
         inGameUI.CurrentBullet = playerManager.CurrentBullet;
+        inGameUI.isCloseWeapon = playerManager.is_close_weapon;
 
         // InGameUI 스크립트에서 선언된 다양한 UI Update 함수들을 실행
         inGameUI.UpdatePlayerInfo();
