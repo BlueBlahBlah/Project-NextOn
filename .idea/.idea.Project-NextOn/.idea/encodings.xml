@@ -5,6 +5,13 @@
     <file url="file://$PROJECT_DIR$/Assets/Chae's works/Samples/Menu Sample/Script/BlinkText.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/Chae's works/Samples/UI Sample/Scripts/Dialogue.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/Chae's works/Samples/UI Sample/Scripts/UIManager.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Hyeon's/Kim's/SpaceMap/Scripts/Scenario/Scenario.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Hyeon's/Kim's/SpaceMap/Scripts/Scenario/Scenario_1.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Hyeon's/Kim's/SpaceMap/Scripts/Scenario/Scenario_2.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Hyeon's/Kim's/SpaceMap/Scripts/Scenario/Scenario_3.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Hyeon's/Kim's/SpaceMap/Scripts/Scenario/Scenario_4.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Hyeon's/Kim's/SpaceMap/Scripts/SceneReloader.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Hyeon's/Kim's/SpaceMap/Scripts/Space_PlayerScript.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/DemoStage/Gimmicks/Wave3.cs" charset="x-windows-949" />
   </component>
 </project>

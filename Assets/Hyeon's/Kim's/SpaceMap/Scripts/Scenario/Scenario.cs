@@ -42,7 +42,7 @@ public class Scenario : MonoBehaviour
             DontDestroyOnLoad(gameObject); // OnLoad(씬이 로드 되었을 때) 자신을 파괴하지 않고 유지
 
 #if UNITY_EDITOR
-            ResetPlayerPrefsOnStart();
+            //ResetPlayerPrefsOnStart();
 #endif
 
             LoadScenarioProgress();
@@ -75,12 +75,12 @@ public class Scenario : MonoBehaviour
 #endif
     void Update()
     {
-        if (playerManager.Death) 
+        /*if (playerManager.Death) 
         {
             joystick.enabled = false;
             Die(); 
-        }
-        else if (is_End)
+        }*/
+        if (is_End)
         {
             //UI 띄우기, 로그창 띄우기
             Debug.Log("대사 end");
@@ -150,5 +150,5 @@ public class Scenario : MonoBehaviour
         // 저장된 시나리오 진행 상황 로드
         playing_Scenario = PlayerPrefs.GetInt("PlayingScenario", 1); // 기본값은 1
     }
-    public void Die() => StartCoroutine(sceneReloader.RestartScene());
+    //public void Die() => StartCoroutine(sceneReloader.RestartScene());
 }

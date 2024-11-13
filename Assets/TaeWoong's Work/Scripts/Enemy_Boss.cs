@@ -26,6 +26,8 @@ public class Enemy_Boss : Mob
     private int health; // 현재 스크립트에서 관리하는 체력
     private Rigidbody rigid;
     [SerializeField] private Animator anim;
+    
+    [SerializeField] private StageClearPanel StageClearPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +69,10 @@ public class Enemy_Boss : Mob
         if (isDie)  // 죽은 경우
         {
            Die();
+           if (UIManager.instance.DialogueNumber >= 328)
+           {
+               StageClearPanel.OpenPanel();
+           }
         }
         else    // 살아있는 경우
         {
@@ -290,6 +296,8 @@ public class Enemy_Boss : Mob
         isLook = false; // 플레이어 추적 중단
 
         rigid.isKinematic = true; // 물리적 상호작용 중지
+        
+        
 
         // if (GetComponent<Mob>().isChase == true) // update 안에서 오류가 너무 많이 발생하지 않도록 하기 위함
         // {

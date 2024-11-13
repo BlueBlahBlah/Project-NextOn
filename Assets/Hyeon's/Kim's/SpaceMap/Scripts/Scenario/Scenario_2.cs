@@ -80,7 +80,7 @@ public class Scenario_2 : MonoBehaviour
 
     internal void OnChildTriggerEnter(Collider other, ChildCollisionHandler child)
     {
-        if (child.name == "2_End" && !is_End)
+        if (child.name == "2_End" && other.tag == "Player" &&  !is_End)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 210);
             Debug.Log("대사 여기서 재시작하는건가? 작동 시켜보자 \r\n\r\n시스템 : 방화벽 프로그램 작동... 재시작 준비완료");
