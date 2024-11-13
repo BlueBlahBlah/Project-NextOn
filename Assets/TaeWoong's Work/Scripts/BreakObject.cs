@@ -30,6 +30,7 @@ public class BreakObject : Enemy
     public bool isNormalization = false; // 정상화 여부
     public bool isEnterArea3 = false; // Area 3 오픈 여부
     public float rotationSpeed = 50f; // 회전 속도
+    private bool isActivated = false;
 
     void Awake() 
     {
@@ -52,12 +53,17 @@ public class BreakObject : Enemy
             // Rotate 함수로 회전효과 
             rotationObj.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
 
-            // 수리 영역 활성화
-            // 활성화할 오브젝트들 활성화
-            foreach (GameObject obj in objectsToAble)
+            if(!isActivated)
             {
-                obj.SetActive(true);
+                // 수리 영역 활성화
+                // 활성화할 오브젝트들 활성화
+                foreach (GameObject obj in objectsToAble)
+                {
+                    obj.SetActive(true);
+                    isActivated = true;
+                }
             }
+    
         }
 
         if (repairArea_1st.isRepaired && repairArea_2nd.isRepaired && repairArea_3rd.isRepaired) // 데미지를 받을 수 있는 상태인지 확인
@@ -69,6 +75,7 @@ public class BreakObject : Enemy
                 // MapSoundManager.Instance.EndProgress_Sound();
                 SoundManager.instance.PlayEffectSound("활설화End");
                 isScript11 = true;
+                 this.curHealth = 30;
             }
         }
 
@@ -82,7 +89,7 @@ public class BreakObject : Enemy
             else    // 살아있는 경우
             {
                 // 체력 관련
-                this.curHealth = GetComponent<Enemy>().curHealth;
+                //this.curHealth = 30;
                 if (curHealth < health)
                 {
                     if (curHealth <= 0)

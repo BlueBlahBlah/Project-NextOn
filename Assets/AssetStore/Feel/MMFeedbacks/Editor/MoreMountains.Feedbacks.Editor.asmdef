@@ -1,7 +1,9 @@
 {
     "name": "MoreMountains.Feedbacks.Editor",
     "references": [
-        "GUID:8087d854c1f812e4b9a74437dfc524e0"
+        "GUID:8087d854c1f812e4b9a74437dfc524e0",
+        "GUID:57a0b9bc628ab4740af4b6f1f0b2e134",
+        "GUID:4a1cb1490dc4df8409b2580d6b44e75e"
     ],
     "includePlatforms": [
         "Editor"
