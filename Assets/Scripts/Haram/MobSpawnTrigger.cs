@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using Unity.AI.Navigation;
 
-public class MobSpawnTrigger : Trigger
+public class MobSpawnTrigger : MonoBehaviour
 {
     [SerializeField]
     private Transform[] _spawnPoints;
@@ -13,7 +13,8 @@ public class MobSpawnTrigger : Trigger
     [SerializeField]
     private GameObject _wallToPreventDestroy;
 
-    public override void OnTriggerEnter(Collider collision)
+    private bool isTriggered = false;
+    public void OnTriggerExit(Collider collision)
     {
         isTriggered = true;
         

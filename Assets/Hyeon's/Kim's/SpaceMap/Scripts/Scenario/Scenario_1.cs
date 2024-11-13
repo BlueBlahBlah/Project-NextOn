@@ -35,7 +35,7 @@ public class Scenario_1 : MonoBehaviour
             Debug.Log("대사 여긴어디지? 주변을 둘러보자");
             is1_TriggerPass=true;
         }
-        if(child.name == "LightRayRound" && !is_End)
+        if(child.name == "LightRayRound" && other.tag == "Player" && !is_End)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 204);
             Debug.Log("대사 컴파일러... 재시작 필요...\r\n누수 방지 프로그램... 작동 필요...\r\n\r\n이게 내가 해야하는 일들인가?\r\n일단 누수된부분을 막는거 부터 해보자");

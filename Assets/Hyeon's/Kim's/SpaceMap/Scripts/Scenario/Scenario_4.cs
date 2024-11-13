@@ -54,7 +54,7 @@ public class Scenario_4 : MonoBehaviour
 
     internal void OnChildTriggerEnter(Collider other, ChildCollisionHandler child)
     {
-        if (child.name == firstTrigger.name && !is1_TriggerPass)
+        if (child.name == firstTrigger.name && other.tag == "Player" && !is1_TriggerPass)
         {
             firstTrigger.GetComponent<CloseDoor2>().enabled = true;
 
@@ -85,70 +85,74 @@ public class Scenario_4 : MonoBehaviour
     }
 
     IEnumerator StartLastGame()
-    {
-        Vector3 startPositionA = Open_Door1.transform.position;
-        Vector3 startPositionB = Open_Door2.transform.position;
-        Vector3 startPositionC = Plane.transform.position;
-        Vector3 startPositionD = AirPlane.transform.position;
+{
+    Vector3 startPositionA = Open_Door1.transform.position;
+    Vector3 startPositionB = Open_Door2.transform.position;
+    Vector3 startPositionC = Plane.transform.position;
+    Vector3 startPositionD = AirPlane.transform.position;
 
 
-        Vector3 endPositionA = startPositionA + Vector3.right * Door_Distance;
-        Vector3 endPositionB = startPositionB + Vector3.left * Door_Distance;
-        Vector3 endPositionC = startPositionC + Vector3.up * Air_Distance;
-        Vector3 endPositionD = startPositionD + Vector3.up * Air_Distance;
+    Vector3 endPositionA = startPositionA + Vector3.right * Door_Distance;
+    Vector3 endPositionB = startPositionB + Vector3.left * Door_Distance;
+    Vector3 endPositionC = startPositionC + Vector3.up * Air_Distance;
+    Vector3 endPositionD = startPositionD + Vector3.up * Air_Distance;
 
-        Gague.gameObject.SetActive(true);
+    Gague.gameObject.SetActive(true);
 
-        float elapsedTime = 0f;
-        float nextSpawnTime = 0f;
-        
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            nextSpawnTime += Time.deltaTime;
-
-            float t = elapsedTime / duration;
+    float elapsedTime = 0f;
+    float nextSpawnTime = 0f;
     
-            Bar.value = elapsedTime;
 
-            Open_Door1.transform.position = Vector3.Lerp(startPositionA, endPositionA, t);
-            Open_Door2.transform.position = Vector3.Lerp(startPositionB, endPositionB, t);
-            Plane.transform.position = Vector3.Lerp(startPositionC, endPositionC, t);
-            AirPlane.transform.position = Vector3.Lerp(startPositionD, endPositionD, t);
+    while (elapsedTime < duration)
+    {
+        elapsedTime += Time.deltaTime;
+        nextSpawnTime += Time.deltaTime;
 
-            if (nextSpawnTime >= spawnInterval)
-            {
-                nextSpawnTime = 0f; // 스폰 타이머 초기화
+        float t = elapsedTime / duration;
 
-                int randomEnemyIndex = Random.Range(0, EnemyProbs.Length);
-                int randomSpawnPosIndex = Random.Range(0, EnemySpawnPos.Length);
+        Bar.value = elapsedTime;
 
-                GameObject ene = Instantiate(EnemyProbs[randomEnemyIndex],
-                            EnemySpawnPos[randomSpawnPosIndex].transform.position,
-                            Quaternion.identity);
-                ene.gameObject.SetActive(true);
-            }
-            yield return null;
-        }
+        Open_Door1.transform.position = Vector3.Lerp(startPositionA, endPositionA, t);
+        Open_Door2.transform.position = Vector3.Lerp(startPositionB, endPositionB, t);
+        Plane.transform.position = Vector3.Lerp(startPositionC, endPositionC, t);
+        AirPlane.transform.position = Vector3.Lerp(startPositionD, endPositionD, t);
 
-        Open_Door1.transform.position = endPositionA;
-        Open_Door2.transform.position = endPositionB;
-        Plane.transform.position = endPositionC;
-        AirPlane.transform.position = endPositionD;
-        
-        scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 238);
-        Time.timeScale = 0f;
-        GameObject dialogueUI = scenario.Dialogue; // 대화 UI 오브젝트
-        while (dialogueUI.activeSelf) // UI가 활성화된 동안 대기
+        if (nextSpawnTime >= spawnInterval)
         {
-            yield return null; // 다음 프레임까지 대기
-        }
+            nextSpawnTime = 0f; // 스폰 타이머 초기화
 
-        Time.timeScale = 1f;
-        Debug.Log("대사 Game Over");
-        is_End = true;
+            int randomEnemyIndex = Random.Range(0, EnemyProbs.Length);
+            int randomSpawnPosIndex = Random.Range(0, EnemySpawnPos.Length);
+
+            GameObject ene = Instantiate(EnemyProbs[randomEnemyIndex],
+                        EnemySpawnPos[randomSpawnPosIndex].transform.position,
+                        Quaternion.identity);
+            ene.gameObject.SetActive(true);
+        }
         yield return null;
+    }
+
+    Open_Door1.transform.position = endPositionA;
+    Open_Door2.transform.position = endPositionB;
+    Plane.transform.position = endPositionC;
+    AirPlane.transform.position = endPositionD;
+
+    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // "Enemy" 태그를 가진 모든 오브젝트 찾기
+
+    foreach (GameObject enemy in enemies)
+    {
+        enemy.SetActive(false); // 각 오브젝트 비활성화
+    }
+
+    scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 238);
+    GameObject dialogueUI = scenario.Dialogue; // 대화 UI 오브젝트
+    while (dialogueUI.activeSelf) // UI가 활성화된 동안 대기
+    {
+        yield return null; // 다음 프레임까지 대기
+    }
+    Debug.Log("대사 Game Over");
+    is_End = true;
+    yield return null;
     }
         // Update is called once per frame
     void Update()

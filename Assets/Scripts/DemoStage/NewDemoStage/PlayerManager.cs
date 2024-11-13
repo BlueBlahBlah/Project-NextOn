@@ -262,7 +262,7 @@ public class PlayerManager : MonoBehaviour
                 else if (revive == 0)
                 {
                     //진짜 끝남
-                    EventManager.Instance.BGMaudioSource.Stop();
+                   
                     Invoke("OpenFailPanel", 3f);   
                     //씬 이동하는 코드
                 }

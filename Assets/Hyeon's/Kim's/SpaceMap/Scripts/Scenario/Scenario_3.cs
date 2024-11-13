@@ -81,7 +81,7 @@ public class Scenario_3 : MonoBehaviour
     }
     internal void OnChildTriggerEnter(Collider other, ChildCollisionHandler child)
     {
-        if(child.name == "First_Trigger" && !is1_TriggerPass)
+        if(child.name == "First_Trigger" && other.tag == "Player" && !is1_TriggerPass)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 218);
             Debug.Log("대사 시스템 : 알수 없는 오류 발생 확인 컴파일러 자동 삭제를 진행합니다 비상탈출 프로그램을 시작합니다");
@@ -93,7 +93,7 @@ public class Scenario_3 : MonoBehaviour
             scenario.BGM.mute = true;
             scenario.MidBGM.mute = false;
         }
-        else if(child.name == "Second_Trigger" && !is2_TriggerPass)
+        else if(child.name == "Second_Trigger" && other.tag == "Player" && !is2_TriggerPass)
         {
             Smoke[2].SetActive(true);
             Smoke[3].SetActive(true);
@@ -102,14 +102,14 @@ public class Scenario_3 : MonoBehaviour
             EnemySpawn[3].SetActive(true);
             is2_TriggerPass = true;
         }
-        else if((child.name == "1_Door"  && !_doorClose1) && other.tag == "Player")
+        else if((child.name == "1_Door"  && !_doorClose1) && other.tag == "Player" && other.tag == "Player")
         {
             firstTrigger[0].GetComponent<CloseDoor2>().enabled = true;
             firstTrigger[1].GetComponent<CloseDoor2>().enabled = true;
             EnemySpawn[4].SetActive(true);
             _doorClose1 = true;
         }
-        else if(child.name == "2_Door" && !_doorClose2)
+        else if(child.name == "2_Door" && other.tag == "Player" && !_doorClose2)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 221);
             Debug.Log("대사 이제 여긴 안전한거 같아 아까들은 비상탈출방법을 찾아보자");
@@ -124,7 +124,7 @@ public class Scenario_3 : MonoBehaviour
             scenario.BGM.mute = false;
             scenario.MidBGM.mute = true;
         }
-        else if (child.name == "3_End" && !is_End)
+        else if (child.name == "3_End" && other.tag == "Player" && !is_End)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 231);
             Debug.Log("대사 저기 있는 비행선을 타고 탈출할수 있겠어 어서 준비하고 탈출하자");

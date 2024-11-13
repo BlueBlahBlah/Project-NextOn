@@ -172,7 +172,10 @@ public class EventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlayerManager.Instance.revive == 0)
+        {
+            BGMaudioSource.Stop();
+        }
         if (UIManager.instance.DialogueNumber == 83)// && UIManager.instance.isCompletelyPrinted == true)
         {
             if (dialogue_1 == false)

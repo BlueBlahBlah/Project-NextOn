@@ -9,8 +9,13 @@ public class Pickups : MonoBehaviour
     {
         if (other.gameObject.tag =="Player")
         {
-            Destroy(gameObject);
+           Invoke("destroy_Invoke",1f);
         }
+    }
+
+    private void destroy_Invoke()
+    {
+        Destroy(gameObject);
     }
 
 }
