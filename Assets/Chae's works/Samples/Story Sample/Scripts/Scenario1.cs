@@ -107,10 +107,6 @@ public class Scenario1 : MonoBehaviour
         scenario1UI.ElectricShock();
     }
 
-    IEnumerator Scenario1Sound()
-    {
-        yield break;
-    }
 
     IEnumerator RunLoopUntilDone()
     {
