@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ScenarioEndingUI : MonoBehaviour
@@ -21,6 +22,15 @@ public class ScenarioEndingUI : MonoBehaviour
 
     private VolumeController volumeController;
 
+
+    private float timer = 0f;         // 시간 추적용 변수
+    private Color bgColor;            // backgroundComputer의 Color 저장
+    private Color textColor;
+
+    private bool lerpAlpha = false;
+    private float elapsedTime = 0f;
+    public float duration = 3f;
+
     private void Start()
     {
         if (volumeController == null)
@@ -38,17 +48,39 @@ public class ScenarioEndingUI : MonoBehaviour
             Invoke("FadeOut", 3f);
 
             //Test
-            Invoke("ChangeImage", 5f);
+            // Invoke("StartLerpAlpha", 5f);
         }
     }
 
-    public void ChangeImage()
+    private void Update()
     {
-        // Lerp 필요
-        backgroundComputer.color = new Color(1, 1, 1, 1);
-        endText1.color = new Color(1, 1, 1, 1);
-        Invoke("ActivateEndText", 1f);
+        if (lerpAlpha)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);  // 0에서 1 사이 값 계산
+
+            // Lerp를 사용하여 alpha 값을 부드럽게 1로 변경
+            Color bgColor = backgroundComputer.color;
+            bgColor.a = Mathf.Lerp(0, 1, t);
+            backgroundComputer.color = bgColor;
+
+            Color textColor = endText1.color;
+            textColor.a = Mathf.Lerp(0, 1, t);
+            endText1.color = textColor;
+
+            if (t >= 1f)
+            {
+                lerpAlpha = false;  // 완료 후 Lerp 비활성화
+            }
+        }
     }
+
+    public void StartLerpAlpha()
+    {
+        lerpAlpha = true;
+        elapsedTime = 0f;  // 타이머 초기화
+    }
+
 
     public void ActivateEndText()
     {

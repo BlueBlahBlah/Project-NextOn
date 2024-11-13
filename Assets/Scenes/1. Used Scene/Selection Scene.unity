@@ -135,6 +135,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Road_Straight_01 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1008071224716400, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667853169065130, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879190264843672, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4969091116097092, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
@@ -212,7 +224,7 @@ GameObject:
   - component: {fileID: 10262371}
   - component: {fileID: 10262373}
   - component: {fileID: 10262372}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,6 +299,10 @@ PrefabInstance:
     - target: {fileID: 198914, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
       propertyPath: m_Name
       value: SM_Env_Sidewalk_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 198914, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
       propertyPath: m_LocalScale.x
@@ -750,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 149032604}
   - component: {fileID: 149032605}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,7 +819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 189564953}
   - component: {fileID: 189564954}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -856,7 +872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 215933049}
   - component: {fileID: 215933050}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1064,6 +1080,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Road_Straight_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1008071224716400, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667853169065130, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879190264843672, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4969091116097092, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
@@ -1144,7 +1172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 331214287}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Glitch Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1174,9 +1202,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 767261207}
     m_Modifications:
+    - target: {fileID: 1163781397312794, guid: 061ef3f04c08a1647b3f8d4a9835b9e2, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1279048031774662, guid: 061ef3f04c08a1647b3f8d4a9835b9e2, type: 3}
       propertyPath: m_Name
       value: SM_Env_Road_Straight_End_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1279048031774662, guid: 061ef3f04c08a1647b3f8d4a9835b9e2, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790359752343460, guid: 061ef3f04c08a1647b3f8d4a9835b9e2, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4711499443477884, guid: 061ef3f04c08a1647b3f8d4a9835b9e2, type: 3}
       propertyPath: m_LocalScale.x
@@ -1389,7 +1429,7 @@ GameObject:
   - component: {fileID: 351377032}
   - component: {fileID: 351377034}
   - component: {fileID: 351377033}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1464,7 +1504,7 @@ GameObject:
   - component: {fileID: 394823801}
   - component: {fileID: 394823803}
   - component: {fileID: 394823802}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1538,7 +1578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 459931159}
   - component: {fileID: 459931160}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1592,6 +1632,10 @@ PrefabInstance:
     - target: {fileID: 198914, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
       propertyPath: m_Name
       value: SM_Env_Sidewalk_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 198914, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
       propertyPath: m_LocalScale.x
@@ -1667,6 +1711,18 @@ PrefabInstance:
     - target: {fileID: 1008071224716400, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
       propertyPath: m_Name
       value: SM_Env_Road_Straight_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008071224716400, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667853169065130, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879190264843672, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4969091116097092, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
       propertyPath: m_LocalScale.x
@@ -1786,7 +1842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 556855926}
   - component: {fileID: 556855927}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1882,7 +1938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 619625415}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1929,6 +1985,10 @@ PrefabInstance:
     - target: {fileID: 1340423736621120, guid: 8fbbb487f67fdc34ab62d2f698ab9c3e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Floor_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1340423736621120, guid: 8fbbb487f67fdc34ab62d2f698ab9c3e, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4230356776046076, guid: 8fbbb487f67fdc34ab62d2f698ab9c3e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2210,7 +2270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 767261207}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Stage 1 Maps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2250,6 +2310,10 @@ PrefabInstance:
     - target: {fileID: 198914, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
       propertyPath: m_Name
       value: SM_Env_Sidewalk_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 198914, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
       propertyPath: m_LocalScale.x
@@ -2543,7 +2607,7 @@ GameObject:
   - component: {fileID: 871554409}
   - component: {fileID: 871554408}
   - component: {fileID: 871554407}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Floor Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2795,6 +2859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Street
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013427128798, guid: 43ccada6edf137d45a1a61238462411e, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4000010695874706, guid: 43ccada6edf137d45a1a61238462411e, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
@@ -2876,7 +2944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 960480326}
   - component: {fileID: 960480327}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3047,7 +3115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052212634}
   - component: {fileID: 1052212635}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3112,6 +3180,18 @@ PrefabInstance:
     - target: {fileID: 1008071224716400, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
       propertyPath: m_Name
       value: SM_Env_Road_Straight_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008071224716400, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667853169065130, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879190264843672, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4969091116097092, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
       propertyPath: m_LocalScale.x
@@ -3327,7 +3407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1108266426}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Blocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3382,7 +3462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1156939991}
   - component: {fileID: 1156939992}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3467,7 +3547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1177823889}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: 'Stage 4 Maps '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3596,7 +3676,7 @@ GameObject:
   - component: {fileID: 1242682014}
   - component: {fileID: 1242682016}
   - component: {fileID: 1242682015}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3886,6 +3966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Ground_Tile_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1287145345238434, guid: 534497d369ca4de4aaeb048a9211449c, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4347189042453166, guid: 534497d369ca4de4aaeb048a9211449c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -3953,7 +4037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333323005}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: 'Stage 2 Maps '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3990,7 +4074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1338196679}
   - component: {fileID: 1338196680}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4044,7 +4128,7 @@ GameObject:
   - component: {fileID: 1342137959}
   - component: {fileID: 1342137961}
   - component: {fileID: 1342137960}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4265,6 +4349,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Road_Straight_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1008071224716400, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667853169065130, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879190264843672, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4969091116097092, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
@@ -4343,6 +4439,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Road_Straight_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1008071224716400, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667853169065130, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879190264843672, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4969091116097092, guid: 37c3590bcdbc7c648ac2969b6b7a08a3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
@@ -4419,7 +4527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1391809206}
   - component: {fileID: 1391809207}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4473,7 +4581,7 @@ GameObject:
   - component: {fileID: 1393775899}
   - component: {fileID: 1393775901}
   - component: {fileID: 1393775900}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4548,6 +4656,10 @@ PrefabInstance:
     - target: {fileID: 1965909188301746, guid: ac86e58f7706ca04a9df3f348cf148bd, type: 3}
       propertyPath: m_Name
       value: SM_Env_Ground_Tile_Half_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965909188301746, guid: ac86e58f7706ca04a9df3f348cf148bd, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4205763758894276, guid: ac86e58f7706ca04a9df3f348cf148bd, type: 3}
       propertyPath: m_LocalScale.x
@@ -4702,7 +4814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1419922676}
   - component: {fileID: 1419922677}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4755,7 +4867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1457297203}
   - component: {fileID: 1457297204}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4809,6 +4921,10 @@ PrefabInstance:
     - target: {fileID: 1340423736621120, guid: 8fbbb487f67fdc34ab62d2f698ab9c3e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Floor_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1340423736621120, guid: 8fbbb487f67fdc34ab62d2f698ab9c3e, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4230356776046076, guid: 8fbbb487f67fdc34ab62d2f698ab9c3e, type: 3}
       propertyPath: m_LocalScale.x
@@ -4970,7 +5086,7 @@ GameObject:
   - component: {fileID: 1644414818}
   - component: {fileID: 1644414820}
   - component: {fileID: 1644414819}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5123,6 +5239,8 @@ MonoBehaviour:
   musicSource: {fileID: 1728844773}
   isBgmMute: 0
   isSEMute: 0
+  volumeBGM: 0.3
+  volumeSE: 1
 --- !u!4 &1728844772
 Transform:
   m_ObjectHideFlags: 0
@@ -5244,7 +5362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742785836}
   - component: {fileID: 1742785837}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5374,7 +5492,7 @@ GameObject:
   - component: {fileID: 1769640031}
   - component: {fileID: 1769640033}
   - component: {fileID: 1769640032}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5447,7 +5565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1784414904}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Stage 3 Maps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5544,7 +5662,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1837118090}
   - component: {fileID: 1837118091}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5738,6 +5856,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Sidewalk_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 198914, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 485062, guid: 260ea4bf1ba71314c9c3833b491586bc, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1
@@ -5806,7 +5928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1903289359}
   - component: {fileID: 1903289360}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5860,7 +5982,7 @@ GameObject:
   - component: {fileID: 1908542820}
   - component: {fileID: 1908542822}
   - component: {fileID: 1908542821}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5934,7 +6056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1911641838}
   - component: {fileID: 1911641839}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5988,7 +6110,7 @@ GameObject:
   - component: {fileID: 1936394660}
   - component: {fileID: 1936394662}
   - component: {fileID: 1936394661}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Image (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6140,7 +6262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1988053531}
   - component: {fileID: 1988053532}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6194,6 +6316,10 @@ PrefabInstance:
     - target: {fileID: 1300858641775680, guid: 9c6f014dbd738ff4398d30310ec82e82, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Landing_Platform_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300858641775680, guid: 9c6f014dbd738ff4398d30310ec82e82, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4790796131391034, guid: 9c6f014dbd738ff4398d30310ec82e82, type: 3}
       propertyPath: m_LocalScale.x
@@ -6531,7 +6657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2030280199}
   - component: {fileID: 2030280200}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Box Collider (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6757,7 +6883,7 @@ GameObject:
   - component: {fileID: 2144948385}
   - component: {fileID: 2144948384}
   - component: {fileID: 2144948383}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Environments
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7056,6 +7182,34 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2494707262928032422, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494707262928032422, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494707262928032422, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494707262928032422, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494707262928032422, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2494707262928032422, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948366539573042791, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.00036621094
+      objectReference: {fileID: 0}
     - target: {fileID: 3034649865634019001, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -7108,6 +7262,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5791501029721279415, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5860257238500260073, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_Camera
       value: 
@@ -7156,9 +7314,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6385210941818708515, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385210941818708515, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385210941818708515, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6573431793161156878, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 89.426544
+      value: 386.1326
       objectReference: {fileID: 0}
     - target: {fileID: 6625167295694576542, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7243,6 +7413,18 @@ PrefabInstance:
     - target: {fileID: 7504917142290211390, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000030517578
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612063948147882357, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612063948147882357, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612063948147882357, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7654577103131493646, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7372,6 +7554,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7931977404784809429, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8177820073092708552, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7382,6 +7568,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177820073092708552, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826562953228193282, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8916159022754040242, guid: de09daf2cf608d746b14cdc52caa1485, type: 3}

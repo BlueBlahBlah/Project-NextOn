@@ -10,6 +10,11 @@ public class SoundManager : MonoBehaviour
     public bool isBgmMute;
     public bool isSEMute;
 
+    [SerializeField]
+    private float volumeBGM = 0.3f;
+    [SerializeField]
+    private float volumeSE = 1f;
+
     private List<AudioSource> activeEffectsSources = new List<AudioSource>();
     private Dictionary<AudioSource, float> originalVolumes = new Dictionary<AudioSource, float>();
 
@@ -35,11 +40,11 @@ public class SoundManager : MonoBehaviour
         {
             AudioSource effectSource = gameObject.AddComponent<AudioSource>();
             effectSource.clip = clip;
-            effectSource.volume = volume; 
+            effectSource.volume = volume * volumeSE; // 입력된 volume과 volumeSE의 곱으로 볼륨 설정
             effectSource.Play();
 
             activeEffectsSources.Add(effectSource);
-            originalVolumes[effectSource] = volume; 
+            originalVolumes[effectSource] = volume;  // 원래의 입력 volume 값을 저장
 
             StartCoroutine(RemoveSourceWhenDone(effectSource));
         }
@@ -73,20 +78,32 @@ public class SoundManager : MonoBehaviour
     // 단발성 효과음 설정 메서드
     public void SetEffectsVolume(float scale)
     {
-        scale = Mathf.Clamp(scale, 0f, 1f); // 볼륨의 범위 지정
+        volumeSE = Mathf.Clamp(scale, 0f, 1f); // volumeSE 값을 업데이트
 
+        // 이미 재생 중인 효과음들의 볼륨을 갱신
         foreach (AudioSource source in activeEffectsSources)
         {
             if (originalVolumes.TryGetValue(source, out float originalVolume))
             {
-                source.volume = originalVolume * scale;
+                source.volume = originalVolume * volumeSE; // 원래 volume과 새로운 volumeSE의 곱으로 설정
             }
         }
+    }
+
+    public float GetEffectsVolume()
+    {
+        return this.volumeSE;
     }
 
     public void SetMusicVolume(float volume)
     {
         musicSource.volume = volume;
+        volumeBGM = volume;
+    }
+
+    public float GetMusicVolume()
+    {
+        return this.volumeBGM;
     }
 
     public void StopEffects()

@@ -9,8 +9,11 @@ public class SoundTester : MonoBehaviour
     {
         SoundManager.instance.PlayMusic("Redemption");
 
-        SoundManager.instance.PlayEffectSound("TestEffectSound");
+        
     }
-
+    public void TestClick()
+    {
+        SoundManager.instance.PlayEffectSound("Click");
+    }
     
 }
