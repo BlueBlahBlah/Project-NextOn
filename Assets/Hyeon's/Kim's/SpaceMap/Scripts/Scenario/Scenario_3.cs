@@ -92,6 +92,7 @@ public class Scenario_3 : MonoBehaviour
             is1_TriggerPass = true;
             scenario.BGM.mute = true;
             scenario.MidBGM.mute = false;
+            SoundManager.instance.PlayMusic("warning");
         }
         else if(child.name == "Second_Trigger" && other.tag == "Player" && !is2_TriggerPass)
         {

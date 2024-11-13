@@ -30,6 +30,7 @@ public class FirstLandManager : MonoBehaviour
     void Start()
     {
         SecondLand.SetActive(false);
+        SoundManager.instance.PlayMusic("puzzle-game-bright-casual-video-game-music-249202");
         StartCoroutine(FirstLandMission());
     }
 

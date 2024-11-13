@@ -54,7 +54,7 @@ public class PlayerSoundManager : MonoBehaviour
         LoadAudioClips();
 
         // 각 오디오 클립마다 AudioSource를 생성하여 저장
-        CreateAudioSources();
+        //CreateAudioSources();
     }
 
     private void LoadAudioClips()
@@ -90,7 +90,7 @@ public class PlayerSoundManager : MonoBehaviour
     }
 
     // 각 오디오 클립마다 AudioSource를 생성하여 저장하는 메서드
-    private void CreateAudioSources()
+    /*private void CreateAudioSources()
     {
         CreateAudioSource(Rifle_Shoot);
         CreateAudioSource(ShootGun_Shoot);
@@ -121,7 +121,7 @@ public class PlayerSoundManager : MonoBehaviour
         
         
         
-    }
+    }*/
 
     // 오디오 클립마다 AudioSource를 생성하는 메서드
     private void CreateAudioSource(AudioClip clip)
@@ -183,33 +183,36 @@ public class PlayerSoundManager : MonoBehaviour
     }
 
     // 각 오디오 클립별로 사용할 메서드들
-    public void Rifle_Shoot_Sound() => PlaySound(Rifle_Shoot);
-    public void ShootGun_Shoot_Sound() => PlaySound(ShootGun_Shoot);
-    public void MachineGun_Shoot_Sound() => PlayLoopingSound(MachineGun_Shoot);
-    public void Sniper_Shoot_Sound() => PlaySound(Snier_Shoot);
-    public void Granade_Shoot_Sound() => PlaySound(Granade_Shoot);
-    public void Granade_Explosion_Sound() => PlaySound(Granade_Explosion);
-    public void Flame_Shoot_Sound() => PlayLoopingSound(Flame_Shoot);
-    
-    public void Close_Attack_1_Sound() => PlaySound(Close_Attack_1);
-    public void Close_Attack_2_Sound() => PlaySound(Close_Attack_2);
-    
-    public void Demacia_Skill_Land_Sound() => PlaySound(Demacia_Skill_Land);
-    public void Fantasy_Skill_Sound() => PlaySound(Fantasy_Skill);
-    public void Sliver_Skill_Sound() => PlaySound(Sliver_Skill);
-    public void Static_Skill_Land_Sound() => PlaySound(Static_Skill_Land);
-    public void StreamOfEdge_Skill_Sound() => PlaySound(StreamOfEdge_Skill);
-    
-    public void Bomb_Plane_Sound() => PlaySound(Bomb_Plane);
-    public void Heli_Plane_Sound() => PlaySound(Heli_Plane);
-    public void Bomb_Expolosion_Sound() => PlaySound(Bomb_Expolosion);
-    public void Heli_Shoot_Sound() => PlaySound(Heli_Shoot);
-    public void Turret_Shoot_Sound() => PlaySound(Turret_Shoot);
-    public void Turrent_Explosion_Sound() => PlaySound(Turrent_Explosion);
-    
+    //public void Rifle_Shoot_Sound() => PlaySound(Rifle_Shoot);
+    public void Rifle_Shoot_Sound() => SoundManager.instance.PlayEffectSound("라이플소리", 0.5f);
+    public void ShootGun_Shoot_Sound() => SoundManager.instance.PlayEffectSound("샷건", 0.5f);
+    public void MachineGun_Shoot_Sound() => SoundManager.instance.PlayEffectSound("머신건", 0.5f);
+    public void Sniper_Shoot_Sound() => SoundManager.instance.PlayEffectSound("sniper", 0.5f);
+    public void Granade_Shoot_Sound() => SoundManager.instance.PlayEffectSound("유탄 발사소리", 0.5f);
+    public void Granade_Explosion_Sound() => SoundManager.instance.PlayEffectSound("유탄", 0.5f);
+    public void Flame_Shoot_Sound() => SoundManager.instance.PlayEffectSound("화염방사기", 0.5f);
+
+    public void Close_Attack_1_Sound() => SoundManager.instance.PlayEffectSound("근접 무기 소리 1", 0.5f);
+    public void Close_Attack_2_Sound() => SoundManager.instance.PlayEffectSound("근접 무기 소리 2", 0.5f);
+
+    public void Demacia_Skill_Land_Sound() => SoundManager.instance.PlayEffectSound("데마시아 떨어진 소리", 0.5f);
+    public void Fantasy_Skill_Sound() => SoundManager.instance.PlayEffectSound("fantasyAxe스킬소리", 0.5f);
+    public void Sliver_Skill_Sound() => SoundManager.instance.PlayEffectSound("sliver스킬소리", 0.5f);
+    public void Static_Skill_Land_Sound() => SoundManager.instance.PlayEffectSound("statict스킬 떨어지는 소리", 0.5f);
+    public void StreamOfEdge_Skill_Sound() => SoundManager.instance.PlayEffectSound("streamofedge스킬소리", 0.5f);
+
+    public void Bomb_Plane_Sound() => SoundManager.instance.PlayEffectSound("bomb폭격기지나가는 소리", 0.5f);
+    public void Heli_Plane_Sound() => SoundManager.instance.PlayEffectSound("헬기지나가는소리", 0.5f);
+    public void Bomb_Expolosion_Sound() => SoundManager.instance.PlayEffectSound("Bomb소리", 0.5f);
+    public void Heli_Shoot_Sound() => SoundManager.instance.PlayEffectSound("헬기총소리", 0.5f);
+    public void Turret_Shoot_Sound() => SoundManager.instance.PlayEffectSound("포탑 미사일 발사소리", 0.5f);
+    public void Turrent_Explosion_Sound() => SoundManager.instance.PlayEffectSound("포탑 미사일 터지는 소리", 0.5f);
+
     public void reload_Sound() => PlaySound(reload);
+    public void revive_Sound() => SoundManager.instance.PlayEffectSound("부활", 0.5f);
+
     public void reload_Sound_stop() => StopSound(reload);
-    public void revive_Sound() => PlaySound(revive);
+
     
 
 

@@ -139,12 +139,13 @@ public class EventManager : MonoBehaviour
         
        
         
-        BGM = Resources.Load<AudioClip>("Sound/BGM/A Fight With The Enemy");
+        /*BGM = Resources.Load<AudioClip>("Sound/BGM/A Fight With The Enemy");
         BGMaudioSource = gameObject.AddComponent<AudioSource>();
         BGMaudioSource.clip = BGM;
         BGMaudioSource.volume = 0.2f; // Set volume to 0.2
         BGMaudioSource.loop = true; // Enable looping
-        BGMaudioSource.Play(); // Start playing BGM
+        BGMaudioSource.Play(); // Start playing BGM*/
+        SoundManager.instance.PlayMusic("A Fight With The Enemy");
 
         dialogue_1 = false;
         dialogue_2 = false;
@@ -174,7 +175,8 @@ public class EventManager : MonoBehaviour
     {
         if (PlayerManager.Instance.revive == 0)
         {
-            BGMaudioSource.Stop();
+            //BGMaudioSource.Stop();
+            SoundManager.instance.StopMusic();
         }
         if (UIManager.instance.DialogueNumber == 83)// && UIManager.instance.isCompletelyPrinted == true)
         {
@@ -295,10 +297,7 @@ public class EventManager : MonoBehaviour
             {
                 dialogue_6 = true;
                 //브금 중지
-                if (BGMaudioSource != null && BGMaudioSource.isPlaying)
-                {
-                    BGMaudioSource.Stop();
-                }
+                SoundManager.instance.StopMusic();
 
                 if (stageclearpannel_appearence == false)
                 {

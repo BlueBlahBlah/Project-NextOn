@@ -80,6 +80,7 @@ public class Scenario_4 : MonoBehaviour
         Debug.Log("대사 이 에러들은 어디서 나온거지? 일단 문이 열릴때까지 버텨보자");
         scenario.FinalBGM.mute = false;
         scenario.BGM.mute = true;
+        SoundManager.instance.PlayMusic("final");
         StartCoroutine(StartLastGame());
 
     }

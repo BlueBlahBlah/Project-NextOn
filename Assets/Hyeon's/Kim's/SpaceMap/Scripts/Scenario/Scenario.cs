@@ -42,7 +42,7 @@ public class Scenario : MonoBehaviour
             DontDestroyOnLoad(gameObject); // OnLoad(씬이 로드 되었을 때) 자신을 파괴하지 않고 유지
 
 #if UNITY_EDITOR
-            //ResetPlayerPrefsOnStart();
+            ResetPlayerPrefsOnStart();
 #endif
 
             LoadScenarioProgress();
@@ -64,6 +64,7 @@ public class Scenario : MonoBehaviour
         FinalBGM.mute = true;
         UIManager = FindAnyObjectByType<UIManager>();
         is_End = false;
+        SoundManager.instance.PlayMusic("BGM");
     }
     // 에디터 전용 초기화 코드
 #if UNITY_EDITOR
@@ -150,5 +151,5 @@ public class Scenario : MonoBehaviour
         // 저장된 시나리오 진행 상황 로드
         playing_Scenario = PlayerPrefs.GetInt("PlayingScenario", 1); // 기본값은 1
     }
-    //public void Die() => StartCoroutine(sceneReloader.RestartScene());
+    public void Die() => StartCoroutine(sceneReloader.RestartScene());
 }
