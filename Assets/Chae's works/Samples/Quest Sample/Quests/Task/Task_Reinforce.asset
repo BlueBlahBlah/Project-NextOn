@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e892d5c7ae791f49b4a742ff6c30a8f, type: 3}
+  m_Name: Task_Reinforce
+  m_EditorClassIdentifier: 
+  category: {fileID: 11400000, guid: c59b09d27ac57004aaeb1343235aa219, type: 2}
+  codeName: Choose_Reinforce
+  description: Choose reinforce out of 3
+  action: {fileID: 11400000, guid: faab3e10387c8a44e8e5fa8ddb8de261, type: 2}
+  targets: []
+  initialSuccessValue: {fileID: 0}
+  needSuccessToComplete: 1
+  canReceiveReportsDuringCompletion: 0

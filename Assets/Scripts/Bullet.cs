@@ -24,11 +24,14 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 26)
+        Debug.Log("명중");
+        Debug.Log(other.tag);
+        if (other.CompareTag("Enemy"))
         {
-            Debug.Log("탄피탄피");
+            Debug.Log("탄-몬스터 타격");
+            other.GetComponent<Enemy>().curHealth--;
             Destroy(gameObject);
         }
     }

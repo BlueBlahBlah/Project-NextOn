@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Ceiling
   layers:
   - Default
   - TransparentFX
@@ -11,27 +13,27 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
+  - PlayerWeapon
+  - Ground
+  - AllIgnore
+  - Enemy
+  - EnemyAttackArea
+  - spawner
   - 
   - 
   - 
   - 
   - 
   - 
+  - Main Camera
+  - Minimap
+  - RoomTrigger
   - 
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - BorderBullet
   - 
   - 
   - 

@@ -1,0 +1,350 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1445054311665758884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 748870223342574429}
+  - component: {fileID: 2337634676247966088}
+  - component: {fileID: 3528932491277820031}
+  m_Layer: 0
+  m_Name: SwordSilverEffect 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &748870223342574429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445054311665758884}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6142317980407834172}
+  - {fileID: 6933996291258404444}
+  - {fileID: 1535228179859565833}
+  - {fileID: 5191120650683450870}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2337634676247966088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445054311665758884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc8629254837eb74491938c5e2c3e1c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rock1: {fileID: 5428171351019769797}
+  Rock2: {fileID: 9102857174188369829}
+  Rock3: {fileID: 803718089756280048}
+  Rock4: {fileID: 6225039042361617423}
+--- !u!54 &3528932491277820031
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445054311665758884}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!1001 &2245814507660211796
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 748870223342574429}
+    m_Modifications:
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445054311665758884, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_Name
+      value: SwordSilverEffect 1 (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+--- !u!1 &803718089756280048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1445054311665758884, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+  m_PrefabInstance: {fileID: 2245814507660211796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1535228179859565833 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+  m_PrefabInstance: {fileID: 2245814507660211796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4786786794926317227
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 748870223342574429}
+    m_Modifications:
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445054311665758884, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_Name
+      value: SwordSilverEffect 1 (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+--- !u!4 &5191120650683450870 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+  m_PrefabInstance: {fileID: 4786786794926317227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6225039042361617423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1445054311665758884, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+  m_PrefabInstance: {fileID: 4786786794926317227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6870628435648560481
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 748870223342574429}
+    m_Modifications:
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445054311665758884, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_Name
+      value: SwordSilverEffect 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+--- !u!1 &5428171351019769797 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1445054311665758884, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+  m_PrefabInstance: {fileID: 6870628435648560481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6142317980407834172 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+  m_PrefabInstance: {fileID: 6870628435648560481}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7664569540929836289
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 748870223342574429}
+    m_Modifications:
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445054311665758884, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+      propertyPath: m_Name
+      value: SwordSilverEffect 1 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+--- !u!4 &6933996291258404444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 748870223342574429, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+  m_PrefabInstance: {fileID: 7664569540929836289}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9102857174188369829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1445054311665758884, guid: f2b93941a068b0d44a3f73b430b20e11, type: 3}
+  m_PrefabInstance: {fileID: 7664569540929836289}
+  m_PrefabAsset: {fileID: 0}

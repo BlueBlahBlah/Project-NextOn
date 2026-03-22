@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b320920dd0b5fcf428567ef8ec14bfaf, type: 3}
+  m_Name: Rifle_Data
+  m_EditorClassIdentifier: 
+  itemName: Rifle
+  itemPrefab: {fileID: 305018857892583462, guid: 3911643d3acd043468d9e0c1df1746e6, type: 3}
+  description: 
+  weaponType: 2
+  baseDamage: 10
+  fireRate: 0.2
+  bulletSpeed: 20
+  reloadDuration: 0
+  shootSound: {fileID: 8300000, guid: 08b15283493d14e6ebacebed36250d4e, type: 3}
+  isLoopingSound: 0
+  maxMagazineSize: 30
+  totalMaxAmmo: 90
+  bulletPrefab: {fileID: 1859234679933314, guid: 42a1bebae52d63246936e2b237a08a4d, type: 3}
