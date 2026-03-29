@@ -7,47 +7,45 @@ public class Parenthesis_Effect : MonoBehaviour
 {
     [SerializeField] private GameObject Mate_Monster;
     private Transform parentTransform;
-    private float distance = 1f; // Parent와의 거리
+    private float distance = 1f; // Parent?�??거리
 
-    // Start는 첫 프레임 업데이트 전에 호출됩니다.
+    // Start??�??�레???�데?�트 ?�에 ?�출?�니??
     void Start()
     {
-        // Mate_Monster가 인스펙터에서 할당되지 않은 경우 컴포넌트에서 가져오기
-        if (Mate_Monster == null)
+        // Mate_Monster가 ?�스?�터?�서 ?�당?��? ?��? 경우 컴포?�트?�서 가?�오�?        if (Mate_Monster == null)
         {
             Mate_Monster = this.gameObject.GetComponentInParent<Parenthesis>().Mate_Monster;
         }
 
-        // Parent 오브젝트의 Transform을 가져오기
-        parentTransform = this.transform.parent;
+        // Parent ?�브?�트??Transform??가?�오�?        parentTransform = this.transform.parent;
     }
 
-    // Update는 매 프레임마다 호출됩니다.
+    // Update??�??�레?�마???�출?�니??
     void Update()
     {
-        // Mate_Monster와 Parent가 null이 아닌 경우 실행
+        // Mate_Monster?� Parent가 null???�닌 경우 ?�행
         if (Mate_Monster != null && parentTransform != null)
         {
-            //만약 둘다 죽은 상태라면 더이상 방향 관여 x
-            //둘중 하나라도 아직 살아있다면 해당 코드 동작
+            //만약 ?�다 죽�? ?�태?�면 ?�이??방향 관??x
+            //?�중 ?�나?�도 ?�직 ?�아?�다�??�당 코드 ?�작
             if (Mate_Monster.GetComponent<Parenthesis>().get_isDeath() == false || this.gameObject.GetComponentInParent<Parenthesis>().get_isDeath() == false)
             {
-                // Mate_Monster를 바라보는 방향 계산
+                // Mate_Monster�?바라보는 방향 계산
                 Vector3 directionToMate = (Mate_Monster.transform.position - parentTransform.position).normalized;
 
-                // Mate_Monster의 정반대 방향 계산
+                // Mate_Monster???�반?� 방향 계산
                 Vector3 oppositeDirection = -directionToMate;
 
-                // Parent의 위치에서 Mate_Monster의 정반대 방향으로 distance 거리를 두고 이동
+                // Parent???�치?�서 Mate_Monster???�반?� 방향?�로 distance 거리�??�고 ?�동
                 Vector3 newPosition = parentTransform.position + oppositeDirection * distance;
 
-                // Y 값을 1.5로 설정
+                // Y 값을 1.5�??�정
                 newPosition.y = 1.5f;
 
-                // Parenthesis_Effect 위치 업데이트
+                // Parenthesis_Effect ?�치 ?�데?�트
                 transform.position = newPosition;
 
-                // Parenthesis_Effect가 Mate_Monster의 정반대 방향을 바라보도록 설정
+                // Parenthesis_Effect가 Mate_Monster???�반?� 방향??바라보도�??�정
                 Vector3 lookDirection = parentTransform.position - Mate_Monster.transform.position;
                 transform.rotation = Quaternion.LookRotation(lookDirection);
             }

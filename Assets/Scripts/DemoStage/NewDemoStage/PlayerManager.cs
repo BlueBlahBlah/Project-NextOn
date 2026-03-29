@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Transform closeWeaponMount;       // 근접 모델의 오른손 본
 
     [SerializeField] private List<GameObject> player_WeaponList;
-    [SerializeField] private Button attackBtn;
+    [SerializeField] private PlayerInputController inputController;
     
     public DropItemPosition _dropItemPosition;
 
@@ -140,7 +140,29 @@ public class PlayerManager : MonoBehaviour
         //현재 총기류를 먹은경우
         if (player_LongWeapon.activeSelf)
         {
-            player_LongWeapon.GetComponent<PlayerScriptRifle>().BulletInfo();
+            var rifle = player_LongWeapon.GetComponent<PlayerScriptRifle>();
+            rifle.BulletInfo();
+            
+            if (rifle.currentGun != null)
+            {
+                // 1. 사격 상태 동기화 (Manager -> Gun)
+                // 1. 사격 상태 동기화 (Input -> Gun)
+                if (inputController != null)
+                {
+                    rifle.currentGun.IsFiring = inputController.IsFiring;
+                }
+
+                // 2. 재장전 상태 동기화 (Gun <-> PlayerScript)
+                // 총이 재장전을 요청하면 플레이어 스크립트의 상태도 업데이트
+                if (rifle.currentGun.nowReloading)
+                {
+                    rifle.Reloading = true;
+                }
+                else
+                {
+                    rifle.Reloading = false;
+                }
+            }
             is_close_weapon = false;
         }
         else
@@ -157,11 +179,11 @@ public class PlayerManager : MonoBehaviour
 
     public void find_attackBtn_Invoke()
     {
-        Invoke("find_attackBtn",3f);
+        // 이제 InputController가 중앙에서 관리하므로 버튼을 직접 찾을 필요가 없습니다.
     }
     private void find_attackBtn()
     {
-       attackBtn = GameObject.Find("FireBtn").GetComponent<Button>();
+        // 제거됨
     }
 
     private void revive_Health_Invoke()
@@ -225,8 +247,8 @@ public class PlayerManager : MonoBehaviour
                 var gun = newWeapon.GetComponent<GunBase>();
                 if (gun != null)
                 {
-                    gun.fireBtn = attackBtn; 
-                    gun.playerRifle = player_LongWeapon.GetComponent<PlayerScriptRifle>(); 
+                    // 이제 버튼을 직접 주입하지 않고 Manager가 IsFiring을 제어함
+                    // gun.playerRifle = player_LongWeapon.GetComponent<PlayerScriptRifle>(); 
                 }
                 
                 player_LongWeapon.GetComponent<PlayerScriptRifle>().WeaponSynchronization();
@@ -234,10 +256,16 @@ public class PlayerManager : MonoBehaviour
             else if (data.weaponType == WeaponType.closeType)
             {
                 // 근접 무기 처리
-                player_CloseWeapon.GetComponent<Space_PlayerScriptOneHand>().WeaponSynchronization();
+                var meleeScript = player_CloseWeapon.GetComponent<Space_PlayerScriptOneHand>();
+                meleeScript.WeaponSynchronization();
                 
-                attackBtn.onClick.RemoveAllListeners();
-                attackBtn.onClick.AddListener(player_CloseWeapon.GetComponent<Space_PlayerScriptOneHand>().OnAttackButtonClick);
+                // 버튼 클릭 리스너 대신 InputController 이벤트에 연결
+                if (inputController != null)
+                {
+                    // 이전 리스너 제거가 불가능하므로 (Action 전역 관리 필요 시 개선)
+                    // 현재는 강제로 한 번만 등록되도록 처리하거나 구조적 개선이 필요함
+                    inputController.OnFirePressed += meleeScript.OnAttackButtonClick;
+                }
             }
         }
     }

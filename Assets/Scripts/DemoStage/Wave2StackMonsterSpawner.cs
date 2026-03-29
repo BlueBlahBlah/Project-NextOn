@@ -7,7 +7,7 @@ public class Wave2StackMonsterSpawner : MonoBehaviour
     [SerializeField] private GameObject Monster;
     private float time;
     private float period;
-    //몬스터 생성 중앙제어
+    //몬스???�성 중앙?�어
     public bool Active;
     // Start is called before the first frame update
     void Start()
@@ -24,9 +24,9 @@ public class Wave2StackMonsterSpawner : MonoBehaviour
         {
             period = Random.Range(5, 10);
             time = 0;
-            //몬스터 생성
+            //몬스???�성
             GameObject newMon = Instantiate(Monster, transform.position, Quaternion.identity);
-            //배열에 추가
+            //배열??추�?
             //MonsterManager.Instance.AddStackMonster_In_Array(newMon);
         }
     }

@@ -8,15 +8,14 @@ public class WeaponChangeGravity : MonoBehaviour
     [SerializeField] private Rigidbody rigidbody;
     public DropItemPosition.ItemList TypeSelf;
 
-    public bool Dialog_After_Acquisition;       //해당 아이템 획득 시 대화창이 나오는지
+    public bool Dialog_After_Acquisition;       //?�당 ?�이???�득 ???�?�창???�오?��?
     // Start is called before the first frame update
     void Start()
     {
         _boxCollider = GetComponent<BoxCollider>();
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.useGravity = true;
-        Dialog_After_Acquisition = false;           //아이템 획득시 대화창 나오지 않는 것이 기본값
-    }
+        Dialog_After_Acquisition = false;           //?�이???�득???�?�창 ?�오지 ?�는 것이 기본�?    }
 
     // Update is called once per frame
     void Update()
@@ -30,7 +29,7 @@ public class WeaponChangeGravity : MonoBehaviour
         }
     }
 
-    //Dialog_After_Acquisition를 true로 바꾸는 함수 - Dialog_After_Acquisition가 변경되는 시점을 맞추기 위함?
+    //Dialog_After_Acquisition�?true�?바꾸???�수 - Dialog_After_Acquisition가 변경되???�점??맞추�??�함?
     public void SetDialog()
     {
        Invoke("Invoke_SetDialog",1);

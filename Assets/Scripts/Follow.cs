@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Follow : MonoBehaviour
 {
-    // 따라갈 목표와 위치 오프셋을 Public 변수로 선언
+    // ?�라�?목표?� ?�치 ?�프?�을 Public 변?�로 ?�언
     public Transform target;
     public Vector3 offset;
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = target.position + offset; // 타겟 위치 설정
+        transform.position = target.position + offset; // ?��??�치 ?�정
     }
 }

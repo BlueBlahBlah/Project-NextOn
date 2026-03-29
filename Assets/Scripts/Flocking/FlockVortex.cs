@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class FlockVortex : MonoBehaviour
 {
-    public float scaleFactor = 1.5f; // 크기 변화 비율
-    public float growDuration = 5.0f; // 크기 커지는 애니메이션 시간
-    public float shrinkDuration = 3.0f; // 크기 작아지는 애니메이션 시간
+    public float scaleFactor = 1.5f; // ?�기 변??비율
+    public float growDuration = 5.0f; // ?�기 커�????�니메이???�간
+    public float shrinkDuration = 3.0f; // ?�기 ?�아지???�니메이???�간
 
-    private Vector3 initialScale; // 초기 크기
+    private Vector3 initialScale; // 초기 ?�기
 
     void Start()
     {
@@ -24,16 +24,14 @@ public class FlockVortex : MonoBehaviour
     {
         yield return StartCoroutine(ScaleOverTime(initialScale * scaleFactor, growDuration));
 
-        // 대기
-        yield return new WaitForSeconds(3.0f);
+        // ?��?        yield return new WaitForSeconds(3.0f);
 
-        // 3초 동안 크기가 0.5로 작아지도록
+        // 3�??�안 ?�기가 0.5�??�아지?�록
         yield return StartCoroutine(ScaleOverTime(initialScale, shrinkDuration));
 
-        // 크기를 초기 크기로 되돌림
-        transform.localScale = initialScale;
+        // ?�기�?초기 ?�기�??�돌�?        transform.localScale = initialScale;
 
-        // 다음 Vortex 호출
+        // ?�음 Vortex ?�출
         Invoke("vortex", Random.Range(10f, 20f));
     }
 

@@ -75,6 +75,13 @@ public class WeaponChange_TriggerEditor : Editor
             {
                 weaponDataProp.objectReferenceValue = weaponList[selectedIndex - 1]; // 다시 -1 해서 원본 리스트 인덱스 맞춤
             }
+            
+            // 즉시 적용 (프리뷰 생성을 위해)
+            serializedObject.ApplyModifiedProperties();
+            
+            // 프리뷰 업데이트 호출
+            WeaponChange_Trigger trigger = (WeaponChange_Trigger)target;
+            trigger.UpdatePreview();
         }
 
         GUILayout.Space(10);

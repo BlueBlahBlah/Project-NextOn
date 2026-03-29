@@ -7,10 +7,10 @@ public class DestroyItemObecjt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 부모 오브젝트의 모든 하위 오브젝트를 가져옵니다.
+        // 부�??�브?�트??모든 ?�위 ?�브?�트�?가?�옵?�다.
         foreach (Transform child in this.transform)
         {
-            // 하위 오브젝트에 MyScript가 없다면 추가합니다.
+            // ?�위 ?�브?�트??MyScript가 ?�다�?추�??�니??
             if (child.gameObject.GetComponent<DestroyItemObecjt>() == null)
             {
                 child.gameObject.AddComponent<DestroyItemObecjt>();
@@ -26,7 +26,7 @@ public class DestroyItemObecjt : MonoBehaviour
     
     public void OnTriggerEnter(Collider other)
     {
-        // 충돌한 물체가 Player 태그를 가진 경우
+        // 충돌??물체가 Player ?�그�?가�?경우
         if (other.CompareTag("Player"))
         {
             Destroy(gameObject,0.1f);

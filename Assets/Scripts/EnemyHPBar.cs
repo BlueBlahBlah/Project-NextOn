@@ -14,7 +14,6 @@ public class EnemyHPBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //항상 카메라를 정면으로 바라 볼 수 있도록
-        transform.LookAt(transform.position + Cam.rotation * Vector3.forward,Cam.rotation * Vector3.up);
+        //??�� 카메?��? ?�면?�로 바라 �????�도�?        transform.LookAt(transform.position + Cam.rotation * Vector3.forward,Cam.rotation * Vector3.up);
     }
 }

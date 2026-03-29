@@ -42,8 +42,7 @@ public class FirstLandManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Maze.SetActive(false);
 
-        //미로의 아래 지형 미션을 클리어 하길 대기
-        yield return new WaitUntil(() => isUnderFin);
+        //미로???�래 지??미션???�리???�길 ?��?        yield return new WaitUntil(() => isUnderFin);
         FoodWall.SetActive(false);
         SecondLand.SetActive(true);
     }

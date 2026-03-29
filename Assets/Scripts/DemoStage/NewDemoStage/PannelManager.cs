@@ -9,23 +9,23 @@ public class PannelManager : MonoBehaviour
         {
             if (null == instance)
             {
-                //이 클래스 인스턴스가 탄생했을 때 전역변수 instance에 게임매니저 인스턴스가 담겨있지 않다면, 자신을 넣어준다.
+                //???�래???�스?�스가 ?�생?�을 ???�역변??instance??게임매니?� ?�스?�스가 ?�겨?��? ?�다�? ?�신???�어준??
                 instance = this;
     
-                //씬 전환이 되더라도 파괴되지 않게 한다.
-                //gameObject만으로도 이 스크립트가 컴포넌트로서 붙어있는 Hierarchy상의 게임오브젝트라는 뜻이지만, 
-                //나는 헷갈림 방지를 위해 this를 붙여주기도 한다.
+                //???�환???�더?�도 ?�괴?��? ?�게 ?�다.
+                //gameObject만으로도 ???�크립트가 컴포?�트로서 붙어?�는 Hierarchy?�의 게임?�브?�트?�는 ?�이지�? 
+                //?�는 ?�갈�?방�?�??�해 this�?붙여주기???�다.
                 DontDestroyOnLoad(this.gameObject);
             }
             else
             {
-                //만약 씬 이동이 되었는데 그 씬에도 Hierarchy에 GameMgr이 존재할 수도 있다.
-                //그럴 경우엔 이전 씬에서 사용하던 인스턴스를 계속 사용해주는 경우가 많은 것 같다.
-                //그래서 이미 전역변수인 instance에 인스턴스가 존재한다면 자신(새로운 씬의 GameMgr)을 삭제해준다.
+                //만약 ???�동???�었?�데 �??�에??Hierarchy??GameMgr??존재???�도 ?�다.
+                //그럴 경우???�전 ?�에???�용?�던 ?�스?�스�?계속 ?�용?�주??경우가 많�? �?같다.
+                //그래???��? ?�역변?�인 instance???�스?�스가 존재?�다�??�신(?�로???�의 GameMgr)????��?��???
                 Destroy(this.gameObject);
             }
         }
-        //게임 매니저 인스턴스에 접근할 수 있는 프로퍼티. static이므로 다른 클래스에서 맘껏 호출할 수 있다.
+        //게임 매니?� ?�스?�스???�근?????�는 ?�로?�티. static?��?�??�른 ?�래?�에??맘껏 ?�출?????�다.
         public static PannelManager Instance
         {
             get
@@ -44,7 +44,7 @@ public class PannelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        data = CSVReader.Read("Resources 안의 경로");
+        data = CSVReader.Read("Resources ?�의 경로");
     }
 
     // Update is called once per frame

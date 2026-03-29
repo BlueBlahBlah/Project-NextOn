@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,10 +20,16 @@ public class Monster : CreatureInfo
 
     public void Damage(int damage)
     {
-        if(GetHP() == 0)
+        int currentHp = GetHP();
+        if (currentHp > 0)
         {
-            //죽는 애니메이션
-            Destroy(this);
+            SetHP(currentHp - damage);
+        }
+        
+        if (GetHP() <= 0)
+        {
+            //二쎈뒗 ?좊땲硫붿씠??
+            Destroy(gameObject);
         }
     }
 }

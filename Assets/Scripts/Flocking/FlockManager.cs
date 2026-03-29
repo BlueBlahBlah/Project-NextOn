@@ -31,7 +31,7 @@ public class FlockManager : MonoBehaviour
                                                                 Random.Range(-swimLimits.y, swimLimits.y),
                                                                 Random.Range(-swimLimits.z, swimLimits.z));
             
-            // Quaternion.Euler를 사용하여 원하는 회전값을 설정
+            // Quaternion.Euler�??�용?�여 ?�하???�전값을 ?�정
             Quaternion rotation = Quaternion.Euler(-90, 0, 0);
             allDuck[i] = Instantiate(duckPrefab, pos, rotation);
         }

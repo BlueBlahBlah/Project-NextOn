@@ -19,24 +19,23 @@ public class EnemyDamageText : MonoBehaviour
     IEnumerator UpperText()
     {
         float elapsedTime = 0f;
-        float duration = 1f; // 1초 동안 진행될 시간
+        float duration = 1f; // 1�??�안 진행???�간
 
         Vector3 startPosition = transform.position;
-        Vector3 targetPosition = transform.position + Vector3.up; // 현재 위치에서 Y축으로 +1
+        Vector3 targetPosition = transform.position + Vector3.up; // ?�재 ?�치?�서 Y축으�?+1
 
         while (elapsedTime < duration)
         {
-            // 시간에 따라 위치를 보간하여 이동
+            // ?�간???�라 ?�치�?보간?�여 ?�동
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
 
-            // 경과 시간 업데이트
+            // 경과 ?�간 ?�데?�트
             elapsedTime += Time.deltaTime;
 
-            // 한 프레임 대기
-            yield return null;
+            // ???�레???��?            yield return null;
         }
 
-        // 마지막에 목표 위치로 정확히 위치를 조정
+        // 마�?막에 목표 ?�치�??�확???�치�?조정
         transform.position = targetPosition;
     }
 }

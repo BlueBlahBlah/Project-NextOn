@@ -20,15 +20,14 @@ public class BombSkillTriggerBox : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         Debug.LogError("무언가 충돌");
-        // 충돌한 물체가 Player 태그를 가진 경우
+        // 충돌??물체가 Player ?�그�?가�?경우
         if (other.CompareTag("Player"))
         //if(other.gameObject.layer == 6)
         {
-            Debug.LogError("플레이어");
-            // plane GameObject의 BomberSkill 스크립트 가져오기
-            BomberSkill bomberSkill = plane.GetComponent<BomberSkill>();
+            Debug.LogError("?�레?�어");
+            // plane GameObject??BomberSkill ?�크립트 가?�오�?            BomberSkill bomberSkill = plane.GetComponent<BomberSkill>();
 
-            // 가져온 스크립트가 null이 아니면 Bomb 함수 실행
+            // 가?�온 ?�크립트가 null???�니�?Bomb ?�수 ?�행
             if (bomberSkill != null)
             {
                 bomberSkill.Bomb();

@@ -1,74 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using ProjectNextOn.Data;
 
 public class BulletSupply : MonoBehaviour
 {
+    [Header("보급할 탄약 비율")]
+    [Tooltip("기본값 1 = 무기의 최대 소지 탄약(TotalMaxAmmo)만큼 회복")]
+    [Range(0.1f, 10f)]
+    public float supplyRatio = 1f;
 
-    [SerializeField] private Rifle rifle;
-    [SerializeField] private Shotgun shotgun;
-    [SerializeField] private Sniper sniper;
-    [SerializeField] private GrenadeLauncher grenadeLauncher;
-    [SerializeField] private MachineGun machineGun;
+    [Header("일회성")]
+    public bool destroyOnPickup = true;
 
-    [SerializeField] private FireGun fireGun;
-    // Start is called before the first frame update
-    void Start()
-    {
-        /*rifle = GameObject.FindObjectOfType<Rifle>();
-        shotgun = GameObject.FindObjectOfType<Shotgun>();
-        sniper = GameObject.FindObjectOfType<Sniper>();
-        grenadeLauncher = GameObject.FindObjectOfType<GrenadeLauncher>();
-        machineGun = GameObject.FindObjectOfType<MachineGun>();
-        fireGun = GameObject.FindObjectOfType<FireGun>();*/
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
     public void OnTriggerEnter(Collider other)
     {
-        // 충돌한 물체가 Player 태그를 가진 경우
         if (other.CompareTag("Player"))
         {
-           
-            if (rifle != null && rifle.gameObject.activeSelf)
+            // 플레이어 하위에 있는 원거리 무기 스크립트를 찾음
+            PlayerScriptRifle rifleScript = other.GetComponentInChildren<PlayerScriptRifle>();
+            
+            // 현재 활성화된 원거리 무기 상태이고 들고 있는 총이 존재한다면
+            if (rifleScript != null && rifleScript.gameObject.activeSelf && rifleScript.currentGun != null)
             {
-                Debug.Log("라이플 탄약보충");
-                rifle.maxBulletCount += 100; // 100발 추가
-            }
+                GunBase gun = rifleScript.currentGun;
+                GunData gd = gun.gunData;
 
-            if (shotgun != null && shotgun.gameObject.activeSelf)
-            {
-                Debug.Log("샷건 탄약보충");
-                shotgun.maxBulletCount += 100; // 100발 추가
-            }
+                if (gd != null)
+                {
+                    // GunData에 정의된 최대 소지 가능 탄수(totalMaxAmmo) 기준으로 획득량 계산
+                    // 예: supplyRatio가 0.5이고 최대 탄수가 100이면 50발 보충
+                    int supplyAmount = Mathf.Max(1, Mathf.FloorToInt(gd.totalMaxAmmo * supplyRatio));
+                    
+                    // 현재 총기 예비 탄약에 보충
+                    gun.maxBulletCount += supplyAmount; 
 
-            if (sniper != null && sniper.gameObject.activeSelf)
-            {
-                Debug.Log("저격총 탄약보충");
-                sniper.maxBulletCount += 100; // 100발 추가
-            }
-
-            if (grenadeLauncher != null && grenadeLauncher.gameObject.activeSelf)
-            {
-                Debug.Log("유탄발사기 탄약보충");
-                grenadeLauncher.maxBulletCount += 100; // 100발 추가
-            }
-
-            if (machineGun != null && machineGun.gameObject.activeSelf)
-            {
-                Debug.Log("기관총 탄약보충");
-                machineGun.maxBulletCount += 200; // 200발 추가
-            }
-
-            if (fireGun != null && fireGun.gameObject.activeSelf)
-            {
-                Debug.Log("화염방사기 탄약보충");
-                fireGun.maxBulletCount += 100; // 100발 추가
+                    // 아이템 획득 후 상자 파괴 (비활성화)
+                    if (destroyOnPickup)
+                    {
+                        gameObject.SetActive(false);
+                    }
+                }
             }
         }
     }

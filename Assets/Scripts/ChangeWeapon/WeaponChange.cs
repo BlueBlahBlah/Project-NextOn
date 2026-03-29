@@ -26,7 +26,7 @@ public class WeaponChange : MonoBehaviour
             player_LongWeapon.SetActive(false);
             player_NonWeapon.SetActive(false);
             player_CloseWeapon.SetActive(true);
-            //근접무기의 경우 무기에서 버튼 이벤트를 등록하는 것이 아니기에 근접공격 모션을 여기서 등록
+            //근접무기??경우 무기?�서 버튼 ?�벤?��? ?�록?�는 것이 ?�니기에 근접공격 모션???�기???�록
             attackBtn.onClick.AddListener(player_CloseWeapon.GetComponent<PlayerScriptOneHand>().OnAttackButtonClick);
         }
         else if (Wt == WeaponType.longType)
@@ -55,11 +55,11 @@ public class WeaponChange : MonoBehaviour
 
         if (Wt == WeaponType.closeType)
         {
-            player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();  //현재 잡은 무기 다시 탐색
+            player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();  //?�재 ?��? 무기 ?�시 ?�색
         }
         else if (Wt == WeaponType.longType)
         {
-            player_LongWeapon.GetComponent<PlayerScriptRifle>().WeaponSynchronization();    //현재 잡은 무기 다시 탐색
+            player_LongWeapon.GetComponent<PlayerScriptRifle>().WeaponSynchronization();    //?�재 ?��? 무기 ?�시 ?�색
         }
     }
 }

@@ -8,25 +8,25 @@ public class GunSpiralSkillSpawn : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        // 충돌한 물체가 Player 태그를 가진 경우
+        // 충돌??물체가 Player ?�그�?가�?경우
         if (other.CompareTag("Player"))
         {
-            // "Enemy" 태그를 가진 가장 가까운 게임 오브젝트를 찾음
+            // "Enemy" ?�그�?가�?가??가까운 게임 ?�브?�트�?찾음
             GameObject nearestEnemy = FindNearestEnemy();
 
-            // 적이 발견되면
+            // ?�이 발견?�면
             if (nearestEnemy != null)
             {
-                // 가장 가까운 적의 위치를 얻음
+                // 가??가까운 ?�의 ?�치�??�음
                 Vector3 enemyPosition = nearestEnemy.transform.position;
 
-                // 해당 위치에 스킬을 생성
+                // ?�당 ?�치???�킬???�성
                 Instantiate(Skill, enemyPosition, Quaternion.identity);
             }
         }
     }
 
-    // "Enemy" 태그를 가진 가장 가까운 게임 오브젝트를 찾는 함수
+    // "Enemy" ?�그�?가�?가??가까운 게임 ?�브?�트�?찾는 ?�수
     private GameObject FindNearestEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

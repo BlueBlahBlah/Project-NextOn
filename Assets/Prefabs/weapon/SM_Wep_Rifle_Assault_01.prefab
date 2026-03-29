@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a787c2edb64af644b9b085bf72ef0072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunData: {fileID: 11400000, guid: fa8b58c73a0371c4faf5b3a6dcf54422, type: 2}
+  weaponData: {fileID: 11400000, guid: fa8b58c73a0371c4faf5b3a6dcf54422, type: 2}
   bulletCount: 0
   maxBulletCount: 0
   nowReloading: 0

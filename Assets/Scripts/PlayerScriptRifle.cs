@@ -10,7 +10,7 @@ public class PlayerScriptRifle : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public bool walking;
-    public bool reloaing;
+    public bool Reloading;
     private Vector3 lastPosition;
     Animator Anim;
     public Button RollBtn;

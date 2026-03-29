@@ -10,52 +10,45 @@ public class FantasyAxe : MonoBehaviour
     [SerializeField] private Button Btn;
     
     public int Damage;
-    public float ThisCoolTime;            //현재 무기의 돌아가고 있는 쿨타임
-    public float SkillCoolTime;           //현재 무기 스킬의 총 쿨타임
-    [SerializeField] private float SkillCoolTimeRate;       //PlayerManager에서 가져오는 쿨타임 감소율
-    
+    public float ThisCoolTime;            //?�재 무기???�아가�??�는 쿨�???    public float SkillCoolTime;           //?�재 무기 ?�킬??�?쿨�???    [SerializeField] private float SkillCoolTimeRate;       //PlayerManager?�서 가?�오??쿨�???감소??    
     // Start is called before the first frame update
     void Start()
     {
         Damage = 1;
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
-        SkillCoolTime = 10f;            //현재 무기의 쿨타임을 10초로 초기화 
-        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨타임은 감소율을 적용한 값으로 
+        SkillCoolTime = 10f;            //?�재 무기??쿨�??�을 10초로 초기??
+        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨�??��? 감소?�을 ?�용??값으�?
         ThisCoolTime = 0;
-        Btn.interactable = true;        //처음에는(먹자마자) 스킬 사용가능
-    }
+        Btn.interactable = true;        //처음?�는(먹자마자) ?�킬 ?�용가??    }
     private void OnEnable()
     {
-        // 버튼 클릭 이벤트 등록
-        //Debug.LogError("도끼 Enable");
+        // 버튼 ?�릭 ?�벤???�록
+        //Debug.LogError("?�끼 Enable");
         Btn.onClick.AddListener(SkillSpawn);
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
-        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨타임은 감소율을 적용한 값으로 
-        ThisCoolTime = 0;               //쿨타임 초기화
-        
-        Btn.interactable = true;        //처음에는(먹자마자) 스킬 사용가능
-    }
+        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨�??��? 감소?�을 ?�용??값으�?
+        ThisCoolTime = 0;               //쿨�???초기??        
+        Btn.interactable = true;        //처음?�는(먹자마자) ?�킬 ?�용가??    }
     
 
     // Update is called once per frame
     void Update()
     {
-        if (ThisCoolTime > 0)                  //쿨타임이 0보다 클때 (쿨이 남아있는 경우)
+        if (ThisCoolTime > 0)                  //쿨�??�이 0보다 ?�때 (쿨이 ?�아?�는 경우)
         {
-            ThisCoolTime -= Time.deltaTime;     //쿨타임 감소
+            ThisCoolTime -= Time.deltaTime;     //쿨�???감소
         }
-        else if (ThisCoolTime <= 0)           //쿨타임이 0일때 
+        else if (ThisCoolTime <= 0)           //쿨�??�이 0?�때 
         {
-            Btn.interactable = true;         //스킬 사용 가능
-        }
+            Btn.interactable = true;         //?�킬 ?�용 가??        }
     }
 
     void SkillSpawn()
     {
         
         Instantiate(Skill, transform.position, Quaternion.identity);
-        Btn.interactable = false;       //스킬 사용후 다음 쿨타임까지 버튼 잠금
-        ThisCoolTime = SkillCoolTime;   //쿨타임 생김
+        Btn.interactable = false;       //?�킬 ?�용???�음 쿨�??�까지 버튼 ?�금
+        ThisCoolTime = SkillCoolTime;   //쿨�????��?
         
     }
     

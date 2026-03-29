@@ -21,18 +21,18 @@ public class FlockIGiGearSword : MonoBehaviour
 
     void attack()
     {
-        // "Enemy" 태그를 가진 가장 가까운 게임 오브젝트를 찾음
+        // "Enemy" ?�그�?가�?가??가까운 게임 ?�브?�트�?찾음
         GameObject nearestEnemy = FindRandomEnemy();
         respawnTime = Random.Range(8, 15);
-        // 적이 발견되면
+        // ?�이 발견?�면
         if (nearestEnemy != null)
         {
-            // 가장 가까운 적의 위치를 얻음
+            // 가??가까운 ?�의 ?�치�??�음
             Vector3 enemyPosition = nearestEnemy.transform.position;
 
             /*Duck.SetActive(false);
             Invoke("respawn",3);*/
-            // 해당 위치에 스킬을 생성
+            // ?�당 ?�치???�킬???�성
             Instantiate(Effect, enemyPosition, Quaternion.identity);
             
         }
@@ -43,26 +43,25 @@ public class FlockIGiGearSword : MonoBehaviour
 
     /*void respawn()
     {
-        Debug.Log("분홍오리");
+        Debug.Log("분홍?�리");
         Duck.SetActive(true);
     }*/
     
-    // "Enemy" 태그를 가진 가장 가까운 게임 오브젝트 5개중 하나를 고르는 함수
+    // "Enemy" ?�그�?가�?가??가까운 게임 ?�브?�트 5개중 ?�나�?고르???�수
     private GameObject FindRandomEnemy()
     {
-        // "Enemy" 태그를 가진 모든 오브젝트를 배열로 가져옴
+        // "Enemy" ?�그�?가�?모든 ?�브?�트�?배열�?가?�옴
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        // 만약 enemies 배열이 비어 있다면 null을 반환
+        // 만약 enemies 배열??비어 ?�다�?null??반환
         if (enemies.Length == 0)
         {
             return null;
         }
 
-        // 가장 가까운 5개의 적을 저장할 리스트
-        List<GameObject> nearestEnemies = new List<GameObject>();
+        // 가??가까운 5개의 ?�을 ?�?�할 리스??        List<GameObject> nearestEnemies = new List<GameObject>();
 
-        // 모든 적을 돌면서 가장 가까운 5개를 찾음
+        // 모든 ?�을 ?�면??가??가까운 5개�? 찾음
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
@@ -84,7 +83,7 @@ public class FlockIGiGearSword : MonoBehaviour
             }
         }
 
-        // 랜덤으로 하나 선택
+        // ?�덤?�로 ?�나 ?�택
         GameObject randomEnemy = nearestEnemies[Random.Range(0, nearestEnemies.Count)];
 
         return randomEnemy;

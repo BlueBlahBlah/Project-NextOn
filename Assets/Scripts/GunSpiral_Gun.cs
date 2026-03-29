@@ -12,7 +12,7 @@ public class GunSpiral_Gun : MonoBehaviour
 
     void Update()
     {
-        // x축 회전
+        // x�??�전
         transform.Rotate(Vector3.up * xRotationSpeed * Time.deltaTime);
 
        

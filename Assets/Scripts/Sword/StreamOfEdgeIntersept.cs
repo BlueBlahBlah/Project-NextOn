@@ -7,8 +7,7 @@ public class StreamOfEdgeIntersept : MonoBehaviour
 {
     [SerializeField] private GameObject destination;
     private Rigidbody rigidbody;
-    // 이동에 사용될 속도 변수
-    public float moveSpeed = 5f;
+    // ?�동???�용???�도 변??    public float moveSpeed = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,19 +24,18 @@ public class StreamOfEdgeIntersept : MonoBehaviour
 
     public void toMove()
     {
-        // 코루틴 시작
+        // 코루???�작
         StartCoroutine(MoveToDestination(destination.transform.position));
     }
 
     IEnumerator MoveToDestination(Vector3 destination)
     {
-        // 현재 위치부터 목적지까지 이동하는 while 루프
+        // ?�재 ?�치부??목적지까�? ?�동?�는 while 루프
         while (transform.position != destination)
         {
-            // 현재 위치에서 목적지 방향으로 이동
+            // ?�재 ?�치?�서 목적지 방향?�로 ?�동
             transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
-            yield return null; // 한 프레임 대기
-        }
+            yield return null; // ???�레???��?        }
         
     }
 }

@@ -11,10 +11,10 @@ public class WeaponDataManagerWindow : EditorWindow
     private Editor weaponEditor;
     private List<WeaponData> weaponDatabase = new List<WeaponData>();
 
-    [MenuItem("Tools/무기 데이터 관리자 (Weapon Data Manager)")]
+    [MenuItem("Tools/무기 ?�이??관리자 (Weapon Data Manager)")]
     public static void ShowWindow()
     {
-        GetWindow<WeaponDataManagerWindow>("무기 데이터 관리자").Show();
+        GetWindow<WeaponDataManagerWindow>("무기 ?�이??관리자").Show();
     }
 
     private void OnEnable()
@@ -25,8 +25,7 @@ public class WeaponDataManagerWindow : EditorWindow
     private void LoadAllWeapons()
     {
         weaponDatabase.Clear();
-        // AssetDatabase.FindAssets로 WeaponData 타입을 상속받는 모든 에셋 검색
-        string[] guids = AssetDatabase.FindAssets("t:WeaponData");
+        // AssetDatabase.FindAssets�?WeaponData ?�?�을 ?�속받는 모든 ?�셋 검??        string[] guids = AssetDatabase.FindAssets("t:WeaponData");
         foreach (string guid in guids)
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
@@ -36,7 +35,7 @@ public class WeaponDataManagerWindow : EditorWindow
                 weaponDatabase.Add(weapon);
             }
         }
-        // 이름순 정렬
+        // ?�름???�렬
         weaponDatabase = weaponDatabase.OrderBy(w => w.name).ToList();
     }
 
@@ -44,10 +43,9 @@ public class WeaponDataManagerWindow : EditorWindow
     {
         GUILayout.BeginHorizontal();
 
-        // 1. 왼쪽 패널: 무기 리스트
-        DrawWeaponList();
+        // 1. ?�쪽 ?�널: 무기 리스??        DrawWeaponList();
 
-        // 2. 오른쪽 패널: 선택된 무기의 디테일 인스펙터
+        // 2. ?�른�??�널: ?�택??무기???�테???�스?�터
         DrawWeaponDetails();
 
         GUILayout.EndHorizontal();
@@ -59,16 +57,15 @@ public class WeaponDataManagerWindow : EditorWindow
         
         GUILayout.BeginHorizontal();
         GUILayout.Label("무기 목록", EditorStyles.boldLabel);
-        if (GUILayout.Button("새로고침", GUILayout.Width(60)))
+        if (GUILayout.Button("?�로고침", GUILayout.Width(60)))
         {
             LoadAllWeapons();
         }
         GUILayout.EndHorizontal();
         
-        // 새 무기 생성 버튼들
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button("새 Gun 생성")) CreateNewWeapon<GunData>("NewGunData");
-        if (GUILayout.Button("새 Melee 생성")) CreateNewWeapon<WeaponData>("NewMeleeData");
+        // ??무기 ?�성 버튼??        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("??Gun ?�성")) CreateNewWeapon<GunData>("NewGunData");
+        if (GUILayout.Button("??Melee ?�성")) CreateNewWeapon<WeaponData>("NewMeleeData");
         GUILayout.EndHorizontal();
 
         GUILayout.Space(5);
@@ -78,16 +75,17 @@ public class WeaponDataManagerWindow : EditorWindow
         {
             if (weapon == null) continue;
 
-            // 선택된 항목 하이라이트 표시
+            // ?�택????�� ?�이?�이???�시
             GUI.backgroundColor = (selectedWeapon == weapon) ? Color.cyan : Color.white;
             
-            string displayName = string.IsNullOrEmpty(weapon.itemName) ? weapon.name : weapon.itemName;
+            // ?�일 ?�름(name)�??�시?�도�??�상복구
+            string displayName = weapon.name;
             string typePrefix = (weapon is GunData) ? "[Gun] " : "[Melee] ";
 
             if (GUILayout.Button(typePrefix + displayName, EditorStyles.toolbarButton))
             {
                 selectedWeapon = weapon;
-                // 선택이 바뀌면 에디터 새로 생성
+                // ?�택??바뀌면 ?�디???�로 ?�성
                 if (weaponEditor != null) DestroyImmediate(weaponEditor);
                 weaponEditor = Editor.CreateEditor(selectedWeapon);
             }
@@ -105,15 +103,33 @@ public class WeaponDataManagerWindow : EditorWindow
         if (selectedWeapon != null)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label($"{selectedWeapon.name} 상세 정보", EditorStyles.boldLabel);
-            if (GUILayout.Button("Ping", GUILayout.Width(60)))
+            GUILayout.Label("?�셋 ?�일 ?�름 (?�터�?변�?:", GUILayout.Width(170));
+            string newFileName = EditorGUILayout.DelayedTextField(selectedWeapon.name);
+            if (newFileName != selectedWeapon.name && !string.IsNullOrEmpty(newFileName))
+            {
+                string path = AssetDatabase.GetAssetPath(selectedWeapon);
+                AssetDatabase.RenameAsset(path, newFileName);
+                AssetDatabase.SaveAssets();
+                
+                LoadAllWeapons();
+                selectedWeapon = weaponDatabase.FirstOrDefault(w => w.name == newFileName) ?? weaponDatabase[0];
+                if (weaponEditor != null) DestroyImmediate(weaponEditor);
+                weaponEditor = Editor.CreateEditor(selectedWeapon);
+                GUI.FocusControl(null);
+            }
+            GUILayout.EndHorizontal();
+            GUILayout.Space(5);
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label($"{selectedWeapon.name} ?�세 ?�보", EditorStyles.boldLabel);
+            if (GUILayout.Button("?�치찾기", GUILayout.Width(60)))
             {
                 EditorGUIUtility.PingObject(selectedWeapon);
             }
             GUI.backgroundColor = Color.red;
-            if (GUILayout.Button("삭제", GUILayout.Width(60)))
+            if (GUILayout.Button("??��", GUILayout.Width(60)))
             {
-                if (EditorUtility.DisplayDialog("경고", $"'{selectedWeapon.name}' 에셋을 완전히 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.", "Delete", "Cancel"))
+                if (EditorUtility.DisplayDialog("경고", $"'{selectedWeapon.name}' ?�셋???�전????��?�시겠습?�까?\n???�업?� ?�돌�????�습?�다.", "Delete", "Cancel"))
                 {
                     string path = AssetDatabase.GetAssetPath(selectedWeapon);
                     AssetDatabase.DeleteAsset(path);
@@ -128,8 +144,7 @@ public class WeaponDataManagerWindow : EditorWindow
             GUILayout.EndHorizontal();
             GUILayout.Space(5);
             
-            // 유니티 기본 인스펙터를 윈도우 안에 그려줌
-            if (weaponEditor == null || weaponEditor.target != selectedWeapon)
+            // ?�니??기본 ?�스?�터�??�도???�에 그려�?            if (weaponEditor == null || weaponEditor.target != selectedWeapon)
             {
                 if (weaponEditor != null) DestroyImmediate(weaponEditor);
                 weaponEditor = Editor.CreateEditor(selectedWeapon);
@@ -138,23 +153,21 @@ public class WeaponDataManagerWindow : EditorWindow
             Vector2 rightScroll = Vector2.zero;
             rightScroll = GUILayout.BeginScrollView(rightScroll);
             
-            // 변경사항 추적 시작
+            // 변경사??추적 ?�작
             EditorGUI.BeginChangeCheck();
             
             weaponEditor.OnInspectorGUI();
             
             if (EditorGUI.EndChangeCheck())
             {
-                // 변경사항이 있으면 에셋에 저장
-                EditorUtility.SetDirty(selectedWeapon);
-                AssetDatabase.SaveAssets(); // 변경 내용 즉시 디스크에 저장
-            }
+                // 변경사??�� ?�으�??�셋???�??                EditorUtility.SetDirty(selectedWeapon);
+                AssetDatabase.SaveAssets(); // 변�??�용 즉시 ?�스?�에 ?�??            }
             
             GUILayout.EndScrollView();
         }
         else
         {
-            GUILayout.Label("왼쪽 목록에서 무기를 선택해주세요.", EditorStyles.centeredGreyMiniLabel);
+            GUILayout.Label("?�쪽 목록?�서 무기�??�택?�주?�요.", EditorStyles.centeredGreyMiniLabel);
         }
         
         GUILayout.EndVertical();
@@ -164,7 +177,7 @@ public class WeaponDataManagerWindow : EditorWindow
     {
         T newWeapon = ScriptableObject.CreateInstance<T>();
         
-        // 데이터 폴더가 없으면 생성
+        // ?�이???�더가 ?�으�??�성
         string folderPath = "Assets/WeaponData";
         if (!AssetDatabase.IsValidFolder(folderPath))
         {

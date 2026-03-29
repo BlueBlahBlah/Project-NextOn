@@ -121,3 +121,24 @@ public class RamMonster : Enemy
     }
     
 }
+    {
+        if (HpBar != null) HpBar.rectTransform.localScale = Vector3.one;
+    }
+    
+    void ColliderAttack()
+    {
+        int damage = 10;
+        if (attackArea == null) return;
+
+        Collider[] hitColliders = Physics.OverlapBox(attackArea.bounds.center, attackArea.bounds.extents,
+            attackArea.transform.rotation);
+
+        foreach (Collider col in hitColliders)
+        {
+            if (col.CompareTag("Player"))
+            {
+                PlayerManager.Instance.Health -= damage;
+            }
+        }
+    }
+}

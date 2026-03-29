@@ -25,7 +25,7 @@ public class DemoEventBtn : MonoBehaviour
         peiz3Gauge.GetComponent<Peiz3Gauge>().StartPeiz3Gauge();
         //GameObject.Find("StageManager").GetComponent<StageManager>().Peiz3MonsterSpawn();
         //GameObject.Find("StageManager").GetComponent<StageManager>().StartPeiz3Pannel();
-        Debug.LogError("컴파일러 해결");
+        Debug.LogError("컴파?�러 ?�결");
         
     }
     

@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b320920dd0b5fcf428567ef8ec14bfaf, type: 3}
-  m_Name: NewGunData
+  m_Name: Shotgun_Data
   m_EditorClassIdentifier: 
   itemName: Shotgun
-  itemPrefab: {fileID: 1200260564779906, guid: d0838917cb453dc4cad3e49b1be3f4b4, type: 3}
+  itemPrefab: {fileID: 7059226011892824034, guid: c740f4d22c253eb44a0c4510a5614efd, type: 3}
   description: "\uC0F7\uAC74"
   weaponType: 2
-  baseDamage: 20
+  baseDamage: 30
   fireRate: 0.5
-  bulletSpeed: 20
+  bulletSpeed: 10
   reloadDuration: 3
   shootSound: {fileID: 8300000, guid: 22b991c903495424a81ff53c87ad78a0, type: 3}
   isLoopingSound: 0
   maxMagazineSize: 30
   totalMaxAmmo: 90
-  bulletPrefab: {fileID: 1859234679933314, guid: c9304f18ec417a740895a3ca68e195f2, type: 3}
+  bulletPrefab: {fileID: 6275233965708496813, guid: 63ac3410daebe034782d64c66b30787a, type: 3}

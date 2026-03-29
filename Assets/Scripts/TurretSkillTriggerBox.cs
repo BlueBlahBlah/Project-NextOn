@@ -26,18 +26,18 @@ public class TurretSkillTriggerBox : MonoBehaviour
     
     public void OnTriggerEnter(Collider other)
     {
-        // 충돌한 물체가 Player 태그를 가진 경우
+        // 충돌??물체가 Player ?�그�?가�?경우
         if (other.CompareTag("Player"))
         {
             int num;    // turret position num
             bool turretSpawned = false;
 
-            // 최대 8번까지 시도
+            // 최�? 8번까지 ?�도
             for (int i = 0; i < 8; i++)
             {
                 num = Random.Range(0, 8);
 
-                // spawnTurret이 성공하면 루프를 종료
+                // spawnTurret???�공?�면 루프�?종료
                 if (spawnTurret(num))
                 {
                     turretSpawned = true;
@@ -45,7 +45,7 @@ public class TurretSkillTriggerBox : MonoBehaviour
                 }
             }
 
-            // 만약 8번 시도 후에도 터렛을 생성하지 못했다면 추가 로직을 추가할 수 있습니다.
+            // 만약 8�??�도 ?�에???�렛???�성?��? 못했?�면 추�? 로직??추�??????�습?�다.
             if (!turretSpawned)
             {
                 Debug.LogError("Failed to spawn turret after 8 attempts.");
@@ -55,18 +55,18 @@ public class TurretSkillTriggerBox : MonoBehaviour
 
     private bool spawnTurret(int num)
     {
-        // "Place + num"의 GameObject를 찾아옵니다.
+        // "Place + num"??GameObject�?찾아?�니??
         GameObject placeObject = GameObject.Find("Place " + num);
 
         if (placeObject != null)
         {
-            // placeObject의 Transform 컴포넌트를 얻어옵니다.
+            // placeObject??Transform 컴포?�트�??�어?�니??
             Transform placeTransform = placeObject.transform;
 
-            // placeObject의 좌표값을 얻어옵니다.
+            // placeObject??좌표값을 ?�어?�니??
             Vector3 placePosition = placeTransform.position;
 
-            // placeObject의 회전값을 얻어옵니다.
+            // placeObject???�전값을 ?�어?�니??
             Quaternion placeRotation = placeTransform.rotation;
             
             int MissileColor = DamageManager.Turret_Skill_BulletColor;
@@ -94,9 +94,9 @@ public class TurretSkillTriggerBox : MonoBehaviour
             
             Instantiate(turret, placePosition, placeRotation);
 
-            return true; // 터렛이 성공적으로 생성되었음을 나타냅니다.
+            return true; // ?�렛???�공?�으�??�성?�었?�을 ?��??�니??
         }
 
-        return false; // 터렛 생성에 실패했음을 나타냅니다.
+        return false; // ?�렛 ?�성???�패?�음???��??�니??
     }
 }

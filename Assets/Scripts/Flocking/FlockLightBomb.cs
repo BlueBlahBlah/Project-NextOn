@@ -6,8 +6,8 @@ using UnityEngine.Timeline;
 
 public class FlockLightBomb : MonoBehaviour
 {
-    public float moveDistance = 3.0f; // 움직일 거리
-    public float moveDuration = 2.0f; // 움직이는 데 걸리는 시간
+    public float moveDistance = 3.0f; // ?�직일 거리
+    public float moveDuration = 2.0f; // ?�직이????걸리???�간
     [SerializeField] private GameObject Effect;
 
     // Start is called before the first frame update
@@ -24,18 +24,18 @@ public class FlockLightBomb : MonoBehaviour
 
     void attack()
     {
-        // "Enemy" 태그를 가진 가장 가까운 게임 오브젝트를 찾음
+        // "Enemy" ?�그�?가�?가??가까운 게임 ?�브?�트�?찾음
         GameObject nearestEnemy = FindNearestEnemy();
 
-        // 적이 발견되면
+        // ?�이 발견?�면
         if (nearestEnemy != null)
         {
-            // 가장 가까운 적의 위치를 얻음
+            // 가??가까운 ?�의 ?�치�??�음
             Vector3 enemyPosition = nearestEnemy.transform.position;
-            // 방향을 구함
+            // 방향??구함
             Vector3 direction = (enemyPosition - transform.position).normalized;
 
-            // 해당 방향으로 오브젝트를 이동시킴
+            // ?�당 방향?�로 ?�브?�트�??�동?�킴
             StartCoroutine(MoveTowardsEnemyCoroutine(direction));
 
         }
@@ -63,15 +63,14 @@ public class FlockLightBomb : MonoBehaviour
 
     private IEnumerator MoveUpAndAttackCoroutine()
     {
-        // MoveUpCoroutine 시작
+        // MoveUpCoroutine ?�작
         yield return StartCoroutine(MoveUpCoroutine());
 
-        // MoveUpCoroutine 이 끝난 후 attack() 실행
+        // MoveUpCoroutine ???�난 ??attack() ?�행
         attack();
     }
 
-    // 위로 움직이는 코루틴
-    private IEnumerator MoveUpCoroutine()
+    // ?�로 ?�직이??코루??    private IEnumerator MoveUpCoroutine()
     {
         float elapsedTime = 0.0f;
         Vector3 initialPosition = transform.position;
@@ -84,12 +83,10 @@ public class FlockLightBomb : MonoBehaviour
             yield return null;
         }
 
-        // 애니메이션이 끝난 후 움직임을 초기화
-        transform.position = targetPosition;
+        // ?�니메이?�이 ?�난 ???�직임??초기??        transform.position = targetPosition;
     }
 
-    // 적 방향으로 움직이는 코루틴
-    private IEnumerator MoveTowardsEnemyCoroutine(Vector3 direction)
+    // ??방향?�로 ?�직이??코루??    private IEnumerator MoveTowardsEnemyCoroutine(Vector3 direction)
     {
         float elapsedTime = 0.0f;
         float moveSpeed = 10;
@@ -108,7 +105,7 @@ public class FlockLightBomb : MonoBehaviour
         {
             Effect.GetComponent<ParticleSystem>().Play();
             StopAllCoroutines();
-            //collider.damage--; //collider의 체력이 닳는 메커니즘
+            //collider.damage--; //collider??체력???�는 메커?�즘
             Destroy(gameObject, 0.5f);
         }
     }

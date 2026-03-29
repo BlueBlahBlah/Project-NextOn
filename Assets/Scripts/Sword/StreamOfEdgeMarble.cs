@@ -21,9 +21,8 @@ public class StreamOfEdgeMarble : MonoBehaviour
         if (timer > rate)
         {
             timer = 0;
-            Vector3 newPosition = transform.position; // 현재 위치 복사
-            newPosition.y = Random.Range(0f, 1f); // y 좌표를 랜덤으로 변경
-            transform.position = newPosition; // 새로운 위치 할당
+            Vector3 newPosition = transform.position; // ?�재 ?�치 복사
+            newPosition.y = Random.Range(0f, 1f); // y 좌표�??�덤?�로 변�?            transform.position = newPosition; // ?�로???�치 ?�당
         }
     }
 }

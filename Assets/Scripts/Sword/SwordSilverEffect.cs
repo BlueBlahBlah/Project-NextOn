@@ -20,8 +20,8 @@ public class SwordSilverEffect : MonoBehaviour
     {
         if (enemy.CompareTag("Enemy"))
         {
-            //collider.damage--; //collider의 체력이 닳는 메커니즘
-            //Debug.LogError("실버스톤 공격");
+            //collider.damage--; //collider??체력???�는 메커?�즘
+            //Debug.LogError("?�버?�톤 공격");
         }
     }
 }

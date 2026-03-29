@@ -17,29 +17,26 @@ public class SwordStaticSkill3StartEach : MonoBehaviour
         Destroy(gameObject,5f);
     }
     
-    // 코루틴: skill1 내 오브젝트를 0.1~0.3초 간격으로 랜덤하게 하나씩 활성화
-    IEnumerator ActivateSkillObjects()
+    // 코루?? skill1 ???�브?�트�?0.1~0.3�?간격?�로 ?�덤?�게 ?�나???�성??    IEnumerator ActivateSkillObjects()
     {
-        // skill1 리스트에 오브젝트가 있는지 확인
+        // skill1 리스?�에 ?�브?�트가 ?�는지 ?�인
         if (skill1 == null || skill1.Count == 0)
         {
-            Debug.LogError("skill1 리스트가 비어있습니다.");
+            Debug.LogError("skill1 리스?��? 비어?�습?�다.");
             yield break;
         }
 
-        // skill1 리스트에서 랜덤하게 오브젝트를 하나씩 활성화
-        while (skill1.Count > 0)
+        // skill1 리스?�에???�덤?�게 ?�브?�트�??�나???�성??        while (skill1.Count > 0)
         {
-            // 리스트에서 랜덤 인덱스 선택
+            // 리스?�에???�덤 ?�덱???�택
             int randomIndex = Random.Range(0, skill1.Count);
 
-            // 해당 오브젝트 활성화
-            skill1[randomIndex].SetActive(true);
+            // ?�당 ?�브?�트 ?�성??            skill1[randomIndex].SetActive(true);
 
-            // 활성화된 오브젝트를 리스트에서 제거
+            // ?�성?�된 ?�브?�트�?리스?�에???�거
             skill1.RemoveAt(randomIndex);
 
-            // 0.1~0.3초 사이의 랜덤한 대기 시간
+            // 0.1~0.3�??�이???�덤???��??�간
             float randomDelay = Random.Range(0.1f, 0.3f);
             yield return new WaitForSeconds(randomDelay);
         }

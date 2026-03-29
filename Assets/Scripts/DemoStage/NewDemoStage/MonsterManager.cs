@@ -14,24 +14,24 @@ public class MonsterManager : MonoBehaviour
     {
         if (null == instance)
         {
-            //이 클래스 인스턴스가 탄생했을 때 전역변수 instance에 게임매니저 인스턴스가 담겨있지 않다면, 자신을 넣어준다.
+            //???�래???�스?�스가 ?�생?�을 ???�역변??instance??게임매니?� ?�스?�스가 ?�겨?��? ?�다�? ?�신???�어준??
             instance = this;
 
-            //씬 전환이 되더라도 파괴되지 않게 한다.
-            //gameObject만으로도 이 스크립트가 컴포넌트로서 붙어있는 Hierarchy상의 게임오브젝트라는 뜻이지만, 
-            //나는 헷갈림 방지를 위해 this를 붙여주기도 한다.
+            //???�환???�더?�도 ?�괴?��? ?�게 ?�다.
+            //gameObject만으로도 ???�크립트가 컴포?�트로서 붙어?�는 Hierarchy?�의 게임?�브?�트?�는 ?�이지�? 
+            //?�는 ?�갈�?방�?�??�해 this�?붙여주기???�다.
             //DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            //만약 씬 이동이 되었는데 그 씬에도 Hierarchy에 GameMgr이 존재할 수도 있다.
-            //그럴 경우엔 이전 씬에서 사용하던 인스턴스를 계속 사용해주는 경우가 많은 것 같다.
-            //그래서 이미 전역변수인 instance에 인스턴스가 존재한다면 자신(새로운 씬의 GameMgr)을 삭제해준다.
+            //만약 ???�동???�었?�데 �??�에??Hierarchy??GameMgr??존재???�도 ?�다.
+            //그럴 경우???�전 ?�에???�용?�던 ?�스?�스�?계속 ?�용?�주??경우가 많�? �?같다.
+            //그래???��? ?�역변?�인 instance???�스?�스가 존재?�다�??�신(?�로???�의 GameMgr)????��?��???
             //Destroy(this.gameObject);
         }
     }
 
-    //게임 매니저 인스턴스에 접근할 수 있는 프로퍼티. static이므로 다른 클래스에서 맘껏 호출할 수 있다.
+    //게임 매니?� ?�스?�스???�근?????�는 ?�로?�티. static?��?�??�른 ?�래?�에??맘껏 ?�출?????�다.
     public static MonsterManager Instance
     {
         get
@@ -45,46 +45,39 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    [Header("StageMonster Number")] //스테이지 몬스터 총 개수
-    GameObject[] enemies; //현재 스테이지의 몬스터, Length로 개수를 구할 수 있음
+    [Header("StageMonster Number")] //?�테?��? 몬스??�?개수
+    GameObject[] enemies; //?�재 ?�테?��???몬스?? Length�?개수�?구할 ???�음
 
     public int TotalMonsters;
 
 
-    [Header("Stack")] //스택 몬스터
-    //[SerializeField] private GameObject[] Stack;
-    //[SerializeField] private int StackIndex;        //스택 내 몬스터의 개수,, top
-    public int Gauge; //스택 몬스터를 잡는 게이지
+    [Header("Stack")] //?�택 몬스??    //[SerializeField] private GameObject[] Stack;
+    //[SerializeField] private int StackIndex;        //?�택 ??몬스?�의 개수,, top
+    public int Gauge; //?�택 몬스?��? ?�는 게이지
 
     [SerializeField] private GameObject ParenthesisGauge;
 
-    [Header("First_Monster")] //첫 조우 몬스터 관련
-    public List<GameObject> First_Monsters;
+    [Header("First_Monster")] //�?조우 몬스??관??    public List<GameObject> First_Monsters;
 
-    public bool First_Monsters_Clear; //첫 조우 몬스터 모두 처치되었는지
+    public bool First_Monsters_Clear; //�?조우 몬스??모두 처치?�었?��?
 
-    [Header("Second_Monster")] //두번째 조우 몬스터 관련
-    public List<GameObject> Second_Monsters;
+    [Header("Second_Monster")] //?�번�?조우 몬스??관??    public List<GameObject> Second_Monsters;
 
-    public bool Second_Monsters_Clear; //두번째 조우 몬스터 모두 처치되었는지
+    public bool Second_Monsters_Clear; //?�번�?조우 몬스??모두 처치?�었?��?
 
-    [Header("Third_Monster")] //세번째(근접무기 먹고난 뒤) 조우 몬스터 관련
-    public List<GameObject> Third_Monsters;
+    [Header("Third_Monster")] //?�번�?근접무기 먹고???? 조우 몬스??관??    public List<GameObject> Third_Monsters;
 
-    public bool Third_Monsters_Clear; //세번째(근접무기 먹고난 뒤) 조우 몬스터 모두 처치되었는지
+    public bool Third_Monsters_Clear; //?�번�?근접무기 먹고???? 조우 몬스??모두 처치?�었?��?
 
-    [Header("Parenthesis_Monster")] //괄호 몬스터 관련
-    public List<GameObject> Parenthesis_Monster_Spawner; //괄호몬스터 스포너
-
-    public List<GameObject> Parenthesis_Monsters; //필드에 있는 괄호 몬스터들
+    [Header("Parenthesis_Monster")] //괄호 몬스??관??    public List<GameObject> Parenthesis_Monster_Spawner; //괄호몬스???�포??
+    public List<GameObject> Parenthesis_Monsters; //?�드???�는 괄호 몬스?�들
     [SerializeField] private GameObject Small_Parenthesis_Monster;
     [SerializeField] private GameObject Medium_Parenthesis_Monster;
     [SerializeField] private GameObject Big_Parenthesis_Monster;
 
     [SerializeField] private List<GameObject> Semicolon_Monsters;
 
-    public List<GameObject> Semicolon_Monster_Spawner; //세미콜론몬스터 스포너
-    public bool FinalPeiz; //마지막 페이즈 해당 변수가 True면 계속 몬스터 생성
+    public List<GameObject> Semicolon_Monster_Spawner; //?��?콜론몬스???�포??    public bool FinalPeiz; //마�?�??�이�??�당 변?��? True�?계속 몬스???�성
 
     // Start is called before the first frame update
     void Start()
@@ -97,7 +90,7 @@ public class MonsterManager : MonoBehaviour
         Second_Monsters_Clear = false;
         Third_Monsters_Clear = false;
 
-        //첫 조우 몬스터 비활성화
+        //�?조우 몬스??비활?�화
         foreach (GameObject E in First_Monsters)
         {
             E.SetActive(false);
@@ -153,7 +146,7 @@ public class MonsterManager : MonoBehaviour
             if (allMonstersDestroyed == true)
             {
                 First_Monsters_Clear = true;
-                EventManager.Instance.PrintMSG(); //다음대화로
+                EventManager.Instance.PrintMSG(); //?�음?�?�로
             }
         }
 
@@ -172,7 +165,7 @@ public class MonsterManager : MonoBehaviour
             if (allMonstersDestroyed == true)
             {
                 Second_Monsters_Clear = true;
-                EventManager.Instance.PrintMSG();      //다음대화로
+                EventManager.Instance.PrintMSG();      //?�음?�?�로
             }
         }
 
@@ -197,64 +190,59 @@ public class MonsterManager : MonoBehaviour
 
     }
 
-    //현재 필드 몬스터들의 동작을 멈추는 함수
+    //?�재 ?�드 몬스?�들???�작??멈추???�수
     public void MonsterTimeStop()
     {
         foreach (GameObject m in enemies)
         {
             Animator animator = m.GetComponent<Animator>();
             Enemy enemy = m.GetComponent<Enemy>();
-            if (animator != null) //애니메이션 멈추고
-            {
+            if (animator != null) //?�니메이??멈추�?            {
                 animator.speed = 0;
             }
 
-            if (enemy != null) //이동도 멈추기
-            {
-                enemy.stopNav();
+            if (enemy != null) //?�동??멈추�?            {
+                enemy.StopNav();
             }
         }
 
     }
 
-    //현재 필드 몬스터들의 동작을 재개하는 함수
+    //?�재 ?�드 몬스?�들???�작???�개?�는 ?�수
     public void MonsterTimeResume()
     {
         foreach (GameObject m in enemies)
         {
             Animator animator = m.GetComponent<Animator>();
             Enemy enemy = m.GetComponent<Enemy>();
-            if (animator != null) //애니메이션 멈추고
-            {
+            if (animator != null) //?�니메이??멈추�?            {
                 animator.speed = 1;
             }
 
-            if (enemy != null) //이동도 멈추기
-            {
-                enemy.startNav();
+            if (enemy != null) //?�동??멈추�?            {
+                enemy.StartNav();
             }
         }
 
     }
 
-    //적을 죽인 경우(스택에 추가)
+    //?�을 죽인 경우(?�택??추�?)
     /*public void AddStackMonster(GameObject g)
     {
-        //처음 들어온 몬스터인경우
+        //처음 ?�어??몬스?�인경우
         if (StackIndex == 0)
         {
             Stack[StackIndex] = g;
             StackIndex++;
             return;
         }
-        else if (StackIndex >= 10) //스택이 꽉 찼는데 몬스터가 죽은 경우
+        else if (StackIndex >= 10) //?�택??�?찼는??몬스?��? 죽�? 경우
         {
             if (g.GetComponent<Parenthesis>().identity == Stack[9].GetComponent<Parenthesis>().identity)
             {
-                Stack[9].GetComponent<Parenthesis>().HitTheMonster(); //몬스터 삭제
-                Stack[9] = null; //스택 pop
-                StackIndex = 9; //인덱스 줄이기
-            }
+                Stack[9].GetComponent<Parenthesis>().HitTheMonster(); //몬스????��
+                Stack[9] = null; //?�택 pop
+                StackIndex = 9; //?�덱??줄이�?            }
             else
             {
                 g.GetComponent<Parenthesis>().NotDeath();
@@ -264,24 +252,22 @@ public class MonsterManager : MonoBehaviour
         {
             Stack[StackIndex] = g;
             StackIndex++;
-            if (CheckParenthesis()) //괄호가 맞아 떨어진 경우
+            if (CheckParenthesis()) //괄호가 맞아 ?�어�?경우
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Stack[StackIndex - 1].GetComponentInChildren<Parenthesis>().HitTheMonster(); //스택에서 몬스터 삭제
-                    Stack[StackIndex - 1] = null; //스택 pop
-                    StackIndex--; //인덱스 줄이기
-                }
+                    Stack[StackIndex - 1].GetComponentInChildren<Parenthesis>().HitTheMonster(); //?�택?�서 몬스????��
+                    Stack[StackIndex - 1] = null; //?�택 pop
+                    StackIndex--; //?�덱??줄이�?                }
 
-                Gauge++; //스택 게이지증가
+                Gauge++; //?�택 게이지증�?
                 ParenthesisGauge.GetComponent<HealthBar>().SetHealth(Gauge);
             }
         }
 
     }*/
 
-    //괄호의 유효성 검사
-    /*private bool CheckParenthesis()
+    //괄호???�효??검??    /*private bool CheckParenthesis()
     {
         if (Stack[StackIndex - 1].GetComponent<Parenthesis>().identity ==
             Stack[StackIndex - 2].GetComponent<Parenthesis>().identity)
@@ -294,11 +280,11 @@ public class MonsterManager : MonoBehaviour
         }
     }*/
 
-    //괄호 몬스터 게이지 채워서 모든 괄호 몬스터 처치
+    //괄호 몬스??게이지 채워??모든 괄호 몬스??처치
     /*public void Clear_Wave2_Monsters()
     {
         //Wave2MonsterClear = true;
-        //모든 스포너 생성중단
+        //모든 ?�포???�성중단
         foreach (GameObject g in Parenthesis_Monster_Spawner)
         {
             g.GetComponent<Wave2StackMonsterSpawner>().Active = false;
@@ -309,7 +295,7 @@ public class MonsterManager : MonoBehaviour
         Invoke("ClearWave2MonsterInvoke",3);
     }*/
 
-    //2페이즈 끝난 후 모든 스택몬스터 삭제
+    //2?�이�??�난 ??모든 ?�택몬스????��
     /*private void ClearWave2MonsterInvoke()
     {
         for (int i = Parenthesis_Monsters.Count-1; i >= 0; i--)
@@ -330,16 +316,16 @@ public class MonsterManager : MonoBehaviour
 
     }*/
 
-    //현재 몬스터목록에 추가
+    //?�재 몬스?�목록에 추�?
     /*public void AddStackMonster_In_Array(GameObject m)
     {
         Parenthesis_Monsters.Add(m);
     }*/
 
-    //첫 조우 몬스터 조작 함수
+    //�?조우 몬스??조작 ?�수
     public void Appearance_First_Monster()
     {
-        //활성화 후 움직임
+        //?�성?????�직임
         foreach (GameObject E in First_Monsters)
         {
             E.SetActive(true);
@@ -347,10 +333,10 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    //두번째 조우 몬스터 조작 함수
+    //?�번�?조우 몬스??조작 ?�수
     public void Appearance_Second_Monster()
     {
-        //활성화 후 움직임
+        //?�성?????�직임
         foreach (GameObject E in Second_Monsters)
         {
             E.SetActive(true);
@@ -358,10 +344,10 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    //세번째 조우 몬스터 조작 함수
+    //?�번�?조우 몬스??조작 ?�수
     public void Appearance_Third_Monster()
     {
-        //활성화 후 움직임
+        //?�성?????�직임
         foreach (GameObject E in Third_Monsters)
         {
             E.SetActive(true);
@@ -369,10 +355,10 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    //세번째 조우 몬스터 조작 함수
+    //?�번�?조우 몬스??조작 ?�수
     public void Appearance_Parenthesis_Monster()
     {
-        //활성화 후 움직임
+        //?�성?????�직임
         foreach (GameObject E in Parenthesis_Monsters)
         {
             E.SetActive(true);
@@ -386,19 +372,18 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    //떨어지는 몬스터에 Nav를 start하는  LastPeizSpawnMonsterMeshControl 를 추가하는 함수
+    //?�어지??몬스?�에 Nav�?start?�는  LastPeizSpawnMonsterMeshControl �?추�??�는 ?�수
     private T InitComponent<T>(GameObject gameObject) where T : MonoBehaviour
     {
         return gameObject.AddComponent<T>();
     }
 
-    //괄호몬스터를 생성하는 코드
+    //괄호몬스?��? ?�성?�는 코드
     public void Spawn_Parenthesis()
     {
-        //괄호몬스터를 생성할 두 스포너 랜덤지정
-        int spawner1 = Random.Range(0, Parenthesis_Monster_Spawner.Count),
+        //괄호몬스?��? ?�성?????�포???�덤지??        int spawner1 = Random.Range(0, Parenthesis_Monster_Spawner.Count),
             spawner2 = Random.Range(0, Parenthesis_Monster_Spawner.Count);
-        //생성할 괄호몬스터 종류
+        //?�성??괄호몬스??종류
         int Monster_Kind_Number = Random.Range(0, 3);
         GameObject Spawn_Monster;
         switch (Monster_Kind_Number)
@@ -417,13 +402,13 @@ public class MonsterManager : MonoBehaviour
                 break;
         }
 
-        //생성
+        //?�성
         GameObject Monster1 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner1].transform.position,
             Quaternion.identity);
         GameObject Monster2 = Instantiate(Spawn_Monster, Parenthesis_Monster_Spawner[spawner2].transform.position,
             Quaternion.identity);
 
-        //연결
+        //?�결
         Monster1.GetComponent<Parenthesis>().Set_Mate_Monster(Monster2);
         Monster2.GetComponent<Parenthesis>().Set_Mate_Monster(Monster1);
 
@@ -431,11 +416,11 @@ public class MonsterManager : MonoBehaviour
         //LastPeizMosnterNavOff(Monster2);
 
         //TODO
-        //이펙트 연결하기
+        //?�펙???�결?�기
 
         if (FinalPeiz == true)
         {
-            //재귀호출
+            //?��??�출
             Invoke("Spawn_Parenthesis", 10f);
         }
 
@@ -443,7 +428,7 @@ public class MonsterManager : MonoBehaviour
 
     public void Spawn_Semicolon()
     {
-        //5마리 동시 생성
+        //5마리 ?�시 ?�성
         for (int i = 0; i < 3; i++)
         {
             int spawnerNum = Random.Range(0, Semicolon_Monster_Spawner.Count);
@@ -458,17 +443,17 @@ public class MonsterManager : MonoBehaviour
 
         if (FinalPeiz == true)
         {
-            //재귀호출
+            //?��??�출
             Invoke("Spawn_Semicolon", 10f);
         }
     }
 
-    //마지막 페이즈 몬스터 공중부양 방지q
+    //마�?�??�이�?몬스??공중부??방�?q
     private void LastPeizMosnterNavOff(GameObject m)
     {
-        m.GetComponent<Enemy>().stopNav();                      //네비게이션 종료
-        InitComponent<LastMonsterNavCont>(m);                   //착지 판정 스크립트 추가
-        m.GetComponent<NavMeshAgent>().enabled = false;         //NavMeshAgent비활성화
+        m.GetComponent<Enemy>().StopNav();                      //?�비게이??종료
+        InitComponent<LastMonsterNavCont>(m);                   //착�? ?�정 ?�크립트 추�?
+        m.GetComponent<NavMeshAgent>().enabled = false;         //NavMeshAgent비활?�화
     }
 
 }

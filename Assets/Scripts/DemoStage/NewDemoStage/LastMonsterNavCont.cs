@@ -29,7 +29,7 @@ public class LastMonsterNavCont : MonoBehaviour
         {
             Landing = true;
             this.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-            this.gameObject.GetComponent<Enemy>().startNav();
+            this.gameObject.GetComponent<Enemy>().StartNav();
         }
     }
 }

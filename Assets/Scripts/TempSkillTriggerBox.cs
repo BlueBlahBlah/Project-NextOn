@@ -19,13 +19,12 @@ public class TempSkillTriggerBox : MonoBehaviour
     
     public void OnTriggerEnter(Collider other)
     {
-        // 충돌한 물체가 Player 태그를 가진 경우
+        // 충돌??물체가 Player ?�그�?가�?경우
         if (other.CompareTag("Player"))
         {
-            // plane GameObject의 BomberSkill 스크립트 가져오기
-            BomberSkill bomberSkill = plane.GetComponent<BomberSkill>();
+            // plane GameObject??BomberSkill ?�크립트 가?�오�?            BomberSkill bomberSkill = plane.GetComponent<BomberSkill>();
 
-            // 가져온 스크립트가 null이 아니면 Bomb 함수 실행
+            // 가?�온 ?�크립트가 null???�니�?Bomb ?�수 ?�행
             if (bomberSkill != null)
             {
                 bomberSkill.Bomb();

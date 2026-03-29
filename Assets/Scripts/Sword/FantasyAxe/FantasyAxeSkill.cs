@@ -43,7 +43,7 @@ public class FantasyAxeSkill : MonoBehaviour
                 if (target.CompareTag("Enemy"))
                 {
                     //공격 로직
-                    Debug.Log("마오카이 궁");
+                    Debug.Log("마오카이 �?);
                 }
             }
         }

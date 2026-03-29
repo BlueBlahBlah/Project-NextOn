@@ -7,10 +7,9 @@ using UnityEngine.AI;
 public class Peiz3Monster : MonoBehaviour
 {
     public Transform target;
-    public bool isChase; // 추적을 결정하는 bool 변수
-    Material mat;
-    NavMeshAgent nav; // Nav Agent를 사용하기 위해서는 Nav Mesh 생성 필수
-    // NavMesh : NavAgent가 경로를 그리기 위한 바탕(Mesh)
+    public bool isChase; // 추적??결정?�는 bool 변??    Material mat;
+    NavMeshAgent nav; // Nav Agent�??�용?�기 ?�해?�는 Nav Mesh ?�성 ?�수
+    // NavMesh : NavAgent가 경로�?그리�??�한 바탕(Mesh)
     Animator anim;
     void Start()
     {
@@ -22,7 +21,7 @@ public class Peiz3Monster : MonoBehaviour
     
     void Update()
     {
-        if(isChase) // 추적을 결정하는 bool 변수 사용
+        if(isChase) // 추적??결정?�는 bool 변???�용
             nav.SetDestination(target.position);
     }
     
@@ -37,7 +36,7 @@ public class Peiz3Monster : MonoBehaviour
 
     private void RageDone()
     {
-        Debug.LogError("RageDone 호출");
+        Debug.LogError("RageDone ?�출");
         anim.SetTrigger("Chase");
         isChase = true;
     }
@@ -46,7 +45,7 @@ public class Peiz3Monster : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            //스크립트 가져와서 피 닳기
+            //?�크립트 가?��??????�기
         }
     }
 }

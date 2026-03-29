@@ -7,8 +7,7 @@ using Random = UnityEngine.Random;
 public class DropItemPosition : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Positions;
-    private int PreviousItemPosition;       //두번 연속 같은 자리에서 아이템이 떨어지지 않도로 하는 변수
-
+    private int PreviousItemPosition;       //?�번 ?�속 같�? ?�리?�서 ?�이?�이 ?�어지지 ?�도�??�는 변??
     public enum ItemList
     {
         BulletSupply,
@@ -29,7 +28,7 @@ public class DropItemPosition : MonoBehaviour
         SkillRandom,
     }
     
-    //떨어지는 무기교체 아이템들
+    //?�어지??무기교체 ?�이?�들
     [SerializeField] private GameObject BulletSupply;
     [SerializeField] private GameObject ChangeWeaponDemacia;
     [SerializeField] private GameObject ChangeWeaponFantasyAxe;
@@ -43,7 +42,7 @@ public class DropItemPosition : MonoBehaviour
     [SerializeField] private GameObject ChangeWeaponStatic;
     [SerializeField] private GameObject ChangeWeaponStreamOfEdge;
     
-    //스킬아이템들
+    //?�킬?�이?�들
     [SerializeField] private GameObject SkillBomb;
     [SerializeField] private GameObject SkillHeilcopter;
     [SerializeField] private GameObject SkillTurret;
@@ -61,8 +60,8 @@ public class DropItemPosition : MonoBehaviour
         
     }
      
-    //8개의 자리중 하나를 랜덤으로 정하는 함수
-    //이전 호출시 정해진 자리가 바로 다음에 나오지 않음
+    //8개의 ?�리�??�나�??�덤?�로 ?�하???�수
+    //?�전 ?�출???�해�??�리가 바로 ?�음???�오지 ?�음
     private GameObject ReturnRandomPosition()
     {
         int num = 0;
@@ -74,14 +73,13 @@ public class DropItemPosition : MonoBehaviour
         return Positions[num];
     }
 
-    //떨어지는 아이템에 떨어지는 코드 WeaponChangeGravity 를 추가하는 함수
+    //?�어지???�이?�에 ?�어지??코드 WeaponChangeGravity �?추�??�는 ?�수
     private T InitComponent<T>(GameObject gameObject) where T : MonoBehaviour
     {
         return gameObject.AddComponent<T>();
     }
     
-     //아이템을 드랍하는 함수 - 인자는 드랍하고자 하는 아이템
-    public GameObject DropItem(ItemList s)
+     //?�이?�을 ?�랍?�는 ?�수 - ?�자???�랍?�고???�는 ?�이??    public GameObject DropItem(ItemList s)
     {
         GameObject Item = null;
         GameObject DropPosition = ReturnRandomPosition();
@@ -142,7 +140,7 @@ public class DropItemPosition : MonoBehaviour
                     Item = Instantiate(SkillTurret, DropPosition.transform.position, DropPosition.transform.rotation);
                 break;
             default:
-                Debug.LogError("ItemDrop 인자 오류");
+                Debug.LogError("ItemDrop ?�자 ?�류");
                 break;
         }
         InitComponent<WeaponChangeGravity>(Item);

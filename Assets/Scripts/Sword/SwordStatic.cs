@@ -8,77 +8,67 @@ public class SwordStatic : MonoBehaviour
 {
     //[SerializeField] private DamageManager DamageManager;
     [SerializeField] private Collider collider;
-    public int attackNum;     //유효타횟수
-    [SerializeField] private int SkillTime;     //스킬타수
-    [SerializeField] private float findDistance;     //스킬거리
-    [SerializeField] private GameObject Effect;     //이펙트
-    public int Damage;
+    public int attackNum;     //?�효?�?�수
+    [SerializeField] private int SkillTime;     //?�킬?�??    [SerializeField] private float findDistance;     //?�킬거리
+    [SerializeField] private GameObject Effect;     //?�펙??    public int Damage;
     
     [SerializeField] private Button Btn;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Skill;
     
-    public float ThisCoolTime;            //현재 무기의 돌아가고 있는 쿨타임
-    public float SkillCoolTime;           //현재 무기 스킬의 총 쿨타임
-    [SerializeField] private float SkillCoolTimeRate;       //PlayerManager에서 가져오는 쿨타임 감소율
-    
+    public float ThisCoolTime;            //?�재 무기???�아가�??�는 쿨�???    public float SkillCoolTime;           //?�재 무기 ?�킬??�?쿨�???    [SerializeField] private float SkillCoolTimeRate;       //PlayerManager?�서 가?�오??쿨�???감소??    
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<MeshCollider>();
-        SkillTime = 3;      //기본 3번 튕김
-        findDistance = 5f;      //스킬반경 5f
+        SkillTime = 3;      //기본 3�??��?
+        findDistance = 5f;      //?�킬반경 5f
         Damage = 1;
         
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
-        SkillCoolTime = 10f;            //현재 무기의 쿨타임을 10초로 초기화 
-        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨타임은 감소율을 적용한 값으로 
+        SkillCoolTime = 10f;            //?�재 무기??쿨�??�을 10초로 초기??
+        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨�??��? 감소?�을 ?�용??값으�?
         ThisCoolTime = 0;
-        Btn.interactable = true;        //처음에는(먹자마자) 스킬 사용가능
-    }
+        Btn.interactable = true;        //처음?�는(먹자마자) ?�킬 ?�용가??    }
     
     private void OnEnable()
     {
-        // 버튼 클릭 이벤트 등록
+        // 버튼 ?�릭 ?�벤???�록
         Btn.onClick.AddListener(SkillSpawn);
         
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
-        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨타임은 감소율을 적용한 값으로 
-        ThisCoolTime = 0;               //쿨타임 초기화
-        
-        Btn.interactable = true;        //처음에는(먹자마자) 스킬 사용가능
-    }
+        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //쿨�??��? 감소?�을 ?�용??값으�?
+        ThisCoolTime = 0;               //쿨�???초기??        
+        Btn.interactable = true;        //처음?�는(먹자마자) ?�킬 ?�용가??    }
     
     void SkillSpawn()
     {
-        // 현재 오브젝트가 바라보는 방향을 얻기 위해 transform.forward 사용
+        // ?�재 ?�브?�트가 바라보는 방향???�기 ?�해 transform.forward ?�용
         Vector3 direction = Player.transform.forward.normalized;
 
-        // 새로운 위치를 현재 위치 + (바라보는 방향 * 거리) 로 설정
+        // ?�로???�치�??�재 ?�치 + (바라보는 방향 * 거리) �??�정
         Vector3 skillPosition = transform.position + (direction * 15f) + (Vector3.up * 5f) + (Vector3.right * 5f);
 
         Instantiate(Skill, skillPosition, Quaternion.Euler(0,90,0));
-        Btn.interactable = false;       //스킬 사용후 다음 쿨타임까지 버튼 잠금
-        ThisCoolTime = SkillCoolTime;   //쿨타임 생김
+        Btn.interactable = false;       //?�킬 ?�용???�음 쿨�??�까지 버튼 ?�금
+        ThisCoolTime = SkillCoolTime;   //쿨�????��?
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (attackNum >= 3)         //3타 이상
+        if (attackNum >= 3)         //3?� ?�상
         {
-            attackNum = 0;          //타수 초기화
-            swordSkill();           //스킬
+            attackNum = 0;          //?�??초기??            swordSkill();           //?�킬
         }
         
-        if (ThisCoolTime > 0)                  //쿨타임이 0보다 클때 (쿨이 남아있는 경우)
+        if (ThisCoolTime > 0)                  //쿨�??�이 0보다 ?�때 (쿨이 ?�아?�는 경우)
         {
-            ThisCoolTime -= Time.deltaTime;     //쿨타임 감소
+            ThisCoolTime -= Time.deltaTime;     //쿨�???감소
         }
-        else if (ThisCoolTime <= 0)           //쿨타임이 0일때 
+        else if (ThisCoolTime <= 0)           //쿨�??�이 0?�때 
         {
-            Btn.interactable = true;         //스킬 사용 가능
-        }
+            Btn.interactable = true;         //?�킬 ?�용 가??        }
         
     }
 
@@ -87,38 +77,35 @@ public class SwordStatic : MonoBehaviour
     private void swordSkill()
     {
         List<GameObject> nearEnemy = FindRandomEnemy();
-        //스킬 계수 추가
+        //?�킬 계수 추�?
         int TempDamage =  DamageManager.Instance.SwordStatic_Passive_DamageCounting * Damage;
 
         int numEnemNear = nearEnemy.Count;
-        if (numEnemNear == 1)       //주변에 다른 몬스터가 없을때
-        {
+        if (numEnemNear == 1)       //주�????�른 몬스?��? ?�을??        {
             Instantiate(Effect, nearEnemy[0].transform.position, Quaternion.identity);
-            nearEnemy[0].GetComponent<Enemy>().curHealth-= TempDamage;
+            nearEnemy[0].GetComponent<Enemy>().CurHealth-= TempDamage;
         }
-        else            //다른 몬스터가 주변에 더 있을때
-        {
-            // 첫번째 적과 자기자신의 중간 지점 계산 후 이펙트 생성
+        else            //?�른 몬스?��? 주�??????�을??        {
+            // 첫번�??�과 ?�기?�신??중간 지??계산 ???�펙???�성
             Vector3 middlePoint = (nearEnemy[0].transform.position + this.gameObject.transform.position) / 2f;
             Instantiate(Effect, middlePoint, Quaternion.identity);
-            nearEnemy[0].GetComponent<Enemy>().curHealth-= TempDamage;
-            //다른 적들 사이에도 이펙트
-            for (int i = 1; i < numEnemNear - 1; i++)
+            nearEnemy[0].GetComponent<Enemy>().CurHealth-= TempDamage;
+            //?�른 ?�들 ?�이?�도 ?�펙??            for (int i = 1; i < numEnemNear - 1; i++)
             {
                 middlePoint = (nearEnemy[i - 1].transform.position + nearEnemy[i].transform.position) / 2f;
                 Instantiate(Effect, middlePoint, Quaternion.identity);
-                nearEnemy[0].GetComponent<Enemy>().curHealth-= TempDamage;
+                nearEnemy[0].GetComponent<Enemy>().CurHealth-= TempDamage;
             }
-            nearEnemy[0].GetComponent<Enemy>().curHealth-= TempDamage;
+            nearEnemy[0].GetComponent<Enemy>().CurHealth-= TempDamage;
         }
     }
     
     private List<GameObject> FindRandomEnemy()
     {
-        //스킬 반경내 콜라이더 가져옴
+        //?�킬 반경??콜라?�더 가?�옴
         Collider[] colliders = Physics.OverlapSphere(transform.position, findDistance);
         
-        // "Enemy" 태그를 가진 오브젝트를 배열로 스킬타수 만큼 가져옴
+        // "Enemy" ?�그�?가�??�브?�트�?배열�??�킬?�??만큼 가?�옴
         //GameObject[] enemies = new GameObject[SkillTime]; //= GameObject.FindGameObjectsWithTag("Enemy");
         List<GameObject> enemies = new List<GameObject>();
         int j = 0;
@@ -134,7 +121,7 @@ public class SwordStatic : MonoBehaviour
                     break;
             }
         }
-        // 만약 enemies 배열이 비어 있다면 null을 반환
+        // 만약 enemies 배열??비어 ?�다�?null??반환
         if (enemies.Count == 0)
         {
             return null;

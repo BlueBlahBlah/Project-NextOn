@@ -36,16 +36,15 @@ public class FinalGauge : MonoBehaviour
         }
 
         slider.value = targetValue; // Ensure the value is exactly zero
-        MonsterManager.Instance.FinalPeiz = false;      //이제 몬스터 그만 생성
-        EventManager.Instance.LastPeizDone();           //모든 몬스터 처치
+        MonsterManager.Instance.FinalPeiz = false;      //?�제 몬스??그만 ?�성
+        EventManager.Instance.LastPeizDone();           //모든 몬스??처치
         
         if (LastPeizDone == false)
         {
             LastPeizDone = true;
-            EventManager.Instance.PrintMSG();               //다음 대화창
-            EventManager.Instance.CancelBulletSupply();     //탄 보충 아이템 드랍 그만
-            EventManager.Instance.CancelDropItem();         //랜덤 스킬 아이템 드랍 그만
-            EventManager.Instance.fadeout();                //화면 검은색으로
-        }
+            EventManager.Instance.PrintMSG();               //?�음 ?�?�창
+            EventManager.Instance.CancelBulletSupply();     //??보충 ?�이???�랍 그만
+            EventManager.Instance.CancelDropItem();         //?�덤 ?�킬 ?�이???�랍 그만
+            EventManager.Instance.fadeout();                //?�면 검?�?�으�?        }
     }
 }

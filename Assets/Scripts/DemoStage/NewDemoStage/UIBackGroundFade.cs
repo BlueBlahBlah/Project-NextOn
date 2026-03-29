@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIBackGroundFade : MonoBehaviour
 {
-    public Image blackImage;  // 캔버스에 있는 Image 컴포넌트
-    public float fadeDuration = 1f;  // 페이드가 완료되는 데 걸리는 시간
+    public Image blackImage;  // 캔버?�에 ?�는 Image 컴포?�트
+    public float fadeDuration = 1f;  // ?�이?��? ?�료?�는 ??걸리???�간
 
     public void fadeout()
     {
@@ -14,7 +14,7 @@ public class UIBackGroundFade : MonoBehaviour
     }
     
 
-    // 이 코루틴을 호출하면 투명한 검은색이 1초에 걸쳐 불투명해집니다.
+    // ??코루?�을 ?�출?�면 ?�명??검?�?�이 1초에 걸쳐 불투명해집니??
     private IEnumerator FadeImageToBlack()
     {
         Color color = blackImage.color;
@@ -28,7 +28,7 @@ public class UIBackGroundFade : MonoBehaviour
             yield return null;
         }
         
-        // 마지막으로 알파값을 1로 설정하여 완전히 불투명하게 만듭니다.
+        // 마�?막으�??�파값을 1�??�정?�여 ?�전??불투명하�?만듭?�다.
         color.a = 1f;
         blackImage.color = color;
     }

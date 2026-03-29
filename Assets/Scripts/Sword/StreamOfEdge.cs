@@ -13,7 +13,7 @@ public class StreamOfEdge : MonoBehaviour
     {
         Destroy(gameObject, 10f);
 
-        // 초기 목표지점 설정
+        // 초기 목표지???�정
         //currentTarget = Sphere2.transform;
         
     }
@@ -23,7 +23,6 @@ public class StreamOfEdge : MonoBehaviour
     {
         
     }
-    // 공들을 이동시키는 메서드
-
+    // 공들???�동?�키??메서??
     
 }

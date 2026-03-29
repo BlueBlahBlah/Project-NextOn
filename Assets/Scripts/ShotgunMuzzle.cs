@@ -9,7 +9,7 @@ public class ShotgunMuzzle : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
 
-        // 총알에 속도 적용 (AddForce로 변경, y축 값은 0으로 설정)
+        // 총알???�도 ?�용 (AddForce�?변�? y�?값�? 0?�로 ?�정)
         Vector3 force = transform.forward * speed;
         force.y = 0f;
         bullet.GetComponent<Rigidbody>().AddForce(force, ForceMode.VelocityChange);

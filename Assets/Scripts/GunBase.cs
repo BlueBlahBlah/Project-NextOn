@@ -2,25 +2,59 @@ using UnityEngine;
 using UnityEngine.UI;
 using ProjectNextOn.Data;
 
-public abstract class GunBase : MonoBehaviour
+public abstract class GunBase : WeaponBase
 {
-    [Header("연동할 데이터 에셋")]
-    public GunData gunData;
+    // 부모 클래스의 weaponData를 GunData로 편하게 쓰기 위한 헬퍼 프로퍼티
+    public GunData gunData => weaponData as GunData;
 
     [Header("실시간 상태 (데이터에서 초기화됨)")]
     public int bulletCount;
     public int maxBulletCount;
     public bool nowReloading;
-    public Button fireBtn;
-    public PlayerScriptRifle playerRifle; 
-    
-    [Header("연사 설정")]
-    public float fireRate;
-    protected float timer;
-    public bool fireBtnDown; // 외부(UI 등)에서 설정해줌
+    public bool IsFiring; // 외부(PlayerManager, AI 등)에서 사발 트리거
 
     [Header("머즐 위치 설정")]
     public Transform[] muzzles;
+
+    protected virtual void Awake()
+    {
+        // 머즐이 비어있을 경우에만 자동 탐색
+        if (muzzles == null || muzzles.Length == 0)
+        {
+            Transform muzzleParent = FindMuzzleRecursive(transform, "muzzle") ?? FindMuzzleRecursive(transform, "Muzzle");
+
+            if (muzzleParent != null)
+            {
+                // 부모 밑에 실제 자식(각 구멍)들이 있다면 배열에 담기
+                if (muzzleParent.childCount > 0)
+                {
+                    muzzles = new Transform[muzzleParent.childCount];
+                    for (int i = 0; i < muzzleParent.childCount; i++)
+                    {
+                        muzzles[i] = muzzleParent.GetChild(i);
+                    }
+                }
+                else
+                {
+                    // 자식이 없고 Muzzle 통짜 하나라면 그거 하나를 발사구로 지정
+                    muzzles = new Transform[] { muzzleParent };
+                }
+            }
+        }
+    }
+
+    // 이름으로 자식을 무기 모델 내부 끝까지 파고들며 찾는 재귀 함수
+    private Transform FindMuzzleRecursive(Transform parent, string name)
+    {
+        if (parent.name.Contains(name)) return parent; // 이름에 Muzzle이 포함되어 있으면 반환
+        
+        foreach (Transform child in parent)
+        {
+            Transform result = FindMuzzleRecursive(child, name);
+            if (result != null) return result;
+        }
+        return null;
+    }
 
     protected virtual void Start()
     {
@@ -43,13 +77,7 @@ public abstract class GunBase : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (fireBtn != null)
-        {
-            var btn = fireBtn.GetComponent<FireBtn>();
-            if (btn != null) fireBtnDown = btn.BtnDown;
-        }
-        
-        bool canFire = fireBtnDown && bulletCount > 0 && !nowReloading;
+        bool canFire = IsFiring && bulletCount > 0 && !nowReloading;
 
         // 자동 사격 처리
         if (canFire && timer >= fireRate)
@@ -57,9 +85,9 @@ public abstract class GunBase : MonoBehaviour
             OnFireButtonClick();
             timer = 0;
         }
-        else if (fireBtnDown && bulletCount <= 0 && !nowReloading)
+        else if (IsFiring && bulletCount <= 0 && !nowReloading)
         {
-            // 총알이 없는데 버튼을 누르고 있으면 자동 재장전 요청
+            // 총알이 없는데 사격 시도 중이면 자동 재장전 요청
             RequestReload();
         }
 
@@ -86,15 +114,13 @@ public abstract class GunBase : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        if (fireBtn != null)
-        {
-            fireBtn.onClick.RemoveListener(OnFireButtonClick);
-            fireBtn.onClick.AddListener(OnFireButtonClick);
-        }
+        // 이제 외부에서 IsFiring을 제어하므로 리스너가 필요 없음
     }
 
     protected virtual void OnDisable()
     {
+        IsFiring = false; // 비활성화 시 사격 중지
+        
         // 비활성화될 때 루핑 사운드 중지
         if (gunData != null && gunData.isLoopingSound)
         {
@@ -129,8 +155,16 @@ public abstract class GunBase : MonoBehaviour
             {
                 if (muzzle == null) continue;
 
-                GameObject bullet = Instantiate(gunData.bulletPrefab, muzzle.position, muzzle.rotation);
+                // Pooling 방식으로 총알 가져오기 (Instantiate 대신 활용)
+                GameObject bullet = BulletPoolManager.Instance.GetBullet(gunData.bulletPrefab, muzzle.position, muzzle.rotation);
                 
+                // 총알 초기화 (데미지 전달)
+                BulletBase bulletComponent = bullet.GetComponentInChildren<BulletBase>();
+                if (bulletComponent != null)
+                {
+                    bulletComponent.Initialize(weaponData.baseDamage);
+                }
+
                 Vector3 force = muzzle.forward * gunData.bulletSpeed;
                 force.y = 0f;
                 
@@ -148,11 +182,9 @@ public abstract class GunBase : MonoBehaviour
     {
         if (nowReloading == false)
         {
-            if (playerRifle != null) 
-            {
-                playerRifle.reloaing = true;
-                nowReloading = true;
-            }
+            // 이제 PlayerRifle을 직접 호출하지 않고 상태만 변경함.
+            // PlayerManager가 이 상태를 감지하여 애니메이션을 실행함.
+            nowReloading = true;
 
             // 재장전 시작 시 루핑 사운드 즉시 중지
             if (gunData != null && gunData.isLoopingSound)
@@ -167,6 +199,5 @@ public abstract class GunBase : MonoBehaviour
         if (gunData != null && gunData.shootSound != null)
         {
             PlayerSoundManager.Instance.PlayWeaponSound(gunData.shootSound);
-        }
     }
 }

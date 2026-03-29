@@ -28,13 +28,13 @@ public class SwordSliverSkillPart3 : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null && IsAlready1Attack(enemy) == false)      
             {
-                enemy.curHealth -= TempDamage;
+                enemy.CurHealth -= TempDamage;
                 Parent.enemyAgain.Add(enemy);
             }
         }
     }
 
-    bool IsAlready1Attack(Enemy e) //이미 1타를 맞은 몬스터인지 판단
+    bool IsAlready1Attack(Enemy e) //?��? 1?��?맞�? 몬스?�인지 ?�단
     {
         foreach (Enemy v in Parent.enemyAgain)
         {
@@ -55,7 +55,7 @@ public class SwordSliverSkillPart3 : MonoBehaviour
                 // Check if the enemy is in contact with SwordSilverEffect
                 if (ISContact(enemy.gameObject))
                 {
-                    enemy.curHealth -= TempDamage;
+                    enemy.CurHealth -= TempDamage;
                 }
             }
         }
@@ -63,13 +63,13 @@ public class SwordSliverSkillPart3 : MonoBehaviour
 
     bool ISContact(GameObject enemyObject)
     {
-        //전달받은 몬스터를 중심으로 맞닿은 물체 탐색
+        //?�달받�? 몬스?��? 중심?�로 맞닿?� 물체 ?�색
         Collider[] colliders = Physics.OverlapBox(
             enemyObject.transform.position,
             enemyObject.GetComponent<Collider>().bounds.extents,
             Quaternion.identity
         );
-        //맞닿은 물체중에 해당 스킬 오브젝트가 있다면 true
+        //맞닿?� 물체중에 ?�당 ?�킬 ?�브?�트가 ?�다�?true
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject == gameObject) 

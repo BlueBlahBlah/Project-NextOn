@@ -5,31 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    //전체 게임 트리거
-    private bool isGameStart;
-    //첫번째 섬 트리거
-    private bool isFirstLandStart;
-    //첫번째 섬의 미로 트리거
-    private bool isMazeStart;
-    //두번째 섬 트리거
-    private bool isSecondLandStart;
-    //두번째 섬 마지막 미션 트리거
-    private bool isLastMissionStart;
+    //?�체 게임 ?�리�?    private bool isGameStart;
+    //첫번�????�리�?    private bool isFirstLandStart;
+    //첫번�??�의 미로 ?�리�?    private bool isMazeStart;
+    //?�번�????�리�?    private bool isSecondLandStart;
+    //?�번�???마�?�?미션 ?�리�?    private bool isLastMissionStart;
 
     void Awake()
     {
         isGameStart = true;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public bool GetisGameStart(){

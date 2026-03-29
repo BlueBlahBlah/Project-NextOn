@@ -24,7 +24,7 @@ public class WaveArea1 : MonoBehaviour
     {
         if (other.CompareTag("Player") && Active == false)
         {
-            //튜토리얼 시작하는 부분 추가
+            //?�토리얼 ?�작?�는 부�?추�?
 
             Active = true;
             //EventManager.Instance.FirstWelcomeMSG();

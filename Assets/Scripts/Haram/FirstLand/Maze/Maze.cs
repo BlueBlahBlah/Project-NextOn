@@ -72,3 +72,21 @@ public class Maze : MonoBehaviour
         FirstLandManager.firstLandManager.isMazeFin = true;
     }
 }
+                var dropPoint = GameObject.Find("PointtoDrop");
+                if (dropPoint != null) leaderComp.SetTarget(dropPoint.transform);
+            }
+        }
+        
+        if (missionObject != null && missionObject.Length > 3)
+        {
+            var finishMaze = missionObject[3].GetComponent<FinishMaze>();
+            if (finishMaze != null)
+            {
+                yield return new WaitUntil(() => finishMaze.isClose);
+            }
+        }
+        
+        Debug.Log("isclose");
+        if (FirstLandManager.firstLandManager != null) FirstLandManager.firstLandManager.isMazeFin = true;
+    }
+}

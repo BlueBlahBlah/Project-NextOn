@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
-    public float TotalHealth;                          //최대체력
-    public float Health;                               //현재체력
+    public float TotalHealth;                          //최�?체력
+    public float Health;                               //?�재체력
     public float HealthGen;                            //체젠
-    private float curHealth;                               //현재 스크립트에 관리하는 체력 - 체력이 닳았는지 판단
+    private float curHealth;                               //?�재 ?�크립트??관리하??체력 - 체력???�았?��? ?�단
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
 
@@ -22,8 +22,7 @@ public class PlayerInfo : MonoBehaviour
         StartCoroutine(WaitInitialize());
     }
 
-    private IEnumerator WaitInitialize()        //PlayerManager 대기
-    {
+    private IEnumerator WaitInitialize()        //PlayerManager ?��?    {
         while (PlayerManager.Instance == null)
         {
             yield return null;
@@ -32,14 +31,13 @@ public class PlayerInfo : MonoBehaviour
         Initialize();
     }
 
-    private void Initialize()       //초기화 함수
+    private void Initialize()       //초기???�수
     {
         Health = PlayerManager.Instance.Health;
         curHealth = Health;
         
-        damaged.SetText("");  //데미지를 입은 경우에만 표시
-        InitHPBarSize();  //체력바 사이즈 초기화
-        UpdateHealthInfo();
+        damaged.SetText("");  //?��?지�??��? 경우?�만 ?�시
+        InitHPBarSize();  //체력�??�이�?초기??        UpdateHealthInfo();
     }
 
     // Update is called once per frame
@@ -49,17 +47,16 @@ public class PlayerInfo : MonoBehaviour
         {
             TotalHealth = PlayerManager.Instance.TotalHealth;
             curHealth = Health;
-            Health = PlayerManager.Instance.Health;     //현재체력 계속 가져오기
-            if (Health == 0 && PlayerManager.Instance.Death == false)                                 //죽은경우
+            Health = PlayerManager.Instance.Health;     //?�재체력 계속 가?�오�?            if (Health == 0 && PlayerManager.Instance.Death == false)                                 //죽�?경우
             {
                 PlayerManager.Instance.Death = true;
-                float DamageDone = curHealth - Health;        //입은 데미지.
+                float DamageDone = curHealth - Health;        //?��? ?��?지.
                 ShowDamage(DamageDone);
                 hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
             }
-            else if (curHealth > Health && PlayerManager.Instance.Death == false)                     //체력이 닳은경우
+            else if (curHealth > Health && PlayerManager.Instance.Death == false)                     //체력???��?경우
             {
-                float DamageDone = curHealth - Health;        //입은 데미지.
+                float DamageDone = curHealth - Health;        //?��? ?��?지.
                 ShowDamage(DamageDone);
             
             }
@@ -78,11 +75,10 @@ public class PlayerInfo : MonoBehaviour
     
     void InitHPBarSize()
     {
-        //hpBar의 사이즈를 원래 자신의 사이즈의 1배 크기로 초기화
-        hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+        //hpBar???�이즈�? ?�래 ?�신???�이즈의 1�??�기�?초기??        hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }
 
-    void UpdateHealthInfo()     //체력관련 내용 가져오는 함수
+    void UpdateHealthInfo()     //체력관???�용 가?�오???�수
     {
         Health = PlayerManager.Instance.Health;     
         HealthGen = PlayerManager.Instance.HealthGen;

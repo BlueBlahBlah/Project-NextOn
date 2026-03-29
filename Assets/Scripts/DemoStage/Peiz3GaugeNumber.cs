@@ -20,6 +20,6 @@ public class Peiz3GaugeNumber : MonoBehaviour
     void Update()
     {
         guage = (float)Peiz3Gauge.slider.value;
-        textMeshPro.text = "컴파일러를 고치는 중.. " +  guage.ToString("F2") + "%";
+        textMeshPro.text = "컴파?�러�?고치??�?. " +  guage.ToString("F2") + "%";
     }
 }
