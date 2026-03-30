@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using DG.Tweening;
@@ -42,7 +42,7 @@ public class FirstLandManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Maze.SetActive(false);
 
-        //미로???�래 지??미션???�리???�길 ?��?        yield return new WaitUntil(() => isUnderFin);
+        //誘몃줈???꾨옒 吏??誘몄뀡???대━???섍만 ?湲?        yield return new WaitUntil(() => isUnderFin);
         FoodWall.SetActive(false);
         SecondLand.SetActive(true);
     }

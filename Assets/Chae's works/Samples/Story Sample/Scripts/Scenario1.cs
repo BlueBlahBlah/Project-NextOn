@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class Scenario1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // ½Ì±ÛÅæ Å¬·¡½ºµé ³»ÀÇ Á¤º¸ °»½Å
+        // ì‹±ê¸€í†¤ í´ë˜ìŠ¤ë“¤ ë‚´ì˜ ì •ë³´ ê°±ì‹ 
         if (SceneContainer.instance != null)
         {
             SceneContainer.instance.currentScene = "Scenario1 Scene";
@@ -19,11 +19,11 @@ public class Scenario1 : MonoBehaviour
         
         if (UIManager.instance != null)
         {
-            UIManager.instance.ScenarioNumber = 0; // ½Ã³ª¸®¿À ³Ñ¹ö ÀúÀå
-            UIManager.instance.DialogueNumber = 0; // ´ÙÀÌ¾ó·Î±× ³Ñ¹ö ÀúÀå (´ë»ç ½ÃÀÛÁöÁ¡)
+            UIManager.instance.ScenarioNumber = 0; // ì‹œë‚˜ë¦¬ì˜¤ ë„˜ë²„ ì €ì¥
+            UIManager.instance.DialogueNumber = 0; // ë‹¤ì´ì–¼ë¡œê·¸ ë„˜ë²„ ì €ì¥ (ëŒ€ì‚¬ ì‹œì‘ì§€ì )
         }
         
-        // Scenario1UI °¡Á®¿À±â
+        // Scenario1UI ê°€ì ¸ì˜¤ê¸°
         if (scenario1UI == null) scenario1UI = GameObject.Find("Scenario1UI").GetComponent<Scenario1UI>();
 
         StartCoroutine("StartScenario1");
@@ -44,22 +44,22 @@ public class Scenario1 : MonoBehaviour
     #region
     IEnumerator StartScenario1()
     {
-        // Scenario1ÀÇ ÀüÃ¼ÀûÀÎ ¿¬ÃâÀ» ³ªÅ¸³¾ ÄÚ·çÆ¾ÀÔ´Ï´Ù.
-        // ±ä ³»¿ëÀ» Æ÷ÇÔÇÏ°í ÀÖ±â ¶§¹®¿¡ Æ¯Â¡ÀûÀÎ ¿¬Ãâ¸¶´Ù ÁÖ¼®À» ÀÛ¼ºÇÕ´Ï´Ù.
+        // Scenario1ì˜ ì „ì²´ì ì¸ ì—°ì¶œì„ ë‚˜íƒ€ë‚¼ ì½”ë£¨í‹´ì…ë‹ˆë‹¤.
+        // ê¸´ ë‚´ìš©ì„ í¬í•¨í•˜ê³  ìˆê¸° ë•Œë¬¸ì— íŠ¹ì§•ì ì¸ ì—°ì¶œë§ˆë‹¤ ì£¼ì„ì„ ì‘ì„±í•©ë‹ˆë‹¤.
 
-        // Å°º¸µå »ç¿îµå Ãâ·Â
+        // í‚¤ë³´ë“œ ì‚¬ìš´ë“œ ì¶œë ¥
         yield return new WaitForSeconds(1f);
         SoundManager.instance.PlayEffectSound("Keyboard", 1f);
         yield return new WaitForSeconds(4f);
 
-        // ´ë»ç Ãâ·Â1
+        // ëŒ€ì‚¬ ì¶œë ¥1
         PrintLongDialogue();
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine("RunLoopUntilDone");
         SoundManager.instance.PlayEffectSound("Keyboard", 1f);
         yield return new WaitForSeconds(2f);
 
-        // ±ôºıÀÓ ¿¬Ãâ
+        // ê¹œë¹¡ì„ ì—°ì¶œ
         scenario1UI.SetLittleDark();
         SoundManager.instance.PlayEffectSound("Blink1", 0.5f);
         yield return new WaitForSeconds(0.1f);
@@ -73,7 +73,7 @@ public class Scenario1 : MonoBehaviour
         SoundManager.instance.PlayEffectSound("Blink2", 0.5f);
         yield return new WaitForSeconds(2f);
 
-        // ´ë»ç Ãâ·Â2 ¹× Ä³¸¯ÅÍ µµÆ® Á¤Áö
+        // ëŒ€ì‚¬ ì¶œë ¥2 ë° ìºë¦­í„° ë„íŠ¸ ì •ì§€
         PrintLongDialogue();
         scenario1UI.StopCharacter();
         yield return new WaitForSeconds(1f);

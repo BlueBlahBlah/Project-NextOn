@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -6,23 +6,23 @@ using TMPro;
 public class BlinkText : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI textMeshPro;  // TextMeshProUGUI ÄÄÆ÷³ÍÆ®
+    private TextMeshProUGUI textMeshPro;  // TextMeshProUGUI ì»´í¬ë„ŒíŠ¸
     [SerializeField]
-    private float initTime = 4f; // Ã¹ ¹İº¹ ½ÃÀÛ ½Ã°£
+    private float initTime = 4f; // ì²« ë°˜ë³µ ì‹œì‘ ì‹œê°„
     [SerializeField]
-    private float power = 0f; // 1º¸´Ù ÀÛÀº Åõ¸í °­µµ
+    private float power = 0f; // 1ë³´ë‹¤ ì‘ì€ íˆ¬ëª… ê°•ë„
     [SerializeField]
-    private float invisibleTime = 3f; // Åõ¸íÈ­ ÁÖ±â
+    private float invisibleTime = 3f; // íˆ¬ëª…í™” ì£¼ê¸°
     [SerializeField]
-    private float visibleTime = 1f; // ºÒÅõ¸íÈ­ ÁÖ±â
+    private float visibleTime = 1f; // ë¶ˆíˆ¬ëª…í™” ì£¼ê¸°
 
     private void Start()
     {
 
-        // TextMeshProUGUI ºñÈ°¼ºÈ­
+        // TextMeshProUGUI ë¹„í™œì„±í™”
         textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 0f);
 
-        // initTime ÃÊ µÚ¿¡ Button ÄÄÆ÷³ÍÆ® È°¼ºÈ­
+        // initTime ì´ˆ ë’¤ì— Button ì»´í¬ë„ŒíŠ¸ í™œì„±í™”
         StartCoroutine("LoopCoroutine");
     }
 
@@ -30,7 +30,7 @@ public class BlinkText : MonoBehaviour
     {
         yield return new WaitForSeconds(initTime);
         textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1f);
-        // TextMeshProUGUI ±ôºıÀÌ´Â È¿°ú ÄÚ·çÆ¾ ½ÃÀÛ
+        // TextMeshProUGUI ê¹œë¹¡ì´ëŠ” íš¨ê³¼ ì½”ë£¨í‹´ ì‹œì‘
         StartCoroutine("Blink");
     }
 
@@ -38,11 +38,11 @@ public class BlinkText : MonoBehaviour
     {
         while (true)
         {
-            // 3ÃÊ ´ë±â ÈÄ TextMeshProUGUI Åõ¸í
+            // 3ì´ˆ ëŒ€ê¸° í›„ TextMeshProUGUI íˆ¬ëª…
             yield return new WaitForSeconds(invisibleTime);
             textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, power);
 
-            // 1ÃÊ ´ë±â ÈÄ TextMeshProUGUI ºÒÅõ¸í
+            // 1ì´ˆ ëŒ€ê¸° í›„ TextMeshProUGUI ë¶ˆíˆ¬ëª…
             yield return new WaitForSeconds(visibleTime);
             textMeshPro.color = new Color(textMeshPro.color.r, textMeshPro.color.g, textMeshPro.color.b, 1f);
         }

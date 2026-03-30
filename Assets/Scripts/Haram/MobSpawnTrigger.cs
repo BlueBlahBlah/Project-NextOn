@@ -34,4 +34,3 @@ public class MobSpawnTrigger : Trigger
         this.gameObject.SetActive(false);
     }
 }
-}

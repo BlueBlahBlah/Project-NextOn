@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MOVE : MonoBehaviour
 {
-    public float speed = 1.0f; // ÃÊ´ç ÀÌµ¿ ¼Óµµ
+    public float speed = 1.0f; // ì´ˆë‹¹ ì´ë™ ì†ë„
 
     void Update()
     {
         float horizontalMovement = speed * Time.deltaTime;
 
-        // ÇöÀç ÇÁ·¹ÀÓ¿¡¼­ ÀÌµ¿ÇÒ °Å¸®¸¦ °è»êÇÏ¿© ÀÌµ¿
+        // í˜„ì¬ í”„ë ˆì„ì—ì„œ ì´ë™í•  ê±°ë¦¬ë¥¼ ê³„ì‚°í•˜ì—¬ ì´ë™
         transform.Translate(horizontalMovement, 0f, 0f);
     }
  

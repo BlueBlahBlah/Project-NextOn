@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStatManager : MonoBehaviour
 {
-    // PlayerStatManager ÀÇ °æ¿ì Áõ°­°ú ´Ù¸£°Ô, ÀÎ°ÔÀÓ ½ÃÀÛ Àü¿¡¼­µµ Ä³¸¯ÅÍ º¯°æ µîÀÇ ÀÌÀ¯·Î
-    // Stat º¯°æÀÌ Á¸ÀçÇÒ ¼ö ÀÖ±â ¶§¹®¿¡ ´Ù¸¥ ¾À¿¡¼­µµ °íÀ¯ÇÑ ÀÎ½ºÅÏ½º¸¸ Á¸ÀçÇÏµµ·Ï ½Ì±ÛÅæÀ¸·Î ÀÛ¼ºÇÏ¿´À½
+    // PlayerStatManager ì˜ ê²½ìš° ì¦ê°•ê³¼ ë‹¤ë¥´ê²Œ, ì¸ê²Œì„ ì‹œì‘ ì „ì—ì„œë„ ìºë¦­í„° ë³€ê²½ ë“±ì˜ ì´ìœ ë¡œ
+    // Stat ë³€ê²½ì´ ì¡´ì¬í•  ìˆ˜ ìˆê¸° ë•Œë¬¸ì— ë‹¤ë¥¸ ì”¬ì—ì„œë„ ê³ ìœ í•œ ì¸ìŠ¤í„´ìŠ¤ë§Œ ì¡´ì¬í•˜ë„ë¡ ì‹±ê¸€í†¤ìœ¼ë¡œ ì‘ì„±í•˜ì˜€ìŒ
 
     public static PlayerStatManager instance = null;
 
@@ -38,7 +38,7 @@ public class PlayerStatManager : MonoBehaviour
     [SerializeField]
     public float speed;
 
-    // ±¸¸£±â »èÁ¦¿¡ µû¶ó stamina °ü·Ã ¿ä¼Ò´Â »ç¿ëÃ³°¡ ºÒºĞ¸íÇØÁ® º¸·ù
+    // êµ¬ë¥´ê¸° ì‚­ì œì— ë”°ë¼ stamina ê´€ë ¨ ìš”ì†ŒëŠ” ì‚¬ìš©ì²˜ê°€ ë¶ˆë¶„ëª…í•´ì ¸ ë³´ë¥˜
     // [SerializeField]
     // private float stamina;
     // [SerializeField]
@@ -58,7 +58,7 @@ public class PlayerStatManager : MonoBehaviour
     [SerializeField]
     public float critDamage;
 
-    // absorption (»ı¸í·Â Èí¼ö) ÀÇ °æ¿ì °ÔÀÓÀÌ ³Ê¹« ½¬¿öÁö°Å³ª ÇÏ´Â ¹ë·±½º¿¡ ¿µÇâÀ» ÁÙ °¡´É¼ºÀÌ ³ô¾Æ º¸·ù 
+    // absorption (ìƒëª…ë ¥ í¡ìˆ˜) ì˜ ê²½ìš° ê²Œì„ì´ ë„ˆë¬´ ì‰¬ì›Œì§€ê±°ë‚˜ í•˜ëŠ” ë°¸ëŸ°ìŠ¤ì— ì˜í–¥ì„ ì¤„ ê°€ëŠ¥ì„±ì´ ë†’ì•„ ë³´ë¥˜ 
     // [SerializeField]
     // private float absorption;
 

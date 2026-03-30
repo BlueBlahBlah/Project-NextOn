@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    // @UIManager ¿ÀºêÁ§Æ®¿¡ Æ÷ÇÔµÇ´Â ½ºÅ©¸³Æ®ÀÔ´Ï´Ù.
-    // °°Àº ÇÏÀÌ¾î¶óÅ° ³»¿¡ 'InGameUI'¿Í 'LongDialogue' UI ÇÁ¸®ÆÕÀÌ
-    // Æ÷ÇÔµÈ Äµ¹ö½º°¡ Á¸ÀçÇØ¾ß ¿À·ù°¡ ¹ß»ıÇÏÁö ¾Ê½À´Ï´Ù.
-    // Dialogue ½ºÅ©¸³Æ®, InGameUI ½ºÅ©¸³Æ®¿¡¼­ ¸Ş¼Òµå¸¦ °¡Á®¿À´Â ÄÚµå°¡ ¸¹¾Æ
-    // ÇØ´ç ½ºÅ©¸³Æ®¸¦ ÂüÁ¶ÇÏ¸é ÁÁ½À´Ï´Ù.
+    // @UIManager ì˜¤ë¸Œì íŠ¸ì— í¬í•¨ë˜ëŠ” ìŠ¤í¬ë¦½íŠ¸ì…ë‹ˆë‹¤.
+    // ê°™ì€ í•˜ì´ì–´ë¼í‚¤ ë‚´ì— 'InGameUI'ì™€ 'LongDialogue' UI í”„ë¦¬íŒ¹ì´
+    // í¬í•¨ëœ ìº”ë²„ìŠ¤ê°€ ì¡´ì¬í•´ì•¼ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
+    // Dialogue ìŠ¤í¬ë¦½íŠ¸, InGameUI ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ë©”ì†Œë“œë¥¼ ê°€ì ¸ì˜¤ëŠ” ì½”ë“œê°€ ë§ì•„
+    // í•´ë‹¹ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ì°¸ì¡°í•˜ë©´ ì¢‹ìŠµë‹ˆë‹¤.
 
-    // ¿¬µ¿ÇÒ ½ºÅ©¸³Æ® ¼±¾ğ
+    // ì—°ë™í•  ìŠ¤í¬ë¦½íŠ¸ ì„ ì–¸
     [Header("Components")]
     public InGameUI inGameUI;
     public Dialogue longDialogue;
@@ -19,9 +19,9 @@ public class UIManager : MonoBehaviour
     public PlayerManager playerManager;
 
     [Header("Data")]
-    public int ScenarioNumber; // ÇöÀç ½Ã³ª¸®¿À ³Ñ¹ö
-    public int DialogueNumber; // ÇöÀç csv ÆÄÀÏÀÇ ¶óÀÎ ³Ñ¹ö
-    public bool isCompletelyPrinted; // SkipAndNext ÇÔ¼ö¸¦ À§ÇØ ÇÊ¿ä. ÅØ½ºÆ®ÀÇ ¿ÏÀüÇÑ Ãâ·Â ¿©ºÎ ÆÇ´Ü
+    public int ScenarioNumber; // í˜„ì¬ ì‹œë‚˜ë¦¬ì˜¤ ë„˜ë²„
+    public int DialogueNumber; // í˜„ì¬ csv íŒŒì¼ì˜ ë¼ì¸ ë„˜ë²„
+    public bool isCompletelyPrinted; // SkipAndNext í•¨ìˆ˜ë¥¼ ìœ„í•´ í•„ìš”. í…ìŠ¤íŠ¸ì˜ ì™„ì „í•œ ì¶œë ¥ ì—¬ë¶€ íŒë‹¨
     public bool doNext;
     public bool isDone;
 
@@ -39,32 +39,45 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private bool isPlayerManager;
 
-    // ½Ì±ÛÅæ ¼±¾ğ
-    #region
-    public static UIManager instance = null;
+    // ì‹±ê¸€í†¤ ì„ ì–¸
+    private static UIManager _instance = null;
+    public static UIManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<UIManager>();
+                if (_instance == null)
+                {
+                    GameObject go = new GameObject("UIManager_Shim");
+                    _instance = go.AddComponent<UIManager>();
+                }
+            }
+            return _instance;
+        }
+        set => _instance = value;
+    }
 
     private void Awake()
     {
-        if (instance == null) //instance°¡ null. Áï, ½Ã½ºÅÛ»ó¿¡ Á¸ÀçÇÏ°í ÀÖÁö ¾ÊÀ»¶§
+        if (_instance == null)
         {
-            instance = this; //³»ÀÚ½ÅÀ» instance·Î ³Ö¾îÁİ´Ï´Ù.
-            DontDestroyOnLoad(gameObject); //OnLoad(¾ÀÀÌ ·Îµå µÇ¾úÀ»¶§) ÀÚ½ÅÀ» ÆÄ±«ÇÏÁö ¾Ê°í À¯Áö
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (_instance != this)
         {
-            if (instance != this) //instance°¡ ³»°¡ ¾Æ´Ï¶ó¸é ÀÌ¹Ì instance°¡ ÇÏ³ª Á¸ÀçÇÏ°í ÀÖ´Ù´Â ÀÇ¹Ì
-                Destroy(this.gameObject); //µÑ ÀÌ»ó Á¸ÀçÇÏ¸é ¾ÈµÇ´Â °´Ã¼ÀÌ´Ï ¹æ±İ AWakeµÈ ÀÚ½ÅÀ» »èÁ¦
+            Destroy(this.gameObject);
         }
 
         InitUI();
-        
     }
-    #endregion
     
     void Start()
     {
-        // GetManager => ½Ì±ÛÅæÀ¸·Î ¼±¾ğµÇÁö ¾ÊÀº ¸Å´ÏÀúµéÀ» °¡Á®¿É´Ï´Ù.
-        // ¸Å´ÏÀúµéÀ» ½Ì±ÛÅæÀ¸·Î ¼±¾ğÇÏµµ·Ï ±¸Á¶¸¦ º¯°æÇÑ´Ù¸é È£Ãâ ¹æ½ÄÀ» ¹Ù²ß´Ï´Ù.
+        // GetManager => ì‹±ê¸€í†¤ìœ¼ë¡œ ì„ ì–¸ë˜ì§€ ì•Šì€ ë§¤ë‹ˆì €ë“¤ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
+        // ë§¤ë‹ˆì €ë“¤ì„ ì‹±ê¸€í†¤ìœ¼ë¡œ ì„ ì–¸í•˜ë„ë¡ êµ¬ì¡°ë¥¼ ë³€ê²½í•œë‹¤ë©´ í˜¸ì¶œ ë°©ì‹ì„ ë°”ê¿‰ë‹ˆë‹¤.
         if (isInGameUI) { inGameUI.GetManager(); }
     }
 
@@ -76,13 +89,13 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // ¾À º¯°æ ½Ã ÀÌº¥Æ® µî·Ï
+        // ì”¬ ë³€ê²½ ì‹œ ì´ë²¤íŠ¸ ë“±ë¡
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        // ¾À º¯°æ ½Ã ÀÌº¥Æ® ÇØÁ¦
+        // ì”¬ ë³€ê²½ ì‹œ ì´ë²¤íŠ¸ í•´ì œ
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -93,7 +106,7 @@ public class UIManager : MonoBehaviour
 
     public void InitUI()
     {
-        // ÇÊ¿äÇÑ ÄÄÆ÷³ÍÆ® °¡Á®¿À±â
+        // í•„ìš”í•œ ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ê¸°
         if (GameObject.Find("InGameUI") != null)
         {
             inGameUI = GameObject.Find("InGameUI").GetComponent<InGameUI>();
@@ -104,7 +117,7 @@ public class UIManager : MonoBehaviour
             isInGameUI = false;
         }
 
-        // **FindÇÔ¼ö »ç¿ë ½Ã, ÇÏÀÌ¾î¶óÅ° ³»¿¡¼­ È°¼ºÈ­µÇ¾îÀÖÁö ¾ÊÀ¸¸é ¿À·ù ¹ß»ı. (DialogueÀÇ Start¿¡¼­ ½º½º·Î ºñÈ°¼ºÈ­ÇÔ)
+        // **Findí•¨ìˆ˜ ì‚¬ìš© ì‹œ, í•˜ì´ì–´ë¼í‚¤ ë‚´ì—ì„œ í™œì„±í™”ë˜ì–´ìˆì§€ ì•Šìœ¼ë©´ ì˜¤ë¥˜ ë°œìƒ. (Dialogueì˜ Startì—ì„œ ìŠ¤ìŠ¤ë¡œ ë¹„í™œì„±í™”í•¨)
         if (GameObject.Find("LongDialogue") != null)
         {
             longDialogue = GameObject.Find("LongDialogue").GetComponent<Dialogue>();
@@ -137,22 +150,23 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // InGameUI ±â´É
+    // InGameUI ê¸°ëŠ¥
     #region
 
-    public void UpdateInGameUI()
+    private void UpdateInGameUI()
     {
-        inGameUI.PlayerHp = playerManager.Health;
-        inGameUI.PlayerMaxHp = playerManager.TotalHealth;
-        inGameUI.MaxBullet = playerManager.TotalBullet;
-        inGameUI.CurrentBullet = playerManager.CurrentBullet;
+        // [MVC ì „í™˜ ì™„ë£Œ] ì²´ë ¥ê³¼ íƒ„ì•½ ì •ë³´ëŠ” ì´ì œ ì»¨íŠ¸ë¡¤ëŸ¬ì—ì„œ ì´ë²¤íŠ¸ë¡œ ìë™ ê°±ì‹ ë©ë‹ˆë‹¤ (Polling ì œê±°)
+        // inGameUI.PlayerHp = playerManager.Health;
+        // inGameUI.PlayerMaxHp = playerManager.TotalHealth;
+        // inGameUI.MaxBullet = playerManager.TotalBullet; 
+        // inGameUI.CurrentBullet = playerManager.CurrentBullet; 
 
-        // InGameUI ½ºÅ©¸³Æ®¿¡¼­ ¼±¾ğµÈ ´Ù¾çÇÑ UI Update ÇÔ¼öµéÀ» ½ÇÇà
-        inGameUI.UpdatePlayerInfo();
+        // InGameUI ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ì„ ì–¸ëœ ë‹¤ì–‘í•œ UI Update í•¨ìˆ˜ë“¤ì„ ì‹¤í–‰
+        // inGameUI.UpdatePlayerInfo(); // ì œê±° (MVC ì´ë²¤íŠ¸ ê¸°ë°˜)
         inGameUI.UpdateBossInfo();
         inGameUI.UpdateGimmickInfo();
         inGameUI.UpdateNumOfEnemy();
-        inGameUI.UpdateBullet();
+        // inGameUI.UpdateBullet(); // ì œê±° (MVC ì´ë²¤íŠ¸ ê¸°ë°˜)
     }
     #endregion
 
@@ -166,7 +180,7 @@ public class UIManager : MonoBehaviour
 
     public void DialogueEventByKeyword(Dialogue _dialogue, string _keyword)
     {
-        // ¾ÆÁ÷ ¹Ì±¸ÇöµÈ ÄÚµå
+        // ì•„ì§ ë¯¸êµ¬í˜„ëœ ì½”ë“œ
         _dialogue.PrintDialogueByKeyword(_keyword);
     }
     #endregion

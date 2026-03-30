@@ -1,16 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ProjectNextOn.Data
 {
     /// <summary>
-    /// 근접 무기(Sword, Axe ?????�용?�는 ?�이???�래?�입?�다.
+    /// 洹쇱젒 臾닿린(Sword, Axe ?????ъ슜?섎뒗 ?곗씠???대옒?ㅼ엯?덈떎.
     /// </summary>
     [CreateAssetMenu(fileName = "NewMeleeData", menuName = "Data/Weapon/MeleeData")]
     public class MeleeData : WeaponData
     {
-        [Header("근접 공격 ?�정")]
-        public GameObject skillPrefab;      // 무기 ?�용 ?�킬 ?�리??        public float skillCoolTime;         // ?�킬 ?�사???�기시�?        
-        [Header("?�수 ?�과 (?�택?�항)")]
-        public int attackNumThreshold;      // ?�정 ?�?�마???�과가 발생?�는 경우 (?? SwordStatic)
+        [Header("洹쇱젒 怨듦꺽 ?ㅼ젙")]
+        public GameObject skillPrefab;      // 臾닿린 ?꾩슜 ?ㅽ궗 ?꾨━??        public float skillCoolTime;         // ?ㅽ궗 ?ъ궗???湲곗떆媛?        
+        [Header("?뱀닔 ?④낵 (?좏깮?ы빆)")]
+        public int attackNumThreshold;      // ?뱀젙 ??섎쭏???④낵媛 諛쒖깮?섎뒗 寃쎌슦 (?? SwordStatic)
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,8 +20,8 @@ public class SwordSilverEffect : MonoBehaviour
     {
         if (enemy.CompareTag("Enemy"))
         {
-            //collider.damage--; //collider??체력???�는 메커?�즘
-            //Debug.LogError("?�버?�톤 공격");
+            //collider.damage--; //collider??泥대젰???노뒗 硫붿빱?덉쬁
+            //Debug.LogError("?ㅻ쾭?ㅽ넠 怨듦꺽");
         }
     }
 }

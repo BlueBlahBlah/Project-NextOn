@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,7 +8,7 @@ public class SpeechBubble : MonoBehaviour
     [SerializeField]
     private RectTransform selectPanel;
 
-    public float animationDuration = 0.5f; // ¾Ö´Ï¸ŞÀÌ¼Ç Áö¼Ó ½Ã°£
+    public float animationDuration = 0.5f; // ì• ë‹ˆë©”ì´ì…˜ ì§€ì† ì‹œê°„
 
 
     private void OnTriggerEnter(Collider other)
@@ -44,7 +44,7 @@ public class SpeechBubble : MonoBehaviour
         Vector3 startScale = Vector3.zero;
         Vector3 endScale = Vector3.one;
         RectTransform panel = selectPanel;
-        panel.gameObject.SetActive(true); // ÆĞ³Î È°¼ºÈ­
+        panel.gameObject.SetActive(true); // íŒ¨ë„ í™œì„±í™”
 
         while (elapsedTime < animationDuration)
         {
@@ -57,7 +57,7 @@ public class SpeechBubble : MonoBehaviour
         panel.localScale = endScale;
     }
 
-    // ÆĞ³Î ´İ±â ¾Ö´Ï¸ŞÀÌ¼Ç
+    // íŒ¨ë„ ë‹«ê¸° ì• ë‹ˆë©”ì´ì…˜
     private IEnumerator ClosePanelCoroutine()
     {
         float elapsedTime = 0f;
@@ -74,7 +74,7 @@ public class SpeechBubble : MonoBehaviour
         }
 
         panel.localScale = endScale;
-        panel.gameObject.SetActive(false); // ÆĞ³Î ºñÈ°¼ºÈ­
+        panel.gameObject.SetActive(false); // íŒ¨ë„ ë¹„í™œì„±í™”
     }
 
     private float EaseOutQuint(float t)

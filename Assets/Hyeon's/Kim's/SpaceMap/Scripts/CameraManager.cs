@@ -1,21 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
-    public Transform[] targetPos;   //Ä«¸Ş¶óÀÇ À§Ä¡µéÀ» ´ã´Â ¹è¿­
+    public Transform[] targetPos;   //ì¹´ë©”ë¼ì˜ ìœ„ì¹˜ë“¤ì„ ë‹´ëŠ” ë°°ì—´
     [SerializeField] private Camera FreeLookCam;
     [SerializeField] private Camera TopCam;
     [SerializeField] private Camera SpecialCam;
 
-    public int currentRoomIndex = -1;  //ÇöÀç ¹æÀÇ ÀÎµ¦½º
+    public int currentRoomIndex = -1;  //í˜„ì¬ ë°©ì˜ ì¸ë±ìŠ¤
     public bool isTopview;
     public bool SpecialView;
 
-    private float offsetX = 0f; // Ä«¸Ş¶óÀÇ xÃà ¿ÀÇÁ¼Â
-    private float offsetZ = -28f; // Ä«¸Ş¶óÀÇ zÃà ¿ÀÇÁ¼Â
+    private float offsetX = 0f; // ì¹´ë©”ë¼ì˜ xì¶• ì˜¤í”„ì…‹
+    private float offsetZ = -28f; // ì¹´ë©”ë¼ì˜ zì¶• ì˜¤í”„ì…‹
 
     void Start()
     {

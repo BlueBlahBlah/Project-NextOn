@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth;
     public int curHealth;
+    public int CurHealth { get => curHealth; set => curHealth = value; }
     public Transform target;
     public bool isChase; // 추적을 결정하는 bool 변수
     Rigidbody rigid;
@@ -83,10 +84,12 @@ public class Enemy : MonoBehaviour
    {
        nav.Stop();
    }
+   public void StopNav() => stopNav();
    public void startNav()
    {
        nav.Resume();
    }
+   public void StartNav() => startNav();
    
    public void SetNavSpeed(float s)
    {

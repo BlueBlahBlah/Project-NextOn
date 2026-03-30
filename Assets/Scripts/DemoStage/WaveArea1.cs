@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -24,7 +24,7 @@ public class WaveArea1 : MonoBehaviour
     {
         if (other.CompareTag("Player") && Active == false)
         {
-            //?�토리얼 ?�작?�는 부�?추�?
+            //?쒗넗由ъ뼹 ?쒖옉?섎뒗 遺遺?異붽?
 
             Active = true;
             //EventManager.Instance.FirstWelcomeMSG();

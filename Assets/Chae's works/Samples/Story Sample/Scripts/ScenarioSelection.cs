@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,14 +65,14 @@ public class ScenarioSelection : MonoBehaviour
 
     public void PlayScenarioSuccess()
     {
-        // 340, 350, 360 Áß ·£´ı Ãâ·Â
+        // 340, 350, 360 ì¤‘ ëœë¤ ì¶œë ¥
         UIManager.instance.DialogueNumber = Random.Range(34, 37) * 10;
         PlayDialogue();
     }
 
     public void PlayScenarioFailure()
     {
-        // 370, 380, 390, 400 Áß ·£´ı Ãâ·Â
+        // 370, 380, 390, 400 ì¤‘ ëœë¤ ì¶œë ¥
         UIManager.instance.DialogueNumber = Random.Range(37, 41) * 10;
         PlayDialogue();
     }

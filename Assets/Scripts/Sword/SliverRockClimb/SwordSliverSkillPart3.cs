@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +34,7 @@ public class SwordSliverSkillPart3 : MonoBehaviour
         }
     }
 
-    bool IsAlready1Attack(Enemy e) //?��? 1?��?맞�? 몬스?�인지 ?�단
+    bool IsAlready1Attack(Enemy e) //?대? 1?瑜?留욎? 紐ъ뒪?곗씤吏 ?먮떒
     {
         foreach (Enemy v in Parent.enemyAgain)
         {
@@ -63,13 +63,13 @@ public class SwordSliverSkillPart3 : MonoBehaviour
 
     bool ISContact(GameObject enemyObject)
     {
-        //?�달받�? 몬스?��? 중심?�로 맞닿?� 물체 ?�색
+        //?꾨떖諛쏆? 紐ъ뒪?곕? 以묒떖?쇰줈 留욌떯? 臾쇱껜 ?먯깋
         Collider[] colliders = Physics.OverlapBox(
             enemyObject.transform.position,
             enemyObject.GetComponent<Collider>().bounds.extents,
             Quaternion.identity
         );
-        //맞닿?� 물체중에 ?�당 ?�킬 ?�브?�트가 ?�다�?true
+        //留욌떯? 臾쇱껜以묒뿉 ?대떦 ?ㅽ궗 ?ㅻ툕?앺듃媛 ?덈떎硫?true
         foreach (Collider collider in colliders)
         {
             if (collider.gameObject == gameObject) 

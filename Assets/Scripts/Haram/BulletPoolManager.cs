@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletPoolManager : MonoBehaviour
@@ -6,7 +6,7 @@ public class BulletPoolManager : MonoBehaviour
     private static BulletPoolManager instance;
     public static BulletPoolManager Instance => instance;
 
-    // ?�리?�별�?관리되???� (Dictionary ?�용?�로 ?�연?�게 관�?
+    // ?꾨━?밸퀎濡?愿由щ릺??? (Dictionary ?ъ슜?쇰줈 ?좎뿰?섍쾶 愿由?
     private Dictionary<GameObject, List<GameObject>> pools = new Dictionary<GameObject, List<GameObject>>();
 
     private void Awake()
@@ -14,7 +14,7 @@ public class BulletPoolManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            // ?�이 바뀌어???��??�고 ?�다�?주석 ?�제?�세??
+            // ?ъ씠 諛붾뚯뼱???좎??섍퀬 ?띕떎硫?二쇱꽍 ?댁젣?섏꽭??
             // DontDestroyOnLoad(gameObject);
         }
         else
@@ -25,7 +25,7 @@ public class BulletPoolManager : MonoBehaviour
 
     public GameObject GetBullet(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        // ?�당 ?�리?�용 ?�???�으�??�성
+        // ?대떦 ?꾨━?뱀슜 ????놁쑝硫??앹꽦
         if (!pools.ContainsKey(prefab))
         {
             pools[prefab] = new List<GameObject>();
@@ -33,7 +33,7 @@ public class BulletPoolManager : MonoBehaviour
 
         GameObject select = null;
 
-        // 1. 비활?�화???�고 ?�는) 총알 찾기
+        // 1. 鍮꾪솢?깊솕???ш퀬 ?덈뒗) 珥앹븣 李얘린
         foreach (GameObject item in pools[prefab])
         {
             if (item != null && !item.activeSelf)
@@ -45,7 +45,7 @@ public class BulletPoolManager : MonoBehaviour
             }
         }
 
-        // 2. 만약 ?�용?????�는 총알???�으�??�로 ?�성
+        // 2. 留뚯빟 ?ъ슜?????덈뒗 珥앹븣???놁쑝硫??덈줈 ?앹꽦
         if (select == null)
         {
             select = Instantiate(prefab, position, rotation);

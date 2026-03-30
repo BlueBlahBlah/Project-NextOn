@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private RectTransform selectPanel;
 
-    public float animationDuration = 0.5f; // ¾Ö´Ï¸ŞÀÌ¼Ç Áö¼Ó ½Ã°£
+    public float animationDuration = 0.5f; // ì• ë‹ˆë©”ì´ì…˜ ì§€ì† ì‹œê°„
 
     private VolumeController volumeController;
 
@@ -20,7 +20,7 @@ public class Menu : MonoBehaviour
 
         if (volumeController == null)
         {
-            // »õ·Î¿î GameObject¸¦ ¸¸µé°í VolumeController¸¦ Ãß°¡
+            // ìƒˆë¡œìš´ GameObjectë¥¼ ë§Œë“¤ê³  VolumeControllerë¥¼ ì¶”ê°€
             GameObject volumeControllerObject = new GameObject("VolumeController");
             volumeController = volumeControllerObject.AddComponent<VolumeController>();
 
@@ -34,16 +34,16 @@ public class Menu : MonoBehaviour
 
     public void ChangeScene()
     {
-        // Scene º¯°æÀ» À§ÇÑ ÇÔ¼ö
-        // 1. SceneManager ÀÎ½ºÅÏ½º¿¡ Á¢±ÙÇØ nextScene À» ÀÌµ¿ÇÏ°íÀÚ ÇÏ´Â ¾À(ÀÎ°ÔÀÓ)À¸·Î º¯°æ
-        // 2. Loading Scene À¸·Î ÀÌµ¿ÇÑ µÚ ·ÎµùÀ» °ÅÃÄ 2Â÷ÀûÀ¸·Î nextScene À¸·Î ÀÌµ¿
+        // Scene ë³€ê²½ì„ ìœ„í•œ í•¨ìˆ˜
+        // 1. SceneManager ì¸ìŠ¤í„´ìŠ¤ì— ì ‘ê·¼í•´ nextScene ì„ ì´ë™í•˜ê³ ì í•˜ëŠ” ì”¬(ì¸ê²Œì„)ìœ¼ë¡œ ë³€ê²½
+        // 2. Loading Scene ìœ¼ë¡œ ì´ë™í•œ ë’¤ ë¡œë”©ì„ ê±°ì³ 2ì°¨ì ìœ¼ë¡œ nextScene ìœ¼ë¡œ ì´ë™
 
         LoadingManager.ToLoadScene();
     }
 
     private void PlayBGM()
     {
-        SoundManager.instance.PlayMusic("Tuesday"); // ¸Ş´º Å×¸¶ À½¾Ç Àç»ı
+        SoundManager.instance.PlayMusic("Tuesday"); // ë©”ë‰´ í…Œë§ˆ ìŒì•… ì¬ìƒ
     }
 
     private void TriggerFadeOut()
@@ -80,7 +80,7 @@ public class Menu : MonoBehaviour
         Vector3 startScale = Vector3.zero;
         Vector3 endScale = Vector3.one;
         RectTransform panel = selectPanel;
-        panel.gameObject.SetActive(true); // ÆĞ³Î È°¼ºÈ­
+        panel.gameObject.SetActive(true); // íŒ¨ë„ í™œì„±í™”
 
         while (elapsedTime < animationDuration)
         {
@@ -93,7 +93,7 @@ public class Menu : MonoBehaviour
         panel.localScale = endScale;
     }
 
-    // ÆĞ³Î ´İ±â ¾Ö´Ï¸ŞÀÌ¼Ç
+    // íŒ¨ë„ ë‹«ê¸° ì• ë‹ˆë©”ì´ì…˜
     private IEnumerator ClosePanelCoroutine()
     {
         float elapsedTime = 0f;
@@ -110,7 +110,7 @@ public class Menu : MonoBehaviour
         }
 
         panel.localScale = endScale;
-        panel.gameObject.SetActive(false); // ÆĞ³Î ºñÈ°¼ºÈ­
+        panel.gameObject.SetActive(false); // íŒ¨ë„ ë¹„í™œì„±í™”
     }
 
     private float EaseOutQuint(float t)

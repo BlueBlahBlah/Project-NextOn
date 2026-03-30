@@ -9,9 +9,30 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance = null;
-    
-    public float TotalHealth;                          //최대체력
-    public float Health;                          //현재체력
+
+    [Header("Health Attributes (MVC Model - Delegated to HealthComponent)")]
+    private HealthComponent _healthComp;
+
+    public float TotalHealth
+    {
+        get => _healthComp != null ? _healthComp.MaxHealth : 100f;
+        set { if (_healthComp != null) _healthComp.MaxHealth = value; }
+    }
+
+    public float Health
+    {
+        get => _healthComp != null ? _healthComp.CurrentHealth : 100f;
+        set { if (_healthComp != null) _healthComp.SetHealthManual(value); }
+    }
+
+    // View가 구독할 수 있는 이벤트 (컴포넌트의 이벤트를 릴레이)
+    public event Action<float, float> OnHealthChanged;
+
+    private void ForwardHealthEvent(float current, float max)
+    {
+        OnHealthChanged?.Invoke(current, max);
+    }
+
     public float HealthGen;                     //체젠
     public int DefensivePower;                  //방어력
     public int MovingSpeed;                     //이동속도
@@ -30,16 +51,19 @@ public class PlayerManager : MonoBehaviour
         closeType,
         longType
     }
-    [SerializeField] private GameObject player_LongWeapon;      // 원거리 캐릭터 모델 루트
-    [SerializeField] private GameObject player_NonWeapon;       // 비무장 캐릭터 모델 루트
-    [SerializeField] private GameObject player_CloseWeapon;     // 근접 캐릭터 모델 루트
+    [SerializeField] public GameObject player_LongWeapon;      // 원거리 캐릭터 모델 루트
+    [SerializeField] public GameObject player_NonWeapon;       // 비무장 캐릭터 모델 루트
+    [SerializeField] public GameObject player_CloseWeapon;     // 근접 캐릭터 모델 루트
 
     [Header("무기 부착 위치 (오른손 등)")]
     [SerializeField] private Transform longWeaponMount;        // 원거리 모델의 오른손 본
     [SerializeField] private Transform closeWeaponMount;       // 근접 모델의 오른손 본
 
     [SerializeField] private List<GameObject> player_WeaponList;
-    [SerializeField] private PlayerInputController inputController;
+    [SerializeField] public PlayerInputController inputController;
+    
+    [Header("MVC Architecture (Manual Assignment)")]
+    public WeaponWidgetController weaponWidgetController;
     
     public DropItemPosition _dropItemPosition;
 
@@ -52,10 +76,40 @@ public class PlayerManager : MonoBehaviour
     
     private void Awake()
     {
-        
         if (null == instance)
         {
-            instance = this;
+            // [Auto-Add] 체력 컴포넌트 자동 추가 및 이벤트 연결
+            _healthComp = GetComponent<HealthComponent>();
+            if (_healthComp == null)
+            {
+                _healthComp = gameObject.AddComponent<HealthComponent>();
+                Debug.Log("<color=yellow>[System]</color> HealthComponent has been automatically added.");
+            }
+            _healthComp.OnHealthChanged += ForwardHealthEvent;
+
+            // [Auto-Add] 속성 컨트롤러 자동 추가
+            if (GetComponent<PlayerAttributeController>() == null)
+            {
+                gameObject.AddComponent<PlayerAttributeController>();
+                Debug.Log("<color=yellow>[System]</color> PlayerAttributeController has been automatically added.");
+            }
+        }
+    }
+
+    private void CleanupDuplicateAudioListeners()
+    {
+        // 씬 내의 모든 오디오 리스너를 검색
+        AudioListener[] listeners = FindObjectsOfType<AudioListener>();
+        if (listeners.Length > 1)
+        {
+            Debug.Log($"<color=orange>[Utility]</color> Found {listeners.Length} AudioListeners. Keeping only one.");
+            
+            // 메인 카메라가 있다면 그것을 유지하고 나머지는 비활성화하는 것이 좋습니다.
+            for (int i = 1; i < listeners.Length; i++)
+            {
+                listeners[i].enabled = false;
+                Debug.Log($"<color=orange>[Utility]</color> Disabled duplicate AudioListener on: {listeners[i].gameObject.name}");
+            }
         }
     }
     //게임 매니저 인스턴스에 접근할 수 있는 프로퍼티. static이므로 다른 클래스에서 맘껏 호출할 수 있다.
@@ -141,7 +195,7 @@ public class PlayerManager : MonoBehaviour
         if (player_LongWeapon.activeSelf)
         {
             var rifle = player_LongWeapon.GetComponent<PlayerScriptRifle>();
-            rifle.BulletInfo();
+            // [DEPRECATED] rifle.BulletInfo(); // 더 이상 매 프레임 물어보지 않습니다 (Polling 제거)
             
             if (rifle.currentGun != null)
             {
@@ -268,5 +322,11 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (_healthComp != null)
+            _healthComp.OnHealthChanged -= ForwardHealthEvent;
     }
 }

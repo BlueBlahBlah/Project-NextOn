@@ -16,7 +16,7 @@ public class MachineGun : GunBase
         base.Update();
 
         // 사격 중이 아닐 때는 이펙트 비활성화
-        if (Effect != null && !fireBtnDown)
+        if (Effect != null && !IsFiring)
         {
             Effect.SetActive(false);
         }

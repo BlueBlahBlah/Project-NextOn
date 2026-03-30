@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +7,10 @@ public class DestroyItemObecjt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 부�??�브?�트??모든 ?�위 ?�브?�트�?가?�옵?�다.
+        // 遺紐??ㅻ툕?앺듃??紐⑤뱺 ?섏쐞 ?ㅻ툕?앺듃瑜?媛?몄샃?덈떎.
         foreach (Transform child in this.transform)
         {
-            // ?�위 ?�브?�트??MyScript가 ?�다�?추�??�니??
+            // ?섏쐞 ?ㅻ툕?앺듃??MyScript媛 ?녿떎硫?異붽??⑸땲??
             if (child.gameObject.GetComponent<DestroyItemObecjt>() == null)
             {
                 child.gameObject.AddComponent<DestroyItemObecjt>();
@@ -26,7 +26,7 @@ public class DestroyItemObecjt : MonoBehaviour
     
     public void OnTriggerEnter(Collider other)
     {
-        // 충돌??물체가 Player ?�그�?가�?경우
+        // 異⑸룎??臾쇱껜媛 Player ?쒓렇瑜?媛吏?寃쎌슦
         if (other.CompareTag("Player"))
         {
             Destroy(gameObject,0.1f);

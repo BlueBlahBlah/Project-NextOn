@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,16 +15,16 @@ public class LineEffect : MonoBehaviour
         pos1.y += 1.5f;
         pos2.y += 1.5f;
 
-        // ?�치�????�겟의 중간 지?�으�??�정
+        // ?꾩튂瑜????寃잛쓽 以묎컙 吏?먯쑝濡??ㅼ젙
         transform.position = Vector3.Lerp(pos1, pos2, 0.5f);
 
-        // ???��??�이??벡터�?계산
+        // ???寃??ъ씠??踰≫꽣瑜?怨꾩궛
         Vector3 direction = pos2 - pos1;
 
-        // ?�브?�트�??�전?�여 ???�겟을 ?�하?�록 ?�정
+        // ?ㅻ툕?앺듃瑜??뚯쟾?섏뿬 ???寃잛쓣 ?ν븯?꾨줉 ?ㅼ젙
         transform.rotation = Quaternion.FromToRotation(Vector3.right, direction);
 
-        // ???��??�이??거리�??��??�을 ?�정
+        // ???寃??ъ씠??嫄곕━濡??ㅼ??쇱쓣 ?ㅼ젙
         Vector3 scale = transform.localScale;
         scale.x = direction.magnitude;
         transform.localScale = scale;

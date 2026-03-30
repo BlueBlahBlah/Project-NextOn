@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -58,7 +58,7 @@ public class CeilingTrigger : MonoBehaviour
                     if (other.gameObject == ceiling)
                     {
                         MakeObjectTransparent(ceiling);
-                        break; // ¹è¿­¿¡¼­ ¿ÀºêÁ§Æ®¸¦ Ã£À¸¸é ´õ ÀÌ»ó ¹İº¹ÇÏÁö ¾ÊÀ½
+                        break; // ë°°ì—´ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìœ¼ë©´ ë” ì´ìƒ ë°˜ë³µí•˜ì§€ ì•ŠìŒ
                     }
                 }
             }
@@ -69,7 +69,7 @@ public class CeilingTrigger : MonoBehaviour
                     if (other.gameObject == ceiling)
                     {
                         MakeObjectHalfTransparent(ceiling);
-                        break; // ¹è¿­¿¡¼­ ¿ÀºêÁ§Æ®¸¦ Ã£À¸¸é ´õ ÀÌ»ó ¹İº¹ÇÏÁö ¾ÊÀ½
+                        break; // ë°°ì—´ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìœ¼ë©´ ë” ì´ìƒ ë°˜ë³µí•˜ì§€ ì•ŠìŒ
                     }
                 }
             }
@@ -89,7 +89,7 @@ public class CeilingTrigger : MonoBehaviour
                     if (other.gameObject == ceiling)
                     {
                         MakeObjectTransparent(ceiling);
-                        break; // ¹è¿­¿¡¼­ ¿ÀºêÁ§Æ®¸¦ Ã£À¸¸é ´õ ÀÌ»ó ¹İº¹ÇÏÁö ¾ÊÀ½
+                        break; // ë°°ì—´ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìœ¼ë©´ ë” ì´ìƒ ë°˜ë³µí•˜ì§€ ì•ŠìŒ
                     }
                 }
             }
@@ -102,7 +102,7 @@ public class CeilingTrigger : MonoBehaviour
                         if (other.gameObject == ceiling)
                         {
                             MakeObjectHalfTransparent(ceiling);
-                            break; // ¹è¿­¿¡¼­ ¿ÀºêÁ§Æ®¸¦ Ã£À¸¸é ´õ ÀÌ»ó ¹İº¹ÇÏÁö ¾ÊÀ½
+                            break; // ë°°ì—´ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìœ¼ë©´ ë” ì´ìƒ ë°˜ë³µí•˜ì§€ ì•ŠìŒ
                         }
                     }
                 }
@@ -123,7 +123,7 @@ public class CeilingTrigger : MonoBehaviour
                     if (other.gameObject == ceiling)
                     {
                         MakeObjectHalfTransparent(ceiling);
-                        break; // ¹è¿­¿¡¼­ ¿ÀºêÁ§Æ®¸¦ Ã£À¸¸é ´õ ÀÌ»ó ¹İº¹ÇÏÁö ¾ÊÀ½
+                        break; // ë°°ì—´ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìœ¼ë©´ ë” ì´ìƒ ë°˜ë³µí•˜ì§€ ì•ŠìŒ
                     }
                 }
             }
@@ -134,7 +134,7 @@ public class CeilingTrigger : MonoBehaviour
                     if (other.gameObject == ceiling)
                     {
                         MakeObjectInvisible(ceiling);
-                        break; // ¹è¿­¿¡¼­ ¿ÀºêÁ§Æ®¸¦ Ã£À¸¸é ´õ ÀÌ»ó ¹İº¹ÇÏÁö ¾ÊÀ½
+                        break; // ë°°ì—´ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìœ¼ë©´ ë” ì´ìƒ ë°˜ë³µí•˜ì§€ ì•ŠìŒ
                     }
                 }
             }

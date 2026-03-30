@@ -18,8 +18,7 @@ public class Maze : MonoBehaviour
     private GameObject MazePlayerSpawnPoint;
     [SerializeField]
     private GameObject leaderMob;
-    //[SerializeField]
-    //private GameObject[] MazeSpawnPoint;
+    
     [SerializeField]
     private GameObject[] MissionObject;
     [SerializeField]
@@ -28,7 +27,6 @@ public class Maze : MonoBehaviour
     [SerializeField]
     private Transform MazePlayerSecondPoint;
 
-    // Update is called once per frame
     void Start(){
         isStart = true;
         StartCoroutine(MazeRoutine());
@@ -46,10 +44,7 @@ public class Maze : MonoBehaviour
 
 
     public IEnumerator MazeRoutine(){
-        //처음 시작하면 스폰포인트에 플레이어를 스폰한다
-        //Player.transform.position = MazePlayerSpawnPoint.transform.position;
         yield return new WaitForSeconds(0.5f);
-        //메이즈 시작 트리거를 지나갈 때까지 대기
         UIManager.instance.DialogueEventByNumber(_dialogue, 120);
         yield return new WaitUntil(() => MazeStart.mazeStart.isMazeStart);
 
@@ -70,23 +65,5 @@ public class Maze : MonoBehaviour
         yield return new WaitUntil(() => MissionObject[3].GetComponent<FinishMaze>().isClose);
         Debug.Log("isclose");
         FirstLandManager.firstLandManager.isMazeFin = true;
-    }
-}
-                var dropPoint = GameObject.Find("PointtoDrop");
-                if (dropPoint != null) leaderComp.SetTarget(dropPoint.transform);
-            }
-        }
-        
-        if (missionObject != null && missionObject.Length > 3)
-        {
-            var finishMaze = missionObject[3].GetComponent<FinishMaze>();
-            if (finishMaze != null)
-            {
-                yield return new WaitUntil(() => finishMaze.isClose);
-            }
-        }
-        
-        Debug.Log("isclose");
-        if (FirstLandManager.firstLandManager != null) FirstLandManager.firstLandManager.isMazeFin = true;
     }
 }

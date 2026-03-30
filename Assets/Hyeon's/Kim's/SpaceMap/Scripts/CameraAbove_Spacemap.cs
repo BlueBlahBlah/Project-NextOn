@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,11 +18,11 @@ public class CameraAbove_Spacemap : MonoBehaviour
     {
         if (operating == false)
         {
-            // »õ·Î¿î À§Ä¡ ¼³Á¤
+            // ìƒˆë¡œìš´ ìœ„ì¹˜ ì„¤ì •
             Vector3 newPosition = new Vector3(Player.transform.position.x, Player.transform.position.y + 15f, Player.transform.position.z - 3f);
             transform.position = newPosition;
 
-            // È¸Àü ¼³Á¤
+            // íšŒì „ ì„¤ì •
             transform.rotation = Quaternion.Euler(70f, 0f, 0f);
         }
 
@@ -39,7 +39,7 @@ public class CameraAbove_Spacemap : MonoBehaviour
         Vector3 targetDirection = (BigMonLocation.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
 
-        float duration = 3f; // È¸ÀüÇÏ´Â µ¥ °É¸®´Â ½Ã°£ (ÃÊ)
+        float duration = 3f; // íšŒì „í•˜ëŠ” ë° ê±¸ë¦¬ëŠ” ì‹œê°„ (ì´ˆ)
         float timer = 0f;
 
         Quaternion initialRotation = transform.rotation;
@@ -52,7 +52,7 @@ public class CameraAbove_Spacemap : MonoBehaviour
             yield return null;
         }
 
-        transform.rotation = targetRotation; // È¸ÀüÀÌ ¿Ï·áµÇ¸é Á¤È®ÇÑ ¹æÇâÀ¸·Î ¼³Á¤
+        transform.rotation = targetRotation; // íšŒì „ì´ ì™„ë£Œë˜ë©´ ì •í™•í•œ ë°©í–¥ìœ¼ë¡œ ì„¤ì •
         Invoke("CameraReturn", 2f);
     }
 

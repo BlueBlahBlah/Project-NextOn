@@ -1,13 +1,13 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GlitchSpawner : MonoBehaviour
 {
-    public GameObject glitchVerticalPrefab;  // ºº∑Œ GlitchEffect «¡∏Æ∆’
-    public GameObject glitchHorizontalPrefab; // ∞°∑Œ GlitchEffect «¡∏Æ∆’
-    public RectTransform canvasRect;  // Canvas¿« RectTransform
-    public float spawnInterval = 0.5f;  // Ω∫∆˘ ∞£∞›
+    public GameObject glitchVerticalPrefab;  // ÏÑ∏Î°ú GlitchEffect ÌîÑÎ¶¨Ìåπ
+    public GameObject glitchHorizontalPrefab; // Í∞ÄÎ°ú GlitchEffect ÌîÑÎ¶¨Ìåπ
+    public RectTransform canvasRect;  // CanvasÏùò RectTransform
+    public float spawnInterval = 0.5f;  // Ïä§Ìè∞ Í∞ÑÍ≤©
     public Transform Container;
 
     void Start()
@@ -15,7 +15,7 @@ public class GlitchSpawner : MonoBehaviour
         if (canvasRect == null)
             canvasRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
 
-        // ¿œ¡§ ∞£∞›¿∏∑Œ GlitchEffect∏¶ Ω∫∆˘
+        // ÏùºÏ†ï Í∞ÑÍ≤©ÏúºÎ°ú GlitchEffectÎ•º Ïä§Ìè∞
         InvokeRepeating("SpawnGlitch", 0f, spawnInterval);
     }
 
@@ -28,7 +28,7 @@ public class GlitchSpawner : MonoBehaviour
         {
             glitch = Instantiate(glitchVerticalPrefab, Container);
 
-            // ºº∑Œ Glitch √ ±‚ ¿ßƒ° º≥¡§
+            // ÏÑ∏Î°ú Glitch Ï¥àÍ∏∞ ÏúÑÏπò ÏÑ§Ï†ï
             RectTransform glitchRect = glitch.GetComponent<RectTransform>();
             float x = Random.Range(-canvasRect.rect.width / 2, canvasRect.rect.width / 2);
             glitchRect.anchoredPosition = new Vector2(x, canvasRect.rect.height / 2 + glitchRect.sizeDelta.y);
@@ -37,7 +37,7 @@ public class GlitchSpawner : MonoBehaviour
         {
             glitch = Instantiate(glitchHorizontalPrefab, Container);
 
-            // ∞°∑Œ Glitch √ ±‚ ¿ßƒ° º≥¡§
+            // Í∞ÄÎ°ú Glitch Ï¥àÍ∏∞ ÏúÑÏπò ÏÑ§Ï†ï
             RectTransform glitchRect = glitch.GetComponent<RectTransform>();
             float y = Random.Range(-canvasRect.rect.height / 2, canvasRect.rect.height / 2);
             if (Random.value > 0.5f)
@@ -47,11 +47,11 @@ public class GlitchSpawner : MonoBehaviour
             else
             {
                 glitchRect.anchoredPosition = new Vector2(-canvasRect.rect.width / 2 - glitchRect.sizeDelta.x, y);
-                glitch.GetComponent<GlitchEffect>().speed = -glitch.GetComponent<GlitchEffect>().speed; // πÊ«‚ π›¥Î∑Œ
+                glitch.GetComponent<GlitchEffect>().speed = -glitch.GetComponent<GlitchEffect>().speed; // Î∞©Ìñ• Î∞òÎåÄÎ°ú
             }
         }
 
-        // GlitchEffect √ ±‚»≠
+        // GlitchEffect Ï¥àÍ∏∞Ìôî
         glitch.GetComponent<GlitchEffect>().Initialize(isVertical);
     }
 }

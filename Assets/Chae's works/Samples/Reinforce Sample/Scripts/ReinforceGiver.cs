@@ -1,21 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ReinforceManager : MonoBehaviour
 {
-    // Reinforce ÄÁÅ×ÀÌ³Ê µîÀ» Ãß°¡ÇÏ¿© (¿¹¸¦ µé¾î List Çü½Ä) Àû¿ëµÈ Áõ°­ÀÇ ³Ñ¹ö¸¦ ÀúÀåÇØ¼­
-    // ´ÙÀ½¿¡ Áõ°­À» È£ÃâÇÒ Áßº¹µÈ Áõ°­ÀÌ È£ÃâµÇÁö ¾Êµµ·Ï ¹æÁöÇÏ´Â ±â´É ÇÊ¿ä
+    // Reinforce ì»¨í…Œì´ë„ˆ ë“±ì„ ì¶”ê°€í•˜ì—¬ (ì˜ˆë¥¼ ë“¤ì–´ List í˜•ì‹) ì ìš©ëœ ì¦ê°•ì˜ ë„˜ë²„ë¥¼ ì €ì¥í•´ì„œ
+    // ë‹¤ìŒì— ì¦ê°•ì„ í˜¸ì¶œí•  ì¤‘ë³µëœ ì¦ê°•ì´ í˜¸ì¶œë˜ì§€ ì•Šë„ë¡ ë°©ì§€í•˜ëŠ” ê¸°ëŠ¥ í•„ìš”
 
     [Header("Reinforce Container")]
-    // È¹µæÇÑ Áõ°­ÀÇ ³Ñ¹ö¸¦ ÀúÀåÇÏ´Â Reinforce Container
-    // Æ÷ÇÔµÈ Áõ°­ÀÇ Á¤º¸¸¦ °¡Áö°í Weight µî º¯¼ö¸¦ Á¶ÀıÇÏ´Â ¿ªÇÒÀ» ¼öÇà
+    // íšë“í•œ ì¦ê°•ì˜ ë„˜ë²„ë¥¼ ì €ì¥í•˜ëŠ” Reinforce Container
+    // í¬í•¨ëœ ì¦ê°•ì˜ ì •ë³´ë¥¼ ê°€ì§€ê³  Weight ë“± ë³€ìˆ˜ë¥¼ ì¡°ì ˆí•˜ëŠ” ì—­í• ì„ ìˆ˜í–‰
     [SerializeField]
     public List<int> ReinforceContainer = new List<int>();
 
     [Header("Rarity (Sum must be 100)")]
-    // Áõ°­ µî±ŞÀÇ È®·ü
-    // À¯´ÏÆ¼ inspector¿¡¼­ ¼öÁ¤ÇÒ ¼ö ÀÖÀ½
+    // ì¦ê°• ë“±ê¸‰ì˜ í™•ë¥ 
+    // ìœ ë‹ˆí‹° inspectorì—ì„œ ìˆ˜ì •í•  ìˆ˜ ìˆìŒ
     [SerializeField]
     private int normalProbability;
     [SerializeField]
@@ -30,11 +30,11 @@ public class ReinforceManager : MonoBehaviour
     List<Dictionary<string, object>> data_Reinforce;
 
     [Header("Data")]
-    public string[] reinforceName = new string[3]; // Áõ°­ÀÇ ÀÌ¸§ ÀúÀå
-    public int[] reinforceNum = new int[3]; // Áõ°­ÀÇ ¹øÈ£ ÀúÀå
-    public string[] targetStat = new string[3]; // º¯È­ÇÒ Å¸°Ù ½ºÅÈ
-    public float[] delta = new float[3]; // ½ºÅÈÀÇ º¯È­·®
-    public string[] valueType = new string[3]; // ½ºÅÈÀÇ º¯È­ Å¸ÀÔ
+    public string[] reinforceName = new string[3]; // ì¦ê°•ì˜ ì´ë¦„ ì €ì¥
+    public int[] reinforceNum = new int[3]; // ì¦ê°•ì˜ ë²ˆí˜¸ ì €ì¥
+    public string[] targetStat = new string[3]; // ë³€í™”í•  íƒ€ê²Ÿ ìŠ¤íƒ¯
+    public float[] delta = new float[3]; // ìŠ¤íƒ¯ì˜ ë³€í™”ëŸ‰
+    public string[] valueType = new string[3]; // ìŠ¤íƒ¯ì˜ ë³€í™” íƒ€ì…
 
     private void Start()
     {
@@ -49,8 +49,8 @@ public class ReinforceManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SelectRarity();
-            MixReinforce(); // ·£´ıÇÑ Áõ°­ Á¤º¸ ¾ò¾î¿Í ÀÌ¸¦ ¹ÙÅÁÀ¸·Î UI º¯°æ
-            OnUI(); // UI È°¼ºÈ­
+            MixReinforce(); // ëœë¤í•œ ì¦ê°• ì •ë³´ ì–»ì–´ì™€ ì´ë¥¼ ë°”íƒ•ìœ¼ë¡œ UI ë³€ê²½
+            OnUI(); // UI í™œì„±í™”
         }
     }
 
@@ -61,12 +61,12 @@ public class ReinforceManager : MonoBehaviour
 
     private void SelectRarity()
     {
-        // Áõ°­ÀÇ µî±ŞÀ» È®·ü¿¡ ÀÇÇØ ¼±ÅÃ
+        // ì¦ê°•ì˜ ë“±ê¸‰ì„ í™•ë¥ ì— ì˜í•´ ì„ íƒ
         int[] Rarity = MakeRandomNumbers(0, 100, 1);
 
         int _rareProbability = normalProbability + rareProbability; 
 
-        // Normal È®·ü
+        // Normal í™•ë¥ 
         if (Rarity[0] < normalProbability)
         {
             Debug.Log("normal reinforce");
@@ -86,34 +86,34 @@ public class ReinforceManager : MonoBehaviour
 
     private void MixReinforce()
     {
-        // csv µ¥ÀÌÅÍ¿¡ ÀúÀåµÈ Áõ°­ÀÇ ¼ö ¾È¿¡¼­ Áßº¹µÇÁö ¾Êµµ·Ï °ª »ı¼º. ¾Æ·¡ ÇÔ¼ö ÂüÁ¶
+        // csv ë°ì´í„°ì— ì €ì¥ëœ ì¦ê°•ì˜ ìˆ˜ ì•ˆì—ì„œ ì¤‘ë³µë˜ì§€ ì•Šë„ë¡ ê°’ ìƒì„±. ì•„ë˜ í•¨ìˆ˜ ì°¸ì¡°
         int[] numbers = MakeRandomNumbers(0, data_Reinforce.Count, 3);
 
-        // UI ³»ÀÇ Áõ°­ ÀÌ¹ÌÁö º¯°æ
+        // UI ë‚´ì˜ ì¦ê°• ì´ë¯¸ì§€ ë³€ê²½
 
-        // UI ³»ÀÇ Áõ°­ ÀÌ¸§ º¯°æ
+        // UI ë‚´ì˜ ì¦ê°• ì´ë¦„ ë³€ê²½
 
-        // UI ³»ÀÇ Áõ°­ ¼³¸í º¯°æ
+        // UI ë‚´ì˜ ì¦ê°• ì„¤ëª… ë³€ê²½
         reinforceUI.text_left.text = data_Reinforce[numbers[0]]["Description"].ToString();
         reinforceUI.text_middle.text = data_Reinforce[numbers[1]]["Description"].ToString();
         reinforceUI.text_right.text = data_Reinforce[numbers[2]]["Description"].ToString();
 
-        // Áõ°­ ¹øÈ£ ÀúÀå
+        // ì¦ê°• ë²ˆí˜¸ ì €ì¥
         reinforceNum[0] = int.Parse(data_Reinforce[numbers[0]]["Number"].ToString());
         reinforceNum[1] = int.Parse(data_Reinforce[numbers[1]]["Number"].ToString());
         reinforceNum[2] = int.Parse(data_Reinforce[numbers[2]]["Number"].ToString());
 
-        // Áõ°­ Å¸°Ù ½ºÅÈ ÀúÀå
+        // ì¦ê°• íƒ€ê²Ÿ ìŠ¤íƒ¯ ì €ì¥
         targetStat[0] = data_Reinforce[numbers[0]]["TargetStat"].ToString();
         targetStat[1] = data_Reinforce[numbers[1]]["TargetStat"].ToString();
         targetStat[2] = data_Reinforce[numbers[2]]["TargetStat"].ToString();
 
-        // º¯È­·®(value) ÀúÀå
+        // ë³€í™”ëŸ‰(value) ì €ì¥
         delta[0] = float.Parse(data_Reinforce[numbers[0]]["Value"].ToString());
         delta[1] = float.Parse(data_Reinforce[numbers[1]]["Value"].ToString());
         delta[2] = float.Parse(data_Reinforce[numbers[2]]["Value"].ToString());
 
-        // º¯È­ Å¸ÀÔ ÀúÀå (Fixed / Percent)
+        // ë³€í™” íƒ€ì… ì €ì¥ (Fixed / Percent)
         valueType[0] = data_Reinforce[numbers[0]]["ValueType"].ToString();
         valueType[1] = data_Reinforce[numbers[1]]["ValueType"].ToString();
         valueType[2] = data_Reinforce[numbers[2]]["ValueType"].ToString();
@@ -127,7 +127,7 @@ public class ReinforceManager : MonoBehaviour
             values.Add(v);
         }
 
-        int[] result = new int[number]; // number °³ÀÇ result ¹İÈ¯
+        int[] result = new int[number]; // number ê°œì˜ result ë°˜í™˜
         System.Random random = new System.Random();
         for (int i = 0; i < result.Length; i++)
         {

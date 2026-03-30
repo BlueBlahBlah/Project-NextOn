@@ -1,13 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class FlockVortex : MonoBehaviour
 {
-    public float scaleFactor = 1.5f; // ?�기 변??비율
-    public float growDuration = 5.0f; // ?�기 커�????�니메이???�간
-    public float shrinkDuration = 3.0f; // ?�기 ?�아지???�니메이???�간
+    public float scaleFactor = 1.5f; // ?ш린 蹂??鍮꾩쑉
+    public float growDuration = 5.0f; // ?ш린 而ㅼ????좊땲硫붿씠???쒓컙
+    public float shrinkDuration = 3.0f; // ?ш린 ?묒븘吏???좊땲硫붿씠???쒓컙
 
-    private Vector3 initialScale; // 초기 ?�기
+    private Vector3 initialScale; // 珥덇린 ?ш린
 
     void Start()
     {
@@ -24,14 +24,14 @@ public class FlockVortex : MonoBehaviour
     {
         yield return StartCoroutine(ScaleOverTime(initialScale * scaleFactor, growDuration));
 
-        // ?��?        yield return new WaitForSeconds(3.0f);
+        // ?湲?        yield return new WaitForSeconds(3.0f);
 
-        // 3�??�안 ?�기가 0.5�??�아지?�록
+        // 3珥??숈븞 ?ш린媛 0.5濡??묒븘吏?꾨줉
         yield return StartCoroutine(ScaleOverTime(initialScale, shrinkDuration));
 
-        // ?�기�?초기 ?�기�??�돌�?        transform.localScale = initialScale;
+        // ?ш린瑜?珥덇린 ?ш린濡??섎룎由?        transform.localScale = initialScale;
 
-        // ?�음 Vortex ?�출
+        // ?ㅼ쓬 Vortex ?몄텧
         Invoke("vortex", Random.Range(10f, 20f));
     }
 

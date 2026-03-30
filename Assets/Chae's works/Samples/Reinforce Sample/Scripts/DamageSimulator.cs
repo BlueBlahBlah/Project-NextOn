@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,9 +45,9 @@ public class DamageSimulator : MonoBehaviour
     {
         float _finalDamage;
 
-        float upperBound = _damage + _damage * (20f/100f); // »óÇÑ +20%
+        float upperBound = _damage + _damage * (20f/100f); // ìƒí•œ +20%
         Debug.Log($"upperBound is {upperBound}");
-        float lowerBound = _damage - _damage * (20f/100f); // ÇÏÇÑ -20%
+        float lowerBound = _damage - _damage * (20f/100f); // í•˜í•œ -20%
         Debug.Log($"lowerBound is {lowerBound}");
 
         _finalDamage = (float)MakeRandomNumbers((int)lowerBound, (int)upperBound + 1, 1)[0];
@@ -61,7 +61,7 @@ public class DamageSimulator : MonoBehaviour
 
     }
 
-    // Å©¸®Æ¼ÄÃ ¿ëµµÀÇ ³­¼ö »ı¼º±â. Áõ°­ ¸ÅÄ¿´ÏÁò¿¡µµ °ø¿ëÀ¸·Î »ç¿ëµÇ±â ¶§¹®¿¡ Static ½ºÅ©¸³Æ®ÀÎ Utils ¸¦ Ãß°¡ÇÒ ÇÊ¿ä ÀÖÀ½
+    // í¬ë¦¬í‹°ì»¬ ìš©ë„ì˜ ë‚œìˆ˜ ìƒì„±ê¸°. ì¦ê°• ë§¤ì»¤ë‹ˆì¦˜ì—ë„ ê³µìš©ìœ¼ë¡œ ì‚¬ìš©ë˜ê¸° ë•Œë¬¸ì— Static ìŠ¤í¬ë¦½íŠ¸ì¸ Utils ë¥¼ ì¶”ê°€í•  í•„ìš” ìˆìŒ
     private int[] MakeRandomNumbers(int minValue, int maxValue, int number)
     {
         List<int> values = new List<int>();
@@ -70,7 +70,7 @@ public class DamageSimulator : MonoBehaviour
             values.Add(v);
         }
 
-        int[] result = new int[number]; // number °³ÀÇ result ¹İÈ¯
+        int[] result = new int[number]; // number ê°œì˜ result ë°˜í™˜
         System.Random random = new System.Random();
         for (int i = 0; i < result.Length; i++)
         {

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +14,7 @@ public class SelectUI : MonoBehaviour
 
     private string stageName;
     private TextMeshProUGUI stageInfo;
-    public float animationDuration = 0.5f; // ¾Ö´Ï¸ŞÀÌ¼Ç Áö¼Ó ½Ã°£
+    public float animationDuration = 0.5f; // ì• ë‹ˆë©”ì´ì…˜ ì§€ì† ì‹œê°„
 
     private VolumeController volumeController;
 
@@ -22,7 +22,7 @@ public class SelectUI : MonoBehaviour
     {
         if (volumeController == null)
         {
-            // »õ·Î¿î GameObject¸¦ ¸¸µé°í VolumeController¸¦ Ãß°¡
+            // ìƒˆë¡œìš´ GameObjectë¥¼ ë§Œë“¤ê³  VolumeControllerë¥¼ ì¶”ê°€
             if (GameObject.Find("VolumeController") != null)
             {
                 volumeController = GameObject.Find("VolumeController").GetComponent<VolumeController>();
@@ -41,13 +41,13 @@ public class SelectUI : MonoBehaviour
 
     private void OnEnable()
     {
-        // ¾À º¯°æ ½Ã ÀÌº¥Æ® µî·Ï
+        // ì”¬ ë³€ê²½ ì‹œ ì´ë²¤íŠ¸ ë“±ë¡
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        // ¾À º¯°æ ½Ã ÀÌº¥Æ® ÇØÁ¦
+        // ì”¬ ë³€ê²½ ì‹œ ì´ë²¤íŠ¸ í•´ì œ
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -78,7 +78,7 @@ public class SelectUI : MonoBehaviour
 
     public void OpenSelectUI(string newStageName)
     {
-        // ÀÌ¹ÌÁö, ÅØ½ºÆ® µî ¼öÁ¤
+        // ì´ë¯¸ì§€, í…ìŠ¤íŠ¸ ë“± ìˆ˜ì •
         SetStageName(newStageName);
         SetStageImage(newStageName);
         SetStageInfo(newStageName);
@@ -110,7 +110,7 @@ public class SelectUI : MonoBehaviour
 
     public void FadeIn()
     {
-        // ±î¸Ä°Ô ¹Ù²î±â
+        // ê¹Œë§£ê²Œ ë°”ë€Œê¸°
     }
 
     public void DoChangeScene()
@@ -134,7 +134,7 @@ public class SelectUI : MonoBehaviour
         Vector3 startScale = Vector3.zero;
         Vector3 endScale = Vector3.one;
         RectTransform panel = selectPanel;
-        panel.gameObject.SetActive(true); // ÆĞ³Î È°¼ºÈ­
+        panel.gameObject.SetActive(true); // íŒ¨ë„ í™œì„±í™”
 
         while (elapsedTime < animationDuration)
         {
@@ -147,7 +147,7 @@ public class SelectUI : MonoBehaviour
         panel.localScale = endScale;
     }
 
-    // ÆĞ³Î ´İ±â ¾Ö´Ï¸ŞÀÌ¼Ç
+    // íŒ¨ë„ ë‹«ê¸° ì• ë‹ˆë©”ì´ì…˜
     private IEnumerator ClosePanelCoroutine()
     {
         float elapsedTime = 0f;
@@ -164,7 +164,7 @@ public class SelectUI : MonoBehaviour
         }
 
         panel.localScale = endScale;
-        panel.gameObject.SetActive(false); // ÆĞ³Î ºñÈ°¼ºÈ­
+        panel.gameObject.SetActive(false); // íŒ¨ë„ ë¹„í™œì„±í™”
     }
 
     private float EaseOutQuint(float t)

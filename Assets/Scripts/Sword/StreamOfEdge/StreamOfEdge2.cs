@@ -2,42 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class StreamOfEdge2 : MonoBehaviour
 {
-    //[SerializeField] private DamageManager DamageManager;
-    private Transform[] currentTarget; // ?�재 목표 지??    private float TickTime;       //?��?지�?주는 ??간격
+    private Transform[] currentTarget;
+    private float TickTime;
     public int Damage;
 
-    // Start is called before the first frame update
     void Start()
     {
         TickTime = 0;
         Destroy(gameObject, 10f);
-        transform.rotation = new Quaternion(0f, transform.rotation.y, 0f,0f);
-        // 초기 목표지???�정
-        //currentTarget = Sphere2.transform;
-        Damage = 1;    //기본 ?�킬 ?��?지
-        
+        transform.rotation = new Quaternion(0f, transform.rotation.y, 0f, 0f);
+        Damage = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
         TickTime += Time.deltaTime;
     }
     
-    
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Enemy") && TickTime >= 0.25f)
         {
-            //?�킬계수추�?
             int TempDamage = DamageManager.Instance.SwordStreamEdge_Skill_DamageCounting * Damage;   
             other.GetComponent<Enemy>().CurHealth -= TempDamage;
             TickTime = 0;
         }
     }
-    
-    
 }

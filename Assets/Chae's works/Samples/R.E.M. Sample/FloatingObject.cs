@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingObject : MonoBehaviour
 {
-    public float floatAmplitude = 0.5f; // ºÎÀ¯ÇÏ´Â ³ôÀÌ ÁøÆø
-    public float floatFrequency = 1.0f; // ºÎÀ¯ÇÏ´Â ¼Óµµ
-    public float timeElapsed = 0.0f; // °æ°ú ½Ã°£
+    public float floatAmplitude = 0.5f; // ë¶€ìœ í•˜ëŠ” ë†’ì´ ì§„í­
+    public float floatFrequency = 1.0f; // ë¶€ìœ í•˜ëŠ” ì†ë„
+    public float timeElapsed = 0.0f; // ê²½ê³¼ ì‹œê°„
 
     // Start is called before the first frame update
     void Start()

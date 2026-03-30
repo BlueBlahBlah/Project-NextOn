@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,11 +9,11 @@ public class SettingManager : MonoBehaviour
     
 
     [Header("Panels")]
-    public RectTransform[] panels; // ¾Ö´Ï¸ŞÀÌ¼ÇÀ» Àû¿ëÇÒ ÆĞ³ÎµéÀÇ RectTransform ¹è¿­
-    public Button[] openButtons; // ÆĞ³ÎÀ» ¿©´Â ¹öÆ° ¹è¿­
-    public Button[] closeButtons; // ÆĞ³ÎÀ» ´İ´Â ¹öÆ° ¹è¿­
+    public RectTransform[] panels; // ì• ë‹ˆë©”ì´ì…˜ì„ ì ìš©í•  íŒ¨ë„ë“¤ì˜ RectTransform ë°°ì—´
+    public Button[] openButtons; // íŒ¨ë„ì„ ì—¬ëŠ” ë²„íŠ¼ ë°°ì—´
+    public Button[] closeButtons; // íŒ¨ë„ì„ ë‹«ëŠ” ë²„íŠ¼ ë°°ì—´
 
-    public float animationDuration = 0.5f; // ¾Ö´Ï¸ŞÀÌ¼Ç Áö¼Ó ½Ã°£
+    public float animationDuration = 0.5f; // ì• ë‹ˆë©”ì´ì…˜ ì§€ì† ì‹œê°„
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class SettingManager : MonoBehaviour
             openButtons[i].onClick.AddListener(() => OpenPanel(index));
             closeButtons[i].onClick.AddListener(() => ClosePanel(index));
 
-            // ÆĞ³Î Å©±â ÃÊ±âÈ­
+            // íŒ¨ë„ í¬ê¸° ì´ˆê¸°í™”
             panels[i].localScale = Vector3.zero;
         }
 
@@ -33,7 +33,7 @@ public class SettingManager : MonoBehaviour
 
     }
 
-    // UI ¾Ö´Ï¸ŞÀÌ¼Ç °ü·Ã ÇÔ¼ö
+    // UI ì• ë‹ˆë©”ì´ì…˜ ê´€ë ¨ í•¨ìˆ˜
     #region
     
 
@@ -48,16 +48,16 @@ public class SettingManager : MonoBehaviour
     }
     #endregion
 
-    // UI ¾Ö´Ï¸ŞÀÌ¼Ç °ü·Ã ÄÚ·çÆ¾
+    // UI ì• ë‹ˆë©”ì´ì…˜ ê´€ë ¨ ì½”ë£¨í‹´
     #region
 
-    // »óÅÂÇ¥½ÃÁÙ ³»·Á¿À´Â ¾Ö´Ï¸ŞÀÌ¼Ç
+    // ìƒíƒœí‘œì‹œì¤„ ë‚´ë ¤ì˜¤ëŠ” ì• ë‹ˆë©”ì´ì…˜
     /*
     private IEnumerator ShowPanelUpToDownAnimation()
     {
-        // ÆĞ³ÎÀ» È­¸é »ó´Ü¿¡¼­ ³»·Á¿À´Â ¾Ö´Ï¸ŞÀÌ¼Ç
+        // íŒ¨ë„ì„ í™”ë©´ ìƒë‹¨ì—ì„œ ë‚´ë ¤ì˜¤ëŠ” ì• ë‹ˆë©”ì´ì…˜
         float elapsedTime = 0f;
-        float duration = 0.5f; // ¾Ö´Ï¸ŞÀÌ¼Ç Áö¼Ó ½Ã°£
+        float duration = 0.5f; // ì• ë‹ˆë©”ì´ì…˜ ì§€ì† ì‹œê°„
 
         Vector2 startPos = new Vector2(0, panel.rect.height);
         Vector2 endPos = Vector2.zero;
@@ -74,9 +74,9 @@ public class SettingManager : MonoBehaviour
 
     private IEnumerator HidePanelDownToUpAnimation()
     {
-        // ÆĞ³ÎÀ» È­¸é »ó´ÜÀ¸·Î ¿Ã¸®´Â ¾Ö´Ï¸ŞÀÌ¼Ç
+        // íŒ¨ë„ì„ í™”ë©´ ìƒë‹¨ìœ¼ë¡œ ì˜¬ë¦¬ëŠ” ì• ë‹ˆë©”ì´ì…˜
         float elapsedTime = 0f;
-        float duration = 0.5f; // ¾Ö´Ï¸ŞÀÌ¼Ç Áö¼Ó ½Ã°£
+        float duration = 0.5f; // ì• ë‹ˆë©”ì´ì…˜ ì§€ì† ì‹œê°„
 
         Vector2 startPos = Vector2.zero;
         Vector2 endPos = new Vector2(0, panel.rect.height);
@@ -92,14 +92,14 @@ public class SettingManager : MonoBehaviour
     }
     */
 
-    // ÆĞ³Î ¿­±â ¾Ö´Ï¸ŞÀÌ¼Ç
+    // íŒ¨ë„ ì—´ê¸° ì• ë‹ˆë©”ì´ì…˜
     private IEnumerator OpenPanelCoroutine(int panelIndex)
     {
         float elapsedTime = 0f;
         Vector3 startScale = Vector3.zero;
         Vector3 endScale = Vector3.one;
         RectTransform panel = panels[panelIndex];
-        panel.gameObject.SetActive(true); // ÆĞ³Î È°¼ºÈ­
+        panel.gameObject.SetActive(true); // íŒ¨ë„ í™œì„±í™”
 
         while (elapsedTime < animationDuration)
         {
@@ -112,7 +112,7 @@ public class SettingManager : MonoBehaviour
         panel.localScale = endScale;
     }
 
-    // ÆĞ³Î ´İ±â ¾Ö´Ï¸ŞÀÌ¼Ç
+    // íŒ¨ë„ ë‹«ê¸° ì• ë‹ˆë©”ì´ì…˜
     private IEnumerator ClosePanelCoroutine(int panelIndex)
     {
         float elapsedTime = 0f;
@@ -129,7 +129,7 @@ public class SettingManager : MonoBehaviour
         }
 
         panel.localScale = endScale;
-        panel.gameObject.SetActive(false); // ÆĞ³Î ºñÈ°¼ºÈ­
+        panel.gameObject.SetActive(false); // íŒ¨ë„ ë¹„í™œì„±í™”
     }
 
     // Ease out quintic function for a smoother animation
@@ -140,9 +140,9 @@ public class SettingManager : MonoBehaviour
 
     #endregion
 
-    // UI ±â´É °ü·Ã ÇÔ¼ö
+    // UI ê¸°ëŠ¥ ê´€ë ¨ í•¨ìˆ˜
     private void GoToMenu()
     {
-        // ÆäÀÌµå ¾Æ¿ô ÀÌÈÄ °ÔÀÓ Á¾·á
+        // í˜ì´ë“œ ì•„ì›ƒ ì´í›„ ê²Œì„ ì¢…ë£Œ
     }
 }

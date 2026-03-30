@@ -1,19 +1,19 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StageClearPanel : MonoBehaviour
 {
-    // Scene º¯°æ °ü·Ã
+    // Scene ë³€ê²½ ê´€ë ¨
     [SerializeField]
     private RectTransform selectPanel;
-    public float animationDuration = 0.5f; // ¾Ö´Ï¸ŞÀÌ¼Ç Áö¼Ó ½Ã°£
+    public float animationDuration = 0.5f; // ì• ë‹ˆë©”ì´ì…˜ ì§€ì† ì‹œê°„
 
     [SerializeField]
     private VolumeController volumeController;
 
-    // Stage Å¬¸®¾î ÆÇÁ¤ °ü·Ã
+    // Stage í´ë¦¬ì–´ íŒì • ê´€ë ¨
     [SerializeField]
     private int currentStageNumber = 0;
 
@@ -39,15 +39,15 @@ public class StageClearPanel : MonoBehaviour
     public void StageClear()
     {
         
-        if (StageClearManager.instance != null) // ¸¸¾à StageClearManager ÀÎ½ºÅÏ½º°¡ Á¸ÀçÇÑ´Ù¸é
+        if (StageClearManager.instance != null) // ë§Œì•½ StageClearManager ì¸ìŠ¤í„´ìŠ¤ê°€ ì¡´ì¬í•œë‹¤ë©´
         {
-            // ½ºÅ×ÀÌÁö Å¬¸®¾î ÇÔ¼ö¸¦ ºÒ·¯¿Í ÇØ´ç ½ºÅ×ÀÌÁö¸¦ Å¬¸®¾î
+            // ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ í•¨ìˆ˜ë¥¼ ë¶ˆëŸ¬ì™€ í•´ë‹¹ ìŠ¤í…Œì´ì§€ë¥¼ í´ë¦¬ì–´
             StageClearManager.instance.SetStageClear(currentStageNumber, true);
             StageClearManager.instance.isSuccess = true;
         }
         else
         {
-            Debug.Log("StageClearManager °¡ ¾ø½À´Ï´Ù!");
+            Debug.Log("StageClearManager ê°€ ì—†ìŠµë‹ˆë‹¤!");
         }
     }
     
@@ -83,15 +83,15 @@ public class StageClearPanel : MonoBehaviour
     }
     
 
-    // ¾Ö´Ï¸ŞÀÌ¼Ç °ü·Ã - ¼±ÅÃÀÇ ¿©ºÎ ¾øÀÌ Å¬¸®¾î ½Ã ¾ÀÀ» ÀÌµ¿. ´İ±â ÇÊ¿ä x
-    // ÆĞ³Î ¿­±â ¾Ö´Ï¸ŞÀÌ¼Ç
+    // ì• ë‹ˆë©”ì´ì…˜ ê´€ë ¨ - ì„ íƒì˜ ì—¬ë¶€ ì—†ì´ í´ë¦¬ì–´ ì‹œ ì”¬ì„ ì´ë™. ë‹«ê¸° í•„ìš” x
+    // íŒ¨ë„ ì—´ê¸° ì• ë‹ˆë©”ì´ì…˜
     private IEnumerator OpenPanelCoroutine()
     {
         float elapsedTime = 0f;
         Vector3 startScale = Vector3.zero;
         Vector3 endScale = Vector3.one;
         RectTransform panel = selectPanel;
-        panel.gameObject.SetActive(true); // ÆĞ³Î È°¼ºÈ­
+        panel.gameObject.SetActive(true); // íŒ¨ë„ í™œì„±í™”
 
         while (elapsedTime < animationDuration)
         {

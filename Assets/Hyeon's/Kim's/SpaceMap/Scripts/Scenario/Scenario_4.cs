@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -42,7 +42,7 @@ public class Scenario_4 : MonoBehaviour
         Wall.SetActive(false);
 
         scenario.FinalBGM.mute = false;
-        // Slider ÃÊ±âÈ­
+        // Slider ì´ˆê¸°í™”
         if (Gague != null)
         {
             Bar = Gague.GetComponent<Slider>();
@@ -64,7 +64,7 @@ public class Scenario_4 : MonoBehaviour
         else if(child.name ==secondTrigger.name && !is2_TriggerPass && other.tag == "Player")
         {
 
-            Debug.Log("´ë»ç Àú ºñÇà¼±À» ÅëÇØ¼­ Å»ÃâÇØº¸ÀÚ ±×·¯±âÀ§ÇØ¼­´Â ¹®ÀÌ ¿­¸±¶§±îÁö ±â´Ù·Á¾ßÇÒ°Å°°¾Æ");
+            Debug.Log("ëŒ€ì‚¬ ì € ë¹„í–‰ì„ ì„ í†µí•´ì„œ íƒˆì¶œí•´ë³´ì ê·¸ëŸ¬ê¸°ìœ„í•´ì„œëŠ” ë¬¸ì´ ì—´ë¦´ë•Œê¹Œì§€ ê¸°ë‹¤ë ¤ì•¼í• ê±°ê°™ì•„");
 
             is2_TriggerPass = true;
             StartCoroutine(DelayFunction(5f));
@@ -77,7 +77,7 @@ public class Scenario_4 : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         Wall.SetActive(true);
         scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 236);
-        Debug.Log("´ë»ç ÀÌ ¿¡·¯µéÀº ¾îµğ¼­ ³ª¿Â°ÅÁö? ÀÏ´Ü ¹®ÀÌ ¿­¸±¶§±îÁö ¹öÅßº¸ÀÚ");
+        Debug.Log("ëŒ€ì‚¬ ì´ ì—ëŸ¬ë“¤ì€ ì–´ë””ì„œ ë‚˜ì˜¨ê±°ì§€? ì¼ë‹¨ ë¬¸ì´ ì—´ë¦´ë•Œê¹Œì§€ ë²„í…¨ë³´ì");
         scenario.FinalBGM.mute = false;
         scenario.BGM.mute = true;
         StartCoroutine(StartLastGame());
@@ -119,7 +119,7 @@ public class Scenario_4 : MonoBehaviour
 
             if (nextSpawnTime >= spawnInterval)
             {
-                nextSpawnTime = 0f; // ½ºÆù Å¸ÀÌ¸Ó ÃÊ±âÈ­
+                nextSpawnTime = 0f; // ìŠ¤í° íƒ€ì´ë¨¸ ì´ˆê¸°í™”
 
                 int randomEnemyIndex = Random.Range(0, EnemyProbs.Length);
                 int randomSpawnPosIndex = Random.Range(0, EnemySpawnPos.Length);
@@ -139,14 +139,14 @@ public class Scenario_4 : MonoBehaviour
         
         scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 238);
         Time.timeScale = 0f;
-        GameObject dialogueUI = scenario.Dialogue; // ´ëÈ­ UI ¿ÀºêÁ§Æ®
-        while (dialogueUI.activeSelf) // UI°¡ È°¼ºÈ­µÈ µ¿¾È ´ë±â
+        GameObject dialogueUI = scenario.Dialogue; // ëŒ€í™” UI ì˜¤ë¸Œì íŠ¸
+        while (dialogueUI.activeSelf) // UIê°€ í™œì„±í™”ëœ ë™ì•ˆ ëŒ€ê¸°
         {
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            yield return null; // ë‹¤ìŒ í”„ë ˆì„ê¹Œì§€ ëŒ€ê¸°
         }
 
         Time.timeScale = 1f;
-        Debug.Log("´ë»ç Game Over");
+        Debug.Log("ëŒ€ì‚¬ Game Over");
         is_End = true;
         yield return null;
     }

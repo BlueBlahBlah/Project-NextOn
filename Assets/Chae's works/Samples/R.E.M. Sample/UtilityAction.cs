@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,8 +6,8 @@ using UnityEngine;
 public class UtilityAction
 {
     public string Name { get; private set; }
-    private System.Func<float> utilityCalculator; // À¯Æ¿¸®Æ¼ °è»ê µ¨¸®°ÔÀÌÆ®
-    private System.Action execute; // Çàµ¿ ½ÇÇà µ¨¸®°ÔÀÌÆ®
+    private System.Func<float> utilityCalculator; // ìœ í‹¸ë¦¬í‹° ê³„ì‚° ë¸ë¦¬ê²Œì´íŠ¸
+    private System.Action execute; // í–‰ë™ ì‹¤í–‰ ë¸ë¦¬ê²Œì´íŠ¸
 
     public UtilityAction(string name, System.Func<float> calculateUtility, System.Action execute)
     {
@@ -20,25 +20,25 @@ public class UtilityAction
     {
         float baseUtility = utilityCalculator();
 
-        // ³ëÀÌÁî ¹üÀ§ ¼³Á¤
+        // ë…¸ì´ì¦ˆ ë²”ìœ„ ì„¤ì •
         float minNoise = 0.5f;
         float maxNoise = 5.0f;
 
-        // ³ëÀÌÁî Àû¿ë ¿©ºÎ °áÁ¤ ¹× ³ëÀÌÁî °­µµ °è»ê
+        // ë…¸ì´ì¦ˆ ì ìš© ì—¬ë¶€ ê²°ì • ë° ë…¸ì´ì¦ˆ ê°•ë„ ê³„ì‚°
         float noise = 0f;
         if (baseUtility >= 10f && baseUtility <= 90f)
         {
-            float normalizedUtility = (baseUtility - 10f) / 80f; // 10~90 ¹üÀ§ Á¤±ÔÈ­
+            float normalizedUtility = (baseUtility - 10f) / 80f; // 10~90 ë²”ìœ„ ì •ê·œí™”
             float noiseStrength = Mathf.Lerp(minNoise, maxNoise, normalizedUtility);
             noise = Random.Range(-noiseStrength, noiseStrength);
         }
 
         Debug.Log(baseUtility + noise);
-        return baseUtility + noise; // À¯Æ¿¸®Æ¼ °è»ê
+        return baseUtility + noise; // ìœ í‹¸ë¦¬í‹° ê³„ì‚°
     }
 
     public void Execute()
     {
-        execute(); // Çàµ¿ ½ÇÇà
+        execute(); // í–‰ë™ ì‹¤í–‰
     }
 }

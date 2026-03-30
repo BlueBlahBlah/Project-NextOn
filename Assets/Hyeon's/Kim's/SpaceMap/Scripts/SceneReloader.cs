@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +11,10 @@ public class SceneReloader : MonoBehaviour
     public IEnumerator RestartScene()
     {
         yield return new WaitForSeconds(3);
-        string sceneName = SceneManager.GetActiveScene().name; // ÇöÀç È°¼ºÈ­µÈ ¾ÀÀÇ ÀÌ¸§À» °¡Á®¿É´Ï´Ù.
+        string sceneName = SceneManager.GetActiveScene().name; // í˜„ì¬ í™œì„±í™”ëœ ì”¬ì˜ ì´ë¦„ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
         scenario.joystick.enabled = true;
-        SceneManager.LoadScene(sceneName);// ÇöÀç ¾ÀÀ» ´Ù½Ã ·Îµå
-        // Scenario.instance°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎÇÏ°í, ÁøÇà »óÈ²À» ºÒ·¯¿È
+        SceneManager.LoadScene(sceneName);// í˜„ì¬ ì”¬ì„ ë‹¤ì‹œ ë¡œë“œ
+        // Scenario.instanceê°€ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸í•˜ê³ , ì§„í–‰ ìƒí™©ì„ ë¶ˆëŸ¬ì˜´
         if (Scenario.instance != null)
         {
             Scenario.instance.LoadScenarioProgress();
@@ -24,7 +24,7 @@ public class SceneReloader : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("´ë»ç ¸®·Î´õ ½ÃÀÛ");
+        Debug.Log("ëŒ€ì‚¬ ë¦¬ë¡œë” ì‹œì‘");
         int scenarioNumber = Scenario.instance.playing_Scenario;
         StartScenario(scenarioNumber);
     }
@@ -36,8 +36,8 @@ public class SceneReloader : MonoBehaviour
         scenario.Scenario_3.SetActive(false);
         scenario.Scenario_4.SetActive(false);
 
-        Debug.Log($"´ë»ç  {scenarioNumber}");
-        // ½Ã³ª¸®¿À ¹øÈ£¿¡ µû¶ó ´Ù¸¥ ·ÎÁ÷ ½ÇÇà
+        Debug.Log($"ëŒ€ì‚¬  {scenarioNumber}");
+        // ì‹œë‚˜ë¦¬ì˜¤ ë²ˆí˜¸ì— ë”°ë¼ ë‹¤ë¥¸ ë¡œì§ ì‹¤í–‰
         switch (scenarioNumber)
         {
             case 1:

@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneContainer : MonoBehaviour
 {
-    // ·Îµù ¾ÀÀ» ÅëÇÑ ÀüÈ¯À» À§ÇÑ Á¤º¸¸¦ ´ãÀ» ¸Å´ÏÀú
-    // ÀÌÀü ¾À, ÇöÀç ¾À, ´ÙÀ½ ¾ÀÀÇ Á¤º¸¸¦ Æ÷ÇÔÇÏ°í ÀÖÀ½
+    // ë¡œë”© ì”¬ì„ í†µí•œ ì „í™˜ì„ ìœ„í•œ ì •ë³´ë¥¼ ë‹´ì„ ë§¤ë‹ˆì €
+    // ì´ì „ ì”¬, í˜„ì¬ ì”¬, ë‹¤ìŒ ì”¬ì˜ ì •ë³´ë¥¼ í¬í•¨í•˜ê³  ìˆìŒ
 
     public static SceneContainer instance = null;
 

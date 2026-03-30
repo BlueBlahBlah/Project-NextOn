@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using MoreMountains.Feedbacks;
 using UnityEngine;
@@ -26,7 +26,7 @@ public class WeaponChange : MonoBehaviour
             player_LongWeapon.SetActive(false);
             player_NonWeapon.SetActive(false);
             player_CloseWeapon.SetActive(true);
-            //근접무기??경우 무기?�서 버튼 ?�벤?��? ?�록?�는 것이 ?�니기에 근접공격 모션???�기???�록
+            //洹쇱젒臾닿린??寃쎌슦 臾닿린?먯꽌 踰꾪듉 ?대깽?몃? ?깅줉?섎뒗 寃껋씠 ?꾨땲湲곗뿉 洹쇱젒怨듦꺽 紐⑥뀡???ш린???깅줉
             attackBtn.onClick.AddListener(player_CloseWeapon.GetComponent<PlayerScriptOneHand>().OnAttackButtonClick);
         }
         else if (Wt == WeaponType.longType)
@@ -55,11 +55,11 @@ public class WeaponChange : MonoBehaviour
 
         if (Wt == WeaponType.closeType)
         {
-            player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();  //?�재 ?��? 무기 ?�시 ?�색
+            player_CloseWeapon.GetComponent<PlayerScriptOneHand>().WeaponSynchronization();  //?꾩옱 ?≪? 臾닿린 ?ㅼ떆 ?먯깋
         }
         else if (Wt == WeaponType.longType)
         {
-            player_LongWeapon.GetComponent<PlayerScriptRifle>().WeaponSynchronization();    //?�재 ?��? 무기 ?�시 ?�색
+            player_LongWeapon.GetComponent<PlayerScriptRifle>().WeaponSynchronization();    //?꾩옱 ?≪? 臾닿린 ?ㅼ떆 ?먯깋
         }
     }
 }

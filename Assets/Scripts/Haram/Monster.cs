@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,6 +13,7 @@ public class Monster : CreatureInfo
         nav = GetComponent<NavMeshAgent>();
         target = GameObject.FindWithTag("Player").transform;
     }
+
     void Update()
     {
         nav.SetDestination(target.position);
@@ -28,7 +29,6 @@ public class Monster : CreatureInfo
         
         if (GetHP() <= 0)
         {
-            //二쎈뒗 ?좊땲硫붿씠??
             Destroy(gameObject);
         }
     }

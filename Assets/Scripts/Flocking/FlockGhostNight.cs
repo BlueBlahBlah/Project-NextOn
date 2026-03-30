@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class FlockGhostNight : MonoBehaviour
@@ -12,7 +12,7 @@ public class FlockGhostNight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 최초????번�? 즉시 ?�출
+        // 理쒖큹????踰덉? 利됱떆 ?몄텧
         //InvokeRepeating("ShowEffect", 0f, Random.Range(minInterval, maxInterval));
         Invoke("ShowEffect", Random.Range(minInterval, maxInterval));
     }
@@ -20,18 +20,18 @@ public class FlockGhostNight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 추�??�인 로직???�요?�다�??�기???�성
+        // 異붽??곸씤 濡쒖쭅???꾩슂?섎떎硫??ш린???묒꽦
     }
 
     void ShowEffect()
     {
-        // ?�펙?��? 보여주는 로직
+        // ?댄럺?몃? 蹂댁뿬二쇰뒗 濡쒖쭅
         GameObject effectInstance = Instantiate(effectPrefab, transform.position, Quaternion.identity);
-        // ?��? ?�어, ?�정 ?�간??지???�에 ?�펙?��? ?�거?�려�?        Destroy(effectInstance, 1.5f); // 1.5�??�에 ?�펙?��? ?�거?�도�??�정 (?�하???�간?�로 변�?가??
+        // ?덈? ?ㅼ뼱, ?쇱젙 ?쒓컙??吏???꾩뿉 ?댄럺?몃? ?쒓굅?섎젮硫?        Destroy(effectInstance, 1.5f); // 1.5珥??꾩뿉 ?댄럺?몃? ?쒓굅?섎룄濡??ㅼ젙 (?먰븯???쒓컙?쇰줈 蹂寃?媛??
 
-        AttackEnemies(); //?�에�??��?지
+        AttackEnemies(); //?곸뿉寃??곕?吏
         
-        // ?�음 ?�출???�한 ?�덤???�간 간격 ?�정
+        // ?ㅼ쓬 ?몄텧???꾪븳 ?쒕뜡???쒓컙 媛꾧꺽 ?ㅼ젙
         Invoke("ShowEffect", Random.Range(minInterval, maxInterval));
     }
 
@@ -43,9 +43,9 @@ public class FlockGhostNight : MonoBehaviour
         {
             if (collider.CompareTag("Enemy"))
             {
-                // Enemy ?�그�?가�??�에�??��?지 주기
+                // Enemy ?쒓렇瑜?媛吏??곸뿉寃??곕?吏 二쇨린
                 //collider.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
-                Debug.Log("백�??�행 공격");
+                Debug.Log("諛깃??쇳뻾 怨듦꺽");
             }
         }
     }

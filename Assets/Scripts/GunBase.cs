@@ -1,31 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
 using ProjectNextOn.Data;
+using System;
 
 public abstract class GunBase : WeaponBase
 {
-    // 부모 클래스의 weaponData를 GunData로 편하게 쓰기 위한 헬퍼 프로퍼티
     public GunData gunData => weaponData as GunData;
 
-    [Header("실시간 상태 (데이터에서 초기화됨)")]
+    [Header("Runtime State")]
     public int bulletCount;
     public int maxBulletCount;
     public bool nowReloading;
-    public bool IsFiring; // 외부(PlayerManager, AI 등)에서 사발 트리거
+    public bool IsFiring; 
+    
+    public event Action<int, int> OnAmmoChanged; // [Broadcasting] 탄약 변경 이벤트 (현재탄환, 최대탄환)
 
-    [Header("머즐 위치 설정")]
+    [Header("Muzzle Setup")]
     public Transform[] muzzles;
 
     protected virtual void Awake()
     {
-        // 머즐이 비어있을 경우에만 자동 탐색
         if (muzzles == null || muzzles.Length == 0)
         {
             Transform muzzleParent = FindMuzzleRecursive(transform, "muzzle") ?? FindMuzzleRecursive(transform, "Muzzle");
 
             if (muzzleParent != null)
             {
-                // 부모 밑에 실제 자식(각 구멍)들이 있다면 배열에 담기
                 if (muzzleParent.childCount > 0)
                 {
                     muzzles = new Transform[muzzleParent.childCount];
@@ -36,17 +36,15 @@ public abstract class GunBase : WeaponBase
                 }
                 else
                 {
-                    // 자식이 없고 Muzzle 통짜 하나라면 그거 하나를 발사구로 지정
                     muzzles = new Transform[] { muzzleParent };
                 }
             }
         }
     }
 
-    // 이름으로 자식을 무기 모델 내부 끝까지 파고들며 찾는 재귀 함수
     private Transform FindMuzzleRecursive(Transform parent, string name)
     {
-        if (parent.name.Contains(name)) return parent; // 이름에 Muzzle이 포함되어 있으면 반환
+        if (parent.name.Contains(name)) return parent; 
         
         foreach (Transform child in parent)
         {
@@ -70,6 +68,9 @@ public abstract class GunBase : WeaponBase
             bulletCount = gunData.maxMagazineSize;
             maxBulletCount = gunData.totalMaxAmmo;
             fireRate = gunData.fireRate;
+            
+            Debug.Log($"<color=cyan>[Model]</color> Ammo Initialized: {bulletCount} / {maxBulletCount}");
+            OnAmmoChanged?.Invoke(bulletCount, maxBulletCount);
         }
     }
 
@@ -79,7 +80,6 @@ public abstract class GunBase : WeaponBase
 
         bool canFire = IsFiring && bulletCount > 0 && !nowReloading;
 
-        // 자동 사격 처리
         if (canFire && timer >= fireRate)
         {
             OnFireButtonClick();
@@ -87,16 +87,13 @@ public abstract class GunBase : WeaponBase
         }
         else if (IsFiring && bulletCount <= 0 && !nowReloading)
         {
-            // 총알이 없는데 사격 시도 중이면 자동 재장전 요청
             RequestReload();
         }
 
-        // 루핑 사운드 처리 (머신건, 화염방사기 등)
         if (gunData != null && gunData.isLoopingSound && gunData.shootSound != null)
         {
             if (canFire)
             {
-                // 소리가 안 나고 있으면 재생 시작
                 var source = PlayerSoundManager.Instance.GetAudioSource(gunData.shootSound);
                 if (source != null && !source.isPlaying)
                 {
@@ -106,7 +103,6 @@ public abstract class GunBase : WeaponBase
             }
             else
             {
-                // 조건이 안 맞으면 중지
                 PlayerSoundManager.Instance.StopWeaponSound(gunData.shootSound);
             }
         }
@@ -114,14 +110,12 @@ public abstract class GunBase : WeaponBase
 
     protected virtual void OnEnable()
     {
-        // 이제 외부에서 IsFiring을 제어하므로 리스너가 필요 없음
     }
 
     protected virtual void OnDisable()
     {
-        IsFiring = false; // 비활성화 시 사격 중지
+        IsFiring = false; 
         
-        // 비활성화될 때 루핑 사운드 중지
         if (gunData != null && gunData.isLoopingSound)
         {
             PlayerSoundManager.Instance.StopWeaponSound(gunData.shootSound);
@@ -133,7 +127,6 @@ public abstract class GunBase : WeaponBase
         if (bulletCount > 0)
         {
             Shoot();
-            // 루핑 사운드가 아닐 때만 단발음 재생
             if (gunData != null && !gunData.isLoopingSound)
             {
                 PlayShootSound();
@@ -143,6 +136,16 @@ public abstract class GunBase : WeaponBase
         {
             RequestReload();
         }
+    }
+
+    // 외부(보급 상자 등)에서 탄약을 추가할 때 사용하는 메서드 (UI 동기화 포함)
+    public void AddAmmo(int amount)
+    {
+        maxBulletCount += amount;
+        Debug.Log($"<color=cyan>[Model]</color> Ammo Added: +{amount} (Total: {maxBulletCount})");
+        
+        // [Broadcast] 탄약 보급 상태를 컨트롤러와 UI에 즉시 알림
+        OnAmmoChanged?.Invoke(bulletCount, maxBulletCount);
     }
 
     protected virtual void Shoot()
@@ -155,10 +158,8 @@ public abstract class GunBase : WeaponBase
             {
                 if (muzzle == null) continue;
 
-                // Pooling 방식으로 총알 가져오기 (Instantiate 대신 활용)
                 GameObject bullet = BulletPoolManager.Instance.GetBullet(gunData.bulletPrefab, muzzle.position, muzzle.rotation);
                 
-                // 총알 초기화 (데미지 전달)
                 BulletBase bulletComponent = bullet.GetComponentInChildren<BulletBase>();
                 if (bulletComponent != null)
                 {
@@ -176,28 +177,47 @@ public abstract class GunBase : WeaponBase
             }
         }
         bulletCount--;
+        Debug.Log($"<color=cyan>[Model]</color> Ammo Changed (Shoot): {bulletCount} / {maxBulletCount}");
+        OnAmmoChanged?.Invoke(bulletCount, maxBulletCount);
     }
 
     protected virtual void RequestReload()
     {
         if (nowReloading == false)
         {
-            // 이제 PlayerRifle을 직접 호출하지 않고 상태만 변경함.
-            // PlayerManager가 이 상태를 감지하여 애니메이션을 실행함.
             nowReloading = true;
-
-            // 재장전 시작 시 루핑 사운드 즉시 중지
-            if (gunData != null && gunData.isLoopingSound)
-            {
-                PlayerSoundManager.Instance.StopWeaponSound(gunData.shootSound);
-            }
+            Debug.Log("<color=cyan>[Model]</color> Reload Requested.");
         }
     }
 
-    protected virtual void PlayShootSound()
+    public virtual void CompleteReload()
+    {
+        if (gunData == null) return;
+
+        int reloadAmount = gunData.maxMagazineSize;
+        
+        if (maxBulletCount >= reloadAmount)
+        {
+            maxBulletCount -= reloadAmount;
+            bulletCount += reloadAmount;
+        }
+        else
+        {
+            bulletCount += maxBulletCount;
+            maxBulletCount = 0;
+        }
+        nowReloading = false;
+        
+        Debug.Log($"<color=cyan>[Model]</color> Reload Completed: {bulletCount} / {maxBulletCount}");
+        // [Broadcast] 재장전 완료 후 UI 갱신 방송
+        OnAmmoChanged?.Invoke(bulletCount, maxBulletCount);
+    }
+
+    public virtual void PlayShootSound()
     {
         if (gunData != null && gunData.shootSound != null)
         {
             PlayerSoundManager.Instance.PlayWeaponSound(gunData.shootSound);
+        }
     }
 }

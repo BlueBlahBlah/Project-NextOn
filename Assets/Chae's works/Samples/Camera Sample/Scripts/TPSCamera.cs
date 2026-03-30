@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,17 +8,17 @@ public class TPSCamera : MonoBehaviour
 {
     [Header("Target")]
     [SerializeField]
-    private Transform target; // Ä³¸¯ÅÍ(Transform)¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
+    private Transform target; // ìºë¦­í„°(Transform)ë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
 
     [Header("Setting")]
     [SerializeField]
-    private float distance = 5.0f; // Ä«¸Ş¶ó¿Í Ä³¸¯ÅÍ °£ÀÇ °Å¸®¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
+    private float distance = 5.0f; // ì¹´ë©”ë¼ì™€ ìºë¦­í„° ê°„ì˜ ê±°ë¦¬ë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
     [SerializeField]
-    private float height = 2.0f; // Ä«¸Ş¶óÀÇ ³ôÀÌ¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
+    private float height = 2.0f; // ì¹´ë©”ë¼ì˜ ë†’ì´ë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
     [SerializeField]
-    private float offset = 1.0f; // Ä«¸Ş¶ó¸¦ Ä³¸¯ÅÍÀÇ ¿À¸¥ÂÊÀ¸·Î ¿ÀÇÁ¼ÂÇÒ °Å¸®¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
+    private float offset = 1.0f; // ì¹´ë©”ë¼ë¥¼ ìºë¦­í„°ì˜ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì˜¤í”„ì…‹í•  ê±°ë¦¬ë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
     [SerializeField]
-    private float rotationSpeed = 5.0f; // È¸Àü ¼Óµµ¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
+    private float rotationSpeed = 5.0f; // íšŒì „ ì†ë„ë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
 
     [Header("Shake")]
     [SerializeField]
@@ -30,8 +30,8 @@ public class TPSCamera : MonoBehaviour
     
     private float currentRotationAngle = 0.0f;
     private float currentHeight = 0.0f;
-    private bool isDragging = false; // ¸¶¿ì½º ¿ŞÂÊ ¹öÆ°ÀÌ ´­·È´ÂÁö ¿©ºÎ¸¦ ÀúÀåÇÕ´Ï´Ù.
-    private Vector3 dragStartPosition; // µå·¡±×¸¦ ½ÃÀÛÇÑ ¸¶¿ì½º À§Ä¡¸¦ ÀúÀåÇÕ´Ï´Ù.
+    private bool isDragging = false; // ë§ˆìš°ìŠ¤ ì™¼ìª½ ë²„íŠ¼ì´ ëˆŒë ¸ëŠ”ì§€ ì—¬ë¶€ë¥¼ ì €ì¥í•©ë‹ˆë‹¤.
+    private Vector3 dragStartPosition; // ë“œë˜ê·¸ë¥¼ ì‹œì‘í•œ ë§ˆìš°ìŠ¤ ìœ„ì¹˜ë¥¼ ì €ì¥í•©ë‹ˆë‹¤.
 
     public bool isCameraMove;
 
@@ -57,10 +57,10 @@ public class TPSCamera : MonoBehaviour
         if (!target)
             return;
 
-        // ¸¶¿ì½º ¿ŞÂÊ ¹öÆ°ÀÌ ´­¸° »óÅÂÀÌ°í µå·¡±× ÁßÀÎÁö È®ÀÎÇÕ´Ï´Ù.
+        // ë§ˆìš°ìŠ¤ ì™¼ìª½ ë²„íŠ¼ì´ ëˆŒë¦° ìƒíƒœì´ê³  ë“œë˜ê·¸ ì¤‘ì¸ì§€ í™•ì¸í•©ë‹ˆë‹¤.
         if (Input.GetMouseButtonDown(0))
         {
-            // ¸¶¿ì½º°¡ UI ¿ä¼Ò À§¿¡ ÀÖ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+            // ë§ˆìš°ìŠ¤ê°€ UI ìš”ì†Œ ìœ„ì— ìˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 isDragging = true;
@@ -72,35 +72,35 @@ public class TPSCamera : MonoBehaviour
             isDragging = false;
         }
 
-        // ¸¶¿ì½º¸¦ Å¬¸¯ÇÑ »óÅÂ·Î µå·¡±×ÇÒ ¶§¸¸ Ä«¸Ş¶ó¸¦ È¸ÀüÇÕ´Ï´Ù.
+        // ë§ˆìš°ìŠ¤ë¥¼ í´ë¦­í•œ ìƒíƒœë¡œ ë“œë˜ê·¸í•  ë•Œë§Œ ì¹´ë©”ë¼ë¥¼ íšŒì „í•©ë‹ˆë‹¤.
         if (isDragging)
         {
-            // ¸¶¿ì½º µå·¡±×·Î Ä«¸Ş¶ó¸¦ È¸ÀüÇÕ´Ï´Ù.
+            // ë§ˆìš°ìŠ¤ ë“œë˜ê·¸ë¡œ ì¹´ë©”ë¼ë¥¼ íšŒì „í•©ë‹ˆë‹¤.
             currentRotationAngle += Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime * 5f;
             currentHeight -= Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime * 5f;
 
             
 
         }
-        // È¸Àü °¢µµ¸¦ QuaternionÀ¸·Î º¯È¯ÇÕ´Ï´Ù.
+        // íšŒì „ ê°ë„ë¥¼ Quaternionìœ¼ë¡œ ë³€í™˜í•©ë‹ˆë‹¤.
         Quaternion rotation = Quaternion.Euler(currentHeight, currentRotationAngle, 0);
 
-        // È¸Àü °¢µµ¸¦ ±âÁØÀ¸·Î °Å¸®¸¦ Á¶Á¤ÇÏ¿© Ä«¸Ş¶ó À§Ä¡¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+        // íšŒì „ ê°ë„ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ê±°ë¦¬ë¥¼ ì¡°ì •í•˜ì—¬ ì¹´ë©”ë¼ ìœ„ì¹˜ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
         Vector3 negDistance = new Vector3(0.0f, height, -distance);
         Vector3 position = rotation * negDistance + target.position;
 
-        // ¿À¸¥ÂÊÀ¸·ÎÀÇ ¿ÀÇÁ¼Â º¤ÅÍ¸¦ °è»êÇÕ´Ï´Ù.
+        // ì˜¤ë¥¸ìª½ìœ¼ë¡œì˜ ì˜¤í”„ì…‹ ë²¡í„°ë¥¼ ê³„ì‚°í•©ë‹ˆë‹¤.
         Vector3 offsetVector = Quaternion.Euler(0, currentRotationAngle, 0) * Vector3.right * offset;
 
-        // Ä«¸Ş¶ó À§Ä¡¿¡ ¿À¸¥ÂÊ ¿ÀÇÁ¼ÂÀ» ´õÇÕ´Ï´Ù.
+        // ì¹´ë©”ë¼ ìœ„ì¹˜ì— ì˜¤ë¥¸ìª½ ì˜¤í”„ì…‹ì„ ë”í•©ë‹ˆë‹¤.
         position += offsetVector;
 
-        // Ä«¸Ş¶óÀÇ À§Ä¡¿Í È¸ÀüÀ» Àû¿ëÇÕ´Ï´Ù.
+        // ì¹´ë©”ë¼ì˜ ìœ„ì¹˜ì™€ íšŒì „ì„ ì ìš©í•©ë‹ˆë‹¤.
         transform.rotation = rotation;
         transform.position = position;
 
-        // ÇÃ·¹ÀÌ¾îÀÇ È¸ÀüÀ» Àû¿ëÇÕ´Ï´Ù. ÀÌ ¶§, rotationÀÇ y°ª¸¸ ¼öÁ¤µÇµµ·Ï ÁÖÀÇÇÕ´Ï´Ù.
-        // ÇöÀç ÀÓ½Ã ÄÚµå, ¼öÁ¤ ÇÊ¿ä
+        // í”Œë ˆì´ì–´ì˜ íšŒì „ì„ ì ìš©í•©ë‹ˆë‹¤. ì´ ë•Œ, rotationì˜ yê°’ë§Œ ìˆ˜ì •ë˜ë„ë¡ ì£¼ì˜í•©ë‹ˆë‹¤.
+        // í˜„ì¬ ì„ì‹œ ì½”ë“œ, ìˆ˜ì • í•„ìš”
         Quaternion playerRotation = Quaternion.Euler(0, currentRotationAngle, 0);
         target.rotation = playerRotation;
 

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class StreamOfEdge : MonoBehaviour
     {
         Destroy(gameObject, 10f);
 
-        // 초기 목표지???�정
+        // 珥덇린 紐⑺몴吏???ㅼ젙
         //currentTarget = Sphere2.transform;
         
     }
@@ -23,6 +23,6 @@ public class StreamOfEdge : MonoBehaviour
     {
         
     }
-    // 공들???�동?�키??메서??
+    // 怨듬뱾???대룞?쒗궎??硫붿꽌??
     
 }

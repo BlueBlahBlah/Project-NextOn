@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -22,12 +22,12 @@ public class WaveArea2 : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        /*//2?�이즈시??        if (other.CompareTag("Player") && peiz2Active == false)
+        /*//2?섏씠利덉떆??        if (other.CompareTag("Player") && peiz2Active == false)
         {
             peiz2Active = true;
             StageManager.Area2Function();
         }*/
-        /*if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false && EventManager.Instance.Area3 == true)  //3?�이�?중에 Area ?�과
+        /*if (other.CompareTag("Player") && peiz2Active == true && peiz3Active == false && EventManager.Instance.Area3 == true)  //3?섏씠利?以묒뿉 Area ?듦낵
         {
             peiz3Active = true;
             //StageManager.Area2Function();

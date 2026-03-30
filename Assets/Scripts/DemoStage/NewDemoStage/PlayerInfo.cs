@@ -6,66 +6,76 @@ using UnityEngine.UI;
 
 public class PlayerInfo : MonoBehaviour
 {
-    public float TotalHealth;                          //최�?체력
-    public float Health;                               //?�재체력
-    public float HealthGen;                            //체젠
-    private float curHealth;                               //?�재 ?�크립트??관리하??체력 - 체력???�았?��? ?�단
+    public float TotalHealth;                          
+    public float Health;                               
+    public float HealthGen;                            
+    private float curHealth;                               
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
 
     private bool updateStart = false;
 
-    
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        StartCoroutine(WaitInitialize());
+        InitializeAsync();
     }
 
-    private IEnumerator WaitInitialize()        //PlayerManager ?��?    {
-        while (PlayerManager.Instance == null)
+    private async void InitializeAsync() 
+    {
+        // 컨트롤러를 찾을 때까지 대기 (혹은 자동 할당 로직)
+        PlayerAttributeController controller = null;
+        while (controller == null)
         {
-            yield return null;
+            controller = FindObjectOfType<PlayerAttributeController>();
+            if (controller == null) await System.Threading.Tasks.Task.Delay(100);
         }
 
+        // 초기화 및 이벤트 구독 (Subscribe)
+        controller.OnHealthChanged += HandleHealthChanged;
+        
         Initialize();
     }
 
-    private void Initialize()       //초기???�수
+    private void Initialize()       
     {
-        Health = PlayerManager.Instance.Health;
-        curHealth = Health;
-        
-        damaged.SetText("");  //?��?지�??��? 경우?�만 ?�시
-        InitHPBarSize();  //체력�??�이�?초기??        UpdateHealthInfo();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (updateStart)
+        if (PlayerManager.Instance != null)
         {
-            TotalHealth = PlayerManager.Instance.TotalHealth;
+            Health = PlayerManager.Instance.Health;
             curHealth = Health;
-            Health = PlayerManager.Instance.Health;     //?�재체력 계속 가?�오�?            if (Health == 0 && PlayerManager.Instance.Death == false)                                 //죽�?경우
-            {
-                PlayerManager.Instance.Death = true;
-                float DamageDone = curHealth - Health;        //?��? ?��?지.
-                ShowDamage(DamageDone);
-                hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
-            }
-            else if (curHealth > Health && PlayerManager.Instance.Death == false)                     //체력???��?경우
-            {
-                float DamageDone = curHealth - Health;        //?��? ?��?지.
-                ShowDamage(DamageDone);
-            
-            }
-            //Debug.LogError("TotalHealth : " + TotalHealth);
-            //Debug.LogError("Health : " + Health);
-            hpBar.rectTransform.localScale = new Vector3((float)Health/(float)TotalHealth, 1f, 1f);
+            TotalHealth = PlayerManager.Instance.TotalHealth;
         }
         
+        damaged.SetText("");  
+        InitHPBarSize();  
+        updateStart = true;
     }
+
+    private void HandleHealthChanged(float newHealth, float maxHealth)
+    {
+        if (!updateStart) return;
+
+        float prevHealth = Health;
+        Health = newHealth;
+        TotalHealth = maxHealth;
+
+        // 데미지 연출 로직 (MVC View의 역할)
+        if (Health < prevHealth && PlayerManager.Instance.Death == false)
+        {
+            float damageDone = prevHealth - Health;
+            ShowDamage(damageDone);
+        }
+
+        // UI 바 업데이트
+        if (maxHealth > 0)
+        {
+            hpBar.rectTransform.localScale = new Vector3(Health / maxHealth, 1f, 1f);
+        }
+
+        Debug.Log($"<color=green>[Player-View]</color> UI Refreshed: {Health} / {maxHealth}");
+    }
+
+    // [DEPRECATED] 더 이상 매 프레임 폴링하지 않습니다.
+    // void Update() { ... }
     
     private void ShowDamage(float d)
     {
@@ -75,10 +85,10 @@ public class PlayerInfo : MonoBehaviour
     
     void InitHPBarSize()
     {
-        //hpBar???�이즈�? ?�래 ?�신???�이즈의 1�??�기�?초기??        hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
+        hpBar.rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }
 
-    void UpdateHealthInfo()     //체력관???�용 가?�오???�수
+    void UpdateHealthInfo()     
     {
         Health = PlayerManager.Instance.Health;     
         HealthGen = PlayerManager.Instance.HealthGen;

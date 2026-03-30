@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class Fire_Guard : MonoBehaviour
 
     private void FindColliders()
     {
-        // ÇöÀç ¿ÀºêÁ§Æ®°¡ °¡Áö°í ÀÖ´Â ¸ğµç Äİ¶óÀÌ´õ¸¦ Ã£½À´Ï´Ù.
+        // í˜„ì¬ ì˜¤ë¸Œì íŠ¸ê°€ ê°€ì§€ê³  ìˆëŠ” ëª¨ë“  ì½œë¼ì´ë”ë¥¼ ì°¾ìŠµë‹ˆë‹¤.
         Collider[] colliders = GetComponentsInChildren<Collider>();
 
         foreach (Collider collider in colliders)

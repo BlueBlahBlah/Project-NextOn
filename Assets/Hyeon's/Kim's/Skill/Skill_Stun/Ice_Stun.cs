@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 
 public class Ice_Stun : MonoBehaviour
 {
     void Start()
     {
-        Vector3 checkPosition = transform.position - new Vector3(0.001f, 0.001f, 0.001f); //ÀÚ±âÀÚ½Å Á¦¿Ü °ª
+        Vector3 checkPosition = transform.position - new Vector3(0.001f, 0.001f, 0.001f); //ìê¸°ìì‹  ì œì™¸ ê°’
 
         Collider[] colliders = Physics.OverlapSphere(checkPosition, 3);
         if (colliders.Length > 0)
@@ -24,7 +24,7 @@ public class Ice_Stun : MonoBehaviour
     IEnumerator Make_Slow(Collider col, float delay)
     {
         col.GetComponent<MOVE>().speed = 0.5f;      //need to check 
-        yield return new WaitForSeconds(delay);     //ÁÖº¯ Àûµéµµ °°ÀÌ ´À·ÁÁü
+        yield return new WaitForSeconds(delay);     //ì£¼ë³€ ì ë“¤ë„ ê°™ì´ ëŠë ¤ì§
         col.GetComponent<MOVE>().speed = 1.0f;
 
     }

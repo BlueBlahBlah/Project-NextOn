@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -9,9 +9,9 @@ using UnityEngine.UI;
 
 public class StageManager : MonoBehaviour
 {
-    /*//DamageManager ?�식?�료
-    /#1#/ ------ 공격 계수 ------ //
-    //근접 무기
+    /*//DamageManager ?댁떇?꾨즺
+    /#1#/ ------ 怨듦꺽 怨꾩닔 ------ //
+    //洹쇱젒 臾닿린
     [Header("Damage Counting")]
     public int SwordStreamEdge_DamageCounting;
     public int SwordStatic_DamageCounting;
@@ -19,7 +19,7 @@ public class StageManager : MonoBehaviour
     public int SwordDemacia_DamageCounting;
     public int FantasyAxe_DamageCounting;
 
-    //근접 무기 ?�킬
+    //洹쇱젒 臾닿린 ?ㅽ궗
     [Header("Skill")]
     public int SwordStreamEdge_Skill_DamageCounting;
     public int SwordStatic_Passive_DamageCounting;
@@ -28,23 +28,23 @@ public class StageManager : MonoBehaviour
     public int SwordDemacia_Skill_DamageCounting;
     public int FantasyAxe_Skill_DamageCounting;
     
-    //총기�?    public int FlameGun_DamageCounting;
+    //珥앷린瑜?    public int FlameGun_DamageCounting;
     public int MachineGun_DamageCounting;
     public int GrenadeLauncher_DamageCounting;
     public int Sniper_DamageCounting;
     public int Rifle_DamageCounting;
     public int ShotGun_DamageCounting;
     
-    //총기�??�킬
-    public int Bomber_Skill_DamageCounting;             //??��???��?지
-    public int Bomber_Skill_WarheadKind;                //??��???�기
-    public int Bomber_Skill_WarheadColor;                //??��???�상  0:?�색 1:빨강, 2:초록, 3:?�랑, 4:?�랑
-    public int Turret_Skill_BulletColor;                //미사?�의 ?�상  0:?�색 1:빨강, 2:초록, 3:?�랑, 4:?�랑 5:?�석�?    public int Turret_Skill_DamageCounting;
+    //珥앷린瑜??ㅽ궗
+    public int Bomber_Skill_DamageCounting;             //??깂???곕?吏
+    public int Bomber_Skill_WarheadKind;                //??깂???ш린
+    public int Bomber_Skill_WarheadColor;                //??깂???됱긽  0:?뚯깋 1:鍮④컯, 2:珥덈줉, 3:?뚮옉, 4:?몃옉
+    public int Turret_Skill_BulletColor;                //誘몄궗?쇱쓽 ?됱긽  0:?곗깋 1:鍮④컯, 2:珥덈줉, 3:?뚮옉, 4:?몃옉 5:?ъ꽍湲?    public int Turret_Skill_DamageCounting;
     public int Helicopter_Skill_DamageCounting;
     public int GunSpire_Skill_DamageCounting;#1#
     
-    //?�이지 개념 ?�시 ?�각
-    // ------ Wave�?몬스??�?기�? ?�물------ //
+    //?섏씠吏 媛쒕뀗 ?ㅼ떆 ?앷컖
+    // ------ Wave蹂?紐ъ뒪??諛?湲고? ?щЪ------ //
     /*[SerializeField] private GameObject[] Wave1_Monsters;
     [SerializeField] private GameObject[] Wave1_Directions;
     [SerializeField] private GameObject[] Wave3_Directions;
@@ -62,41 +62,41 @@ public class StageManager : MonoBehaviour
     // ------ Wave trigger Collider------ //
     [SerializeField] private BoxCollider Area1;
     [SerializeField] private BoxCollider Area2;
-    //public bool Area3;        //Wave3??경우 ?�당 변??true && Area2 ?�시 진행   //EventManager ?�식?�료
+    //public bool Area3;        //Wave3??寃쎌슦 ?대떦 蹂??true && Area2 ?쇱떆 吏꾪뻾   //EventManager ?댁떇?꾨즺
     [SerializeField] private bool Peiz3Start;  
     [SerializeField] private bool Peiz3Monster2UpdateControl;   
-    //public bool Wave2MonsterClear;        //wave2몬스?��? 모두 ?�았?��?     //EventManager ?�식?�료
+    //public bool Wave2MonsterClear;        //wave2紐ъ뒪?곕? 紐⑤몢 ?≪븯?붿?     //EventManager ?댁떇?꾨즺
     [SerializeField] private GameObject WaveArea3Scrit;
     [SerializeField] private GameObject WaveArea3Barrier;
     
     
-    //MonsterManager ?�식?�료
+    //MonsterManager ?댁떇?꾨즺
     //[SerializeField] private GameObject[] Stack;
-    //[SerializeField] private int StackIndex;        //?�택 ??몬스?�의 개수,, top
-    //public int Gauge;                               //?�택 몬스?��? ?�는 게이지
+    //[SerializeField] private int StackIndex;        //?ㅽ깮 ??紐ъ뒪?곗쓽 媛쒖닔,, top
+    //public int Gauge;                               //?ㅽ깮 紐ъ뒪?곕? ?〓뒗 寃뚯씠吏
     //[SerializeField] private GameObject wave2Gauge;
-    //wave3Gauge???�이지개념 ?�시 ?�각?�기?�해 ?�단 보류
+    //wave3Gauge???섏씠吏媛쒕뀗 ?ㅼ떆 ?앷컖?섍린?꾪빐 ?쇰떒 蹂대쪟
     //[SerializeField] private GameObject wave3Gauge;
     
     
-    //?�널?� ?�단 ?�각?�하�??�기�?    /#1#/?�토리얼 ?�널??    [SerializeField] private GameObject WelcomePanel;
+    //?⑤꼸? ?쇰떒 ?앷컖?덊븯怨??섍린濡?    /#1#/?쒗넗由ъ뼹 ?⑤꼸??    [SerializeField] private GameObject WelcomePanel;
     [SerializeField] private Button WelcomPanel_Btn;
     [SerializeField] private GameObject[] WelcomePanel_Text;
     [SerializeField] private int WelcomPanel_Text_Number;
     
-    //?�이�? ?�작???�널
+    //?섏씠利? ?쒖옉???⑤꼸
     [SerializeField] private GameObject Peiz2StartPanel;
     [SerializeField] private Button Peiz2StartPanel_Btn;
     [SerializeField] private GameObject[] Peiz2StartPanel_Text;
     [SerializeField] private int Peiz2StartPanel_Text_Number;
     
-    //?�이�? 종료???�널
+    //?섏씠利? 醫낅즺???⑤꼸
     [SerializeField] private GameObject Peiz2EndPanel;
     [SerializeField] private Button Peiz2EndPanel_Btn;
     [SerializeField] private GameObject[] Peiz2EndPanel_Text;
     [SerializeField] private int Peiz2EndPanel_Text_Number;
     
-    //컴파?�러 고친?�음 ?�널 (컴파?�러 고치???�안 ?�펜??
+    //而댄뙆?쇰윭 怨좎튇?ㅼ쓬 ?⑤꼸 (而댄뙆?쇰윭 怨좎튂???숈븞 ?뷀렂??
     [SerializeField] private GameObject Start3PeizPanel ;
     [SerializeField] private Button Start3PeizPanel_Btn;
     [SerializeField] private GameObject[] Start3PeizPanel_Text;
@@ -104,22 +104,22 @@ public class StageManager : MonoBehaviour
 
    
     
-    //개발????금�? ?�널 3?�이�?Big monster?�장
+    //媛쒕컻????湲덉? ?⑤꼸 3?섏씠利?Big monster?깆옣
     [SerializeField] private GameObject AfterCompilerPanel ;
     [SerializeField] private Button AfterCompilerPanel_Btn;
     [SerializeField] private GameObject[] AfterCompilerPanel_Text;
     [SerializeField] private int AfterCompilerPanel_Text_Number;#1#
 
-    [SerializeField] private bool isPause;  //?�재 게임 ?�간??멈췄?��?
+    [SerializeField] private bool isPause;  //?꾩옱 寃뚯엫 ?쒓컙??硫덉톬?붿?
 
     [Header("Enemies")]
-    public GameObject[] enemies;  //?�재 ?�테?��???몬스?? Length�?개수�?구할 ???�음
+    public GameObject[] enemies;  //?꾩옱 ?ㅽ뀒?댁???紐ъ뒪?? Length濡?媛쒖닔瑜?援ы븷 ???덉쓬
 
     
     // Start is called before the first frame update
     void Start()
     {
-        // 무기 계수 곱하�????��?지 ?�정
+        // 臾닿린 怨꾩닔 怨깊븯湲????곕?吏 ?ㅼ젙
         SwordStreamEdge_DamageCounting = 1;
         SwordStatic_DamageCounting = 1;
         SwordSliver_DamageCounting = 1;
@@ -198,7 +198,7 @@ public class StageManager : MonoBehaviour
         Peiz3Monster2UpdateControl = false;
         isPause = false;
         
-        //?�널 비활?�화
+        //?⑤꼸 鍮꾪솢?깊솕
         WelcomePanel.SetActive(false);
         WelcomPanel_Text_Number = 0;
         foreach (GameObject g in WelcomePanel_Text)
@@ -243,23 +243,23 @@ public class StageManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //?�택몬스??20 게이지 채우�?모두 ??��
+        //?ㅽ깮紐ъ뒪??20 寃뚯씠吏 梨꾩슦硫?紐⑤몢 ??젣
         if (Gauge >= 2 && Wave2MonsterClear == false)
             Clear_Wave2_Monsters();
 
-        //Area3??Peiz3Gauge?�서 True�?변�?        if (Area3 == true && Peiz3Start == false)
+        //Area3??Peiz3Gauge?먯꽌 True濡?蹂寃?        if (Area3 == true && Peiz3Start == false)
         {
             Peiz3Start = true;
-            Peiz3Monster_1.SetActive(true);  //3?�이�?몬스?? ?�장
-            //Start_AfterCompilerPanel();    //컴파?�러 고친 ???�널 ?�장
+            Peiz3Monster_1.SetActive(true);  //3?섏씠利?紐ъ뒪?? ?깆옣
+            //Start_AfterCompilerPanel();    //而댄뙆?쇰윭 怨좎튇 ???⑤꼸 ?깆옣
             Start_Panel(AfterCompilerPanel,AfterCompilerPanel_Btn,AfterCompilerPanel_Text,AfterCompilerPanel_Text_Number,false);
         }
         
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        Debug.Log("?�그가 'Enemy'??게임 ?�브?�트??개수: " + enemies.Length);
+        Debug.Log("?쒓렇媛 'Enemy'??寃뚯엫 ?ㅻ툕?앺듃??媛쒖닔: " + enemies.Length);
     }
 
-    //1?�이�??�작
+    //1?섏씠利??쒖옉
     public void Area1Function()
     {
         foreach (GameObject g in Wave1_Monsters)
@@ -274,7 +274,7 @@ public class StageManager : MonoBehaviour
     }
     public void Area2Function()
     {
-        //2?�이�??�작
+        //2?섏씠利??쒖옉
         if (Area3 == false)
         {
             foreach (GameObject d in Wave1_Directions)
@@ -292,13 +292,13 @@ public class StageManager : MonoBehaviour
             }
             wave2Gauge.SetActive(true);
 
-            //Start_Peiz2StartPanel();  //2?�이�??�널 ?�장
+            //Start_Peiz2StartPanel();  //2?섏씠利??⑤꼸 ?깆옣
             Start_Panel(Peiz2StartPanel, Peiz2StartPanel_Btn, Peiz2StartPanel_Text, Peiz2StartPanel_Text_Number, true);
         }
-        else        //3?�이�??�작
+        else        //3?섏씠利??쒖옉
         {
-            Debug.LogError("3?�이�??�작");
-            //?�리�??�결
+            Debug.LogError("3?섏씠利??쒖옉");
+            //?ㅻ━瑜??곌껐
             foreach (GameObject g in Before3Peiz)
             {
                 g.SetActive(false);
@@ -307,10 +307,10 @@ public class StageManager : MonoBehaviour
             {
                 g.SetActive(true);
             }
-            //길목 ?�거
+            //湲몃ぉ ?쒓굅
             WaveArea3Scrit.SetActive(false);
             WaveArea3Barrier.SetActive(false);
-            //EventBtn 비활?�화
+            //EventBtn 鍮꾪솢?깊솕
             EventBtn.SetActive(false);
             Peiz3Monster_2.SetActive(true); 
         }
@@ -318,23 +318,23 @@ public class StageManager : MonoBehaviour
         
     }
 
-    //?�을 죽인 경우
+    //?곸쓣 二쎌씤 寃쎌슦
     public void AddStackMonster(GameObject g)
     {
-        //처음 ?�어??몬스?�인경우
+        //泥섏쓬 ?ㅼ뼱??紐ъ뒪?곗씤寃쎌슦
         if (StackIndex == 0)
         {
             Stack[StackIndex] = g;
             StackIndex++;
             return;
         }
-        else if (StackIndex >= 10) //?�택??�?찼는??몬스?��? 죽�? 경우
+        else if (StackIndex >= 10) //?ㅽ깮??苑?李쇰뒗??紐ъ뒪?곌? 二쎌? 寃쎌슦
         {
             if (g.GetComponent<Parenthesis>().identity == Stack[9].GetComponent<Parenthesis>().identity)
             {
-                Stack[9].GetComponent<Parenthesis>().HitTheMonster(); //몬스????��
-                Stack[9] = null; //?�택 pop
-                StackIndex = 9; //?�덱??줄이�?            }
+                Stack[9].GetComponent<Parenthesis>().HitTheMonster(); //紐ъ뒪????젣
+                Stack[9] = null; //?ㅽ깮 pop
+                StackIndex = 9; //?몃뜳??以꾩씠湲?            }
             else
             {
                 g.GetComponent<Parenthesis>().NotDeath();
@@ -344,15 +344,15 @@ public class StageManager : MonoBehaviour
         {
             Stack[StackIndex] = g;
             StackIndex++;
-            if (CheckParenthesis()) //괄호가 맞아 ?�어�?경우
+            if (CheckParenthesis()) //愿꾪샇媛 留욎븘 ?⑥뼱吏?寃쎌슦
             {
                 for (int i = 0; i < 2; i++)
                 {
-                    Stack[StackIndex - 1].GetComponentInChildren<Parenthesis>().HitTheMonster(); //?�택?�서 몬스????��
-                    Stack[StackIndex - 1] = null; //?�택 pop
-                    StackIndex--; //?�덱??줄이�?                }
+                    Stack[StackIndex - 1].GetComponentInChildren<Parenthesis>().HitTheMonster(); //?ㅽ깮?먯꽌 紐ъ뒪????젣
+                    Stack[StackIndex - 1] = null; //?ㅽ깮 pop
+                    StackIndex--; //?몃뜳??以꾩씠湲?                }
 
-                Gauge++; //?�택 게이지증�?
+                Gauge++; //?ㅽ깮 寃뚯씠吏利앷?
                 wave2Gauge.GetComponent<HealthBar>().SetHealth(Gauge);
             }
         }
@@ -360,7 +360,7 @@ public class StageManager : MonoBehaviour
        
     }
 
-    //괄호???�효??검??    private bool CheckParenthesis()
+    //愿꾪샇???좏슚??寃??    private bool CheckParenthesis()
     {
         if (Stack[StackIndex - 1].GetComponent<Parenthesis>().identity ==
             Stack[StackIndex - 2].GetComponent<Parenthesis>().identity)
@@ -373,10 +373,10 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    //2?�이�???    public void Clear_Wave2_Monsters()
+    //2?섏씠利???    public void Clear_Wave2_Monsters()
     {
         Wave2MonsterClear = true;
-        //모든 ?�포???�성중단
+        //紐⑤뱺 ?ㅽ룷???앹꽦以묐떒
         foreach (GameObject g in Wave2_Monsters_Spawner)
         {
             g.GetComponent<Wave2StackMonsterSpawner>().Active = false;
@@ -405,7 +405,7 @@ public class StageManager : MonoBehaviour
         }
         wave2Gauge.SetActive(false);
 
-        //Start_Peiz2EndPanel(); //2?�이�??�난 ?�널 ?�장
+        //Start_Peiz2EndPanel(); //2?섏씠利??앸궃 ?⑤꼸 ?깆옣
         Start_Panel(Peiz2EndPanel,Peiz2EndPanel_Btn,Peiz2EndPanel_Text,Peiz2EndPanel_Text_Number,false);
     }
 
@@ -414,8 +414,8 @@ public class StageManager : MonoBehaviour
         Wave2_Monsters.Add(m);
     }
 
-    //?�이지 개념 ?�시 ?�각
-    //3?�이�?방향
+    //?섏씠吏 媛쒕뀗 ?ㅼ떆 ?앷컖
+    //3?섏씠利?諛⑺뼢
     /*public void OnWave3Direction()
     {
         foreach (GameObject g in Wave3_Directions)
@@ -429,60 +429,60 @@ public class StageManager : MonoBehaviour
     {
         if (timestop == true)
         {
-            Time.timeScale = 0;    //게임 ?�시?��?
+            Time.timeScale = 0;    //寃뚯엫 ?쇱떆?뺤?
             isPause = true;
         }
         btn.onClick.AddListener(() => NextText(panal, text, ref number));
-        panal.SetActive(true);    //?�널?�장
-        text[number].SetActive(true);      //�??�널 메세지 ?�장
+        panal.SetActive(true);    //?⑤꼸?깆옣
+        text[number].SetActive(true);      //泥??⑤꼸 硫붿꽭吏 ?깆옣
     }
 
-    //?�테?��? �??�널 ?�장 ?�수
+    //?ㅽ뀒?댁? 泥??⑤꼸 ?깆옣 ?⑥닔
     private void Start_WelcomePanel()
     {
-        Time.timeScale = 0;    //게임 ?�시?��?
+        Time.timeScale = 0;    //寃뚯엫 ?쇱떆?뺤?
         isPause = true;
         WelcomPanel_Btn.onClick.AddListener(() => NextText(WelcomePanel,WelcomePanel_Text, ref WelcomPanel_Text_Number));
-        WelcomePanel.SetActive(true);    //?�널?�장
-        WelcomePanel_Text[WelcomPanel_Text_Number].SetActive(true);      //�??�널 메세지 ?�장
+        WelcomePanel.SetActive(true);    //?⑤꼸?깆옣
+        WelcomePanel_Text[WelcomPanel_Text_Number].SetActive(true);      //泥??⑤꼸 硫붿꽭吏 ?깆옣
     }
     
     /*private void Start_Peiz2StartPanel()
     {
-        Time.timeScale = 0;    //게임 ?�시?��?
+        Time.timeScale = 0;    //寃뚯엫 ?쇱떆?뺤?
         isPause = true;
         Peiz2StartPanel_Btn.onClick.AddListener(() => NextText(Peiz2StartPanel_Text, ref Peiz2StartPanel_Text_Number));
-        Peiz2StartPanel.SetActive(true);    //?�널?�장
-        Peiz2StartPanel_Text[Peiz2StartPanel_Text_Number].SetActive(true);      //�??�널 메세지 ?�장
+        Peiz2StartPanel.SetActive(true);    //?⑤꼸?깆옣
+        Peiz2StartPanel_Text[Peiz2StartPanel_Text_Number].SetActive(true);      //泥??⑤꼸 硫붿꽭吏 ?깆옣
     }
     
     private void Start_Peiz2EndPanel()
     {
         Peiz2EndPanel_Btn.onClick.AddListener(() => NextText(Peiz2EndPanel_Text, ref Peiz2EndPanel_Text_Number));
-        Peiz2EndPanel.SetActive(true);    //?�널?�장
-        Peiz2EndPanel_Text[Peiz2EndPanel_Text_Number].SetActive(true);      //�??�널 메세지 ?�장
+        Peiz2EndPanel.SetActive(true);    //?⑤꼸?깆옣
+        Peiz2EndPanel_Text[Peiz2EndPanel_Text_Number].SetActive(true);      //泥??⑤꼸 硫붿꽭吏 ?깆옣
     }
     
     private void Start_AfterCompilerPanel()
     {
         AfterCompilerPanel_Btn.onClick.AddListener(() => NextText(AfterCompilerPanel_Text, ref AfterCompilerPanel_Text_Number));
-        AfterCompilerPanel.SetActive(true);    //?�널?�장
-        AfterCompilerPanel_Text[AfterCompilerPanel_Text_Number].SetActive(true);      //�??�널 메세지 ?�장
+        AfterCompilerPanel.SetActive(true);    //?⑤꼸?깆옣
+        AfterCompilerPanel_Text[AfterCompilerPanel_Text_Number].SetActive(true);      //泥??⑤꼸 硫붿꽭吏 ?깆옣
     }#1#
 
-    //?�테?��? �??�널???�스?��? ?�기???�수 
+    //?ㅽ뀒?댁? 泥??⑤꼸???띿뒪?몃? ?섍린???⑥닔 
     private void NextText(GameObject panal,GameObject[] TextArray, ref int TextIndex)
     {
-        if (TextArray[TextIndex].activeSelf)  //?�음 ?�널 메세지 ?�장
+        if (TextArray[TextIndex].activeSelf)  //?ㅼ쓬 ?⑤꼸 硫붿꽭吏 ?깆옣
         {
             TextArray[TextIndex].SetActive(false);
             TextIndex++;
-            if (TextIndex >= TextArray.Length)     //마�?�??�널 메세지?�면
+            if (TextIndex >= TextArray.Length)     //留덉?留??⑤꼸 硫붿꽭吏?쇰㈃
             {
                 panal.SetActive(false);
-                if (isPause == true)    //?�간??멈췄?�면 
+                if (isPause == true)    //?쒓컙??硫덉톬?ㅻ㈃ 
                 {
-                    Time.timeScale = 1;  //?�간?�돌리기
+                    Time.timeScale = 1;  //?쒓컙?섎룎由ш린
                     isPause = false;
                 }
                 

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class Magic_Stun : MonoBehaviour
 {
     void Start()
     {
-        Vector3 checkPosition = transform.position - new Vector3(0.001f, 0.001f, 0.001f); //ÀÚ±âÀÚ½Å Á¦¿Ü °ª
+        Vector3 checkPosition = transform.position - new Vector3(0.001f, 0.001f, 0.001f); //ìê¸°ìì‹  ì œì™¸ ê°’
 
         Collider[] colliders = Physics.OverlapSphere(checkPosition, 3);
         if (colliders.Length > 0)
@@ -25,8 +25,8 @@ public class Magic_Stun : MonoBehaviour
 
     IEnumerator Make_SlowDamage(Collider col, float delay)
     {
-        //col.hp -= 10;                             //ÇÇÇØ¹ŞÀº ÀûÀÇ ÁÖº¯ Àûµé¿¡°Ô ´ë¹ÌÁö ºÎ°¡ 
-        col.GetComponent<MOVE>().speed = 0.3f;      //+ ´À·ÁÁü
+        //col.hp -= 10;                             //í”¼í•´ë°›ì€ ì ì˜ ì£¼ë³€ ì ë“¤ì—ê²Œ ëŒ€ë¯¸ì§€ ë¶€ê°€ 
+        col.GetComponent<MOVE>().speed = 0.3f;      //+ ëŠë ¤ì§
         yield return new WaitForSeconds(delay);
         col.GetComponent<MOVE>().speed = 1.0f;
 

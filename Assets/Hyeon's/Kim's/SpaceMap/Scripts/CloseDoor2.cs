@@ -1,18 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CloseDoor2 : MonoBehaviour
 {
-    private Vector3 closedPosition;  // ¹®ÀÌ ´İÈú À§Ä¡
-    private Vector3 openPosition;    // ¹®ÀÌ ¿­·Á ÀÖ´Â À§Ä¡
-    public float duration = 3.0f;                           // ¹®ÀÌ ´İÈ÷´Â µ¥ °É¸®´Â ½Ã°£
+    private Vector3 closedPosition;  // ë¬¸ì´ ë‹«í ìœ„ì¹˜
+    private Vector3 openPosition;    // ë¬¸ì´ ì—´ë ¤ ìˆëŠ” ìœ„ì¹˜
+    public float duration = 3.0f;                           // ë¬¸ì´ ë‹«íˆëŠ” ë° ê±¸ë¦¬ëŠ” ì‹œê°„
 
     private void Start()
     {
         openPosition = this.transform.position;
         closedPosition = this.transform.position - new Vector3(0, 3, 0);
-        // ¹®À» ´İ´Â ÄÚ·çÆ¾ ½ÃÀÛ
+        // ë¬¸ì„ ë‹«ëŠ” ì½”ë£¨í‹´ ì‹œì‘
         StartCoroutine(CloseDoor());
     }
 
@@ -23,13 +23,13 @@ public class CloseDoor2 : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            // ¹®À» ºÎµå·´°Ô ÇÏ°­½ÃÅ°±â À§ÇØ Lerp »ç¿ë
+            // ë¬¸ì„ ë¶€ë“œëŸ½ê²Œ í•˜ê°•ì‹œí‚¤ê¸° ìœ„í•´ Lerp ì‚¬ìš©
             transform.position = Vector3.Lerp(startPosition, closedPosition, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            yield return null; // ë‹¤ìŒ í”„ë ˆì„ê¹Œì§€ ëŒ€ê¸°
         }
 
-        // Á¤È®ÇÏ°Ô ¹®ÀÌ ´İÈù À§Ä¡·Î ¼³Á¤
+        // ì •í™•í•˜ê²Œ ë¬¸ì´ ë‹«íŒ ìœ„ì¹˜ë¡œ ì„¤ì •
         transform.position = closedPosition;
     }
 }

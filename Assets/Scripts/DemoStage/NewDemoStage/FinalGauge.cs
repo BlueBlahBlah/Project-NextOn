@@ -12,7 +12,6 @@ public class FinalGauge : MonoBehaviour
     {
         slider = GetComponent<Slider>();
         slider.value = 100;
-        
     }
 
     public void DecreaseGauge_Coriutine()
@@ -22,7 +21,7 @@ public class FinalGauge : MonoBehaviour
 
     IEnumerator DecreaseGauge()
     {
-        float duration = 100f; // Set duration to 100 seconds
+        float duration = 100f; 
         float timer = 0f;
         float initialValue = slider.value;
         float targetValue = 0f;
@@ -35,16 +34,17 @@ public class FinalGauge : MonoBehaviour
             yield return null;
         }
 
-        slider.value = targetValue; // Ensure the value is exactly zero
-        MonsterManager.Instance.FinalPeiz = false;      //?´ì œ ëª¬ìŠ¤??ê·¸ë§Œ ?ì„±
-        EventManager.Instance.LastPeizDone();           //ëª¨ë“  ëª¬ìŠ¤??ì²˜ì¹˜
+        slider.value = targetValue; 
+        MonsterManager.Instance.FinalPeiz = false;      
+        EventManager.Instance.LastPeizDone();           
         
         if (LastPeizDone == false)
         {
             LastPeizDone = true;
-            EventManager.Instance.PrintMSG();               //?¤ìŒ ?€?”ì°½
-            EventManager.Instance.CancelBulletSupply();     //??ë³´ì¶© ?„ì´???œë ê·¸ë§Œ
-            EventManager.Instance.CancelDropItem();         //?œë¤ ?¤í‚¬ ?„ì´???œë ê·¸ë§Œ
-            EventManager.Instance.fadeout();                //?”ë©´ ê²€?€?‰ìœ¼ë¡?        }
+            EventManager.Instance.PrintMSG();               
+            EventManager.Instance.CancelBulletSupply();     
+            EventManager.Instance.CancelDropItem();         
+            EventManager.Instance.fadeout();                
+        }
     }
 }

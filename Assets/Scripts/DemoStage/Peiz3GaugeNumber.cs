@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +20,6 @@ public class Peiz3GaugeNumber : MonoBehaviour
     void Update()
     {
         guage = (float)Peiz3Gauge.slider.value;
-        textMeshPro.text = "컴파?�러�?고치??�?. " +  guage.ToString("F2") + "%";
+        textMeshPro.text = "而댄뙆?쇰윭瑜?怨좎튂??以?. " +  guage.ToString("F2") + "%";
     }
 }

@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CloseDoor : MonoBehaviour
 {
-    public float duration = 2.0f; // È¸ÀüÀÌ ¿Ï·áµÉ ½Ã°£(ÃÊ)
+    public float duration = 2.0f; // íšŒì „ì´ ì™„ë£Œë  ì‹œê°„(ì´ˆ)
     private float elapsedTime = 0.0f;
     private Quaternion startRotation;
     private Quaternion endRotation;
@@ -27,11 +27,11 @@ public class CloseDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // °æ°ú ½Ã°£À» Áõ°¡½ÃÅ´
+        // ê²½ê³¼ ì‹œê°„ì„ ì¦ê°€ì‹œí‚´
         elapsedTime += Time.deltaTime;
 
-        // °æ°úµÈ ½Ã°£ ºñÀ²¿¡ µû¶ó È¸Àü °ªÀ» Lerp·Î °è»ê
-        float t = Mathf.Clamp01(elapsedTime / duration); // 0¿¡¼­ 1 »çÀÌÀÇ °ªÀ» ¾òÀ½
+        // ê²½ê³¼ëœ ì‹œê°„ ë¹„ìœ¨ì— ë”°ë¼ íšŒì „ ê°’ì„ Lerpë¡œ ê³„ì‚°
+        float t = Mathf.Clamp01(elapsedTime / duration); // 0ì—ì„œ 1 ì‚¬ì´ì˜ ê°’ì„ ì–»ìŒ
         transform.localRotation = Quaternion.Lerp(startRotation, endRotation, t);
     }
 }

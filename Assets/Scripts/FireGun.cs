@@ -16,7 +16,7 @@ public class FireGun : GunBase
         base.Update();
 
         // 사격 중이 아닐 때는 화염 비활성화
-        if (Effect != null && !fireBtnDown)
+        if (Effect != null && !IsFiring)
         {
             var flame = Effect.GetComponent<FireGunFlame>();
             if (flame != null) flame.active = false;

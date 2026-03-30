@@ -3,16 +3,17 @@ using UnityEngine;
 namespace ProjectNextOn.Data
 {
     /// <summary>
-    /// 무기가 ?�닌 ?�수???�킬 ?�이??Turret, Helicopter, Bomb ?????�용?�는 ?�이???�래?�입?�다.
+    /// 무기가 아닌 특수 스킬(Turret, Helicopter, Bomb 등)에서 사용하는 데이터 클래스입니다.
     /// </summary>
     [CreateAssetMenu(fileName = "NewSkillData", menuName = "Data/SkillData")]
     public class SkillData : BaseData
     {
-        [Header("?�킬 ?�세 ?�정")]
-        public float duration;      // ?�킬 지???�간
-        public float cooldown;      // ?�킬 쿨�???        
-        [Header("?�과 관??)]
-        public float effectRadius;  // ?�향 범위
-        public int effectValue;     // ?��?지???�복?????�치
+        [Header("스킬 상세 설정")]
+        public float duration;      // 스킬 지속 시간
+        public float cooldown;      // 스킬 쿨타임        
+        
+        [Header("효과 관련")]
+        public float effectRadius;  // 영향 범위
+        public int effectValue;     // 데미지 회복 수치
     }
 }

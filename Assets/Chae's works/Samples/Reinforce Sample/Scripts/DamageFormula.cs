@@ -1,15 +1,15 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class DamageFormula
 {
-    // Damage Àû¿ë ±ÔÄ¢
-    // 1. ÀÏ¹İ °ø°İÀÇ Damage´Â ÇÃ·¹ÀÌ¾îÀÇ Damage ½ºÅÈ¿¡ ±â¹İÇÏ¿© ¿¬»ê
-    // 2. ½ºÅ³ÀÇ Damage´Â ÇÃ·¹ÀÌ¾îÀÇ SkillDamage ½ºÅÈ¿¡ ±â¹İÇÏ¿© ¿¬»ê
-    // 3. Ä¡¸íÅ¸ÀÇ °æ¿ì, À§ ¿¬»êÀÌ ³¡³­ µÚ ÃÖÁ¾ÀûÀ¸·Î Crit Damage ½ºÅÈ¿¡ ±â¹İÇÏ¿© ¿¬»ê
-    // 4. ¿¬»êÀÌ ³¡³­ Damage µéÀÇ Á¤º¸´Â PlayerStatManager ¿¡ ÀúÀåµÇ°í, Damage¸¦ ÀÔÈ÷´Â °³Ã¼µéÀÌ
-    //  ÀÌ Á¤º¸¸¦ °¡Á®°¡¼­ °¢°¢ÀÇ °è¼ö¸¦ Àû¿ëÇÏ¿© »ç¿ëµÉ ¿¹Á¤
+    // Damage ì ìš© ê·œì¹™
+    // 1. ì¼ë°˜ ê³µê²©ì˜ DamageëŠ” í”Œë ˆì´ì–´ì˜ Damage ìŠ¤íƒ¯ì— ê¸°ë°˜í•˜ì—¬ ì—°ì‚°
+    // 2. ìŠ¤í‚¬ì˜ DamageëŠ” í”Œë ˆì´ì–´ì˜ SkillDamage ìŠ¤íƒ¯ì— ê¸°ë°˜í•˜ì—¬ ì—°ì‚°
+    // 3. ì¹˜ëª…íƒ€ì˜ ê²½ìš°, ìœ„ ì—°ì‚°ì´ ëë‚œ ë’¤ ìµœì¢…ì ìœ¼ë¡œ Crit Damage ìŠ¤íƒ¯ì— ê¸°ë°˜í•˜ì—¬ ì—°ì‚°
+    // 4. ì—°ì‚°ì´ ëë‚œ Damage ë“¤ì˜ ì •ë³´ëŠ” PlayerStatManager ì— ì €ì¥ë˜ê³ , Damageë¥¼ ì…íˆëŠ” ê°œì²´ë“¤ì´
+    //  ì´ ì •ë³´ë¥¼ ê°€ì ¸ê°€ì„œ ê°ê°ì˜ ê³„ìˆ˜ë¥¼ ì ìš©í•˜ì—¬ ì‚¬ìš©ë  ì˜ˆì •
 
     public static float UpdateDamage()
     {

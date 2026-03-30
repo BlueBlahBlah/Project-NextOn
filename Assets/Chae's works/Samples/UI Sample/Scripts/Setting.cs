@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -13,17 +13,17 @@ public class Setting : MonoBehaviour
 
     void Start()
     {
-        // ¾À ·Îµå ¶Ç´Â UI È°¼ºÈ­ ½Ã ½ºÅ©·Ñ¹ÙÀÇ ÃÊ±â À§Ä¡¸¦ ¼³Á¤
+        // ì”¬ ë¡œë“œ ë˜ëŠ” UI í™œì„±í™” ì‹œ ìŠ¤í¬ë¡¤ë°”ì˜ ì´ˆê¸° ìœ„ì¹˜ë¥¼ ì„¤ì •
         InitializeScrollBars();
     }
 
     void OnEnable()
     {
-        // UI°¡ ´Ù½Ã È°¼ºÈ­µÉ ¶§ ½ºÅ©·Ñ¹ÙÀÇ ÃÊ±â À§Ä¡¸¦ ¼³Á¤
+        // UIê°€ ë‹¤ì‹œ í™œì„±í™”ë  ë•Œ ìŠ¤í¬ë¡¤ë°”ì˜ ì´ˆê¸° ìœ„ì¹˜ë¥¼ ì„¤ì •
         InitializeScrollBars();
     }
 
-    // BGM º¼·ı ¼³Á¤ ¸Ş¼­µå
+    // BGM ë³¼ë¥¨ ì„¤ì • ë©”ì„œë“œ
     public void SetBgmVolume()
     {
         if (0 <= BgmScrollBar.value && BgmScrollBar.value <= 0.125f)
@@ -48,21 +48,21 @@ public class Setting : MonoBehaviour
         }
     }
 
-    // BGM À½¼Ò°Å Åä±Û
+    // BGM ìŒì†Œê±° í† ê¸€
     public void SetBgmMute()
     {
         if (!SoundManager.instance.isBgmMute)
         {
             BgmScrollBar.interactable = false;
-            SoundManager.instance.SetMusicVolume(0f);  // À½¼Ò°Å ½Ã º¼·ıÀ» 0À¸·Î ¼³Á¤
+            SoundManager.instance.SetMusicVolume(0f);  // ìŒì†Œê±° ì‹œ ë³¼ë¥¨ì„ 0ìœ¼ë¡œ ì„¤ì •
             SoundManager.instance.isBgmMute = true;
         }
         else
         {
             BgmScrollBar.interactable = true;
 
-            // À½¼Ò°Å ÇØÁ¦ ÈÄ º¼·ıÀ» ½ºÅ©·Ñ¹Ù °ªÀ¸·Î ¼³Á¤
-            float currentVolume = BgmScrollBar.value;  // ½ºÅ©·Ñ¹Ù °ª ÀúÀå
+            // ìŒì†Œê±° í•´ì œ í›„ ë³¼ë¥¨ì„ ìŠ¤í¬ë¡¤ë°” ê°’ìœ¼ë¡œ ì„¤ì •
+            float currentVolume = BgmScrollBar.value;  // ìŠ¤í¬ë¡¤ë°” ê°’ ì €ì¥
             if (currentVolume <= 0.125f)
             {
                 SoundManager.instance.SetMusicVolume(0.06f);
@@ -88,10 +88,10 @@ public class Setting : MonoBehaviour
         }
     }
 
-    // SE º¼·ı ¼³Á¤ ¸Ş¼­µå
+    // SE ë³¼ë¥¨ ì„¤ì • ë©”ì„œë“œ
     public void SetSEVolume()
     {
-        // SE º¼·ıÀ» Scrollbar °ª¿¡ µû¶ó ¼³Á¤
+        // SE ë³¼ë¥¨ì„ Scrollbar ê°’ì— ë”°ë¼ ì„¤ì •
         if (0 <= SEScrollBar.value && SEScrollBar.value <= 0.125f)
         {
             SoundManager.instance.SetEffectsVolume(0.2f);
@@ -114,7 +114,7 @@ public class Setting : MonoBehaviour
         }
     }
 
-    // SE À½¼Ò°Å Åä±Û
+    // SE ìŒì†Œê±° í† ê¸€
     public void SetSEMute()
     {
         if (!SoundManager.instance.isSEMute)
@@ -127,8 +127,8 @@ public class Setting : MonoBehaviour
         {
             SEScrollBar.interactable = true;
 
-            // SE À½¼Ò°Å ÇØÁ¦ ÈÄ º¼·ıÀ» ½ºÅ©·Ñ¹Ù °ªÀ¸·Î ¼³Á¤
-            float currentVolume = SEScrollBar.value;  // ½ºÅ©·Ñ¹Ù °ª ÀúÀå
+            // SE ìŒì†Œê±° í•´ì œ í›„ ë³¼ë¥¨ì„ ìŠ¤í¬ë¡¤ë°” ê°’ìœ¼ë¡œ ì„¤ì •
+            float currentVolume = SEScrollBar.value;  // ìŠ¤í¬ë¡¤ë°” ê°’ ì €ì¥
             if (currentVolume <= 0.125f)
             {
                 SoundManager.instance.SetEffectsVolume(0.2f);
@@ -154,15 +154,15 @@ public class Setting : MonoBehaviour
         }
     }
 
-    // ½ºÅ©·Ñ¹Ù ÃÊ±âÈ­ ¸Ş¼­µå
+    // ìŠ¤í¬ë¡¤ë°” ì´ˆê¸°í™” ë©”ì„œë“œ
     private void InitializeScrollBars()
     {
-        // BGM Scrollbar ÃÊ±âÈ­
+        // BGM Scrollbar ì´ˆê¸°í™”
 
         if (SoundManager.instance.isBgmMute)
         {
             BgmScrollBar.interactable = false;
-            BgmScrollBar.value = 0f;  // À½¼Ò°Å »óÅÂ¿¡¼­´Â ½ºÅ©·Ñ¹Ù °ªÀ» 0À¸·Î ¼³Á¤
+            BgmScrollBar.value = 0f;  // ìŒì†Œê±° ìƒíƒœì—ì„œëŠ” ìŠ¤í¬ë¡¤ë°” ê°’ì„ 0ìœ¼ë¡œ ì„¤ì •
             SoundManager.instance.SetMusicVolume(0f);
         }
         else
@@ -192,12 +192,12 @@ public class Setting : MonoBehaviour
         }
 
 
-        // SE Scrollbar ÃÊ±âÈ­
+        // SE Scrollbar ì´ˆê¸°í™”
 
         if (SoundManager.instance.isSEMute)
         {
             SEScrollBar.interactable = false;
-            SEScrollBar.value = 0f;  // À½¼Ò°Å »óÅÂ¿¡¼­´Â ½ºÅ©·Ñ¹Ù °ªÀ» 0À¸·Î ¼³Á¤
+            SEScrollBar.value = 0f;  // ìŒì†Œê±° ìƒíƒœì—ì„œëŠ” ìŠ¤í¬ë¡¤ë°” ê°’ì„ 0ìœ¼ë¡œ ì„¤ì •
             SoundManager.instance.SetEffectsVolume(0f);
         }
         else

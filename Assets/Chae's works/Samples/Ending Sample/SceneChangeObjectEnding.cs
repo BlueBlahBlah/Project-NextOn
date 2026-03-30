@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
@@ -11,7 +11,7 @@ public class SceneChangeObjectEnding : MonoBehaviour
     {
         if (volumeController == null)
         {
-            // »õ·Î¿î GameObject¸¦ ¸¸µé°í VolumeController¸¦ Ãß°¡
+            // ìƒˆë¡œìš´ GameObjectë¥¼ ë§Œë“¤ê³  VolumeControllerë¥¼ ì¶”ê°€
             if (GameObject.Find("VolumeController") != null)
             {
                 volumeController = GameObject.Find("VolumeController").GetComponent<VolumeController>();

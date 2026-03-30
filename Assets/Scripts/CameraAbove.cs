@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,11 +19,11 @@ public class CameraAbove : MonoBehaviour
     {
         if (operating == false)
         {
-            // ?�로???�치 ?�정
+            // ?덈줈???꾩튂 ?ㅼ젙
             Vector3 newPosition = new Vector3(Player.transform.position.x, Player.transform.position.y + 12f, Player.transform.position.z - 6f);
             transform.position = newPosition;
 
-            // ?�전 ?�정
+            // ?뚯쟾 ?ㅼ젙
             transform.rotation = Quaternion.Euler(55f, 0f, 0f);
         }
         
@@ -40,7 +40,7 @@ public class CameraAbove : MonoBehaviour
         Vector3 targetDirection = (BigMonLocation.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
 
-        float duration = 3f; // ?�전?�는 ??걸리???�간 (�?
+        float duration = 3f; // ?뚯쟾?섎뒗 ??嫄몃━???쒓컙 (珥?
         float timer = 0f;
 
         Quaternion initialRotation = transform.rotation;
@@ -53,7 +53,7 @@ public class CameraAbove : MonoBehaviour
             yield return null;
         }
 
-        transform.rotation = targetRotation; // ?�전???�료?�면 ?�확??방향?�로 ?�정
+        transform.rotation = targetRotation; // ?뚯쟾???꾨즺?섎㈃ ?뺥솗??諛⑺뼢?쇰줈 ?ㅼ젙
         Invoke("CameraReturn", 2f);
     }
 

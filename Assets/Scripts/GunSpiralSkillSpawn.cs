@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,25 +8,25 @@ public class GunSpiralSkillSpawn : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        // 충돌??물체가 Player ?�그�?가�?경우
+        // 異⑸룎??臾쇱껜媛 Player ?쒓렇瑜?媛吏?寃쎌슦
         if (other.CompareTag("Player"))
         {
-            // "Enemy" ?�그�?가�?가??가까운 게임 ?�브?�트�?찾음
+            // "Enemy" ?쒓렇瑜?媛吏?媛??媛源뚯슫 寃뚯엫 ?ㅻ툕?앺듃瑜?李얠쓬
             GameObject nearestEnemy = FindNearestEnemy();
 
-            // ?�이 발견?�면
+            // ?곸씠 諛쒓껄?섎㈃
             if (nearestEnemy != null)
             {
-                // 가??가까운 ?�의 ?�치�??�음
+                // 媛??媛源뚯슫 ?곸쓽 ?꾩튂瑜??살쓬
                 Vector3 enemyPosition = nearestEnemy.transform.position;
 
-                // ?�당 ?�치???�킬???�성
+                // ?대떦 ?꾩튂???ㅽ궗???앹꽦
                 Instantiate(Skill, enemyPosition, Quaternion.identity);
             }
         }
     }
 
-    // "Enemy" ?�그�?가�?가??가까운 게임 ?�브?�트�?찾는 ?�수
+    // "Enemy" ?쒓렇瑜?媛吏?媛??媛源뚯슫 寃뚯엫 ?ㅻ툕?앺듃瑜?李얜뒗 ?⑥닔
     private GameObject FindNearestEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

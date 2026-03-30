@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ public class FlockManager : MonoBehaviour
                                                                 Random.Range(-swimLimits.y, swimLimits.y),
                                                                 Random.Range(-swimLimits.z, swimLimits.z));
             
-            // Quaternion.Euler�??�용?�여 ?�하???�전값을 ?�정
+            // Quaternion.Euler瑜??ъ슜?섏뿬 ?먰븯???뚯쟾媛믪쓣 ?ㅼ젙
             Quaternion rotation = Quaternion.Euler(-90, 0, 0);
             allDuck[i] = Instantiate(duckPrefab, pos, rotation);
         }

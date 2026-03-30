@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +6,9 @@ using TMPro;
 
 public class FallingText : MonoBehaviour
 {
-    public TextMeshProUGUI fallingText; // µå·¡±× ¾Ø µå·ÓÀ¸·Î ÅØ½ºÆ® UI¸¦ ¿¬°áÇÏ¼¼¿ä.
-    public float fallSpeed = 200f; // ÅØ½ºÆ®°¡ ¶³¾îÁö´Â ¼Óµµ.
-    public float destroyTime = 3f; // ÅØ½ºÆ®°¡ È­¸é¿¡¼­ »ç¶óÁö´Â ½Ã°£.
+    public TextMeshProUGUI fallingText; // ë“œë˜ê·¸ ì•¤ ë“œë¡­ìœ¼ë¡œ í…ìŠ¤íŠ¸ UIë¥¼ ì—°ê²°í•˜ì„¸ìš”.
+    public float fallSpeed = 200f; // í…ìŠ¤íŠ¸ê°€ ë–¨ì–´ì§€ëŠ” ì†ë„.
+    public float destroyTime = 3f; // í…ìŠ¤íŠ¸ê°€ í™”ë©´ì—ì„œ ì‚¬ë¼ì§€ëŠ” ì‹œê°„.
 
     public RectTransform canvasRect;
 
@@ -16,17 +16,17 @@ public class FallingText : MonoBehaviour
 
     void Start()
     {
-        // Canvas RectTransformÀ» Ã£¾Æ ¼³Á¤
+        // Canvas RectTransformì„ ì°¾ì•„ ì„¤ì •
         canvasRect = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
 
-        // °¢ ±¸¿ªÀÇ ½ÃÀÛ°ú ³¡ ÁÂÇ¥ °è»ê
+        // ê° êµ¬ì—­ì˜ ì‹œì‘ê³¼ ë ì¢Œí‘œ ê³„ì‚°
         float startX;
         float endX;
 
-        // alpha°¡ 2ÀÏ ¶§ Æ¯¼öÇÑ ±ÔÄ¢ Àû¿ë
+        // alphaê°€ 2ì¼ ë•Œ íŠ¹ìˆ˜í•œ ê·œì¹™ ì ìš©
         if (alpha == 2)
         {
-            // 2¹øÂ°, 3¹øÂ°, 5¹øÂ° ±¸¿ª¿¡¼­ ½ºÆùµÇµµ·Ï ¼³Á¤
+            // 2ë²ˆì§¸, 3ë²ˆì§¸, 5ë²ˆì§¸ êµ¬ì—­ì—ì„œ ìŠ¤í°ë˜ë„ë¡ ì„¤ì •
             if (Random.Range(0, 3) == 0)
             {
                 startX = -960 + (384 * 1);
@@ -45,28 +45,28 @@ public class FallingText : MonoBehaviour
         }
         else
         {
-            // ÀÏ¹İÀûÀÎ ±¸¿ª ¼³Á¤
+            // ì¼ë°˜ì ì¸ êµ¬ì—­ ì„¤ì •
             startX = -960 + (384 * (alpha - 1));
             endX = startX + 384;
         }
 
-        // ·£´ıÇÑ X ÁÂÇ¥ ¼³Á¤
+        // ëœë¤í•œ X ì¢Œí‘œ ì„¤ì •
         float randomX = Random.Range(startX, endX);
 
-        // CanvasÀÇ Áß¾Ó ÁÂÇ¥¸¦ °è»ê
+        // Canvasì˜ ì¤‘ì•™ ì¢Œí‘œë¥¼ ê³„ì‚°
         Vector2 canvasCenter = new Vector2(canvasRect.rect.width / 2, canvasRect.rect.height / 2);
 
-        // ÃÊ±â À§Ä¡ ¼³Á¤ (·£´ıÇÑ x À§Ä¡¿¡ Y ÁÂÇ¥´Â Äµ¹ö½ºÀÇ »ó´ÜÀ¸·Î ¼³Á¤)
+        // ì´ˆê¸° ìœ„ì¹˜ ì„¤ì • (ëœë¤í•œ x ìœ„ì¹˜ì— Y ì¢Œí‘œëŠ” ìº”ë²„ìŠ¤ì˜ ìƒë‹¨ìœ¼ë¡œ ì„¤ì •)
         fallingText.rectTransform.anchoredPosition = new Vector2(randomX, canvasCenter.y);
 
-        // ÀÏÁ¤ ½Ã°£ ÈÄ ¿ÀºêÁ§Æ®¸¦ ÆÄ±«
+        // ì¼ì • ì‹œê°„ í›„ ì˜¤ë¸Œì íŠ¸ë¥¼ íŒŒê´´
         Destroy(gameObject, destroyTime);
     }
 
 
     void Update()
     {
-        // ÅØ½ºÆ®°¡ ¾Æ·¡·Î ¶³¾îÁöµµ·Ï ÇÔ
+        // í…ìŠ¤íŠ¸ê°€ ì•„ë˜ë¡œ ë–¨ì–´ì§€ë„ë¡ í•¨
         fallingText.rectTransform.anchoredPosition -= new Vector2(0, fallSpeed * Time.deltaTime);
     }
 }

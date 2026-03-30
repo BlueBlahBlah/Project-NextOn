@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -32,19 +32,19 @@ public class Scenario_1 : MonoBehaviour
         if(child.name == "1_Trigger" && !is1_TriggerPass)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(),180);
-            Debug.Log("´ë»ç ¿©±ä¾îµğÁö? ÁÖº¯À» µÑ·¯º¸ÀÚ");
+            Debug.Log("ëŒ€ì‚¬ ì—¬ê¸´ì–´ë””ì§€? ì£¼ë³€ì„ ë‘˜ëŸ¬ë³´ì");
             is1_TriggerPass=true;
         }
         if(child.name == "LightRayRound" && !is_End)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 204);
-            Debug.Log("´ë»ç ÄÄÆÄÀÏ·¯... Àç½ÃÀÛ ÇÊ¿ä...\r\n´©¼ö ¹æÁö ÇÁ·Î±×·¥... ÀÛµ¿ ÇÊ¿ä...\r\n\r\nÀÌ°Ô ³»°¡ ÇØ¾ßÇÏ´Â ÀÏµéÀÎ°¡?\r\nÀÏ´Ü ´©¼öµÈºÎºĞÀ» ¸·´Â°Å ºÎÅÍ ÇØº¸ÀÚ");
+            Debug.Log("ëŒ€ì‚¬ ì»´íŒŒì¼ëŸ¬... ì¬ì‹œì‘ í•„ìš”...\r\nëˆ„ìˆ˜ ë°©ì§€ í”„ë¡œê·¸ë¨... ì‘ë™ í•„ìš”...\r\n\r\nì´ê²Œ ë‚´ê°€ í•´ì•¼í•˜ëŠ” ì¼ë“¤ì¸ê°€?\r\nì¼ë‹¨ ëˆ„ìˆ˜ëœë¶€ë¶„ì„ ë§‰ëŠ”ê±° ë¶€í„° í•´ë³´ì");
             is_End=true;
         }
         if (child.name == "Prob" & other.name.Length > 2)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 192);
-            Debug.Log("´ë»ç ¹«±â¸¦ ¹ß°ßÇß´Ù\r\nÀÌ°Ô ¿Ö ¿©±â ÀÖ´ÂÁö´Â ¸ğ¸£°ÚÁö¸¸, ¾ø´Â°Åº¸´Ù´Â...");
+            Debug.Log("ëŒ€ì‚¬ ë¬´ê¸°ë¥¼ ë°œê²¬í–ˆë‹¤\r\nì´ê²Œ ì™œ ì—¬ê¸° ìˆëŠ”ì§€ëŠ” ëª¨ë¥´ê² ì§€ë§Œ, ì—†ëŠ”ê±°ë³´ë‹¤ëŠ”...");
             for(int i=0;i < WeaponSpawn.Length; i++)
             {
                 WeaponSpawn[i].gameObject.SetActive(false);

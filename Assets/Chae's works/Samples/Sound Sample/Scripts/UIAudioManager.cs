@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -19,11 +19,11 @@ public class UIAudioManager : MonoBehaviour
                 if (button != null)
                 {
                     button.onClick.AddListener(() => PlaySound(soundName));
-                    Debug.Log("Button »ç¿îµå µî·Ï ¿Ï·á");
+                    Debug.Log("Button ì‚¬ìš´ë“œ ë“±ë¡ ì™„ë£Œ");
                 }
                 else
                 {
-                    Debug.LogWarning("Button ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù.");
+                    Debug.LogWarning("Button ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
                 }
                 break;
             case 1: // Toggle
@@ -31,11 +31,11 @@ public class UIAudioManager : MonoBehaviour
                 if (toggle != null)
                 {
                     toggle.onValueChanged.AddListener((value) => PlaySound(soundName));
-                    Debug.Log("Toggle »ç¿îµå µî·Ï ¿Ï·á");
+                    Debug.Log("Toggle ì‚¬ìš´ë“œ ë“±ë¡ ì™„ë£Œ");
                 }
                 else
                 {
-                    Debug.LogWarning("Toggle ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù.");
+                    Debug.LogWarning("Toggle ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
                 }
                 break;
             case 2: // Slider
@@ -43,11 +43,11 @@ public class UIAudioManager : MonoBehaviour
                 if (slider != null)
                 {
                     slider.onValueChanged.AddListener((value) => PlaySound(soundName));
-                    Debug.Log("Slider »ç¿îµå µî·Ï ¿Ï·á");
+                    Debug.Log("Slider ì‚¬ìš´ë“œ ë“±ë¡ ì™„ë£Œ");
                 }
                 else
                 {
-                    Debug.LogWarning("Slider ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù.");
+                    Debug.LogWarning("Slider ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
                 }
                 break;
             case 3: // ScrollRect
@@ -55,15 +55,15 @@ public class UIAudioManager : MonoBehaviour
                 if (scrollRect != null)
                 {
                     scrollRect.onValueChanged.AddListener((value) => PlaySound(soundName));
-                    Debug.Log("ScrollRect »ç¿îµå µî·Ï ¿Ï·á");
+                    Debug.Log("ScrollRect ì‚¬ìš´ë“œ ë“±ë¡ ì™„ë£Œ");
                 }
                 else
                 {
-                    Debug.LogWarning("ScrollRect ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù.");
+                    Debug.LogWarning("ScrollRect ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
                 }
                 break;
             default:
-                Debug.LogError("À¯È¿ÇÏÁö ¾ÊÀº uiTypeÀÔ´Ï´Ù.");
+                Debug.LogError("ìœ íš¨í•˜ì§€ ì•Šì€ uiTypeì…ë‹ˆë‹¤.");
                 break;
         }
     }
@@ -74,101 +74,4 @@ public class UIAudioManager : MonoBehaviour
         SoundManager.instance.PlayEffectSound("UISound/" + soundFileName, 1f);
     }
 
-
-
-    /*
-    // »ç¿îµå Å¬¸³À» ÇÒ´çÇÒ ¼ö ÀÖ´Â °ø°³ º¯¼ö
-    [Header("UI Interaction Sounds")]
-    public string buttonClickSound = "ButtonClick";
-    public string toggleOnSound = "ToggleOn";
-    public string toggleOffSound = "ToggleOff";
-    public string sliderMoveSound = "SliderMove";
-    public string scrollSound = "Scroll";
-
-    // ÃÊ±âÈ­ ½Ã UI ¿ä¼ÒÀÇ ÀÌº¥Æ®¿¡ ±¸µ¶ÇÏ´Â ¸Ş¼­µå
-    private void Start()
-    {
-        // ¸ğµç Button ÄÄÆ÷³ÍÆ® Ã£±â
-        Button[] buttons = GetComponentsInChildren<Button>(true);
-        foreach (Button button in buttons)
-        {
-            Debug.Log("Add Buttons");
-            button.onClick.AddListener(() => PlayButtonClickSound());
-        }
-
-        // ¸ğµç Toggle ÄÄÆ÷³ÍÆ® Ã£±â
-        Toggle[] toggles = GetComponentsInChildren<Toggle>(true);
-        foreach (Toggle toggle in toggles)
-        {
-            toggle.onValueChanged.AddListener((isOn) => PlayToggleSound(isOn));
-        }
-
-        // ¸ğµç Slider ÄÄÆ÷³ÍÆ® Ã£±â
-        Slider[] sliders = GetComponentsInChildren<Slider>(true);
-        foreach (Slider slider in sliders)
-        {
-            // ½½¶óÀÌ´õ °ªÀÌ º¯°æµÉ ¶§¸¶´Ù »ç¿îµå Àç»ı
-            slider.onValueChanged.AddListener((value) => PlaySliderSound());
-        }
-
-        // ¸ğµç ScrollRect ÄÄÆ÷³ÍÆ® Ã£±â
-        ScrollRect[] scrollRects = GetComponentsInChildren<ScrollRect>(true);
-        foreach (ScrollRect scrollRect in scrollRects)
-        {
-            // ScrollRectÀÇ OnValueChanged ÀÌº¥Æ®¿¡ »ç¿îµå Àç»ı
-            scrollRect.onValueChanged.AddListener((value) => PlayScrollSound());
-        }
-
-        // ±âÅ¸ UI ¿ä¼Òµé¿¡ ´ëÇÑ Ãß°¡ÀûÀÎ ÀÌº¥Æ® ±¸µ¶Àº ¿©±â¿¡ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.
-    }
-
-    // ¹öÆ° Å¬¸¯ ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
-    private void PlayButtonClickSound()
-    {
-        if (!string.IsNullOrEmpty(buttonClickSound))
-        {
-            Debug.Log("Click Sound Trigger");
-            SoundManager.instance.PlayEffectSound(buttonClickSound, 1f);
-        }
-    }
-
-    // Åä±Û º¯°æ ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
-    private void PlayToggleSound(bool isOn)
-    {
-        if (isOn)
-        {
-            if (!string.IsNullOrEmpty(toggleOnSound))
-            {
-                SoundManager.instance.PlayEffectSound(toggleOnSound, 1f);
-            }
-        }
-        else
-        {
-            if (!string.IsNullOrEmpty(toggleOffSound))
-            {
-                SoundManager.instance.PlayEffectSound(toggleOffSound, 1f);
-            }
-        }
-    }
-
-    // ½½¶óÀÌ´õ Á¶Àı ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
-    private void PlaySliderSound()
-    {
-        if (!string.IsNullOrEmpty(sliderMoveSound))
-        {
-            SoundManager.instance.PlayEffectSound(sliderMoveSound, 0.5f); // ½½¶óÀÌ´õ´Â ÀÚÁÖ º¯°æµÇ¹Ç·Î º¼·ıÀ» ³·Ãã
-        }
-    }
-
-    // ½ºÅ©·Ñ Á¶Àı ½Ã È£ÃâµÇ´Â ¸Ş¼­µå
-    private void PlayScrollSound()
-    {
-        if (!string.IsNullOrEmpty(scrollSound))
-        {
-            SoundManager.instance.PlayEffectSound(scrollSound, 0.5f); // ½ºÅ©·Ñµµ ÀÚÁÖ º¯°æµÇ¹Ç·Î º¼·ıÀ» ³·Ãã
-        }
-    }
-
-    // ÇÊ¿ä¿¡ µû¶ó Ãß°¡ÀûÀÎ UI »óÈ£ÀÛ¿ë ÀÌº¥Æ® ÇÚµé·¯¸¦ ±¸ÇöÇÒ ¼ö ÀÖ½À´Ï´Ù.
-    */
 }

@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
 
-    // Camera¿¡ Á÷Á¢ ³Ö´Â ½ºÅ©¸³Æ®
+    // Cameraì— ì§ì ‘ ë„£ëŠ” ìŠ¤í¬ë¦½íŠ¸
 
     [SerializeField]
     Transform _player;
@@ -13,19 +13,19 @@ public class CameraController : MonoBehaviour
     Transform _target;
     Transform _camera;
 
-    float _dist = 5f; // player¿Í target »çÀÌÀÇ °Å¸®
-    Vector3 _playerSide; // camera°¡ player·ÎºÎÅÍ ¾ó¸¶³ª ¿·À¸·Î °¡´ÂÁö <- ÁÜ »óÅÂÀÏ °æ¿ì »ìÂ¦ º¯°æ
-    Vector3 _playerHeight; // camera°¡ player·ÎºÎÅÍ ¾ó¸¶³ª À§·Î °¡´ÂÁö
-    Vector3 _targetpos; // targetÀÇ x, z ÁÂÇ¥¸¦ ÀúÀåÇÒ º¯¼ö
-    Vector3 _camerapos; // dist¸¦ °í·Á ¾È ÇÑ cameraÀÇ ÃÊ±â À§Ä¡
-    Vector3 _reverseDist; // player¿Í target »çÀÌÀÇ °Å¸®¿¡ ºñ·ÊÇØ¼­ camera°¡ ¾ó¸¶³ª ÇÃ·¹ÀÌ¾îÀÇ µÚ·Î °¡´ÂÁö
+    float _dist = 5f; // playerì™€ target ì‚¬ì´ì˜ ê±°ë¦¬
+    Vector3 _playerSide; // cameraê°€ playerë¡œë¶€í„° ì–¼ë§ˆë‚˜ ì˜†ìœ¼ë¡œ ê°€ëŠ”ì§€ <- ì¤Œ ìƒíƒœì¼ ê²½ìš° ì‚´ì§ ë³€ê²½
+    Vector3 _playerHeight; // cameraê°€ playerë¡œë¶€í„° ì–¼ë§ˆë‚˜ ìœ„ë¡œ ê°€ëŠ”ì§€
+    Vector3 _targetpos; // targetì˜ x, z ì¢Œí‘œë¥¼ ì €ì¥í•  ë³€ìˆ˜
+    Vector3 _camerapos; // distë¥¼ ê³ ë ¤ ì•ˆ í•œ cameraì˜ ì´ˆê¸° ìœ„ì¹˜
+    Vector3 _reverseDist; // playerì™€ target ì‚¬ì´ì˜ ê±°ë¦¬ì— ë¹„ë¡€í•´ì„œ cameraê°€ ì–¼ë§ˆë‚˜ í”Œë ˆì´ì–´ì˜ ë’¤ë¡œ ê°€ëŠ”ì§€
 
-    public bool _isZoom; // ÁÜ ¿©ºÎ
+    public bool _isZoom; // ì¤Œ ì—¬ë¶€
     public float _toggle;
 
-    public bool _isShake; // Ä«¸Ş¶ó shake ¿©ºÎ
-    public float _ShakeAmount; // shake °­µµ
-    public float _ShakeTime; // shake Áö¼Ó½Ã°£
+    public bool _isShake; // ì¹´ë©”ë¼ shake ì—¬ë¶€
+    public float _ShakeAmount; // shake ê°•ë„
+    public float _ShakeTime; // shake ì§€ì†ì‹œê°„
 
     void Start()
     {
@@ -52,10 +52,10 @@ public class CameraController : MonoBehaviour
 
     void AutoTargeting()
     {
-        // targetÀÇ À§Ä¡¸¦ ±â¹İÀ¸·Î playerÀÇ ½ÃÁ¡ Á¶Á¤
+        // targetì˜ ìœ„ì¹˜ë¥¼ ê¸°ë°˜ìœ¼ë¡œ playerì˜ ì‹œì  ì¡°ì •
 
 
-        // playerÀÇ À§Ä¡¿Í target°úÀÇ °Å¸®¸¦ ±â¹İÀ¸·Î cameraÀÇ À§Ä¡ Á¶Á¤
+        // playerì˜ ìœ„ì¹˜ì™€ targetê³¼ì˜ ê±°ë¦¬ë¥¼ ê¸°ë°˜ìœ¼ë¡œ cameraì˜ ìœ„ì¹˜ ì¡°ì •
         if(_target == null)
         {
             TargetNotExist();
@@ -67,7 +67,7 @@ public class CameraController : MonoBehaviour
 
         if (!_isZoom)
         {
-            if (_dist >= 3f) // ³Ê¹« °¡±õ°Å³ª ¸Ö °æ¿ì¿¡ ÀûÀıÈ÷ À§Ä¡ Á¶Á¤
+            if (_dist >= 3f) // ë„ˆë¬´ ê°€ê¹ê±°ë‚˜ ë©€ ê²½ìš°ì— ì ì ˆíˆ ìœ„ì¹˜ ì¡°ì •
             {
                 _reverseDist = new Vector3(0f, 0f, -3f);
             }
@@ -85,10 +85,10 @@ public class CameraController : MonoBehaviour
             _reverseDist = new Vector3(0f, 0.1f, -1f);
         }
 
-        // _camera.position = _camerapos + _camera.rotation * _reverseDist; // <- cameraÀÇ ÃÖÁ¾ À§Ä¡
+        // _camera.position = _camerapos + _camera.rotation * _reverseDist; // <- cameraì˜ ìµœì¢… ìœ„ì¹˜
         transform.position = Vector3.Lerp(transform.position, _camerapos + _camera.rotation * _reverseDist, Time.deltaTime * 5f);
 
-        // targetÀÇ À§Ä¡¸¦ ±â¹İÀ¸·Î cameraÀÇ ½ÃÁ¡ Á¶Á¤
+        // targetì˜ ìœ„ì¹˜ë¥¼ ê¸°ë°˜ìœ¼ë¡œ cameraì˜ ì‹œì  ì¡°ì •
         _camera.LookAt(new Vector3(_target.transform.position.x, 0.8f, _target.transform.position.z));
     }
 

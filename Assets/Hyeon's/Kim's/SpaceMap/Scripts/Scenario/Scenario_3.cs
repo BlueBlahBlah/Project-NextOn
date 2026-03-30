@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+ï»¿using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -67,7 +67,7 @@ public class Scenario_3 : MonoBehaviour
         if (!isSideScrollingCamActivated && scenario.Player.transform.position.y > 5f)
         {
             SideScrollingCam();
-            isSideScrollingCamActivated = true; // ÇÔ¼ö È£Ãâ ÈÄ ÇÃ·¡±×¸¦ true·Î ¼³Á¤
+            isSideScrollingCamActivated = true; // í•¨ìˆ˜ í˜¸ì¶œ í›„ í”Œë˜ê·¸ë¥¼ trueë¡œ ì„¤ì •
         }
 
     }
@@ -84,8 +84,8 @@ public class Scenario_3 : MonoBehaviour
         if(child.name == "First_Trigger" && !is1_TriggerPass)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 218);
-            Debug.Log("´ë»ç ½Ã½ºÅÛ : ¾Ë¼ö ¾ø´Â ¿À·ù ¹ß»ı È®ÀÎ ÄÄÆÄÀÏ·¯ ÀÚµ¿ »èÁ¦¸¦ ÁøÇàÇÕ´Ï´Ù ºñ»óÅ»Ãâ ÇÁ·Î±×·¥À» ½ÃÀÛÇÕ´Ï´Ù");
-            Debug.Log("´ë»ç ºñ»óÅ»Ãâ? ¿ì¼± »ì¾Æ¾ß°Ú¾î ÃÖ´ëÇÑ ¾Æ·¡·Î µµ¸ÁÄ¡ÀÚ");
+            Debug.Log("ëŒ€ì‚¬ ì‹œìŠ¤í…œ : ì•Œìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ ë°œìƒ í™•ì¸ ì»´íŒŒì¼ëŸ¬ ìë™ ì‚­ì œë¥¼ ì§„í–‰í•©ë‹ˆë‹¤ ë¹„ìƒíƒˆì¶œ í”„ë¡œê·¸ë¨ì„ ì‹œì‘í•©ë‹ˆë‹¤");
+            Debug.Log("ëŒ€ì‚¬ ë¹„ìƒíƒˆì¶œ? ìš°ì„  ì‚´ì•„ì•¼ê² ì–´ ìµœëŒ€í•œ ì•„ë˜ë¡œ ë„ë§ì¹˜ì");
             Smoke[0].SetActive(true);
             Smoke[1].SetActive(true);
             EnemySpawn[0].SetActive(true);
@@ -112,7 +112,7 @@ public class Scenario_3 : MonoBehaviour
         else if(child.name == "2_Door" && !_doorClose2)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 221);
-            Debug.Log("´ë»ç ÀÌÁ¦ ¿©±ä ¾ÈÀüÇÑ°Å °°¾Æ ¾Æ±îµéÀº ºñ»óÅ»Ãâ¹æ¹ıÀ» Ã£¾Æº¸ÀÚ");
+            Debug.Log("ëŒ€ì‚¬ ì´ì œ ì—¬ê¸´ ì•ˆì „í•œê±° ê°™ì•„ ì•„ê¹Œë“¤ì€ ë¹„ìƒíƒˆì¶œë°©ë²•ì„ ì°¾ì•„ë³´ì");
             EnemySpawn[0].SetActive(false);
             EnemySpawn[1].SetActive(false);
             EnemySpawn[2].SetActive(false);
@@ -127,7 +127,7 @@ public class Scenario_3 : MonoBehaviour
         else if (child.name == "3_End" && !is_End)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 231);
-            Debug.Log("´ë»ç Àú±â ÀÖ´Â ºñÇà¼±À» Å¸°í Å»ÃâÇÒ¼ö ÀÖ°Ú¾î ¾î¼­ ÁØºñÇÏ°í Å»ÃâÇÏÀÚ");
+            Debug.Log("ëŒ€ì‚¬ ì €ê¸° ìˆëŠ” ë¹„í–‰ì„ ì„ íƒ€ê³  íƒˆì¶œí• ìˆ˜ ìˆê² ì–´ ì–´ì„œ ì¤€ë¹„í•˜ê³  íƒˆì¶œí•˜ì");
             is_End = true;
         }
     }

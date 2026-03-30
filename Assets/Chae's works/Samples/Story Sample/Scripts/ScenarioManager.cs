@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ScenarioManager : MonoBehaviour
 {
-    // ** ½Ì±ÛÅæÀ¸·Î ¼±¾ğµÈ ½Ã³ª¸®¿À ¸Å´ÏÀú¿¡¼­ ÄÚ·çÆ¾ °´Ã¼¸¦ »ı¼ºÇØ¼­
-    // °¢ ½Ã³ª¸®¿À¿¡ ÀÔÀåÇÒ ¶§, ÄÚ·çÆ¾ °´Ã¼¿¡ ½Ã³ª¸®¿À¿¡ ¸Â´Â ÄÚ·çÆ¾À» ´ëÀÔÇÏ°í
-    // ´ÙÀÌ·²·Î±×, UI µî¿¡¼­ Start, Stop ÄÚ·çÆ¾À» »ç¿ëÇÏ´Â ¹æ¹ı?
+    // ** ì‹±ê¸€í†¤ìœ¼ë¡œ ì„ ì–¸ëœ ì‹œë‚˜ë¦¬ì˜¤ ë§¤ë‹ˆì €ì—ì„œ ì½”ë£¨í‹´ ê°ì²´ë¥¼ ìƒì„±í•´ì„œ
+    // ê° ì‹œë‚˜ë¦¬ì˜¤ì— ì…ì¥í•  ë•Œ, ì½”ë£¨í‹´ ê°ì²´ì— ì‹œë‚˜ë¦¬ì˜¤ì— ë§ëŠ” ì½”ë£¨í‹´ì„ ëŒ€ì…í•˜ê³ 
+    // ë‹¤ì´ëŸ´ë¡œê·¸, UI ë“±ì—ì„œ Start, Stop ì½”ë£¨í‹´ì„ ì‚¬ìš©í•˜ëŠ” ë°©ë²•?
 
     [Header("Scenario")]
     [SerializeField]
@@ -14,21 +14,21 @@ public class ScenarioManager : MonoBehaviour
 
     public Coroutine scenario_Coroutine = null;
 
-    // ½Ì±ÛÅæ ¼±¾ğ
+    // ì‹±ê¸€í†¤ ì„ ì–¸
     #region
     public static ScenarioManager instance = null;
 
     private void Awake()
     {
-        if (instance == null) //instance°¡ null. Áï, ½Ã½ºÅÛ»ó¿¡ Á¸ÀçÇÏ°í ÀÖÁö ¾ÊÀ»¶§
+        if (instance == null) //instanceê°€ null. ì¦‰, ì‹œìŠ¤í…œìƒì— ì¡´ì¬í•˜ê³  ìˆì§€ ì•Šì„ë•Œ
         {
-            instance = this; //³»ÀÚ½ÅÀ» instance·Î ³Ö¾îÁİ´Ï´Ù.
-            DontDestroyOnLoad(gameObject); //OnLoad(¾ÀÀÌ ·Îµå µÇ¾úÀ»¶§) ÀÚ½ÅÀ» ÆÄ±«ÇÏÁö ¾Ê°í À¯Áö
+            instance = this; //ë‚´ìì‹ ì„ instanceë¡œ ë„£ì–´ì¤ë‹ˆë‹¤.
+            DontDestroyOnLoad(gameObject); //OnLoad(ì”¬ì´ ë¡œë“œ ë˜ì—ˆì„ë•Œ) ìì‹ ì„ íŒŒê´´í•˜ì§€ ì•Šê³  ìœ ì§€
         }
         else
         {
-            if (instance != this) //instance°¡ ³»°¡ ¾Æ´Ï¶ó¸é ÀÌ¹Ì instance°¡ ÇÏ³ª Á¸ÀçÇÏ°í ÀÖ´Ù´Â ÀÇ¹Ì
-                Destroy(this.gameObject); //µÑ ÀÌ»ó Á¸ÀçÇÏ¸é ¾ÈµÇ´Â °´Ã¼ÀÌ´Ï ¹æ±İ AWakeµÈ ÀÚ½ÅÀ» »èÁ¦
+            if (instance != this) //instanceê°€ ë‚´ê°€ ì•„ë‹ˆë¼ë©´ ì´ë¯¸ instanceê°€ í•˜ë‚˜ ì¡´ì¬í•˜ê³  ìˆë‹¤ëŠ” ì˜ë¯¸
+                Destroy(this.gameObject); //ë‘˜ ì´ìƒ ì¡´ì¬í•˜ë©´ ì•ˆë˜ëŠ” ê°ì²´ì´ë‹ˆ ë°©ê¸ˆ AWakeëœ ìì‹ ì„ ì‚­ì œ
         }
     }
     #endregion

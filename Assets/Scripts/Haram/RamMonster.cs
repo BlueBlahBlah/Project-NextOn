@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class RamMonster : Enemy
 {
     private Animator _animator;
-    private int health;         //현재 스크립트에 관리하는 체력 - Enemy와 비교홰 닳았는지 판단
+    private int health;         
     private bool IsDeath;
     [SerializeField] private TextMeshPro damaged;
     public Image hpBar;
@@ -28,32 +28,30 @@ public class RamMonster : Enemy
         IsDeath = false;
         damaged.SetText(""); 
         capsulCollider = GetComponent<CapsuleCollider>();
-        InitHPBarSize();  //체력바 사이즈 초기화
+        InitHPBarSize();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (IsDeath == true)  //죽은경우
+        if (IsDeath == true)
         {
             _animator.SetTrigger("Death");
-            if (GetComponent<Enemy>().isChase == true)                  //update안에서 오류가 너무 많이 발생하지 않도록하기 위함
+            if (GetComponent<Enemy>().isChase == true)
             {
                 GetComponent<Enemy>().stopNav();
-                GetComponent<Enemy>().Death_Collider_False();           //콜라이더 비활성화
+                GetComponent<Enemy>().Death_Collider_False();
             }
             GetComponent<Enemy>().isChase = false;
             Destroy(gameObject,3f);
         }
-        else        //살아있는경우
+        else
         {
-            //체력관련
             this.curHealth = GetComponent<Enemy>().curHealth;
             if (curHealth < health)
             {
                 if (curHealth <= 0)
                 {
-                    int DamageDone = health - curHealth;       //입은 데미지.
+                    int DamageDone = health - curHealth;
                     ShowDamage(DamageDone);
                     hpBar.rectTransform.localScale = new Vector3(0f, 0f, 0f);
                     _animator.SetTrigger("Death");
@@ -63,7 +61,7 @@ public class RamMonster : Enemy
                 }
                 else
                 {
-                    int DamageDone = health - curHealth;        //입은 데미지.
+                    int DamageDone = health - curHealth;
                     ShowDamage(DamageDone);
                     hpBar.rectTransform.localScale = new Vector3((float)curHealth/(float)maxHealth, 1f, 1f);
                     health = curHealth;
@@ -116,28 +114,6 @@ public class RamMonster : Enemy
             if (col.CompareTag("Player"))
             {
                 PlayerManager.Instance.Health -= Damage;
-            }
-        }
-    }
-    
-}
-    {
-        if (HpBar != null) HpBar.rectTransform.localScale = Vector3.one;
-    }
-    
-    void ColliderAttack()
-    {
-        int damage = 10;
-        if (attackArea == null) return;
-
-        Collider[] hitColliders = Physics.OverlapBox(attackArea.bounds.center, attackArea.bounds.extents,
-            attackArea.transform.rotation);
-
-        foreach (Collider col in hitColliders)
-        {
-            if (col.CompareTag("Player"))
-            {
-                PlayerManager.Instance.Health -= damage;
             }
         }
     }

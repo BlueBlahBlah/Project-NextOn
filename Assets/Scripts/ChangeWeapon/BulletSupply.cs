@@ -30,8 +30,8 @@ public class BulletSupply : MonoBehaviour
                     // 예: supplyRatio가 0.5이고 최대 탄수가 100이면 50발 보충
                     int supplyAmount = Mathf.Max(1, Mathf.FloorToInt(gd.totalMaxAmmo * supplyRatio));
                     
-                    // 현재 총기 예비 탄약에 보충
-                    gun.maxBulletCount += supplyAmount; 
+                    // 현재 총기 예비 탄약에 보충 (메서드 호출을 통해 UI 동기화 유도)
+                    gun.AddAmmo(supplyAmount); 
 
                     // 아이템 획득 후 상자 파괴 (비활성화)
                     if (destroyOnPickup)

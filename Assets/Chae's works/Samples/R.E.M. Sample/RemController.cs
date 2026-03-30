@@ -1,24 +1,24 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RemController : MonoBehaviour
 {
     [Header("Move")]
-    public GameObject Target; // Å¸°Ù °´Ã¼
-    public GameObject REM_Mesh; // REMÀÇ ¸ğµ¨¸µ
-    public float speed = 2.0f; // ÀÌµ¿ ¼Óµµ
-    public float floatAmplitude = 0.5f; // ºÎÀ¯ÇÏ´Â ³ôÀÌ ÁøÆø
-    public float floatFrequency = 1.0f; // ºÎÀ¯ÇÏ´Â ¼Óµµ
+    public GameObject Target; // íƒ€ê²Ÿ ê°ì²´
+    public GameObject REM_Mesh; // REMì˜ ëª¨ë¸ë§
+    public float speed = 2.0f; // ì´ë™ ì†ë„
+    public float floatAmplitude = 0.5f; // ë¶€ìœ í•˜ëŠ” ë†’ì´ ì§„í­
+    public float floatFrequency = 1.0f; // ë¶€ìœ í•˜ëŠ” ì†ë„
 
     private List<UtilityAction> actions = new List<UtilityAction>();
 
     [Header("System")]
-    public float timeSinceLastAction = 0.0f; // Áö³­ Çàµ¿ ÀÌÈÄ °æ°úµÈ ½Ã°£
+    public float timeSinceLastAction = 0.0f; // ì§€ë‚œ í–‰ë™ ì´í›„ ê²½ê³¼ëœ ì‹œê°„
     [SerializeField]
-    private float actionInterval = 5.0f; // ÀÇµµÇÑ Çàµ¿ °£°İ
+    private float actionInterval = 5.0f; // ì˜ë„í•œ í–‰ë™ ê°„ê²©
     [SerializeField]
-    private float timeElapsed = 0.0f; // °æ°ú ½Ã°£
+    private float timeElapsed = 0.0f; // ê²½ê³¼ ì‹œê°„
 
     private float initialRotationX;
     private RemAction remAction;
@@ -34,8 +34,8 @@ public class RemController : MonoBehaviour
     public GameObject REM_Debuff;
 
     [Header("EnemyDetect")]
-    public float detectionRadius = 5f; // °¨ÁöÇÒ ¹üÀ§ÀÇ ¹İÁö¸§
-    public LayerMask enemyLayerMask;   // °¨ÁöÇÒ Enemy ·¹ÀÌ¾î
+    public float detectionRadius = 5f; // ê°ì§€í•  ë²”ìœ„ì˜ ë°˜ì§€ë¦„
+    public LayerMask enemyLayerMask;   // ê°ì§€í•  Enemy ë ˆì´ì–´
 
     [Header("Adjustment")]
     [SerializeField] 
@@ -47,7 +47,7 @@ public class RemController : MonoBehaviour
     [SerializeField] 
     private int debuffUsageCount = 0;
 
-    private const float maxAdjustment = 3.0f; // º¸Á¤°ªÀÇ ÃÖ´ëÄ¡
+    private const float maxAdjustment = 3.0f; // ë³´ì •ê°’ì˜ ìµœëŒ€ì¹˜
 
     void Start()
     {
@@ -55,11 +55,11 @@ public class RemController : MonoBehaviour
 
         initialRotationX = transform.eulerAngles.x;
 
-        // Çàµ¿ Á¤ÀÇ¿Í Ãß°¡
+        // í–‰ë™ ì •ì˜ì™€ ì¶”ê°€
 
         ///////////////////////////////////////////////
         ///
-        /// ¾Æ·¡ÀÇ RemTestManeger.instance µîÀ» PlayerManager.instance·Î º¯°æÇØ¾ßÇÔ 
+        /// ì•„ë˜ì˜ RemTestManeger.instance ë“±ì„ PlayerManager.instanceë¡œ ë³€ê²½í•´ì•¼í•¨ 
         ///
         /////////////////////////////////////////////
         
@@ -94,13 +94,13 @@ public class RemController : MonoBehaviour
         timeSinceLastAction += Time.deltaTime;
         timeElapsed += Time.deltaTime;
 
-        // 5ÃÊ °£°İÀ¸·Î ½ÇÇà
+        // 5ì´ˆ ê°„ê²©ìœ¼ë¡œ ì‹¤í–‰
         if (timeSinceLastAction >= actionInterval && !remAction.isActioning)
         {
             SelectAndExecuteBestAction();
         }
 
-        // Target°úÀÇ °Å¸® È®ÀÎ ¹× ÀÌµ¿
+        // Targetê³¼ì˜ ê±°ë¦¬ í™•ì¸ ë° ì´ë™
         if (Target != null && remAction.isMovable)
         {
             MoveTowardsTarget();
@@ -134,28 +134,28 @@ public class RemController : MonoBehaviour
 
         if (distance > 2.0f)
         {
-            // Å¸°ÙÀ» ÇâÇØ ÀÌµ¿
+            // íƒ€ê²Ÿì„ í–¥í•´ ì´ë™
             Vector3 moveDirection = direction.normalized;
             transform.position += moveDirection * speed * Time.deltaTime;
 
-            // ÆÄÆ¼Å¬ÀÇ °¢µµ º¯°æ
+            // íŒŒí‹°í´ì˜ ê°ë„ ë³€ê²½
         }
         else
         {
-            // ÆÄÆ¼Å¬ÀÇ °¢µµ º¯°æ
+            // íŒŒí‹°í´ì˜ ê°ë„ ë³€ê²½
         }
 
-        // Å¸°ÙÀ» ¹Ù¶óº¸µµ·Ï È¸Àü, xÃà È¸ÀüÀº ÃÊ±â°ªÀ» À¯Áö
+        // íƒ€ê²Ÿì„ ë°”ë¼ë³´ë„ë¡ íšŒì „, xì¶• íšŒì „ì€ ì´ˆê¸°ê°’ì„ ìœ ì§€
         Vector3 lookDirection = Target.transform.position - transform.position;
-        lookDirection.y = 0; // xÃà È¸Àü À¯Áö, yÃà ÀÌµ¿¸¸ °í·Á
-        if (lookDirection != Vector3.zero) // zero vector È®ÀÎ
+        lookDirection.y = 0; // xì¶• íšŒì „ ìœ ì§€, yì¶• ì´ë™ë§Œ ê³ ë ¤
+        if (lookDirection != Vector3.zero) // zero vector í™•ì¸
         {
             Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speed);
             transform.rotation = Quaternion.Euler(initialRotationX, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
         }
 
-        // ºÎÀ¯ÇÏ´Â y°ª °è»ê
+        // ë¶€ìœ í•˜ëŠ” yê°’ ê³„ì‚°
         float floatOffset = Mathf.Sin(timeElapsed * floatFrequency) * floatAmplitude;
         Vector3 newPosition = transform.position;
         newPosition.y = Target.transform.position.y + 1.0f + floatOffset;
@@ -164,62 +164,62 @@ public class RemController : MonoBehaviour
 
     void DetectEnemies()
     {
-        // LayerMask¸¦ ÀÌ¿ëÇØ Æ¯Á¤ ·¹ÀÌ¾îÀÇ ¿ÀºêÁ§Æ®¸¸ °Ë»ö
+        // LayerMaskë¥¼ ì´ìš©í•´ íŠ¹ì • ë ˆì´ì–´ì˜ ì˜¤ë¸Œì íŠ¸ë§Œ ê²€ìƒ‰
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayerMask);
 
-        // °¨ÁöµÈ ¿ÀºêÁ§Æ®ÀÇ ¼ö¸¦ ¼À
+        // ê°ì§€ëœ ì˜¤ë¸Œì íŠ¸ì˜ ìˆ˜ë¥¼ ì…ˆ
         int enemyCount = hitColliders.Length;
 
-        // °á°ú¸¦ Ãâ·ÂÇÏ°Å³ª ¿øÇÏ´Â µ¿ÀÛÀ» ¼öÇà
+        // ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ê±°ë‚˜ ì›í•˜ëŠ” ë™ì‘ì„ ìˆ˜í–‰
         Debug.Log("Number of Enemies detected: " + enemyCount);
     }
 
-    // °¨Áö ¹üÀ§¸¦ ½Ã°¢ÀûÀ¸·Î Ç¥½Ã (¼±ÅÃ »çÇ×)
+    // ê°ì§€ ë²”ìœ„ë¥¼ ì‹œê°ì ìœ¼ë¡œ í‘œì‹œ (ì„ íƒ ì‚¬í•­)
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
-    // À¯Æ¿¸®Æ¼ °è»ê ÇÔ¼öµé
+    // ìœ í‹¸ë¦¬í‹° ê³„ì‚° í•¨ìˆ˜ë“¤
     float CalculateHealUtility()
     {
         //float baseUtility = PlayerManager.instance.hp < 50 ? (1.0f / PlayerManager.instance.hp) * 100 : 0;
-        float adjustment = Mathf.Min(0.1f * (healUsageCount * 0.2f) * (healUsageCount * 0.2f), maxAdjustment);// »ç¿ë È½¼ö¿¡ ºñ·ÊÇÑ º¸Á¤°ª
+        float adjustment = Mathf.Min(0.1f * (healUsageCount * 0.2f) * (healUsageCount * 0.2f), maxAdjustment);// ì‚¬ìš© íšŸìˆ˜ì— ë¹„ë¡€í•œ ë³´ì •ê°’
         //return baseUtility + adjustment;
 
         Debug.Log(50 + adjustment);
-        return 50 + adjustment; // ÀÓ½Ã°ª
+        return 50 + adjustment; // ì„ì‹œê°’
     }
 
     float CalculateDeployShieldUtility()
     {
         //float baseUtility = PlayerManager.instance.hp < 90 ? (100 - PlayerManager.instance.hp) / 50.0f * 100 : 0;
-        float adjustment = Mathf.Min(0.1f * (shieldUsageCount * 0.2f) * (shieldUsageCount * 0.2f), maxAdjustment);// »ç¿ë È½¼ö¿¡ ºñ·ÊÇÑ º¸Á¤°ª
+        float adjustment = Mathf.Min(0.1f * (shieldUsageCount * 0.2f) * (shieldUsageCount * 0.2f), maxAdjustment);// ì‚¬ìš© íšŸìˆ˜ì— ë¹„ë¡€í•œ ë³´ì •ê°’
         //return baseUtility + adjustment;
 
         Debug.Log(50 + adjustment);
-        return 50 + adjustment; // ÀÓ½Ã°ª
+        return 50 + adjustment; // ì„ì‹œê°’
     }
 
     float CalculateAttackUtility()
     {
         //bool isNear = PlayerManager.instance.isNear;
         //float baseUtility = (isNear && PlayerManager.instance.hp >= 90) ? 80.0f : 0;
-        float adjustment = Mathf.Min(0.1f * (attackUsageCount * 0.2f) * (attackUsageCount * 0.2f), maxAdjustment);// »ç¿ë È½¼ö¿¡ ºñ·ÊÇÑ º¸Á¤°ª
+        float adjustment = Mathf.Min(0.1f * (attackUsageCount * 0.2f) * (attackUsageCount * 0.2f), maxAdjustment);// ì‚¬ìš© íšŸìˆ˜ì— ë¹„ë¡€í•œ ë³´ì •ê°’
         //return baseUtility + adjustment;
 
         Debug.Log(50 + adjustment);
-        return 50 + adjustment; // ÀÓ½Ã°ª
+        return 50 + adjustment; // ì„ì‹œê°’
     }
 
     float CalculateDebuffUtility()
     {
         //bool isNear = PlayerManager.instance.isNear;
         //float baseUtility = (isNear && PlayerManager.instance.hp >= 90) ? 79.0f : 0;
-        //float adjustment = Mathf.Min(debuffUsageCount * 0.1f, maxAdjustment); // »ç¿ë È½¼ö¿¡ ºñ·ÊÇÑ º¸Á¤°ª
+        //float adjustment = Mathf.Min(debuffUsageCount * 0.1f, maxAdjustment); // ì‚¬ìš© íšŸìˆ˜ì— ë¹„ë¡€í•œ ë³´ì •ê°’
         //return baseUtility + adjustment;
 
-        return 0; // ÀÓ½Ã°ª
+        return 0; // ì„ì‹œê°’
     }
 }

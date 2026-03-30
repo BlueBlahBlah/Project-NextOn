@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TextSpawner : MonoBehaviour
 {
-    public GameObject[] textPrefabs; // ¼­·Î ´Ù¸¥ 3°³ÀÇ ÅØ½ºÆ® ÇÁ¸®ÆÕÀ» ÀúÀåÇÏ´Â ¹è¿­.
-    public RectTransform canvasRect; // CanvasÀÇ RectTransformÀ» ¿¬°áÇÏ¼¼¿ä.
+    public GameObject[] textPrefabs; // ì„œë¡œ ë‹¤ë¥¸ 3ê°œì˜ í…ìŠ¤íŠ¸ í”„ë¦¬íŒ¹ì„ ì €ì¥í•˜ëŠ” ë°°ì—´.
+    public RectTransform canvasRect; // Canvasì˜ RectTransformì„ ì—°ê²°í•˜ì„¸ìš”.
     public Transform Container;
-    public float spawnInterval = 1f; // ÅØ½ºÆ®°¡ »ı¼ºµÇ´Â °£°İ.
+    public float spawnInterval = 1f; // í…ìŠ¤íŠ¸ê°€ ìƒì„±ë˜ëŠ” ê°„ê²©.
 
     void Start()
     {
@@ -16,13 +16,13 @@ public class TextSpawner : MonoBehaviour
 
     void SpawnText()
     {
-        // ÅØ½ºÆ® ÇÁ¸®ÆÕÀ» ¼±ÅÃÇÒ ·£´ıÇÑ °ª »ı¼º (0 ~ 99)
+        // í…ìŠ¤íŠ¸ í”„ë¦¬íŒ¹ì„ ì„ íƒí•  ëœë¤í•œ ê°’ ìƒì„± (0 ~ 99)
         int randomValue = Random.Range(0, 100);
 
-        // ÅØ½ºÆ® ÇÁ¸®ÆÕÀ» ¼±ÅÃÇÒ È®·ü ¹üÀ§ ¼³Á¤
-        int[] spawnChances = { 20, 60, 20 }; // °¢ ÇÁ¸®ÆÕÀÇ ½ºÆù È®·ü (20%, 60%, 20%)
+        // í…ìŠ¤íŠ¸ í”„ë¦¬íŒ¹ì„ ì„ íƒí•  í™•ë¥  ë²”ìœ„ ì„¤ì •
+        int[] spawnChances = { 20, 60, 20 }; // ê° í”„ë¦¬íŒ¹ì˜ ìŠ¤í° í™•ë¥  (20%, 60%, 20%)
 
-        // ·£´ıÇÑ °ª¿¡ µû¶ó ¼±ÅÃµÈ ÅØ½ºÆ® ÇÁ¸®ÆÕ °áÁ¤
+        // ëœë¤í•œ ê°’ì— ë”°ë¼ ì„ íƒëœ í…ìŠ¤íŠ¸ í”„ë¦¬íŒ¹ ê²°ì •
         int cumulativeChance = 0;
         GameObject selectedPrefab = null;
         for (int i = 0; i < textPrefabs.Length; i++)
@@ -35,11 +35,11 @@ public class TextSpawner : MonoBehaviour
             }
         }
 
-        // ¼±ÅÃµÈ ÅØ½ºÆ® ÇÁ¸®ÆÕÀ» ½ºÆù
+        // ì„ íƒëœ í…ìŠ¤íŠ¸ í”„ë¦¬íŒ¹ì„ ìŠ¤í°
         GameObject newText = Instantiate(selectedPrefab, Container);
         FallingText fallingText = newText.GetComponent<FallingText>();
 
-        // FallingText ½ºÅ©¸³Æ®¿¡ Canvas¸¦ ¼³Á¤
+        // FallingText ìŠ¤í¬ë¦½íŠ¸ì— Canvasë¥¼ ì„¤ì •
         fallingText.canvasRect = canvasRect;
     }
 }

@@ -9,14 +9,13 @@ public class FantasyAxeSkill : MonoBehaviour
     [SerializeField] private GameObject[] magicEffect;
     [SerializeField] private float time;
     [SerializeField] private float radius;
-    // Start is called before the first frame update
+    
     void Start()
     {
         explosionEffect.SetActive(false);
         Invoke("explore",time);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -42,8 +41,7 @@ public class FantasyAxeSkill : MonoBehaviour
             {
                 if (target.CompareTag("Enemy"))
                 {
-                    //공격 로직
-                    Debug.Log("마오카이 �?);
+                    Debug.Log("Attack");
                 }
             }
         }

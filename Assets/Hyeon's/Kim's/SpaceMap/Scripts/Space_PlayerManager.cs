@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -18,17 +18,17 @@ public class Space_PlayerManager : MonoBehaviour
     [SerializeField] private FireGun fireGun = GameObject.FindObjectOfType<FireGun>();*/
 
 
-    public float TotalHealth;                          //ÃÖ´ëÃ¼·Â
-    public float Health;                          //ÇöÀçÃ¼·Â
-    public float HealthGen;                     //Ã¼Á¨
-    public int DefensivePower;                  //¹æ¾î·Â
-    public int MovingSpeed;                     //ÀÌµ¿¼Óµµ
-    public int PlayerPlainHitDamage;            //ÆòÅ¸ °ø°İ·Â
-    public int PlayerSkillDamage;               //½ºÅ³ °ø°İ·Â
-    public int CurrentBullet;                   //ÇöÀç ÀÜÅº ¼ö
-    public int TotalBullet;                     //³²Àº ÅºÃ¢ ¼ö
+    public float TotalHealth;                          //ìµœëŒ€ì²´ë ¥
+    public float Health;                          //í˜„ì¬ì²´ë ¥
+    public float HealthGen;                     //ì²´ì  
+    public int DefensivePower;                  //ë°©ì–´ë ¥
+    public int MovingSpeed;                     //ì´ë™ì†ë„
+    public int PlayerPlainHitDamage;            //í‰íƒ€ ê³µê²©ë ¥
+    public int PlayerSkillDamage;               //ìŠ¤í‚¬ ê³µê²©ë ¥
+    public int CurrentBullet;                   //í˜„ì¬ ì”íƒ„ ìˆ˜
+    public int TotalBullet;                     //ë‚¨ì€ íƒ„ì°½ ìˆ˜
 
-    public float SkillCoolTimeRate;                     //±ÙÁ¢¹«±â ÄğÅ¸ÀÓ°¨¼ÒÀ²
+    public float SkillCoolTimeRate;                     //ê·¼ì ‘ë¬´ê¸° ì¿¨íƒ€ì„ê°ì†Œìœ¨
 
     public bool Death;
 
@@ -47,31 +47,31 @@ public class Space_PlayerManager : MonoBehaviour
     public DropItemPosition _dropItemPosition;
 
 
-    public int revive;      //ºÎÈ° È½¼ö
-    private bool revive_decrease_once;      //ºÎÈ° È½¼ö¸¦ 1¸¸ ÁÙÀÌ±â À§ÇÑ º¯¼ö
+    public int revive;      //ë¶€í™œ íšŸìˆ˜
+    private bool revive_decrease_once;      //ë¶€í™œ íšŸìˆ˜ë¥¼ 1ë§Œ ì¤„ì´ê¸° ìœ„í•œ ë³€ìˆ˜
 
     private void Awake()
     {
 
         if (null == instance)
         {
-            //ÀÌ Å¬·¡½º ÀÎ½ºÅÏ½º°¡ Åº»ıÇßÀ» ¶§ Àü¿ªº¯¼ö instance¿¡ °ÔÀÓ¸Å´ÏÀú ÀÎ½ºÅÏ½º°¡ ´ã°ÜÀÖÁö ¾Ê´Ù¸é, ÀÚ½ÅÀ» ³Ö¾îÁØ´Ù.
+            //ì´ í´ë˜ìŠ¤ ì¸ìŠ¤í„´ìŠ¤ê°€ íƒ„ìƒí–ˆì„ ë•Œ ì „ì—­ë³€ìˆ˜ instanceì— ê²Œì„ë§¤ë‹ˆì € ì¸ìŠ¤í„´ìŠ¤ê°€ ë‹´ê²¨ìˆì§€ ì•Šë‹¤ë©´, ìì‹ ì„ ë„£ì–´ì¤€ë‹¤.
             instance = this;
 
-            //¾À ÀüÈ¯ÀÌ µÇ´õ¶óµµ ÆÄ±«µÇÁö ¾Ê°Ô ÇÑ´Ù.
-            //gameObject¸¸À¸·Îµµ ÀÌ ½ºÅ©¸³Æ®°¡ ÄÄÆ÷³ÍÆ®·Î¼­ ºÙ¾îÀÖ´Â Hierarchy»óÀÇ °ÔÀÓ¿ÀºêÁ§Æ®¶ó´Â ¶æÀÌÁö¸¸, 
-            //³ª´Â Çò°¥¸² ¹æÁö¸¦ À§ÇØ this¸¦ ºÙ¿©ÁÖ±âµµ ÇÑ´Ù.
+            //ì”¬ ì „í™˜ì´ ë˜ë”ë¼ë„ íŒŒê´´ë˜ì§€ ì•Šê²Œ í•œë‹¤.
+            //gameObjectë§Œìœ¼ë¡œë„ ì´ ìŠ¤í¬ë¦½íŠ¸ê°€ ì»´í¬ë„ŒíŠ¸ë¡œì„œ ë¶™ì–´ìˆëŠ” Hierarchyìƒì˜ ê²Œì„ì˜¤ë¸Œì íŠ¸ë¼ëŠ” ëœ»ì´ì§€ë§Œ, 
+            //ë‚˜ëŠ” í—·ê°ˆë¦¼ ë°©ì§€ë¥¼ ìœ„í•´ thisë¥¼ ë¶™ì—¬ì£¼ê¸°ë„ í•œë‹¤.
             //DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            //¸¸¾à ¾À ÀÌµ¿ÀÌ µÇ¾ú´Âµ¥ ±× ¾À¿¡µµ Hierarchy¿¡ GameMgrÀÌ Á¸ÀçÇÒ ¼öµµ ÀÖ´Ù.
-            //±×·² °æ¿ì¿£ ÀÌÀü ¾À¿¡¼­ »ç¿ëÇÏ´ø ÀÎ½ºÅÏ½º¸¦ °è¼Ó »ç¿ëÇØÁÖ´Â °æ¿ì°¡ ¸¹Àº °Í °°´Ù.
-            //±×·¡¼­ ÀÌ¹Ì Àü¿ªº¯¼öÀÎ instance¿¡ ÀÎ½ºÅÏ½º°¡ Á¸ÀçÇÑ´Ù¸é ÀÚ½Å(»õ·Î¿î ¾ÀÀÇ GameMgr)À» »èÁ¦ÇØÁØ´Ù.
+            //ë§Œì•½ ì”¬ ì´ë™ì´ ë˜ì—ˆëŠ”ë° ê·¸ ì”¬ì—ë„ Hierarchyì— GameMgrì´ ì¡´ì¬í•  ìˆ˜ë„ ìˆë‹¤.
+            //ê·¸ëŸ´ ê²½ìš°ì—” ì´ì „ ì”¬ì—ì„œ ì‚¬ìš©í•˜ë˜ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ê³„ì† ì‚¬ìš©í•´ì£¼ëŠ” ê²½ìš°ê°€ ë§ì€ ê²ƒ ê°™ë‹¤.
+            //ê·¸ë˜ì„œ ì´ë¯¸ ì „ì—­ë³€ìˆ˜ì¸ instanceì— ì¸ìŠ¤í„´ìŠ¤ê°€ ì¡´ì¬í•œë‹¤ë©´ ìì‹ (ìƒˆë¡œìš´ ì”¬ì˜ GameMgr)ì„ ì‚­ì œí•´ì¤€ë‹¤.
             //Destroy(this.gameObject);
         }
     }
-    //°ÔÀÓ ¸Å´ÏÀú ÀÎ½ºÅÏ½º¿¡ Á¢±ÙÇÒ ¼ö ÀÖ´Â ÇÁ·ÎÆÛÆ¼. staticÀÌ¹Ç·Î ´Ù¸¥ Å¬·¡½º¿¡¼­ ¸¾²¯ È£ÃâÇÒ ¼ö ÀÖ´Ù.
+    //ê²Œì„ ë§¤ë‹ˆì € ì¸ìŠ¤í„´ìŠ¤ì— ì ‘ê·¼í•  ìˆ˜ ìˆëŠ” í”„ë¡œí¼í‹°. staticì´ë¯€ë¡œ ë‹¤ë¥¸ í´ë˜ìŠ¤ì—ì„œ ë§˜ê» í˜¸ì¶œí•  ìˆ˜ ìˆë‹¤.
     public static Space_PlayerManager Instance
     {
         get
@@ -91,7 +91,7 @@ public class Space_PlayerManager : MonoBehaviour
         player_NonWeapon = GameObject.Find("Check_Sprite");
         player_CloseWeapon = GameObject.Find("Check_Sprite_Short");
 
-        // player_NonWeapon°ú °°Àº ±íÀÌÀÇ(°°Àº ºÎ¸ğ¸¦ °¡Áø) ¿ÀºêÁ§Æ®¸¦ Ã£À½
+        // player_NonWeaponê³¼ ê°™ì€ ê¹Šì´ì˜(ê°™ì€ ë¶€ëª¨ë¥¼ ê°€ì§„) ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŒ
         Transform parentTransform = player_NonWeapon.transform.parent;
         foreach (Transform sibling in parentTransform)
         {
@@ -99,7 +99,7 @@ public class Space_PlayerManager : MonoBehaviour
 
             if (dropItemPosition != null)
             {
-                // DropItemPositionÀ» °¡Áø ¿ÀºêÁ§Æ®¸¦ Ã£¾ÒÀ» ¶§ _dropItemPosition¿¡ ¿¬°á
+                // DropItemPositionì„ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•˜ì„ ë•Œ _dropItemPositionì— ì—°ê²°
                 _dropItemPosition = dropItemPosition;
                 break;
             }
@@ -108,15 +108,15 @@ public class Space_PlayerManager : MonoBehaviour
         player_LongWeapon.SetActive(false);
         player_CloseWeapon.SetActive(false);
 
-        TotalHealth = 100;  //½ÃÀÛ ½Ã Ã¼·Â 100
+        TotalHealth = 100;  //ì‹œì‘ ì‹œ ì²´ë ¥ 100
         Health = TotalHealth;
-        SkillCoolTimeRate = 0;     //½ÃÀÛ ½Ã ½ºÅ³ ÄğÅ¸ÀÓ
+        SkillCoolTimeRate = 0;     //ì‹œì‘ ì‹œ ìŠ¤í‚¬ ì¿¨íƒ€ì„
         Death = false;
     }
 
     /*void OnEnable()
     {
-        // ¾À ¸Å´ÏÀúÀÇ sceneLoaded¿¡ Ã¼ÀÎÀ» °Ç´Ù.
+        // ì”¬ ë§¤ë‹ˆì €ì˜ sceneLoadedì— ì²´ì¸ì„ ê±´ë‹¤.
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     
@@ -125,7 +125,7 @@ public class Space_PlayerManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }*/
 
-    // Ã¼ÀÎÀ» °É¾î¼­ ÀÌ ÇÔ¼ö´Â ¸Å ¾À¸¶´Ù È£ÃâµÈ´Ù.
+    // ì²´ì¸ì„ ê±¸ì–´ì„œ ì´ í•¨ìˆ˜ëŠ” ë§¤ ì”¬ë§ˆë‹¤ í˜¸ì¶œëœë‹¤.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         init();
@@ -133,16 +133,16 @@ public class Space_PlayerManager : MonoBehaviour
 
     private void init()
     {
-        TotalHealth = 100;  //½ÃÀÛ ½Ã Ã¼·Â 100
+        TotalHealth = 100;  //ì‹œì‘ ì‹œ ì²´ë ¥ 100
         Health = TotalHealth;
-        SkillCoolTimeRate = 0;     //½ÃÀÛ ½Ã ½ºÅ³ ÄğÅ¸ÀÓ
+        SkillCoolTimeRate = 0;     //ì‹œì‘ ì‹œ ìŠ¤í‚¬ ì¿¨íƒ€ì„
         Death = false;
         /*player_LongWeapon = GameObject.Find("Check_Sprite_Long");
         player_NonWeapon = GameObject.Find("Check_Sprite");
         player_CloseWeapon = GameObject.Find("Check_Sprite_Short");*/
         Debug.Log("********************tlqkf*******************");
 
-        // °¢ ¹«±â ¸®½ºÆ®¿¡ Ãß°¡ÇÒ ¿ÀºêÁ§Æ® ÀÌ¸§
+        // ê° ë¬´ê¸° ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€í•  ì˜¤ë¸Œì íŠ¸ ì´ë¦„
         string[] longWeaponNames = {
             "FlameGun",
             "SM_Wep_MachineGun_01",
@@ -160,7 +160,7 @@ public class Space_PlayerManager : MonoBehaviour
             "FantasyAxe_Unity"
         };
 
-        // parent ¿ÀºêÁ§Æ® Ã£±â
+        // parent ì˜¤ë¸Œì íŠ¸ ì°¾ê¸°
         if (GameObject.Find("Check_Sprite_Long") is not null)
         {
             player_LongWeapon = GameObject.Find("Check_Sprite_Long");
@@ -177,11 +177,11 @@ public class Space_PlayerManager : MonoBehaviour
 
 
 
-        // ¸ğµç ÀÚ½Ä ¿ÀºêÁ§Æ®µé °¡Á®¿À±â
+        // ëª¨ë“  ìì‹ ì˜¤ë¸Œì íŠ¸ë“¤ ê°€ì ¸ì˜¤ê¸°
         Transform[] longWeaponChildren = player_LongWeapon.GetComponentsInChildren<Transform>(true);
         Transform[] closeWeaponChildren = player_CloseWeapon.GetComponentsInChildren<Transform>(true);
 
-        // longWeapon ÀÚ½Ä Áß ¹«±â ÀÌ¸§°ú ÀÏÄ¡ÇÏ´Â ¿ÀºêÁ§Æ® Ãß°¡
+        // longWeapon ìì‹ ì¤‘ ë¬´ê¸° ì´ë¦„ê³¼ ì¼ì¹˜í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ ì¶”ê°€
         foreach (string weaponName in longWeaponNames)
         {
             foreach (Transform child in longWeaponChildren)
@@ -194,7 +194,7 @@ public class Space_PlayerManager : MonoBehaviour
             }
         }
 
-        // closeWeapon ÀÚ½Ä Áß ¹«±â ÀÌ¸§°ú ÀÏÄ¡ÇÏ´Â ¿ÀºêÁ§Æ® Ãß°¡
+        // closeWeapon ìì‹ ì¤‘ ë¬´ê¸° ì´ë¦„ê³¼ ì¼ì¹˜í•˜ëŠ” ì˜¤ë¸Œì íŠ¸ ì¶”ê°€
         foreach (string weaponName in closeWeaponNames)
         {
             foreach (Transform child in closeWeaponChildren)
@@ -208,17 +208,17 @@ public class Space_PlayerManager : MonoBehaviour
         }
 
 
-        // player_NonWeapon°ú °°Àº ±íÀÌÀÇ(°°Àº ºÎ¸ğ¸¦ °¡Áø) ¿ÀºêÁ§Æ®¸¦ Ã£À½
+        // player_NonWeaponê³¼ ê°™ì€ ê¹Šì´ì˜(ê°™ì€ ë¶€ëª¨ë¥¼ ê°€ì§„) ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŒ
         Transform parentTransform = player_NonWeapon.transform.parent;
 
-        // ºÎ¸ğÀÇ ÀÚ½Ä ¿ÀºêÁ§Æ®µé Áß DropItemPositionÀ» °¡Áö°í ÀÖ´Â ¿ÀºêÁ§Æ® Ã£±â
+        // ë¶€ëª¨ì˜ ìì‹ ì˜¤ë¸Œì íŠ¸ë“¤ ì¤‘ DropItemPositionì„ ê°€ì§€ê³  ìˆëŠ” ì˜¤ë¸Œì íŠ¸ ì°¾ê¸°
         foreach (Transform sibling in parentTransform)
         {
             DropItemPosition dropItemPosition = sibling.GetComponent<DropItemPosition>();
 
             if (dropItemPosition != null)
             {
-                // DropItemPositionÀ» °¡Áø ¿ÀºêÁ§Æ®¸¦ Ã£¾ÒÀ» ¶§ _dropItemPosition¿¡ ¿¬°á
+                // DropItemPositionì„ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•˜ì„ ë•Œ _dropItemPositionì— ì—°ê²°
                 _dropItemPosition = dropItemPosition;
                 break;
             }
@@ -246,9 +246,9 @@ public class Space_PlayerManager : MonoBehaviour
         {
             init();
         }
-        if (Health <= 0)        //Ã¼·ÂÀÌ ´Ù ´âÀº °æ¿ì
+        if (Health <= 0)        //ì²´ë ¥ì´ ë‹¤ ë‹³ì€ ê²½ìš°
         {
-            Health = 0;         //Ã¼·Â¹Ù°¡ ±æ¾îÁö´Â °ÍÀ» ¹æÁö
+            Health = 0;         //ì²´ë ¥ë°”ê°€ ê¸¸ì–´ì§€ëŠ” ê²ƒì„ ë°©ì§€
             if (revive_decrease_once == false)
             {
                 revive_decrease_once = true;
@@ -257,24 +257,24 @@ public class Space_PlayerManager : MonoBehaviour
                     revive_Health_Invoke();
                 else if (revive == 0)
                 {
-                    //ÁøÂ¥ ³¡³²
+                    //ì§„ì§œ ëë‚¨
                     EventManager.Instance.fadeout();
-                    //¾À ÀÌµ¿ÇÏ´Â ÄÚµå
+                    //ì”¬ ì´ë™í•˜ëŠ” ì½”ë“œ
                 }
             }
 
 
         }
-        //ÇöÀç ÃÑ±â·ù¸¦ ¸ÔÀº°æ¿ì
+        //í˜„ì¬ ì´ê¸°ë¥˜ë¥¼ ë¨¹ì€ê²½ìš°
         if (player_LongWeapon.activeSelf)
         {
             player_LongWeapon.GetComponent<Space_PlayerScriptRifle>().BulletInfo();
-            //Debug.LogError("ÇöÀç ÀÜÅº "  + CurrentBullet);
-            //Debug.LogError("ÃÑ ÀÜÅº "  + TotalBullet);
+            //Debug.LogError("í˜„ì¬ ì”íƒ„ "  + CurrentBullet);
+            //Debug.LogError("ì´ ì”íƒ„ "  + TotalBullet);
         }
         else
         {
-            //ÀÜÅºÀÇ ¼ö¸¦ ¹«ÇÑ´ë·Î ÇÏ´Â ÄÚµå
+            //ì”íƒ„ì˜ ìˆ˜ë¥¼ ë¬´í•œëŒ€ë¡œ í•˜ëŠ” ì½”ë“œ
         }
     }
 
@@ -301,13 +301,13 @@ public class Space_PlayerManager : MonoBehaviour
     }
     public void ChangeWeapon(WeaponType Wt, GameObject Weapon)
     {
-        //¸ğµ¨¸µ È°¼ºÈ­
+        //ëª¨ë¸ë§ í™œì„±í™”
         if (Wt == WeaponType.closeType)
         {
             player_LongWeapon.SetActive(false);
             player_NonWeapon.SetActive(false);
             player_CloseWeapon.SetActive(true);
-            //±ÙÁ¢¹«±âÀÇ °æ¿ì ¹«±â¿¡¼­ ¹öÆ° ÀÌº¥Æ®¸¦ µî·ÏÇÏ´Â °ÍÀÌ ¾Æ´Ï±â¿¡ ±ÙÁ¢°ø°İ ¸ğ¼ÇÀ» ¿©±â¼­ µî·Ï
+            //ê·¼ì ‘ë¬´ê¸°ì˜ ê²½ìš° ë¬´ê¸°ì—ì„œ ë²„íŠ¼ ì´ë²¤íŠ¸ë¥¼ ë“±ë¡í•˜ëŠ” ê²ƒì´ ì•„ë‹ˆê¸°ì— ê·¼ì ‘ê³µê²© ëª¨ì…˜ì„ ì—¬ê¸°ì„œ ë“±ë¡
             attackBtn.onClick.AddListener(player_CloseWeapon.GetComponent<Space_PlayerScriptOneHand>().OnAttackButtonClick);
         }
         else if (Wt == WeaponType.longType)
@@ -322,7 +322,7 @@ public class Space_PlayerManager : MonoBehaviour
             player_NonWeapon.SetActive(true);
             player_CloseWeapon.SetActive(false);
         }
-        //¹«±â È°¼ºÈ­
+        //ë¬´ê¸° í™œì„±í™”
         foreach (GameObject g in player_WeaponList)
         {
             if (Weapon == g)
@@ -339,7 +339,7 @@ public class Space_PlayerManager : MonoBehaviour
         {
             try
             {
-                player_CloseWeapon.GetComponent<Space_PlayerScriptOneHand>().WeaponSynchronization();  //ÇöÀç ÀâÀº ¹«±â ´Ù½Ã Å½»ö
+                player_CloseWeapon.GetComponent<Space_PlayerScriptOneHand>().WeaponSynchronization();  //í˜„ì¬ ì¡ì€ ë¬´ê¸° ë‹¤ì‹œ íƒìƒ‰
             }
             catch (NullReferenceException e)
             {
@@ -351,7 +351,7 @@ public class Space_PlayerManager : MonoBehaviour
         {
             try
             {
-                player_LongWeapon.GetComponent<Space_PlayerScriptRifle>().WeaponSynchronization();    //ÇöÀç ÀâÀº ¹«±â ´Ù½Ã Å½»ö
+                player_LongWeapon.GetComponent<Space_PlayerScriptRifle>().WeaponSynchronization();    //í˜„ì¬ ì¡ì€ ë¬´ê¸° ë‹¤ì‹œ íƒìƒ‰
             }
             catch (NullReferenceException e)
             {
@@ -361,8 +361,8 @@ public class Space_PlayerManager : MonoBehaviour
     }
 
 
-    //¿ø°Å¸® ¹«±â°¡ ¹Ù²î¾îµµ ÇöÀç µé°íÀÖ´Â ¹«±âÀÇ ÅºÀ» °¡Á®¿À±â
-    //±ÙÁ¢ ¹«±âÀÇ °æ¿ì ÀÜÅºÀÇ ¼ö´Â ¹«ÇÑ´ë·Î ÇÏ¸é
-    //-> ÇöÀç µé°íÀÖ´Â ¹«±âºÎÅÍ ÆÇ´Ü
+    //ì›ê±°ë¦¬ ë¬´ê¸°ê°€ ë°”ë€Œì–´ë„ í˜„ì¬ ë“¤ê³ ìˆëŠ” ë¬´ê¸°ì˜ íƒ„ì„ ê°€ì ¸ì˜¤ê¸°
+    //ê·¼ì ‘ ë¬´ê¸°ì˜ ê²½ìš° ì”íƒ„ì˜ ìˆ˜ëŠ” ë¬´í•œëŒ€ë¡œ í•˜ë©´
+    //-> í˜„ì¬ ë“¤ê³ ìˆëŠ” ë¬´ê¸°ë¶€í„° íŒë‹¨
 }
 

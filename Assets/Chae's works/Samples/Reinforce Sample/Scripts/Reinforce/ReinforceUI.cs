@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,22 +26,22 @@ public class ReinforceUI : MonoBehaviour
     [SerializeField]
     public Text text_right;
 
-    // ¸®½ºÅ©Çü Áõ°­(x °¨¼ÒÇÏ´Â ´ë½Å, y Å©°Ô Áõ°¡ µî °¨¼ÒÄ¡°¡ Á¸Àç)¿¡ ´ëÇÑ ¾ÆÀÌµğ¾î
-    // µÎ °¡Áö ½ºÅÈ Á¤º¸¸¦ È£ÃâÇÏ±â À§ÇØ ¿¢¼¿ Type¿¡ mixed ¶ó´Â °ªÀ» Ãß°¡ÇÏ°í, mixedÀÇ °æ¿ì second stat µîÀ» µû·Î Ç¥±â
+    // ë¦¬ìŠ¤í¬í˜• ì¦ê°•(x ê°ì†Œí•˜ëŠ” ëŒ€ì‹ , y í¬ê²Œ ì¦ê°€ ë“± ê°ì†Œì¹˜ê°€ ì¡´ì¬)ì— ëŒ€í•œ ì•„ì´ë””ì–´
+    // ë‘ ê°€ì§€ ìŠ¤íƒ¯ ì •ë³´ë¥¼ í˜¸ì¶œí•˜ê¸° ìœ„í•´ ì—‘ì…€ Typeì— mixed ë¼ëŠ” ê°’ì„ ì¶”ê°€í•˜ê³ , mixedì˜ ê²½ìš° second stat ë“±ì„ ë”°ë¡œ í‘œê¸°
 
     #region Reinforce Function
     public void ReinforceStat(int i) // i : 0~2 left, middle, right
     {
-        // 0. ÀÌ ÇÔ¼ö´Â 'Æ¯¼ö Áõ°­'ÀÌ ¾Æ´Ñ °æ¿ì¿¡ ½ÇÇàµÊ.
-        // 1. ¸ÕÀú ValueType °Ë»ç (Percent / Fixed) -> ¹Ì±¸Çö
-        // 2. ÀÌÈÄ TargetStat °Ë»ç
-        // 3. ¸¶Áö¸·À¸·Î Value¸¦ ¾ò°í Áõ°¡ -> ¹Ì±¸Çö
+        // 0. ì´ í•¨ìˆ˜ëŠ” 'íŠ¹ìˆ˜ ì¦ê°•'ì´ ì•„ë‹Œ ê²½ìš°ì— ì‹¤í–‰ë¨.
+        // 1. ë¨¼ì € ValueType ê²€ì‚¬ (Percent / Fixed) -> ë¯¸êµ¬í˜„
+        // 2. ì´í›„ TargetStat ê²€ì‚¬
+        // 3. ë§ˆì§€ë§‰ìœ¼ë¡œ Valueë¥¼ ì–»ê³  ì¦ê°€ -> ë¯¸êµ¬í˜„
 
         if (ReinforceManager.valueType[i] == "Fixed")
         {
-            // °è»ê½Ä : º¯°æµÉ ½ºÅÈ = ±âÁ¸ ½ºÅÈ + º¯È­·®
-            // ¿¹½Ã : ±âÁ¸ ½ºÅÈ 100, º¯È­·® 50
-            // °á°ú : 100 + 50 = 150
+            // ê³„ì‚°ì‹ : ë³€ê²½ë  ìŠ¤íƒ¯ = ê¸°ì¡´ ìŠ¤íƒ¯ + ë³€í™”ëŸ‰
+            // ì˜ˆì‹œ : ê¸°ì¡´ ìŠ¤íƒ¯ 100, ë³€í™”ëŸ‰ 50
+            // ê²°ê³¼ : 100 + 50 = 150
             switch (ReinforceManager.targetStat[i])
             {
                 case "health":
@@ -78,9 +78,9 @@ public class ReinforceUI : MonoBehaviour
         }
         else if (ReinforceManager.valueType[i] == "Percent")
         {
-            // °è»ê½Ä => º¯°æµÉ ½ºÅÈ = ±âÁ¸ ½ºÅÈ + ±âÁ¸ ½ºÅÈ*0.01*º¯È­·®
-            // ¿¹½Ã : ±âÁ¸½ºÅÈ 100, º¯È­·® 5%
-            // °á°ú : 100 + 100 * 0.01 * 5 = 100 + 5 = 105
+            // ê³„ì‚°ì‹ => ë³€ê²½ë  ìŠ¤íƒ¯ = ê¸°ì¡´ ìŠ¤íƒ¯ + ê¸°ì¡´ ìŠ¤íƒ¯*0.01*ë³€í™”ëŸ‰
+            // ì˜ˆì‹œ : ê¸°ì¡´ìŠ¤íƒ¯ 100, ë³€í™”ëŸ‰ 5%
+            // ê²°ê³¼ : 100 + 100 * 0.01 * 5 = 100 + 5 = 105
             switch (ReinforceManager.targetStat[i])
             {
                 case "health":
@@ -125,7 +125,7 @@ public class ReinforceUI : MonoBehaviour
     #region OnClick Function
     public void ReinforceLeft()
     {
-        // Æ¯¼ö Áõ°­ Àû¿ë ½Ã, if¹®À¸·Î ¸ÕÀú Áõ°­ Å¸ÀÔ °Ë»ç
+        // íŠ¹ìˆ˜ ì¦ê°• ì ìš© ì‹œ, ifë¬¸ìœ¼ë¡œ ë¨¼ì € ì¦ê°• íƒ€ì… ê²€ì‚¬
         ReinforceStat(0);
         ReinforceManager.ReinforceContainer.Add(ReinforceManager.reinforceNum[0]);
     }

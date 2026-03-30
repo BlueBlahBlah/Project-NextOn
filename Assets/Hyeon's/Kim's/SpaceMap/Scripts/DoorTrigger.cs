@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +30,7 @@ public class DoorTrigger : MonoBehaviour
         {
             StartCoroutine(OpenDoor());
 
-            // Ãæµ¹ Á¾·á ½Ã À§Ä¡ º¹±Í¸¦ ¸ØÃã
+            // ì¶©ëŒ ì¢…ë£Œ ì‹œ ìœ„ì¹˜ ë³µê·€ë¥¼ ë©ˆì¶¤
             if (m_ReturnCoroutine != null)
             {
                 StopCoroutine(m_ReturnCoroutine);
@@ -43,7 +43,7 @@ public class DoorTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // À§Ä¡ º¹±Í ÄÚ·çÆ¾ ½ÃÀÛ
+            // ìœ„ì¹˜ ë³µê·€ ì½”ë£¨í‹´ ì‹œì‘
             if (m_ReturnCoroutine == null)
             {
                 m_ReturnCoroutine = StartCoroutine(ReturnToPosition());
@@ -54,11 +54,11 @@ public class DoorTrigger : MonoBehaviour
     {
         while (Door.transform.position.y < m_Position.y)
         {
-            Door.transform.Translate(Vector3.up * Time.deltaTime); // ¸Å ÇÁ·¹ÀÓ¸¶´Ù ÃµÃµÈ÷ ÀÌµ¿
-            yield return null; // ´ÙÀ½ ÇÁ·¹ÀÓ±îÁö ´ë±â
+            Door.transform.Translate(Vector3.up * Time.deltaTime); // ë§¤ í”„ë ˆì„ë§ˆë‹¤ ì²œì²œíˆ ì´ë™
+            yield return null; // ë‹¤ìŒ í”„ë ˆì„ê¹Œì§€ ëŒ€ê¸°
         }
 
-        // À§Ä¡°¡ ÃÊ±â À§Ä¡¿¡ µµ´ŞÇÏ¸é Á¤È®È÷ ÃÊ±â À§Ä¡·Î ¼³Á¤
+        // ìœ„ì¹˜ê°€ ì´ˆê¸° ìœ„ì¹˜ì— ë„ë‹¬í•˜ë©´ ì •í™•íˆ ì´ˆê¸° ìœ„ì¹˜ë¡œ ì„¤ì •
         transform.position = new Vector3(transform.position.x, m_Position.y, transform.position.z);
         m_ReturnCoroutine = null;
         EnableColliders(true);

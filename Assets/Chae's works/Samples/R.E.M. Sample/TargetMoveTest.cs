@@ -1,38 +1,38 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetMoveTest : MonoBehaviour
 {
-    public float moveDistance = 1.0f;  // ÇÑ º¯ÀÇ ±æÀÌ
-    public float speed = 1.0f;  // ÀÌµ¿ ¼Óµµ
+    public float moveDistance = 1.0f;  // í•œ ë³€ì˜ ê¸¸ì´
+    public float speed = 1.0f;  // ì´ë™ ì†ë„
 
-    private Vector3 startPosition;  // ÇöÀç º¯ÀÇ ½ÃÀÛ À§Ä¡
-    private int sideCount = 0;  // ÇöÀç ±×¸° º¯ÀÇ ¼ö
+    private Vector3 startPosition;  // í˜„ì¬ ë³€ì˜ ì‹œì‘ ìœ„ì¹˜
+    private int sideCount = 0;  // í˜„ì¬ ê·¸ë¦° ë³€ì˜ ìˆ˜
 
     void Start()
     {
-        startPosition = transform.position;  // ÃÊ±â À§Ä¡ ÀúÀå
+        startPosition = transform.position;  // ì´ˆê¸° ìœ„ì¹˜ ì €ì¥
     }
 
     void Update()
     {
-        // ÇöÀç À§Ä¡¿¡¼­ ½ÃÀÛ À§Ä¡±îÁöÀÇ °Å¸® °è»ê
+        // í˜„ì¬ ìœ„ì¹˜ì—ì„œ ì‹œì‘ ìœ„ì¹˜ê¹Œì§€ì˜ ê±°ë¦¬ ê³„ì‚°
         float distance = Vector3.Distance(transform.position, startPosition);
 
-        // ÀÌµ¿ ÁßÀÎÁö È¸Àü ÁßÀÎÁö È®ÀÎ
+        // ì´ë™ ì¤‘ì¸ì§€ íšŒì „ ì¤‘ì¸ì§€ í™•ì¸
         if (distance < moveDistance)
         {
-            // ÀüÁø
+            // ì „ì§„
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
         else
         {
-            // ¿ŞÂÊÀ¸·Î 90µµ È¸Àü
+            // ì™¼ìª½ìœ¼ë¡œ 90ë„ íšŒì „
             transform.Rotate(Vector3.up, 90.0f);
             sideCount++;
 
-            // »õ·Î¿î º¯ÀÇ ½ÃÀÛ À§Ä¡ ÀúÀå
+            // ìƒˆë¡œìš´ ë³€ì˜ ì‹œì‘ ìœ„ì¹˜ ì €ì¥
             startPosition = transform.position;
 
             

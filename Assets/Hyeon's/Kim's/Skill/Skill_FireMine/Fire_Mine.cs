@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Fire_Mine : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class Fire_Mine : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             /*
-             * Æø¹ß½Ã ¹İ°æ¾È¿¡ Á¸ÀçÇÏ´Â Àûµé¿¡°Ô ´ë¹ÌÁö ºÎ°¡    
+             * í­ë°œì‹œ ë°˜ê²½ì•ˆì— ì¡´ì¬í•˜ëŠ” ì ë“¤ì—ê²Œ ëŒ€ë¯¸ì§€ ë¶€ê°€    
              */
         }
 

@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 public class DropItemPosition : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Positions;
-    private int PreviousItemPosition;       //?ë²ˆ ?°ì† ê°™ì? ?ë¦¬?ì„œ ?„ì´?œì´ ?¨ì–´ì§€ì§€ ?Šë„ë¡??˜ëŠ” ë³€??
+    private int PreviousItemPosition;       
+    
     public enum ItemList
     {
         BulletSupply,
@@ -28,7 +29,6 @@ public class DropItemPosition : MonoBehaviour
         SkillRandom,
     }
     
-    //?¨ì–´ì§€??ë¬´ê¸°êµì²´ ?„ì´?œë“¤
     [SerializeField] private GameObject BulletSupply;
     [SerializeField] private GameObject ChangeWeaponDemacia;
     [SerializeField] private GameObject ChangeWeaponFantasyAxe;
@@ -42,26 +42,20 @@ public class DropItemPosition : MonoBehaviour
     [SerializeField] private GameObject ChangeWeaponStatic;
     [SerializeField] private GameObject ChangeWeaponStreamOfEdge;
     
-    //?¤í‚¬?„ì´?œë“¤
     [SerializeField] private GameObject SkillBomb;
     [SerializeField] private GameObject SkillHeilcopter;
     [SerializeField] private GameObject SkillTurret;
     
-    
-    // Start is called before the first frame update
     void Start()
     {
         PreviousItemPosition = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
      
-    //8ê°œì˜ ?ë¦¬ì¤??˜ë‚˜ë¥??œë¤?¼ë¡œ ?•í•˜???¨ìˆ˜
-    //?´ì „ ?¸ì¶œ???•í•´ì§??ë¦¬ê°€ ë°”ë¡œ ?¤ìŒ???˜ì˜¤ì§€ ?ŠìŒ
     private GameObject ReturnRandomPosition()
     {
         int num = 0;
@@ -73,13 +67,12 @@ public class DropItemPosition : MonoBehaviour
         return Positions[num];
     }
 
-    //?¨ì–´ì§€???„ì´?œì— ?¨ì–´ì§€??ì½”ë“œ WeaponChangeGravity ë¥?ì¶”ê??˜ëŠ” ?¨ìˆ˜
     private T InitComponent<T>(GameObject gameObject) where T : MonoBehaviour
     {
         return gameObject.AddComponent<T>();
     }
     
-     //?„ì´?œì„ ?œë?˜ëŠ” ?¨ìˆ˜ - ?¸ì???œë?˜ê³ ???˜ëŠ” ?„ì´??    public GameObject DropItem(ItemList s)
+    public GameObject DropItem(ItemList s)
     {
         GameObject Item = null;
         GameObject DropPosition = ReturnRandomPosition();
@@ -140,12 +133,11 @@ public class DropItemPosition : MonoBehaviour
                     Item = Instantiate(SkillTurret, DropPosition.transform.position, DropPosition.transform.rotation);
                 break;
             default:
-                Debug.LogError("ItemDrop ?¸ì ?¤ë¥˜");
+                Debug.LogError("ItemDrop Error");
                 break;
         }
         InitComponent<WeaponChangeGravity>(Item);
         Item.GetComponent<WeaponChangeGravity>().TypeSelf = s;
         return Item;
     }
-
 }

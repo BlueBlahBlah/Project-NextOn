@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,14 +6,14 @@ using TMPro;
 
 public class StartButton : MonoBehaviour
 {
-    public Button button;  // Button ÄÄÆ÷³ÍÆ®
+    public Button button;  // Button ì»´í¬ë„ŒíŠ¸
 
     private void Start()
     {
-        // Button ÄÄÆ÷³ÍÆ® ºñÈ°¼ºÈ­
+        // Button ì»´í¬ë„ŒíŠ¸ ë¹„í™œì„±í™”
         button.interactable = false;
 
-        // 2ÃÊ µÚ¿¡ Button ÄÄÆ÷³ÍÆ® È°¼ºÈ­
+        // 2ì´ˆ ë’¤ì— Button ì»´í¬ë„ŒíŠ¸ í™œì„±í™”
         StartCoroutine(ActivateButton());
     }
 
@@ -21,7 +21,7 @@ public class StartButton : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
 
-        // Button ÄÄÆ÷³ÍÆ® È°¼ºÈ­
+        // Button ì»´í¬ë„ŒíŠ¸ í™œì„±í™”
         button.interactable = true;
     }
 }

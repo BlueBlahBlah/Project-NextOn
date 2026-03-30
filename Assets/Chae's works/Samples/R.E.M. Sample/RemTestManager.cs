@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RemTestManager : MonoBehaviour
 {
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
     public static RemTestManager instance;
 
-    // ¿¹½Ã º¯¼ö - ÇÃ·¹ÀÌ¾îÀÇ Ã¼·Â
+    // ì˜ˆì‹œ ë³€ìˆ˜ - í”Œë ˆì´ì–´ì˜ ì²´ë ¥
     public int hp;
     public bool isNear;
 
@@ -23,5 +23,5 @@ public class RemTestManager : MonoBehaviour
         }
     }
 
-    // ±âÅ¸ °ü·Ã ¸Ş¼­µåµéÀ» Ãß°¡ÇÒ ¼ö ÀÖÀ½
+    // ê¸°íƒ€ ê´€ë ¨ ë©”ì„œë“œë“¤ì„ ì¶”ê°€í•  ìˆ˜ ìˆìŒ
 }

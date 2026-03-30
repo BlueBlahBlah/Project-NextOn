@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPool : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs; // ¼­·Î ´Ù¸¥ ÀûµéÀÇ ÇÁ¸®ÆÕÀ» ¹è¿­·Î ÀúÀå
-    public int poolSize = 5; // °¢ Àû Å¸ÀÔ´ç Ç® »çÀÌÁî
-    private Dictionary<int, List<GameObject>> pools; // ¿ÀºêÁ§Æ® Ç®À» ÀúÀåÇÒ µñ¼Å³Ê¸®
+    public GameObject[] enemyPrefabs; // ì„œë¡œ ë‹¤ë¥¸ ì ë“¤ì˜ í”„ë¦¬íŒ¹ì„ ë°°ì—´ë¡œ ì €ì¥
+    public int poolSize = 5; // ê° ì  íƒ€ì…ë‹¹ í’€ ì‚¬ì´ì¦ˆ
+    private Dictionary<int, List<GameObject>> pools; // ì˜¤ë¸Œì íŠ¸ í’€ì„ ì €ì¥í•  ë”•ì…”ë„ˆë¦¬
 
     void Start()
     {
@@ -35,7 +35,7 @@ public class EnemyPool : MonoBehaviour
             }
         }
 
-        // Ç®¿¡ »ç¿ë °¡´ÉÇÑ ¿ÀºêÁ§Æ®°¡ ¾øÀ¸¸é »õ·Î »ı¼ºÇÏ¿© Ãß°¡
+        // í’€ì— ì‚¬ìš© ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ê°€ ì—†ìœ¼ë©´ ìƒˆë¡œ ìƒì„±í•˜ì—¬ ì¶”ê°€
         GameObject newObj = Instantiate(enemyPrefabs[enemyType]);
         newObj.SetActive(false);
         pools[enemyType].Add(newObj);

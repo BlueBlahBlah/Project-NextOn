@@ -1,35 +1,35 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DictionaryManager : MonoBehaviour
 {
-    public GameObject[] detailPanels; // »ó¼¼ Á¤º¸¸¦ Ç¥½ÃÇÒ ÆĞ³Î ¹è¿­
-    public Button[] tabButtons; // ÅÇ ¹öÆ° ¹è¿­
+    public GameObject[] detailPanels; // ìƒì„¸ ì •ë³´ë¥¼ í‘œì‹œí•  íŒ¨ë„ ë°°ì—´
+    public Button[] tabButtons; // íƒ­ ë²„íŠ¼ ë°°ì—´
 
     private void Start()
     {
-        // °¢ ÅÇ ¹öÆ°¿¡ Å¬¸¯ ÀÌº¥Æ® ¸®½º³Ê¸¦ µî·ÏÇÕ´Ï´Ù.
+        // ê° íƒ­ ë²„íŠ¼ì— í´ë¦­ ì´ë²¤íŠ¸ ë¦¬ìŠ¤ë„ˆë¥¼ ë“±ë¡í•©ë‹ˆë‹¤.
         for (int i = 0; i < tabButtons.Length; i++)
         {
-            int index = i; // ·ÎÄÃ º¯¼ö·Î ÀÎµ¦½º¸¦ Ä¸Ã³
+            int index = i; // ë¡œì»¬ ë³€ìˆ˜ë¡œ ì¸ë±ìŠ¤ë¥¼ ìº¡ì²˜
             tabButtons[i].onClick.AddListener(() => ShowDetail(index));
         }
 
-        // ÃÊ±â »óÅÂ·Î Ã¹ ¹øÂ° »ó¼¼ Á¤º¸¸¦ Ç¥½ÃÇÕ´Ï´Ù.
+        // ì´ˆê¸° ìƒíƒœë¡œ ì²« ë²ˆì§¸ ìƒì„¸ ì •ë³´ë¥¼ í‘œì‹œí•©ë‹ˆë‹¤.
         ShowDetail(0);
     }
 
     private void ShowDetail(int index)
     {
-        // ¸ğµç »ó¼¼ Á¤º¸ ÆĞ³ÎÀ» ¼û±é´Ï´Ù.
+        // ëª¨ë“  ìƒì„¸ ì •ë³´ íŒ¨ë„ì„ ìˆ¨ê¹ë‹ˆë‹¤.
         foreach (var panel in detailPanels)
         {
             panel.SetActive(false);
         }
 
-        // ¼±ÅÃµÈ ÅÇ¿¡ ÇØ´çÇÏ´Â »ó¼¼ Á¤º¸ ÆĞ³ÎÀ» Ç¥½ÃÇÕ´Ï´Ù.
+        // ì„ íƒëœ íƒ­ì— í•´ë‹¹í•˜ëŠ” ìƒì„¸ ì •ë³´ íŒ¨ë„ì„ í‘œì‹œí•©ë‹ˆë‹¤.
         if (index >= 0 && index < detailPanels.Length)
         {
             detailPanels[index].SetActive(true);

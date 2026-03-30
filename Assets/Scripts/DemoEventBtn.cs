@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +25,7 @@ public class DemoEventBtn : MonoBehaviour
         peiz3Gauge.GetComponent<Peiz3Gauge>().StartPeiz3Gauge();
         //GameObject.Find("StageManager").GetComponent<StageManager>().Peiz3MonsterSpawn();
         //GameObject.Find("StageManager").GetComponent<StageManager>().StartPeiz3Pannel();
-        Debug.LogError("컴파?�러 ?�결");
+        Debug.LogError("而댄뙆?쇰윭 ?닿껐");
         
     }
     

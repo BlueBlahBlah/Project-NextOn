@@ -8,14 +8,16 @@ public class WeaponChangeGravity : MonoBehaviour
     [SerializeField] private Rigidbody rigidbody;
     public DropItemPosition.ItemList TypeSelf;
 
-    public bool Dialog_After_Acquisition;       //?´ë‹¹ ?„ì´???ë“ ???€?”ì°½???˜ì˜¤?”ì?
+    public bool Dialog_After_Acquisition;       
+    
     // Start is called before the first frame update
     void Start()
     {
         _boxCollider = GetComponent<BoxCollider>();
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.useGravity = true;
-        Dialog_After_Acquisition = false;           //?„ì´???ë“???€?”ì°½ ?˜ì˜¤ì§€ ?ŠëŠ” ê²ƒì´ ê¸°ë³¸ê°?    }
+        Dialog_After_Acquisition = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -23,13 +25,12 @@ public class WeaponChangeGravity : MonoBehaviour
         if (transform.position.y < 0.8F)
         {
             rigidbody.useGravity = false;
-            rigidbody.velocity = Vector3.zero; // Stop all movement
-            rigidbody.angularVelocity = Vector3.zero; // Stop all rotation
-            rigidbody.isKinematic = true; // Optionally, make the object kinematic to prevent any further physics interactions
+            rigidbody.velocity = Vector3.zero; 
+            rigidbody.angularVelocity = Vector3.zero; 
+            rigidbody.isKinematic = true; 
         }
     }
 
-    //Dialog_After_Acquisitionë¥?trueë¡?ë°”ê¾¸???¨ìˆ˜ - Dialog_After_Acquisitionê°€ ë³€ê²½ë˜???œì ??ë§ì¶”ê¸??„í•¨?
     public void SetDialog()
     {
        Invoke("Invoke_SetDialog",1);
@@ -62,8 +63,6 @@ public class WeaponChangeGravity : MonoBehaviour
                 EventManager.Instance.PrintMSG();
             }
             DestroyLater();
-            
         }
-        
     }
 }

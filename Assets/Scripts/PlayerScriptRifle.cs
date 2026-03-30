@@ -144,11 +144,11 @@ public class PlayerScriptRifle : MonoBehaviour
                 Anim.SetBool("Right", isMovingRight);
                 
 
-                if (reloaing == true)       //재장전중이라면
+                if (Reloading == true)       //재장전중이라면
                 {
                     PlayerSoundManager.Instance.reload_Sound();
                     Anim.SetBool("reload", true);       //재장전 애니메이션
-                    reloaing = false;
+                    Reloading = false;
                     Invoke("reloadDone",4);      //4초후 재장전 끝
                 }
             }
@@ -168,21 +168,9 @@ public class PlayerScriptRifle : MonoBehaviour
         Anim.SetBool("reload", false);
         WeaponSynchronization();
 
-        if (currentGun != null && currentGun.gunData != null)
+        if (currentGun != null)
         {
-            int reloadAmount = currentGun.gunData.maxMagazineSize;
-            
-            if (currentGun.maxBulletCount >= reloadAmount)
-            {
-                currentGun.maxBulletCount -= reloadAmount;
-                currentGun.bulletCount += reloadAmount;
-            }
-            else
-            {
-                currentGun.bulletCount += currentGun.maxBulletCount;
-                currentGun.maxBulletCount = 0;
-            }
-            currentGun.nowReloading = false;
+            currentGun.CompleteReload();
         }
 
         PlayerSoundManager.Instance.reload_Sound_stop();

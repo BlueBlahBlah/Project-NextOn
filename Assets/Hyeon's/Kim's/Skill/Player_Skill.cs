@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class Player_Skill : MonoBehaviour
 {
-    private float skill_power = 10.0f;      //½ºÅ³ ÇÇÇØ·®
-    private float skill_inrease = 1.0f;     //½ºÅ³ ÇÇÇØ Áõ°¡·®
-    private float heal = 10.0f;             //È¸º¹·®
-    private float heal_increase = 1.0f;     //È¸º¹ Áõ°¡·®
-    private float Skill_Round = 2.0f;       //½ºÅ³ ½ÇÇà ¿ø±æÀÌ
+    private float skill_power = 10.0f;      //ìŠ¤í‚¬ í”¼í•´ëŸ‰
+    private float skill_inrease = 1.0f;     //ìŠ¤í‚¬ í”¼í•´ ì¦ê°€ëŸ‰
+    private float heal = 10.0f;             //íšŒë³µëŸ‰
+    private float heal_increase = 1.0f;     //íšŒë³µ ì¦ê°€ëŸ‰
+    private float Skill_Round = 2.0f;       //ìŠ¤í‚¬ ì‹¤í–‰ ì›ê¸¸ì´
 
 
-    private int playerHp = 0;               //ÀÓ½Ã È®ÀÎ¿ë HP
-    private Transform PlayerTr;             //ÇÃ·¹ÀÌ¾î À§Ä¡ È®ÀÎ¿ë
-    GameObject particleSystemObject;        //½ºÅ³ ÇÁ¸®ÆÕ ´ë¿ë
+    private int playerHp = 0;               //ì„ì‹œ í™•ì¸ìš© HP
+    private Transform PlayerTr;             //í”Œë ˆì´ì–´ ìœ„ì¹˜ í™•ì¸ìš©
+    GameObject particleSystemObject;        //ìŠ¤í‚¬ í”„ë¦¬íŒ¹ ëŒ€ìš©
     GameObject zonePre;
 
     [Header("HealSkill")]
@@ -76,15 +76,15 @@ public class Player_Skill : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z)) P_Skill_WindHeal();                //Z ÀÔ·Â½Ã Heal
-        else if (Input.GetKeyDown(KeyCode.X)) P_Skill_Storm();              //X ÀÔ·Â½Ã Splash Skill
-        else if (Input.GetKeyDown(KeyCode.C)) P_Skill_FireMine();           //C ÀÔ·Â½Ã Mine Skill
-        else if (Input.GetKeyDown(KeyCode.V)) P_Skill_FireGuard();          //V ÀÔ·Â½Ã Guard Skill
-        else if (Input.GetKeyDown(KeyCode.B)) P_Skill_Spark();              //B ÀÔ·Â½Ã Delay Skill
-        else if (Input.GetKeyDown(KeyCode.N)) P_Skill_Stun();               //N ÀÔ·Â½Ã Stun Skill
+        if (Input.GetKeyDown(KeyCode.Z)) P_Skill_WindHeal();                //Z ì…ë ¥ì‹œ Heal
+        else if (Input.GetKeyDown(KeyCode.X)) P_Skill_Storm();              //X ì…ë ¥ì‹œ Splash Skill
+        else if (Input.GetKeyDown(KeyCode.C)) P_Skill_FireMine();           //C ì…ë ¥ì‹œ Mine Skill
+        else if (Input.GetKeyDown(KeyCode.V)) P_Skill_FireGuard();          //V ì…ë ¥ì‹œ Guard Skill
+        else if (Input.GetKeyDown(KeyCode.B)) P_Skill_Spark();              //B ì…ë ¥ì‹œ Delay Skill
+        else if (Input.GetKeyDown(KeyCode.N)) P_Skill_Stun();               //N ì…ë ¥ì‹œ Stun Skill
     }
 
-    void OnDrawGizmos() //¹üÀ§È®ÀÎ¿ë ±âÁî¸ğ
+    void OnDrawGizmos() //ë²”ìœ„í™•ì¸ìš© ê¸°ì¦ˆëª¨
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, transform.forward.normalized * Skill_Round);
@@ -99,9 +99,9 @@ public class Player_Skill : MonoBehaviour
         particleSystemObject.transform.localScale = new Vector3(Heal_round, Heal_round, Heal_round);
         particleSystemObject.transform.parent = this.transform;
         /*
-         * ÇÃ·¹ÀÌ¾î Ã¼·ÂÈ¸º¹
-         * ÃÑ È¸º¹·® = Ã¼·Â °è¼ö * È¸º¹·®
-         * Ã¼·Â°è¼ö¸¸Å­ ½ºÅ³ ÀÌÆåÆ® Å©±â°¡ Áõ°¡ÇÔ
+         * í”Œë ˆì´ì–´ ì²´ë ¥íšŒë³µ
+         * ì´ íšŒë³µëŸ‰ = ì²´ë ¥ ê³„ìˆ˜ * íšŒë³µëŸ‰
+         * ì²´ë ¥ê³„ìˆ˜ë§Œí¼ ìŠ¤í‚¬ ì´í™íŠ¸ í¬ê¸°ê°€ ì¦ê°€í•¨
          * player_HP += heal * heal_increase;
         */
     }
@@ -115,11 +115,11 @@ public class Player_Skill : MonoBehaviour
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, Storm_round);
 
-        foreach (Collider collider in colliders) //collider ¿¡ ´ë¹ÌÁö ºÎ°¡
+        foreach (Collider collider in colliders) //collider ì— ëŒ€ë¯¸ì§€ ë¶€ê°€
         {
             /*
-                * ÇØ´ç collider Àûµé¿¡°Ô ´ë¹ÌÁö ºÎ°¡
-                * ÃÑ ÇÇÇØ·® = ½ºÅ³°è¼ö * ½ºÅ³ÇÇÇØ·®
+                * í•´ë‹¹ collider ì ë“¤ì—ê²Œ ëŒ€ë¯¸ì§€ ë¶€ê°€
+                * ì´ í”¼í•´ëŸ‰ = ìŠ¤í‚¬ê³„ìˆ˜ * ìŠ¤í‚¬í”¼í•´ëŸ‰
                 * colliders....
             */
         }
@@ -131,8 +131,8 @@ public class Player_Skill : MonoBehaviour
         particleSystemObject = Instantiate(FireMine, PlayerTr.position, Quaternion.identity);
         particleSystemObject.transform.localScale = new Vector3(Skill_Round, particleSystemObject.transform.localScale.y, Skill_Round);
         /*
-         * ½ºÅ³ »ç¿ë½Ã Áö·Ú ¼³Ä¡µÊ
-         * -> ÀÏÁ¤½Ã°£ Áö³¯½Ã Æø¹ß(Fire_Mine½ºÅ©¸³Æ® ¹ßµ¿ÇÔ)
+         * ìŠ¤í‚¬ ì‚¬ìš©ì‹œ ì§€ë¢° ì„¤ì¹˜ë¨
+         * -> ì¼ì •ì‹œê°„ ì§€ë‚ ì‹œ í­ë°œ(Fire_MineìŠ¤í¬ë¦½íŠ¸ ë°œë™í•¨)
          */
     }
 
@@ -144,8 +144,8 @@ public class Player_Skill : MonoBehaviour
 
         StartCoroutine(WaitAndDestroy(particleSystemObject, null, null,null,10f));
         /*
-         * ½ºÅ³ »ç¿ë½Ã ÀÏÁ¤ ½Ã°£ Áö³ª¸é ÀÚµ¿À¸·Î »èÁ¦µÊ
-         * Äİ¶óÀÌ´õ Á¢ÃË½Ã µ¥¹ÌÁöºÎ°¡
+         * ìŠ¤í‚¬ ì‚¬ìš©ì‹œ ì¼ì • ì‹œê°„ ì§€ë‚˜ë©´ ìë™ìœ¼ë¡œ ì‚­ì œë¨
+         * ì½œë¼ì´ë” ì ‘ì´‰ì‹œ ë°ë¯¸ì§€ë¶€ê°€
          */
     }
 
@@ -168,7 +168,7 @@ public class Player_Skill : MonoBehaviour
                     Delay.transform.parent = collider.transform;
 
                     /*
-                     * ÇØ´ç collider Àûµé¿¡°Ô ´ë¹ÌÁö ºÎ°¡
+                     * í•´ë‹¹ collider ì ë“¤ì—ê²Œ ëŒ€ë¯¸ì§€ ë¶€ê°€
                      */
 
                     StartCoroutine(WaitAndDestroy(particleSystemObject, Lightning,Delay, collider,2f));
@@ -192,7 +192,7 @@ public class Player_Skill : MonoBehaviour
                     particleSystemObject = Instantiate(Stun, new Vector3(enemyPosition.x, enemyPosition.y, enemyPosition.z), Quaternion.identity);
 
                     /*
-                     * ÇØ´ç collider Àûµé¿¡°Ô ´ë¹ÌÁö ºÎ°¡
+                     * í•´ë‹¹ collider ì ë“¤ì—ê²Œ ëŒ€ë¯¸ì§€ ë¶€ê°€
                      */
                     StartCoroutine(WaitAndDestroy(particleSystemObject, null, null, collider, 3.5f));
                 }

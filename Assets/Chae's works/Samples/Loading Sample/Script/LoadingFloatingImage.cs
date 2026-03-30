@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,14 +8,14 @@ public class LoadingFloatingImage : MonoBehaviour
     [SerializeField]
     private Image floatingImage;
 
-    private float posX; // ÃÊ±â x
-    private float posY; // ÃÊ±â y
+    private float posX; // ì´ˆê¸° x
+    private float posY; // ì´ˆê¸° y
 
     [SerializeField]
-    private float speed = 1f; // ¼Óµµ
+    private float speed = 1f; // ì†ë„
     private float time = 0f;
 
-    private float deltaY = 0f; // Y º¯È­·®
+    private float deltaY = 0f; // Y ë³€í™”ëŸ‰
 
     void Start()
     {

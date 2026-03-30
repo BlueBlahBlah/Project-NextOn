@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -7,41 +7,41 @@ using UnityEngine.SceneManagement;
 
 public class VolumeController : MonoBehaviour
 {
-    // ÀÌº¥Æ®¸¦ »ç¿ëÇÒ ¼ö ÀÖµµ·Ï UnityEvent Á¤ÀÇ
+    // ì´ë²¤íŠ¸ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆë„ë¡ UnityEvent ì •ì˜
     public UnityEvent OnFadeIn = new UnityEvent();
     public UnityEvent OnFadeOut = new UnityEvent();
 
     private Volume volume;
-    private float lerpDuration = 1.5f; // Lerp ½Ã°£À» ¼³Á¤
+    private float lerpDuration = 1.5f; // Lerp ì‹œê°„ì„ ì„¤ì •
 
 
     void Start()
     {
-        // Ã³À½ ½ÃÀÛ ½Ã ¸ŞÀÎ Ä«¸Ş¶ó¸¦ Ã£¾Æ¼­ VolumeÀ» ¼³Á¤
+        // ì²˜ìŒ ì‹œì‘ ì‹œ ë©”ì¸ ì¹´ë©”ë¼ë¥¼ ì°¾ì•„ì„œ Volumeì„ ì„¤ì •
         FindAndSetVolume();
 
-        // ¾ÀÀÌ ·ÎµåµÉ ¶§¸¶´Ù ¸ŞÀÎ Ä«¸Ş¶ó¿Í VolumeÀ» ´Ù½Ã Ã£µµ·Ï ÀÌº¥Æ® µî·Ï
+        // ì”¬ì´ ë¡œë“œë  ë•Œë§ˆë‹¤ ë©”ì¸ ì¹´ë©”ë¼ì™€ Volumeì„ ë‹¤ì‹œ ì°¾ë„ë¡ ì´ë²¤íŠ¸ ë“±ë¡
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        // UnityEvent¿¡ FadeIn, FadeOut ÇÔ¼ö µî·Ï
+        // UnityEventì— FadeIn, FadeOut í•¨ìˆ˜ ë“±ë¡
         OnFadeIn.AddListener(FadeIn);
         OnFadeOut.AddListener(FadeOut);
     }
 
     void OnDestroy()
     {
-        // ¾ÀÀÌ º¯°æµÉ ¶§ ÀÌº¥Æ® µî·Ï ÇØÁ¦
+        // ì”¬ì´ ë³€ê²½ë  ë•Œ ì´ë²¤íŠ¸ ë“±ë¡ í•´ì œ
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // ¾ÀÀÌ ·ÎµåµÉ ¶§ È£ÃâµÇ´Â ¸Ş¼­µå
+    // ì”¬ì´ ë¡œë“œë  ë•Œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // ¾ÀÀÌ ·ÎµåµÉ ¶§¸¶´Ù ¸ŞÀÎ Ä«¸Ş¶ó¿Í VolumeÀ» ´Ù½Ã ¼³Á¤
+        // ì”¬ì´ ë¡œë“œë  ë•Œë§ˆë‹¤ ë©”ì¸ ì¹´ë©”ë¼ì™€ Volumeì„ ë‹¤ì‹œ ì„¤ì •
         FindAndSetVolume();
     }
 
-    // ·¹ÀÌ¾î°¡ Main CameraÀÎ Ä«¸Ş¶ó¸¦ Ã£¾Æ Volume ÄÄÆ÷³ÍÆ®¸¦ ¼³Á¤ÇÏ´Â ÇÔ¼ö
+    // ë ˆì´ì–´ê°€ Main Cameraì¸ ì¹´ë©”ë¼ë¥¼ ì°¾ì•„ Volume ì»´í¬ë„ŒíŠ¸ë¥¼ ì„¤ì •í•˜ëŠ” í•¨ìˆ˜
     void FindAndSetVolume()
     {
         GameObject mainCamera = GameObject.FindWithTag("MainCamera");
@@ -51,16 +51,16 @@ public class VolumeController : MonoBehaviour
             volume = mainCamera.GetComponent<Volume>();
             if (volume == null)
             {
-                Debug.LogError("Main Camera¿¡ Volume ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù.");
+                Debug.LogError("Main Cameraì— Volume ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
             }
         }
         else
         {
-            Debug.LogError("Main Camera¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("Main Cameraë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 
-    // ·¹ÀÌ¾î°¡ Main CameraÀÎ Ä«¸Ş¶ó¸¦ Ã£´Â ÇÔ¼ö
+    // ë ˆì´ì–´ê°€ Main Cameraì¸ ì¹´ë©”ë¼ë¥¼ ì°¾ëŠ” í•¨ìˆ˜
     GameObject FindMainCamera()
     {
         GameObject[] cameras = GameObject.FindGameObjectsWithTag("MainCamera");
@@ -75,7 +75,7 @@ public class VolumeController : MonoBehaviour
         return null;
     }
 
-    // Weight¸¦ 0¿¡¼­ 1·Î ÀÚ¿¬½º·´°Ô º¯°æÇÏ´Â ÇÔ¼ö
+    // Weightë¥¼ 0ì—ì„œ 1ë¡œ ìì—°ìŠ¤ëŸ½ê²Œ ë³€ê²½í•˜ëŠ” í•¨ìˆ˜
     public void FadeIn()
     {
         if (volume != null)
@@ -84,11 +84,11 @@ public class VolumeController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("VolumeÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("Volumeì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
         }
     }
 
-    // Weight¸¦ 1¿¡¼­ 0À¸·Î ÀÚ¿¬½º·´°Ô º¯°æÇÏ´Â ÇÔ¼ö
+    // Weightë¥¼ 1ì—ì„œ 0ìœ¼ë¡œ ìì—°ìŠ¤ëŸ½ê²Œ ë³€ê²½í•˜ëŠ” í•¨ìˆ˜
     public void FadeOut()
     {
         if (volume != null)
@@ -97,11 +97,11 @@ public class VolumeController : MonoBehaviour
         }
         else
         {
-            Debug.LogError("VolumeÀÌ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+            Debug.LogError("Volumeì´ ì„¤ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
         }
     }
 
-    // Weight °ªÀ» Lerp·Î º¯°æÇÏ´Â Coroutine
+    // Weight ê°’ì„ Lerpë¡œ ë³€ê²½í•˜ëŠ” Coroutine
     private IEnumerator ChangeWeight(float startValue, float endValue)
     {
         float elapsed = 0f;
@@ -116,20 +116,20 @@ public class VolumeController : MonoBehaviour
             yield return null;
         }
 
-        // ¿Ï·á ÈÄ ÃÖÁ¾°ª Àû¿ë
+        // ì™„ë£Œ í›„ ìµœì¢…ê°’ ì ìš©
         if (volume != null)
         {
             volume.weight = endValue;
         }
     }
 
-    // FadeIn ÀÌº¥Æ®¸¦ Æ®¸®°ÅÇÏ´Â ÇÔ¼ö
+    // FadeIn ì´ë²¤íŠ¸ë¥¼ íŠ¸ë¦¬ê±°í•˜ëŠ” í•¨ìˆ˜
     public void TriggerFadeIn()
     {
         OnFadeIn.Invoke();
     }
 
-    // FadeOut ÀÌº¥Æ®¸¦ Æ®¸®°ÅÇÏ´Â ÇÔ¼ö
+    // FadeOut ì´ë²¤íŠ¸ë¥¼ íŠ¸ë¦¬ê±°í•˜ëŠ” í•¨ìˆ˜
     public void TriggerFadeOut()
     {
         Debug.Log("TriggerFadeOut");

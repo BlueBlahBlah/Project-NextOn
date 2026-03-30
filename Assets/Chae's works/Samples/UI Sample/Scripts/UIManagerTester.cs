@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManagerTester : MonoBehaviour
 {
-    // UIÀÇ °¢ ±â´ÉÀÌ Á¤»óÀÛµ¿ÇÏ´ÂÁö, ¾î¶»°Ô ¿¬°áµÇ¾îÀÖ´ÂÁö Âü°íÇÏµµ·Ï µµ¿òÀ» ÁÖ´Â ½ºÅ©¸³Æ®ÀÔ´Ï´Ù.
+    // UIì˜ ê° ê¸°ëŠ¥ì´ ì •ìƒì‘ë™í•˜ëŠ”ì§€, ì–´ë–»ê²Œ ì—°ê²°ë˜ì–´ìˆëŠ”ì§€ ì°¸ê³ í•˜ë„ë¡ ë„ì›€ì„ ì£¼ëŠ” ìŠ¤í¬ë¦½íŠ¸ì…ë‹ˆë‹¤.
 
     public UIManager uiManager;
     public InGameUI inGameUI;
@@ -93,9 +93,9 @@ public class UIManagerTester : MonoBehaviour
 
     private void FunctionTestStart()
     {
-        // ***ÀÌ ÇÔ¼ö¸¦ ÀÀ¿ëÇÏ¿©, ¾Æ·¡ º¯¼öµé¿¡ ½ÇÁ¦ ¿¬°áÇÒ °ªÀ» ´ëÀÔÇÕ´Ï´Ù.
+        // ***ì´ í•¨ìˆ˜ë¥¼ ì‘ìš©í•˜ì—¬, ì•„ë˜ ë³€ìˆ˜ë“¤ì— ì‹¤ì œ ì—°ê²°í•  ê°’ì„ ëŒ€ì…í•©ë‹ˆë‹¤.
 
-        // Å×½ºÆ® ÃÊ±âÈ­
+        // í…ŒìŠ¤íŠ¸ ì´ˆê¸°í™”
         inGameUI.PlayerHp = setPlayerHp;
         inGameUI.BossHp = setBossHp;
         inGameUI.MaxBullet = initMaxBullet;
@@ -106,9 +106,9 @@ public class UIManagerTester : MonoBehaviour
         inGameUI.GimmickPercent = 0f;
         inGameUI.NumOfEnemy = 0;
 
-        inGameUI.BossName = "Overflow"; // ÇöÀç ÃâÇöÇÑ º¸½º ÀÌ¸§ ¿¬°á
-        inGameUI.GimmickName = "Error404"; // ±â¹Í ÀÌ¸§ ¿¬°á
-        inGameUI.WeaponName = "Weapon1"; // ÇöÀç Âø¿ë ÁßÀÎ ¹«±â ÀÌ¸§ ¿¬°á
+        inGameUI.BossName = "Overflow"; // í˜„ì¬ ì¶œí˜„í•œ ë³´ìŠ¤ ì´ë¦„ ì—°ê²°
+        inGameUI.GimmickName = "Error404"; // ê¸°ë¯¹ ì´ë¦„ ì—°ê²°
+        inGameUI.WeaponName = "Weapon1"; // í˜„ì¬ ì°©ìš© ì¤‘ì¸ ë¬´ê¸° ì´ë¦„ ì—°ê²°
 
         inGameUI.InitWeaponInfo();
     }

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +24,7 @@ public class SpaceWeaponChange_Trigger : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        // Ãæµ¹ÇÑ ¹°Ã¼°¡ Player ÅÂ±×¸¦ °¡Áø °æ¿ì
+        // ì¶©ëŒí•œ ë¬¼ì²´ê°€ Player íƒœê·¸ë¥¼ ê°€ì§„ ê²½ìš°
         if (other.CompareTag("Player") && self.activeSelf == false)
         {
             fireBtn.onClick.RemoveAllListeners();

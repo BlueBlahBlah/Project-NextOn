@@ -3,8 +3,8 @@ using ProjectNextOn.Data;
 
 public abstract class WeaponBase : MonoBehaviour
 {
-    [Header("연동할 데이터 에셋")]
+    [Header("장착된 무기 데이터 (ScriptableObject)")]
     public WeaponData weaponData;
-}
-    public WeaponData WeaponData;
+    public float fireRate;
+    public float timer;
 }

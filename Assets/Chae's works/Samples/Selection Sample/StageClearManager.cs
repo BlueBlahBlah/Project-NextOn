@@ -1,46 +1,46 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StageClearManager : MonoBehaviour
 {
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
     public static StageClearManager instance { get; private set; }
 
-    // Stage Å¬¸®¾î ¿©ºÎ ÀúÀå
+    // Stage í´ë¦¬ì–´ ì—¬ë¶€ ì €ì¥
     [SerializeField]
     public bool[] stageClearStatus = new bool[4]; // 0: Stage1, 1: Stage2, 2: Stage3, 3: Stage4
     public bool isSuccess = false;
 
     private void Awake()
     {
-        // ½Ì±ÛÅæ ÆĞÅÏ ±¸Çö
+        // ì‹±ê¸€í†¤ íŒ¨í„´ êµ¬í˜„
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // ¾ÀÀÌ º¯°æµÇ¾îµµ °´Ã¼ À¯Áö
+            DontDestroyOnLoad(gameObject); // ì”¬ì´ ë³€ê²½ë˜ì–´ë„ ê°ì²´ ìœ ì§€
 
         }
         else
         {
-            Destroy(gameObject); // ÀÌ¹Ì ÀÎ½ºÅÏ½º°¡ ÀÖ´Ù¸é ÆÄ±«
+            Destroy(gameObject); // ì´ë¯¸ ì¸ìŠ¤í„´ìŠ¤ê°€ ìˆë‹¤ë©´ íŒŒê´´
         }
     }
 
     private void OnEnable()
     {
-        // ¾À º¯°æ ½Ã ÀÌº¥Æ® µî·Ï
+        // ì”¬ ë³€ê²½ ì‹œ ì´ë²¤íŠ¸ ë“±ë¡
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        // ¾À º¯°æ ½Ã ÀÌº¥Æ® ÇØÁ¦
+        // ì”¬ ë³€ê²½ ì‹œ ì´ë²¤íŠ¸ í•´ì œ
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // ¾ÀÀÌ ·ÎµåµÇ¾úÀ» ¶§ È£ÃâµÇ´Â ¸Ş¼­µå
+    // ì”¬ì´ ë¡œë“œë˜ì—ˆì„ ë•Œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "Selection Scene")
@@ -49,7 +49,7 @@ public class StageClearManager : MonoBehaviour
         }
     }
 
-    // °¢ Stage Å¬¸®¾î ¿©ºÎ È®ÀÎ ÈÄ ÇÔ¼ö È£Ãâ (¿©±â¼­´Â Debug ·Î±× Ãâ·Â)
+    // ê° Stage í´ë¦¬ì–´ ì—¬ë¶€ í™•ì¸ í›„ í•¨ìˆ˜ í˜¸ì¶œ (ì—¬ê¸°ì„œëŠ” Debug ë¡œê·¸ ì¶œë ¥)
     private void CheckStageClearStatus()
     {
         int clearCount = 0;
@@ -58,13 +58,13 @@ public class StageClearManager : MonoBehaviour
         {
             if (stageClearStatus[i])
             {
-                // i¹øÂ° ½ºÅ×ÀÌÁö Å¬¸®¾î -> i¹øÂ° ½ºÅ×ÀÌÁö ÀÔÀå ¿ÀºêÁ§Æ® ÆÄ±«
+                // ië²ˆì§¸ ìŠ¤í…Œì´ì§€ í´ë¦¬ì–´ -> ië²ˆì§¸ ìŠ¤í…Œì´ì§€ ì…ì¥ ì˜¤ë¸Œì íŠ¸ íŒŒê´´
                 ExecuteStageClearFunction(i + 1);
                 clearCount++;
             }
             else
             {
-                // i¹øÂ° ½ºÅ×ÀÌÁö ¹ÌÅ¬¸®¾î
+                // ië²ˆì§¸ ìŠ¤í…Œì´ì§€ ë¯¸í´ë¦¬ì–´
             }
         }
 
@@ -87,40 +87,40 @@ public class StageClearManager : MonoBehaviour
         
     }
 
-    // °¢ Stage °¡ Å¬¸®¾î µÇ¾ú´Ù¸é ½ÇÇàÇÒ ÇÔ¼ö
+    // ê° Stage ê°€ í´ë¦¬ì–´ ë˜ì—ˆë‹¤ë©´ ì‹¤í–‰í•  í•¨ìˆ˜
     private void ExecuteStageClearFunction(int stageNumber)
     {
-        Debug.Log($"Stage {stageNumber} Å¬¸®¾î ÈÄ ½ÇÇàÇÒ ÇÔ¼ö È£Ãâ");
+        Debug.Log($"Stage {stageNumber} í´ë¦¬ì–´ í›„ ì‹¤í–‰í•  í•¨ìˆ˜ í˜¸ì¶œ");
 
-        // "Scene Change Object - i" ¶ó´Â ÀÌ¸§ÀÇ ¿ÀºêÁ§Æ®¸¦ Ã£À½
+        // "Scene Change Object - i" ë¼ëŠ” ì´ë¦„ì˜ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŒ
         string objectName = $"Scene Change Object - {stageNumber}";
         GameObject targetObject = GameObject.Find(objectName);
 
         if (targetObject != null)
         {
-            // ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÒ ½Ã ÆÄ±«
+            // ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ì¬í•  ì‹œ íŒŒê´´
             Destroy(targetObject);
         }
         else
         {
-            // ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÏÁö ¾Ê´Â´Ù¸é ½ºÅµ
+            // ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ì¬í•˜ì§€ ì•ŠëŠ”ë‹¤ë©´ ìŠ¤í‚µ
             
         }
     }
 
 
-    // Stage Å¬¸®¾î »óÅÂ º¯°æ ¸Ş¼­µå (ÇÊ¿ä ½Ã ¿ÜºÎ¿¡¼­ È£Ãâ)
-    public void SetStageClear(int stageNumber, bool isClear = true) // ¿ÜºÎ¿¡¼­´Â 1~4·Î Á¢±ÙÇÔ
+    // Stage í´ë¦¬ì–´ ìƒíƒœ ë³€ê²½ ë©”ì„œë“œ (í•„ìš” ì‹œ ì™¸ë¶€ì—ì„œ í˜¸ì¶œ)
+    public void SetStageClear(int stageNumber, bool isClear = true) // ì™¸ë¶€ì—ì„œëŠ” 1~4ë¡œ ì ‘ê·¼í•¨
     {
         if (stageNumber >= 1 && stageNumber <= 4)
         {
             stageClearStatus[stageNumber - 1] = isClear;
-            Debug.Log($"Stage {stageNumber} Å¬¸®¾î »óÅÂ°¡ {isClear}·Î ¼³Á¤µÊ");
+            Debug.Log($"Stage {stageNumber} í´ë¦¬ì–´ ìƒíƒœê°€ {isClear}ë¡œ ì„¤ì •ë¨");
             isSuccess = true;
         }
         else
         {
-            Debug.LogWarning("Àß¸øµÈ Stage ¹øÈ£");
+            Debug.LogWarning("ì˜ëª»ëœ Stage ë²ˆí˜¸");
         }
     }
 
@@ -129,12 +129,12 @@ public class StageClearManager : MonoBehaviour
         if (stageNumber >= 1 && stageNumber <= 4)
         {
             stageClearStatus[stageNumber - 1] = isClear;
-            Debug.Log($"Stage {stageNumber} Å¬¸®¾î »óÅÂ°¡ {isClear}·Î ¼³Á¤µÊ");
+            Debug.Log($"Stage {stageNumber} í´ë¦¬ì–´ ìƒíƒœê°€ {isClear}ë¡œ ì„¤ì •ë¨");
             isSuccess = false;
         }
         else
         {
-            Debug.LogWarning("Àß¸øµÈ Stage ¹øÈ£");
+            Debug.LogWarning("ì˜ëª»ëœ Stage ë²ˆí˜¸");
         }
     }
 }

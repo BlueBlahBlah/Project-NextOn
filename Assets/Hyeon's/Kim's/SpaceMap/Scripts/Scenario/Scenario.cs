@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,16 +30,16 @@ public class Scenario : MonoBehaviour
     public bool is_End;
     public FixedJoystick joystick;
     public GameObject GameClearPanel;
-    // ½Ì±ÛÅæ ¼±¾ğ
+    // ì‹±ê¸€í†¤ ì„ ì–¸
     #region
     public static Scenario instance;
 
     private void Awake()
     {
-        if (instance == null) // instance°¡ null. Áï, ½Ã½ºÅÛ»ó¿¡ Á¸ÀçÇÏ°í ÀÖÁö ¾ÊÀ» ¶§
+        if (instance == null) // instanceê°€ null. ì¦‰, ì‹œìŠ¤í…œìƒì— ì¡´ì¬í•˜ê³  ìˆì§€ ì•Šì„ ë•Œ
         {
-            instance = this; // ³» ÀÚ½ÅÀ» instance·Î ³Ö¾îÁİ´Ï´Ù.
-            DontDestroyOnLoad(gameObject); // OnLoad(¾ÀÀÌ ·Îµå µÇ¾úÀ» ¶§) ÀÚ½ÅÀ» ÆÄ±«ÇÏÁö ¾Ê°í À¯Áö
+            instance = this; // ë‚´ ìì‹ ì„ instanceë¡œ ë„£ì–´ì¤ë‹ˆë‹¤.
+            DontDestroyOnLoad(gameObject); // OnLoad(ì”¬ì´ ë¡œë“œ ë˜ì—ˆì„ ë•Œ) ìì‹ ì„ íŒŒê´´í•˜ì§€ ì•Šê³  ìœ ì§€
 
 #if UNITY_EDITOR
             ResetPlayerPrefsOnStart();
@@ -49,7 +49,7 @@ public class Scenario : MonoBehaviour
         }
         else
         {
-            if (instance != this) // instance°¡ ³»°¡ ¾Æ´Ï¶ó¸é ÀÌ¹Ì instance°¡ ÇÏ³ª Á¸ÀçÇÏ°í ÀÖ´Ù´Â ÀÇ¹Ì
+            if (instance != this) // instanceê°€ ë‚´ê°€ ì•„ë‹ˆë¼ë©´ ì´ë¯¸ instanceê°€ í•˜ë‚˜ ì¡´ì¬í•˜ê³  ìˆë‹¤ëŠ” ì˜ë¯¸
             {
                 Destroy(this.gameObject);
             }
@@ -65,12 +65,12 @@ public class Scenario : MonoBehaviour
         UIManager = FindAnyObjectByType<UIManager>();
         is_End = false;
     }
-    // ¿¡µğÅÍ Àü¿ë ÃÊ±âÈ­ ÄÚµå
+    // ì—ë””í„° ì „ìš© ì´ˆê¸°í™” ì½”ë“œ
 #if UNITY_EDITOR
     private void ResetPlayerPrefsOnStart()
     {
-        PlayerPrefs.DeleteAll(); // PlayerPrefs ÃÊ±âÈ­
-        PlayerPrefs.Save();      // º¯°æ »çÇ×À» ÀúÀå
+        PlayerPrefs.DeleteAll(); // PlayerPrefs ì´ˆê¸°í™”
+        PlayerPrefs.Save();      // ë³€ê²½ ì‚¬í•­ì„ ì €ì¥
     }
 #endif
     void Update()
@@ -82,8 +82,8 @@ public class Scenario : MonoBehaviour
         }
         else if (is_End)
         {
-            //UI ¶ç¿ì±â, ·Î±×Ã¢ ¶ç¿ì±â
-            Debug.Log("´ë»ç end");
+            //UI ë„ìš°ê¸°, ë¡œê·¸ì°½ ë„ìš°ê¸°
+            Debug.Log("ëŒ€ì‚¬ end");
             BGM.mute = true;
             FinalBGM.mute = true;
             MidBGM.mute = true;
@@ -92,7 +92,7 @@ public class Scenario : MonoBehaviour
     public IEnumerator Scenario1Start()
     {
         SaveScenarioProgress();
-        Debug.Log($"´ë»ç {playing_Scenario} ½Ã³ª¸®¿À ½ÃÀÛ");
+        Debug.Log($"ëŒ€ì‚¬ {playing_Scenario} ì‹œë‚˜ë¦¬ì˜¤ ì‹œì‘");
 
         Scenario_1.SetActive(true);
         yield return null;
@@ -101,7 +101,7 @@ public class Scenario : MonoBehaviour
     public IEnumerator Scenario2Start()
     {
         SaveScenarioProgress();
-        Debug.Log($"´ë»ç {playing_Scenario} ½Ã³ª¸®¿À ½ÃÀÛ");
+        Debug.Log($"ëŒ€ì‚¬ {playing_Scenario} ì‹œë‚˜ë¦¬ì˜¤ ì‹œì‘");
 
         StopCoroutine(Scenario1Start());
         Scenario_1.SetActive(false);
@@ -112,7 +112,7 @@ public class Scenario : MonoBehaviour
     public IEnumerator Scenario3Start()
     {
         SaveScenarioProgress();
-        Debug.Log($"´ë»ç {playing_Scenario} ½Ã³ª¸®¿À ½ÃÀÛ");
+        Debug.Log($"ëŒ€ì‚¬ {playing_Scenario} ì‹œë‚˜ë¦¬ì˜¤ ì‹œì‘");
 
         StopCoroutine(Scenario2Start());
         Scenario_2.SetActive(false);
@@ -123,7 +123,7 @@ public class Scenario : MonoBehaviour
     public IEnumerator Scenario4Start() 
     {
         SaveScenarioProgress();
-        Debug.Log($"´ë»ç {playing_Scenario} ½Ã³ª¸®¿À ½ÃÀÛ");
+        Debug.Log($"ëŒ€ì‚¬ {playing_Scenario} ì‹œë‚˜ë¦¬ì˜¤ ì‹œì‘");
 
         StopCoroutine(Scenario3Start());
         Scenario_3.SetActive(false);
@@ -142,13 +142,13 @@ public class Scenario : MonoBehaviour
     public void SaveScenarioProgress()
     {
         PlayerPrefs.SetInt("PlayingScenario", playing_Scenario);
-        PlayerPrefs.Save(); // ¸í½ÃÀûÀ¸·Î ÀúÀå
+        PlayerPrefs.Save(); // ëª…ì‹œì ìœ¼ë¡œ ì €ì¥
     }
 
     public void LoadScenarioProgress()
     {
-        // ÀúÀåµÈ ½Ã³ª¸®¿À ÁøÇà »óÈ² ·Îµå
-        playing_Scenario = PlayerPrefs.GetInt("PlayingScenario", 1); // ±âº»°ªÀº 1
+        // ì €ì¥ëœ ì‹œë‚˜ë¦¬ì˜¤ ì§„í–‰ ìƒí™© ë¡œë“œ
+        playing_Scenario = PlayerPrefs.GetInt("PlayingScenario", 1); // ê¸°ë³¸ê°’ì€ 1
     }
     public void Die() => StartCoroutine(sceneReloader.RestartScene());
 }

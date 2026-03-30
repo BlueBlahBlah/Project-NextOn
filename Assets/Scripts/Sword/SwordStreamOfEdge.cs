@@ -11,66 +11,53 @@ public class SwordStreamOfEdge : MonoBehaviour
     [SerializeField] private GameObject Player;
     public int Damage;
 
-    public float ThisCoolTime;            //?„ì¬ ë¬´ê¸°???Œì•„ê°€ê³??ˆëŠ” ì¿¨í???    public float SkillCoolTime;           //?„ì¬ ë¬´ê¸° ?¤í‚¬??ì´?ì¿¨í???    [SerializeField] private float SkillCoolTimeRate;       //PlayerManager?ì„œ ê°€?¸ì˜¤??ì¿¨í???ê°ì†Œ??    
-    // Start is called before the first frame update
+    public float ThisCoolTime;            
+    public float SkillCoolTime;           
+    [SerializeField] private float SkillCoolTimeRate;       
+    
     void Start()
     {
         collider = GetComponent<MeshCollider>();
         collider.enabled = false;
         Damage = 1;
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
-        SkillCoolTime = 10f;            //?„ì¬ ë¬´ê¸°??ì¿¨í??„ì„ 10ì´ˆë¡œ ì´ˆê¸°??
-        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //ì¿¨í??„ì? ê°ì†Œ?¨ì„ ?ìš©??ê°’ìœ¼ë¡?
+        SkillCoolTime = 10f;            
+        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        
         ThisCoolTime = 0;
-        Btn.interactable = true;        //ì²˜ìŒ?ëŠ”(ë¨¹ìë§ˆì) ?¤í‚¬ ?¬ìš©ê°€??    }
+        Btn.interactable = true;        
+    }
     
     private void OnEnable()
     {
-        // ë²„íŠ¼ ?´ë¦­ ?´ë²¤???±ë¡
         Btn.onClick.AddListener(SkillSpawn);
         SkillCoolTimeRate = PlayerManager.Instance.SkillCoolTimeRate;
-        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        //ì¿¨í??„ì? ê°ì†Œ?¨ì„ ?ìš©??ê°’ìœ¼ë¡?
-        ThisCoolTime = 0;               //ì¿¨í???ì´ˆê¸°??        
-        Btn.interactable = true;        //ì²˜ìŒ?ëŠ”(ë¨¹ìë§ˆì) ?¤í‚¬ ?¬ìš©ê°€??    }
+        SkillCoolTime = SkillCoolTime - (SkillCoolTime * SkillCoolTimeRate);        
+        ThisCoolTime = 0;               
+        Btn.interactable = true;        
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        //Debug.LogError(ThisCoolTime);
-        if (ThisCoolTime > 0)                  //ì¿¨í??„ì´ 0ë³´ë‹¤ ?´ë•Œ (ì¿¨ì´ ?¨ì•„?ˆëŠ” ê²½ìš°)
+        if (ThisCoolTime > 0)                  
         {
-            ThisCoolTime -= Time.deltaTime;     //ì¿¨í???ê°ì†Œ
+            ThisCoolTime -= Time.deltaTime;     
         }
-        else if (ThisCoolTime <= 0)           //ì¿¨í??„ì´ 0?¼ë•Œ 
+        else if (ThisCoolTime <= 0)           
         {
-            Btn.interactable = true;         //?¤í‚¬ ?¬ìš© ê°€??        }
+            Btn.interactable = true;         
+        }
     }
 
     void SkillSpawn()
     {
-        // ?„ì¬ ?¤ë¸Œ?íŠ¸ê°€ ë°”ë¼ë³´ëŠ” ë°©í–¥???»ê¸° ?„í•´ transform.forward ?¬ìš©
         Vector3 direction = Player.transform.forward.normalized;
-
-        // ?ˆë¡œ???„ì¹˜ë¥??„ì¬ ?„ì¹˜ + (ë°”ë¼ë³´ëŠ” ë°©í–¥ * ê±°ë¦¬) ë¡??¤ì •
         Vector3 skillPosition = transform.position + (direction * 10f) + (Vector3.up * 5f);
-        //?’ì´???Œë ˆ?´ì–´???ˆë†’??        skillPosition.y = Player.transform.position.y + 1;
+        skillPosition.y = Player.transform.position.y + 1;
 
         Instantiate(Skill, skillPosition, Player.transform.rotation);
 
-        Btn.interactable = false;       //?¤í‚¬ ?¬ìš©???¤ìŒ ì¿¨í??„ê¹Œì§€ ë²„íŠ¼ ? ê¸ˆ
-        ThisCoolTime = SkillCoolTime;   //ì¿¨í????ê?
+        Btn.interactable = false;       
+        ThisCoolTime = SkillCoolTime;   
 
     }
-    
-  
-
-    /*public void OnCollider()
-    {
-        collider.enabled = true;
-    }
-
-    public void OffCollider()
-    {
-        collider.enabled = false;
-    }*/
 }

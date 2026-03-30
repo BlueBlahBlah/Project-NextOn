@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public class ProbDestroy : MonoBehaviour
     {
         if (!collision.gameObject.CompareTag("Untagged"))
         {
-            // Ãæµ¹ÀÌ ¹ß»ıÇÏ¸é 3ÃÊ µÚ¿¡ ¿ÀºêÁ§Æ®¸¦ »èÁ¦
+            // ì¶©ëŒì´ ë°œìƒí•˜ë©´ 3ì´ˆ ë’¤ì— ì˜¤ë¸Œì íŠ¸ë¥¼ ì‚­ì œ
             StartCoroutine(DestroyAfterDelay());
         }
 
@@ -17,10 +17,10 @@ public class ProbDestroy : MonoBehaviour
 
     private IEnumerator DestroyAfterDelay()
     {
-        // 3ÃÊ ´ë±â
+        // 3ì´ˆ ëŒ€ê¸°
         yield return new WaitForSeconds(3);
 
-        // ¿ÀºêÁ§Æ® »èÁ¦
+        // ì˜¤ë¸Œì íŠ¸ ì‚­ì œ
         Destroy(gameObject);
     }
 }

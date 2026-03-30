@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,7 +19,7 @@ public class Scenario1UI : MonoBehaviour
     {
         if (volumeController == null)
         {
-            // »õ·Î¿î GameObject¸¦ ¸¸µé°í VolumeController¸¦ Ãß°¡
+            // ìƒˆë¡œìš´ GameObjectë¥¼ ë§Œë“¤ê³  VolumeControllerë¥¼ ì¶”ê°€
             if (GameObject.Find("VolumeController") != null)
             {
                 volumeController = GameObject.Find("VolumeController").GetComponent<VolumeController>();
@@ -35,25 +35,25 @@ public class Scenario1UI : MonoBehaviour
 
     public void SetLittleDark()
     {
-        // Á¶¸íÀÇ ±ôºıÀÓ ¿¬Ãâ (¾îµÎ¿ò)
+        // ì¡°ëª…ì˜ ê¹œë¹¡ì„ ì—°ì¶œ (ì–´ë‘ì›€)
         Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 0.5f);
     }
 
     public void SetAlmostDark()
     {
-        // È­¸éÀÇ ¾ÏÀü ¿¬Ãâ
+        // í™”ë©´ì˜ ì•”ì „ ì—°ì¶œ
         Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 0.8f);
     }
 
     public void SetLight()
     {
-        // Á¶¸íÀÇ ±ôºıÀÓ ¿¬Ãâ (¹àÀ½)
+        // ì¡°ëª…ì˜ ê¹œë¹¡ì„ ì—°ì¶œ (ë°ìŒ)
         Darkness.color = new Color(Darkness.color.r, Darkness.color.g, Darkness.color.b, 0f);
     }
 
     public void StopCharacter()
     {
-        // Ä³¸¯ÅÍÀÇ Á¤Áö
+        // ìºë¦­í„°ì˜ ì •ì§€
         characterPixel.GetComponent<Animator>().enabled = false;
         characterPixel.sprite = Resources.Load($"UI/Image/Characters/Devin/coding 1", typeof(Sprite)) as Sprite;
     }
@@ -85,7 +85,7 @@ public class Scenario1UI : MonoBehaviour
         SoundManager.instance.PlayEffectSound("FailSound", 0.5f);
         yield return new WaitForSeconds(0.8f);
 
-        // ¼ø°£ °­ÇÑ Àü±â°¡ Èå¸£´Â ¿¬Ãâ
+        // ìˆœê°„ ê°•í•œ ì „ê¸°ê°€ íë¥´ëŠ” ì—°ì¶œ
         yield break;
     }
 

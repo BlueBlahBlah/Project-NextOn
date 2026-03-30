@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -51,22 +51,22 @@ public class Scenario_2 : MonoBehaviour
         }
 
         if ((is1_TriggerPass || is2_TriggerPass) && !cmd1IsPass)
-        {//µÑ´Ù ÀÛµ¿µÈ »óÅÂ
+        {//ë‘˜ë‹¤ ì‘ë™ëœ ìƒíƒœ
             cmd1IsPass = true;
             EnemySpawn[3].SetActive(true);
             EnemySpawn[4].SetActive(true);
             EnemySpawn[5].SetActive(true);
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 208);
-            Debug.Log("´ë»ç ¿©±â¸¦ ¸·´Â°Ç°¡");
+            Debug.Log("ëŒ€ì‚¬ ì—¬ê¸°ë¥¼ ë§‰ëŠ”ê±´ê°€");
         }
         else if ((is1_TriggerPass && is2_TriggerPass) && !cmd2IsPass)
-        {//µÑÁß ÇÏ³ª¸¸ ÀÛµ¿µÈ »óÅÂ
+        {//ë‘˜ì¤‘ í•˜ë‚˜ë§Œ ì‘ë™ëœ ìƒíƒœ
             cmd2IsPass = true;
             EnemySpawn[6].SetActive(true);
             EnemySpawn[7].SetActive(true);
             EnemySpawn[8].SetActive(true);
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 208);
-            Debug.Log("´ë»ç ÀÌÁ¦ Àç½ÃÀÛÀ» ÇÏ·¯ °¡º¸ÀÚ");
+            Debug.Log("ëŒ€ì‚¬ ì´ì œ ì¬ì‹œì‘ì„ í•˜ëŸ¬ ê°€ë³´ì");
         }
         
 
@@ -83,7 +83,7 @@ public class Scenario_2 : MonoBehaviour
         if (child.name == "2_End" && !is_End)
         {
             scenario.UIManager.DialogueEventByNumber(scenario.Dialogue.GetComponent<Dialogue>(), 210);
-            Debug.Log("´ë»ç ¿©±â¼­ Àç½ÃÀÛÇÏ´Â°Ç°¡? ÀÛµ¿ ½ÃÄÑº¸ÀÚ \r\n\r\n½Ã½ºÅÛ : ¹æÈ­º® ÇÁ·Î±×·¥ ÀÛµ¿... Àç½ÃÀÛ ÁØºñ¿Ï·á");
+            Debug.Log("ëŒ€ì‚¬ ì—¬ê¸°ì„œ ì¬ì‹œì‘í•˜ëŠ”ê±´ê°€? ì‘ë™ ì‹œì¼œë³´ì \r\n\r\nì‹œìŠ¤í…œ : ë°©í™”ë²½ í”„ë¡œê·¸ë¨ ì‘ë™... ì¬ì‹œì‘ ì¤€ë¹„ì™„ë£Œ");
             is_End = true;
         }
     }

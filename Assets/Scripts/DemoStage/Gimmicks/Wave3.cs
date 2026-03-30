@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Wave3 : Gimmick
 {
-    //3ÆäÀÌÁî 90% ³Ñ¾î°¬´ÂÁö
+    //3í˜ì´ì¦ˆ 90% ë„˜ì–´ê°”ëŠ”ì§€
     private bool Peiz3PersentOver;
     public Slider slider;
 
@@ -23,16 +23,16 @@ public class Wave3 : Gimmick
 
     public void StartPeiz3Gauge()
     {
-        Debug.LogError("peiz3°ÔÀÌÁö ½ÃÀÛ");
+        Debug.LogError("peiz3ê²Œì´ì§€ ì‹œì‘");
         StartCoroutine(FillTo90());
     }
 
     IEnumerator FillTo90()
     {
-        float duration = 30f; // 30ÃÊ µ¿¾È ÁøÇàµË´Ï´Ù.
+        float duration = 30f; // 30ì´ˆ ë™ì•ˆ ì§„í–‰ë©ë‹ˆë‹¤.
         float timer = 0f;
         float initialValue = slider.value;
-        float targetValue = initialValue + 90f; // ÀÌµ¿ÇÒ °ªÀº ÃÊ±â °ª¿¡ 90À» ´õÇÕ´Ï´Ù.
+        float targetValue = initialValue + 90f; // ì´ë™í•  ê°’ì€ ì´ˆê¸° ê°’ì— 90ì„ ë”í•©ë‹ˆë‹¤.
 
         while (timer < duration)
         {
@@ -42,7 +42,7 @@ public class Wave3 : Gimmick
             yield return null;
         }
 
-        // 30ÃÊ ÀÌÈÄ¿¡´Â °ªÀÌ 90ÀÌ µÇÁö ¾Ê°í °è¼Ó Áõ°¡ÇÕ´Ï´Ù.
+        // 30ì´ˆ ì´í›„ì—ëŠ” ê°’ì´ 90ì´ ë˜ì§€ ì•Šê³  ê³„ì† ì¦ê°€í•©ë‹ˆë‹¤.
         while (true)
         {
             slider.value += Time.deltaTime * 0.1f;
@@ -52,12 +52,12 @@ public class Wave3 : Gimmick
                 if (Peiz3PersentOver == false)
                 {
                     Peiz3PersentOver = true;
-                    //AfterCompilerPannel ÆĞ³ÎµîÀå
-                    //´ëÇü¸ó½ºÅÍ µîÀå
+                    //AfterCompilerPannel íŒ¨ë„ë“±ì¥
+                    //ëŒ€í˜•ëª¬ìŠ¤í„° ë“±ì¥
                     Debug.LogError("Area3 true");
                     //stagemanager.Area3 = true;
-                    //stagemanager.OnWave3Direction();  //3ÆäÀÌÁî È­»ìÇ¥ È°¼ºÈ­ + Å»Ãâ º® ºñÈ°¼ºÈ­
-                    //Å« ¸ó½ºÅÍ ¹Ù¶óº¸±â
+                    //stagemanager.OnWave3Direction();  //3í˜ì´ì¦ˆ í™”ì‚´í‘œ í™œì„±í™” + íƒˆì¶œ ë²½ ë¹„í™œì„±í™”
+                    //í° ëª¬ìŠ¤í„° ë°”ë¼ë³´ê¸°
                     //GameObject.Find("Main Camera").GetComponent<CameraAbove>().LookBigMonster();
                     //GameObject.Find("Player").GetComponent<PlayerSpec>().ProtectPlayerWhenBigMonAppear();
                 }

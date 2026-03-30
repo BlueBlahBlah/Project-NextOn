@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GlitchEffect : MonoBehaviour
 {
-    public RectTransform imageTransform;  // ÀÌ¹ÌÁöÀÇ RectTransform
-    public float speed = 200f;  // ÀÌµ¿ ¼Óµµ
-    private Vector2 direction;  // ÀÌµ¿ ¹æÇâ
+    public RectTransform imageTransform;  // ì´ë¯¸ì§€ì˜ RectTransform
+    public float speed = 200f;  // ì´ë™ ì†ë„
+    private Vector2 direction;  // ì´ë™ ë°©í–¥
     private float width;
     private float height;
 
     private Color[] colors = new Color[]
     {
-        new Color(255f / 255f, 0f, 228f / 255f, 150f / 255f),   // Ã¹¹øÂ° »ö (RGB: 255, 0, 228, A: 150)
-        new Color(166f / 255f, 0f, 255f / 255f, 150f / 255f),   // µÎ¹øÂ° »ö (RGB: 166, 0, 255, A: 150)
-        new Color(0f, 255f / 255f, 196f / 255f, 150f / 255f)    // ¼¼¹øÂ° »ö (RGB: 0, 255, 196, A: 150)
+        new Color(255f / 255f, 0f, 228f / 255f, 150f / 255f),   // ì²«ë²ˆì§¸ ìƒ‰ (RGB: 255, 0, 228, A: 150)
+        new Color(166f / 255f, 0f, 255f / 255f, 150f / 255f),   // ë‘ë²ˆì§¸ ìƒ‰ (RGB: 166, 0, 255, A: 150)
+        new Color(0f, 255f / 255f, 196f / 255f, 150f / 255f)    // ì„¸ë²ˆì§¸ ìƒ‰ (RGB: 0, 255, 196, A: 150)
     };
 
     public void Initialize(bool isVertical)
@@ -22,7 +22,7 @@ public class GlitchEffect : MonoBehaviour
         if (imageTransform == null)
             imageTransform = GetComponent<RectTransform>();
 
-        // ÀÌµ¿ ¹æÇâ ¼³Á¤
+        // ì´ë™ ë°©í–¥ ì„¤ì •
         if (isVertical)
         {
             direction = Vector2.down;
@@ -32,7 +32,7 @@ public class GlitchEffect : MonoBehaviour
             direction = Random.value > 0.5f ? Vector2.left : Vector2.right;
         }
 
-        // Å©±â ¼³Á¤
+        // í¬ê¸° ì„¤ì •
         if (isVertical)
         {
             height = Random.Range(50f, 450f);
@@ -46,16 +46,16 @@ public class GlitchEffect : MonoBehaviour
             imageTransform.sizeDelta = new Vector2(width, height);
         }
 
-        // »ö»ó ¼³Á¤
+        // ìƒ‰ìƒ ì„¤ì •
         GetComponent<UnityEngine.UI.Image>().color = colors[Random.Range(0, colors.Length)];
     }
 
     void Update()
     {
-        // ÀÌ¹ÌÁö ÀÌµ¿
+        // ì´ë¯¸ì§€ ì´ë™
         imageTransform.anchoredPosition += direction * speed * Time.deltaTime;
 
-        // È­¸é ¹ÛÀ¸·Î ³ª°¡¸é »èÁ¦
+        // í™”ë©´ ë°–ìœ¼ë¡œ ë‚˜ê°€ë©´ ì‚­ì œ
         if (imageTransform.anchoredPosition.y < -Screen.height ||
             imageTransform.anchoredPosition.x < -Screen.width ||
             imageTransform.anchoredPosition.x > Screen.width)

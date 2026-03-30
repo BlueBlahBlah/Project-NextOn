@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,15 +16,15 @@ public class ScenarioEndingUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI endText1;
     [SerializeField]
-    private GameObject endText2; // ÀÌ TMP´Â Blink°¡ ÀÖ±â ¶§¹®¿¡ È°¼ºÈ­ ½ÃÅ°µµ·Ï
+    private GameObject endText2; // ì´ TMPëŠ” Blinkê°€ ìˆê¸° ë•Œë¬¸ì— í™œì„±í™” ì‹œí‚¤ë„ë¡
     [SerializeField]
     private Button endButton;
 
     private VolumeController volumeController;
 
 
-    private float timer = 0f;         // ½Ã°£ ÃßÀû¿ë º¯¼ö
-    private Color bgColor;            // backgroundComputerÀÇ Color ÀúÀå
+    private float timer = 0f;         // ì‹œê°„ ì¶”ì ìš© ë³€ìˆ˜
+    private Color bgColor;            // backgroundComputerì˜ Color ì €ì¥
     private Color textColor;
 
     private bool lerpAlpha = false;
@@ -35,7 +35,7 @@ public class ScenarioEndingUI : MonoBehaviour
     {
         if (volumeController == null)
         {
-            // »õ·Î¿î GameObject¸¦ ¸¸µé°í VolumeController¸¦ Ãß°¡
+            // ìƒˆë¡œìš´ GameObjectë¥¼ ë§Œë“¤ê³  VolumeControllerë¥¼ ì¶”ê°€
             if (GameObject.Find("VolumeController") != null)
             {
                 volumeController = GameObject.Find("VolumeController").GetComponent<VolumeController>();
@@ -57,9 +57,9 @@ public class ScenarioEndingUI : MonoBehaviour
         if (lerpAlpha)
         {
             elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / duration);  // 0¿¡¼­ 1 »çÀÌ °ª °è»ê
+            float t = Mathf.Clamp01(elapsedTime / duration);  // 0ì—ì„œ 1 ì‚¬ì´ ê°’ ê³„ì‚°
 
-            // Lerp¸¦ »ç¿ëÇÏ¿© alpha °ªÀ» ºÎµå·´°Ô 1·Î º¯°æ
+            // Lerpë¥¼ ì‚¬ìš©í•˜ì—¬ alpha ê°’ì„ ë¶€ë“œëŸ½ê²Œ 1ë¡œ ë³€ê²½
             Color bgColor = backgroundComputer.color;
             bgColor.a = Mathf.Lerp(0, 1, t);
             backgroundComputer.color = bgColor;
@@ -70,7 +70,7 @@ public class ScenarioEndingUI : MonoBehaviour
 
             if (t >= 1f)
             {
-                lerpAlpha = false;  // ¿Ï·á ÈÄ Lerp ºñÈ°¼ºÈ­
+                lerpAlpha = false;  // ì™„ë£Œ í›„ Lerp ë¹„í™œì„±í™”
             }
         }
     }
@@ -78,7 +78,7 @@ public class ScenarioEndingUI : MonoBehaviour
     public void StartLerpAlpha()
     {
         lerpAlpha = true;
-        elapsedTime = 0f;  // Å¸ÀÌ¸Ó ÃÊ±âÈ­
+        elapsedTime = 0f;  // íƒ€ì´ë¨¸ ì´ˆê¸°í™”
     }
 
 

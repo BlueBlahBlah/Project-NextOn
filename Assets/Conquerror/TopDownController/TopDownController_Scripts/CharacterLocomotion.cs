@@ -129,9 +129,9 @@ public class CharacterLocomotion : MonoBehaviour
 
             characterController.Move(heading * walkSpeed * Time.deltaTime); // move
 
-            if (lookToMovementDirection)
+            if (lookToMovementDirection && (Mathf.Abs(heading.x) > 0.01f || Mathf.Abs(heading.z) > 0.01f))
             {
-                characterVisual.forward = new Vector3(heading.x, characterVisual.forward.y, heading.z); // look to movement direction
+                characterVisual.forward = new Vector3(heading.x, 0, heading.z); // look to movement direction
             }
         }
         else
@@ -142,9 +142,9 @@ public class CharacterLocomotion : MonoBehaviour
             Vector3 heading = Vector3.Normalize(rightMovement + upMovement); //final movement vector
             heading.y = -9.8f;//gravity while moving
             characterController.Move(heading * walkSpeed * Time.deltaTime);//move
-            if (lookToMovementDirection)
+            if (lookToMovementDirection && (Mathf.Abs(heading.x) > 0.01f || Mathf.Abs(heading.z) > 0.01f))
             {
-                characterVisual.forward = new Vector3(heading.x, characterVisual.forward.y, heading.z);
+                characterVisual.forward = new Vector3(heading.x, 0, heading.z);
                 //look to movement direction
             }
         }

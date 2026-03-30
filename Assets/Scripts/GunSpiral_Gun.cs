@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class GunSpiral_Gun : MonoBehaviour
@@ -12,7 +12,7 @@ public class GunSpiral_Gun : MonoBehaviour
 
     void Update()
     {
-        // x�??�전
+        // x異??뚯쟾
         transform.Rotate(Vector3.up * xRotationSpeed * Time.deltaTime);
 
        

@@ -99,9 +99,40 @@ public class InGameUI : MonoBehaviour
     #endregion
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        InitializeInGameUIMVC();
+    }
+
+    private async void InitializeInGameUIMVC()
+    {
+        // 1. [Health MVC] 속성 컨트롤러 구독
+        PlayerAttributeController attrController = null;
+        while (attrController == null)
+        {
+            attrController = FindObjectOfType<PlayerAttributeController>();
+            if (attrController == null) await System.Threading.Tasks.Task.Delay(100);
+        }
+        attrController.OnHealthChanged += (hp, max) => {
+            PlayerHp = hp;
+            PlayerMaxHp = max;
+            UpdatePlayerInfo();
+        };
+
+        // 2. [Ammo MVC] 무기 컨트롤러 구독
+        WeaponWidgetController weaponController = null;
+        while (weaponController == null)
+        {
+            weaponController = FindObjectOfType<WeaponWidgetController>();
+            if (weaponController == null) await System.Threading.Tasks.Task.Delay(100);
+        }
+        weaponController.OnAmmoChanged += (curr, total) => {
+            CurrentBullet = curr;
+            MaxBullet = total;
+            UpdateBullet();
+        };
+
+        Debug.Log("<color=green>[InGameUI-View]</color> MVC Subscriptions Complete.");
     }
 
     // Update is called once per frame
@@ -212,7 +243,7 @@ public class InGameUI : MonoBehaviour
         }
         else
         {
-            Debug.Log("There's no stageManager!");
+            //Debug.Log("There's no stageManager!");
         }
         numOfEnemy.text = NumOfEnemy.ToString();
     }

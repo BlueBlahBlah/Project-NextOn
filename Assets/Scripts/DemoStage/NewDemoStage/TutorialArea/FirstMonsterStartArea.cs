@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FirstMonsterStartArea : MonoBehaviour
 {
-    [SerializeField] private bool Active;       //발동?�는지? ?�번 발동?�면 ?�시 발동?��? ?�도�?    // Start is called before the first frame update
+    [SerializeField] private bool Active;       //諛쒕룞?덈뒗吏? ?쒕쾲 諛쒕룞?섎㈃ ?ㅼ떆 諛쒕룞?섏? ?딅룄濡?    // Start is called before the first frame update
     void Start()
     {
         Active = false;
@@ -20,9 +20,9 @@ public class FirstMonsterStartArea : MonoBehaviour
     {
         if (other.CompareTag("Player") && Active == false)
         {
-            //?�토리얼 ?�작?�는 부�?추�?
+            //?쒗넗由ъ뼹 ?쒖옉?섎뒗 遺遺?異붽?
             Active = true;
-            //EventManager.Instance.TimeStop();   //?�간 ?��?
+            //EventManager.Instance.TimeStop();   //?쒓컙 ?뺤?
             EventManager.Instance.PrintMSG();
         }
         

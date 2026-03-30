@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,8 +7,8 @@ public class MinimapMonsterCount : MonoBehaviour
 {
     [Header("EnemyDetect")]
     private GameObject player;
-    public float detectionRadius = 50f; // °¨ÁöÇÒ ¹üÀ§ÀÇ ¹İÁö¸§
-    public LayerMask enemyLayerMask;   // °¨ÁöÇÒ Enemy ·¹ÀÌ¾î
+    public float detectionRadius = 50f; // ê°ì§€í•  ë²”ìœ„ì˜ ë°˜ì§€ë¦„
+    public LayerMask enemyLayerMask;   // ê°ì§€í•  Enemy ë ˆì´ì–´
     [SerializeField]
     private TextMeshProUGUI enemyCountText;
     
@@ -21,7 +21,7 @@ public class MinimapMonsterCount : MonoBehaviour
             player = GameObject.FindWithTag("Player");
             if (player == null)
             {
-                Debug.LogWarning("Player ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®°¡ ¾À¿¡ ¾ø½À´Ï´Ù.");
+                Debug.LogWarning("Player íƒœê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ê°€ ì”¬ì— ì—†ìŠµë‹ˆë‹¤.");
             }
         }
     }
@@ -34,13 +34,13 @@ public class MinimapMonsterCount : MonoBehaviour
 
     void DetectEnemies()
     {
-        // LayerMask¸¦ ÀÌ¿ëÇØ Æ¯Á¤ ·¹ÀÌ¾îÀÇ ¿ÀºêÁ§Æ®¸¸ °Ë»ö
+        // LayerMaskë¥¼ ì´ìš©í•´ íŠ¹ì • ë ˆì´ì–´ì˜ ì˜¤ë¸Œì íŠ¸ë§Œ ê²€ìƒ‰
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius, enemyLayerMask);
 
-        // °¨ÁöµÈ ¿ÀºêÁ§Æ®ÀÇ ¼ö¸¦ ¼À
+        // ê°ì§€ëœ ì˜¤ë¸Œì íŠ¸ì˜ ìˆ˜ë¥¼ ì…ˆ
         int enemyCount = hitColliders.Length;
 
-        // °á°ú¸¦ Ãâ·ÂÇÏ°Å³ª ¿øÇÏ´Â µ¿ÀÛÀ» ¼öÇà
+        // ê²°ê³¼ë¥¼ ì¶œë ¥í•˜ê±°ë‚˜ ì›í•˜ëŠ” ë™ì‘ì„ ìˆ˜í–‰
         enemyCountText.text = enemyCount.ToString();
     }
 }

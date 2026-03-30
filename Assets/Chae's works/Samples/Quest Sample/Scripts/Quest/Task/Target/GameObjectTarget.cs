@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,11 +13,11 @@ public class GameObjectTarget : TaskTarget
 
     public override bool IsEqual(object target)
     {
-        // GameObject ºñ±³
+        // GameObject ë¹„êµ
         var targetAsGameObject = target as GameObject;
         if (targetAsGameObject == null)
             return false;
-        // ¾À ³»ÀÇ GameObject °¡ ÇØ´ç ÀÌ¸§À» 'Æ÷ÇÔ' ÇÏ´ÂÁö ºñ±³ (³Ñ¹ö È¤Àº clone °æ¿ì °í·Á)
+        // ì”¬ ë‚´ì˜ GameObject ê°€ í•´ë‹¹ ì´ë¦„ì„ 'í¬í•¨' í•˜ëŠ”ì§€ ë¹„êµ (ë„˜ë²„ í˜¹ì€ clone ê²½ìš° ê³ ë ¤)
         return targetAsGameObject.name.Contains(value.name);
     }
 }

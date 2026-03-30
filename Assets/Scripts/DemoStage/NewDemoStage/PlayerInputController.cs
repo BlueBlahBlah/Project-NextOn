@@ -7,33 +7,19 @@ using UnityEngine;
 /// </summary>
 public class PlayerInputController : MonoBehaviour
 {
-    [Header("Input States")]
     public bool IsFiring { get; private set; }
     
     // 이벤트 기반 통신을 위한 액션들
     public event Action OnReload;
     public event Action OnFirePressed; // 단발성 공격 (근접 공격 등)
-    public event Action<int> OnWeaponSwap; // 1, 2번 키 등
 
     private void Update()
     {
-        // 1. PC 입력 감지 (마우스 왼쪽 클릭)
-        if (Input.GetMouseButtonDown(0))
-        {
-            SetFiring(true);
-            OnFirePressed?.Invoke();
-        }
-        if (Input.GetMouseButtonUp(0)) SetFiring(false);
-
         // 2. 재장전 입력 (R 키)
         if (Input.GetKeyDown(KeyCode.R))
         {
             TriggerReload();
         }
-
-        // 3. 무기 스왑 입력 (숫자 키)
-        if (Input.GetKeyDown(KeyCode.Alpha1)) OnWeaponSwap?.Invoke(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) OnWeaponSwap?.Invoke(1);
     }
 
     /// <summary>
